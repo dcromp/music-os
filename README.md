@@ -24,9 +24,10 @@ The synthetic result checks experiment plumbing. It is not a real-guitar benchma
 
 The experiment bench is a local browser tool, independent of the Expo app. Requirements: Python 3.12 and a browser; FFmpeg is needed only to convert other local recordings.
 
-From the repository root:
+The current Mac checkout is `/Users/davidcrompton/Documents/music-os`, on branch `codex/mac-analysis-phase0`. From the repository root:
 
 ```sh
+cd /Users/davidcrompton/Documents/music-os
 python3.12 -m venv .venv-analysis
 .venv-analysis/bin/python -m pip install -r experiments/analysis/requirements.txt
 .venv-analysis/bin/python experiments/analysis/lab.py smoke
@@ -50,6 +51,8 @@ Open [http://127.0.0.1:8067](http://127.0.0.1:8067/) and press **Load demo**. Ch
 | Expo web product | Existing build fails | Missing `react-native-web-webview` in the YouTube wrapper; defer repair until product integration |
 | Expo Android product | Bundle export passed | Device installation and live playback remain unverified |
 | Expo iOS product | Existing project target; not verified/deployed | Defer device/build work until algorithm and practice results justify integration |
+
+To restart the existing Mac setup, run `cd /Users/davidcrompton/Documents/music-os` followed by `.venv-analysis/bin/python experiments/analysis/lab.py serve`; the environment and demo are already created.
 
 The experiment server binds to `127.0.0.1` only. It serves the bench and generated demo files, not the repository generally. It has no public hosting, uploads, accounts or background daemon. Generated audio, local recordings, results and `.venv-analysis` are gitignored. Restart the command after restarting the machine; a source push does not deploy a hosted service.
 
