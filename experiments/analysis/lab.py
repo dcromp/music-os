@@ -13,6 +13,7 @@ import json
 import math
 from pathlib import Path
 import platform
+import re
 import shutil
 import subprocess
 import sys
@@ -255,6 +256,60 @@ def smoke(directory: Path) -> dict:
 
 
 class BenchHandler(SimpleHTTPRequestHandler):
+    def send_head(self):
+        path = Path(self.translate_path(self.path))
+        self._remaining_bytes = None
+        if path.suffix.lower() != ".wav":
+            return super().send_head()
+        try:
+            stream = path.open("rb")
+        except OSError:
+            self.send_error(404, "Audio file not found")
+            return None
+        size = path.stat().st_size
+        start, end = 0, size - 1
+        header = self.headers.get("Range")
+        if header:
+            match = re.fullmatch(r"bytes=(\d*)-(\d*)", header.strip())
+            if not match or not any(match.groups()):
+                stream.close()
+                self.send_error(416, "Unsupported audio range")
+                return None
+            if match[1]:
+                start = int(match[1])
+                end = min(int(match[2]), end) if match[2] else end
+            else:
+                start = max(0, size - int(match[2]))
+            if start >= size or start > end:
+                stream.close()
+                self.send_response(416)
+                self.send_header("Content-Range", f"bytes */{size}")
+                self.send_header("Content-Length", "0")
+                self.end_headers()
+                return None
+            self.send_response(206)
+            self.send_header("Content-Range", f"bytes {start}-{end}/{size}")
+        else:
+            self.send_response(200)
+        self.send_header("Content-Type", "audio/wav")
+        self.send_header("Accept-Ranges", "bytes")
+        self.send_header("Content-Length", str(end - start + 1))
+        self.end_headers()
+        stream.seek(start)
+        self._remaining_bytes = end - start + 1
+        return stream
+
+    def copyfile(self, source, outputfile):
+        if self._remaining_bytes is None:
+            return super().copyfile(source, outputfile)
+        remaining = self._remaining_bytes
+        while remaining:
+            data = source.read(min(65536, remaining))
+            if not data:
+                break
+            outputfile.write(data)
+            remaining -= len(data)
+
     def do_GET(self) -> None:
         if self.path == "/api/suite":
             folder = GENERATED / "synthetic-suite"
