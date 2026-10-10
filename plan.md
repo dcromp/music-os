@@ -10,6 +10,8 @@ Project plan · 10 October 2026 · Working title
 
 **First product:** an affordable song-based guitar practice app that shows useful chords and rhythm guidance, then recommends what to play next. Start with rock and with players who know some chords but need help progressing.
 
+**Catalogue strategy:** work toward a curated few hundred rock/pop titles, beginning with a smaller reviewed learning path. For known songs, use comparable chord/key references plus audio verification, then align the reviewed sequence to a specific recording. Prioritise reliable timings and affordable one-time curation; keep free chord recognition as a control, verification signal and fallback.
+
 The founder is the first test player. His own guitar sessions will guide early algorithm and interface decisions. Broader testing will follow: a tool that works for one player is promising evidence, not proof of a market.
 
 The first product should stand on its own. Customers should get a worthwhile practice companion even if the full band experience takes years to develop.
@@ -26,6 +28,7 @@ The first product should stand on its own. Customers should get a worthwhile pra
 | Structured progression and rhythm guidance improve practice | Core product hypothesis | Compare guided sessions with the founder's current workflow, then run an external pilot |
 | Users will pay around $4–6/month | Proposed price test, informed by the user's quoted competitor prices | Test payment and renewal after users experience the product |
 | Chord analysis can become the foundation for a virtual band | Plausible technical direction | Reuse song timing, harmony, sections and rhythm data; validate accompaniment separately |
+| Reviewed chord/key references make curated songs primarily an alignment task | Research-supported direction; local benefit and source availability unmeasured | Test chart-assisted alignment against audio-only recognition, including wrong/capo/edited references; measure timing and review cost |
 
 Technical experimentation and commercial sourcing are separate workstreams. Continue useful experiments while investigating the latter. Do not treat an unverified rights arrangement as an engineering blocker for every experiment, or technical feasibility as confirmation of permission to launch.
 
@@ -86,6 +89,7 @@ Compare these approaches with identical inputs and hardware:
 | Pretrained chord-recognition model | Does it materially improve useful chord labels and timing? |
 | Full mix versus separated harmonic/instrument stems | Does separation improve recognition enough to justify processing cost and artefacts? |
 | Raw chord output versus soft key/context assistance | Can likely key and neighbouring chords resolve uncertain labels without erasing borrowed chords or modulations? |
+| Audio-only versus known chart/sequence alignment | Does reviewed harmony reduce errors and correction effort when aligning curated songs to exact recordings? |
 | Raw versus beat-aware smoothing | Can we remove distracting label flicker without erasing real changes? |
 | Full chord vocabulary versus simplified vocabulary | Which output is more playable for the target learner? |
 | Beat/onset analysis versus human-authored practice rhythms | What rhythm information is reliable and useful? |
@@ -101,16 +105,25 @@ The supplied report, “Algorithmic Architectures and Empirical Evaluation Frame
 | Chord recognition | Spectral-template baseline, BTC-ISMIR19, CREMA, ChordMini/ChordNet2E1D, Chordino/NNLS-Chroma; ChordFormer after source/checkpoint review | Five have completed the same 64-case synthetic screen. Chordino Mac setup is complete; the shortlist is open. Compare real-recording harmony, timing, setup and compute before narrowing it. |
 | Source separation | Standard HT-Demucs; optional 6-stem model; Spleeter as an alternative comparison | Compare original mix, 4-stem bass plus “other”, and isolated guitar. Retain separation only where its benefit warrants its cost; it may remove useful harmony or introduce artefacts. |
 | Key and harmonic context | Cheap chroma/key-profile baseline; optional verified pretrained key estimator | Estimate from audio, retain alternative keys and uncertainty, then test a soft prior for ambiguous chord candidates. Allow local key changes; never force all chords into one scale. |
+| Curated chart alignment | Small constrained decoder; DECIBEL Jump Alignment as a reference; ChordSync after runtime/checkpoint verification | Next priority for the curated catalogue. Compare unordered vocabulary guidance with an ordered reviewed sequence, section structure and audio-only controls. Measure timing, drift and review effort. |
 | Beat and section analysis | Simple baseline; All-In-One | No beat tracker exists in the inspected app. Compare beat/downbeat alignment and useful practice boundaries. Test All-In-One for combined tempo, beats and sections; verify dependency and model requirements. |
 | Chord smoothing | Raw output, simple duration smoothing, beat-aware probability pooling/decoding where probabilities are available | Measure distracting flicker and lost/shifted genuine changes. Include anticipations, fast changes, tempo variation and an incorrect beat grid. |
 | Rhythm guidance | Human-authored pattern library; optional onset detection and pattern matching | Establish a useful practice-pattern baseline before trying automated transcription or stroke-direction classification. |
 | Evaluation | mir_eval plus founder play-tests | Use duration-weighted chord scores, boundary timing and beat metrics alongside usability and correction effort. |
 
-Run experiments in stages: compare chord detectors on the original mix first, test separation with the strongest practical candidates second, then assess timing and simplification. Avoid an exhaustive combination of every model and setting before any guitar feedback. [App-readiness criteria](docs/APP_READINESS.md) records concrete synthetic failures and the bounded next validation gate. Finish the practical Chordino comparison, then move to annotated real guitar rather than waiting for every research architecture. A curated learning-path release can use automatically drafted, checked and cached arrangements; measure correction effort as well as raw recognition.
+The initial detector screen and annotated acoustic pilot are complete. Next prioritise [curated chart-assisted alignment](docs/CHART_ALIGNMENT.md): compare audio-only detection, key/chord-vocabulary guidance and alignment from an ordered reviewed sequence on ten permitted excerpts. Test separation and soft context as controlled improvements where failures justify them. Avoid an exhaustive model/setting combination before guitar feedback. [App-readiness criteria](docs/APP_READINESS.md) records the validation gate; measure timing, drift and correction effort as well as raw recognition. A curated learning-path release can use reviewed, cached arrangements.
 
 [Spleeter](https://github.com/deezer/spleeter) and [Demucs](https://github.com/facebookresearch/demucs) are source-separation tools, not chord recognisers. Their output is audio stems, which must go through a separate chord detector. Spleeter provides 2/4/5-stem variants; Demucs provides the usual vocals/drums/bass/other split and an experimental six-source variant with guitar/piano. Benchmark the original mix against selected stems or recombined accompaniment rather than assuming a cleaner-sounding stem improves recognition. Separation adds compute and can introduce artefacts or remove useful harmony. For the longer band-in-your-pocket goal, stems can support muting a part for practice; generated accompaniment remains a separate engine. Meta's linked Demucs repository is archived and points to the author's fork, so check the actual maintained source and pinned dependencies at integration time.
 
 First run the automated synthetic suite across available candidates and inspect flagged failures. This precedes founder guitar sessions. A setup failure or unavailable checkpoint is recorded separately from a poor musical score; do not quietly omit a requested candidate or treat it as passed. Test the surviving approaches on permitted real recordings and manually checked references before using guitar feedback for final usefulness decisions.
+
+### Curated references and chart-assisted timing
+
+Search for comparable chord/key references for a specific recording, preserve provenance and source-use status, normalise capo shapes into sounding pitches, and compare ordered verses/choruses plus repetitions. An unordered list of chords only narrows the vocabulary; an ordered sequence and section structure provide a much stronger alignment constraint. Copied charts are correlated evidence, and a simplified learner chart is a separate arrangement rather than proof of exact recorded harmony.
+
+Use the chart to guide variable-duration alignment against acoustic evidence, then flag contradictions and unknown spans for review. Exact recording identity matters: radio edits, covers, intros and section repeats can invalidate an otherwise correct chart. Preserve raw recognition, alternative readings, reviewed harmony and playable shapes. Once checked, cache the alignment per recording/arrangement so ordinary playback needs no new inference.
+
+The next bounded spike is described in [docs/CHART_ALIGNMENT.md](docs/CHART_ALIGNMENT.md), with a 2–3 focused-day estimate after suitable inputs are available. Research leads include [DECIBEL](https://arxiv.org/abs/2002.09748) and [ChordSync](https://arxiv.org/abs/2408.00674). ChordSync's execution/checkpoint availability is unresolved; do not mark it integrated or assign a benchmark score. Test wrong-key/capo charts, wrong chords and missing repeats deliberately, and evaluate actual timing against independently checked audible boundaries. Chart-assisted scores are separate from audio-only recognition, and timing gold stays hidden from the aligner.
 
 ### Pipeline experiment: separation and musical context
 
@@ -125,7 +138,7 @@ Treat song analysis as a modular pipeline with shared source timing. Key, chords
 | Stabilise timing | Reduce flicker while preserving audible, offbeat and fast changes | Planned controlled treatment; preserve raw timestamps |
 | Make a practice arrangement | Playable shapes/capo, labelled simplification and suitable practice rhythm | Later product stage, evaluated separately from exact recognition |
 
-First compare four variants using one practical detector and fixed settings: **original mix**, **separation only**, **key/context assistance only**, and **separation plus key/context assistance**. Keep timing smoothing fixed during this comparison. Tune on development recordings, freeze settings, then evaluate held-out recordings. Record accuracy, missed changes, added wrong chords, correction effort and total processing time, including separation and key analysis. Do not use reference key annotations as model input; an oracle-key diagnostic must be explicitly labelled and excluded from deployment claims.
+After the curated alignment baseline, compare four variants where further improvement is needed, using one practical detector and fixed settings: **original mix**, **separation only**, **key/context assistance only**, and **separation plus key/context assistance**. Keep timing smoothing fixed during this comparison. Tune on development recordings, freeze settings, then evaluate held-out recordings. Record accuracy, missed changes, added wrong chords, correction effort and total processing time, including separation and key analysis. Externally sourced keys/charts are legitimate declared inputs for a chart-assisted task; do not give evaluation-only gold labels to the audio-only control and claim it discovered them. An oracle-key diagnostic must be explicitly labelled and excluded from deployment claims.
 
 Use key to rank uncertain alternatives, not to discard strong audio evidence. A song in C major can contain F minor or D major; preserve those if supported. Include minor/relative-major ambiguity, borrowed chords, secondary dominants, key changes, modal rock and deliberately wrong key estimates in the next synthetic context tests. Disable or weaken the prior when the key is uncertain. Prefer audio-derived key evidence and avoid a feedback loop in which wrong chord labels imply a key that then reinforces those same labels.
 
@@ -228,6 +241,8 @@ Provide editing for chord labels, boundaries, section markers, capo/tuning notes
 **Indicative effort: 1–2 focused weeks, with ongoing content work.**
 
 Create a reviewed catalogue of approximately 30–50 arrangements, subject to the chosen content route. Attach difficulty to the arrangement, not just the song title.
+
+Build this as the first batch of a potential few hundred rock/pop songs. Each entry needs a specific recording/version, reviewed sounding harmony, capo/played shapes, aligned timing and section structure, with source provenance and correction history. Expand only after measuring curation effort and player demand; several easy/hard arrangements of one song can support progression without increasing the title count.
 
 Tag the actual demands: chord shapes, chord transitions, change rate, tempo, rhythmic subdivision, syncopation, muting, barre chords, power chords, stamina, tuning and capo requirements. Record which skill each arrangement introduces and which it reinforces.
 

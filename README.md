@@ -19,13 +19,16 @@ Updated 10 October 2026. Status and deployment information belong in this README
 | Automated synthetic screening before guitar | Expanded batch complete | 64 cases × 5 algorithms = 320 successful comparisons; [results](docs/SYNTHETIC_RESULTS.md) |
 | Chordino Mac setup and comparison | Complete | Project-local native build, common adapter and 64 successful runs; [setup](docs/CHORDINO_SETUP.md) |
 | Annotated real-guitar pilot | Complete | Six preselected GuitarSet performances × five models = 30 successful runs; [results](docs/GUITARSET_PILOT.md) |
-| Separation and soft key/context pipeline | Planned | Four controlled variants after representative real-mix reference selection; see [plan](plan.md) |
+| Curated chart-assisted alignment | Next priority; planned | Ten-excerpt comparison of audio-only, vocabulary-guided and known-sequence approaches; estimated 2–3 focused days after inputs are available; [design](docs/CHART_ALIGNMENT.md) |
+| Separation and soft key/context pipeline | Planned supporting experiments | Four controlled variants where alignment/recognition failures justify them; see [plan](plan.md) |
 | Further research candidates | Backlog | ChordFormer source/checkpoint review; real-recording evidence takes priority |
 | Founder guitar test on real material | Deferred | After automated screening and reference checks; 15–20 minutes when ready |
 
 The synthetic suite compares the template baseline, BTC, CREMA, ChordMini/ChordNet and Chordino across clean triads, voicings/timbres, guitar-like attacks, distractors and timing/vocabulary complexity. ChordMini leads the original core metric including silence (94.7%) and boundary F1 (0.927); the baseline leads the new chord-only core metric (96.1%). Chordino scores 95.4% chord-only, with weaker silence and boundary handling. All audio in that suite is procedural; these are not real-song accuracy estimates and no production algorithm has been selected. The founder's previous analysis code was deleted; the older Expo app only displayed hardcoded sample chords. See [app-readiness criteria](docs/APP_READINESS.md).
 
 The real-guitar pilot changes the ranking: CREMA leads at **93.9% intended major/minor agreement** and 94.4% root agreement. BTC scores 84.0%, Chordino 82.7%, ChordMini 79.5% and the baseline 54.3% on intended major/minor. Eligible reference coverage is 98.1%; performed-quality comparisons have lower coverage and separate scores. Six acoustic performances are a diagnostic sample, not an accuracy estimate for arbitrary songs. No source separation, key assistance or founder play-tests have been used yet.
+
+For the curated rock/pop catalogue, the next experiment uses reviewed chord/key references to guide **alignment to a specific recording**. Match versions, capo and ordered sections before forming a consensus; an unordered chord list only narrows recognition. Audio remains evidence for timing and chart verification. No online catalogue has been harvested and no alignment algorithm has been implemented or scored yet. Checked arrangements can then be cached and reused across learners.
 
 ## Run on Mac
 
@@ -100,4 +103,4 @@ This is the old app startup path, not the Mac experiment setup above. Expo SDK 5
 
 ## Next
 
-Validate the practical shortlist on representative permitted excerpts and manually checked changes. Compare original-mix detection with separation and soft key/context assistance as described in the plan. Record quality, timing errors, correction effort and runtime before founder guitar sessions and product integration. The website remains optional until a concrete session is assigned.
+Run the ten-excerpt chart-assisted alignment spike with permitted inputs and independently checked audible changes. Compare audio-only recognition, key/vocabulary guidance and known-sequence alignment; include corrupted charts and missing repeats. Add separation or soft context where useful, then inspect timing, drift, review effort and runtime before founder guitar sessions and product integration. The website remains optional until a concrete session is assigned.

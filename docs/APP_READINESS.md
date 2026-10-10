@@ -33,6 +33,8 @@ These are procedural tones, not physical guitar performances. They are diagnosti
 
 For a **curated learning path**, the practical first release can use automatic drafts with checked, cached arrangements. Track correction effort per minute of audio and recurring failure conditions. A chart with a few cheap corrections can be viable even if raw transcription is imperfect. For unrestricted “analyse any song”, reliability needs broader evidence and an easy correction workflow. Raw labels are also insufficient to generate accompaniment: bass motion, beat/section timing and playable voicings require separate validation.
 
+The next priority is [chart-assisted alignment](CHART_ALIGNMENT.md) for known catalogue entries. Use reviewed, version-matched ordered chord sequences and key references as declared inputs; keep audio-only recognition as a control and verification signal. Measure actual boundaries and section drift, including corrupted charts, rather than treating online consensus as timing ground truth. Record one-time preparation/correction cost per recording and arrangement. No alignment benchmark has been run yet.
+
 Do not spend months trying every published model before testing real music. Chordino screening and the first real-recording pilot are complete; use larger representative recordings to narrow the shortlist, and revisit newer architectures only if a concrete quality, vocabulary or runtime gap remains. “Ready” means useful charts for the target practice repertoire at an acceptable correction cost, followed by successful play-tests; it is not a universal synthetic percentage threshold.
 
 ## Website's role
