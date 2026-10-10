@@ -1,0 +1,244 @@
+# Guitar learning app → Band in your pocket
+
+Project plan · 10 October 2026 · Working title
+
+**Project repository:** [dcromp/music-os](https://github.com/dcromp/music-os). Continue development in this existing repository. The first implementation step is to inspect and run the old code, then decide what is worth reusing. The repository audit has not yet been performed; this plan makes no assumptions about its current contents or working state.
+
+## 1. Vision and first product
+
+**Long-term vision:** make playing guitar alone feel like playing with a band. Serve people who lack nearby musicians, compatible schedules, or the confidence to join a group. Success means they pick up their instrument more often, enjoy playing, and improve through making music.
+
+**First product:** an affordable song-based guitar practice app that shows useful chords and rhythm guidance, then recommends what to play next. Start with rock and with players who know some chords but need help progressing.
+
+The founder is the first test player. His own guitar sessions will guide early algorithm and interface decisions. Broader testing will follow: a tool that works for one player is promising evidence, not proof of a market.
+
+The first product should stand on its own. Customers should get a worthwhile practice companion even if the full band experience takes years to develop.
+
+**Initial promise:** “Play songs you like, with chords and strumming you can follow, and a clear next step.”
+
+## 2. Starting assumptions
+
+| Assumption | Status | How to resolve it |
+|---|---|---|
+| Audio can be separated and analysed for chords | The founder has already done this; useful starting evidence | Reproduce the workflow and benchmark how reliably it supports actual playing |
+| A Chordify-like service can operate commercially | Existing product demonstrates a market implementation | Investigate available sourcing, permissions, commercial terms and costs for our implementation |
+| Chordify pays YouTube a small amount per video | Speculation; not a verified commercial arrangement | Do not put this into the financial model as a fact; obtain actual terms or choose another supported route |
+| Structured progression and rhythm guidance improve practice | Core product hypothesis | Compare guided sessions with the founder's current workflow, then run an external pilot |
+| Users will pay around $4–6/month | Proposed price test, informed by the user's quoted competitor prices | Test payment and renewal after users experience the product |
+| Chord analysis can become the foundation for a virtual band | Plausible technical direction | Reuse song timing, harmony, sections and rhythm data; validate accompaniment separately |
+
+Technical experimentation and commercial sourcing are separate workstreams. Continue useful experiments while investigating the latter. Do not treat an unverified rights arrangement as an engineering blocker for every experiment, or technical feasibility as confirmation of permission to launch.
+
+## 3. Target user and scope
+
+Start with adult beginners and returning guitarists who enjoy rock, know several chords or basic power chords, and usually practise alone. They can follow simple instruction but struggle with selecting suitable songs, keeping rhythm, or knowing whether they are progressing.
+
+The first release supports one coherent learning path and a small, reliable catalogue. Choose acoustic rhythm or electric rhythm as the first emphasis during the founder's initial sessions; avoid trying to cover both comprehensively at launch.
+
+Include:
+
+- Chords aligned to playback, with the next change visible early enough to prepare.
+- Simple strumming guidance, with audible original demonstrations.
+- Clearly labelled simplified arrangements and more demanding variants.
+- Short practice sessions and recommendations based on skills and musical taste.
+- Section practice and count-ins where the playback source supports them.
+- Fast correction and feedback tools for the test player and content reviewer.
+
+Defer full courses for absolute beginners, exhaustive song coverage, solos and note-perfect tabs, live multiplayer, automatic performance grading, and accompaniment that follows the player in real time.
+
+## 4. Phase 0 — Audit and run the existing music-os code
+
+**Indicative effort: 1–2 focused days, time-boxed before new implementation.**
+
+Use an existing local checkout of `dcromp/music-os` if available; otherwise clone it. Read repository instructions and documentation, inspect the working tree and preserve existing changes. Record the branch and commit being evaluated so the findings are reproducible.
+
+1. **Map what exists.** Inspect entry points, dependencies, tests, history and unfinished work. Look specifically for audio import, source separation, chord/beat detection, playback synchronisation, song data structures, UI and accompaniment experiments. Record absent capabilities rather than assuming they exist.
+2. **Try the documented startup path.** Inspect setup scripts before running them, use an isolated environment, and run relevant existing checks. Record exact commands, required configuration, missing assets/model weights and failures. Never include credentials in the audit report.
+3. **Run one end-to-end example.** With a suitable local audio sample, exercise as much of the existing import → analysis → playback flow as is implemented. Save outputs and measure processing time. If it cannot run within the time box, document the blocker and inspect the relevant code rather than starting a broad repair effort.
+4. **Assess reuse by component.** Classify each useful component as reuse as-is, adapt, replace, or defer. Base the decision on observed behaviour, implementation quality, dependency/model licences, timing accuracy, and estimated adaptation effort—not merely the presence of code.
+5. **Choose the smallest next change.** Identify how existing components can support the Phase A comparison bench and which gaps need new code. Prefer targeted changes over a rewrite; choose a different stack only if the audit supplies a concrete reason.
+
+**Deliverable in music-os:** `docs/REUSE_AUDIT.md`, containing the evaluated commit, startup/test results, sample-run evidence, a component decision table with file references, known limitations and an ordered implementation backlog. Maintain this plan in `plan.md`. Add `PLAYTEST_LOG.csv` during implementation setup with fields for session date, track/excerpt, algorithm and arrangement versions, playback setup, followability, chord usefulness, timing, rhythm guidance, enjoyment, completion, correction time and notes.
+
+**Exit decision:** there is either a reproducible baseline to extend or a documented explanation of why the old code is unsuitable, with a bounded replacement plan. “Not yet tested” must remain distinct from “does not work.”
+
+### Phase A — Build the guitar testing bench
+
+**Indicative effort: 1–2 focused weeks.** These are planning estimates for a solo builder, not delivery commitments.
+
+Start with the components selected in the music-os reuse audit and the founder's existing audio-separation and chord-analysis workflow. If that workflow lives outside music-os, recover it separately and compare it with the repository baseline. Record inputs, dependencies, output and known failures before replacing anything.
+
+Select 12–20 test tracks or excerpts across clean acoustic guitar, distorted rhythm guitar, sparse and dense mixes, slow and fast changes, open chords, power chords, and rhythmically awkward passages. Use recordings with a suitable permission basis for the experiment; include original recordings with known chords and timing. Keep a source and permission record for each item.
+
+Build a minimal local interface: play audio, display chord changes, switch analysis versions, adjust timing offset, and record a session rating. No accounts, payment system or polished mobile app yet.
+
+Compare these approaches with identical inputs and hardware:
+
+| Experiment | Question |
+|---|---|
+| Simple chroma/template baseline | How far does a cheap, explainable chord detector get us? |
+| Pretrained chord-recognition model | Does it materially improve useful chord labels and timing? |
+| Full mix versus separated harmonic/instrument stems | Does separation improve recognition enough to justify processing cost and artefacts? |
+| Raw versus beat-aware smoothing | Can we remove distracting label flicker without erasing real changes? |
+| Full chord vocabulary versus simplified vocabulary | Which output is more playable for the target learner? |
+| Beat/onset analysis versus human-authored practice rhythms | What rhythm information is reliable and useful? |
+
+Specific libraries and models are selected during the spike after checking maintenance, commercial-use licences, model-weight terms, hardware needs and reproducibility. An LLM may explain structured results, but it is not the source of truth for timestamps or harmony.
+
+Annotate a small reference set of chord boundaries, chord labels and beats. Reserve several tracks as a holdout set so repeated tuning does not merely fit the founder's favourites.
+
+Measure both musical accuracy and experience:
+
+- Duration-weighted chord agreement, with separate exact and simplified-label scores.
+- Chord-boundary timing error and unnecessary changes per minute.
+- Beat tracking errors, including half/double-tempo mistakes.
+- Processing time, memory, compute cost per analysed minute, and manual correction time.
+- “Could I follow it?”, “Did it sound right?”, “Where did I stop?”, and “Would I play it again?”
+
+Where practical, hide the algorithm identity and alternate comparison order. Otherwise expectations and familiarity may dominate preference.
+
+**Exit decision:** select the cheapest workflow that produces enjoyable, usable results on most target material. If none does, narrow the supported material or introduce manual review; do not expand the catalogue to hide quality problems.
+
+## 5. Founder play-test protocol
+
+Run three or four 15–20 minute guitar sessions each week. Keep logging under a minute so research does not replace playing.
+
+1. Pick one familiar and one less familiar excerpt at an appropriate difficulty.
+2. Play with the current baseline and a candidate version.
+3. Mark the time of confusing chords, late cues, awkward voicings, or unsuitable rhythms.
+4. Rate chord usefulness, timing, rhythm guidance and enjoyment from 1–5.
+5. Record whether the session ended with a successful play-through and what to change next.
+
+Distinguish recognition errors from teaching and playback errors. A correctly identified chord can still be an unsuitable fingering; a good chart can feel wrong because of output latency; an accurate rhythm can be too difficult for the learner.
+
+Create and use `PLAYTEST_LOG.csv` for session-level records. Keep timestamped findings in the notes field initially; introduce a dedicated annotation tool only if needed.
+
+**Proposed internal gate:** at least 8 of 10 representative reviewed excerpts score 4/5 or better for followability across two sessions. Treat this as a project decision rule, not a scientific or industry benchmark.
+
+## 6. Phase B — Make a useful practice companion
+
+**Indicative effort: 2–3 focused weeks after the testing bench.**
+
+Build the smallest complete practice flow:
+
+1. Select a song and an appropriate arrangement.
+2. Preview the chords and the one skill to focus on.
+3. Practise a suitable rhythm with an original demonstration or click.
+4. Play a section, then the complete arrangement.
+5. Record “too easy”, “about right” or “too hard”, plus the specific difficulty.
+6. Get a suggested next session.
+
+Support two rhythm modes: **practice pattern**, a suitable accompaniment selected for the learner; and **transcribed rhythm**, only where its accuracy has been validated. Never present a suggested pattern as the exact recorded guitar part.
+
+Make chord text readable at guitar-playing distance. Allow a simple keyboard or optional foot-control interaction. Test the actual speaker/headphone setup; wireless audio delay can affect how the player experiences visual alignment.
+
+Provide editing for chord labels, boundaries, section markers, capo/tuning notes and arrangement difficulty. Preserve the raw analysis alongside reviewed and simplified versions.
+
+**Exit decision:** the founder chooses this app for ordinary practice for two weeks and can finish sessions without developer intervention. Keep a short record of why he returns to another tool.
+
+## 7. Phase C — Add structured progression
+
+**Indicative effort: 1–2 focused weeks, with ongoing content work.**
+
+Create a reviewed catalogue of approximately 30–50 arrangements, subject to the chosen content route. Attach difficulty to the arrangement, not just the song title.
+
+Tag the actual demands: chord shapes, chord transitions, change rate, tempo, rhythmic subdivision, syncopation, muting, barre chords, power chords, stamina, tuning and capo requirements. Record which skill each arrangement introduces and which it reinforces.
+
+Start with transparent rules: prefer liked music using established skills plus one manageable new challenge. Avoid recommending a song that introduces a new chord, faster changes and a new rhythm simultaneously. Revisit weak skills through different songs.
+
+Example progression: steady downstrokes → comfortable open-chord changes → eighth-note strumming → rests and accents → power-chord movement → palm muting. Adapt the sequence to the selected acoustic or electric focus.
+
+Let players skip, repeat, choose alternatives and revisit favourites. Advancement initially relies on self-report and successful play-throughs; do not invent precision with unvalidated microphone scoring.
+
+**Exit decision:** the app gives a useful, understandable answer to “What should I practise next?” and changes its recommendation when the player reports a specific problem.
+
+## 8. Phase D — Test with other players and test payment
+
+**Indicative duration: a four-week pilot after the founder version is stable.** Recruit 10–20 target players beyond the founder, with a mix of beginner and returning-player ability.
+
+Give each player a short baseline session using their usual tools, then access to the guided product. Collect completed practice sessions, songs or sections completed, difficulty feedback, support requests and reasons for stopping. Minimise collection of raw microphone audio; it is unnecessary for this pilot.
+
+Test a real paid continuation around $4–6/month, clearly presented as a price experiment. Measure payment separately from statements of interest.
+
+Proposed decision signals:
+
+- At least half of participants still practise with it in week four.
+- Retained players typically complete at least two meaningful sessions per week.
+- Several participants pay to continue and can explain what they would miss.
+- Manual correction and support costs appear affordable at the tested price.
+
+These are directional gates for a small pilot, not proof of product-market fit. If users enjoy play-along but ignore recommendations, reconsider whether progression is the main paid benefit. If they follow recommendations but distrust charts, prioritise content quality.
+
+## 9. Technical foundation and cost control
+
+Use music-os as the implementation repository and let the reuse audit inform the stack. If a new interface is needed, prefer a web prototype for rapid iteration. Test browser playback and timing on the actual target devices before committing to a native app. Run expensive analysis offline or in background jobs; reuse results where permitted instead of analysing audio on every play.
+
+Keep five concepts separate:
+
+- **Recording/source:** exact version, duration, provenance and permitted uses.
+- **Analysis:** model version, chord events, beats, confidence and processing cost.
+- **Arrangement:** playable chords, voicings, simplification, rhythm guidance and required skills.
+- **Song structure:** sections, boundaries and repetitions.
+- **Practice history:** what the player attempted, difficulty feedback and next recommendation.
+
+Align each chart to a specific recording. Live versions, remasters, edits and different intros can break timing. Store manual corrections independently so model upgrades cannot silently erase them. Flag uncertain output for review rather than filling gaps with confident guesses.
+
+The first cost model should include payment/platform fees, applicable taxes, content/rights costs, compute, storage, support and human review. Separate initial catalogue creation from recurring cost. At $5/month, 1,000 paying users yield $5,000/month gross before those costs; that is an illustration, not a forecast.
+
+Record cost per newly processed song, cost per reviewed arrangement, recurring cost per active payer, acquisition cost and retention. Set spending limits after the first benchmark. Avoid unlimited on-demand processing until its costs and sourcing are understood.
+
+## 10. Content and YouTube commercial workstream
+
+Run this alongside Phase A. The existence of Chordify is a reason to investigate feasible arrangements, not evidence that a public per-video YouTube tariff exists.
+
+Compare three possible routes:
+
+1. Official embedded playback with separately sourced, permitted analysis and teaching content.
+2. An authorised catalogue or commercial partner supplying the needed audio/data rights.
+3. Artist partnerships and original recordings that explicitly permit analysis and the intended app features.
+
+For each route, establish playback permissions, analysis access, storage/reuse permissions, chart/arrangement permissions, commercial terms, territory limits, and handling of removed recordings. Determine whether the planned looping, speed controls and future instrument muting are supported. Keep unavailable capabilities out of the advertised product.
+
+YouTube's published API policies restrict downloading and separating audiovisual content without approval. The founder's successful experiments demonstrate capability; they do not establish the commercial terms for this app. Get a targeted review of the selected implementation before public monetisation rather than designing around guessed fees.
+
+**Deliverable:** a one-page comparison with actual terms or explicitly unresolved items, costs and a preferred launch route. If the preferred catalogue is unavailable, continue with a narrower authorised catalogue and test whether users still value the experience.
+
+## 11. Roadmap toward a band in your pocket
+
+| Stage | Player experience | What carries forward | New question to validate |
+|---|---|---|---|
+| 1. Guided song practice | Follow chords and rhythm; choose the next song | Harmony, timing, sections, arrangements, practice habits | Does this make solo practice easier and more enjoyable? |
+| 2. Backing band | Play with drums and bass at a selected tempo | Beat grid, chord map, section structure | Does the accompaniment sound musical enough to return to? |
+| 3. Rehearsal partner | Repeat sections, change intensity, remove the player's part where permitted | Arrangement and playback controls | Which controls create the feeling of rehearsing with others? |
+| 4. Responsive band | Accompaniment reacts to playing, tempo or section cues | Song model plus new live audio/timing systems | Can response remain stable, low-latency and enjoyable? |
+
+Begin stage 2 with original or appropriately licensed grooves and arrangements. Stem separation may support an authorised “remove the guitar” mode, but generated accompaniment and extracted stems are distinct product and rights choices.
+
+Keep the first experiment simple: a steady drummer and bass part following a known progression. Real-time listening, tempo following, expressive accompaniment and recovery after mistakes are substantial later research problems.
+
+The bridge between the products is a reusable model of harmony, rhythm and song structure. Validate the emotional promise at every stage: “Did this feel more like making music with others?”
+
+## 12. Immediate backlog
+
+| Order | Action | Output |
+|---|---|---|
+| 0 | Inspect and run dcromp/music-os; assess old code for reuse | docs/REUSE_AUDIT.md with evidence, component decisions and next changes |
+| 1 | Recover any additional founder separation/chord workflow and combine useful components | Reproducible baseline and sample output in music-os |
+| 2 | Choose target setup, musical focus and first test material | Short test-set manifest with provenance |
+| 3 | Build the minimal playback/comparison interface | Usable guitar test bench |
+| 4 | Run the first three guitar sessions | Completed logs and ranked failure list |
+| 5 | Compare baseline, model and separation variants | Quality/cost comparison including held-out material |
+| 6 | Investigate content and playback commercial routes in parallel | Source/permission/cost comparison |
+| 7 | Choose the first reliable workflow and arrangement format | Phase B implementation brief |
+
+The next meaningful milestone is a play-along experience the founder wants to use again. Build the curriculum around that evidence, then test whether other players want to pay for it.
+
+## Evidence and references
+
+These sources support context, not claims about private licensing agreements or guaranteed economics. Competitor prices mentioned in discussion are user-provided and should be checked for market, tier and billing period before a formal pricing comparison.
+
+- [Musopia: differences between JustinGuitar's website and app](https://musopia.zendesk.com/hc/en-us/articles/360021893219-What-s-the-difference-between-the-courses-on-the-justinguitar-com-website-and-this-app) — identifies song copyright fees as an app subscription cost, without disclosing the cost breakdown.
+- [Chordify: strumming-pattern support](https://support.chordify.net/hc/en-us/articles/360019489618-Does-Chordify-show-the-strumming-patterns) — published support statement says patterns are not detected; its algorithm assessment dates to 2021.
+- [Chordify terms](https://chordify.net/pages/terms-and-conditions/) — describes embedded YouTube API playback, without establishing the proposed per-video payment arrangement.
+- [YouTube API developer policies](https://developers.google.com/youtube/terms/developer-policies) — relevant restrictions and commercial-use conditions for an API-based implementation.
+- [JustinGuitar song library](https://www.justinguitar.com/songs/) — existing difficulty/chord/genre discovery means simple filtering alone is insufficient differentiation.
