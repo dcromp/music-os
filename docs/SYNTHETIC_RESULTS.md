@@ -59,7 +59,7 @@ Use `--reuse-existing` only to rescore already generated predictions; it checks 
 
 ## Browser verification
 
-The 64-case inventory and all four model choices were verified on the deployed Mac browser. A cold-loaded strumming case could seek to 1.0 seconds before playback and display the correct current source-time chord. The server now supplies WAV byte-range responses; Native sentinel/timing conversion and silence-excluding scoring checks were added. See the README for the current test count.
+The 64-case inventory and all five model choices were verified on the deployed Mac browser. A cold-loaded strumming case could seek to 1.0 seconds before playback and display the correct current source-time chord, including Chordino's C# label. The server supplies WAV byte-range responses. Native sentinel/timing conversion and silence-excluding scoring checks were added; 22 baseline/native Python checks, 8 pilot metric checks and 48 JavaScript checks pass.
 
 ## Next
 
