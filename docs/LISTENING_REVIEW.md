@@ -1,72 +1,42 @@
-# Short local listening review
+# Automatic play-along and optional review
 
-The review now gives a concrete optional task: **start with Creep's first 20 seconds, replay it, and mark one or a few audible chord changes without seeing model charts.** Use `?` for an unknown chord. This first familiarisation task takes about **5–10 minutes**, with no required guitar session. Preparing independently checked chord/timing references for all three clips is separate work and may take **20–40 minutes or longer**; the small task is not a claim that gold annotations can be completed in five minutes.
+The default page now gives you a prepared song to play. It does not ask you to transcribe chord names or timings. Open [the player](http://127.0.0.1:8068/), choose a song and press play. Current and upcoming chords follow the audio clock automatically.
 
-## Current pack
+If a moment feels wrong, tap **Something feels wrong**. The page records the playback time and displayed chord and saves the issue in this browser. A reason or note is optional. This reaction timestamp is a problem location, not a verified chord-change boundary. There is no required session length or checklist.
 
-Three first-20-second windows are frozen at source frames **0–441,000**, from the exact prepared mono 22,050 Hz PCM16 WAV files. Bounds are arbitrary listening windows, not verified intro endings or section boundaries. All three are development cases; none is a held-out recording.
+## Current automatic pack
 
-| Window | Recording ID | Excerpt SHA256 |
-| --- | --- | --- |
-| Creep | `creep-listening-00-20` | `eed98c153e766509d226196d8a57abb35ba04668e6a4e456f0aaaef36b47572e` |
-| Wonderwall | `wonderwall-listening-00-20` | `2469ecd73dc56013c4d99c5682e7586c29ddf4593c2aea634e770211c11e02d6` |
-| House of the Rising Sun | `house-listening-00-20` | `943f3488d5c201c424e73f9145f0b64f5f6976abf11c4328a247a1e54ef82aa6` |
+`experiments/generated/automatic-playalong/` contains full prepared recordings for Creep, Wonderwall and House of the Rising Sun. CREMA supplies the unchanged primary draft; Chordino supplies optional disagreements. Creep also has an advanced NNLS cyclic hypothesis. [Preparation and provenance](AUTOMATIC_DRAFTS.md) describe exact audio pairing and the experimental model choice.
 
-The final pack is `experiments/generated/listening-review-alignment/`. Each clip has five anonymous candidates: the three saved audio-only detectors plus spectral and NNLS evidence with bounded section hypotheses. Candidate identities and source parameters stay in `private-candidate-key.json`, which the server does not expose. Ordering is shuffled deterministically per case; this concealment is for review convenience, not a formal blinded study. Candidate chords may suggest which model produced them.
+Wonderwall defaults to **Capo 2 · played shapes**, using its teacher-guide capo suggestion. The practice display transposes detected roots and named bass notes while preserving quality; raw sounding-pitch charts stay unchanged. You can select **Sounding pitches** instead. Feedback preserves both labels and the selected capo/view. Creep and House use no capo suggestion beyond zero.
 
-All predictions and alignment drafts remain unaccepted. A bounded Creep pass or a fixed maximum Wonderwall loop count prevents unbounded cycling, but does not prove the hypothesis or its timings correct. House's source upload is from an unofficial tribute channel; the pack preserves the exact imported version. Acquisition/source-use limitations remain in [YouTube import evidence](YOUTUBE_IMPORT_SMOKE.md).
+Disagreement points are under optional details. They are places where algorithms differ, not a list of known mistakes. Many flags have a correct primary chord, and some shared errors produce no flag. [Automated warning evaluation](DRAFT_SCREEN.md) measures that limitation without founder annotations. These hints never block playback or rewrite the primary timeline.
 
-## Run on the Mac
+## Start on the Mac
 
-From the Music OS checkout, with the prepared imports and saved predictions present:
+From `/Users/davidcrompton/Documents/music-os`:
 
 ```sh
-.venv-analysis/bin/python experiments/analysis/review_pack.py build \
-  --spec experiments/fixtures/review-packs/first-intros-alignment.json \
-  --output experiments/generated/listening-review-alignment
-
-.venv-analysis/bin/python experiments/analysis/review_pack.py serve \
-  --pack experiments/generated/listening-review-alignment --port 8068
+.venv-analysis/bin/python experiments/analysis/automatic_drafts.py serve \
+  --pack experiments/generated/automatic-playalong --port 8068
 ```
 
-Open `http://127.0.0.1:8068/`. The existing synthetic bench stays on port 8067. Build only once per output directory; the builder refuses to overwrite an existing review. For a changed specification, choose a new output directory and serve that pack. The source-only initial pack remains at `experiments/generated/listening-review/`, with its specification in `experiments/fixtures/review-packs/first-intros.json`.
+The existing synthetic bench remains on port 8067. Stop either command with Ctrl+C; restart after reboot. The automatic pack is already cached on the deployed Mac. For another build, use the instructions in [AUTOMATIC_DRAFTS.md](AUTOMATIC_DRAFTS.md) and choose a new output directory.
 
-1. Start with **Creep · first 20 seconds**. Play, pause, restart, or use **Go to seconds** and **Back 2 seconds** to inspect a change.
-2. Press **Mark change now**, then edit its time, chord name or `?`, timing uncertainty, and confidence. Add a mark at zero if the starting chord is identifiable. Marks extend to the next mark, with the final mark ending at the clip end. An unlabelled initial gap stays explicit.
-3. Download the annotation JSON. **Show JSON to copy** provides a fallback if browser downloads are unavailable. Drafts live only in tab memory; save before closing or reloading.
-4. Optionally reveal anonymous candidates after saving your audio-only draft. Compare by replaying boundaries. Candidate events are never copied into manual annotations. Any later export records `candidate_exposure: "model-exposed"`.
+## Feedback storage
 
-Each export includes the review pack ID, excerpt recording ID and audio hash, original recording ID/hash, exact sample endpoints, source offset, uncertainty, notes, and elapsed wall time since first selecting the case in that tab. This timer includes pauses and time on other cases; it is not a measured active correction-cost metric. Times in annotation intervals are **excerpt-relative**; original time is excerpt time plus `origin.source_offset_seconds`.
+Issues, optional reasons and notes save to browser-local storage, keyed by pack, recording ID and exact audio hash. Reloading restores them. This storage stays in the browser profile/origin where you used the player; another browser or clearing storage does not retain it. If storage is unavailable, the page reports that limitation and keeps feedback in the tab with optional export.
 
-Exposure flags persist in browser-local storage, keyed by pack ID, case ID and excerpt hash, so reloading does not turn a previously exposed review into an audio-only draft. If storage cannot be read or written, exports conservatively assume model exposure and identify the unavailable history. Only the exposure flag persists; manual marks and notes still require a download. These flags do not prove that a reviewer has never seen predictions outside this browser or after clearing browser storage.
+**Download feedback** and **Copy feedback JSON** are backups, not required steps. Exports use a feedback schema separate from manual chord annotations. They record source coordinates, the raw sounding chord, displayed chord/shape, practice view and whether the user heard a problem. They are not reference truth or algorithm-accuracy labels.
 
-Exports use `listening-annotations-1.0`, `status: "human-draft-needs-independent-verification"`, and `gold: false`. They are not automatically evaluation references. A separate verification step must check chord identities, physical change times, gaps, version pairing and uncertainty. Model-exposed corrections are useful curation evidence but must not be presented as independent timing gold.
+## Optional research tools
 
-## Add predictions or private untimed inputs
+Other charts, source details and manual annotations remain under **Advanced**. You can inspect or correct a troublesome moment if useful, but the founder does not need to label a song before playing. Manual annotation exports remain model-exposed drafts with `gold: false`; use sounding pitches for reference-style labels and verify them separately before scoring.
 
-The builder accepts source-relative detector files as strings in each case's `candidates` list. New excerpt-local alignments need an explicit coordinate system:
+The earlier three 20-second packs remain cached in `experiments/generated/listening-review/` and `experiments/generated/listening-review-alignment/`. Their sample ranges, identities and anonymous alternatives remain auditable. The current interface automatically displays a draft even for these older packs; it no longer provides the former blind-annotation-first workflow. Its old blank-mark task is superseded by the automatic player.
 
-```json
-{
-  "path": "experiments/generated/real-alignment-v2/creep-listening-00-20-nnls-sections.json",
-  "time_origin": "excerpt"
-}
-```
+Independent accuracy evaluation uses existing annotated datasets and separately verified references. Ordinary play-along reactions guide usefulness and investigations; they do not require detailed manual transcription or certify a chart as correct.
 
-Source predictions must match the original ID, WAV hash, duration and sample rate, and are cropped/rebased once. Excerpt predictions must match the excerpt ID, hash, duration and sample rate, and keep their local timestamps. Mismatches fail instead of silently pairing different audio or shifting times twice. The final specification is [first-intros-alignment.json](../experiments/fixtures/review-packs/first-intros-alignment.json).
+## Verification
 
-An optional `untimed_chart` path validates and copies a finite untimed candidate into each case's private `untimed-chart.json`. It remains separate from `origin.json`, timed predictions, and manual annotations. No timestamped labels are fed into these chart inputs. The browser never requests private chart inputs, origin files, build specifications or model identity keys.
-
-The standalone server binds only `127.0.0.1` and serves fixed static assets, one public manifest, cropped WAV files and anonymous JSON candidates. Public paths reject symlinks and hard-link aliases to private review files at startup and on every request. WAV byte ranges support seeking. It has no upload/annotation POST endpoint, directory listing, arbitrary file route or external request code; a Content Security Policy restricts page resources to the same local origin.
-
-## Validation
-
-Eight offline Python checks pass for exact PCM sample/origin preservation, source/excerpt prediction pairing, blinding, finite untimed separation, transactional failure/no-overwrite behaviour, and the server allowlist including private symlink/hard-link aliases. Eight JavaScript helper checks cover manual interval export and exposure provenance across sessions, conservative unavailable-storage handling, invalid/duplicate timestamps, candidate identity validation, and half-open intervals/gaps. These checks do not establish annotation quality or song accuracy.
-
-```sh
-.venv-analysis/bin/python -W error -m unittest discover \
-  -s experiments/analysis/tests -p test_review_pack.py -v
-node experiments/review/test.js
-```
-
-A live browser smoke verified all three audio windows load, exact 5.250-second seeking, blank manual drafts, audio-only/model-exposed export transitions, and the final five-candidate reveal. A separate smoke pack/origin verified model exposure remains recorded after reloading without marking the user's pack as exposed. Temporary UI test marks were discarded by reloading; no listening annotations or gold were manufactured by that test.
+Tests cover exact audio/chart matching, full-duration preparation, feedback capture from the playback clock, source offsets, persistence and case isolation, optional manual provenance, practice transposition, and private HTTP routes. Browser smoke checked immediate chords, seeking, issue capture, reload persistence and song switching. The final capo display has targeted tests; its deployed visual check is reported separately if the browser connection is unavailable.

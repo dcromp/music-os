@@ -13,7 +13,7 @@ Updated 10 October 2026. Status and deployment information belong in this README
 | Existing-code audit and reuse decisions | Complete | Expo shell/song cards reusable; chart data and clock need later repair |
 | Isolated Mac analysis environment | Complete | Python 3.12.10 and pinned NumPy 2.2.6; separate from npm/Expo |
 | Output format and known-chord audio | Complete | Version 1.0 JSON; generated 22-second triad/silence fixture |
-| Baseline run and automated checks | Complete | 90 Python checks across analysis/pilot environments and 56 JavaScript checks pass; native tests require built assets |
+| Baseline run and automated checks | Complete | Analysis, pilot, draft-preparation and browser checks pass; native tests require built assets |
 | Local play-along bench | Complete | Live Mac browser checks passed: playback, pause, seeking, switching charts, Restart and visible CSV export |
 | Run guide, deployment and evidence | Complete | Local startup instructions below; measurements and limits in [Phase 0 results](docs/PHASE0_RESULTS.md) |
 | Automated synthetic screening before guitar | Expanded batch complete | 64 cases × 5 algorithms = 320 successful comparisons; [results](docs/SYNTHETIC_RESULTS.md) |
@@ -23,17 +23,18 @@ Updated 10 October 2026. Status and deployment information belong in this README
 | Chart alignment baseline and synthetic timing | Complete experimental baseline | 64/64 cases; 90.4% mean boundary F1 given correct chord order, with 59 extra / 1 missed changes; [results](docs/ALIGNMENT_SCREEN.md) |
 | Explicit section order and repeat counts | Implemented | Finite untimed section schema, partial-prefix handling and five new checks pass; real arrangements remain hypotheses |
 | NNLS acoustic evidence comparison | Complete experimental comparison | 64 pairs / 128 successful alignments; conditional F1 98.4% NNLS vs 90.4% spectral, with timing tradeoffs; [results](docs/ACOUSTIC_ALIGNMENT_COMPARISON.md) |
-| Short listening-reference pack | Ready for first listening pass | Three 20-second windows, five anonymous drafts each; start with Creep for 5–10 min; [task/setup](docs/LISTENING_REVIEW.md) |
-| Curated real-song alignment validation | In progress | Human reference recording match/marks still needed; bounded prefixes and stronger acoustic evidence are diagnostic only; remaining estimate 1.5–2.5 focused days; [design](docs/CHART_ALIGNMENT.md) |
+| Automatic full-song play-along | Ready | Creep, Wonderwall and House load complete drafts immediately; optional one-tap issue feedback; [setup](docs/AUTOMATIC_DRAFTS.md) |
+| Automated draft/warning evaluation | Complete | Six annotated performances / 12 reference comparisons, exact primary-score parity; disagreement warnings are optional hints; [results](docs/DRAFT_SCREEN.md) |
+| Curated real-song alignment validation | Further evaluation planned | Full-mix accuracy and broader holdout comparisons remain unmeasured; manual transcription is not required to try the player; [design](docs/CHART_ALIGNMENT.md) |
 | Separation and soft key/context pipeline | Planned supporting experiments | Four controlled variants where alignment/recognition failures justify them; see [plan](plan.md) |
 | Further research candidates | Backlog | ChordFormer source/checkpoint review; real-recording evidence takes priority |
-| Founder guitar test on real material | Deferred | After automated screening and reference checks; 15–20 minutes when ready |
+| Founder play-along feedback | Optional, ready now | Play normally; tap only if something feels wrong. No timestamp or chord-name entry required |
 
 The synthetic suite compares the template baseline, BTC, CREMA, ChordMini/ChordNet and Chordino across clean triads, voicings/timbres, guitar-like attacks, distractors and timing/vocabulary complexity. ChordMini leads the original core metric including silence (94.7%) and boundary F1 (0.927); the baseline leads the new chord-only core metric (96.1%). Chordino scores 95.4% chord-only, with weaker silence and boundary handling. All audio in that suite is procedural; these are not real-song accuracy estimates and no production algorithm has been selected. The founder's previous analysis code was deleted; the older Expo app only displayed hardcoded sample chords. See [app-readiness criteria](docs/APP_READINESS.md).
 
 The real-guitar pilot changes the ranking: CREMA leads at **93.9% intended major/minor agreement** and 94.4% root agreement. BTC scores 84.0%, Chordino 82.7%, ChordMini 79.5% and the baseline 54.3% on intended major/minor. Eligible reference coverage is 98.1%; performed-quality comparisons have lower coverage and separate scores. Six acoustic performances are a diagnostic sample, not an accuracy estimate for arbitrary songs. No source separation, key assistance or founder play-tests have been used yet.
 
-For the curated rock/pop catalogue, the known-chart aligner now accepts explicit finite section order/repeats and optional NNLS acoustic evidence. The paired synthetic comparison favours NNLS for fewer spurious changes but finds larger matched timing error. These are timing scores given correct harmony, not recognition accuracy. On full Creep, NNLS reduces cyclic wraps from 31 to 17; both drafts remain unaccepted. Bounded 20-second prefixes are ready for listening review, with no real-song timing score yet. Match versions, capo, sections and repeats before caching arrangements. See [real diagnostics](docs/REAL_ALIGNMENT_DIAGNOSTICS.md).
+The default player now starts with complete automatic CREMA drafts for the three imported songs. CREMA is the experimental primary because it led the annotated acoustic pilot; full-mix accuracy remains unmeasured. Chordino differences provide optional hints, without replacing primary chords or claiming that agreement proves correctness. The known-chart/NNLS experiments remain available separately: their cyclic drafts and bounded prefixes have not been accepted as verified arrangements. See [automatic preparation](docs/AUTOMATIC_DRAFTS.md) and [real diagnostics](docs/REAL_ALIGNMENT_DIAGNOSTICS.md).
 
 ## Run on Mac
 
@@ -52,13 +53,13 @@ python3.12 -m venv .venv-analysis
 
 Browser-logic checks additionally run with `node experiments/bench/test.js` (no npm install needed).
 
-The [YouTube import guide](docs/YOUTUBE_IMPORT.md) covers isolated yt-dlp setup and cached recordings. The existing iframe wrapper supplies playback, while the separate Python importer supplies prepared local audio. A short listening check is ready below; no guitar session is required yet.
+The [YouTube import guide](docs/YOUTUBE_IMPORT.md) covers isolated yt-dlp setup and cached recordings. The existing iframe wrapper supplies playback, while the separate Python importer supplies prepared local audio. Automatic drafts are ready to use below.
 
-## First listening check
+## Play with the automatic draft
 
-Open [the listening review](http://127.0.0.1:8068/) and start with **Creep · first 20 seconds**. Play/replay it, press **Mark change now** for one or a few audible chord changes, and leave `?` when unsure of the chord. Save the annotation JSON using the download or copy fallback before revealing candidate charts. This familiarisation task takes about **5–10 minutes** and needs no guitar.
+Open [the player](http://127.0.0.1:8068/), choose a song and press play. The current chord and upcoming changes appear automatically. Listen or pick up your guitar; there is no annotation task to complete first.
 
-The three windows start with blank manual annotations; model charts remain hidden until requested. Exports preserve the audio hash/source offset and candidate-exposure history and remain human drafts, not automatic timing gold. Checking references for all three clips may take 20–40 minutes or longer. [Instructions](docs/LISTENING_REVIEW.md) distinguish the first short task from independent reference preparation. The synthetic bench on port 8067 remains an optional diagnostic viewer.
+If something feels wrong, tap **Something feels wrong**. The page captures the playback time and chord and saves the issue automatically in this browser. A reason or note is optional. Model disagreements, other charts and manual corrections are under optional details; none is a checklist you must finish. [Instructions](docs/LISTENING_REVIEW.md) explain storage and practice views. The synthetic bench on port 8067 remains optional.
 
 ## Automated synthetic tests
 
@@ -83,7 +84,7 @@ Add `--overwrite` only to replace an existing screen deliberately. [Results](doc
 
 For the newer frozen spectral/NNLS comparison, build the separate [native acoustic host](docs/NNLS_CHROMA_EVIDENCE.md) and run `.venv-analysis/bin/python experiments/analysis/alignment_comparison.py`. Saved [paired results](docs/ACOUSTIC_ALIGNMENT_COMPARISON.md) report all 64 cases and extraction/alignment runtimes separately; use a new output directory or explicit `--overwrite` for another run.
 
-The automated runs are handled by the agent. The website is an **optional diagnostic viewer**, and no founder guitar test is currently assigned. To inspect a result, press **Load synthetic suite**, choose a case, and **Load case** to compare its reference and candidate charts. A later guitar session will specify the recording, charts and feedback questions. See [app-readiness criteria](docs/APP_READINESS.md).
+Automated runs and reference evaluation are handled by the agent. To inspect synthetic results, press **Load synthetic suite** in the port-8067 bench, choose a case, and **Load case**. The default port-8068 player is for ordinary play-along and optional issue feedback, with no transcription assignment. See [app-readiness criteria](docs/APP_READINESS.md).
 
 Real-guitar scoring uses pinned `mir_eval` in a separate evaluation environment. The Mac deployment includes saved pilot inputs/references/predictions and `.venv-pilot`, so the existing results can be rescored without loading the models:
 
@@ -103,7 +104,7 @@ Open [http://127.0.0.1:8067](http://127.0.0.1:8067/) and press **Load demo**. Ch
 | Target | State | Start / stop |
 |---|---|---|
 | Mac experiment bench | Running locally in this session; live browser checks passed | Run `lab.py serve`; opens on localhost port 8067. Stop with Ctrl+C. Use `--port 8069` if needed; listening review uses 8068. |
-| Mac listening review | Running locally on port 8068; exact seeking and private-file exclusions verified | Run `review_pack.py serve --pack experiments/generated/listening-review-alignment --port 8068`; stop with Ctrl+C. |
+| Mac automatic player | Local port 8068; complete prepared audio and automatic charts | Run `automatic_drafts.py serve --pack experiments/generated/automatic-playalong --port 8068`; stop with Ctrl+C. |
 | Public web service | Not deployed | Hosting, authentication, storage and public launch are later work |
 | Native macOS app | Not configured | The current Mac tool is a browser page plus local analysis scripts |
 | Expo web product | Existing build fails | Missing `react-native-web-webview` in the YouTube wrapper; defer repair until product integration |
@@ -114,7 +115,7 @@ To restart the existing Mac setup, run `cd /Users/davidcrompton/Documents/music-
 
 The experiment server binds to `127.0.0.1` only. It serves the bench and allowlisted experiment files, not the repository generally. It has no public hosting, uploads, accounts or background daemon. Generated audio, local recordings, results and analysis environments are gitignored. Restart the command after restarting the machine; a source push does not deploy a hosted service.
 
-The Mac checkout contains cached three-song audio, detector charts, the conditional screens, NNLS evidence, and `experiments/generated/listening-review-alignment/`. The listening server serves only cropped audio and anonymous public charts; it excludes private identities/untimed inputs and offers no upload endpoint. `.venv-youtube` supports fresh imports, and project-local native assets support NNLS extraction. Neural model environments remain separate research setup; saved outputs require none of them. Restart each server command after reboot.
+The Mac checkout contains cached three-song audio, detector charts, conditional screens, NNLS evidence, legacy review windows and `experiments/generated/automatic-playalong/`. The player serves only its allowlisted audio/chart/evidence assets. Feedback persists in browser-local storage; download/copy is an optional backup, not a required step. `.venv-youtube` supports fresh imports, and native assets support NNLS extraction. Neural inference environments remain separate research setup; saved playback requires none of them. Restart each server after reboot.
 
 ## Existing Expo prototype
 
@@ -129,4 +130,4 @@ This is the old app startup path, not the Mac experiment setup above. Expo SDK 5
 
 ## Next
 
-Save and refine human marks on the first short listening windows, then expand to the ten-excerpt comparison with fresh holdout material. The Animals corpus reference describes a longer recording than our import and cannot be scored unchanged; see [reference sources](docs/REAL_REFERENCE_SOURCES.md). Compare audio-only recognition, vocabulary guidance and known-sequence alignment, including corrupted charts. Measure timing, drift and correction effort before guitar sessions and product integration.
+Continue automated comparisons with annotated data and fresh holdout material while the founder plays normally. Optional timestamped feedback helps target problems; it is not reference truth. The Animals corpus recording still requires version matching before scoring. Compare recognition, vocabulary guidance and known-sequence alignment, then measure correction effort and followability. The founder does not need to manually transcribe the repertoire.
