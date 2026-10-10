@@ -85,7 +85,39 @@ Compare these approaches with identical inputs and hardware:
 
 Specific libraries and models are selected during the spike after checking maintenance, commercial-use licences, model-weight terms, hardware needs and reproducibility. An LLM may explain structured results, but it is not the source of truth for timestamps or harmony.
 
+### Candidate tools and controlled comparisons
+
+The supplied report, “Algorithmic Architectures and Empirical Evaluation Framework for Automated Guitar Learning Systems”, provides research leads, not a validated implementation specification. Keep Phase 0 first. Do not adopt its runtime, cost, accuracy or confidence figures as measured results for this project.
+
+| Area | Initial candidates | Experiment and decision |
+|---|---|---|
+| Chord recognition | Existing music-os workflow, a simple chroma/template baseline, BTC-ISMIR19 and CREMA | Run on identical excerpts; compare chord accuracy, followability, setup effort and processing cost. Choose after measurement rather than preselecting BTC. |
+| Source separation | Standard HT-Demucs; optional 6-stem model | Compare original mix, 4-stem bass plus “other”, and isolated guitar. Retain separation only where its benefit warrants its cost; it may remove useful harmony or introduce artefacts. |
+| Beat and section analysis | Existing beat tracker or simple baseline; All-In-One | Compare beat/downbeat alignment and useful practice boundaries. Test All-In-One as a candidate for combined tempo, beats and sections; verify dependency and model requirements. |
+| Chord smoothing | Raw output, simple duration smoothing, beat-aware probability pooling/decoding where probabilities are available | Measure distracting flicker and lost/shifted genuine changes. Include anticipations, fast changes, tempo variation and an incorrect beat grid. |
+| Rhythm guidance | Human-authored pattern library; optional onset detection and pattern matching | Establish a useful practice-pattern baseline before trying automated transcription or stroke-direction classification. |
+| Evaluation | mir_eval plus founder play-tests | Use duration-weighted chord scores, boundary timing and beat metrics alongside usability and correction effort. |
+
+Run experiments in stages: compare chord detectors on the original mix first, test separation with the strongest practical candidates second, then assess timing and simplification. Avoid an exhaustive combination of every model and setting before any guitar feedback.
+
+Pin tool/model versions and record hardware, audio duration, settings, cold versus warm runtime, peak memory and failure rate. Include decoding, separation and feature extraction in end-to-end processing time. Cloud cost estimates must include actual provider pricing, idle/startup time and storage where relevant; the report's per-song compute estimate is not a budget.
+
+Check code, model weights, dependencies and datasets separately. BTC's repository identifies an MIT licence and CREMA identifies BSD-2-Clause, but that alone is not a complete deployment review. All-In-One depends on madmom, which distinguishes BSD source code from noncommercial model/data files; inspect whether the selected pipeline uses those files before drawing a commercial-use conclusion.
+
+Use one consistently decoded audio source and preserve its timing reference across analyses and playback. Do not assume different decoders or recordings have identical offsets. Retain raw timestamps alongside any adjusted display or practice boundaries.
+
+### Musical safeguards for the experiments
+
+- Do not impose a universal maximum number of chord changes per bar or force every change onto a rigid grid. These can hide genuine musical events. Compare optional snapping with unsnapped output and keep manual correction available.
+- Treat a detected bass note as evidence for harmony, not ground truth for the chord root; inversions and passing notes are expected.
+- Treat pattern similarity as a ranking score, not a calibrated probability. Determine display thresholds from labelled examples and play-tests rather than adopting the report's 0.75 value.
+- Distinguish detected attack timing from inferred down/up strokes. When uncertain, show a labelled practice pattern instead of claiming an exact transcription.
+- Review suggested section loops by listening and playing. Downbeat snapping alone does not resolve pickup notes, wrong beat grids or discontinuities at loop boundaries. Allow pickup/count-in choices and editable boundaries where supported.
+- Keep the current chord aligned with playback and preview upcoming changes separately. Test a configurable look-ahead rather than shifting the whole chart early by a fixed 1–1.5 seconds.
+
 Annotate a small reference set of chord boundaries, chord labels and beats. Reserve several tracks as a holdout set so repeated tuning does not merely fit the founder's favourites.
+
+Use mir_eval's root and major/minor chord comparisons first; add richer chord-quality metrics only where the reference labels support them. Score simplified teaching arrangements separately from exact transcription so deliberate simplification is not confused with recognition failure. Investigate GuitarSet and annotated popular-music datasets as supplementary benchmarks after checking audio availability, permissions and overlap with candidate models' training data. Published annotation access does not necessarily include the audio. Evaluate separation SDR only where reference stems exist; downstream chord usefulness is the main project criterion.
 
 Measure both musical accuracy and experience:
 
@@ -96,6 +128,8 @@ Measure both musical accuracy and experience:
 - “Could I follow it?”, “Did it sound right?”, “Where did I stop?”, and “Would I play it again?”
 
 Where practical, hide the algorithm identity and alternate comparison order. Otherwise expectations and familiarity may dominate preference.
+
+For the founder's main comparison, present the same excerpt in three anonymous versions: existing baseline, an alternative detector, and the strongest detector with timing/arrangement improvements. Track recognition, display timing and playability as separate outcomes. If the combined improved version wins, compare its timing and simplification changes separately before attributing the benefit to either one.
 
 **Exit decision:** select the cheapest workflow that produces enjoyable, usable results on most target material. If none does, narrow the supported material or introduce manual review; do not expand the catalogue to hide quality problems.
 
@@ -143,6 +177,10 @@ Provide editing for chord labels, boundaries, section markers, capo/tuning notes
 Create a reviewed catalogue of approximately 30–50 arrangements, subject to the chosen content route. Attach difficulty to the arrangement, not just the song title.
 
 Tag the actual demands: chord shapes, chord transitions, change rate, tempo, rhythmic subdivision, syncopation, muting, barre chords, power chords, stamina, tuning and capo requirements. Record which skill each arrangement introduces and which it reinforces.
+
+Add a small capo and voicing experiment. Search a practical range of capo positions and familiar chord shapes, preserving the recording's sounding key. Show the capo position and played shapes explicitly. Compare familiar open shapes, barre requirements, hand movement and transition speed against the founder's actual ratings; the easiest arrangement depends on the player's learned shapes, not a universal score. Use the report's cited playability research as a lead to inspect before implementing its formulas or weights.
+
+Do not automatically replace every suspended, extended or slash chord with a triad. Review whether the simplification preserves the recognisable harmony and fits the backing track. Keep the detected harmony and the teaching arrangement separate, with optional power-chord versions where musically suitable. Start with a reviewed shape library rather than a full biomechanical fingering optimiser.
 
 Start with transparent rules: prefer liked music using established skills plus one manageable new challenge. Avoid recommending a song that introduces a new chord, faster changes and a new rhythm simultaneously. Revisit weak skills through different songs.
 
@@ -216,6 +254,10 @@ Begin stage 2 with original or appropriately licensed grooves and arrangements. 
 
 Keep the first experiment simple: a steady drummer and bass part following a known progression. Real-time listening, tempo following, expressive accompaniment and recovery after mistakes are substantial later research problems.
 
+For this first band experiment, use authored MIDI drum grooves and simple root/root-fifth bass patterns driven by the reviewed chord map, tempo and section markers. Compare a fixed groove with basic verse/chorus variation and fills. Use appropriately licensed soundfonts or samples and measure whether the result feels musical, stays in time and encourages another play-through. Generated MIDI does not by itself establish rights to every sound asset or song arrangement. Keep generation local where practical and measure its actual device performance.
+
+Defer live tempo-following, microphone-based intensity response and automatic recovery/vamping until the fixed-tempo band is enjoyable. Later tests must distinguish the player's sound from the app's own accompaniment and account for microphone processing and playback latency.
+
 The bridge between the products is a reusable model of harmony, rhythm and song structure. Validate the emotional promise at every stage: “Did this feel more like making music with others?”
 
 ## 12. Immediate backlog
@@ -233,6 +275,8 @@ The bridge between the products is a reusable model of harmony, rhythm and song 
 
 The next meaningful milestone is a play-along experience the founder wants to use again. Build the curriculum around that evidence, then test whether other players want to pay for it.
 
+Phase A's comparison report should record candidate versions, permitted inputs, exact run commands, measurements, anonymous play-test ratings and a keep/adapt/reject decision for each tested approach. Preserve negative results so future work does not repeat failed experiments.
+
 ## Evidence and references
 
 These sources support context, not claims about private licensing agreements or guaranteed economics. Competitor prices mentioned in discussion are user-provided and should be checked for market, tier and billing period before a formal pricing comparison.
@@ -242,3 +286,9 @@ These sources support context, not claims about private licensing agreements or 
 - [Chordify terms](https://chordify.net/pages/terms-and-conditions/) — describes embedded YouTube API playback, without establishing the proposed per-video payment arrangement.
 - [YouTube API developer policies](https://developers.google.com/youtube/terms/developer-policies) — relevant restrictions and commercial-use conditions for an API-based implementation.
 - [JustinGuitar song library](https://www.justinguitar.com/songs/) — existing difficulty/chord/genre discovery means simple filtering alone is insufficient differentiation.
+- [BTC-ISMIR19](https://github.com/jayg996/BTC-ISMIR19) — candidate chord-recognition implementation; supports major/minor and larger-vocabulary inference.
+- [CREMA](https://github.com/bmcfee/crema) — alternative chord-analysis candidate with a BSD-2-Clause repository licence.
+- [Demucs](https://github.com/facebookresearch/demucs) — separation candidates, model-specific limitations and resource guidance; benchmark the exact selected configuration.
+- [All-In-One](https://github.com/mir-aidj/all-in-one) — tempo, beat, downbeat and functional-section analysis, with installation dependencies and audio-offset guidance.
+- [madmom licence distinctions](https://github.com/CPJKU/madmom#license) — separate source-code and model/data terms; inspect actual dependency usage.
+- [mir_eval chord evaluation](https://mir-eval.readthedocs.io/latest/api/chord.html) — standard chord comparisons for the benchmark.
