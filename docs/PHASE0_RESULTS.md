@@ -38,6 +38,6 @@ The full legacy Expo checks remain in [REUSE_AUDIT.md](REUSE_AUDIT.md). They do 
 
 ## Founder test sequencing
 
-The founder requested automated synthetic screening before guitar sessions. That first four-candidate screen has now run, and further candidate/reference checks remain explicit in the plan. The later 15–20 minute session will prepare a suitable local WAV, analyse it, load its matching chart and record confusing timestamps/ratings. Actual guitar/music material remains necessary for a production decision.
+The founder requested automated synthetic screening before guitar sessions. The expanded [five-candidate synthetic screen](SYNTHETIC_RESULTS.md) and [six-performance real-guitar pilot](GUITARSET_PILOT.md) have now run. Further representative mix/reference checks remain explicit in the plan. The later 15–20 minute session will specify a suitable local WAV, matching charts and feedback questions; the website is currently an optional diagnostic viewer. Actual practice on inspected material remains necessary for a production decision.
 
 The previous analysis code was deleted, as confirmed by the founder. Phase A proceeds from this fresh baseline.

@@ -64,7 +64,7 @@ Verification: locked dependencies install, TypeScript passes and the sole starte
 
 Phase 0 now includes the experiment foundation as well as the completed code audit. Keep its step/status/ETA table, startup instructions and deployment state in the root [README.md](README.md). Its deliverables are an isolated Mac environment, versioned JSON format, known-chord fixture, a cheap baseline with measured output, a minimal local browser play-along bench and a reproducible run guide. Validate the bench clock before trusting guitar ratings. Synthetic results establish plumbing only; Phase A chooses algorithms using real material and held-out tests.
 
-**Current evidence:** Phase 0's technical foundation is implemented. The first automated Phase A screen has now completed 64 synthetic cases for each of four algorithms (256 successful comparisons). Results and limitations are in [docs/SYNTHETIC_RESULTS.md](docs/SYNTHETIC_RESULTS.md). Per the founder's sequencing preference, automated screening and reference checks precede guitar sessions.
+**Current evidence:** Phase 0's technical foundation is implemented. The expanded automated Phase A screen has completed 64 synthetic cases for each of five algorithms (320 successful comparisons), including the project-local Chordino Mac build. Results and limitations are in [docs/SYNTHETIC_RESULTS.md](docs/SYNTHETIC_RESULTS.md). The [six-recording annotated real-guitar pilot](docs/GUITARSET_PILOT.md) completed all 30 model runs and reverses the synthetic ranking: CREMA leads intended major/minor agreement at 93.9%, followed by BTC 84.0%, Chordino 82.7%, ChordMini 79.5% and baseline 54.3%. This small acoustic dataset has lead-sheet-derived roots/boundaries and different eligible quality coverage; it is not a general app accuracy claim. Per the founder's sequencing preference, automated screening and reference checks precede guitar sessions.
 
 ### Phase A — Choose algorithms on Mac and build the guitar testing bench
 
@@ -85,6 +85,7 @@ Compare these approaches with identical inputs and hardware:
 | Simple chroma/template baseline | How far does a cheap, explainable chord detector get us? |
 | Pretrained chord-recognition model | Does it materially improve useful chord labels and timing? |
 | Full mix versus separated harmonic/instrument stems | Does separation improve recognition enough to justify processing cost and artefacts? |
+| Raw chord output versus soft key/context assistance | Can likely key and neighbouring chords resolve uncertain labels without erasing borrowed chords or modulations? |
 | Raw versus beat-aware smoothing | Can we remove distracting label flicker without erasing real changes? |
 | Full chord vocabulary versus simplified vocabulary | Which output is more playable for the target learner? |
 | Beat/onset analysis versus human-authored practice rhythms | What rhythm information is reliable and useful? |
@@ -97,16 +98,38 @@ The supplied report, “Algorithmic Architectures and Empirical Evaluation Frame
 
 | Area | Initial candidates | Experiment and decision |
 |---|---|---|
-| Chord recognition | Spectral-template baseline, BTC-ISMIR19, CREMA, ChordMini/ChordNet2E1D, Chordino/NNLS-Chroma; ChordFormer after source/checkpoint review | First four have completed the same 64-case synthetic screen. Chordino setup is pending; the shortlist is open. Compare core/exact harmony, timing, setup and compute before narrowing it. |
-| Source separation | Standard HT-Demucs; optional 6-stem model | Compare original mix, 4-stem bass plus “other”, and isolated guitar. Retain separation only where its benefit warrants its cost; it may remove useful harmony or introduce artefacts. |
+| Chord recognition | Spectral-template baseline, BTC-ISMIR19, CREMA, ChordMini/ChordNet2E1D, Chordino/NNLS-Chroma; ChordFormer after source/checkpoint review | Five have completed the same 64-case synthetic screen. Chordino Mac setup is complete; the shortlist is open. Compare real-recording harmony, timing, setup and compute before narrowing it. |
+| Source separation | Standard HT-Demucs; optional 6-stem model; Spleeter as an alternative comparison | Compare original mix, 4-stem bass plus “other”, and isolated guitar. Retain separation only where its benefit warrants its cost; it may remove useful harmony or introduce artefacts. |
+| Key and harmonic context | Cheap chroma/key-profile baseline; optional verified pretrained key estimator | Estimate from audio, retain alternative keys and uncertainty, then test a soft prior for ambiguous chord candidates. Allow local key changes; never force all chords into one scale. |
 | Beat and section analysis | Simple baseline; All-In-One | No beat tracker exists in the inspected app. Compare beat/downbeat alignment and useful practice boundaries. Test All-In-One for combined tempo, beats and sections; verify dependency and model requirements. |
 | Chord smoothing | Raw output, simple duration smoothing, beat-aware probability pooling/decoding where probabilities are available | Measure distracting flicker and lost/shifted genuine changes. Include anticipations, fast changes, tempo variation and an incorrect beat grid. |
 | Rhythm guidance | Human-authored pattern library; optional onset detection and pattern matching | Establish a useful practice-pattern baseline before trying automated transcription or stroke-direction classification. |
 | Evaluation | mir_eval plus founder play-tests | Use duration-weighted chord scores, boundary timing and beat metrics alongside usability and correction effort. |
 
-Run experiments in stages: compare chord detectors on the original mix first, test separation with the strongest practical candidates second, then assess timing and simplification. Avoid an exhaustive combination of every model and setting before any guitar feedback.
+Run experiments in stages: compare chord detectors on the original mix first, test separation with the strongest practical candidates second, then assess timing and simplification. Avoid an exhaustive combination of every model and setting before any guitar feedback. [App-readiness criteria](docs/APP_READINESS.md) records concrete synthetic failures and the bounded next validation gate. Finish the practical Chordino comparison, then move to annotated real guitar rather than waiting for every research architecture. A curated learning-path release can use automatically drafted, checked and cached arrangements; measure correction effort as well as raw recognition.
+
+[Spleeter](https://github.com/deezer/spleeter) and [Demucs](https://github.com/facebookresearch/demucs) are source-separation tools, not chord recognisers. Their output is audio stems, which must go through a separate chord detector. Spleeter provides 2/4/5-stem variants; Demucs provides the usual vocals/drums/bass/other split and an experimental six-source variant with guitar/piano. Benchmark the original mix against selected stems or recombined accompaniment rather than assuming a cleaner-sounding stem improves recognition. Separation adds compute and can introduce artefacts or remove useful harmony. For the longer band-in-your-pocket goal, stems can support muting a part for practice; generated accompaniment remains a separate engine. Meta's linked Demucs repository is archived and points to the author's fork, so check the actual maintained source and pinned dependencies at integration time.
 
 First run the automated synthetic suite across available candidates and inspect flagged failures. This precedes founder guitar sessions. A setup failure or unavailable checkpoint is recorded separately from a poor musical score; do not quietly omit a requested candidate or treat it as passed. Test the surviving approaches on permitted real recordings and manually checked references before using guitar feedback for final usefulness decisions.
+
+### Pipeline experiment: separation and musical context
+
+Treat song analysis as a modular pipeline with shared source timing. Key, chords and rhythm can inform one another; a first key estimate should remain revisable rather than becoming an irreversible first-step decision. Joint use of key, chord, bass and metric context has a research basis in [Dixon's computational harmony work](https://webspace.eecs.qmul.ac.uk/s.e.dixon/pub/2010/Dixon-CMMR-2010.pdf); its historical results are not measured accuracy for this app.
+
+| Step | Output / purpose | Experiment state |
+|---|---|---|
+| Decode once | Prepared audio, identity/hash and shared time origin | Implemented |
+| Choose analysis signal | Original mix; optional guitar, accompaniment or harmonic stem combination | Separation comparison planned |
+| Extract evidence | Chroma/chord candidate scores; key candidates; beats/onsets; optional bass evidence | Chord labels implemented; other evidence and score export require adapters |
+| Resolve uncertain harmony | Combine audio evidence with neighbouring chords and a soft key prior | Planned; measure benefit before retaining |
+| Stabilise timing | Reduce flicker while preserving audible, offbeat and fast changes | Planned controlled treatment; preserve raw timestamps |
+| Make a practice arrangement | Playable shapes/capo, labelled simplification and suitable practice rhythm | Later product stage, evaluated separately from exact recognition |
+
+First compare four variants using one practical detector and fixed settings: **original mix**, **separation only**, **key/context assistance only**, and **separation plus key/context assistance**. Keep timing smoothing fixed during this comparison. Tune on development recordings, freeze settings, then evaluate held-out recordings. Record accuracy, missed changes, added wrong chords, correction effort and total processing time, including separation and key analysis. Do not use reference key annotations as model input; an oracle-key diagnostic must be explicitly labelled and excluded from deployment claims.
+
+Use key to rank uncertain alternatives, not to discard strong audio evidence. A song in C major can contain F minor or D major; preserve those if supported. Include minor/relative-major ambiguity, borrowed chords, secondary dominants, key changes, modal rock and deliberately wrong key estimates in the next synthetic context tests. Disable or weaken the prior when the key is uncertain. Prefer audio-derived key evidence and avoid a feedback loop in which wrong chord labels imply a key that then reinforces those same labels.
+
+Current adapters mostly emit final labels rather than comparable candidate probabilities. Export model scores before implementing probabilistic assistance, and validate their calibration; a softmax or chroma similarity is not automatically a trustworthy confidence percentage. Store raw candidates, key alternatives, context adjustments and reasons separately from the displayed arrangement, so improvements and regressions remain inspectable.
 
 ### Progressive synthetic screening before real-recording comparisons
 
@@ -124,7 +147,7 @@ Keep generator seeds and recipes reproducible. Vary one factor at a time before 
 
 Use these as screening diagnostics. Confirm sample rate, label mapping and adapter correctness before rejecting a candidate for basic failures. Synthetic timbre can differ substantially from a pretrained model's training domain, so a poor synthetic score alone is insufficient to reject a model intended for real music. Power chords do not establish major/minor quality; mark ambiguity or evaluate root/acceptable labels instead of inventing an exact quality. Generated strum timing is known, but any direction classifier still needs physical guitar examples.
 
-Phase 0 supplies the initial fixture and baseline. Phase A's initial levelled suite is now implemented and has run across four candidates. ChordMini currently leads core/boundary scores, while the baseline fits the synthetic timbres well but flickers more. Chordino and newer candidates remain in the backlog. Survivors proceed to real-recording holdouts and then founder guitar sessions. A synthetic winner is not a production winner.
+Phase 0 supplies the initial fixture and baseline. Phase A's levelled suite is implemented and has run across five candidates. ChordMini leads the original core metric including silence and boundary F1; the baseline leads the new chord-only metric but flickers more. Chordino recognises clean voiced triads well but has weaker silence/timing behaviour and misses fast changes. Proceed to annotated real recordings and then founder guitar sessions; newer architectures remain optional backlog work. A synthetic winner is not a production winner.
 
 Pin tool/model versions and record hardware, audio duration, settings, cold versus warm runtime, peak memory and failure rate. Include decoding, separation and feature extraction in end-to-end processing time. Cloud cost estimates must include actual provider pricing, idle/startup time and storage where relevant; the report's per-song compute estimate is not a budget.
 

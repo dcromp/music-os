@@ -323,7 +323,7 @@ class BenchHandler(SimpleHTTPRequestHandler):
                 if not re_safe_case_id(case_id):
                     continue
                 candidates = [{"name": "Known reference", "url": f"/suite/{case_id}/reference.json"}]
-                for name in ("baseline", "btc", "crema", "chordmini"):
+                for name in ("baseline", "btc", "crema", "chordmini", "chordino"):
                     path = folder / "cases" / case_id / f"{name}.json"
                     if path.exists():
                         display_name = {"btc": "BTC", "chordmini": "ChordMini / ChordNet"}.get(name, name.title())
@@ -356,7 +356,7 @@ class BenchHandler(SimpleHTTPRequestHandler):
         virtual = super().translate_path(path)
         relative = Path(virtual).relative_to(BENCH)
         if relative.parts and relative.parts[0] == "suite":
-            allowed = {"audio.wav", "reference.json", "baseline.json", "btc.json", "crema.json", "chordmini.json"}
+            allowed = {"audio.wav", "reference.json", "baseline.json", "btc.json", "crema.json", "chordmini.json", "chordino.json"}
             if len(relative.parts) == 3 and re_safe_case_id(relative.parts[1]) and relative.parts[2] in allowed:
                 return str(GENERATED / "synthetic-suite" / "cases" / relative.parts[1] / relative.parts[2])
             return str(BENCH / "__not_found__")

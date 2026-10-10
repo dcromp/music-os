@@ -1,9 +1,11 @@
 import copy
+import hashlib
 import json
 from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import lab
@@ -44,6 +46,7 @@ class SyntheticSuiteTests(unittest.TestCase):
             self.assertEqual(metrics["acceptable_agreement"], 1)
             self.assertEqual(metrics["root_agreement"], 1)
             self.assertIsNone(metrics["major_minor_core_agreement"])
+            self.assertIsNone(metrics["major_minor_chord_agreement"])
             prediction["chords"][0]["label"] = "D"
             self.assertEqual(suite.score(reference, prediction)["root_agreement"], 0)
 
@@ -53,6 +56,39 @@ class SyntheticSuiteTests(unittest.TestCase):
         self.assertIsNone(suite.triad_family("C:sus4"))
         self.assertIsNone(suite.triad_family("X"))
         self.assertEqual(suite.triad_family("N"), "N")
+
+    def test_silence_does_not_mask_complete_chord_failure(self):
+        with tempfile.TemporaryDirectory() as folder:
+            _, path = lab.create_fixture(Path(folder))
+            reference = lab.load_chart(path)
+            reference["chords"] = [
+                {"start_seconds": 0, "end_seconds": 0.5, "label": "N"},
+                {"start_seconds": 0.5, "end_seconds": 21.5, "label": "Gm"},
+                {"start_seconds": 21.5, "end_seconds": 22, "label": "N"},
+            ]
+            prediction = copy.deepcopy(reference)
+            prediction["chords"] = [{"start_seconds": 0, "end_seconds": 22, "label": "N"}]
+            result = suite.score(reference, prediction)
+            self.assertGreater(result["major_minor_core_agreement"], 0)
+            self.assertEqual(result["major_minor_chord_agreement"], 0)
+            self.assertAlmostEqual(result["major_minor_chord_reference_coverage"], 21 / 22)
+
+    def test_reuse_scores_baseline_without_running_inference(self):
+        with tempfile.TemporaryDirectory() as folder:
+            directory = Path(folder)
+            audio, reference_path = lab.create_fixture(directory)
+            reference = lab.load_chart(reference_path)
+            case_id = reference["recording"]["id"]
+            prediction = lab.detect(audio, case_id)
+            prediction["recording"]["audio_sha256"] = hashlib.sha256(audio.read_bytes()).hexdigest()
+            lab.write_json(directory / "cases" / case_id / "baseline.json", prediction)
+            lab.write_json(directory / "manifest.json", {
+                "suite_version": "test", "cases": [{"id": case_id, "level": 1,
+                "condition": "fixture", "split": "screen", "audio": audio.name,
+                "reference": reference_path.name}]})
+            with patch.object(lab, "detect", side_effect=AssertionError("Unexpected inference")):
+                report = suite.run(directory, ["baseline"], reuse_existing=True)
+            self.assertEqual(report["cases"][0]["status"], "ok")
 
     def test_extra_boundaries_are_penalised(self):
         with tempfile.TemporaryDirectory() as folder:

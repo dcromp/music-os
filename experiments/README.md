@@ -93,10 +93,10 @@ The suite generator creates 64 deterministic cases across roots/voicings/registe
 
 ```sh
 .venv-analysis/bin/python experiments/analysis/synthetic_suite.py generate
-.venv-analysis/bin/python experiments/analysis/synthetic_suite.py run --candidates baseline,btc,crema,chordmini
+.venv-analysis/bin/python experiments/analysis/synthetic_suite.py run --candidates baseline,btc,crema,chordmini,chordino
 ```
 
-Install model environments/assets using the candidate setup documents before requesting their runs. `--reuse-existing` rescoring requires matching audio hashes and produces no new inference. Failed/unavailable candidates remain visible and make the runner exit nonzero; logs, JSON and CSV stay in the generated suite directory. The initial four-candidate batch completed 256 comparisons with zero failures. See [recorded results](../docs/SYNTHETIC_RESULTS.md).
+Install model environments/assets using the candidate setup documents before requesting their runs; [Chordino](../docs/CHORDINO_SETUP.md) uses a project-local native build. `--reuse-existing` requires matching saved-prediction audio hashes and does not rerun any detector, including the baseline. Failed/unavailable candidates remain visible and make the runner exit nonzero; logs, JSON and CSV stay in the generated suite directory. The five-candidate screen completed 320 comparisons with zero failures. See [recorded results](../docs/SYNTHETIC_RESULTS.md), including the chord-only metric that excludes silence and ambiguous power chords.
 
 The server's `/api/suite` inventory exposes only safe case IDs and allowlisted audio/chart files. Use Load synthetic suite → choose case → Load case in the bench. No model inference happens in the browser. Generated cases can be played without guitar first; founder guitar sessions follow the automated screening.
 

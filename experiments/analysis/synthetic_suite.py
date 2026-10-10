@@ -231,11 +231,14 @@ def score(reference: dict, prediction: dict) -> dict:
     if abs(duration - prediction["recording"]["duration_seconds"]) > 0.05:
         raise ValueError("Prediction/reference audio durations differ")
     exact = root = acceptable = covered = quality = major_minor = major_minor_covered = 0.0
+    major_minor_chords = major_minor_chords_covered = 0.0
     for expected in reference["chords"]:
         covered += expected["end_seconds"] - expected["start_seconds"]
         expected_family = triad_family(expected["label"])
         if expected_family is not None:
             major_minor_covered += expected["end_seconds"] - expected["start_seconds"]
+        if expected_family not in (None, "N"):
+            major_minor_chords_covered += expected["end_seconds"] - expected["start_seconds"]
         accepted = {canonical(label) for label in expected.get("acceptable_labels", [expected["label"]])}
         for actual in prediction["chords"]:
             overlap = max(0.0, min(expected["end_seconds"], actual["end_seconds"])
@@ -244,6 +247,8 @@ def score(reference: dict, prediction: dict) -> dict:
             quality += overlap * (canonical(expected["label"]).split("/")[0] == canonical(actual["label"]).split("/")[0])
             if expected_family is not None:
                 major_minor += overlap * (expected_family == triad_family(actual["label"]))
+            if expected_family not in (None, "N"):
+                major_minor_chords += overlap * (expected_family == triad_family(actual["label"]))
             acceptable += overlap * (canonical(actual["label"]) in accepted)
             # Unknown X is not a correct no-chord prediction; ambiguity is explicit.
             root += overlap * ((root_of(expected["label"]) == root_of(actual["label"]))
@@ -263,6 +268,8 @@ def score(reference: dict, prediction: dict) -> dict:
             "quality_without_bass_agreement": quality / covered,
             "major_minor_core_agreement": major_minor / major_minor_covered if major_minor_covered else None,
             "major_minor_reference_coverage": major_minor_covered / covered,
+            "major_minor_chord_agreement": major_minor_chords / major_minor_chords_covered if major_minor_chords_covered else None,
+            "major_minor_chord_reference_coverage": major_minor_chords_covered / covered,
             "acceptable_agreement": acceptable / covered,
             "boundary_f1_150ms": 2 * precision * recall / (precision + recall) if precision + recall else 0.0,
             "matched_boundary_mean_error_seconds": sum(errors) / len(errors) if errors else None,
@@ -278,6 +285,7 @@ def run(directory: Path, candidates: list[str], timeout: float = 600, reuse_exis
         "btc": [lab.ROOT / ".venv-btc/bin/python", Path(__file__).parent / "candidates/btc_adapter.py"],
         "crema": [lab.ROOT / ".venv-crema/bin/python", Path(__file__).parent / "candidates/crema_adapter.py"],
         "chordmini": [lab.ROOT / ".venv-chordmini/bin/python", Path(__file__).parent / "candidates/chordmini_adapter.py"],
+        "chordino": [lab.ROOT / ".venv-analysis/bin/python", Path(__file__).parent / "candidates/chordino_adapter.py"],
     }
     unavailable = {}
     for candidate in candidates:
@@ -311,7 +319,7 @@ def run(directory: Path, candidates: list[str], timeout: float = 600, reuse_exis
                    "split": case["split"], "candidate": candidate, "status": "ok"}
             started = time.perf_counter()
             try:
-                if candidate == "baseline":
+                if candidate == "baseline" and not reuse_existing:
                     prediction = lab.detect(directory / case["audio"], case["id"])
                     prediction["recording"] = reference["recording"].copy()
                     prediction["recording"]["audio_sha256"] = hashlib.sha256((directory / case["audio"]).read_bytes()).hexdigest()
@@ -342,7 +350,7 @@ def run(directory: Path, candidates: list[str], timeout: float = 600, reuse_exis
         good = [r for r in group if r["status"] == "ok"]
         entry = {"candidate": candidate, "level": level, "level_name": LEVELS[level], "split": split,
                  "successful_cases": len(good), "failed_cases": len(group) - len(good)}
-        for metric in ("exact_agreement", "root_agreement", "acceptable_agreement", "quality_without_bass_agreement", "major_minor_core_agreement", "major_minor_reference_coverage", "boundary_f1_150ms", "extra_events", "analysis_runtime_seconds", "scoring_runtime_seconds"):
+        for metric in ("exact_agreement", "root_agreement", "acceptable_agreement", "quality_without_bass_agreement", "major_minor_core_agreement", "major_minor_reference_coverage", "major_minor_chord_agreement", "major_minor_chord_reference_coverage", "boundary_f1_150ms", "extra_events", "analysis_runtime_seconds", "scoring_runtime_seconds"):
             measured = [r[metric] for r in good if r[metric] is not None]
             entry[metric] = sum(measured) / len(measured) if measured else None
         summary.append(entry)

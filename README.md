@@ -13,14 +13,19 @@ Updated 10 October 2026. Status and deployment information belong in this README
 | Existing-code audit and reuse decisions | Complete | Expo shell/song cards reusable; chart data and clock need later repair |
 | Isolated Mac analysis environment | Complete | Python 3.12.10 and pinned NumPy 2.2.6; separate from npm/Expo |
 | Output format and known-chord audio | Complete | Version 1.0 JSON; generated 22-second triad/silence fixture |
-| Baseline run and automated checks | Complete | Initial fixture works; expanded 16 Python and 48 JavaScript checks pass |
+| Baseline run and automated checks | Complete | 22 baseline/native Python checks, 8 pilot metric checks and 48 JavaScript checks pass |
 | Local play-along bench | Complete | Live Mac browser checks passed: playback, pause, seeking, switching charts, Restart and visible CSV export |
 | Run guide, deployment and evidence | Complete | Local startup instructions below; measurements and limits in [Phase 0 results](docs/PHASE0_RESULTS.md) |
-| Automated synthetic screening before guitar | Initial batch complete | 64 cases × 4 algorithms = 256 successful comparisons; [results](docs/SYNTHETIC_RESULTS.md) |
-| Additional candidates | Pending | Chordino needs Mac Vamp setup; ChordFormer needs source/checkpoint review |
+| Automated synthetic screening before guitar | Expanded batch complete | 64 cases × 5 algorithms = 320 successful comparisons; [results](docs/SYNTHETIC_RESULTS.md) |
+| Chordino Mac setup and comparison | Complete | Project-local native build, common adapter and 64 successful runs; [setup](docs/CHORDINO_SETUP.md) |
+| Annotated real-guitar pilot | Complete | Six preselected GuitarSet performances × five models = 30 successful runs; [results](docs/GUITARSET_PILOT.md) |
+| Separation and soft key/context pipeline | Planned | Four controlled variants after representative real-mix reference selection; see [plan](plan.md) |
+| Further research candidates | Backlog | ChordFormer source/checkpoint review; real-recording evidence takes priority |
 | Founder guitar test on real material | Deferred | After automated screening and reference checks; 15–20 minutes when ready |
 
-The initial fixture checks experiment plumbing. The expanded synthetic suite now compares the template baseline, BTC, CREMA and ChordMini/ChordNet across clean triads, voicings/timbres, guitar-like attacks, distractors and timing/vocabulary complexity. ChordMini leads major/minor core agreement (94.7%) and boundary F1 (0.927) in this suite. All audio is procedural; no production algorithm has been selected and no guitar ratings have been used. The founder confirmed the previous analysis code was deleted, so the baseline is newly implemented.
+The synthetic suite compares the template baseline, BTC, CREMA, ChordMini/ChordNet and Chordino across clean triads, voicings/timbres, guitar-like attacks, distractors and timing/vocabulary complexity. ChordMini leads the original core metric including silence (94.7%) and boundary F1 (0.927); the baseline leads the new chord-only core metric (96.1%). Chordino scores 95.4% chord-only, with weaker silence and boundary handling. All audio in that suite is procedural; these are not real-song accuracy estimates and no production algorithm has been selected. The founder's previous analysis code was deleted; the older Expo app only displayed hardcoded sample chords. See [app-readiness criteria](docs/APP_READINESS.md).
+
+The real-guitar pilot changes the ranking: CREMA leads at **93.9% intended major/minor agreement** and 94.4% root agreement. BTC scores 84.0%, Chordino 82.7%, ChordMini 79.5% and the baseline 54.3% on intended major/minor. Eligible reference coverage is 98.1%; performed-quality comparisons have lower coverage and separate scores. Six acoustic performances are a diagnostic sample, not an accuracy estimate for arbitrary songs. No source separation, key assistance or founder play-tests have been used yet.
 
 ## Run on Mac
 
@@ -41,18 +46,27 @@ Browser-logic checks additionally run with `node experiments/bench/test.js` (no 
 
 ## Automated synthetic tests
 
-The deployed Mac browser has saved predictions for all four candidates; playback does not require the model environments. Install the isolated candidate environments/assets below before rerunning model inference in a fresh checkout.
+The deployed Mac browser has saved predictions for all five candidates; playback does not require the model environments. Install the isolated candidate environments/assets below before rerunning model inference in a fresh checkout.
 
-Candidate setup: [BTC](docs/BTC_SETUP.md), [CREMA](docs/CREMA_SETUP.md), [ChordMini](docs/CHORDMINI_SETUP.md). The baseline environment is separate from the model environments.
+Candidate setup: [BTC](docs/BTC_SETUP.md), [CREMA](docs/CREMA_SETUP.md), [ChordMini](docs/CHORDMINI_SETUP.md), [Chordino](docs/CHORDINO_SETUP.md). The baseline environment is separate from the model environments; Chordino uses a local native plugin/host.
 
 ```sh
 .venv-analysis/bin/python experiments/analysis/synthetic_suite.py generate
-.venv-analysis/bin/python experiments/analysis/synthetic_suite.py run --candidates baseline,btc,crema,chordmini
+.venv-analysis/bin/python experiments/analysis/synthetic_suite.py run --candidates baseline,btc,crema,chordmini,chordino
 ```
 
 The runner loads each model once per batch, scores every case, writes JSON/CSV under `experiments/generated/synthetic-suite`, and exits nonzero for requested unavailable candidates or failed cases. Use `--reuse-existing` to rescore outputs only; it verifies audio hashes. Committed [results](docs/SYNTHETIC_RESULTS.md) include per-case evidence.
 
-In the browser, press **Load synthetic suite**, choose a case, and **Load case** to compare its reference and available candidate charts. This is the next step before guitar sessions. Chordino and newer candidates remain explicit backlog items, not untested algorithms with assigned scores.
+The automated runs are handled by the agent. The website is an **optional diagnostic viewer**, and no founder guitar test is currently assigned. To inspect a result, press **Load synthetic suite**, choose a case, and **Load case** to compare its reference and candidate charts. A later guitar session will specify the recording, charts and feedback questions. See [app-readiness criteria](docs/APP_READINESS.md).
+
+Real-guitar scoring uses pinned `mir_eval` in a separate evaluation environment. The Mac deployment includes saved pilot inputs/references/predictions and `.venv-pilot`, so the existing results can be rescored without loading the models:
+
+```sh
+.venv-pilot/bin/python experiments/analysis/guitarset_pilot.py run --reuse-existing
+.venv-pilot/bin/python -m unittest discover -s experiments/analysis/tests -p test_guitarset_pilot.py -v
+```
+
+For a fresh checkout, create `.venv-pilot` with Python 3.12 and install `experiments/analysis/requirements-pilot.txt`. Model inference and retrieval of the original dataset assets are separate setup steps in [the pilot report](docs/GUITARSET_PILOT.md).
 
 On the founder's audited Mac, `/Users/davidcrompton/miniforge3/bin/python` is Python 3.12.10 and can replace `python3.12` in the first command. The Homebrew `python3` is 3.14.3 and was not used for the baseline.
 
@@ -86,4 +100,4 @@ This is the old app startup path, not the Mac experiment setup above. Expo SDK 5
 
 ## Next
 
-Review the automated screening's weakest cases, add Chordino and other verified candidates, then test promising models and separation variants on permitted real excerpts and annotated holdouts. Record quality, timing errors, correction effort and runtime before founder guitar sessions and product integration.
+Validate the practical shortlist on representative permitted excerpts and manually checked changes. Compare original-mix detection with separation and soft key/context assistance as described in the plan. Record quality, timing errors, correction effort and runtime before founder guitar sessions and product integration. The website remains optional until a concrete session is assigned.

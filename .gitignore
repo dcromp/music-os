@@ -27,6 +27,7 @@ project_plan/
 .venv-btc/
 .venv-crema/
 .venv-chordmini/
+.venv-pilot/
 experiments/candidate-assets/
 experiments/generated/
 experiments/local-audio/

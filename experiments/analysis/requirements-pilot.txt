@@ -1,0 +1,4 @@
+# Optional clean evaluation environment. Existing .venv-crema already has these exact versions.
+numpy==1.26.4
+scipy==1.11.4
+mir_eval==0.8.2
