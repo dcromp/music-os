@@ -13,7 +13,7 @@ Updated 10 October 2026. Status and deployment information belong in this README
 | Existing-code audit and reuse decisions | Complete | Expo shell/song cards reusable; chart data and clock need later repair |
 | Isolated Mac analysis environment | Complete | Python 3.12.10 and pinned NumPy 2.2.6; separate from npm/Expo |
 | Output format and known-chord audio | Complete | Version 1.0 JSON; generated 22-second triad/silence fixture |
-| Baseline run and automated checks | Complete | Initial fixture works; expanded 12 Python and 48 JavaScript checks pass |
+| Baseline run and automated checks | Complete | Initial fixture works; expanded 16 Python and 48 JavaScript checks pass |
 | Local play-along bench | Complete | Live Mac browser checks passed: playback, pause, seeking, switching charts, Restart and visible CSV export |
 | Run guide, deployment and evidence | Complete | Local startup instructions below; measurements and limits in [Phase 0 results](docs/PHASE0_RESULTS.md) |
 | Automated synthetic screening before guitar | Initial batch complete | 64 cases × 4 algorithms = 256 successful comparisons; [results](docs/SYNTHETIC_RESULTS.md) |
@@ -40,6 +40,8 @@ python3.12 -m venv .venv-analysis
 Browser-logic checks additionally run with `node experiments/bench/test.js` (no npm install needed).
 
 ## Automated synthetic tests
+
+The deployed Mac browser has saved predictions for all four candidates; playback does not require the model environments. Install the isolated candidate environments/assets below before rerunning model inference in a fresh checkout.
 
 Candidate setup: [BTC](docs/BTC_SETUP.md), [CREMA](docs/CREMA_SETUP.md), [ChordMini](docs/CHORDMINI_SETUP.md). The baseline environment is separate from the model environments.
 

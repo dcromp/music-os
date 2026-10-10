@@ -54,6 +54,10 @@ Install the isolated candidate environments from their setup documents, then run
 
 Use `--reuse-existing` only to rescore already generated predictions; it checks input hashes and does not perform new model inference. Use the browser’s Load synthetic suite and Load case controls to inspect the same audio with reference and candidate charts.
 
+## Browser verification
+
+The 64-case inventory and all four model choices were verified on the deployed Mac browser. A cold-loaded strumming case could seek to 1.0 seconds before playback and display the correct current source-time chord. The server now supplies WAV byte-range responses; 16 Python and 48 JavaScript checks pass.
+
 ## Next
 
 Extend screening with Chordino and source/checkpoint-verified newer candidates, inspect the weakest cases, then validate promising models on permitted real-recording holdouts. Founder guitar sessions follow the automated screening and reference checks. No guitar ratings have been used in this report.
