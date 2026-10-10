@@ -2,7 +2,7 @@
 
 Project plan · 10 October 2026 · Working title
 
-**Project repository:** [dcromp/music-os](https://github.com/dcromp/music-os). The 10 October 2026 [reuse audit](docs/REUSE_AUDIT.md) found an Expo/React Native YouTube play-along prototype. Keep its app shell, song cards and player composition; repair the chart data flow and synchronization. Audio separation, chord detection, learning paths and accompaniment are new work. The founder's previous analysis workflow is not in the inspected repository.
+**Project repository:** [dcromp/music-os](https://github.com/dcromp/music-os). The 10 October 2026 [reuse audit](docs/REUSE_AUDIT.md) found an Expo/React Native YouTube play-along prototype. Preserve its useful UI for later product integration. **First choose and validate the algorithms on the founder's Mac**, using offline analysis and a small local play-along bench. Repairing the Expo app or developing iOS is not a prerequisite. Audio separation, chord detection, learning paths and accompaniment are new work; the founder's previous analysis workflow is not in the inspected repository.
 
 ## 1. Vision and first product
 
@@ -46,9 +46,9 @@ Include:
 
 Defer full courses for absolute beginners, exhaustive song coverage, solos and note-perfect tabs, live multiplayer, automatic performance grading, and accompaniment that follows the player in real time.
 
-## 4. Phase 0 — Reuse findings and playback baseline
+## 4. Phase 0 — Audit and Mac experiment setup
 
-**Initial inspection completed on 10 October 2026.** [docs/REUSE_AUDIT.md](docs/REUSE_AUDIT.md) records evidence and component decisions at commit `0083861`. Device/browser playback and the first guitar session remain to be verified. Allow an initial 2–4 focused days for the playback repairs below, then revise the estimate from observed results.
+**Initial inspection completed on 10 October 2026.** [docs/REUSE_AUDIT.md](docs/REUSE_AUDIT.md) records evidence and component decisions at commit `0083861`. The existing app has no configured native macOS target. Its browser build, the potential Mac access route, currently fails. Live app playback and guitar testing remain unverified. These findings inform later product integration; they do not block Phase A's independent algorithm bench on Mac.
 
 What exists:
 
@@ -60,24 +60,21 @@ What exists:
 
 Verification: locked dependencies install, TypeScript passes and the sole starter snapshot test passes. Android bundle export succeeds. Web export fails because the iframe wrapper imports missing `react-native-web-webview`. These checks do not validate live playback or chart accuracy; the JavaScript core also lacks checkJs coverage.
 
-Next implementation:
+**Reuse decision:** keep the app shell, song cards and player composition as candidates for Phase B. Defer route cleanup, Expo upgrades, YouTube web repairs and iOS/device work until the algorithm experiment supplies useful results. Build new offline analysis tooling and a versioned output format in music-os now. The old app's free-running sample animation must not be used to judge model accuracy. The founder confirmed that his prior analysis code was deleted; establish a fresh baseline.
 
-1. Keep Expo initially. Establish one practice player, move non-route modules outside `app/`, and provide direct access for founder testing. Validate the chosen native or browser playback path; resolve web support before promising browser availability. Record a supported runtime and run commands.
-2. Extend the shared, versioned recording/analysis/arrangement format with explicit timestamp units. Use stable IDs instead of duplicated route metadata. Replace the current sample with a clearly synthetic timing fixture and one manually verified recording/chart pair.
-3. Feed the selected chart into the display and derive highlighting from numeric playback time. Consolidate the clock hooks, handling seek, pause/resume, buffering, replay, source change and supported speeds. Retain the visual bar concept where useful, while allowing real timestamps and changes inside bars. Add focused tests when implementing these behaviours.
-4. Run the first guitar session on the founder's actual screen/audio setup. Add `PLAYTEST_LOG.csv` for observations and record a reproducible baseline.
+Phase 0 now includes the experiment foundation as well as the completed code audit. Keep its step/status/ETA table, startup instructions and deployment state in the root [README.md](README.md). Its deliverables are an isolated Mac environment, versioned JSON format, known-chord fixture, a cheap baseline with measured output, a minimal local browser play-along bench and a reproducible run guide. Validate the bench clock before trusting guitar ratings. Synthetic results establish plumbing only; Phase A chooses algorithms using real material and held-out tests.
 
-**Exit decision:** one verified recording/chart pair remains aligned through start, pause/resume, forward/backward seeking and replay, and the founder can complete a short session without manually resetting the chart. This gate is still outstanding. Establish it before interpreting recognition-model play-test results.
-
-### Phase A — Build the guitar testing bench
+### Phase A — Choose algorithms on Mac and build the guitar testing bench
 
 **Indicative effort: 1–2 focused weeks.** These are planning estimates for a solo builder, not delivery commitments.
 
-Use the repaired Expo player from Phase 0 as the comparison interface. Recover the founder's previous separation/chord-analysis workflow separately if available; none was found in music-os. Put offline analysis tooling in this repository behind adapters that emit the shared JSON format, and import those results into the player. Record inputs, dependencies, outputs and known failures; start with a simple detector if the prior workflow cannot be recovered.
+Extend Phase 0's fresh baseline; the prior workflow was deleted. Put additional offline analysis tooling behind command-line adapters that emit the shared versioned JSON format with recording identity, explicit timestamp units, chord intervals and available beat/section data. Run it on the founder's Mac in the isolated environment. Record macOS version, CPU/architecture, memory, runtime and model versions, inputs and failures. Default to CPU for comparability and check optional Mac acceleration per candidate. Do not assume CUDA or that every model already supports Apple acceleration.
 
 Select 12–20 test tracks or excerpts across clean acoustic guitar, distorted rhythm guitar, sparse and dense mixes, slow and fast changes, open chords, power chords, and rhythmically awkward passages. Use recordings with a suitable permission basis for the experiment; include original recordings with known chords and timing. Keep a source and permission record for each item.
 
-Extend the existing player to switch imported analysis versions, adjust timing offset and record a session rating. Add local-audio playback for permitted benchmark material; it is not already implemented, despite the react-native-sound dependency. Keep the playback source matched to the analysed recording. No accounts, payment system or polished mobile app yet.
+Start by producing machine-readable chord results, timeline plots and metric summaries. Add only the interface needed for the founder to judge them with a guitar: a small locally served browser page on Mac that plays the same local audio, displays imported timestamped chords, switches analysis versions and records ratings. Keep this bench separate from Expo, with a documented local startup command and no dependency on the existing YouTube wrapper. It is experiment tooling, not the production app or a native macOS app.
+
+Validate this bench with a synthetic timeline and one manually checked excerpt. Highlight from the browser audio element's current playback time; handle pause/resume, seek and replay, and preview future chords separately. Keep the source file matched to its chart. Verify the clock before interpreting human algorithm ratings so display errors do not appear to be detector errors. Keep this check bounded; defer account flows, mobile builds, platform polish and broader app repairs.
 
 Compare these approaches with identical inputs and hardware:
 
@@ -98,7 +95,7 @@ The supplied report, “Algorithmic Architectures and Empirical Evaluation Frame
 
 | Area | Initial candidates | Experiment and decision |
 |---|---|---|
-| Chord recognition | Recovered founder workflow if available, a simple chroma/template baseline, BTC-ISMIR19 and CREMA | No detector exists in the inspected app. Run candidates on identical excerpts; compare chord accuracy, followability, setup effort and processing cost. Choose after measurement rather than preselecting BTC. |
+| Chord recognition | Phase 0's fresh spectral-template baseline, BTC-ISMIR19 and CREMA | The old app has no detector; the new baseline lives in experiments/analysis. Run candidates on identical excerpts; compare chord accuracy, followability, setup effort and processing cost. Choose after measurement rather than preselecting BTC. |
 | Source separation | Standard HT-Demucs; optional 6-stem model | Compare original mix, 4-stem bass plus “other”, and isolated guitar. Retain separation only where its benefit warrants its cost; it may remove useful harmony or introduce artefacts. |
 | Beat and section analysis | Simple baseline; All-In-One | No beat tracker exists in the inspected app. Compare beat/downbeat alignment and useful practice boundaries. Test All-In-One for combined tempo, beats and sections; verify dependency and model requirements. |
 | Chord smoothing | Raw output, simple duration smoothing, beat-aware probability pooling/decoding where probabilities are available | Measure distracting flicker and lost/shifted genuine changes. Include anticipations, fast changes, tempo variation and an incorrect beat grid. |
@@ -106,6 +103,24 @@ The supplied report, “Algorithmic Architectures and Empirical Evaluation Frame
 | Evaluation | mir_eval plus founder play-tests | Use duration-weighted chord scores, boundary timing and beat metrics alongside usability and correction effort. |
 
 Run experiments in stages: compare chord detectors on the original mix first, test separation with the strongest practical candidates second, then assess timing and simplification. Avoid an exhaustive combination of every model and setting before any guitar feedback.
+
+### Progressive synthetic screening before real-recording comparisons
+
+Use original generated audio with known labels to identify broken integrations, vocabulary gaps and basic timing errors early. Build up controlled difficulty rather than jumping immediately to dense music:
+
+| Level | Generated conditions | What to inspect |
+|---|---|---|
+| 1. Clean harmony | Major/minor triads, silence, all roots, slow changes | Basic recognition, input/output correctness and no-chord behaviour |
+| 2. Voicing variation | Inversions, octave/register changes, missing/doubled notes and changed instrument timbres | Sensitivity to voicing and harmonic content |
+| 3. Guitar-like events | Plucked decays, staggered strum attacks, accents and repeated strokes | Chord stability during attacks/decays and rhythm detection |
+| 4. Controlled mix | Add bass movement, drum-like transients, a melodic line, noise and simple effects independently | Whether separation helps and which distractors cause false labels |
+| 5. Temporal/music complexity | Faster/offbeat changes, tempo variation, section repetition, power chords and extensions | Boundary accuracy, smoothing damage and vocabulary/ambiguity handling |
+
+Keep generator seeds and recipes reproducible. Vary one factor at a time before combining factors; report results per condition, not just an aggregate score. Reserve unseen seeds, roots and timbres for synthetic holdouts. Sound synthesis and any sample assets must have an appropriate permission basis.
+
+Use these as screening diagnostics. Confirm sample rate, label mapping and adapter correctness before rejecting a candidate for basic failures. Synthetic timbre can differ substantially from a pretrained model's training domain, so a poor synthetic score alone is insufficient to reject a model intended for real music. Power chords do not establish major/minor quality; mark ambiguity or evaluate root/acceptable labels instead of inventing an exact quality. Generated strum timing is known, but any direction classifier still needs physical guitar examples.
+
+Phase 0 supplies the initial known-triad fixture and baseline; the broader levelled suite belongs to Phase A. Survivors proceed to real-recording holdouts and founder guitar sessions. A synthetic winner is not a production winner.
 
 Pin tool/model versions and record hardware, audio duration, settings, cold versus warm runtime, peak memory and failure rate. Include decoding, separation and feature extraction in end-to-end processing time. Cloud cost estimates must include actual provider pricing, idle/startup time and storage where relevant; the report's per-song compute estimate is not a budget.
 
@@ -136,9 +151,9 @@ Measure both musical accuracy and experience:
 
 Where practical, hide the algorithm identity and alternate comparison order. Otherwise expectations and familiarity may dominate preference.
 
-For the founder's main comparison, present the same excerpt in three anonymous versions: a measured detector baseline (recovered workflow or simple new detector), an alternative detector, and the strongest detector with timing/arrangement improvements. The old app's arbitrary sample chart is not a detector baseline. Keep a manually checked reference chart as a control. Track recognition, display timing and playability separately; if the combined improved version wins, test timing and simplification separately before attributing the benefit to either one.
+For the founder's main comparison, present the same excerpt in three anonymous versions: Phase 0's measured detector baseline, an alternative detector, and the strongest detector with timing/arrangement improvements. The old app's arbitrary sample chart is not a detector baseline. Keep a manually checked reference chart as a control. Track recognition, display timing and playability separately; if the combined improved version wins, test timing and simplification separately before attributing the benefit to either one.
 
-**Exit decision:** select the cheapest workflow that produces enjoyable, usable results on most target material. If none does, narrow the supported material or introduce manual review; do not expand the catalogue to hide quality problems.
+**Exit decision:** recommend an initial chord/beat/rhythm workflow with measured Mac runtime, quality, correction effort and founder play-test evidence, including held-out excerpts. Keep the scripts, shared output format and bench reproducible. Select the cheapest practical workflow that produces enjoyable, usable results on most target material; if none does, narrow the supported material or introduce review. The algorithm choice may evolve after broader testing, but substantial product/iOS work starts after this decision.
 
 ## 5. Founder play-test protocol
 
@@ -159,6 +174,10 @@ Create and use `PLAYTEST_LOG.csv` for session-level records. Keep timestamped fi
 ## 6. Phase B — Make a useful practice companion
 
 **Indicative effort: 2–3 focused weeks after the testing bench.**
+
+Integrate the selected analysis outputs into a practice product. Choose the first product platform after Phase A: a Mac-accessible browser version or an Expo mobile version. The existing Expo shell is reusable, but its web path needs repair and native macOS is not configured. Begin iOS work when the algorithms and practice interaction justify it.
+
+If continuing with Expo, establish one practice player, move non-route modules outside `app/`, replace duplicated route metadata with stable IDs, and feed the selected recording/arrangement into the display. Replace its free-running timer with playback-clock synchronization and consolidate the unused hooks. Verify pause/resume, forward/backward seeking, replay, buffering, source changes and supported speeds. Check dependency/runtime compatibility and add focused tests while implementing these behaviours. Reuse Phase A's known chart and timing fixtures rather than diagnosing a new model and a new player simultaneously.
 
 Build the smallest complete practice flow:
 
@@ -216,7 +235,7 @@ These are directional gates for a small pilot, not proof of product-market fit. 
 
 ## 9. Technical foundation and cost control
 
-Use music-os as the implementation repository and retain its Expo/React Native shell for the first iteration. The Android bundle builds, while web currently has a dependency blocker; verify playback on the chosen target before settling the first test platform. Add a platform-specific playback adapter if needed rather than replacing the whole app. Check the older Expo stack against the intended device/build workflow and plan upgrades from a captured baseline. Run analysis offline or in background jobs and reuse results where permitted instead of analysing audio on every play.
+Use music-os as the implementation repository. The first development target is the founder's Mac: offline analysis scripts plus a minimal local browser bench, independent of Expo. Preserve the old Expo shell for later integration. Its Android bundle builds, its web build fails on a dependency, and no native macOS target is configured; settle the product platform after the algorithm decision. Run analysis offline or in background jobs and reuse results where permitted instead of analysing audio on every play. Port the selected results format into whichever product UI is chosen.
 
 Keep five concepts separate:
 
@@ -272,15 +291,15 @@ The bridge between the products is a reusable model of harmony, rhythm and song 
 | Order | Action | Output |
 |---|---|---|
 | 0 | Completed: inspect existing code and run baseline checks | [Reuse audit](docs/REUSE_AUDIT.md); Android bundling passes, web blocker recorded, playback unverified |
-| 1 | Establish one player flow and select/verify target playback support | Reproducible run guide; clean routes; native or browser smoke test |
-| 2 | Define shared versioned JSON; connect one verified recording/chart pair to the playback clock | Timing fixture and selected-song data flow; pause/seek/replay checks |
-| 3 | Run a short guitar session with the verified chart | Phase 0 acceptance evidence, play-test log and timing corrections |
-| 4 | Recover external founder analysis workflow or implement a baseline; add offline adapters and local audio | Reproducible analysis outputs imported into the existing player |
-| 5 | Choose benchmark material, add candidate switching and run staged comparisons | Test-set manifest, anonymous guitar ratings and held-out quality/cost report |
+| 1 | Establish a fresh detector baseline in an isolated Mac environment (prior workflow deleted) | Reproducible analysis command, explicit output format and first chart |
+| 2 | Screen candidates with progressive synthetic cases, then select real benchmark excerpts | Per-condition diagnostics, held-out recipes, reference annotations and Mac runtime/quality measurements |
+| 3 | Build the small local-audio browser bench and check its playback clock | Known chart fixture, pause/seek/replay validation and a short guitar session |
+| 4 | Compare promising detectors, separation inputs and timing/arrangement variants | Anonymous guitar ratings, held-out results and correction effort |
+| 5 | Choose the initial algorithms and record the decision | Repeatable scripts, quality/cost report and accepted limitations |
 | 6 | Investigate content and playback commercial routes in parallel | Source/permission/cost comparison |
-| 7 | Choose the first reliable detector/arrangement workflow | Phase B implementation brief |
+| 7 | Choose the product platform and integrate the selected pipeline | Phase B brief, scoped Expo/browser repairs and later iOS work |
 
-The next meaningful milestone is a play-along experience the founder wants to use again. Build the curriculum around that evidence, then test whether other players want to pay for it.
+The next meaningful milestone is a measured algorithm choice supported by enjoyable guitar sessions on Mac. Develop the product and curriculum around that evidence, then test whether other players want to pay for it.
 
 Phase A's comparison report should record candidate versions, permitted inputs, exact run commands, measurements, anonymous play-test ratings and a keep/adapt/reject decision for each tested approach. Preserve negative results so future work does not repeat failed experiments.
 

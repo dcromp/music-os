@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>music-os · Guitar testing bench</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">music-os · Local experiment</p>
+      <h1>Guitar testing bench</h1>
+      <p class="intro">Play along, compare chord charts, and record what works.</p>
+    </header>
+
+    <section class="card sources" aria-labelledby="source-heading">
+      <div class="section-heading"><h2 id="source-heading">1. Choose your audio and chart</h2><button id="load-demo" type="button">Load demo</button></div>
+      <div class="file-grid">
+        <label class="file-picker">Local audio <input id="audio-file" type="file" accept="audio/*,.wav,.mp3,.m4a,.ogg"></label>
+        <label class="file-picker">Analysis JSON <input id="chart-file" type="file" accept="application/json,.json"></label>
+      </div>
+      <div class="candidate-row">
+        <label class="candidate-label" for="candidate">Chart version <select id="candidate" disabled><option>Load a chart first</option></select></label>
+        <label class="checkbox-label"><input id="blind-mode" type="checkbox"> Hide algorithm names</label>
+      </div>
+      <p id="status" class="status" role="status">Load the generated demo, or choose an audio file and its analysis JSON.</p>
+    </section>
+
+    <section class="card player" aria-labelledby="player-heading">
+      <div class="section-heading"><h2 id="player-heading">2. Play along</h2><span id="clock" class="clock">0:00.0</span></div>
+      <p id="source-title" class="source-title">No recording loaded</p>
+      <p id="analysis-info" class="muted">No analysis loaded</p>
+      <audio id="audio" controls preload="metadata" aria-label="Recording playback"></audio>
+      <form id="seek-form" class="seek-row" novalidate>
+        <label for="seek-position">Audio position (seconds)</label>
+        <input id="seek-position" type="number" min="0" step="any" value="0" inputmode="decimal" disabled>
+        <button id="seek-go" type="submit" disabled>Go</button>
+        <button id="restart" class="secondary" type="button" disabled>Restart</button>
+      </form>
+      <p id="seek-status" class="help" role="status">Go and Restart preserve whether playback is paused or playing.</p>
+      <div class="chord-grid" aria-live="off">
+        <div class="current-panel"><span class="chord-heading">Current chord</span><strong id="current-chord" class="current-chord">—</strong><span id="current-detail" class="muted">Waiting for audio and chart</span></div>
+        <div class="next-panel"><span class="chord-heading">Next change</span><strong id="next-chord" class="next-chord">—</strong><span id="next-detail" class="muted">Upcoming chords appear here</span></div>
+      </div>
+      <div class="offset-row">
+        <label for="offset">Display offset (seconds)</label>
+        <input id="offset" type="number" min="-30" max="30" step="0.05" value="0" inputmode="decimal">
+        <button id="reset-offset" class="secondary" type="button">Reset</button>
+      </div>
+      <p class="help">Displayed chart time = audio time + offset. Positive values show later chart events earlier; negative values delay the chart. Default: 0. Playback timing always comes from the audio player.</p>
+    </section>
+
+    <section class="card feedback" aria-labelledby="feedback-heading">
+      <div class="section-heading"><h2 id="feedback-heading">3. Record the session</h2><span id="saved-count" class="muted">0 saved</span></div>
+      <form id="feedback-form">
+        <div class="rating-grid">
+          <label for="followability">Could you follow it?<select id="followability" required><option value="">Choose 1–5</option><option value="1">1 · Very difficult</option><option value="2">2 · Difficult</option><option value="3">3 · Mixed</option><option value="4">4 · Easy</option><option value="5">5 · Very easy</option></select></label>
+          <label for="enjoyment">Did you enjoy playing?<select id="enjoyment" required><option value="">Choose 1–5</option><option value="1">1 · Not at all</option><option value="2">2 · A little</option><option value="3">3 · Somewhat</option><option value="4">4 · Yes</option><option value="5">5 · Very much</option></select></label>
+        </div>
+        <label for="notes">Notes <textarea id="notes" rows="3" placeholder="e.g. 0:24 — confusing change; chorus was easy to follow"></textarea></label>
+        <div class="feedback-actions"><button id="save-rating" type="submit" disabled>Save rating</button><button id="download-csv" class="secondary" type="button" disabled>Download CSV</button><button id="show-csv" class="secondary" type="button" disabled>Show CSV</button></div>
+        <p id="feedback-status" class="help" role="status">Ratings stay in this tab. Download the CSV before closing it.</p>
+        <div id="csv-preview" hidden>
+          <label for="csv-text">CSV to copy</label>
+          <textarea id="csv-text" rows="8" readonly spellcheck="false"></textarea>
+          <p class="help">If this browser cannot download files, select and copy this CSV into a local text file ending in .csv.</p>
+        </div>
+      </form>
+    </section>
+    <footer>Audio, selected files and ratings stay on your Mac. Demo requests go to this local server only.</footer>
+  </main>
+</body>
+</html>
