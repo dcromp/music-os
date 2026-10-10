@@ -1,0 +1,31 @@
+:root { color-scheme: light; font: 16px/1.5 system-ui, -apple-system, sans-serif; color: #19312e; background: #eef4f1; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { max-width: 980px; padding: 32px 24px 64px; margin: auto; }
+h1 { font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -.04em; line-height: 1.1; margin: 8px 0 18px; }
+h2 { margin-top: 0; font-size: 1.25rem; }
+.eyebrow { text-transform: uppercase; letter-spacing: .1em; font-size: .75rem; font-weight: 700; color: #436d62; }
+.lead { max-width: 790px; font-size: 1.1rem; }
+section { background: white; padding: 24px; margin: 24px 0; border: 1px solid #c9dad3; border-radius: 12px; }
+.note { color: #51665f; font-size: .9rem; }
+.small { font-size: .8rem; overflow-wrap: anywhere; color: #51665f; }
+#status { font-size: .9rem; padding: 12px 16px; background: #e2ebe7; border-radius: 8px; }
+label { font-size: .9rem; }
+input, select, textarea, button { font: inherit; border: 1px solid #adbfb7; padding: 7px 10px; border-radius: 5px; color: #19312e; background: white; }
+select { max-width: 100%; }
+textarea { width: 100%; display: block; margin-top: 8px; }
+textarea[hidden] { display: none; }
+button { cursor: pointer; background: #edf5f0; }
+button:hover { background: #dcece3; }
+button:disabled { opacity: .45; cursor: default; }
+input[type=number] { width: 95px; }
+audio { width: 100%; display: block; }
+.position { font-size: 1.2rem; font-variant-numeric: tabular-nums; }
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0; }
+.table-wrap { overflow-x: auto; margin: 14px 0; max-height: 390px; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; text-align: left; font-size: .85rem; }
+th, td { padding: 7px; border-bottom: 1px solid #e1e9e5; white-space: nowrap; }
+td input[type=text] { width: 110px; }
+.current { font-size: 2rem; color: #285d49; font-weight: 700; }
+tr.active { background: #e3f2e8; }
+@media (max-width: 600px) { main { padding: 24px 12px; } section { padding: 16px; } }

@@ -21,8 +21,9 @@ import numpy as np
 
 import lab
 
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 SCHEMA = "untimed-chart-1.0"
+SECTION_SCHEMA = "untimed-chart-1.1"
 QUALITIES = {
     "": (0, 4, 7), "m": (0, 3, 7), "7": (0, 4, 7, 10),
     "maj7": (0, 4, 7, 11), "m7": (0, 3, 7, 10), "5": (0, 7),
@@ -73,10 +74,12 @@ def validate_untimed_chart(chart: dict) -> None:
             for child in value:
                 reject_times(child)
 
-    if not isinstance(chart, dict) or chart.get("schema_version") != SCHEMA:
-        raise ValueError(f"Expected schema_version {SCHEMA}")
+    if not isinstance(chart, dict) or chart.get("schema_version") not in (SCHEMA, SECTION_SCHEMA):
+        raise ValueError(f"Expected schema_version {SCHEMA} or {SECTION_SCHEMA}")
     reject_times(chart)
-    allowed = {"schema_version", "recording", "sequence", "mode", "start_policy", "end_policy", "metadata"}
+    sectional = chart["schema_version"] == SECTION_SCHEMA
+    allowed = {"schema_version", "recording", "mode", "start_policy", "end_policy", "metadata"}
+    allowed.update(("sections", "order") if sectional else ("sequence",))
     if set(chart) - allowed:
         raise ValueError(f"Unsupported untimed chart fields: {sorted(set(chart) - allowed)}")
     recording = chart.get("recording")
@@ -84,7 +87,10 @@ def validate_untimed_chart(chart: dict) -> None:
         not isinstance(recording.get(key), str) or not recording[key].strip() for key in ("id", "title")
     ):
         raise ValueError("recording.id and recording.title are required")
-    sequence = chart.get("sequence")
+    if sectional:
+        sequence, _ = expand_sections(chart)
+    else:
+        sequence = chart.get("sequence")
     if not isinstance(sequence, list) or not 1 <= len(sequence) <= 512:
         raise ValueError("sequence must contain 1–512 ordered chord strings")
     for label in sequence:
@@ -92,6 +98,8 @@ def validate_untimed_chart(chart: dict) -> None:
     mode = chart.get("mode", "finite")
     if mode not in ("finite", "cyclic"):
         raise ValueError("mode must be finite or explicitly cyclic")
+    if sectional and mode != "finite":
+        raise ValueError("Section charts are finite; declare each repeat explicitly")
     if chart.get("start_policy", "first") not in ("first", "any"):
         raise ValueError("start_policy must be first or explicitly any")
     if chart.get("end_policy", "last" if mode == "finite" else "any") not in ("last", "any"):
@@ -103,6 +111,52 @@ def validate_untimed_chart(chart: dict) -> None:
         json.dumps(chart, allow_nan=False)
     except (TypeError, ValueError) as error:
         raise ValueError("Untimed chart must contain finite JSON data") from error
+
+
+def expand_sections(chart: dict) -> tuple[list[str], list[dict]]:
+    """Compile declared section order/repeats without inventing timings or loops."""
+    sections, order = chart.get("sections"), chart.get("order")
+    if not isinstance(sections, list) or not 1 <= len(sections) <= 128:
+        raise ValueError("sections must contain 1–128 section definitions")
+    if not isinstance(order, list) or not 1 <= len(order) <= 128:
+        raise ValueError("order must contain 1–128 declared section occurrences")
+    definitions = {}
+    for section in sections:
+        if not isinstance(section, dict) or set(section) - {"id", "name", "sequence"}:
+            raise ValueError("Each section accepts only id, name and sequence")
+        identifier = section.get("id")
+        if not isinstance(identifier, str) or not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", identifier):
+            raise ValueError("Section IDs must be 1–64 letters, digits, underscores or hyphens")
+        if identifier in definitions:
+            raise ValueError("Section IDs must be unique")
+        name = section.get("name", identifier)
+        if not isinstance(name, str) or not name.strip():
+            raise ValueError("Section name must be a nonempty string")
+        labels = section.get("sequence")
+        if not isinstance(labels, list) or not 1 <= len(labels) <= 512:
+            raise ValueError("Each section needs 1–512 ordered chord strings")
+        for label in labels:
+            chord_template(label)
+        definitions[identifier] = {"name": name, "sequence": labels}
+    sequence, mapping = [], []
+    for order_index, occurrence in enumerate(order):
+        if not isinstance(occurrence, dict) or set(occurrence) - {"section_id", "repeat"}:
+            raise ValueError("Each order entry accepts only section_id and repeat")
+        identifier, repeats = occurrence.get("section_id"), occurrence.get("repeat", 1)
+        if not isinstance(identifier, str) or identifier not in definitions:
+            raise ValueError("Section order refers to an undefined section")
+        if isinstance(repeats, bool) or not isinstance(repeats, int) or not 1 <= repeats <= 64:
+            raise ValueError("repeat must be an integer from 1 to 64")
+        section = definitions[identifier]
+        if len(sequence) + repeats * len(section["sequence"]) > 512:
+            raise ValueError("Expanded section chart exceeds 512 chord positions")
+        for repeat_index in range(repeats):
+            for chord_index, label in enumerate(section["sequence"]):
+                sequence.append(label)
+                mapping.append({"section_id": identifier, "section_name": section["name"],
+                                "order_index": order_index, "repeat_index": repeat_index,
+                                "chord_index": chord_index})
+    return sequence, mapping
 
 
 def features(signal: np.ndarray, sample_rate: int, hop_seconds: float, window_seconds: float) -> dict:
@@ -127,6 +181,33 @@ def features(signal: np.ndarray, sample_rate: int, hop_seconds: float, window_se
     return {"chroma": np.array(chroma), "rms": np.array(rms),
             "silent": np.array(rms) < threshold, "silence_rms_threshold": threshold,
             "hop_samples": hop, "frame_size": frame_size}
+
+
+def acoustic_evidence(audio: Path, evidence_path: Path, recording_id: str, original: dict,
+                      sample_rate: int) -> tuple[np.ndarray, dict]:
+    """Resample hash-paired native acoustic features, never chord annotations."""
+    from candidates import nnls_chroma_adapter
+    raw = evidence_path.read_bytes()
+    packet = json.loads(raw)
+    try:
+        nnls_chroma_adapter.validate_evidence(packet, audio)
+    except (KeyError, TypeError, IndexError) as error:
+        raise ValueError("Malformed acoustic evidence packet") from error
+    if packet["recording"]["id"] != recording_id:
+        raise ValueError("Acoustic evidence recording ID differs from untimed chart")
+    native_times = np.asarray(packet["times_seconds"], dtype=float)
+    native_chroma = np.asarray(packet["chroma_c_first"], dtype=float)
+    grid = np.arange(len(original["chroma"])) * original["hop_samples"] / sample_rate
+    interpolated = np.column_stack([np.interp(grid, native_times, native_chroma[:, pitch])
+                                    for pitch in range(12)])
+    norms = np.linalg.norm(interpolated, axis=1)
+    normalized = np.divide(interpolated, norms[:, None], out=np.zeros_like(interpolated),
+                           where=norms[:, None] > 0)
+    return normalized, {"backend": "nnls-chroma", "evidence_sha256": hashlib.sha256(raw).hexdigest(),
+                        "native_analysis": packet["analysis"], "native_frames": len(native_times),
+                        "sampling": "linear interpolation of native frame centers to decoder grid; nearest edge outside centers; L2 renormalize",
+                        "silence_mask": "unchanged original PCM RMS on decoder's short analysis window",
+                        "note": "Interpolation does not improve native temporal resolution; features are offline/global-tuned"}
 
 
 def constrained_path(emissions: np.ndarray, minimum_frames: int, transition_penalty: float,
@@ -216,7 +297,8 @@ def _events(labels: list[str], path: np.ndarray, hop: int, sample_rate: int, dur
 def align(audio_path: Path, chart_path: Path, *, hop_seconds: float = 0.025,
           window_seconds: float = 0.18, min_chord_seconds: float = 0.15,
           transition_penalty: float = 0.12, unknown_score: float = 0.45,
-          mismatch_margin: float = 0.30, max_audio_seconds: float = 600) -> dict:
+          mismatch_margin: float = 0.30, max_audio_seconds: float = 600,
+          evidence_json: Path | None = None) -> dict:
     started = time.perf_counter()
     for name, value in (("hop_seconds", hop_seconds), ("window_seconds", window_seconds),
                         ("min_chord_seconds", min_chord_seconds), ("max_audio_seconds", max_audio_seconds)):
@@ -245,7 +327,15 @@ def align(audio_path: Path, chart_path: Path, *, hop_seconds: float = 0.025,
         raise ValueError(f"Audio exceeds the experimental {max_audio_seconds:g}-second bound")
     evidence = features(signal, sample_rate, hop_seconds, window_seconds)
     chroma, silent = evidence["chroma"], evidence["silent"]
-    sequence = chart["sequence"]
+    acoustic_input = {"backend": "spectral", "sampling": "direct spectral chroma on decoder grid",
+                      "silence_mask": "original PCM RMS on decoder analysis window"}
+    if evidence_json is not None:
+        chroma, acoustic_input = acoustic_evidence(audio_path, evidence_json, chart["recording"]["id"],
+                                                  evidence, sample_rate)
+    if chart["schema_version"] == SECTION_SCHEMA:
+        sequence, section_mapping = expand_sections(chart)
+    else:
+        sequence, section_mapping = chart["sequence"], []
     harmonic_templates = [chord_template(label) for label in sequence]
     acoustic = np.zeros((len(chroma), len(sequence)))
     emissions = np.zeros_like(acoustic)
@@ -339,15 +429,19 @@ def align(audio_path: Path, chart_path: Path, *, hop_seconds: float = 0.025,
                                     "transition_penalty": transition_penalty, "unknown_score": unknown_score,
                                     "mismatch_margin": mismatch_margin, "silence_rms_threshold": evidence["silence_rms_threshold"],
                                     "maximum_audio_seconds": max_audio_seconds, "forced_beat_grid": False,
+                                    "acoustic_backend": acoustic_input["backend"],
+                                    "runtime_semantics": ("spectral feature extraction and alignment" if evidence_json is None
+                                                          else "alignment, original PCM silence mask and cached-evidence loading; native extraction measured separately"),
                                     "key_or_capo_adjustment": "none; supplied labels must already be sounding chords",
                                     "source_separation": "none"}},
         "chords": output,
-        "alignment_input": {"schema_version": SCHEMA, "sequence": sequence, "mode": mode,
+        "alignment_input": {"schema_version": chart["schema_version"], "sequence": sequence, "mode": mode,
                             "start_policy": start_policy, "end_policy": end_policy, "metadata": metadata,
                             "chart_sha256": hashlib.sha256(chart_bytes).hexdigest(),
                             "source_references_sha256": hashlib.sha256(json.dumps(source_references, sort_keys=True,
                                                                   ensure_ascii=False).encode()).hexdigest()},
         "alignment_evidence": {
+            "acoustic_input": acoustic_input,
             "diagnostics": {"acoustic_fit_status": fit_status, "always_requires_human_review": True,
                             "score_is_calibrated_confidence": False, "active_frames": active_count,
                             "silent_frame_fraction": float(silent.mean()), "active_mismatch_fraction": mismatch_fraction,
@@ -363,13 +457,30 @@ def align(audio_path: Path, chart_path: Path, *, hop_seconds: float = 0.025,
                         float(best_scores[frame]), float(evidence["rms"][frame]),
                         bool(silent[frame]), bool(acoustic_mismatch[frame])] for frame in range(len(path))],
             "limitations": ["Labels and sequence are given inputs; agreement with those labels is not recognition accuracy.",
-                            "This spectral-template baseline has not been validated on a representative catalogue.",
+                            "This template-scored alignment has not been validated on a representative catalogue.",
                             "Cyclic mode assumes the exact ordered loop; it cannot discover verse/chorus structure.",
                             "Frame resolution and analysis windows limit boundary precision; no beat grid is imposed.",
                             "Cosine scores, mismatch thresholds and endpoint constraints require review; there is no calibrated confidence.",
                             "Templates ignore slash-bass voicing, tuning deviation, instrument identity and key/capo metadata.",
                             "A missing or wrong chart may produce a forced path; inspect X gaps, proposed events and diagnostics."]},
     }
+    if section_mapping:
+        result["alignment_input"].update(sections=chart["sections"], order=chart["order"],
+                                         expanded_position_sections=section_mapping)
+        intervals = []
+        for frame, position in enumerate(path):
+            section = section_mapping[int(position)]
+            key = (section["order_index"], section["repeat_index"])
+            end = min(duration, (frame + 1) * evidence["hop_samples"] / sample_rate)
+            if intervals and (intervals[-1]["order_index"], intervals[-1]["repeat_index"]) == key:
+                intervals[-1]["end_seconds"] = end
+            else:
+                intervals.append({key: value for key, value in section.items() if key != "chord_index"}
+                                 | {"start_seconds": frame * evidence["hop_samples"] / sample_rate,
+                                    "end_seconds": end, "status": "proposed; requires listening review"})
+        result["alignment_evidence"]["section_intervals_from_proposed_path"] = intervals
+        result["alignment_evidence"]["limitations"].append(
+            "Section order and repeat counts are declared inputs, not discovered song structure; wrong repeats can force drift.")
     lab.validate_chart(result)
     return result
 
@@ -417,6 +528,8 @@ def write_json_safely(output_path: Path, value: dict, protected_inputs: list[Pat
 
 def align_to_file(audio_path: Path, chart_path: Path, output_path: Path, *, overwrite: bool = False, **parameters) -> dict:
     protected = [audio_path, chart_path]
+    if parameters.get("evidence_json") is not None:
+        protected.append(parameters["evidence_json"])
     check_output_path(output_path, protected, overwrite=overwrite)
     result = align(audio_path, chart_path, **parameters)
     write_json_safely(output_path, result, protected, overwrite=overwrite)
@@ -431,6 +544,8 @@ def main() -> None:
     command.add_argument("--chart", type=Path, required=True)
     command.add_argument("--output", type=Path, required=True)
     command.add_argument("--overwrite", action="store_true")
+    command.add_argument("--evidence-json", type=Path,
+                         help="Optional hash-paired NNLS-Chroma acoustic evidence; default is direct spectral chroma")
     command.add_argument("--hop-seconds", type=float, default=0.025)
     command.add_argument("--window-seconds", type=float, default=0.18)
     command.add_argument("--min-chord-seconds", type=float, default=0.15)

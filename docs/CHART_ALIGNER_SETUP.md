@@ -4,6 +4,8 @@ The local NumPy tool in `experiments/analysis/chart_aligner.py` aligns a **given
 
 Its first conditional synthetic screen completed 64 cases. See [ALIGNMENT_SCREEN.md](ALIGNMENT_SCREEN.md) for timing results and limitations. It has not established real-song timing accuracy or readiness for a learner-facing app.
 
+Version 0.2 adds explicit finite section/repeat inputs and optional hash-paired [NNLS acoustic evidence](NNLS_CHROMA_EVIDENCE.md). These are input/feature choices, not discovery of correct structure. [Real diagnostics](REAL_ALIGNMENT_DIAGNOSTICS.md) preserve unaccepted outputs and their limits.
+
 ## Untimed input
 
 ```json
@@ -36,6 +38,26 @@ Its first conditional synthetic screen completed 64 cases. See [ALIGNMENT_SCREEN
 
 Key, capo and source metadata are preserved separately, without affecting the path. **Supply sounding pitches**, after reviewing any capo-shape conversion yourself. No transposition or key-based substitution is performed.
 
+## Explicit section order and repeats
+
+Schema `untimed-chart-1.1` replaces `sequence` with section definitions and declared order:
+
+```json
+{
+  "schema_version": "untimed-chart-1.1",
+  "recording": {"id": "clip-version-id", "title": "Reviewed excerpt"},
+  "sections": [{"id": "intro", "name": "Intro", "sequence": ["G", "B", "C", "Cm"]}],
+  "order": [{"section_id": "intro", "repeat": 1}],
+  "mode": "finite",
+  "start_policy": "first",
+  "end_policy": "any"
+}
+```
+
+Section charts are finite; declare each repeat explicitly. The compiler expands only that order, with at most 512 positions, without timing fields or guessed skips/repeats. `end_policy: any` permits a partial-prefix excerpt. Unvisited positions remain reported; wrong repeats can still cause drift or a forced path.
+
+Output preserves definitions/order, expanded position mapping and **proposed** section intervals. Those are not independent annotations. The three committed first-20-second charts remain hypotheses, not complete-song arrangements.
+
 Supported templates include major, minor, major seventh, dominant seventh, minor seventh, power, sus2, sus4, dominant 7sus4, add9, diminished, diminished seventh and augmented chords. Conventional forms such as `F#m7` and colon forms such as `F#:min7` are supported. Flat roots are accepted. Slash-bass suffixes are preserved in labels but ignored by the pitch-class template; they do not establish inversion accuracy. Unsupported qualities are rejected rather than silently simplified.
 
 ## Run on local prepared audio
@@ -50,6 +72,8 @@ From the repository root:
 ```
 
 It refuses to overwrite or alias either input, including existing hardlinks, even with `--overwrite`. Symlink outputs are rejected. Results publish atomically; without `--overwrite`, creation is exclusive and preserves a concurrent new file. Existing output files require explicit `--overwrite`. The synthetic screening runner preflights every artifact against all suite inputs before writing. Default maximum audio length is ten minutes; use a reviewed excerpt for a source chart that describes only one section. Do not run an intro progression over a whole song unless that is a documented assumption being tested.
+
+To use cached native features, add `--evidence-json /path/to/nnls-features.json`. The packet must match the audio hash, recording ID, sample count/rate and frozen native configuration. The aligner interpolates normalized C-first vectors from native centers onto its grid, uses nearest edge values outside centers and renormalizes. This does not improve native temporal resolution. Original PCM silence remains unchanged. Acoustic JSON is protected from output overwrites; extraction and cached alignment runtimes are separate.
 
 ## What the algorithm actually does
 

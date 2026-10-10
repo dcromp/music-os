@@ -111,3 +111,7 @@ The new NumPy aligner accepts strictly untimed ordered labels, with explicit fin
 ```
 
 The [64-case conditional screen](../docs/ALIGNMENT_SCREEN.md) withholds all reference timing/silence events from inference. Its timing score assumes the correct harmonic order and count. The [three-song import smoke](../docs/YOUTUBE_IMPORT_SMOKE.md) proves acquisition and detector execution; its Creep cyclic alignment remains an unaccepted draft. Exact excerpt/section review and independent timing references precede real-song scoring and founder guitar sessions.
+
+Version 0.2 adds finite section/repeat charts and cached NNLS acoustic packets. Build the separate [native host](../docs/NNLS_CHROMA_EVIDENCE.md), then run `alignment_comparison.py` for the frozen 64-case paired comparison. Native evidence consumes audio only; source hashes and fixed frame-center coordinates remain explicit. [Paired results](../docs/ACOUSTIC_ALIGNMENT_COMPARISON.md) and [real diagnostics](../docs/REAL_ALIGNMENT_DIAGNOSTICS.md) remain separate.
+
+The [listening review](../docs/LISTENING_REVIEW.md) serves three exact 20-second windows and anonymous charts on port 8068, independently of the existing bench. First mark a few Creep changes, save the human draft, then reveal candidates if useful. Private model identities and untimed charts are not served. Exports preserve exposure history and `gold: false`; no model output is automatically a human reference.

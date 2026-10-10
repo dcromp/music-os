@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Music OS · short listening review</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Music OS · local experiment</p>
+    <h1>Mark a few chord changes</h1>
+    <p class="lead">Listen to a 20-second window. Replay it and mark where you hear a chord change. Give the chord a name if you know it; <strong>?</strong> is fine. This takes about 5–10 minutes. Your guitar is optional.</p>
+    <p class="note">These are listening windows, not verified sections. Manual labels are drafts until checked independently. Audio and drafts stay on this computer; download your work before closing the tab.</p>
+    <div id="status" role="status">Loading local review pack…</div>
+    <section aria-labelledby="listen-heading">
+      <h2 id="listen-heading">1. Listen with no candidate chart</h2>
+      <label for="case">Listening window</label>
+      <select id="case" disabled></select>
+      <p id="origin" class="small"></p>
+      <audio id="audio" controls preload="metadata"></audio>
+      <p id="position" class="position">0.000 s</p>
+      <div class="controls">
+        <button id="restart" disabled>Restart</button>
+        <label for="seek">Go to seconds</label><input id="seek" type="number" min="0" step="0.05" value="0">
+        <button id="go" disabled>Go</button>
+        <button id="back" disabled>Back 2 seconds</button>
+      </div>
+    </section>
+    <section aria-labelledby="mark-heading">
+      <h2 id="mark-heading">2. Make your own timing draft</h2>
+      <p>Pause or replay around a change, then press <strong>Mark change now</strong>. Edit its time and chord below. Add a mark at 0 if you can identify the starting chord. A mark extends until the next one; uncertainty is allowed.</p>
+      <button id="mark" disabled>Mark change now</button>
+      <div class="table-wrap"><table><thead><tr><th>Time (s)</th><th>Chord</th><th>Timing ± (s)</th><th>Confidence</th><th>Replay</th><th>Remove</th></tr></thead><tbody id="marks"></tbody></table></div>
+      <label for="notes">What was unclear?</label><textarea id="notes" rows="2" placeholder="For example: first guitar attack is hard to hear; chord name unsure"></textarea>
+      <p id="exposure" class="note">Candidate charts are hidden. This draft is audio-only so far.</p>
+      <div class="controls"><button id="save" disabled>Download annotation JSON</button><button id="show" disabled>Show JSON to copy</button></div>
+      <textarea id="export" rows="12" readonly hidden aria-label="Annotation JSON to copy"></textarea>
+    </section>
+    <section aria-labelledby="compare-heading">
+      <h2 id="compare-heading">3. Optionally compare anonymous candidates</h2>
+      <p>Save your audio-only draft first. Revealing these charts records model exposure in later exports. Candidate labels and timings are unreviewed, and are never added to your annotations automatically.</p>
+      <button id="reveal" disabled>Reveal candidate charts</button>
+      <div id="comparison" hidden>
+        <label for="candidate">Candidate</label><select id="candidate"></select>
+        <p id="current" class="current">No labelled chord here</p>
+        <div class="table-wrap"><table><thead><tr><th>Start (s)</th><th>End (s)</th><th>Chord</th><th>Replay</th></tr></thead><tbody id="candidate-events"></tbody></table></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
