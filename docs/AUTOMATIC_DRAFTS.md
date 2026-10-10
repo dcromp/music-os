@@ -40,6 +40,12 @@ use 0. Raw detected labels remain sounding pitches, including inversions and
 extensions. Any capo-shape display is a practice view rather than recorded-harmony
 ground truth. Guide URLs and this distinction are included in manifest metadata.
 
+The first founder feedback and [Wonderwall vocabulary audit](WONDERWALL_QUALITY_AUDIT.md)
+identify a specific limit: CREMA cannot emit add9 or 7sus4, and the default
+Chordino dictionary lacks those and suspensions. A capo view preserves whatever
+quality was detected; it cannot supply a missing extension. Rich-quality
+synthetic controls and a separate chart-assisted comparison are planned.
+
 ## Build and run on Mac
 
 From the repository checkout with `.venv-analysis` already installed:
