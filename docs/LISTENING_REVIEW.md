@@ -39,4 +39,4 @@ Independent accuracy evaluation uses existing annotated datasets and separately 
 
 ## Verification
 
-Tests cover exact audio/chart matching, full-duration preparation, feedback capture from the playback clock, source offsets, persistence and case isolation, optional manual provenance, practice transposition, and private HTTP routes. Browser smoke checked immediate chords, seeking, issue capture, reload persistence and song switching. The final capo display has targeted tests; its deployed visual check is reported separately if the browser connection is unavailable.
+Tests cover exact audio/chart matching, full-duration preparation, feedback capture from the playback clock, source offsets, persistence and case isolation, optional manual provenance, practice transposition, and private HTTP routes. Browser smoke checked immediate chords, seeking, issue capture, reload persistence and song switching. The deployed player additionally verified Creep's immediate G/B/C/Cm cues and Wonderwall switching between Em7/G practice shapes and F#m7/A sounding pitches. QA feedback stayed on a separate test origin; the deployed Creep page was left with no invented user issues.
