@@ -24,6 +24,10 @@ project_plan/
 
 # Local Mac analysis environment and generated audio/results
 .venv-analysis/
+.venv-btc/
+.venv-crema/
+.venv-chordmini/
+experiments/candidate-assets/
 experiments/generated/
 experiments/local-audio/
 experiments/results/

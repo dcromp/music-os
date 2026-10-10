@@ -24,7 +24,7 @@
 
 Runtime includes WAV loading and analysis, excludes interpreter/NumPy import and fixture generation, and is specific to this Mac and short fixture. It is not a GPU/cloud cost estimate. Extra output segments show brief label instability around transitions; high duration agreement does not remove that usability concern.
 
-This fixture verifies input/output and basic chord/timing plumbing. It does not establish real-guitar performance, prove a pretrained model inferior, or select a production algorithm. No BTC/CREMA/All-In-One/Demucs comparison has run yet. The planned progressive synthetic suite and real-recording holdouts are Phase A work.
+This fixture verifies input/output and basic chord/timing plumbing. It does not establish real-guitar performance or select a production algorithm. Subsequent work has completed the expanded baseline/BTC/CREMA/ChordMini synthetic screen; see [SYNTHETIC_RESULTS.md](SYNTHETIC_RESULTS.md). All-In-One, source separation and real-recording holdouts remain outstanding.
 
 ## Verification
 
@@ -36,8 +36,8 @@ This fixture verifies input/output and basic chord/timing plumbing. It does not 
 
 The full legacy Expo checks remain in [REUSE_AUDIT.md](REUSE_AUDIT.md). They do not describe this new bench's deployment or prove native app playback.
 
-## Remaining founder test
+## Founder test sequencing
 
-Estimated 15–20 minutes after choosing a suitable recording: prepare the local WAV, run the baseline, load the same WAV and its JSON, play with guitar, record confusing timestamps and ratings. Synthetic tones can check basic interaction immediately, but actual guitar/music material is needed for useful algorithm decisions.
+The founder requested automated synthetic screening before guitar sessions. That first four-candidate screen has now run, and further candidate/reference checks remain explicit in the plan. The later 15–20 minute session will prepare a suitable local WAV, analyse it, load its matching chart and record confusing timestamps/ratings. Actual guitar/music material remains necessary for a production decision.
 
 The previous analysis code was deleted, as confirmed by the founder. Phase A proceeds from this fresh baseline.

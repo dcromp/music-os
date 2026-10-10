@@ -87,8 +87,17 @@ The generated fixture has seven pitched chord events (including an inversion) an
 
 A high result on this fixture confirms the basic input/output/timing path. It does not establish performance on actual guitar, dense mixes or unseen songs, and does not select a production algorithm. Founder guitar ratings and held-out real excerpts are still required.
 
-## Next: progressive synthetic screening
+## Automated progressive synthetic screening
 
-Phase A will extend the generator from clean triads through varied roots/voicings/registers, guitar-like plucks and staggered attacks, controlled bass/percussion/noise, and faster/offbeat changes. Change one factor at a time, keep seeds/recipes reproducible, and report each condition separately. The current generator is the first fixture, not that complete suite.
+The suite generator creates 64 deterministic cases across roots/voicings/registers, guitar-like plucks and staggered attacks, controlled bass/percussion/noise, and faster/offbeat changes. It uses procedural tones/envelopes, not recordings of actual guitars. Recipes, hashes and paired screen/holdout variants are saved in its manifest. Results are reported per condition and candidate.
+
+```sh
+.venv-analysis/bin/python experiments/analysis/synthetic_suite.py generate
+.venv-analysis/bin/python experiments/analysis/synthetic_suite.py run --candidates baseline,btc,crema,chordmini
+```
+
+Install model environments/assets using the candidate setup documents before requesting their runs. `--reuse-existing` rescoring requires matching audio hashes and produces no new inference. Failed/unavailable candidates remain visible and make the runner exit nonzero; logs, JSON and CSV stay in the generated suite directory. The initial four-candidate batch completed 256 comparisons with zero failures. See [recorded results](../docs/SYNTHETIC_RESULTS.md).
+
+The server's `/api/suite` inventory exposes only safe case IDs and allowlisted audio/chart files. Use Load synthetic suite → choose case → Load case in the bench. No model inference happens in the browser. Generated cases can be played without guitar first; founder guitar sessions follow the automated screening.
 
 Use synthetic failures to diagnose integration/timing/vocabulary problems early. Confirm adapters and input conventions before dropping a candidate: artificial tones can be outside the training domain of a real-recording model. Power chords require ambiguous-quality or root-only evaluation. Real recordings and guitar play-tests remain the selection evidence.

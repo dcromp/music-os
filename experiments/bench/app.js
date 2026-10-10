@@ -3,7 +3,7 @@
 (() => {
   const $ = (id) => document.getElementById(id);
   const audio = $("audio");
-  const state = { candidates: [], active: -1, audioUrl: null, objectUrl: null, audioName: "", duration: null, offset: 0, validForAudio: false, request: 0, chartRequest: 0, ratings: [] };
+  const state = { candidates: [], active: -1, audioUrl: null, objectUrl: null, audioName: "", duration: null, offset: 0, validForAudio: false, request: 0, chartRequest: 0, ratings: [], suiteCases: [], suiteRequest: 0 };
   const tolerance = (duration) => Math.max(0.1, duration * 0.001);
 
   function status(message, isError = false) {
@@ -155,9 +155,9 @@
   }
 
   function localUrl(value) {
-    if (typeof value !== "string") throw new Error("Demo URLs must be strings.");
+    if (typeof value !== "string") throw new Error("Generated asset URLs must be strings.");
     const url = new URL(value, location.href);
-    if (url.origin !== location.origin || !["http:", "https:"].includes(url.protocol)) throw new Error("Demo URLs must point to this local server.");
+    if (url.origin !== location.origin || !["http:", "https:"].includes(url.protocol)) throw new Error("Generated asset URLs must point to this local server.");
     return url.href;
   }
   async function getJson(url) {
@@ -165,6 +165,87 @@
     if (!response.ok) throw new Error(`Request failed (${response.status}): ${new URL(url, location.href).pathname}`);
     return response.json();
   }
+
+  async function loadRecording(recording, request) {
+    if (!Array.isArray(recording.candidates) || !recording.candidates.length) throw new Error("No analysis candidates are available. Run the lab suite first.");
+    const audioUrl = localUrl(recording.audio_url);
+    const candidates = await Promise.all(recording.candidates.map(async (candidate, index) => ({ name: typeof candidate.name === "string" ? candidate.name : `Version ${index + 1}`, chart: validateChart(await getJson(localUrl(candidate.url))) })));
+    const firstRecording = candidates[0].chart.recording;
+    if (candidates.some(({ chart }) => chart.recording.id !== firstRecording.id || chart.recording.duration_seconds !== firstRecording.duration_seconds)) throw new Error("The candidate charts refer to different recordings.");
+    if (request !== state.request) return;
+    state.candidates = candidates;
+    state.active = 0;
+    populateCandidates();
+    setAudio(audioUrl, firstRecording.title);
+  }
+
+  function clearRecordingPair() {
+    audio.pause();
+    if (state.objectUrl) URL.revokeObjectURL(state.objectUrl);
+    state.objectUrl = null;
+    state.audioUrl = null;
+    state.audioName = "";
+    state.duration = null;
+    state.candidates = [];
+    state.active = -1;
+    state.offset = 0;
+    $("offset").value = "0";
+    $("offset").setCustomValidity("");
+    audio.removeAttribute("src");
+    audio.load();
+    populateCandidates();
+    checkPair();
+  }
+
+  function suiteCaseLabel(testCase) {
+    const level = String(testCase.level ?? "Unspecified level");
+    return `${/^level\b/i.test(level) ? level : `Level ${level}`} · ${testCase.name} · ${testCase.condition || "Standard condition"}`;
+  }
+
+  $("load-suite").addEventListener("click", async () => {
+    const request = ++state.suiteRequest;
+    $("load-suite").disabled = true;
+    $("suite-status").textContent = "Loading synthetic suite…";
+    try {
+      const suite = await getJson("/api/suite");
+      if (!Array.isArray(suite.cases) || !suite.cases.length) throw new Error("No synthetic cases are available.");
+      const ids = new Set();
+      suite.cases.forEach((testCase) => {
+        if (!testCase || typeof testCase.id !== "string" || !testCase.id.trim() || ids.has(testCase.id) || typeof testCase.name !== "string" || !testCase.name.trim()) throw new Error("The suite has an invalid or duplicate case.");
+        ids.add(testCase.id);
+        localUrl(testCase.audio_url);
+        if (!Array.isArray(testCase.candidates) || !testCase.candidates.length) throw new Error(`No charts are available for ${testCase.name}.`);
+        testCase.candidates.forEach((candidate) => localUrl(candidate.url));
+      });
+      if (request !== state.suiteRequest) return;
+      state.suiteCases = suite.cases;
+      const select = $("suite-case");
+      select.replaceChildren();
+      state.suiteCases.forEach((testCase) => select.add(new Option(suiteCaseLabel(testCase), testCase.id)));
+      select.value = state.suiteCases[0].id;
+      select.disabled = false;
+      $("load-case").disabled = false;
+      $("suite-status").textContent = `${state.suiteCases.length} synthetic cases available. Choose a case and press Load case. Results on synthetic audio are an early screen, not proof of real-music performance.`;
+    } catch (error) {
+      if (request === state.suiteRequest) $("suite-status").textContent = `Could not load synthetic suite: ${error.message} Run the lab suite first, then try again.`;
+    } finally { $("load-suite").disabled = false; }
+  });
+  $("suite-case").addEventListener("change", () => {
+    const selected = state.suiteCases.find((testCase) => testCase.id === $("suite-case").value);
+    if (selected) $("suite-status").textContent = `Selected ${suiteCaseLabel(selected)}. Press Load case to replace the current recording and chart.`;
+  });
+  $("load-case").addEventListener("click", async () => {
+    const testCase = state.suiteCases.find((item) => item.id === $("suite-case").value);
+    if (!testCase) { $("suite-status").textContent = "Run the lab suite first, then load its synthetic cases."; return; }
+    const request = ++state.request;
+    ++state.chartRequest;
+    $("load-case").disabled = true;
+    clearRecordingPair();
+    status(`Loading synthetic case: ${testCase.name}…`);
+    try { await loadRecording(testCase, request); }
+    catch (error) { if (request === state.request) status(`Could not load synthetic case: ${error.message} Run the lab suite first if generated files are missing.`, true); }
+    finally { $("load-case").disabled = !state.suiteCases.length; }
+  });
 
   $("load-demo").addEventListener("click", async () => {
     const request = ++state.request;
@@ -174,13 +255,8 @@
     try {
       const demo = await getJson("/api/demo");
       if (!Array.isArray(demo.candidates) || !demo.candidates.length) throw new Error("Demo has no analysis candidates. Generate the demo first.");
-      const candidates = await Promise.all(demo.candidates.map(async (candidate, index) => ({ name: typeof candidate.name === "string" ? candidate.name : `Version ${index + 1}`, chart: validateChart(await getJson(localUrl(candidate.url))) })));
-      const audioUrl = localUrl(demo.audio_url);
       if (request !== state.request) return;
-      state.candidates = candidates;
-      state.active = 0;
-      populateCandidates();
-      setAudio(audioUrl, candidates[0].chart.recording.title);
+      await loadRecording(demo, request);
     } catch (error) { if (request === state.request) status(`Could not load demo: ${error.message}`, true); }
     finally { $("load-demo").disabled = false; }
   });

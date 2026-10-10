@@ -256,7 +256,33 @@ def smoke(directory: Path) -> dict:
 
 class BenchHandler(SimpleHTTPRequestHandler):
     def do_GET(self) -> None:
-        if self.path == "/api/demo":
+        if self.path == "/api/suite":
+            folder = GENERATED / "synthetic-suite"
+            manifest = folder / "manifest.json"
+            if not manifest.exists():
+                self.send_error(404, "Generate the synthetic suite first")
+                return
+            cases = []
+            for case in json.loads(manifest.read_text())["cases"]:
+                case_id = case["id"]
+                if not re_safe_case_id(case_id):
+                    continue
+                candidates = [{"name": "Known reference", "url": f"/suite/{case_id}/reference.json"}]
+                for name in ("baseline", "btc", "crema", "chordmini"):
+                    path = folder / "cases" / case_id / f"{name}.json"
+                    if path.exists():
+                        candidates.append({"name": name.upper() if name == "btc" else name.title(),
+                                           "url": f"/suite/{case_id}/{name}.json"})
+                cases.append({"id": case_id, "name": case["name"], "level": case["level"],
+                              "condition": case["condition"], "audio_url": f"/suite/{case_id}/audio.wav",
+                              "candidates": candidates})
+            payload = json.dumps({"cases": cases}).encode()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(payload)))
+            self.end_headers()
+            self.wfile.write(payload)
+        elif self.path == "/api/demo":
             payload = json.dumps({"audio_url": "/demo/audio.wav", "candidates": [
                 {"name": "Known reference", "url": "/demo/reference.json"},
                 {"name": "Template baseline", "url": "/demo/baseline.json"},
@@ -273,6 +299,11 @@ class BenchHandler(SimpleHTTPRequestHandler):
         # Resolve via a fixed virtual root. Do not expose repository files/secrets.
         virtual = super().translate_path(path)
         relative = Path(virtual).relative_to(BENCH)
+        if relative.parts and relative.parts[0] == "suite":
+            allowed = {"audio.wav", "reference.json", "baseline.json", "btc.json", "crema.json", "chordmini.json"}
+            if len(relative.parts) == 3 and re_safe_case_id(relative.parts[1]) and relative.parts[2] in allowed:
+                return str(GENERATED / "synthetic-suite" / "cases" / relative.parts[1] / relative.parts[2])
+            return str(BENCH / "__not_found__")
         if relative.parts and relative.parts[0] == "demo":
             allowed = {"audio.wav", "reference.json", "baseline.json"}
             if len(relative.parts) == 2 and relative.parts[1] in allowed:
@@ -283,6 +314,10 @@ class BenchHandler(SimpleHTTPRequestHandler):
     def list_directory(self, path: str):
         self.send_error(404, "Directory listing disabled")
         return None
+
+
+def re_safe_case_id(value: str) -> bool:
+    return isinstance(value, str) and bool(value) and all(c in "abcdefghijklmnopqrstuvwxyz0123456789-_" for c in value)
 
 
 def serve(port: int) -> None:

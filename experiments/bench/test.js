@@ -20,12 +20,14 @@ function element(id) {
       textContent: "",
       handlers: {},
       loadCalls: 0,
+      options: [],
       classList: { toggle() {} },
       addEventListener(name, handler) { this.handlers[name] = handler; },
-      replaceChildren() {},
-      add() {},
-      pause() {},
-      load() { this.loadCalls++; },
+      replaceChildren() { this.options = []; },
+      add(option) { this.options.push(option); },
+      pause() { this.paused = true; },
+      load() { this.loadCalls++; this.currentTime = 0; },
+      removeAttribute(name) { delete this[name]; },
       setCustomValidity(message) { this.validationMessage = message; },
       checkValidity() { return !this.validationMessage; },
       reportValidity() { return this.checkValidity(); },
@@ -271,6 +273,81 @@ check("Show CSV reveals the same serialization for manual copying", () => {
     assert.equal(element("save-rating").disabled, true);
     assert.equal(element("current-chord").textContent, "—");
     assert.match(element("status").textContent, /no chord events/);
+  });
+  const firstCase = { id: "clean", name: "Clean major triads", level: 1, condition: "Sine tones", audio_url: "/data/clean.wav", candidates: [{ name: "Ground truth", url: "/data/clean.json" }] };
+  const secondCase = { id: "noisy", name: "Triads with noise", level: 2, condition: "Noise at 20 dB", audio_url: "/data/noisy.wav", candidates: [{ name: "Baseline", url: "/data/noisy.json" }] };
+  const secondChart = chart();
+  secondChart.recording.id = "noisy";
+  secondChart.recording.title = "Triads with noise";
+  secondChart.recording.duration_seconds = 12;
+  secondChart.chords[0].label = "Dm";
+  let chartFetch;
+  context.fetch = async (url) => {
+    if (new URL(url, context.location).pathname === "/api/suite") return { ok: true, json: async () => ({ cases: [firstCase, secondCase] }) };
+    if (new URL(url, context.location).pathname === "/data/noisy.json") return new Promise((resolve) => { chartFetch = () => resolve({ ok: true, json: async () => secondChart }); });
+    return { ok: true, json: async () => chart() };
+  };
+  readyChart();
+  await element("load-suite").handlers.click();
+  check("loading the synthetic catalogue keeps the current audio and chart", () => {
+    assert.equal(state.validForAudio, true);
+    assert.equal(state.audioUrl, "blob:fixture");
+    assert.equal(state.candidates[0].chart.recording.id, "fixture");
+    assert.equal(element("suite-case").disabled, false);
+    assert.equal(element("load-case").disabled, false);
+    assert.match(element("suite-case").options[1].text, /Level 2.*Triads with noise.*Noise at 20 dB/);
+  });
+  element("suite-case").value = "noisy";
+  const pendingCase = element("load-case").handlers.click();
+  check("loading another case immediately clears the previous audio and chart", () => {
+    assert.equal(state.candidates.length, 0);
+    assert.equal(state.audioUrl, null);
+    assert.equal(state.duration, null);
+    assert.equal(state.validForAudio, false);
+    assert.equal(element("audio").src, undefined);
+    assert.equal(element("current-chord").textContent, "—");
+    assert.equal(element("save-rating").disabled, true);
+  });
+  chartFetch();
+  await pendingCase;
+  check("the selected case installs its own chart and waits for matching audio metadata", () => {
+    assert.equal(state.audioUrl, "http://127.0.0.1:8765/data/noisy.wav");
+    assert.equal(state.candidates[0].chart.recording.id, "noisy");
+    assert.equal(state.duration, null);
+    assert.equal(state.validForAudio, false);
+    assert.equal(element("audio").currentTime, 0);
+    element("audio").duration = 12;
+    element("audio").handlers.loadedmetadata();
+    assert.equal(state.validForAudio, true);
+    assert.equal(element("current-chord").textContent, "Dm");
+  });
+  context.fetch = async () => ({ ok: false, status: 404 });
+  await element("load-case").handlers.click();
+  check("a missing synthetic chart leaves no old pair available for rating", () => {
+    assert.equal(state.candidates.length, 0);
+    assert.equal(state.audioUrl, null);
+    assert.equal(element("save-rating").disabled, true);
+    assert.match(element("status").textContent, /Run the lab suite first/);
+  });
+  await element("load-suite").handlers.click();
+  check("a missing suite gives a useful lab instruction", () => {
+    assert.match(element("suite-status").textContent, /Run the lab suite first/);
+  });
+  context.fetch = async () => ({ ok: true, json: async () => ({ cases: [{ ...firstCase, audio_url: "https://example.com/audio.wav" }] }) });
+  await element("load-suite").handlers.click();
+  check("synthetic asset URLs are restricted to the local server", () => {
+    assert.match(element("suite-status").textContent, /must point to this local server/);
+  });
+
+  context.fetch = async () => new Promise((resolve) => { chartFetch = () => resolve({ ok: true, json: async () => secondChart }); });
+  const supersededCase = element("load-case").handlers.click();
+  ++state.request;
+  state.audioUrl = "blob:new-upload";
+  chartFetch();
+  await supersededCase;
+  check("a late case response cannot overwrite a newer audio selection", () => {
+    assert.equal(state.audioUrl, "blob:new-upload");
+    assert.equal(state.candidates.length, 0);
   });
   console.log(`\n${passed} validation and timing checks passed. Browser audio remains a separate smoke test.`);
 })().catch(error => {

@@ -21,6 +21,9 @@ select, textarea, input[type="number"] { font: inherit; font-weight: 400; color:
 select, textarea { width: 100%; margin-top: 6px; }
 textarea { resize: vertical; }
 .file-grid, .rating-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px; }
+.suite-controls { display: flex; align-items: end; gap: 12px; }
+.suite-controls label { flex: 1; min-width: 0; }
+#suite-status { margin-bottom: 18px; }
 .file-picker { padding: 12px 14px; background: #f6f8f5; border: 1px dashed #bbcbbf; border-radius: 10px; }
 input[type="file"] { display: block; width: 100%; font: inherit; font-weight: 400; margin-top: 8px; font-size: .84rem; }
 .candidate-row { display: flex; gap: 20px; align-items: end; }
@@ -49,4 +52,4 @@ audio { width: 100%; margin: 18px 0; display: block; }
 #csv-preview { margin-top: 18px; }
 #csv-text { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .8rem; }
 footer { text-align: center; color: #61756b; font-size: .8rem; padding: 10px; }
-@media (max-width: 650px) { main { padding: 24px 14px; } .card { padding: 18px; } .file-grid, .rating-grid { grid-template-columns: 1fr; } .candidate-row { display: block; } .checkbox-label { margin-top: 12px; } .chord-grid { gap: 10px; } .current-panel, .next-panel { min-height: 175px; padding: 10px; } .section-heading { align-items: start; } }
+@media (max-width: 650px) { main { padding: 24px 14px; } .card { padding: 18px; } .file-grid, .rating-grid { grid-template-columns: 1fr; } .candidate-row { display: block; } .checkbox-label { margin-top: 12px; } .chord-grid { gap: 10px; } .current-panel, .next-panel { min-height: 175px; padding: 10px; } .section-heading { align-items: start; } .suite-controls { flex-wrap: wrap; } .suite-controls label { flex-basis: 100%; order: 1; } .suite-controls #load-case { order: 2; } }

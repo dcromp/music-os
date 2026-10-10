@@ -13,12 +13,14 @@ Updated 10 October 2026. Status and deployment information belong in this README
 | Existing-code audit and reuse decisions | Complete | Expo shell/song cards reusable; chart data and clock need later repair |
 | Isolated Mac analysis environment | Complete | Python 3.12.10 and pinned NumPy 2.2.6; separate from npm/Expo |
 | Output format and known-chord audio | Complete | Version 1.0 JSON; generated 22-second triad/silence fixture |
-| Baseline run and automated checks | Complete | 98.9% exact-label duration agreement on synthetic fixture; 7 Python and 41 JavaScript checks pass |
+| Baseline run and automated checks | Complete | Initial fixture works; expanded 12 Python and 48 JavaScript checks pass |
 | Local play-along bench | Complete | Live Mac browser checks passed: playback, pause, seeking, switching charts, Restart and visible CSV export |
 | Run guide, deployment and evidence | Complete | Local startup instructions below; measurements and limits in [Phase 0 results](docs/PHASE0_RESULTS.md) |
-| Founder guitar test on real material | Pending founder session | 15–20 minutes once suitable local audio is chosen |
+| Automated synthetic screening before guitar | Initial batch complete | 64 cases × 4 algorithms = 256 successful comparisons; [results](docs/SYNTHETIC_RESULTS.md) |
+| Additional candidates | Pending | Chordino needs Mac Vamp setup; ChordFormer needs source/checkpoint review |
+| Founder guitar test on real material | Deferred | After automated screening and reference checks; 15–20 minutes when ready |
 
-The synthetic result checks experiment plumbing. It is not a real-guitar benchmark or a selected production algorithm. The baseline produced 11 segments against 8 reference segments, including brief extra transitions. BTC, CREMA, source separation and real-song comparisons remain Phase A work. The founder confirmed the previous analysis code was deleted, so the baseline is newly implemented.
+The initial fixture checks experiment plumbing. The expanded synthetic suite now compares the template baseline, BTC, CREMA and ChordMini/ChordNet across clean triads, voicings/timbres, guitar-like attacks, distractors and timing/vocabulary complexity. ChordMini leads major/minor core agreement (94.7%) and boundary F1 (0.927) in this suite. All audio is procedural; no production algorithm has been selected and no guitar ratings have been used. The founder confirmed the previous analysis code was deleted, so the baseline is newly implemented.
 
 ## Run on Mac
 
@@ -36,6 +38,19 @@ python3.12 -m venv .venv-analysis
 ```
 
 Browser-logic checks additionally run with `node experiments/bench/test.js` (no npm install needed).
+
+## Automated synthetic tests
+
+Candidate setup: [BTC](docs/BTC_SETUP.md), [CREMA](docs/CREMA_SETUP.md), [ChordMini](docs/CHORDMINI_SETUP.md). The baseline environment is separate from the model environments.
+
+```sh
+.venv-analysis/bin/python experiments/analysis/synthetic_suite.py generate
+.venv-analysis/bin/python experiments/analysis/synthetic_suite.py run --candidates baseline,btc,crema,chordmini
+```
+
+The runner loads each model once per batch, scores every case, writes JSON/CSV under `experiments/generated/synthetic-suite`, and exits nonzero for requested unavailable candidates or failed cases. Use `--reuse-existing` to rescore outputs only; it verifies audio hashes. Committed [results](docs/SYNTHETIC_RESULTS.md) include per-case evidence.
+
+In the browser, press **Load synthetic suite**, choose a case, and **Load case** to compare its reference and available candidate charts. This is the next step before guitar sessions. Chordino and newer candidates remain explicit backlog items, not untested algorithms with assigned scores.
 
 On the founder's audited Mac, `/Users/davidcrompton/miniforge3/bin/python` is Python 3.12.10 and can replace `python3.12` in the first command. The Homebrew `python3` is 3.14.3 and was not used for the baseline.
 
@@ -69,4 +84,4 @@ This is the old app startup path, not the Mac experiment setup above. Expo SDK 5
 
 ## Next
 
-Extend the synthetic screening from clean triads to varied voicings/timbres, guitar-like attacks and controlled mix/rhythm complexity. Use it to diagnose basic failures, then compare baseline/BTC/CREMA and separation variants on permitted real excerpts and annotated holdouts. Record quality, timing errors, correction effort, runtime and founder guitar ratings before selecting a pipeline and integrating it into a product UI.
+Review the automated screening's weakest cases, add Chordino and other verified candidates, then test promising models and separation variants on permitted real excerpts and annotated holdouts. Record quality, timing errors, correction effort and runtime before founder guitar sessions and product integration.

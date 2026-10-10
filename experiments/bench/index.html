@@ -17,6 +17,12 @@
 
     <section class="card sources" aria-labelledby="source-heading">
       <div class="section-heading"><h2 id="source-heading">1. Choose your audio and chart</h2><button id="load-demo" type="button">Load demo</button></div>
+      <div class="suite-controls">
+        <button id="load-suite" class="secondary" type="button">Load synthetic suite</button>
+        <label for="suite-case">Synthetic test case <select id="suite-case" disabled><option>Load the suite first</option></select></label>
+        <button id="load-case" type="button" disabled>Load case</button>
+      </div>
+      <p id="suite-status" class="help" role="status">Synthetic recordings test known chords under controlled conditions. They help find failures; they do not prove which algorithm works best on real music.</p>
       <div class="file-grid">
         <label class="file-picker">Local audio <input id="audio-file" type="file" accept="audio/*,.wav,.mp3,.m4a,.ogg"></label>
         <label class="file-picker">Analysis JSON <input id="chart-file" type="file" accept="application/json,.json"></label>
@@ -69,7 +75,7 @@
         </div>
       </form>
     </section>
-    <footer>Audio, selected files and ratings stay on your Mac. Demo requests go to this local server only.</footer>
+    <footer>Audio, selected files and ratings stay on your Mac. Demo and suite requests go to this local server only.</footer>
   </main>
 </body>
 </html>

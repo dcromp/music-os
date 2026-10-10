@@ -64,6 +64,8 @@ Verification: locked dependencies install, TypeScript passes and the sole starte
 
 Phase 0 now includes the experiment foundation as well as the completed code audit. Keep its step/status/ETA table, startup instructions and deployment state in the root [README.md](README.md). Its deliverables are an isolated Mac environment, versioned JSON format, known-chord fixture, a cheap baseline with measured output, a minimal local browser play-along bench and a reproducible run guide. Validate the bench clock before trusting guitar ratings. Synthetic results establish plumbing only; Phase A chooses algorithms using real material and held-out tests.
 
+**Current evidence:** Phase 0's technical foundation is implemented. The first automated Phase A screen has now completed 64 synthetic cases for each of four algorithms (256 successful comparisons). Results and limitations are in [docs/SYNTHETIC_RESULTS.md](docs/SYNTHETIC_RESULTS.md). Per the founder's sequencing preference, automated screening and reference checks precede guitar sessions.
+
 ### Phase A — Choose algorithms on Mac and build the guitar testing bench
 
 **Indicative effort: 1–2 focused weeks.** These are planning estimates for a solo builder, not delivery commitments.
@@ -95,7 +97,7 @@ The supplied report, “Algorithmic Architectures and Empirical Evaluation Frame
 
 | Area | Initial candidates | Experiment and decision |
 |---|---|---|
-| Chord recognition | Phase 0's fresh spectral-template baseline, BTC-ISMIR19 and CREMA | The old app has no detector; the new baseline lives in experiments/analysis. Run candidates on identical excerpts; compare chord accuracy, followability, setup effort and processing cost. Choose after measurement rather than preselecting BTC. |
+| Chord recognition | Spectral-template baseline, BTC-ISMIR19, CREMA, ChordMini/ChordNet2E1D, Chordino/NNLS-Chroma; ChordFormer after source/checkpoint review | First four have completed the same 64-case synthetic screen. Chordino setup is pending; the shortlist is open. Compare core/exact harmony, timing, setup and compute before narrowing it. |
 | Source separation | Standard HT-Demucs; optional 6-stem model | Compare original mix, 4-stem bass plus “other”, and isolated guitar. Retain separation only where its benefit warrants its cost; it may remove useful harmony or introduce artefacts. |
 | Beat and section analysis | Simple baseline; All-In-One | No beat tracker exists in the inspected app. Compare beat/downbeat alignment and useful practice boundaries. Test All-In-One for combined tempo, beats and sections; verify dependency and model requirements. |
 | Chord smoothing | Raw output, simple duration smoothing, beat-aware probability pooling/decoding where probabilities are available | Measure distracting flicker and lost/shifted genuine changes. Include anticipations, fast changes, tempo variation and an incorrect beat grid. |
@@ -103,6 +105,8 @@ The supplied report, “Algorithmic Architectures and Empirical Evaluation Frame
 | Evaluation | mir_eval plus founder play-tests | Use duration-weighted chord scores, boundary timing and beat metrics alongside usability and correction effort. |
 
 Run experiments in stages: compare chord detectors on the original mix first, test separation with the strongest practical candidates second, then assess timing and simplification. Avoid an exhaustive combination of every model and setting before any guitar feedback.
+
+First run the automated synthetic suite across available candidates and inspect flagged failures. This precedes founder guitar sessions. A setup failure or unavailable checkpoint is recorded separately from a poor musical score; do not quietly omit a requested candidate or treat it as passed. Test the surviving approaches on permitted real recordings and manually checked references before using guitar feedback for final usefulness decisions.
 
 ### Progressive synthetic screening before real-recording comparisons
 
@@ -120,7 +124,7 @@ Keep generator seeds and recipes reproducible. Vary one factor at a time before 
 
 Use these as screening diagnostics. Confirm sample rate, label mapping and adapter correctness before rejecting a candidate for basic failures. Synthetic timbre can differ substantially from a pretrained model's training domain, so a poor synthetic score alone is insufficient to reject a model intended for real music. Power chords do not establish major/minor quality; mark ambiguity or evaluate root/acceptable labels instead of inventing an exact quality. Generated strum timing is known, but any direction classifier still needs physical guitar examples.
 
-Phase 0 supplies the initial known-triad fixture and baseline; the broader levelled suite belongs to Phase A. Survivors proceed to real-recording holdouts and founder guitar sessions. A synthetic winner is not a production winner.
+Phase 0 supplies the initial fixture and baseline. Phase A's initial levelled suite is now implemented and has run across four candidates. ChordMini currently leads core/boundary scores, while the baseline fits the synthetic timbres well but flickers more. Chordino and newer candidates remain in the backlog. Survivors proceed to real-recording holdouts and then founder guitar sessions. A synthetic winner is not a production winner.
 
 Pin tool/model versions and record hardware, audio duration, settings, cold versus warm runtime, peak memory and failure rate. Include decoding, separation and feature extraction in end-to-end processing time. Cloud cost estimates must include actual provider pricing, idle/startup time and storage where relevant; the report's per-song compute estimate is not a budget.
 
