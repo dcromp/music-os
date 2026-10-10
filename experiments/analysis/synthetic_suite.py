@@ -165,8 +165,10 @@ def generate(directory: Path) -> dict:
             output.setsampwidth(2)
             output.setframerate(SAMPLE_RATE)
             output.writeframes(pcm)
+        harmony_name = lab.NOTES[recipe["root"]] + (" minor" if recipe["quality"] == "m" else " major")
+        case_title = f"{LEVELS[recipe['level']]} / {harmony_name} / {recipe['condition'].replace('_', ' ')} / {recipe['split']}"
         reference = {"schema_version": "1.0",
-                     "recording": {"id": case_id, "title": f"{LEVELS[recipe['level']]} / {recipe['condition']} / {recipe['split']}",
+                     "recording": {"id": case_id, "title": case_title,
                                    "duration_seconds": len(signal) / SAMPLE_RATE, "sample_rate_hz": SAMPLE_RATE,
                                    "provenance": "Original procedural synthetic audio; intended harmony is known; not a real guitar"},
                      "analysis": {"id": "synthetic-suite-reference-v1", "algorithm": "fixture-reference",

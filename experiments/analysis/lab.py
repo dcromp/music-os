@@ -271,7 +271,8 @@ class BenchHandler(SimpleHTTPRequestHandler):
                 for name in ("baseline", "btc", "crema", "chordmini"):
                     path = folder / "cases" / case_id / f"{name}.json"
                     if path.exists():
-                        candidates.append({"name": name.upper() if name == "btc" else name.title(),
+                        display_name = {"btc": "BTC", "chordmini": "ChordMini / ChordNet"}.get(name, name.title())
+                        candidates.append({"name": display_name,
                                            "url": f"/suite/{case_id}/{name}.json"})
                 cases.append({"id": case_id, "name": case["name"], "level": case["level"],
                               "condition": case["condition"], "audio_url": f"/suite/{case_id}/audio.wav",
