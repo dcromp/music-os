@@ -8,7 +8,7 @@ Development starts with choosing useful chord/rhythm algorithms on Mac and testi
 
 Updated 10 October 2026. Status and deployment information belong in this README as work progresses. The full roadmap is in [plan.md](plan.md); source findings and existing-app checks are in [docs/REUSE_AUDIT.md](docs/REUSE_AUDIT.md).
 
-| Phase 0 part | Status | Remaining ETA / evidence |
+| Mac experiment step | Status | Remaining ETA / evidence |
 |---|---|---|
 | Existing-code audit and reuse decisions | Complete | Expo shell/song cards reusable; chart data and clock need later repair |
 | Isolated Mac analysis environment | Complete | Python 3.12.10 and pinned NumPy 2.2.6; separate from npm/Expo |
@@ -103,7 +103,7 @@ Open [http://127.0.0.1:8067](http://127.0.0.1:8067/) and press **Load demo**. Ch
 | Target | State | Start / stop |
 |---|---|---|
 | Mac experiment bench | Running locally in this session; live browser checks passed | Run `lab.py serve`; opens on localhost port 8067. Stop with Ctrl+C. Use `--port 8069` if needed; listening review uses 8068. |
-| Mac listening review | Available locally on port 8068; separate from the synthetic bench | Run `review_pack.py serve --pack experiments/generated/listening-review-alignment --port 8068`; stop with Ctrl+C. |
+| Mac listening review | Running locally on port 8068; exact seeking and private-file exclusions verified | Run `review_pack.py serve --pack experiments/generated/listening-review-alignment --port 8068`; stop with Ctrl+C. |
 | Public web service | Not deployed | Hosting, authentication, storage and public launch are later work |
 | Native macOS app | Not configured | The current Mac tool is a browser page plus local analysis scripts |
 | Expo web product | Existing build fails | Missing `react-native-web-webview` in the YouTube wrapper; defer repair until product integration |
