@@ -2,7 +2,7 @@
 
 Project plan · 10 October 2026 · Working title
 
-**Project repository:** [dcromp/music-os](https://github.com/dcromp/music-os). Continue development in this existing repository. The first implementation step is to inspect and run the old code, then decide what is worth reusing. The repository audit has not yet been performed; this plan makes no assumptions about its current contents or working state.
+**Project repository:** [dcromp/music-os](https://github.com/dcromp/music-os). The 10 October 2026 [reuse audit](docs/REUSE_AUDIT.md) found an Expo/React Native YouTube play-along prototype. Keep its app shell, song cards and player composition; repair the chart data flow and synchronization. Audio separation, chord detection, learning paths and accompaniment are new work. The founder's previous analysis workflow is not in the inspected repository.
 
 ## 1. Vision and first product
 
@@ -46,31 +46,38 @@ Include:
 
 Defer full courses for absolute beginners, exhaustive song coverage, solos and note-perfect tabs, live multiplayer, automatic performance grading, and accompaniment that follows the player in real time.
 
-## 4. Phase 0 — Audit and run the existing music-os code
+## 4. Phase 0 — Reuse findings and playback baseline
 
-**Indicative effort: 1–2 focused days, time-boxed before new implementation.**
+**Initial inspection completed on 10 October 2026.** [docs/REUSE_AUDIT.md](docs/REUSE_AUDIT.md) records evidence and component decisions at commit `0083861`. Device/browser playback and the first guitar session remain to be verified. Allow an initial 2–4 focused days for the playback repairs below, then revise the estimate from observed results.
 
-Use an existing local checkout of `dcromp/music-os` if available; otherwise clone it. Read repository instructions and documentation, inspect the working tree and preserve existing changes. Record the branch and commit being evaluated so the findings are reproducible.
+What exists:
 
-1. **Map what exists.** Inspect entry points, dependencies, tests, history and unfinished work. Look specifically for audio import, source separation, chord/beat detection, playback synchronisation, song data structures, UI and accompaniment experiments. Record absent capabilities rather than assuming they exist.
-2. **Try the documented startup path.** Inspect setup scripts before running them, use an isolated environment, and run relevant existing checks. Record exact commands, required configuration, missing assets/model weights and failures. Never include credentials in the audit report.
-3. **Run one end-to-end example.** With a suitable local audio sample, exercise as much of the existing import → analysis → playback flow as is implemented. Save outputs and measure processing time. If it cannot run within the time box, document the blocker and inspect the relevant code rather than starting a broad repair effort.
-4. **Assess reuse by component.** Classify each useful component as reuse as-is, adapt, replace, or defer. Base the decision on observed behaviour, implementation quality, dependency/model licences, timing accuracy, and estimated adaptation effort—not merely the presence of code.
-5. **Choose the smallest next change.** Identify how existing components can support the Phase A comparison bench and which gaps need new code. Prefer targeted changes over a rewrite; choose a different stack only if the audit supplies a concrete reason.
+- Expo SDK 51 / React Native 0.74.5 with Expo Router, theme utilities, seven hardcoded song cards, an embedded YouTube wrapper and a chord/beat/bar display.
+- The active flow is Songs → `app/screens/SongPlayer.js`. The separate Player tab, Profile and Tutorial are placeholders; login/signup simulate navigation.
+- A preliminary Song type includes timed chord intervals, but the display always loads sampleSongData instead of the selected song. It ignores the sample's timestamps and runs on its own fixed-tempo timer. At 120 BPM it advances a chord every two seconds despite sample intervals of 15 seconds.
+- Two unused hooks sketch player-state and clock synchronization. They need consolidation and correction before use; one expects numeric states while the installed wrapper supplies string states.
+- No implemented audio import, analysis pipeline, persistence, strumming, recommendation or band engine. Earlier player code inspected in history does not supply those missing capabilities.
 
-**Deliverable in music-os:** `docs/REUSE_AUDIT.md`, containing the evaluated commit, startup/test results, sample-run evidence, a component decision table with file references, known limitations and an ordered implementation backlog. Maintain this plan in `plan.md`. Add `PLAYTEST_LOG.csv` during implementation setup with fields for session date, track/excerpt, algorithm and arrangement versions, playback setup, followability, chord usefulness, timing, rhythm guidance, enjoyment, completion, correction time and notes.
+Verification: locked dependencies install, TypeScript passes and the sole starter snapshot test passes. Android bundle export succeeds. Web export fails because the iframe wrapper imports missing `react-native-web-webview`. These checks do not validate live playback or chart accuracy; the JavaScript core also lacks checkJs coverage.
 
-**Exit decision:** there is either a reproducible baseline to extend or a documented explanation of why the old code is unsuitable, with a bounded replacement plan. “Not yet tested” must remain distinct from “does not work.”
+Next implementation:
+
+1. Keep Expo initially. Establish one practice player, move non-route modules outside `app/`, and provide direct access for founder testing. Validate the chosen native or browser playback path; resolve web support before promising browser availability. Record a supported runtime and run commands.
+2. Extend the shared, versioned recording/analysis/arrangement format with explicit timestamp units. Use stable IDs instead of duplicated route metadata. Replace the current sample with a clearly synthetic timing fixture and one manually verified recording/chart pair.
+3. Feed the selected chart into the display and derive highlighting from numeric playback time. Consolidate the clock hooks, handling seek, pause/resume, buffering, replay, source change and supported speeds. Retain the visual bar concept where useful, while allowing real timestamps and changes inside bars. Add focused tests when implementing these behaviours.
+4. Run the first guitar session on the founder's actual screen/audio setup. Add `PLAYTEST_LOG.csv` for observations and record a reproducible baseline.
+
+**Exit decision:** one verified recording/chart pair remains aligned through start, pause/resume, forward/backward seeking and replay, and the founder can complete a short session without manually resetting the chart. This gate is still outstanding. Establish it before interpreting recognition-model play-test results.
 
 ### Phase A — Build the guitar testing bench
 
 **Indicative effort: 1–2 focused weeks.** These are planning estimates for a solo builder, not delivery commitments.
 
-Start with the components selected in the music-os reuse audit and the founder's existing audio-separation and chord-analysis workflow. If that workflow lives outside music-os, recover it separately and compare it with the repository baseline. Record inputs, dependencies, output and known failures before replacing anything.
+Use the repaired Expo player from Phase 0 as the comparison interface. Recover the founder's previous separation/chord-analysis workflow separately if available; none was found in music-os. Put offline analysis tooling in this repository behind adapters that emit the shared JSON format, and import those results into the player. Record inputs, dependencies, outputs and known failures; start with a simple detector if the prior workflow cannot be recovered.
 
 Select 12–20 test tracks or excerpts across clean acoustic guitar, distorted rhythm guitar, sparse and dense mixes, slow and fast changes, open chords, power chords, and rhythmically awkward passages. Use recordings with a suitable permission basis for the experiment; include original recordings with known chords and timing. Keep a source and permission record for each item.
 
-Build a minimal local interface: play audio, display chord changes, switch analysis versions, adjust timing offset, and record a session rating. No accounts, payment system or polished mobile app yet.
+Extend the existing player to switch imported analysis versions, adjust timing offset and record a session rating. Add local-audio playback for permitted benchmark material; it is not already implemented, despite the react-native-sound dependency. Keep the playback source matched to the analysed recording. No accounts, payment system or polished mobile app yet.
 
 Compare these approaches with identical inputs and hardware:
 
@@ -91,9 +98,9 @@ The supplied report, “Algorithmic Architectures and Empirical Evaluation Frame
 
 | Area | Initial candidates | Experiment and decision |
 |---|---|---|
-| Chord recognition | Existing music-os workflow, a simple chroma/template baseline, BTC-ISMIR19 and CREMA | Run on identical excerpts; compare chord accuracy, followability, setup effort and processing cost. Choose after measurement rather than preselecting BTC. |
+| Chord recognition | Recovered founder workflow if available, a simple chroma/template baseline, BTC-ISMIR19 and CREMA | No detector exists in the inspected app. Run candidates on identical excerpts; compare chord accuracy, followability, setup effort and processing cost. Choose after measurement rather than preselecting BTC. |
 | Source separation | Standard HT-Demucs; optional 6-stem model | Compare original mix, 4-stem bass plus “other”, and isolated guitar. Retain separation only where its benefit warrants its cost; it may remove useful harmony or introduce artefacts. |
-| Beat and section analysis | Existing beat tracker or simple baseline; All-In-One | Compare beat/downbeat alignment and useful practice boundaries. Test All-In-One as a candidate for combined tempo, beats and sections; verify dependency and model requirements. |
+| Beat and section analysis | Simple baseline; All-In-One | No beat tracker exists in the inspected app. Compare beat/downbeat alignment and useful practice boundaries. Test All-In-One for combined tempo, beats and sections; verify dependency and model requirements. |
 | Chord smoothing | Raw output, simple duration smoothing, beat-aware probability pooling/decoding where probabilities are available | Measure distracting flicker and lost/shifted genuine changes. Include anticipations, fast changes, tempo variation and an incorrect beat grid. |
 | Rhythm guidance | Human-authored pattern library; optional onset detection and pattern matching | Establish a useful practice-pattern baseline before trying automated transcription or stroke-direction classification. |
 | Evaluation | mir_eval plus founder play-tests | Use duration-weighted chord scores, boundary timing and beat metrics alongside usability and correction effort. |
@@ -129,7 +136,7 @@ Measure both musical accuracy and experience:
 
 Where practical, hide the algorithm identity and alternate comparison order. Otherwise expectations and familiarity may dominate preference.
 
-For the founder's main comparison, present the same excerpt in three anonymous versions: existing baseline, an alternative detector, and the strongest detector with timing/arrangement improvements. Track recognition, display timing and playability as separate outcomes. If the combined improved version wins, compare its timing and simplification changes separately before attributing the benefit to either one.
+For the founder's main comparison, present the same excerpt in three anonymous versions: a measured detector baseline (recovered workflow or simple new detector), an alternative detector, and the strongest detector with timing/arrangement improvements. The old app's arbitrary sample chart is not a detector baseline. Keep a manually checked reference chart as a control. Track recognition, display timing and playability separately; if the combined improved version wins, test timing and simplification separately before attributing the benefit to either one.
 
 **Exit decision:** select the cheapest workflow that produces enjoyable, usable results on most target material. If none does, narrow the supported material or introduce manual review; do not expand the catalogue to hide quality problems.
 
@@ -209,7 +216,7 @@ These are directional gates for a small pilot, not proof of product-market fit. 
 
 ## 9. Technical foundation and cost control
 
-Use music-os as the implementation repository and let the reuse audit inform the stack. If a new interface is needed, prefer a web prototype for rapid iteration. Test browser playback and timing on the actual target devices before committing to a native app. Run expensive analysis offline or in background jobs; reuse results where permitted instead of analysing audio on every play.
+Use music-os as the implementation repository and retain its Expo/React Native shell for the first iteration. The Android bundle builds, while web currently has a dependency blocker; verify playback on the chosen target before settling the first test platform. Add a platform-specific playback adapter if needed rather than replacing the whole app. Check the older Expo stack against the intended device/build workflow and plan upgrades from a captured baseline. Run analysis offline or in background jobs and reuse results where permitted instead of analysing audio on every play.
 
 Keep five concepts separate:
 
@@ -264,14 +271,14 @@ The bridge between the products is a reusable model of harmony, rhythm and song 
 
 | Order | Action | Output |
 |---|---|---|
-| 0 | Inspect and run dcromp/music-os; assess old code for reuse | docs/REUSE_AUDIT.md with evidence, component decisions and next changes |
-| 1 | Recover any additional founder separation/chord workflow and combine useful components | Reproducible baseline and sample output in music-os |
-| 2 | Choose target setup, musical focus and first test material | Short test-set manifest with provenance |
-| 3 | Build the minimal playback/comparison interface | Usable guitar test bench |
-| 4 | Run the first three guitar sessions | Completed logs and ranked failure list |
-| 5 | Compare baseline, model and separation variants | Quality/cost comparison including held-out material |
+| 0 | Completed: inspect existing code and run baseline checks | [Reuse audit](docs/REUSE_AUDIT.md); Android bundling passes, web blocker recorded, playback unverified |
+| 1 | Establish one player flow and select/verify target playback support | Reproducible run guide; clean routes; native or browser smoke test |
+| 2 | Define shared versioned JSON; connect one verified recording/chart pair to the playback clock | Timing fixture and selected-song data flow; pause/seek/replay checks |
+| 3 | Run a short guitar session with the verified chart | Phase 0 acceptance evidence, play-test log and timing corrections |
+| 4 | Recover external founder analysis workflow or implement a baseline; add offline adapters and local audio | Reproducible analysis outputs imported into the existing player |
+| 5 | Choose benchmark material, add candidate switching and run staged comparisons | Test-set manifest, anonymous guitar ratings and held-out quality/cost report |
 | 6 | Investigate content and playback commercial routes in parallel | Source/permission/cost comparison |
-| 7 | Choose the first reliable workflow and arrangement format | Phase B implementation brief |
+| 7 | Choose the first reliable detector/arrangement workflow | Phase B implementation brief |
 
 The next meaningful milestone is a play-along experience the founder wants to use again. Build the curriculum around that evidence, then test whether other players want to pay for it.
 
