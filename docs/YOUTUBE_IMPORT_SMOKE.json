@@ -1,0 +1,392 @@
+{
+  "report_version": "2.0",
+  "test": "YouTube import to offline detector smoke test",
+  "date": "2026-10-10",
+  "successful_imports": 3,
+  "successful_detector_runs": 9,
+  "cases": [
+    {
+      "recording": {
+        "id": "radiohead-creep-youtube-20261010",
+        "title": "Radiohead - Creep",
+        "duration_seconds": 236.63455782312926,
+        "sample_rate_hz": 22050,
+        "audio": "audio.wav",
+        "audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10",
+        "provenance": "Requested local founder algorithm experiment; commercial clearance not established"
+      },
+      "source": {
+        "video_id": "XFkzRNyygfk",
+        "url": "https://www.youtube.com/watch?v=XFkzRNyygfk",
+        "title": "Radiohead - Creep",
+        "uploader": "Radiohead",
+        "duration_seconds": 237.0,
+        "availability": "public",
+        "live_status": "not_live",
+        "format_id": "140",
+        "extension": "m4a",
+        "audio_codec": "mp4a.40.2",
+        "upload_date": "20080718",
+        "extractor_warning_count": 0,
+        "file": "source.m4a",
+        "sha256": "d4413e8b461d81c9f1d7176376735ecc5bfd35a211bd617e3bc3af2c34d371b8",
+        "bytes": 3827820
+      },
+      "import": {
+        "yt_dlp_version": "2026.08.19",
+        "download_warning_count": 0,
+        "duration_limit_seconds": 600,
+        "download_byte_limit": 33554432,
+        "metadata_timeout_seconds": 60,
+        "download_timeout_seconds": 180,
+        "credentials": "none",
+        "proxy": "none",
+        "remote_components": "disabled",
+        "scope": "one explicit public video; no playlists or search"
+      },
+      "local_audio": "experiments/generated/youtube-pilot/cases/radiohead-creep-youtube-20261010/audio.wav",
+      "candidates": [
+        {
+          "candidate": "baseline",
+          "algorithm": "spectral-template",
+          "version": "0.1.0",
+          "analysis_runtime_seconds": 0.32576733408495784,
+          "event_count": 2181,
+          "top_labels_seconds": {
+            "G": 60.372607709750575,
+            "C": 35.05909297052158,
+            "B": 30.91097505668936,
+            "Cm": 15.467981859410596,
+            "Bm": 13.019092970521516,
+            "Em": 7.546575963718748,
+            "A": 7.221723356009015,
+            "Gm": 6.871882086167746
+          },
+          "prediction": "experiments/generated/youtube-pilot/cases/radiohead-creep-youtube-20261010/baseline.json",
+          "prediction_sha256": "1646a99ce1ca05281d63fcb5f20f7cb007b53ea89fb6454bb928aedbb438d139",
+          "runtime_semantics": "per-file baseline analysis; excludes import/decoding"
+        },
+        {
+          "candidate": "crema",
+          "algorithm": "crema-pretrained",
+          "version": "0.2.0/a4c7d57.0/adapter-0.1.0",
+          "analysis_runtime_seconds": 13.884927249979228,
+          "event_count": 52,
+          "top_labels_seconds": {
+            "C": 62.97251700680272,
+            "G": 60.37188208616781,
+            "B": 37.523446712018114,
+            "Cm": 34.92281179138324,
+            "Cmaj7": 8.637823129251728,
+            "N": 8.335963718820864,
+            "B7": 7.9876643990929495,
+            "Bm": 6.687346938775477
+          },
+          "prediction": "experiments/generated/youtube-pilot/cases/radiohead-creep-youtube-20261010/crema.json",
+          "prediction_sha256": "9ab5ce1f02b7ba127554937009f1747112e7fc3df583ddcd3b8abcfa9cdc191c",
+          "runtime_semantics": "includes imports, model load, features, inference and decoding"
+        },
+        {
+          "candidate": "chordino",
+          "algorithm": "Chordino-NNLS-Chroma",
+          "version": "adapter-0.1",
+          "analysis_runtime_seconds": 1.4245650409720838,
+          "event_count": 54,
+          "top_labels_seconds": {
+            "C": 62.693877551000014,
+            "G": 61.27746031812922,
+            "B": 51.64117913600004,
+            "Cm": 32.22929705400001,
+            "Gmaj7": 6.037188208,
+            "Cmaj7": 5.294149659999988,
+            "B7": 4.179591837999993,
+            "Cm7": 2.9721541950000017
+          },
+          "prediction": "experiments/generated/youtube-pilot/cases/radiohead-creep-youtube-20261010/chordino.json",
+          "prediction_sha256": "e2af0e0f30f235cbd0c90f4afd009678312013c4c75b365049159d39770cf474",
+          "runtime_semantics": "WAV validation and one native process including plugin loading"
+        }
+      ]
+    },
+    {
+      "recording": {
+        "id": "oasis-wonderwall-youtube-20261010",
+        "title": "Oasis - Wonderwall (Official Video)",
+        "duration_seconds": 277.78031746031746,
+        "sample_rate_hz": 22050,
+        "audio": "audio.wav",
+        "audio_sha256": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462",
+        "provenance": "Requested local founder algorithm experiment; commercial clearance not established"
+      },
+      "source": {
+        "video_id": "bx1Bh8ZvH84",
+        "url": "https://www.youtube.com/watch?v=bx1Bh8ZvH84",
+        "title": "Oasis - Wonderwall (Official Video)",
+        "uploader": "Oasis",
+        "duration_seconds": 278.0,
+        "availability": "public",
+        "live_status": "not_live",
+        "format_id": "140",
+        "extension": "m4a",
+        "audio_codec": "mp4a.40.2",
+        "upload_date": "20131121",
+        "extractor_warning_count": 0,
+        "file": "source.m4a",
+        "sha256": "11da0fb779e0891ae58be6957bc594844fa05d3aae772716996ec05272d75f90",
+        "bytes": 4493245
+      },
+      "import": {
+        "yt_dlp_version": "2026.08.19",
+        "download_warning_count": 0,
+        "duration_limit_seconds": 600,
+        "download_byte_limit": 33554432,
+        "metadata_timeout_seconds": 60,
+        "download_timeout_seconds": 180,
+        "credentials": "none",
+        "proxy": "none",
+        "remote_components": "disabled",
+        "scope": "one explicit public video; no playlists or search"
+      },
+      "local_audio": "experiments/generated/youtube-pilot/cases/oasis-wonderwall-youtube-20261010/audio.wav",
+      "candidates": [
+        {
+          "candidate": "baseline",
+          "algorithm": "spectral-template",
+          "version": "0.1.0",
+          "analysis_runtime_seconds": 0.30599941685795784,
+          "event_count": 2168,
+          "top_labels_seconds": {
+            "A": 76.24040816326531,
+            "F#m": 61.34716553287986,
+            "N": 27.768752834467126,
+            "D": 25.36349206349202,
+            "B": 14.718321995464908,
+            "E": 14.568390022675736,
+            "F#": 12.51931972789118,
+            "Em": 9.570657596371905
+          },
+          "prediction": "experiments/generated/youtube-pilot/cases/oasis-wonderwall-youtube-20261010/baseline.json",
+          "prediction_sha256": "fff08193e6d8bf042be88e24e9685eea4d2a3ae4823bde2e9b57744ca2bf80e8",
+          "runtime_semantics": "per-file baseline analysis; excludes import/decoding"
+        },
+        {
+          "candidate": "crema",
+          "algorithm": "crema-pretrained",
+          "version": "0.2.0/a4c7d57.0/adapter-0.1.0",
+          "analysis_runtime_seconds": 8.55931150028482,
+          "event_count": 144,
+          "top_labels_seconds": {
+            "A": 72.44625850340134,
+            "F#m7": 66.03755102040823,
+            "F#m": 39.75256235827665,
+            "D": 39.566802721088365,
+            "N": 29.23392290249436,
+            "E": 18.575963718820873,
+            "B": 8.452063492063473,
+            "Bsus4": 1.9504761904761878
+          },
+          "prediction": "experiments/generated/youtube-pilot/cases/oasis-wonderwall-youtube-20261010/crema.json",
+          "prediction_sha256": "1d696977fe56f91126f3e838903939a6670a335d7079fc297b45e6573a3c3e83",
+          "batch_model_load_seconds": 4.1290806252509356,
+          "runtime_semantics": "per-file features, inference and decoding; batch model load measured separately"
+        },
+        {
+          "candidate": "chordino",
+          "algorithm": "Chordino-NNLS-Chroma",
+          "version": "adapter-0.1",
+          "analysis_runtime_seconds": 1.2105011655949056,
+          "event_count": 92,
+          "top_labels_seconds": {
+            "F#m7": 126.78095238100003,
+            "D": 33.71537414899997,
+            "N": 23.289614512317442,
+            "A6": 20.43356009000003,
+            "B7": 18.66884353800002,
+            "A": 11.424217687999992,
+            "E": 9.195102040999984,
+            "Dmaj7": 7.430385486999953
+          },
+          "prediction": "experiments/generated/youtube-pilot/cases/oasis-wonderwall-youtube-20261010/chordino.json",
+          "prediction_sha256": "bcaec761a32f62eae070962e47e4b7cdc33394d84d8e707eb7756be48ad7ecba",
+          "runtime_semantics": "WAV validation and one native process including plugin loading"
+        }
+      ]
+    },
+    {
+      "recording": {
+        "id": "animals-house-rising-sun-youtube-20261010",
+        "title": "The Animals - House of the Rising Sun (1964) ♫ 60+ YEARS 🎶⭐ ❤",
+        "duration_seconds": 248.54639455782313,
+        "sample_rate_hz": 22050,
+        "audio": "audio.wav",
+        "audio_sha256": "7724e708da432a588e2faeb3aa025b7e37128c3a440b39077e0370e472c55035",
+        "provenance": "Requested local founder algorithm experiment; source upload is an unofficial tribute channel; commercial clearance not established"
+      },
+      "source": {
+        "video_id": "4-43lLKaqBQ",
+        "url": "https://www.youtube.com/watch?v=4-43lLKaqBQ",
+        "title": "The Animals - House of the Rising Sun (1964) ♫ 60+ YEARS 🎶⭐ ❤",
+        "uploader": "The Animals Tribute Channel (unofficial)",
+        "duration_seconds": 249.0,
+        "availability": "public",
+        "live_status": "not_live",
+        "format_id": "140",
+        "extension": "m4a",
+        "audio_codec": "mp4a.40.2",
+        "upload_date": "20090703",
+        "extractor_warning_count": 0,
+        "file": "source.m4a",
+        "sha256": "7c12ed248086e2401307f0be17e39f13328fa34b2747afd1df6d2ca140a09708",
+        "bytes": 4020491
+      },
+      "import": {
+        "yt_dlp_version": "2026.08.19",
+        "download_warning_count": 0,
+        "duration_limit_seconds": 600,
+        "download_byte_limit": 33554432,
+        "metadata_timeout_seconds": 60,
+        "download_timeout_seconds": 180,
+        "credentials": "none",
+        "proxy": "none",
+        "remote_components": "disabled",
+        "scope": "one explicit public video; no playlists or search"
+      },
+      "local_audio": "experiments/generated/youtube-pilot/cases/animals-house-rising-sun-youtube-20261010/audio.wav",
+      "candidates": [
+        {
+          "candidate": "baseline",
+          "algorithm": "spectral-template",
+          "version": "0.1.0",
+          "analysis_runtime_seconds": 0.28746545827016234,
+          "event_count": 1627,
+          "top_labels_seconds": {
+            "Am": 61.14725623582781,
+            "C": 40.03183673469386,
+            "F": 30.76104308390019,
+            "Dm": 28.237188208616914,
+            "D": 25.113605442176812,
+            "E": 22.689705215419465,
+            "A": 17.66698412698409,
+            "Em": 6.072244897959184
+          },
+          "prediction": "experiments/generated/youtube-pilot/cases/animals-house-rising-sun-youtube-20261010/baseline.json",
+          "prediction_sha256": "792ef2c74c7399f469972c400caf84dcd2e1db4fc4488f3604757860c829436e",
+          "runtime_semantics": "per-file baseline analysis; excludes import/decoding"
+        },
+        {
+          "candidate": "crema",
+          "algorithm": "crema-pretrained",
+          "version": "0.2.0/a4c7d57.0/adapter-0.1.0",
+          "analysis_runtime_seconds": 7.275922583881766,
+          "event_count": 138,
+          "top_labels_seconds": {
+            "Am": 105.13995464852617,
+            "C": 39.65968253968259,
+            "D": 28.978503401360513,
+            "F": 28.51410430839001,
+            "Em": 20.15492063492056,
+            "E": 12.260136054421785,
+            "Dm": 5.201269841269802,
+            "Am7": 3.065034013605441
+          },
+          "prediction": "experiments/generated/youtube-pilot/cases/animals-house-rising-sun-youtube-20261010/crema.json",
+          "prediction_sha256": "847f08a554e0bf6c838b48910a1b30447fa2aaca12fc2be4002a4d41b1cd13a0",
+          "batch_model_load_seconds": 4.1290806252509356,
+          "runtime_semantics": "per-file features, inference and decoding; batch model load measured separately"
+        },
+        {
+          "candidate": "chordino",
+          "algorithm": "Chordino-NNLS-Chroma",
+          "version": "adapter-0.1",
+          "analysis_runtime_seconds": 0.9740837910212576,
+          "event_count": 152,
+          "top_labels_seconds": {
+            "Am": 90.2791836768231,
+            "C": 41.14575963800004,
+            "E": 32.60081632599997,
+            "F": 32.50793651000001,
+            "D": 24.241632649999982,
+            "E7": 13.096054419999994,
+            "D7": 7.3375056670000305,
+            "Dm": 2.9721541960000195
+          },
+          "prediction": "experiments/generated/youtube-pilot/cases/animals-house-rising-sun-youtube-20261010/chordino.json",
+          "prediction_sha256": "a3e06ac6fe8d6a8b4cdef9ef6e323c0359c9c9d7daa3408379b27892f21fe10e",
+          "runtime_semantics": "WAV validation and one native process including plugin loading"
+        }
+      ]
+    }
+  ],
+  "alignment_smoke": {
+    "recording_id": "radiohead-creep-youtube-20261010",
+    "untimed_chart": "experiments/fixtures/untimed-charts/creep.json",
+    "prediction": "experiments/results/youtube/creep-aligned.json",
+    "prediction_sha256": "ba3636a269ed9474931d26cf2add1c9aae211cc9d74f7939af68e6dd7a845623",
+    "analysis_runtime_seconds": 0.4272972079925239,
+    "event_count": 827,
+    "diagnostics": {
+      "acoustic_fit_status": "needs_review",
+      "always_requires_human_review": true,
+      "score_is_calibrated_confidence": false,
+      "active_frames": 9223,
+      "silent_frame_fraction": 0.026082365364308344,
+      "active_mismatch_fraction": 0.19754960425024395,
+      "conflicting_proposed_event_indices": [
+        4,
+        8,
+        12,
+        14,
+        15,
+        18,
+        19,
+        25,
+        32,
+        34,
+        46,
+        47,
+        53,
+        54,
+        55,
+        61,
+        65,
+        66,
+        73,
+        82,
+        84,
+        85,
+        86,
+        89,
+        90,
+        91,
+        94,
+        106,
+        111,
+        113,
+        117,
+        118,
+        120,
+        124
+      ],
+      "unvisited_sequence_indices": [],
+      "path_transitions": 124,
+      "acoustically_indistinguishable_sequence_position_pairs": [],
+      "cycle_wraps_observed": 31,
+      "viterbi_objective": 5675.972162019645
+    },
+    "review_outcome": "Unaccepted draft: unrestricted cyclic sequence produces excessive wraps; source harmony is simplified, sections/repeat counts/timing gold are not reviewed. No parameter tuning on this recording."
+  },
+  "initial_setup_failure": {
+    "candidate": "crema",
+    "reason": "Batch adapter required a reference field for its path guard even for unannotated inference.",
+    "resolution": "Reference made optional; supplied-reference path/overwrite guards preserved. Five focused tests passed and two-song batch rerun succeeded. Model settings unchanged."
+  },
+  "limitations": [
+    "No independently checked real-song chord labels or timing references; no accuracy or timing score.",
+    "Event counts and label durations describe output stability/vocabulary only, not correctness.",
+    "Creep CREMA runtime includes startup/model load; other two CREMA runtimes exclude one shared 4.129-second model load.",
+    "All detector runs used original complete mixes; no source separation, key prior, beat guidance or manual corrections.",
+    "Successful technical import is not evidence of commercial clearance or a YouTube payment/licensing arrangement.",
+    "House of the Rising Sun upload is from an unofficial tribute channel; version identity remains unreviewed.",
+    "No model was selected from these smoke tests."
+  ]
+}

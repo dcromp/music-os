@@ -1,6 +1,6 @@
 # Mac analysis experiments
 
-Phase 0 establishes a reproducible analysis environment and a local guitar test bench. Phase A will compare recognition models and real recordings. These tools run independently of the older Expo app.
+Phase 0 establishes a reproducible analysis environment and a local guitar test bench. Phase A compares recognition models, chart alignment and real recordings. These tools run independently of the older Expo app.
 
 ## Setup
 
@@ -17,9 +17,9 @@ node experiments/bench/test.js
 
 On the audited Mac, Python is also available at `/Users/davidcrompton/miniforge3/bin/python` (3.12.10). Substitute that executable for `python3.12` when creating the environment. The system/Homebrew `python3` was 3.14.3 and was not used for this experiment. NumPy is pinned; no system packages are changed. FFmpeg is optional for the fixture, required for normalising other local audio formats.
 
-Open [the local bench](http://127.0.0.1:8067/) and load the synthetic demo. The server binds to localhost, exposes the bench assets and three demo files, and stops with Ctrl+C. It serves no repository secrets or general file listings. Generated audio/results and the environment are gitignored. This is a local development deployment; there is no public hosted service or iOS build.
+Open [the local bench](http://127.0.0.1:8067/) and load the synthetic demo. The server binds to localhost, exposes bench assets and allowlisted demo/synthetic files, and stops with Ctrl+C. It serves no repository secrets or general file listings. Generated audio/results and the environment are gitignored. This is a local development deployment; there is no public hosted service or iOS build.
 
-Node is required only for the dependency-free browser-logic checks, not for serving the bench. Use Download CSV or the visible Show CSV copy fallback to retain ratings; closing/reloading the tab clears unsaved rows.
+Node is needed for the dependency-free browser checks and the separate YouTube importer, but not for serving the bench. Use Download CSV or the visible Show CSV copy fallback to retain ratings; closing/reloading the tab clears unsaved rows.
 
 ## Commands
 
@@ -42,7 +42,7 @@ Prepare a local recording and analyse it:
 .venv-analysis/bin/python experiments/analysis/lab.py analyze experiments/local-audio/song.wav --recording-id my-recording-v1 --output experiments/results/song-baseline.json
 ```
 
-Prepare creates a new mono 22,050 Hz, 16-bit PCM WAV and refuses to overwrite existing audio. Analysis accepts 16-bit PCM WAV (mono or stereo). Use the prepared WAV for both analysis and browser playback so decoder offsets or different edits do not confound timing. Select the local WAV and its chart in the bench. There is no upload to a remote service and no automatic YouTube extraction.
+Prepare creates a new mono 22,050 Hz, 16-bit PCM WAV and refuses to overwrite existing audio. Analysis accepts 16-bit PCM WAV (mono or stereo). Use the prepared WAV for both analysis and browser playback so decoder offsets or different edits do not confound timing. Select the local WAV and its chart in the bench. The separate [YouTube importer](../docs/YOUTUBE_IMPORT.md) accepts an explicitly chosen recording; the browser does not run extraction or analysis.
 
 Compare against a manually labelled chart identifying the same recording:
 
@@ -101,3 +101,13 @@ Install model environments/assets using the candidate setup documents before req
 The server's `/api/suite` inventory exposes only safe case IDs and allowlisted audio/chart files. Use Load synthetic suite → choose case → Load case in the bench. No model inference happens in the browser. Generated cases can be played without guitar first; founder guitar sessions follow the automated screening.
 
 Use synthetic failures to diagnose integration/timing/vocabulary problems early. Confirm adapters and input conventions before dropping a candidate: artificial tones can be outside the training domain of a real-recording model. Power chords require ambiguous-quality or root-only evaluation. Real recordings and guitar play-tests remain the selection evidence.
+
+## Known-chart timing
+
+The new NumPy aligner accepts strictly untimed ordered labels, with explicit finite/cyclic assumptions. It preserves source hashes, raw path evidence and `N`/`X` gaps; it does not infer capo conversion or song structure. See [setup](../docs/CHART_ALIGNER_SETUP.md).
+
+```sh
+.venv-analysis/bin/python experiments/analysis/alignment_screen.py
+```
+
+The [64-case conditional screen](../docs/ALIGNMENT_SCREEN.md) withholds all reference timing/silence events from inference. Its timing score assumes the correct harmonic order and count. The [three-song import smoke](../docs/YOUTUBE_IMPORT_SMOKE.md) proves acquisition and detector execution; its Creep cyclic alignment remains an unaccepted draft. Exact excerpt/section review and independent timing references precede real-song scoring and founder guitar sessions.

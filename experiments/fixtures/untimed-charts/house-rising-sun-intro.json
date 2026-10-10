@@ -1,0 +1,37 @@
+{
+  "schema_version": "untimed-chart-1.0",
+  "start_policy": "first",
+  "recording": {
+    "id": "animals-house-rising-sun-intro-candidate",
+    "title": "The Animals - House of the Rising Sun / candidate intro only"
+  },
+  "sequence": [
+    "Am",
+    "C",
+    "D",
+    "F",
+    "Am",
+    "E",
+    "Am",
+    "E"
+  ],
+  "mode": "finite",
+  "metadata": {
+    "key": "A minor",
+    "capo": 0,
+    "label_convention": "sounding pitches",
+    "video_id": "4-43lLKaqBQ",
+    "scope": "Intro candidate only; choose and review a matching excerpt before running. Vocal sections and ending differ.",
+    "source_references": [
+      {
+        "author": "Jonathan Richter",
+        "url": "https://richterguitar.com/house-of-the-rising-sun-the-animals/"
+      },
+      {
+        "author": "Carl Brown / GuitarLessons365",
+        "url": "https://guitarlessons365.com/how-to-play-the-house-of-the-rising-sun-the-animals/"
+      }
+    ],
+    "review_status": "Candidate hypothesis; exact unofficial video version and intro bounds need review"
+  }
+}

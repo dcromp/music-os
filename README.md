@@ -13,13 +13,15 @@ Updated 10 October 2026. Status and deployment information belong in this README
 | Existing-code audit and reuse decisions | Complete | Expo shell/song cards reusable; chart data and clock need later repair |
 | Isolated Mac analysis environment | Complete | Python 3.12.10 and pinned NumPy 2.2.6; separate from npm/Expo |
 | Output format and known-chord audio | Complete | Version 1.0 JSON; generated 22-second triad/silence fixture |
-| Baseline run and automated checks | Complete | 22 baseline/native Python checks, 8 pilot metric checks and 48 JavaScript checks pass |
+| Baseline run and automated checks | Complete | 22 baseline/native, 8 pilot metric, 28 new importer/alignment and 48 browser checks pass |
 | Local play-along bench | Complete | Live Mac browser checks passed: playback, pause, seeking, switching charts, Restart and visible CSV export |
 | Run guide, deployment and evidence | Complete | Local startup instructions below; measurements and limits in [Phase 0 results](docs/PHASE0_RESULTS.md) |
 | Automated synthetic screening before guitar | Expanded batch complete | 64 cases × 5 algorithms = 320 successful comparisons; [results](docs/SYNTHETIC_RESULTS.md) |
 | Chordino Mac setup and comparison | Complete | Project-local native build, common adapter and 64 successful runs; [setup](docs/CHORDINO_SETUP.md) |
 | Annotated real-guitar pilot | Complete | Six preselected GuitarSet performances × five models = 30 successful runs; [results](docs/GUITARSET_PILOT.md) |
-| Curated chart-assisted alignment | Next priority; planned | Ten-excerpt comparison of audio-only, vocabulary-guided and known-sequence approaches; estimated 2–3 focused days after inputs are available; [design](docs/CHART_ALIGNMENT.md) |
+| Famous-song audio import and detector smoke | Complete | Creep, Wonderwall and House of the Rising Sun imported with yt-dlp; 9 successful detector runs; [evidence](docs/YOUTUBE_IMPORT_SMOKE.md) |
+| Chart alignment baseline and synthetic timing | Complete experimental baseline | 64/64 cases; 90.4% mean boundary F1 given correct chord order, with 59 extra / 1 missed changes; [results](docs/ALIGNMENT_SCREEN.md) |
+| Curated real-song alignment validation | In progress | Creep cyclic draft unaccepted; review exact excerpts/sections/repeats next, then ten-excerpt comparison; remaining estimate 1.5–2.5 focused days; [design](docs/CHART_ALIGNMENT.md) |
 | Separation and soft key/context pipeline | Planned supporting experiments | Four controlled variants where alignment/recognition failures justify them; see [plan](plan.md) |
 | Further research candidates | Backlog | ChordFormer source/checkpoint review; real-recording evidence takes priority |
 | Founder guitar test on real material | Deferred | After automated screening and reference checks; 15–20 minutes when ready |
@@ -28,7 +30,7 @@ The synthetic suite compares the template baseline, BTC, CREMA, ChordMini/ChordN
 
 The real-guitar pilot changes the ranking: CREMA leads at **93.9% intended major/minor agreement** and 94.4% root agreement. BTC scores 84.0%, Chordino 82.7%, ChordMini 79.5% and the baseline 54.3% on intended major/minor. Eligible reference coverage is 98.1%; performed-quality comparisons have lower coverage and separate scores. Six acoustic performances are a diagnostic sample, not an accuracy estimate for arbitrary songs. No source separation, key assistance or founder play-tests have been used yet.
 
-For the curated rock/pop catalogue, the next experiment uses reviewed chord/key references to guide **alignment to a specific recording**. Match versions, capo and ordered sections before forming a consensus; an unordered chord list only narrows recognition. Audio remains evidence for timing and chart verification. No online catalogue has been harvested and no alignment algorithm has been implemented or scored yet. Checked arrangements can then be cached and reused across learners.
+For the curated rock/pop catalogue, an initial known-chart aligner now uses supplied chord order to guide **alignment to a specific recording**. It completed the conditional synthetic screen; this measures timing given harmony, not chord recognition. Three famous-song imports also completed baseline/CREMA/Chordino inference. The first Creep cyclic draft over-repeats its four-chord loop and needs review, so real-song timing accuracy remains unmeasured. Match versions, capo, sections and repeat counts before trusting online consensus or caching an arrangement. See [the import/draft report](docs/YOUTUBE_IMPORT_SMOKE.md).
 
 ## Run on Mac
 
@@ -47,6 +49,8 @@ python3.12 -m venv .venv-analysis
 
 Browser-logic checks additionally run with `node experiments/bench/test.js` (no npm install needed).
 
+The new [YouTube import guide](docs/YOUTUBE_IMPORT.md) covers isolated yt-dlp setup and cached recordings. The existing iframe wrapper supplies playback, while the separate Python importer supplies prepared local audio for experiments. No guitar session is assigned yet.
+
 ## Automated synthetic tests
 
 The deployed Mac browser has saved predictions for all five candidates; playback does not require the model environments. Install the isolated candidate environments/assets below before rerunning model inference in a fresh checkout.
@@ -59,6 +63,14 @@ Candidate setup: [BTC](docs/BTC_SETUP.md), [CREMA](docs/CREMA_SETUP.md), [ChordM
 ```
 
 The runner loads each model once per batch, scores every case, writes JSON/CSV under `experiments/generated/synthetic-suite`, and exits nonzero for requested unavailable candidates or failed cases. Use `--reuse-existing` to rescore outputs only; it verifies audio hashes. Committed [results](docs/SYNTHETIC_RESULTS.md) include per-case evidence.
+
+The known-chart timing screen runs separately, using the generated audio and ordered labels with every reference timestamp and silence event withheld from the aligner:
+
+```sh
+.venv-analysis/bin/python experiments/analysis/alignment_screen.py
+```
+
+Add `--overwrite` only to replace an existing screen deliberately. [Results](docs/ALIGNMENT_SCREEN.md) report boundary precision/recall, missed/extra changes, silence coverage and unknown spans. [Setup](docs/CHART_ALIGNER_SETUP.md) explains finite versus cyclic inputs and sounding chord labels.
 
 The automated runs are handled by the agent. The website is an **optional diagnostic viewer**, and no founder guitar test is currently assigned. To inspect a result, press **Load synthetic suite**, choose a case, and **Load case** to compare its reference and candidate charts. A later guitar session will specify the recording, charts and feedback questions. See [app-readiness criteria](docs/APP_READINESS.md).
 
@@ -88,7 +100,9 @@ Open [http://127.0.0.1:8067](http://127.0.0.1:8067/) and press **Load demo**. Ch
 
 To restart the existing Mac setup, run `cd /Users/davidcrompton/Documents/music-os` followed by `.venv-analysis/bin/python experiments/analysis/lab.py serve`; the environment and demo are already created.
 
-The experiment server binds to `127.0.0.1` only. It serves the bench and generated demo files, not the repository generally. It has no public hosting, uploads, accounts or background daemon. Generated audio, local recordings, results and `.venv-analysis` are gitignored. Restart the command after restarting the machine; a source push does not deploy a hosted service.
+The experiment server binds to `127.0.0.1` only. It serves the bench and allowlisted experiment files, not the repository generally. It has no public hosting, uploads, accounts or background daemon. Generated audio, local recordings, results and analysis environments are gitignored. Restart the command after restarting the machine; a source push does not deploy a hosted service.
+
+The Mac checkout contains cached three-song audio under `experiments/local-audio/youtube/`, detector charts under `experiments/generated/youtube-pilot/cases/`, and saved conditional alignment evidence under `experiments/generated/alignment-screen/`. Use local file selection to inspect a famous-song WAV and matching JSON; the synthetic loader still serves synthetic cases. `.venv-youtube` supports fresh imports. Neural model environments remain separate research setup; saved outputs do not require them.
 
 ## Existing Expo prototype
 
@@ -103,4 +117,4 @@ This is the old app startup path, not the Mac experiment setup above. Expo SDK 5
 
 ## Next
 
-Run the ten-excerpt chart-assisted alignment spike with permitted inputs and independently checked audible changes. Compare audio-only recognition, key/vocabulary guidance and known-sequence alignment; include corrupted charts and missing repeats. Add separation or soft context where useful, then inspect timing, drift, review effort and runtime before founder guitar sessions and product integration. The website remains optional until a concrete session is assigned.
+Select exact excerpts from the imported recordings, check their harmony/sections/repeats, and annotate audible changes independently. Use these for the ten-excerpt comparison of audio-only recognition, vocabulary guidance and known-sequence alignment, including corrupted charts and missing repeats. Add separation or soft context where useful, then inspect timing, drift and correction effort before founder guitar sessions and product integration. The website remains optional until a concrete session is assigned.

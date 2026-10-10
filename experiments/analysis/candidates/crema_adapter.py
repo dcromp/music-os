@@ -159,10 +159,14 @@ def run_batch(manifest_path: Path, output_root: Path) -> int:
         audio_path = (manifest_path.parent / case["audio"]).resolve(strict=True)
         if not audio_path.is_relative_to(manifest_path.parent):
             raise ValueError(f"Audio is outside suite folder: {audio_path}")
-        reference_path = (manifest_path.parent / case["reference"]).resolve(strict=True)
-        if not reference_path.is_relative_to(manifest_path.parent):
-            raise ValueError(f"Reference is outside suite folder: {reference_path}")
-        protected_paths.update((audio_path, reference_path))
+        protected_paths.add(audio_path)
+        # Unannotated recordings can be analysed without a gold chart. When a
+        # reference is supplied, retain its path and overwrite protections.
+        if "reference" in case:
+            reference_path = (manifest_path.parent / case["reference"]).resolve(strict=True)
+            if not reference_path.is_relative_to(manifest_path.parent):
+                raise ValueError(f"Reference is outside suite folder: {reference_path}")
+            protected_paths.add(reference_path)
         output_path = (output_root / "cases" / recording_id / "crema.json").resolve()
         if not output_path.is_relative_to(output_root):
             raise ValueError("Output symlink would leave the selected output folder")

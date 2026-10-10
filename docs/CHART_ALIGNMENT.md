@@ -40,13 +40,19 @@ Repeated identical chords do not necessarily create a harmonic boundary in the a
 
 ## Next bounded experiment
 
-Estimated effort: **2–3 focused days once suitable inputs/references are available**; this is a planning estimate, excluding external content-access lead time. No alignment implementation or benchmark result is claimed yet.
+An [initial NumPy alignment baseline](CHART_ALIGNER_SETUP.md) is implemented. Its [64-case conditional synthetic screen](ALIGNMENT_SCREEN.md) completed with mean boundary F1 90.4% within 150 ms, 59 extra and one missed boundary. Correct labels/order/count were inputs; all timestamps and reference silence events were withheld. This is a timing diagnostic, not recognition or real-song accuracy.
 
-| Part | Deliverable | Estimated effort |
+The Python [YouTube importer](YOUTUBE_IMPORT.md) acquired three recordings from the existing song list. Nine detector runs succeeded. A simplified Creep cyclic draft over-repeats the four-chord loop and is unaccepted; exact sections/repeat counts and independently checked timing gold remain outstanding. Wonderwall and House have source-informed intro candidates only, pending exact excerpt selection. See [the smoke evidence](YOUTUBE_IMPORT_SMOKE.md).
+
+**Remaining estimate: 1.5–2.5 focused days** for reference preparation and the broader comparison, excluding external content-access lead time. This is a planning estimate, not a delivery commitment. The full ten-excerpt experiment remains incomplete.
+
+| Part | Status / deliverable | Remaining effort |
 |---|---|---|
-| Freeze ten representative excerpts and references | Exact versions, source records, untimed candidate sequences and independently checked timing gold | 0.5–1 day |
-| Implement a small alignment baseline | Shared-format output; variable durations; mismatch/fallback evidence | 1 day |
-| Compare and inspect failures | Held-out results, timing plots and review-cost measurements | 0.5–1 day |
+| Audio acquisition and smoke inference | Complete for three existing catalogue entries; source/hash evidence and nine detector outputs | Complete |
+| Small alignment baseline | Implemented; variable durations, finite/cyclic assumptions, mismatch/X evidence | Complete initial baseline; later changes follow reviewed failures |
+| Conditional synthetic timing screen | Complete, 64 cases; timing gold withheld from inference | Complete |
+| Freeze ten representative excerpts and references | Next: exact versions, section/repeat sequences, independently checked timing gold and development/holdout split | 0.5–1 day |
+| Compare and inspect failures | Pending: audio-only/vocabulary/sequence comparison, corrupted-chart controls, drift and review-cost measurements | 1–1.5 days |
 
 Compare **audio-only recognition**, **key/chord-vocabulary guidance**, and **known-sequence alignment** on the same recordings. Freeze a development/holdout split before tuning. Use permitted rock/pop or suitable original recordings, including repeats, sparse/dense arrangements, intros and quick/offbeat changes. Add corrupted chart inputs: wrong key/capo, wrong chord, missing repeat/section and a different edit. Generated cases with known boundaries can diagnose these failures before manual guitar sessions.
 
