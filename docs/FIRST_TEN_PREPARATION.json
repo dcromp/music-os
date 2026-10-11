@@ -1,0 +1,261 @@
+{
+  "schema_version": "first-ten-preparation-1.0",
+  "checked_date": "2026-10-11",
+  "status": "10 prepared recordings and 20 validated native chart files; automatic unreviewed drafts",
+  "timed_gold": false,
+  "accuracy_measured": false,
+  "teacher_conditioned": false,
+  "review_sha256": "d1bbcd7618e0aeaf4af954c6b2bc7307d1ea4b3378af55ed172e53c0b18d7bda",
+  "prepared_manifest_sha256": "6b8a272451671e0db3a5fa74d6f0991111d778091d2cdd1fa2f378a185e743f1",
+  "inference_manifest_sha256": "6f78ebbec42107a7b2e832aad32c135e8b58fb55270861725770eec36d49ecd0",
+  "batch_status_sha256": "4e735cb0b19509f551524bd73e05c6669faa3993d6759224733e64099a6feff1",
+  "failed_preparation_status_sha256": "c22131f40212de43c48a724e6ee411a8b902c16f7c9b542c53f0ba15e09ff531",
+  "player_manifest_sha256": "556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671",
+  "player_pack_id": "automatic-first-ten-v1",
+  "prepared_count": 10,
+  "new_inference_count_per_model": 8,
+  "reused_chart_count": 4,
+  "public_asset_count": 45,
+  "cases": [
+    {
+      "song_id": "wild-thing",
+      "recording_id": "troggs-wild-thing-youtube-20261011",
+      "title": "The Troggs - Wild Thing",
+      "url": "https://www.youtube.com/watch?v=bLJkrOYHNw8",
+      "duration_seconds": 155.3516553287982,
+      "audio_sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf",
+      "reused_original_pilot": false,
+      "charts": {
+        "crema": {
+          "sha256": "13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81",
+          "event_count": 80,
+          "algorithm": "crema-pretrained"
+        },
+        "chordino": {
+          "sha256": "f8045c178233cfe6a02e5e5831357df0c3e18752ac79400f50518663185c9a46",
+          "event_count": 74,
+          "algorithm": "Chordino-NNLS-Chroma"
+        }
+      }
+    },
+    {
+      "song_id": "knockin-on-heaven-s-door",
+      "recording_id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+      "title": "Bob Dylan - Knockin' On Heaven's Door",
+      "url": "https://www.youtube.com/watch?v=z4R5crZylQ0",
+      "duration_seconds": 149.89496598639457,
+      "audio_sha256": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f",
+      "reused_original_pilot": false,
+      "charts": {
+        "crema": {
+          "sha256": "022405eadb0d332a34ca66b74989e72cc5e597e57417c1a289178e0a7a084082",
+          "event_count": 65,
+          "algorithm": "crema-pretrained"
+        },
+        "chordino": {
+          "sha256": "d3e838dac71c2a824814268290936ccd053a0f975f0af17ced49de882defcc2d",
+          "event_count": 68,
+          "algorithm": "Chordino-NNLS-Chroma"
+        }
+      }
+    },
+    {
+      "song_id": "brown-eyed-girl",
+      "recording_id": "van-morrison-brown-eyed-girl-youtube-20261011",
+      "title": "Van Morrison - Brown Eyed Girl",
+      "url": "https://www.youtube.com/watch?v=nEQmbFWnQeE",
+      "duration_seconds": 186.55927437641722,
+      "audio_sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf",
+      "reused_original_pilot": false,
+      "charts": {
+        "crema": {
+          "sha256": "1bc1f1c9467a8bea0aab8e8ae9ea4ccbd3f71ce47c52a1376f591528bcb1170d",
+          "event_count": 107,
+          "algorithm": "crema-pretrained"
+        },
+        "chordino": {
+          "sha256": "a9b647dd9e4c5af426d4672d95210fb64ceeba636c624b9d022292860d3e8ee1",
+          "event_count": 80,
+          "algorithm": "Chordino-NNLS-Chroma"
+        }
+      }
+    },
+    {
+      "song_id": "love-me-do",
+      "recording_id": "beatles-love-me-do-youtube-20261011",
+      "title": "The Beatles - Love Me Do",
+      "url": "https://www.youtube.com/watch?v=0pGOFX1D_jg",
+      "duration_seconds": 141.69832199546485,
+      "audio_sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea",
+      "reused_original_pilot": false,
+      "charts": {
+        "crema": {
+          "sha256": "a12394c6654f761febee240b95d60c45b7c55e33a6fb287225d181976e6531c4",
+          "event_count": 57,
+          "algorithm": "crema-pretrained"
+        },
+        "chordino": {
+          "sha256": "a20662914898b0507ca37cc8510e73e3d41d9207077bc798ff150c49ede4af8e",
+          "event_count": 20,
+          "algorithm": "Chordino-NNLS-Chroma"
+        }
+      }
+    },
+    {
+      "song_id": "twist-and-shout",
+      "recording_id": "beatles-twist-and-shout-youtube-20261011",
+      "title": "The Beatles - Twist And Shout",
+      "url": "https://www.youtube.com/watch?v=2RicaUqd9Hg",
+      "duration_seconds": 155.23555555555555,
+      "audio_sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c",
+      "reused_original_pilot": false,
+      "charts": {
+        "crema": {
+          "sha256": "09f64db9a6563e2256c528576bd9776b13c84128ce3b982810b8dfbe6145bb59",
+          "event_count": 102,
+          "algorithm": "crema-pretrained"
+        },
+        "chordino": {
+          "sha256": "fb968ff8ce30627a37712348de39f520f46c7395b2b7085dad0212a3e8b6e5d6",
+          "event_count": 103,
+          "algorithm": "Chordino-NNLS-Chroma"
+        }
+      }
+    },
+    {
+      "song_id": "seven-nation-army",
+      "recording_id": "white-stripes-seven-nation-army-youtube-20261011",
+      "title": "The White Stripes - Seven Nation Army",
+      "url": "https://www.youtube.com/watch?v=D_QLxj8jCF0",
+      "duration_seconds": 232.1168253968254,
+      "audio_sha256": "394c791d799d7ff7ece36c1b93a434c1f600afe0265f5dfe1d6ad328626a6854",
+      "reused_original_pilot": false,
+      "charts": {
+        "crema": {
+          "sha256": "b7deadf0f4f816c2da6c91e1f8c807ceebc543c6b106e728d1e54bbedf2f0f9b",
+          "event_count": 128,
+          "algorithm": "crema-pretrained"
+        },
+        "chordino": {
+          "sha256": "b5561d083c417ea4eeef425534a59f76c9e27e144afa4e5640181fee1eb9906f",
+          "event_count": 76,
+          "algorithm": "Chordino-NNLS-Chroma"
+        }
+      }
+    },
+    {
+      "song_id": "come-as-you-are",
+      "recording_id": "nirvana-come-as-you-are-youtube-20261011",
+      "title": "Nirvana - Come As You Are",
+      "url": "https://www.youtube.com/watch?v=f1IdyrhOrGs",
+      "duration_seconds": 218.92789115646258,
+      "audio_sha256": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7",
+      "reused_original_pilot": false,
+      "charts": {
+        "crema": {
+          "sha256": "86371063c859a1b412d39a8ef4a87436863690d181838600946ce207f960bee1",
+          "event_count": 107,
+          "algorithm": "crema-pretrained"
+        },
+        "chordino": {
+          "sha256": "7e775151d29d1a829d336bb701c04981205a48970974257db4d2368d86e024a1",
+          "event_count": 86,
+          "algorithm": "Chordino-NNLS-Chroma"
+        }
+      }
+    },
+    {
+      "song_id": "creep",
+      "recording_id": "radiohead-creep-youtube-20261010",
+      "title": "Radiohead - Creep",
+      "url": "https://www.youtube.com/watch?v=XFkzRNyygfk",
+      "duration_seconds": 236.63455782312926,
+      "audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10",
+      "reused_original_pilot": true,
+      "charts": {
+        "crema": {
+          "sha256": "9ab5ce1f02b7ba127554937009f1747112e7fc3df583ddcd3b8abcfa9cdc191c",
+          "event_count": 52,
+          "algorithm": "crema-pretrained"
+        },
+        "chordino": {
+          "sha256": "e2af0e0f30f235cbd0c90f4afd009678312013c4c75b365049159d39770cf474",
+          "event_count": 54,
+          "algorithm": "Chordino-NNLS-Chroma"
+        }
+      }
+    },
+    {
+      "song_id": "the-house-of-the-rising-sun",
+      "recording_id": "animals-house-rising-sun-official-20261011",
+      "title": "The Animals - The House Of The Rising Sun",
+      "url": "https://www.youtube.com/watch?v=VixdIglCZXk",
+      "duration_seconds": 269.91891156462583,
+      "audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708",
+      "reused_original_pilot": false,
+      "charts": {
+        "crema": {
+          "sha256": "71eb918cc9ef3662d5c6d75b49814f700b89a2fc15b73c1ce92d9bdb18dd6037",
+          "event_count": 162,
+          "algorithm": "crema-pretrained"
+        },
+        "chordino": {
+          "sha256": "519748e12a7612c4965339f13d09e733192f2dba9e8de1209ef685a8086e1c13",
+          "event_count": 152,
+          "algorithm": "Chordino-NNLS-Chroma"
+        }
+      }
+    },
+    {
+      "song_id": "wonderwall",
+      "recording_id": "oasis-wonderwall-youtube-20261010",
+      "title": "Oasis - Wonderwall",
+      "url": "https://www.youtube.com/watch?v=bx1Bh8ZvH84",
+      "duration_seconds": 277.78031746031746,
+      "audio_sha256": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462",
+      "reused_original_pilot": true,
+      "charts": {
+        "crema": {
+          "sha256": "1d696977fe56f91126f3e838903939a6670a335d7079fc297b45e6573a3c3e83",
+          "event_count": 144,
+          "algorithm": "crema-pretrained"
+        },
+        "chordino": {
+          "sha256": "bcaec761a32f62eae070962e47e4b7cdc33394d84d8e707eb7756be48ad7ecba",
+          "event_count": 92,
+          "algorithm": "Chordino-NNLS-Chroma"
+        }
+      }
+    }
+  ],
+  "new_batch_runs": {
+    "crema": {
+      "summary_sha256": "7af6542623b3e6eaea06157a10d449a76c7b96c5115df11d7e5de8e329f142e6",
+      "cases": 8,
+      "failures": [],
+      "batch_wall_seconds": 50.220451541710645
+    },
+    "chordino": {
+      "summary_sha256": "7bccbd993967d31806e75e58be55860c442614d8a7101350413ad121247a4701",
+      "cases": 8,
+      "failures": [],
+      "batch_wall_seconds": 6.428109209053218
+    }
+  },
+  "verification": {
+    "python_distinct_passed": 220,
+    "standard_passed": 204,
+    "standard_evaluation_environment_skips": 16,
+    "pinned_evaluation_passed": 16,
+    "batch_recovery_tests_passed": 23,
+    "mac_copied_files": 141,
+    "mac_copied_bytes": 308885258,
+    "http_assets_matching_local_bytes": 45,
+    "sampled_private_paths_404": 3,
+    "browser_all_ten_ready": true,
+    "browser_play_pause_backward_seek": true,
+    "browser_core_chords_new_song": true,
+    "test_feedback_added_to_normal_players": false,
+    "screenshot_sha256": "7225102dee45d4d6f731f26da8528fea0ce5b1609c809a81aa9b90316a7dc077"
+  }
+}

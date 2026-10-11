@@ -1,6 +1,11 @@
 # Automatic full-song drafts
 
-The three imported songs now have complete play-along drafts without a founder
+The expanded [first-ten batch](FIRST_TEN_REVIEW.md) is now deployed on
+[port 8070](http://127.0.0.1:8070/) using `automatic-first-ten-v1`. It adds eight
+selected recordings and reuses exact Creep/Wonderwall caches. The original
+three-song pack below remains on 8068, including its older House tribute example.
+
+The original three imported songs have complete play-along drafts without a founder
 timing annotation step. Playback uses the unchanged CREMA timeline immediately.
 Chordino supplies secondary evidence; differences produce optional check spots.
 The user can simply play along and report a problem when they encounter one.
@@ -10,7 +15,7 @@ GuitarSet pilot. That result does not establish its accuracy on these commercial
 full mixes. The preparation tool does not vote models into a supposedly verified
 answer, rewrite chords to fit a teacher chart, or turn agreement into confidence.
 
-## Current automatic pack
+## Original three-song automatic pack
 
 Generated local artifact: `experiments/generated/automatic-playalong/manifest.json`.
 Audio and predictions remain ignored by Git; the code and this documentation are

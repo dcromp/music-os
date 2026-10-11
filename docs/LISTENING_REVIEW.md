@@ -1,10 +1,15 @@
 # Automatic play-along and optional review
 
-The default page now gives you a prepared song to play. It does not ask you to transcribe chord names or timings. Open [the player](http://127.0.0.1:8068/), choose a song and press play. Current and upcoming chords follow the audio clock automatically.
+The default page now gives you a prepared song to play. It does not ask you to transcribe chord names or timings. Open [the ten-song player](http://127.0.0.1:8070/), choose a song and press play. Current and upcoming chords follow the audio clock automatically.
 
 If a moment feels wrong, tap **Something feels wrong**. The page records the playback time and displayed chord and saves the issue in this browser. A reason or note is optional. This reaction timestamp is a problem location, not a verified chord-change boundary. There is no required session length or checklist.
 
-## Current automatic pack
+## Current automatic packs
+
+`experiments/generated/automatic-first-ten-v1/` contains ten selected recordings
+on port 8070; [versions, teaching proposals and checks](FIRST_TEN_REVIEW.md)
+explain the new batch. The original port-8068 pack below remains available with
+its earlier feedback. Each pack has a separate feedback identity.
 
 `experiments/generated/automatic-playalong/` contains full prepared recordings for Creep, Wonderwall and House of the Rising Sun. CREMA supplies the unchanged primary draft; Chordino supplies optional disagreements. Creep also has an advanced NNLS cyclic hypothesis. [Preparation and provenance](AUTOMATIC_DRAFTS.md) describe exact audio pairing and the experimental model choice.
 
@@ -48,3 +53,9 @@ Tests cover exact audio/chart matching, full-duration preparation, feedback capt
 The core-view continuation adds nine helper checks (29 total), including pitch-class subsets, suspensions, slash bass, display-only merging and backward compatible feedback. A temporary port-8069 QA browser verified Em / Full chord: Em7 at 16s with capo 2, F#m / Full chord: F#m7 in sounding view, automatic issue capture, note persistence across reload and replay. Test feedback remains isolated on that QA origin; the normal player receives no invented issue reports.
 
 The installed port-8068 player then verified Wonderwall's Core chords selector and Em / Full chord: Em7 at the same 16s timestamp, with no added issue. Its HTML, JavaScript and CSS match the Mac checkout byte-for-byte. The temporary QA server and both test tabs were closed; the original user tab remains available. Reload it to load the updated selector.
+
+The expanded port-8070 deployment verifies all ten cases loading ready cues,
+playback/pause/backward seek and Core chords on Love Me Do. All 45 served assets
+match the Mac checkout; sampled private metadata paths return 404. No invented
+feedback was added. Its screenshot is saved locally under
+`experiments/generated/player-proof-20261011/first-ten.jpg`.

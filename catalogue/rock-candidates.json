@@ -49,7 +49,7 @@
     }
   ],
   "first_review_batch": {
-    "status": "Proposed research priority, not verified easiest-to-hardest order",
+    "status": "Ten project-selected recordings prepared; teaching proposals and automatic drafts, no verified timed arrangements",
     "song_ids": [
       "wild-thing",
       "knockin-on-heaven-s-door",
@@ -62,7 +62,9 @@
       "the-house-of-the-rising-sun",
       "wonderwall"
     ],
-    "scope": "Reuse the three existing examples, then inspect seven candidate recordings/teaching variants before acquisition or learner publication"
+    "scope": "Reuse exact Creep/Wonderwall caches; eight new selected uploads include a label-distributed Animals version; preserve older tribute separately",
+    "source_review": "first-ten-review.json",
+    "preparation_evidence": "../docs/FIRST_TEN_PREPARATION.json"
   },
   "proposed_practice_tracks": [
     {
@@ -191,14 +193,30 @@
       "id": "brown-eyed-girl",
       "title": "Brown Eyed Girl",
       "repertoire_source_id": "hl-first-50-rock",
-      "canonical_artist": null,
-      "recording_selection_status": "unresolved",
-      "local_test_recording_id": null,
-      "practice_track_candidate": "rhythm or riff; needs arrangement review",
-      "difficulty_status": "ungraded",
-      "reviewed_shapes": null,
+      "canonical_artist": "Van Morrison",
+      "recording_selection_status": "Explicit project-selected upload prepared; no publisher-master match claimed",
+      "local_test_recording_id": "van-morrison-brown-eyed-girl-youtube-20261011",
+      "practice_track_candidate": "open-chord-rhythm",
+      "difficulty_status": "Source-reviewed skill placement proposed; not a validated grade",
+      "reviewed_shapes": {
+        "labels": [
+          "G",
+          "C",
+          "D",
+          "Em"
+        ],
+        "convention": "Teacher played-shape names; recording pitch not yet checked",
+        "recording_compatible": null,
+        "source_review": "first-ten-review.json"
+      },
       "strumming_pattern": null,
-      "verified_timed_arrangement": null
+      "verified_timed_arrangement": null,
+      "source_review": {
+        "file": "first-ten-review.json",
+        "song_id": "brown-eyed-girl"
+      },
+      "proposed_practice_order": 4,
+      "rhythm_focus": "Progress from steady strums to the linked eighth-note pattern with an omitted beat; keep intro/lead as optional later work."
     },
     {
       "id": "californication",
@@ -230,14 +248,25 @@
       "id": "come-as-you-are",
       "title": "Come As You Are",
       "repertoire_source_id": "hl-first-50-rock",
-      "canonical_artist": null,
-      "recording_selection_status": "unresolved",
-      "local_test_recording_id": null,
-      "practice_track_candidate": "rhythm or riff; needs arrangement review",
-      "difficulty_status": "ungraded",
-      "reviewed_shapes": null,
+      "canonical_artist": "Nirvana",
+      "recording_selection_status": "Explicit project-selected upload prepared; no publisher-master match claimed",
+      "local_test_recording_id": "nirvana-come-as-you-are-youtube-20261011",
+      "practice_track_candidate": "electric-riffs-and-power-chords",
+      "difficulty_status": "Source-reviewed skill placement proposed; not a validated grade",
+      "reviewed_shapes": {
+        "labels": null,
+        "convention": "Teacher setup, kept separate from sounding labels",
+        "recording_compatible": null,
+        "source_review": "first-ten-review.json"
+      },
       "strumming_pattern": null,
-      "verified_timed_arrangement": null
+      "verified_timed_arrangement": null,
+      "source_review": {
+        "file": "first-ten-review.json",
+        "song_id": "come-as-you-are"
+      },
+      "proposed_practice_order": 2,
+      "rhythm_focus": "Repeated single-note riff, then chord sections; keep suspended fourths"
     },
     {
       "id": "communication-breakdown",
@@ -256,14 +285,30 @@
       "id": "creep",
       "title": "Creep",
       "repertoire_source_id": "hl-first-50-rock",
-      "canonical_artist": null,
-      "recording_selection_status": "existing local example; not a verified publisher recording match",
+      "canonical_artist": "Radiohead",
+      "recording_selection_status": "Explicit project-selected upload prepared; no publisher-master match claimed",
       "local_test_recording_id": "radiohead-creep-youtube-20261010",
-      "practice_track_candidate": "rhythm or riff; needs arrangement review",
-      "difficulty_status": "ungraded",
-      "reviewed_shapes": null,
+      "practice_track_candidate": "open-chord-rhythm",
+      "difficulty_status": "Source-reviewed skill placement proposed; not a validated grade",
+      "reviewed_shapes": {
+        "labels": [
+          "G",
+          "B",
+          "C",
+          "Cm"
+        ],
+        "convention": "Teacher standard-tuning barre shapes; chord inventory is not a complete timed chart",
+        "recording_compatible": null,
+        "source_review": "first-ten-review.json"
+      },
       "strumming_pattern": null,
-      "verified_timed_arrangement": null
+      "verified_timed_arrangement": null,
+      "source_review": {
+        "file": "first-ten-review.json",
+        "song_id": "creep"
+      },
+      "proposed_practice_order": 8,
+      "rhythm_focus": "Barre changes, controlled verse arpeggios, then chorus dynamics"
     },
     {
       "id": "day-tripper",
@@ -373,14 +418,33 @@
       "id": "the-house-of-the-rising-sun",
       "title": "The House Of The Rising Sun",
       "repertoire_source_id": "hl-first-50-rock",
-      "canonical_artist": null,
-      "recording_selection_status": "existing local example; not a verified publisher recording match",
-      "local_test_recording_id": "animals-house-rising-sun-youtube-20261010",
-      "practice_track_candidate": "rhythm or riff; needs arrangement review",
-      "difficulty_status": "ungraded",
-      "reviewed_shapes": null,
+      "canonical_artist": "The Animals",
+      "recording_selection_status": "Explicit project-selected upload prepared; no publisher-master match claimed",
+      "local_test_recording_id": "animals-house-rising-sun-official-20261011",
+      "practice_track_candidate": "open-chord-rhythm",
+      "difficulty_status": "Source-reviewed skill placement proposed; not a validated grade",
+      "reviewed_shapes": {
+        "labels": [
+          "Am",
+          "C",
+          "D",
+          "F",
+          "E",
+          "Dm"
+        ],
+        "convention": "Played-shape vocabulary; outro Dm and optional organ-inspired E7 remain distinct",
+        "recording_compatible": null,
+        "source_review": "first-ten-review.json"
+      },
       "strumming_pattern": null,
-      "verified_timed_arrangement": null
+      "verified_timed_arrangement": null,
+      "legacy_local_test_recording_id": "animals-house-rising-sun-youtube-20261010",
+      "source_review": {
+        "file": "first-ten-review.json",
+        "song_id": "the-house-of-the-rising-sun"
+      },
+      "proposed_practice_order": 6,
+      "rhythm_focus": "Count six eighth-note subdivisions in two groups; steady strums before arpeggios, then raked flat-pick attack"
     },
     {
       "id": "i-can-t-get-no-satisfaction",
@@ -451,14 +515,30 @@
       "id": "knockin-on-heaven-s-door",
       "title": "Knockin' On Heaven's Door",
       "repertoire_source_id": "hl-first-50-rock",
-      "canonical_artist": null,
-      "recording_selection_status": "unresolved",
-      "local_test_recording_id": null,
-      "practice_track_candidate": "rhythm or riff; needs arrangement review",
-      "difficulty_status": "ungraded",
-      "reviewed_shapes": null,
+      "canonical_artist": "Bob Dylan",
+      "recording_selection_status": "Explicit project-selected upload prepared; no publisher-master match claimed",
+      "local_test_recording_id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+      "practice_track_candidate": "open-chord-rhythm",
+      "difficulty_status": "Source-reviewed skill placement proposed; not a validated grade",
+      "reviewed_shapes": {
+        "labels": [
+          "G",
+          "D",
+          "Am",
+          "C"
+        ],
+        "convention": "Teacher setup, kept separate from sounding labels",
+        "recording_compatible": null,
+        "source_review": "first-ten-review.json"
+      },
       "strumming_pattern": null,
-      "verified_timed_arrangement": null
+      "verified_timed_arrangement": null,
+      "source_review": {
+        "file": "first-ten-review.json",
+        "song_id": "knockin-on-heaven-s-door"
+      },
+      "proposed_practice_order": 3,
+      "rhythm_focus": "Steady slow 4/4 strums, then subdivision and optional picking"
     },
     {
       "id": "mr-jones",
@@ -594,14 +674,25 @@
       "id": "seven-nation-army",
       "title": "Seven Nation Army",
       "repertoire_source_id": "hl-first-50-rock",
-      "canonical_artist": null,
-      "recording_selection_status": "unresolved",
-      "local_test_recording_id": null,
-      "practice_track_candidate": "rhythm or riff; needs arrangement review",
-      "difficulty_status": "ungraded",
-      "reviewed_shapes": null,
+      "canonical_artist": "The White Stripes",
+      "recording_selection_status": "Explicit project-selected upload prepared; no publisher-master match claimed",
+      "local_test_recording_id": "white-stripes-seven-nation-army-youtube-20261011",
+      "practice_track_candidate": "electric-riffs-and-power-chords",
+      "difficulty_status": "Source-reviewed skill placement proposed; not a validated grade",
+      "reviewed_shapes": {
+        "labels": null,
+        "convention": "Teacher setup, kept separate from sounding labels",
+        "recording_compatible": null,
+        "source_review": "first-ten-review.json"
+      },
       "strumming_pattern": null,
-      "verified_timed_arrangement": null
+      "verified_timed_arrangement": null,
+      "source_review": {
+        "file": "first-ten-review.json",
+        "song_id": "seven-nation-army"
+      },
+      "proposed_practice_order": 1,
+      "rhythm_focus": "Single-note groove and muting; add power shapes later"
     },
     {
       "id": "should-i-stay-or-should-i-go",
@@ -724,14 +815,29 @@
       "id": "wild-thing",
       "title": "Wild Thing",
       "repertoire_source_id": "hl-first-50-rock",
-      "canonical_artist": null,
-      "recording_selection_status": "unresolved",
-      "local_test_recording_id": null,
-      "practice_track_candidate": "rhythm or riff; needs arrangement review",
-      "difficulty_status": "ungraded",
-      "reviewed_shapes": null,
+      "canonical_artist": "The Troggs",
+      "recording_selection_status": "Explicit project-selected upload prepared; no publisher-master match claimed",
+      "local_test_recording_id": "troggs-wild-thing-youtube-20261011",
+      "practice_track_candidate": "open-chord-rhythm",
+      "difficulty_status": "Source-reviewed skill placement proposed; not a validated grade",
+      "reviewed_shapes": {
+        "labels": [
+          "A",
+          "D",
+          "E"
+        ],
+        "convention": "Teacher played-shape names; recording pitch not yet checked",
+        "recording_compatible": null,
+        "source_review": "first-ten-review.json"
+      },
       "strumming_pattern": null,
-      "verified_timed_arrangement": null
+      "verified_timed_arrangement": null,
+      "source_review": {
+        "file": "first-ten-review.json",
+        "song_id": "wild-thing"
+      },
+      "proposed_practice_order": 1,
+      "rhythm_focus": "Start with the teacher's two-strums-per-chord riff practice, then include the contrasting open-string figure."
     },
     {
       "id": "you-really-got-me",
@@ -1088,14 +1194,29 @@
       "id": "love-me-do",
       "title": "Love Me Do",
       "repertoire_source_id": "hl-three-chord-rock",
-      "canonical_artist": null,
-      "recording_selection_status": "unresolved",
-      "local_test_recording_id": null,
-      "practice_track_candidate": "three-chord arrangement",
-      "difficulty_status": "ungraded",
-      "reviewed_shapes": null,
+      "canonical_artist": "The Beatles",
+      "recording_selection_status": "Explicit project-selected upload prepared; no publisher-master match claimed",
+      "local_test_recording_id": "beatles-love-me-do-youtube-20261011",
+      "practice_track_candidate": "open-chord-rhythm",
+      "difficulty_status": "Source-reviewed skill placement proposed; not a validated grade",
+      "reviewed_shapes": {
+        "labels": [
+          "G",
+          "C",
+          "D"
+        ],
+        "convention": "Teacher played-shape names; recording pitch not yet checked",
+        "recording_compatible": null,
+        "source_review": "first-ten-review.json"
+      },
       "strumming_pattern": null,
-      "verified_timed_arrangement": null
+      "verified_timed_arrangement": null,
+      "source_review": {
+        "file": "first-ten-review.json",
+        "song_id": "love-me-do"
+      },
+      "proposed_practice_order": 2,
+      "rhythm_focus": "Begin on the beat, preserve intentional muted stops, progress to swing feel."
     },
     {
       "id": "mellow-yellow",
@@ -1322,14 +1443,29 @@
       "id": "twist-and-shout",
       "title": "Twist And Shout",
       "repertoire_source_id": "hl-three-chord-rock",
-      "canonical_artist": null,
-      "recording_selection_status": "unresolved",
-      "local_test_recording_id": null,
-      "practice_track_candidate": "three-chord arrangement",
-      "difficulty_status": "ungraded",
-      "reviewed_shapes": null,
+      "canonical_artist": "The Beatles",
+      "recording_selection_status": "Explicit project-selected upload prepared; no publisher-master match claimed",
+      "local_test_recording_id": "beatles-twist-and-shout-youtube-20261011",
+      "practice_track_candidate": "open-chord-rhythm",
+      "difficulty_status": "Source-reviewed skill placement proposed; not a validated grade",
+      "reviewed_shapes": {
+        "labels": [
+          "D",
+          "G",
+          "A"
+        ],
+        "convention": "Teacher played-shape names; recording pitch not yet checked",
+        "recording_compatible": null,
+        "source_review": "first-ten-review.json"
+      },
       "strumming_pattern": null,
-      "verified_timed_arrangement": null
+      "verified_timed_arrangement": null,
+      "source_review": {
+        "file": "first-ten-review.json",
+        "song_id": "twist-and-shout"
+      },
+      "proposed_practice_order": 5,
+      "rhythm_focus": "Learn the accompaniment response rhythm, then eighth-note build-up; riff, dual-lead solo and chromatic/D9 ending are later options."
     },
     {
       "id": "werewolves-of-london",
@@ -1387,14 +1523,31 @@
       "id": "wonderwall",
       "title": "Wonderwall",
       "repertoire_source_id": "hl-first-50-strum",
-      "canonical_artist": null,
-      "recording_selection_status": "existing local example; not a verified publisher recording match",
+      "canonical_artist": "Oasis",
+      "recording_selection_status": "Explicit project-selected upload prepared; no publisher-master match claimed",
       "local_test_recording_id": "oasis-wonderwall-youtube-20261010",
-      "practice_track_candidate": "rhythm or riff; needs arrangement review",
-      "difficulty_status": "ungraded",
-      "reviewed_shapes": null,
+      "practice_track_candidate": "open-chord-rhythm",
+      "difficulty_status": "Source-reviewed skill placement proposed; not a validated grade",
+      "reviewed_shapes": {
+        "labels": [
+          "Em7",
+          "G",
+          "Dsus4",
+          "A7sus4",
+          "Cadd9"
+        ],
+        "convention": "Teacher capo-2 played shapes; main vocabulary, not a complete section chart",
+        "recording_compatible": null,
+        "source_review": "first-ten-review.json"
+      },
       "strumming_pattern": null,
-      "verified_timed_arrangement": null
+      "verified_timed_arrangement": null,
+      "source_review": {
+        "file": "first-ten-review.json",
+        "song_id": "wonderwall"
+      },
+      "proposed_practice_order": 7,
+      "rhythm_focus": "Continuous strumming motion, syncopated gaps and section variations"
     }
   ]
 }

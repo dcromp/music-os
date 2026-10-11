@@ -21,44 +21,36 @@ original track, so they do not supply its recording-specific key or chart.
 
 ## First review batch
 
-Review these ten candidates first to combine simpler rhythm material, riffs
-and the three already cached examples. This is a proposed research priority;
-actual difficulty and recording compatibility remain ungraded.
+The [first-ten review](FIRST_TEN_REVIEW.md) now records exact selected uploads,
+teaching sources, setup distinctions and proposed practice tracks. Ten recordings
+are prepared: eight new inputs plus the exact cached Creep and Wonderwall.
+House uses a new label-distributed Animals recording; the original tribute
+example stays available in the old three-song player.
 
-| Candidate | Reason to inspect | Current evidence |
-|---|---|---|
-| Wild Thing | Possible short rhythm exercise | Title membership only |
-| Knockin' On Heaven's Door | Possible recurring chord-cycle exercise | Title membership only; select a performer/version |
-| Brown Eyed Girl | Possible rhythm and change practice | Title membership only |
-| Love Me Do | Candidate from the three-chord pool | Publisher G/C/D arrangement category; original version not checked |
-| Twist And Shout | Candidate from the three-chord pool | Publisher G/C/D arrangement category; tempo/difficulty not checked |
-| Seven Nation Army | Inspect a riff-based route | Title membership only |
-| Come As You Are | Inspect a riff-to-rhythm route | Title membership only |
-| Creep | Reuse current automated analysis | Local Radiohead example; arrangement/difficulty unverified |
-| The House Of The Rising Sun | Reuse current automated analysis | Local Animals example; recording-specific timing unverified |
-| Wonderwall | Reuse founder feedback and core/full comparison | Local Oasis example; rich-quality/structure limits documented |
-
-The proposed practice tracks are open-chord rhythm and electric riffs/power
-shapes. Grade playable fingerings, transition distances, barre requirements,
-tempo, rhythm and section changes separately. Chord-name count alone is not a
-difficulty measure. An extension can be an easier shared-finger shape.
+The proposed rhythm route is Wild Thing → Love Me Do → Dylan's Knockin' On
+Heaven's Door → Brown Eyed Girl → Twist And Shout → House Of The Rising Sun →
+Wonderwall → Creep. A separate riff route begins with Seven Nation Army and then
+Come As You Are. This is a source-informed practice proposal, not a validated
+difficulty grade. Recording-compatible shapes, rhythm and section checks remain
+before lesson publication.
 
 ## Preparation workflow and estimates
 
 | Step | Status | Remaining estimate |
 |---|---|---|
-| Publisher title research, deduplication and source records | Complete | 100 candidates saved; no transcription task |
-| Select exact artists/recordings for the ten-song batch | Next | 1–2 focused hours; some titles name multiple songs or versions |
-| Inspect teaching variants, shapes and rhythm requirements | Pending | About half a focused day for the first ten; estimates depend on source availability |
-| Prepare automatic drafts and reference/structure checks | Pending | Part of the existing 1.5–2.5 day broader-reference milestone; catalogue membership does not supply gold labels |
-| Propose a short progressive practice path | Pending | After those checks; use only recording-compatible reviewed variants |
+| Publisher title research, deduplication and source records | Complete | 100 candidates saved |
+| First-ten recording selection / teaching-source review | Complete | Versions and provisional skill placement saved |
+| Automatic preparation and raw detector drafts | Complete | 10 recordings, 20 charts; no accuracy claim |
+| Expanded local playback | Deployed and browser verified | Ten cases load; playback/seek/Core and served file bytes checked |
+| Recording-compatible arrangements / real-reference checks | Next | 1.5–2.5 focused days, including about half a day for first-ten shapes/rhythm/sections |
 
-Resolve identities such as Jailbreak or Gloria before matching any external
-chart. Keep book transpositions, actual audio chords and the player's capo
-shapes separate. Preserve independently checked reference data for scoring;
-do not call a consensus or a source title an accurate timed arrangement.
+The [selection JSON](../catalogue/first-ten-review.json) preserves the static
+pre-acquisition checkpoint; [preparation evidence](FIRST_TEN_PREPARATION.json)
+records the later run. Teacher shapes stay separate from sounding audio labels.
+Publisher membership, model agreement and online consensus do not supply
+independently checked timings.
 
-The agent handles discovery and draft preparation. The founder plays normally
-and optionally taps a problem; no required chord naming or timing assignment.
-No additional recordings have been imported for this seed. The current player
-still contains the same three cached songs.
+Resolve identities such as Jailbreak or Gloria before extending the pool. Grade
+fingerings, transitions, barres, tempo, rhythm and section changes separately.
+The agent handles discovery and draft preparation; the founder plays normally
+and optionally taps a problem, with no required chord naming or timing task.
