@@ -25,15 +25,15 @@ The guided variants mask 38.5% / 19.6% of active audio for quality checks. Witho
 
 ## Provenance and reproducibility
 
-The six new outputs, exact copied untimed charts, byte-identical NNLS cache, frozen policy, and machine/Markdown summaries are in ignored local directory `experiments/generated/wonderwall-guarded-20261011`. All original JSON, policy and audio hashes were rechecked after inference; none was overwritten. The machine report preserves full output/source hashes, section intervals, masks, compression bins and unvisited indices.
+The six new outputs, exact copied untimed charts, byte-identical NNLS cache, frozen policy, and machine/Markdown summaries are in ignored local directory `experiments/generated/wonderwall-guarded-verified-20261011`. All original JSON, policy and audio hashes were rechecked after inference; none was overwritten. The machine report preserves full output/source hashes, section intervals, masks, compression bins and unvisited indices.
 
 - Prepared audio SHA-256: `88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462`.
 - Source section hypothesis SHA-256: `002054d85d182279118ac6673352f5221c0f4a873590f58bf0a30351437d2a3b`.
 - Reused NNLS bytes SHA-256: `52766a21e5bbbd2ba0b1e8b14fe24e53910189fd8f0f1066c9fac322900e7ff2`.
 - Shared frozen spectral arrays SHA-256: `fd5cee0f1aa1fd9dc2163024eb05852fc8926d4893cbce742a950cec913be084`.
 - Guarded aligner SHA-256: `f25536fdf9c56e5fdb0d03e8441c91a60ee91961272afa47011b5b815e24e6b0`.
-- Wrapper SHA-256: `1f575f02f082c8aa57928b7c7878061a7b07321bb891d30319f0c895e3e8ef65`.
-- Machine summary SHA-256: `06b33a7e1211cb685e0dd44ea6bbb45f28b65823c1598b854b9b34d480459211`.
+- Wrapper SHA-256: `bbb7fe61fbb603305716ae5e50848141433d40fe3ff123be3a21ee876da6d9c3`.
+- Machine summary SHA-256: `76e1e87db2fb60338d7cd8247c508d7f44dea12ed2497959b1cd6b9fee6efeff`.
 
 ```sh
 .venv-analysis/bin/python experiments/analysis/wonderwall_guarded.py \

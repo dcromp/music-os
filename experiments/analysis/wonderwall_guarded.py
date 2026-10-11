@@ -150,7 +150,7 @@ def markdown(report: dict) -> str:
     lines = ["# Wonderwall frozen-policy diagnostic", "",
         "Six guarded runs compare with the exact previous guided/reversed/simplified controls. No independent full-recording timing or rich-quality reference exists, so **accuracy is not measured** and no output is accepted for playback.", "",
         f"Policy `{report['selected_policy']}` was frozen at `{report['frozen_at_utc']}`, before this diagnostic; SHA-256 `{report['frozen_policy_sha256']}`. Parameters are unchanged: `{json.dumps(report['parameters'], sort_keys=True)}`.", "",
-        "| Hypothesis / evidence | Old labeled coverage | Guarded labeled coverage | N seconds | X seconds / gaps | Old / guarded silent advances | Partial / unvisited | <350ms positions | Near minimum active support |", 
+        "| Hypothesis / evidence | Old labeled coverage | Guarded labeled coverage | N seconds | X seconds / gaps | Old / guarded silent advances | Partial / unvisited | <350ms positions | Near minimum active support |",
         "|---|---:|---:|---:|---:|---:|---:|---:|---:|"]
     for case in report["cases"]:
         new, old = case["guarded"], case["old_frozen"]
@@ -162,7 +162,7 @@ def markdown(report: dict) -> str:
         f"- Shared frozen spectral arrays SHA-256: `{report['spectral_feature_arrays_sha256']}`.",
         f"- Wrapper SHA-256: `{report['wrapper_sha256']}`.", "- All prior JSON/audio/policy bytes rechecked after inference; no prior output is overwritten.", "",
         "## Limits", "", *["- " + item for item in report["limitations"]], "",
-        "## Reproduce", "", "```sh", 
+        "## Reproduce", "", "```sh",
         ".venv-analysis/bin/python experiments/analysis/wonderwall_guarded.py --output experiments/generated/wonderwall-guarded-new --policy-sha256 " + report["frozen_policy_sha256"],
         "```", "", "Use a new output directory. Existing policy, old paired controls and native NNLS evidence are required; model inference, new acquisition and threshold tuning do not occur.", ""])
     return "\n".join(lines)
