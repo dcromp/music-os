@@ -110,6 +110,7 @@ Open [http://127.0.0.1:8067](http://127.0.0.1:8067/) and press **Load demo**. Ch
 |---|---|---|
 | Mac experiment bench | Running locally in this session; live browser checks passed | Run `lab.py serve`; opens on localhost port 8067. Stop with Ctrl+C. Use `--port 8069` if needed; listening review uses 8068. |
 | Mac automatic player | Running on port 8068; immediate chords and capo-view switching verified | Run `automatic_drafts.py serve --pack experiments/generated/automatic-playalong --port 8068`; stop with Ctrl+C. |
+| Rich-chord / Wonderwall research | Tools and cached v2 results saved in the Mac checkout; hashes and 26 new checks verified | See [rich screen](docs/RICH_QUALITY_SCREEN.md) and [frozen Wonderwall CLI](docs/WONDERWALL_GUIDED_DRAFT.md). Recognition reruns need isolated model environments; cached diagnostics do not. |
 | Public web service | Not deployed | Hosting, authentication, storage and public launch are later work |
 | Native macOS app | Not configured | The current Mac tool is a browser page plus local analysis scripts |
 | Expo web product | Existing build fails | Missing `react-native-web-webview` in the YouTube wrapper; defer repair until product integration |
