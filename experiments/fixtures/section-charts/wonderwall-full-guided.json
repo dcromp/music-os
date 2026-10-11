@@ -1,0 +1,181 @@
+{
+  "schema_version": "untimed-chart-1.1",
+  "recording": {
+    "id": "oasis-wonderwall-youtube-20261010",
+    "title": "Oasis - Wonderwall (Official Video) / teacher-section hypothesis",
+    "audio_sha256": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "name": "Intro / two written loops, repeated",
+      "sequence": [
+        "F#m7",
+        "A",
+        "Esus4",
+        "B7sus4",
+        "F#m7",
+        "A",
+        "Esus4",
+        "B7sus4"
+      ]
+    },
+    {
+      "id": "verse-1",
+      "name": "Verse 1 / final Cadd9-Dsus4-A7sus4 shape variation",
+      "sequence": [
+        "F#m7",
+        "A",
+        "Esus4",
+        "B7sus4",
+        "F#m7",
+        "A",
+        "Esus4",
+        "B7sus4",
+        "F#m7",
+        "A",
+        "Esus4",
+        "B7sus4",
+        "Dadd9",
+        "Esus4",
+        "B7sus4"
+      ]
+    },
+    {
+      "id": "verse",
+      "name": "Verse 2 or 3 / two written loops, repeated",
+      "sequence": [
+        "F#m7",
+        "A",
+        "Esus4",
+        "B7sus4",
+        "F#m7",
+        "A",
+        "Esus4",
+        "B7sus4"
+      ]
+    },
+    {
+      "id": "bridge",
+      "name": "Pre-chorus / includes passing G-F# shape bass",
+      "sequence": [
+        "Dadd9",
+        "Esus4",
+        "F#m7",
+        "Dadd9",
+        "Esus4",
+        "F#m7",
+        "Dadd9",
+        "Esus4",
+        "A",
+        "A/G#",
+        "F#m7",
+        "B7sus4"
+      ]
+    },
+    {
+      "id": "chorus",
+      "name": "Chorus / two written Cadd9-Em7-G-Em7 shape loops",
+      "sequence": [
+        "Dadd9",
+        "F#m7",
+        "A",
+        "F#m7",
+        "Dadd9",
+        "F#m7",
+        "A",
+        "F#m7"
+      ]
+    }
+  ],
+  "order": [
+    {
+      "section_id": "intro",
+      "repeat": 2
+    },
+    {
+      "section_id": "verse-1",
+      "repeat": 1
+    },
+    {
+      "section_id": "verse",
+      "repeat": 2
+    },
+    {
+      "section_id": "bridge",
+      "repeat": 1
+    },
+    {
+      "section_id": "chorus",
+      "repeat": 2
+    },
+    {
+      "section_id": "verse",
+      "repeat": 2
+    },
+    {
+      "section_id": "bridge",
+      "repeat": 1
+    },
+    {
+      "section_id": "chorus",
+      "repeat": 8
+    }
+  ],
+  "mode": "finite",
+  "start_policy": "first",
+  "end_policy": "last",
+  "metadata": {
+    "key": "F# minor",
+    "capo": 2,
+    "tuning": "standard",
+    "played_shapes": [
+      "Em7",
+      "G",
+      "Dsus4",
+      "A7sus4",
+      "Cadd9",
+      "G/F#"
+    ],
+    "shape_to_sounding": {
+      "Em7": "F#m7",
+      "G": "A",
+      "Dsus4": "Esus4",
+      "A7sus4": "B7sus4",
+      "Cadd9": "Dadd9",
+      "G/F#": "A/G#"
+    },
+    "label_convention": "Sounding pitches; every source shape transposed up two semitones; do not apply capo again during alignment",
+    "video_id": "bx1Bh8ZvH84",
+    "retrieval_date": "2026-10-11",
+    "experiment_id": "wonderwall-guided-20261011",
+    "chart_hypothesis_version": "0.1.0",
+    "scope": "Full exact prepared official-video audio; declared teacher arrangement, not verified recording structure",
+    "source_references": [
+      {
+        "author": "Greg Shute",
+        "url": "https://www.gregshuteguitar.co.uk/_files/ugd/4079b4_0a1b39a89c1a4776a5c8f553f259cb08.pdf",
+        "source_kind": "Teacher arrangement; page 1 section chart",
+        "contributes": "Chord qualities, slash bass, section order and written repeat notation; no timing annotations"
+      },
+      {
+        "author": "Carl Brown / GuitarLessons365",
+        "url": "https://guitarlessons365.com/wonderwall-guitar-lesson-oasis/",
+        "source_kind": "Teacher lesson description",
+        "contributes": "Independent capo-2 standard tuning and F# minor confirmation; verse variation and pre-chorus overdub caveat; no page-text repeat-count confirmation"
+      }
+    ],
+    "repeat_notation_interpretation": "Unnumbered repeat signs interpreted as two total performances. Final chorus x8 interpreted as eight total performances of the written eight-position line, rather than eight additional performances.",
+    "repeat_count_status": "Frozen source-reading hypothesis; not checked against the exact official-video edit; no counts inferred from CREMA, Chordino or previous timing outputs",
+    "harmonic_rearticulation_policy": "Two consecutive A7sus4 bars in each bridge represented as one held harmonic position; terminal Em7 ending continues the final chorus Em7 position. Drum fill has no declared harmonic event. This decoder cannot time identical-chord rearticulation.",
+    "slash_bass_limitation": "A/G# is preserved in supplied labels; existing equal-pitch-class templates ignore slash bass and cannot acoustically distinguish it from A.",
+    "review_status": "Unaccepted source-informed alignment hypothesis; algorithm completion and low mismatch are not accuracy or source consensus",
+    "source_use_status": "Public teacher source inspected for local research; commercial reuse and redistribution rights not established; no lyrics or source PDF copied into this fixture",
+    "uncertainties": [
+      "Teacher arrangement may simplify recorded embellishments or combine guitar overdubs",
+      "Official video may differ in intro, outro or repeat count from source arrangement",
+      "Repeated equivalent progressions can produce forced section drift",
+      "Section labels are supplied, not discovered; no timestamp anchors or gold consumed"
+    ]
+  }
+}

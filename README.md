@@ -6,7 +6,7 @@ Development starts with choosing useful chord/rhythm algorithms on Mac and testi
 
 ## Current status
 
-Updated 10 October 2026. Status and deployment information belong in this README as work progresses. The full roadmap is in [plan.md](plan.md); source findings and existing-app checks are in [docs/REUSE_AUDIT.md](docs/REUSE_AUDIT.md).
+Updated 11 October 2026. Status and deployment information belong in this README as work progresses. The full roadmap is in [plan.md](plan.md); source findings and existing-app checks are in [docs/REUSE_AUDIT.md](docs/REUSE_AUDIT.md).
 
 | Mac experiment step | Status | Remaining ETA / evidence |
 |---|---|---|
@@ -29,6 +29,9 @@ Updated 10 October 2026. Status and deployment information belong in this README
 | Separation and soft key/context pipeline | Planned supporting experiments | Four controlled variants where alignment/recognition failures justify them; see [plan](plan.md) |
 | Further research candidates | Backlog | ChordFormer source/checkpoint review; real-recording evidence takes priority |
 | Founder play-along feedback | Initial qualitative feedback received | Mostly correct; Wonderwall's richer shapes need attention. No measured accuracy score; [audit and next step](docs/WONDERWALL_QUALITY_AUDIT.md) |
+| Rich-quality synthetic controls | Complete | 24 richer/plain/contrast guitar-voicing cases, four conditions and two transposed recipe variants; [results](docs/RICH_QUALITY_SCREEN.md) |
+| Rich-quality and corrupted-chart evaluation | Complete; rejection check fails | 224/224 comparisons; known-chart timing works on these examples, but both aligners retain every forced rich upgrade on eight plain controls |
+| Wonderwall guided full-song hypothesis | Complete, unaccepted | Six frozen runs; reversed section order also completes with low mismatch and compressed positions; [diagnostics](docs/WONDERWALL_GUIDED_DRAFT.md) |
 
 The synthetic suite compares the template baseline, BTC, CREMA, ChordMini/ChordNet and Chordino across clean triads, voicings/timbres, guitar-like attacks, distractors and timing/vocabulary complexity. ChordMini leads the original core metric including silence (94.7%) and boundary F1 (0.927); the baseline leads the new chord-only core metric (96.1%). Chordino scores 95.4% chord-only, with weaker silence and boundary handling. All audio in that suite is procedural; these are not real-song accuracy estimates and no production algorithm has been selected. The founder's previous analysis code was deleted; the older Expo app only displayed hardcoded sample chords. See [app-readiness criteria](docs/APP_READINESS.md).
 
@@ -36,7 +39,7 @@ The real-guitar pilot changes the ranking: CREMA leads at **93.9% intended major
 
 The default player now starts with complete automatic CREMA drafts for the three imported songs. CREMA is the experimental primary because it led the annotated acoustic pilot; full-mix accuracy remains unmeasured. Chordino differences provide optional hints, without replacing primary chords or claiming that agreement proves correctness. The known-chart/NNLS experiments remain available separately: their cyclic drafts and bounded prefixes have not been accepted as verified arrangements. See [automatic preparation](docs/AUTOMATIC_DRAFTS.md) and [real diagnostics](docs/REAL_ALIGNMENT_DIAGNOSTICS.md).
 
-The first qualitative feedback is promising: the player seems mostly correct, with Wonderwall's Em7/Dsus4/A7sus4/Cadd9 shapes a concern. An installed-model audit confirms CREMA cannot emit add9 or 7sus4; Chordino's default dictionary lacks these and suspensions. Next prioritise automated rich-quality controls and a separately labelled curated-chart comparison. Raw predictions and the deployed player remain unchanged. [Findings and estimated effort](docs/WONDERWALL_QUALITY_AUDIT.md) distinguish feedback, model vocabulary and measured accuracy.
+The first qualitative feedback is promising: the player seems mostly correct, with Wonderwall's Em7/Dsus4/A7sus4/Cadd9 shapes a concern. CREMA cannot emit add9 or 7sus4; default Chordino lacks those and suspensions. The [richer synthetic comparison](docs/RICH_QUALITY_SCREEN.md) is complete: raw exact quality on rich progressions is 42.8% CREMA / 36.0% Chordino, versus 92.5% / 95.4% on plain controls. Given correct labels/order/count, spectral timing F1 is 100.0% and NNLS 96.5%; these are conditional procedural results. Deliberately upgrading plain chords to rich labels survives both rejection masks in all eight controls. The [full Wonderwall hypothesis](docs/WONDERWALL_GUIDED_DRAFT.md) also exposes wrong-order compression. Improve quality/section acceptance before promoting guided arrangements. Raw predictions and the deployed player remain unchanged.
 
 ## Run on Mac
 

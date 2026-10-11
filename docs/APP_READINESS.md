@@ -43,4 +43,6 @@ Do not spend months trying every published model before testing real music. Chor
 
 ## Website's role
 
+The [11 October richer screen](RICH_QUALITY_SCREEN.md) adds 24 explicit guitar-voicing cases and 224 comparisons. Both aligners retain every forced rich upgrade on eight plain controls without a large-mismatch warning. The [full Wonderwall experiment](WONDERWALL_GUIDED_DRAFT.md) also completes reversed section order while compressing many positions into silence. Quality/section acceptance and abstention are explicit next requirements; neither low mismatch nor completion can approve an arrangement. These checks remain automated and separate from normal founder play-along.
+
 The original port-8067 bench remains optional. Port 8068 opens ready-to-play automatic full-song drafts, showing current and upcoming chords. The founder only taps a problem if he hears one; time and displayed chord save automatically, with reason/notes optional. Manual annotation and model comparison are advanced tools. They are not prerequisites for play-along or algorithm usefulness feedback.

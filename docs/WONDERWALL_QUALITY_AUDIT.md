@@ -63,11 +63,15 @@ extensions. Prioritise the following before broader model search or iOS work:
    vocabulary and reviewed section order. The existing aligner supports 7sus4
    and add9. Test wrong-quality/wrong-section inputs and permit unknown spans.
 
-The audit and feedback capture are complete. The controls and guided comparison
-are planned: allow **0.5–1 focused day** for a bounded first pass, within the
-broader alignment estimate. This is a planning estimate. Exact recording
-structure and real timing need separate checking; founder transcription is not
-required.
+The audit, controls and bounded guided comparison are complete as of
+11 October 2026. [The richer screen](RICH_QUALITY_SCREEN.md) has 24 cases and
+224 successful comparisons. Correct-chart timing is promising on procedural
+audio, but added extensions survive rejection in all eight plain controls.
+[The full-song hypothesis](WONDERWALL_GUIDED_DRAFT.md) also completes wrong
+section order with substantial compression. It remains unaccepted. The original
+0.5–1 focused-day estimate described this first pass; quality/section acceptance
+and broader real-reference validation remain further work. Founder
+transcription is not required.
 
 Do not replace every D with Dadd9 or B with B7sus4. Preserve raw predictions,
 then cache any accepted teaching arrangement separately. Simplification should

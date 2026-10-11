@@ -43,8 +43,11 @@ ground truth. Guide URLs and this distinction are included in manifest metadata.
 The first founder feedback and [Wonderwall vocabulary audit](WONDERWALL_QUALITY_AUDIT.md)
 identify a specific limit: CREMA cannot emit add9 or 7sus4, and the default
 Chordino dictionary lacks those and suspensions. A capo view preserves whatever
-quality was detected; it cannot supply a missing extension. Rich-quality
-synthetic controls and a separate chart-assisted comparison are planned.
+quality was detected; it cannot supply a missing extension. [Rich-quality
+controls](RICH_QUALITY_SCREEN.md) and [six Wonderwall hypotheses/controls](WONDERWALL_GUIDED_DRAFT.md)
+are complete. Wrong extensions/order can survive current acceptance rules,
+so the guided hypothesis remains a research artifact and does not replace
+the primary player timeline.
 
 ## Build and run on Mac
 

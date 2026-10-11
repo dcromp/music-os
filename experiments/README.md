@@ -23,6 +23,22 @@ Node is needed for the dependency-free browser checks and the separate YouTube i
 
 ## Commands
 
+The [rich-quality screen](../docs/RICH_QUALITY_SCREEN.md) generates and runs
+24 richer/plain/contrast cases automatically. The saved v2 pack/report is the
+current frozen comparison; no founder annotation is required. A new run needs
+the isolated CREMA environment and built Chordino/NNLS assets from the candidate
+setup guides, and fresh output directories:
+
+```sh
+.venv-analysis/bin/python experiments/analysis/rich_quality_suite.py generate --output-dir experiments/generated/rich-quality-suite-new
+.venv-analysis/bin/python experiments/analysis/rich_quality_screen.py --suite experiments/generated/rich-quality-suite-new --output experiments/generated/rich-quality-screen-new
+```
+
+The [Wonderwall wrapper](../docs/WONDERWALL_GUIDED_DRAFT.md) separately builds
+frozen section/quality controls and runs six alignments, or verifies cached
+outputs without model inference. These results remain research artifacts;
+the automatic player continues to use its existing raw drafts.
+
 Generate a known 22-second triad fixture and reference chart:
 
 ```sh
