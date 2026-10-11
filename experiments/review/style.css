@@ -35,6 +35,7 @@ tr.active { background: #e3f2e8; }
 .chord-caption { display: block; color: #526e62; font-size: .85rem; margin-bottom: 8px; }
 #play-current { display: block; font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; color: #22543e; }
 #next-change { display: block; min-height: 20px; margin-top: 10px; }
+#full-chord { display: block; margin-top: 6px; }
 .upcoming { display: flex; gap: 18px; flex-wrap: wrap; }
 .upcoming-chord { min-width: 72px; display: flex; flex-direction: column; }
 .upcoming-chord strong { font-size: 1.7rem; }

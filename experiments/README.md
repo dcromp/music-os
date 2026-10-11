@@ -23,6 +23,22 @@ Node is needed for the dependency-free browser checks and the separate YouTube i
 
 ## Commands
 
+The beginner view and whole-sequence continuation use saved outputs, with no
+model inference or founder transcription:
+
+```sh
+.venv-analysis/bin/python experiments/analysis/core_chord_screen.py --output experiments/generated/core-chord-screen-new
+.venv-analysis/bin/python experiments/analysis/arrangement_screen.py --output experiments/generated/arrangement-screen-new
+node experiments/review/test.js
+```
+
+[Core scoring](../docs/CORE_CHORD_SCREEN.md) distinguishes exact from reduced
+quality. [Structure diagnostics](../docs/ARRANGEMENT_SCREEN.md) retain raw/stable
+unrestricted sequences and expose wrong-chart rankings; they do not approve
+arrangements. Both commands need cached inputs named in their help/guides and
+a fresh output directory. The player exposes Core chords as an optional display
+after capo conversion, retaining raw outputs and issue timestamps.
+
 The [rich-quality screen](../docs/RICH_QUALITY_SCREEN.md) generates and runs
 24 richer/plain/contrast cases automatically. The saved v2 pack/report is the
 current frozen comparison; no founder annotation is required. A new run needs

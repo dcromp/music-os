@@ -121,8 +121,42 @@ function transposePracticeLabel(label, capo) {
   const bass = parsed[3] === undefined ? "" : "/" + (/^[A-G](?:#|b)?$/.test(parsed[3]) && parsed[3] in notes ? shifted(parsed[3], parsed[1].includes("b")) : parsed[3]);
   return shifted(parsed[1]) + parsed[2] + bass;
 }
-function practiceLabel(label, view, capo) {
-  return view === "capo-shapes" ? transposePracticeLabel(label, capo) : label;
+const QUALITY_MODES = ["full-chords", "core-chords"];
+function coreChordLabel(label) {
+  if (typeof label !== "string") return label;
+  // Reduce only explicit, known qualities. Suspensions do not contain a major
+  // or minor third, so they must not become ordinary major/minor chords.
+  const parsed = /^([A-G](?:#|b)?)([^/]*)(\/(?:[A-G](?:#|b)?|[b#]?[1-7]))?$/.exec(label);
+  if (!parsed) return label;
+  const qualities = { m7: "m", min7: "m", minor7: "m", maj7: "", major7: "", add9: "", add2: "", "7": "", "7sus4": "sus4", "7sus": "sus4",
+    "maj(9)": "", "maj(add9)": "", "(1,3,5,9)": "", "sus4(b7)": "sus4" };
+  const suffix = parsed[2].replace(/^:/, "");
+  if (!Object.hasOwn(qualities, suffix)) return label;
+  return parsed[1] + qualities[suffix] + (parsed[3] || "");
+}
+function practiceLabel(label, view, capo, qualityMode = "full-chords") {
+  if (!QUALITY_MODES.includes(qualityMode)) throw new Error("Invalid chord quality display.");
+  const shape = view === "capo-shapes" ? transposePracticeLabel(label, capo) : label;
+  return qualityMode === "core-chords" ? coreChordLabel(shape) : shape;
+}
+function displayedChord(label, view, capo, qualityMode = "full-chords") {
+  return label === "N" ? "No chord" : label === "X" ? "Unclear" : practiceLabel(label, view, capo, qualityMode);
+}
+function practiceTimeline(events, view, capo, qualityMode = "full-chords") {
+  const result = [];
+  for (const event of events) {
+    const displayed = { ...event, label: practiceLabel(event.label, view, capo, qualityMode),
+      full_label: practiceLabel(event.label, view, capo) };
+    const previous = result[result.length - 1];
+    // Merge only adjacent equal core harmony. Never bridge a gap, uncertainty
+    // or silence; original charts still provide the detector label at each tap.
+    const coreHarmony = /^[A-G](?:#|b)?(?::?(?:maj|min|major|minor|m|sus2|sus4))?(?:\/(?:[A-G](?:#|b)?|[b#]?[1-7]))?$/.test(displayed.label);
+    if (qualityMode === "core-chords" && coreHarmony && previous &&
+        previous.end_seconds === displayed.start_seconds && previous.label === displayed.label) {
+      previous.end_seconds = displayed.end_seconds;
+    } else result.push(displayed);
+  }
+  return result;
 }
 function feedbackKey(packId, reviewCase) {
   return "music-os-playalong-feedback:" + JSON.stringify([packId, reviewCase.id, reviewCase.recording.audio_sha256]);
@@ -130,7 +164,7 @@ function feedbackKey(packId, reviewCase) {
 function feedbackExport(reviewCase, packId, feedback) {
   return { schema_version: "playalong-feedback-1.0", review_pack_id: packId, recording: reviewCase.recording,
     origin: reviewCase.origin || null, candidate_exposure: "model-exposed", gold: false,
-    semantics: "Playback issue reports, not chord labels or verified change times. Times are captured at the tap and include listener reaction delay. raw_sounding_chord is the detector label; displayed_chord follows the recorded practice view and capo.",
+    semantics: "Playback issue reports, not chord labels or verified change times. Times are captured at the tap and include listener reaction delay. raw_sounding_chord is the detector label; displayed_chord follows the recorded practice view, capo and quality_mode. Missing quality_mode in older reports means full-chords.",
     feedback: feedback.map(item => ({ ...item })) };
 }
 function captureFeedback(reviewCase, seconds, chart, id, createdAt, practice = {}) {
@@ -140,19 +174,22 @@ function captureFeedback(reviewCase, seconds, chart, id, createdAt, practice = {
   validateCandidate(chart, reviewCase.recording);
   const event = currentEvent(chart.chords, seconds);
   const view = practice.view || "sounding-pitches", capo = view === "capo-shapes" ? practice.capo : 0;
+  const qualityMode = practice.qualityMode ?? "full-chords";
   if (!["sounding-pitches", "capo-shapes"].includes(view) || !Number.isInteger(capo) || capo < 0 || capo > 12) throw new Error("Invalid practice display.");
+  if (!QUALITY_MODES.includes(qualityMode)) throw new Error("Invalid chord quality display.");
   return { id, playback_seconds: seconds,
     source_seconds: seconds + (reviewCase.origin?.source_offset_seconds || 0),
     candidate_analysis_id: chart.analysis?.id || null, raw_sounding_chord: event?.label || null,
-    displayed_chord: event ? practiceLabel(event.label, view, capo) : null,
-    practice_view: view, practice_capo: capo,
+    displayed_chord: event ? displayedChord(event.label, view, capo, qualityMode) : null,
+    practice_view: view, practice_capo: capo, quality_mode: qualityMode,
     reason: "not-sure", note: "", created_at: createdAt };
 }
 function validFeedback(item, recording) {
   return item && typeof item.id === "string" && item.id && validNumber(item.playback_seconds) &&
     item.playback_seconds >= 0 && item.playback_seconds <= recording.duration_seconds &&
     validNumber(item.source_seconds) && FEEDBACK_REASONS.includes(item.reason) &&
-    typeof item.note === "string" && item.note.length <= 1000 && typeof item.created_at === "string";
+    typeof item.note === "string" && item.note.length <= 1000 && typeof item.created_at === "string" &&
+    (item.quality_mode === undefined || QUALITY_MODES.includes(item.quality_mode));
 }
 function loadFeedback(storage, key, reviewCase, packId) {
   try {
@@ -177,7 +214,7 @@ function timeLabel(seconds) {
 if (typeof module !== "undefined" && module.exports) {
   module.exports = { annotationExport, validateCandidate, currentEvent, exposureKey, loadExposure, recordExposure,
     refreshExposure, pairedRecording, validateEvidence, clampSeek, playbackSnapshot, feedbackKey, feedbackExport,
-    captureFeedback, loadFeedback, saveFeedback, timeLabel, transposePracticeLabel, practiceLabel };
+    captureFeedback, loadFeedback, saveFeedback, timeLabel, transposePracticeLabel, practiceLabel, coreChordLabel, displayedChord, practiceTimeline };
 }
 
 if (typeof document !== "undefined") {
@@ -196,7 +233,7 @@ if (typeof document !== "undefined") {
     return response.json();
   }
   function controls(enabled) {
-    for (const id of ["restart", "go", "back", "mark", "save", "show", "reveal", "problem", "save-feedback", "copy-feedback"]) el(id).disabled = !enabled;
+    for (const id of ["restart", "go", "back", "mark", "save", "show", "reveal", "problem", "save-feedback", "copy-feedback", "quality-mode"]) el(id).disabled = !enabled;
   }
   function readyControls() { controls(Boolean(state?.primary && state.audioReady)); }
   function seek(seconds) {
@@ -271,6 +308,8 @@ if (typeof document !== "undefined") {
     el("practice").hidden = !selected.practice;
     el("chord-view-choice").hidden = !capo;
     el("chord-view").value = state.practiceView;
+    el("quality-mode").value = state.qualityMode;
+    el("quality-info").hidden = state.qualityMode !== "core-chords";
     el("chord-view").options[0].textContent = `Capo ${capo} · played shapes`;
     el("practice").textContent = capo && state.practiceView === "capo-shapes"
       ? `Capo ${capo} on your guitar. Chords below are the shapes you play.`
@@ -282,12 +321,14 @@ if (typeof document !== "undefined") {
       const key = exposureKey(packId, selected), saved = loadFeedback(storage, feedbackKey(packId, selected), selected, packId);
       states.set(selected.id, { marks: [], notes: "", ...loadExposure(storage, key), exposureKey: key, packId,
         ...saved, feedbackKey: feedbackKey(packId, selected), primary: null, evidence: null, candidates: null,
-        audioReady: false, practiceView: selected.practice?.capo ? "capo-shapes" : "sounding-pitches", started: performance.now() });
+        audioReady: false, practiceView: selected.practice?.capo ? "capo-shapes" : "sounding-pitches",
+        qualityMode: "full-chords", started: performance.now() });
     }
     state = states.get(selected.id); const target = state, reviewCase = selected;
     state.audioReady = false; controls(false); audio.pause(); audio.removeAttribute("src"); audio.load();
     el("comparison").hidden = true; el("candidate-events").replaceChildren(); el("candidate").replaceChildren();
     el("play-current").textContent = "Loading…"; el("upcoming").replaceChildren(); el("next-change").textContent = "";
+    el("full-chord").hidden = true;
     el("feedback-detail").hidden = true; state.activeFeedback = null;
     el("notes").value = state.notes; el("export").hidden = true; el("feedback-export").hidden = true;
     el("point-notice").hidden = true;
@@ -316,14 +357,20 @@ if (typeof document !== "undefined") {
     if (!selected) return;
     el("position").textContent = `${timeLabel(audio.currentTime)} / ${timeLabel(selected.recording.duration_seconds)}`;
     if (state?.primary) {
-      const snapshot = playbackSnapshot(state.primary.chords, audio.currentTime);
-      const display = label => ({ N: "No chord", X: "Unclear" }[label] || practiceLabel(label, state.practiceView, selected.practice?.capo || 0));
+      const timeline = practiceTimeline(state.primary.chords, state.practiceView, selected.practice?.capo || 0, state.qualityMode);
+      const snapshot = playbackSnapshot(timeline, audio.currentTime);
+      const display = label => label === "N" ? "No chord" : label === "X" ? "Unclear" : label;
       el("play-current").textContent = snapshot.current ? display(snapshot.current.label) : "—";
+      const rawCurrent = currentEvent(state.primary.chords, audio.currentTime);
+      const fullLabel = rawCurrent ? displayedChord(rawCurrent.label, state.practiceView, selected.practice?.capo || 0) : null;
+      el("full-chord").hidden = !snapshot.current || fullLabel === display(snapshot.current.label);
+      el("full-chord").textContent = fullLabel ? `Full chord: ${fullLabel}` : "";
       el("next-change").textContent = snapshot.upcoming.length ? `Next in ${Math.max(0, snapshot.upcoming[0].start_seconds - audio.currentTime).toFixed(1)} s` : "";
       el("upcoming").replaceChildren();
       for (const event of snapshot.upcoming) {
         const node = document.createElement("div"); node.className = "upcoming-chord";
         const chord = document.createElement("strong"); chord.textContent = display(event.label);
+        chord.title = `Full chord: ${display(event.full_label)}`;
         const time = document.createElement("span"); time.textContent = timeLabel(event.start_seconds); node.append(chord, time); el("upcoming").append(node);
       }
       const point = (state.evidence?.review_points || []).find(item => item.start_seconds <= audio.currentTime && audio.currentTime < item.end_seconds);
@@ -363,7 +410,7 @@ if (typeof document !== "undefined") {
   el("problem").addEventListener("click", () => {
     try {
       const item = captureFeedback(selected, audio.currentTime, state.primary, `${Date.now()}-${++feedbackCounter}`, new Date().toISOString(),
-        {view: state.practiceView, capo: selected.practice?.capo || 0});
+        {view: state.practiceView, capo: selected.practice?.capo || 0, qualityMode: state.qualityMode});
       state.feedback.push(item); state.activeFeedback = item.id; persist(); renderFeedback();
       el("feedback-detail").hidden = false; el("captured").textContent = `Captured at ${timeLabel(item.playback_seconds)}. You can keep playing.`;
       el("reason").value = "not-sure"; el("feedback-note").value = "";
@@ -402,6 +449,7 @@ if (typeof document !== "undefined") {
   });
   el("candidate").addEventListener("change", renderCandidate);
   el("chord-view").addEventListener("change", () => { state.practiceView = el("chord-view").value; practiceInfo(); updateClock(); });
+  el("quality-mode").addEventListener("change", () => { state.qualityMode = el("quality-mode").value; practiceInfo(); updateClock(); });
   el("points-details").addEventListener("toggle", updateClock);
   audio.addEventListener("loadedmetadata", () => {
     if (!selected || audio.currentSrc !== safeURL(selected.audio_url)) return;

@@ -20,10 +20,12 @@
       <p class="note">This is an automatic draft. Some chords and changes may need correction.</p>
       <p id="practice" class="small" hidden></p>
       <div id="chord-view-choice" class="controls" hidden><label for="chord-view">Chord display</label><select id="chord-view"><option value="capo-shapes">Capo shapes</option><option value="sounding-pitches">Sounding pitches</option></select></div>
+      <div class="controls"><label for="quality-mode">Chord detail</label><select id="quality-mode" disabled><option value="full-chords">Full chords</option><option value="core-chords">Core chords</option></select></div>
+      <p id="quality-info" class="note" hidden>Core chords leave out some added notes, such as Em7 → Em and Cadd9 → C. Suspended chords stay suspended: Dsus4 stays Dsus4. This can help you start playing, but may change the sound.</p>
       <audio id="audio" controls preload="metadata"></audio>
       <p id="position" class="position">0:00</p>
       <div class="chord-strip" aria-label="Automatic chord draft">
-        <div class="now-card"><span class="chord-caption">Now</span><strong id="play-current">Loading…</strong><span id="next-change" class="small"></span></div>
+        <div class="now-card"><span class="chord-caption">Now</span><strong id="play-current">Loading…</strong><span id="full-chord" class="small" hidden></span><span id="next-change" class="small"></span></div>
         <div class="upcoming-card"><span class="chord-caption">Coming up</span><div id="upcoming" class="upcoming"></div></div>
       </div>
       <div class="controls"><button id="restart" disabled>Restart</button><button id="back" disabled>Back 2 seconds</button></div>

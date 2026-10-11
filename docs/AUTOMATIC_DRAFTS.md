@@ -55,6 +55,19 @@ examples. [Wonderwall diagnostics](WONDERWALL_GUARDED_CHECK.md) eliminate silent
 progress and expose partial endpoints, but cannot verify recording-specific
 section order. These research outputs do not replace the player's raw drafts.
 
+The beginner **Core chords** option is a display convention applied after capo
+conversion: m7 → minor, 7/maj7/add9 → major, 7sus4 → sus4. Suspensions remain
+distinct from major/minor; other qualities and slash bass remain explicit.
+Full chords is the default. Contiguous equal core labels merge for the current/
+upcoming display; no silence, unknown interval or temporal gap is filled. The
+current full detected shape remains visible when it differs. This does not
+alter model output, timing, optional model-disagreement evidence or source data.
+
+[48 saved predictions](CORE_CHORD_SCREEN.md) score higher under that easier
+quality task, but root/suspension errors remain. A [25-comparison sequence
+diagnostic](ARRANGEMENT_SCREEN.md) sometimes ranks wrong repeats best. Neither
+result approves a teacher-guided chart or verifies a substitute arrangement.
+
 ## Build and run on Mac
 
 From the repository checkout with `.venv-analysis` already installed:

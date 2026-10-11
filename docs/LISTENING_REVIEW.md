@@ -10,6 +10,10 @@ If a moment feels wrong, tap **Something feels wrong**. The page records the pla
 
 Wonderwall defaults to **Capo 2 · played shapes**, using its teacher-guide capo suggestion. The practice display transposes detected roots and named bass notes while preserving quality; raw sounding-pitch charts stay unchanged. You can select **Sounding pitches** instead. Feedback preserves both labels and the selected capo/view. Creep and House use no capo suggestion beyond zero.
 
+**Chord detail → Core chords** offers a simpler view: Em7 → Em, Cadd9 → C, A7sus4 → Asus4. Dsus4 stays Dsus4; replacing it with D would introduce a third. The current full shape appears underneath when it differs. Full chords is the default, and reload restores that default. The choice is retained per song within the current tab. This convention leaves out notes and may change the sound; actual fingering/transition difficulty is a separate question. [The retrospective screen](CORE_CHORD_SCREEN.md) measures extension differences ignored, not detector improvement.
+
+Contiguous events showing the same core chord appear as one interval, so the next cue reflects the next different displayed harmony. Silence, uncertainty and missing intervals are preserved. Raw events still determine the detector label and timestamp recorded when you tap an issue.
+
 Disagreement points are under optional details. They are places where algorithms differ, not a list of known mistakes. Many flags have a correct primary chord, and some shared errors produce no flag. [Automated warning evaluation](DRAFT_SCREEN.md) measures that limitation without founder annotations. These hints never block playback or rewrite the primary timeline.
 
 ## Start on the Mac
@@ -27,7 +31,7 @@ The existing synthetic bench remains on port 8067. Stop either command with Ctrl
 
 Issues, optional reasons and notes save to browser-local storage, keyed by pack, recording ID and exact audio hash. Reloading restores them. This storage stays in the browser profile/origin where you used the player; another browser or clearing storage does not retain it. If storage is unavailable, the page reports that limitation and keeps feedback in the tab with optional export.
 
-**Download feedback** and **Copy feedback JSON** are backups, not required steps. Exports use a feedback schema separate from manual chord annotations. They record source coordinates, the raw sounding chord, displayed chord/shape, practice view and whether the user heard a problem. They are not reference truth or algorithm-accuracy labels.
+**Download feedback** and **Copy feedback JSON** are backups, not required steps. Exports use a feedback schema separate from manual chord annotations. They record source coordinates, the raw sounding chord, displayed chord/shape, practice view, `quality_mode` and whether the user heard a problem. Earlier reports without `quality_mode` mean Full chords and still load. They are not reference truth or algorithm-accuracy labels.
 
 ## Optional research tools
 
@@ -40,3 +44,5 @@ Independent accuracy evaluation uses existing annotated datasets and separately 
 ## Verification
 
 Tests cover exact audio/chart matching, full-duration preparation, feedback capture from the playback clock, source offsets, persistence and case isolation, optional manual provenance, practice transposition, and private HTTP routes. Browser smoke checked immediate chords, seeking, issue capture, reload persistence and song switching. The deployed player additionally verified Creep's immediate G/B/C/Cm cues and Wonderwall switching between Em7/G practice shapes and F#m7/A sounding pitches. QA feedback stayed on a separate test origin; the deployed Creep page was left with no invented user issues.
+
+The core-view continuation adds nine helper checks (29 total), including pitch-class subsets, suspensions, slash bass, display-only merging and backward compatible feedback. A temporary port-8069 QA browser verified Em / Full chord: Em7 at 16s with capo 2, F#m / Full chord: F#m7 in sounding view, automatic issue capture, note persistence across reload and replay. Test feedback remains isolated on that QA origin; the normal player receives no invented issue reports.

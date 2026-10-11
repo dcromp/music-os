@@ -1,6 +1,6 @@
 "use strict";
 const assert = require("node:assert/strict");
-const { annotationExport, validateCandidate, currentEvent, exposureKey, loadExposure, recordExposure, refreshExposure, validateEvidence, clampSeek, playbackSnapshot, feedbackKey, feedbackExport, captureFeedback, loadFeedback, saveFeedback, transposePracticeLabel, practiceLabel } = require("./app.js");
+const { annotationExport, validateCandidate, currentEvent, exposureKey, loadExposure, recordExposure, refreshExposure, validateEvidence, clampSeek, playbackSnapshot, feedbackKey, feedbackExport, captureFeedback, loadFeedback, saveFeedback, transposePracticeLabel, practiceLabel, coreChordLabel, displayedChord, practiceTimeline } = require("./app.js");
 let checks = 0;
 function test(name, callback) { callback(); checks++; console.log(`ok ${name}`); }
 const recording = { id: "excerpt", title: "Generated", audio_sha256: "hash", duration_seconds: 20, sample_rate_hz: 100 };
@@ -187,5 +187,108 @@ test("capo-view feedback preserves raw detector output and the shape actually di
   const original = captureFeedback(reviewCase, 6.25, sourceChart, "original-tap", "now", {view: "sounding-pitches", capo: 2});
   assert.equal(original.displayed_chord, "F#m7/C#");
   assert.equal(original.practice_capo, 0);
+});
+test("core chords reduce only known added notes while full display stays unchanged", () => {
+  const examples = [["Em7", "Em"], ["Cmaj7", "C"], ["Cadd9", "C"],
+    ["G7", "G"], ["A7sus4", "Asus4"], ["C:7", "C"], ["E:min7", "Em"],
+    ["C:maj7", "C"], ["C:add9", "C"], ["A:7sus4", "Asus4"],
+    ["Gminor7", "Gm"], ["Cmaj(add9)", "C"], ["C(1,3,5,9)", "C"], ["Asus4(b7)", "Asus4"],
+    ["A:sus4(b7)", "Asus4"], ["D:maj(add9)/F#", "D/F#"]];
+  for (const [full, core] of examples) {
+    assert.equal(coreChordLabel(full), core);
+    assert.equal(practiceLabel(full, "sounding-pitches", 0), full);
+    assert.equal(practiceLabel(full, "sounding-pitches", 0, "core-chords"), core);
+  }
+});
+test("core qualities contain only pitch classes already in each full chord", () => {
+  // Independently specified intervals check the musical subset, including sus4.
+  const examples = [
+    ["Cm7", [0, 3, 7, 10], "Cm", [0, 3, 7]],
+    ["Cmaj7", [0, 4, 7, 11], "C", [0, 4, 7]],
+    ["Cadd9", [0, 2, 4, 7], "C", [0, 4, 7]],
+    ["C7", [0, 4, 7, 10], "C", [0, 4, 7]],
+    ["C7sus4", [0, 5, 7, 10], "Csus4", [0, 5, 7]]
+  ];
+  for (const [full, fullNotes, core, coreNotes] of examples) {
+    assert.equal(coreChordLabel(full), core);
+    assert.equal(coreNotes.every(note => fullNotes.includes(note)), true);
+  }
+});
+test("D and Dsus4 remain different; unsupported and unknown qualities remain explicit", () => {
+  assert.notEqual(coreChordLabel("D"), coreChordLabel("Dsus4"));
+  for (const label of ["D", "Dm", "Dsus2", "Dsus4", "Ddim", "Ddim7", "Daug", "D5", "Dm7b5", "D6", "Dm6", "Dmmaj7",
+    "Dsus4(7)", "DM7", "D:dim7", "D:hdim7", "D:aug", "D:sus4(7)", "Dunknown", "Dadd9/unknown", "N", "X", "?", "unknown"]) {
+    assert.equal(coreChordLabel(label), label);
+  }
+  assert.equal(displayedChord("X", "sounding-pitches", 0, "core-chords"), "Unclear");
+  assert.equal(displayedChord("N", "sounding-pitches", 0, "core-chords"), "No chord");
+});
+test("capo transposition precedes core reduction and preserves named or relative bass", () => {
+  for (const [source, result] of [["F#m7/C#", "Em/B"], ["Bbmaj7/F", "Ab/Eb"],
+    ["F#:min7/b3", "Em/b3"], ["B7sus4/5", "Asus4/5"]]) {
+    assert.equal(practiceLabel(source, "capo-shapes", 2, "core-chords"), result);
+  }
+  assert.throws(() => practiceLabel("Em7", "sounding-pitches", 0, "guess"));
+});
+test("core feedback preserves raw full chord, played shape, quality mode and unchanged chart times", () => {
+  const sourceChart = {...chart, chords: [{start_seconds: 0, end_seconds: 20, label: "F#m7/C#"}]};
+  const original = JSON.stringify(sourceChart);
+  const report = captureFeedback(reviewCase, 6.25, sourceChart, "core-tap", "now", {view: "capo-shapes", capo: 2, qualityMode: "core-chords"});
+  assert.equal(report.raw_sounding_chord, "F#m7/C#");
+  assert.equal(report.displayed_chord, "Em/B");
+  assert.equal(report.practice_view, "capo-shapes");
+  assert.equal(report.practice_capo, 2);
+  assert.equal(report.quality_mode, "core-chords");
+  assert.equal(JSON.stringify(sourceChart), original);
+  assert.equal(captureFeedback(reviewCase, 6.25, chart, "full", "now").quality_mode, "full-chords");
+  assert.throws(() => captureFeedback(reviewCase, 6.25, chart, "invalid", "now", {qualityMode: "guess"}));
+  assert.throws(() => captureFeedback(reviewCase, 6.25, chart, "invalid", "now", {qualityMode: ""}));
+});
+test("core display leaves uncertainty, silence and temporal gaps intact in feedback", () => {
+  const sourceChart = {...chart, chords: [{start_seconds: 0, end_seconds: 5, label: "X"}, {start_seconds: 6, end_seconds: 20, label: "N"}]};
+  const mode = {qualityMode: "core-chords"};
+  assert.equal(captureFeedback(reviewCase, 1, sourceChart, "unknown", "now", mode).displayed_chord, "Unclear");
+  assert.equal(captureFeedback(reviewCase, 1, sourceChart, "unknown", "now", mode).raw_sounding_chord, "X");
+  assert.equal(captureFeedback(reviewCase, 5.5, sourceChart, "gap", "now", mode).displayed_chord, null);
+  assert.equal(captureFeedback(reviewCase, 6, sourceChart, "silence", "now", mode).displayed_chord, "No chord");
+});
+test("feedback reload preserves quality choice, accepts old reports and rejects unknown new modes", () => {
+  const values = new Map();
+  const storage = {getItem: key => values.get(key) ?? null, setItem: (key, value) => values.set(key, value)};
+  const report = captureFeedback(reviewCase, 6.25, chart, "core", "now", {qualityMode: "core-chords"});
+  saveFeedback(storage, "key", reviewCase, "pack", [report]);
+  assert.deepEqual(loadFeedback(storage, "key", reviewCase, "pack").feedback, [report]);
+  const oldReport = {...report}; delete oldReport.quality_mode;
+  storage.setItem("key", JSON.stringify(feedbackExport(reviewCase, "pack", [oldReport])));
+  assert.deepEqual(loadFeedback(storage, "key", reviewCase, "pack").feedback, [oldReport]);
+  storage.setItem("key", JSON.stringify(feedbackExport(reviewCase, "pack", [{...report, quality_mode: "unknown-mode"}])));
+  assert.equal(loadFeedback(storage, "key", reviewCase, "pack").persistence, "unavailable");
+});
+test("core timeline merges contiguous equal shapes without changing raw labels or feedback times", () => {
+  const events = [{start_seconds: 0, end_seconds: 5, label: "F#m7"}, {start_seconds: 5, end_seconds: 10, label: "F#m"},
+    {start_seconds: 10, end_seconds: 15, label: "Esus4"}, {start_seconds: 15, end_seconds: 20, label: "E"}];
+  const original = JSON.stringify(events);
+  const displayed = practiceTimeline(events, "capo-shapes", 2, "core-chords");
+  assert.deepEqual(displayed.map(event => [event.start_seconds, event.end_seconds, event.label]), [[0, 10, "Em"], [10, 15, "Dsus4"], [15, 20, "D"]]);
+  assert.equal(playbackSnapshot(displayed, 6).upcoming[0].start_seconds, 10);
+  assert.equal(JSON.stringify(events), original);
+  const sourceChart = {...chart, chords: events};
+  const report = captureFeedback(reviewCase, 6, sourceChart, "merged", "now", {view: "capo-shapes", capo: 2, qualityMode: "core-chords"});
+  assert.equal(report.playback_seconds, 6);
+  assert.equal(report.raw_sounding_chord, "F#m");
+  assert.equal(report.displayed_chord, "Em");
+  assert.equal(practiceTimeline(events, "capo-shapes", 2).length, events.length);
+});
+test("core timeline never bridges gaps, silence, uncertainty or suspended-to-major changes", () => {
+  const events = [{start_seconds: 0, end_seconds: 1, label: "Cadd9"}, {start_seconds: 2, end_seconds: 3, label: "C"},
+    {start_seconds: 3, end_seconds: 4, label: "X"}, {start_seconds: 4, end_seconds: 5, label: "X"},
+    {start_seconds: 5, end_seconds: 6, label: "N"}, {start_seconds: 6, end_seconds: 7, label: "N"},
+    {start_seconds: 7, end_seconds: 8, label: "Dsus4"}, {start_seconds: 8, end_seconds: 9, label: "D"}];
+  const displayed = practiceTimeline(events, "sounding-pitches", 0, "core-chords");
+  assert.equal(displayed.length, events.length);
+  assert.equal(currentEvent(displayed, 1.5), null);
+  assert.equal(currentEvent(displayed, 3.5).label, "X");
+  assert.equal(currentEvent(displayed, 5.5).label, "N");
+  assert.equal(currentEvent(displayed, 7.5).label, "Dsus4");
 });
 console.log(`${checks} review helper checks passed`);
