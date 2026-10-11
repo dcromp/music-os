@@ -35,7 +35,7 @@ Updated 11 October 2026. Status and deployment information belong in this README
 | Guarded quality / section acceptance | Implemented and evaluated | Active-evidence dwell and same-root/added-tone checks; original aligner remains frozen; [evaluation](docs/ACCEPTANCE_SCREEN.md) |
 | Fresh acceptance validation | Complete | 888 development/validation attempts, zero failures; NNLS reduces wrong-label seconds by 77.8% on fresh corrupt charts and retains 96.3% correct harmony on correct charts; spectral guard fails retention check |
 | Guarded Wonderwall diagnostic | Complete, unaccepted | All six runs eliminate silent progress; reversed NNLS is partial, but wrong arrangements still retain labels; [diagnostics](docs/WONDERWALL_GUARDED_CHECK.md) |
-| Beginner core-chord display | Implemented; QA browser verified | Optional Core chords view removes selected extensions, retains suspensions and raw feedback; 29 browser helper checks pass |
+| Beginner core-chord display | Deployed and browser verified | Optional Core chords view removes selected extensions, retains suspensions and raw feedback; 29 browser helper checks pass |
 | Core-chord cached screen | Complete | 48 unchanged outputs rescored: CREMA 61.0% exact / 73.8% core, Chordino 61.5% / 72.8%; [retrospective results](docs/CORE_CHORD_SCREEN.md) |
 | Whole-sequence diagnostic | Complete, insufficient for acceptance | 25 cached comparisons; stable edit distance ranks the correct chart first in 3/4 procedural recordings, with a wrong extra repeat first in the fourth; [results](docs/ARRANGEMENT_SCREEN.md) |
 | Representative real references / learner validation | Next | Estimated 1.5–2.5 focused days for broader annotated/version-matched checks; founder transcription is not required |
@@ -50,9 +50,9 @@ The first qualitative feedback is promising: the player seems mostly correct, wi
 
 The [new guarded comparison](docs/ACCEPTANCE_SCREEN.md) freezes settings on development cases before 16 fresh synthetic recordings. Harmonic progress through silence is eliminated. The NNLS path reduces incorrect-label time on corrupt charts from 272.492 to 60.392 seconds while correct-chart harmonic quality remains 96.3%; neither result is real-song accuracy. The spectral guard loses too much correct harmony and is excluded from further guarded-arrangement consideration. Wrong chords and missing/extra repeats still survive, and short unknown gaps add display changes. Keep CREMA for current automatic drafts and NNLS as the guarded-alignment research candidate; whole-arrangement validation remains necessary.
 
-## Run on Mac
-
 The founder's beginner focus now has an optional **Core chords** display. Em7 becomes Em and Cadd9 becomes C; Dsus4 stays Dsus4, and A7sus4 becomes Asus4. Full chords remain the default. Adjacent identical core labels display as one interval, while gaps, silence and uncertainty stay visible. Saved charts, raw labels and feedback timestamps are preserved. The [48-output cached screen](docs/CORE_CHORD_SCREEN.md) shows which extension distinctions this easier task ignores; it does not improve the detector or establish substitute suitability. The [25-comparison structure diagnostic](docs/ARRANGEMENT_SCREEN.md) uses a chart-independent acoustic sequence, but still sometimes favours wrong repeats. No guided arrangement is promoted.
+
+## Run on Mac
 
 The experiment bench is a local browser tool, independent of the Expo app. Requirements: Python 3.12 and a browser; FFmpeg is needed only to convert other local recordings.
 
@@ -122,10 +122,10 @@ Open [http://127.0.0.1:8067](http://127.0.0.1:8067/) and press **Load demo**. Ch
 | Target | State | Start / stop |
 |---|---|---|
 | Mac experiment bench | Running locally in this session; live browser checks passed | Run `lab.py serve`; opens on localhost port 8067. Stop with Ctrl+C. Use `--port 8069` if needed; listening review uses 8068. |
-| Mac automatic player | Running on port 8068; new core view verified on temporary QA origin, deployment verification in progress | Run `automatic_drafts.py serve --pack experiments/generated/automatic-playalong --port 8068`; stop with Ctrl+C. Reload after checkout updates. |
+| Mac automatic player | Running on port 8068; core/full and capo/sounding views verified, served file bytes checked | Run `automatic_drafts.py serve --pack experiments/generated/automatic-playalong --port 8068`; stop with Ctrl+C. Reload an older tab to load the Core chords selector. |
 | Rich-chord / Wonderwall research | Tools and cached v2 results saved in the Mac checkout; hashes and 26 new checks verified | See [rich screen](docs/RICH_QUALITY_SCREEN.md) and [frozen Wonderwall CLI](docs/WONDERWALL_GUIDED_DRAFT.md). Recognition reruns need isolated model environments; cached diagnostics do not. |
 | Guarded acceptance research | Frozen settings, 888 comparison outputs and six verified Wonderwall diagnostics saved on Mac | [Acceptance guide](docs/ACCEPTANCE_SCREEN.md) and [full-song check](docs/WONDERWALL_GUARDED_CHECK.md); existing native caches suffice, with no neural inference or player change |
-| Core / structure diagnostics | 48 core and 25 structure comparisons complete; caches being installed on Mac | [Core screen](docs/CORE_CHORD_SCREEN.md), [structure screen](docs/ARRANGEMENT_SCREEN.md); cached runs require no model environments |
+| Core / structure diagnostics | 48 core and 25 structure comparisons complete; all cache input/outcome hashes verified on Mac | [Core screen](docs/CORE_CHORD_SCREEN.md), [structure screen](docs/ARRANGEMENT_SCREEN.md); `core-chord-screen-v1` and `arrangement-screen-v2` saved locally, with no model environments needed |
 | Public web service | Not deployed | Hosting, authentication, storage and public launch are later work |
 | Native macOS app | Not configured | The current Mac tool is a browser page plus local analysis scripts |
 | Expo web product | Existing build fails | Missing `react-native-web-webview` in the YouTube wrapper; defer repair until product integration |
