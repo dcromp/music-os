@@ -39,6 +39,13 @@ frozen section/quality controls and runs six alignments, or verifies cached
 outputs without model inference. These results remain research artifacts;
 the automatic player continues to use its existing raw drafts.
 
+[Acceptance experiments](../docs/ACCEPTANCE_SCREEN.md) use `acceptance_fixtures.py`
+for fresh voiced/silent/repeat cases, `guarded_aligner.py` for active-evidence
+dwell and quality abstention, and `acceptance_screen.py` for declare/develop/
+freeze/validate stages. The saved policy requires its SHA and matching code
+before validation. No neural inference is needed with the existing native
+feature caches; the original aligner and reports remain unchanged.
+
 Generate a known 22-second triad fixture and reference chart:
 
 ```sh

@@ -49,6 +49,12 @@ are complete. Wrong extensions/order can survive current acceptance rules,
 so the guided hypothesis remains a research artifact and does not replace
 the primary player timeline.
 
+[Guarded validation](ACCEPTANCE_SCREEN.md) now reduces fresh NNLS wrong-label
+time by 77.8% and preserves 96.3% correct harmony on correct-chart synthetic
+examples. [Wonderwall diagnostics](WONDERWALL_GUARDED_CHECK.md) eliminate silent
+progress and expose partial endpoints, but cannot verify recording-specific
+section order. These research outputs do not replace the player's raw drafts.
+
 ## Build and run on Mac
 
 From the repository checkout with `.venv-analysis` already installed:
