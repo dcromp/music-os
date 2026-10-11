@@ -38,6 +38,8 @@ Updated 11 October 2026. Status and deployment information belong in this README
 | Beginner core-chord display | Deployed and browser verified | Optional Core chords view removes selected extensions, retains suspensions and raw feedback; 29 browser helper checks pass |
 | Core-chord cached screen | Complete | 48 unchanged outputs rescored: CREMA 61.0% exact / 73.8% core, Chordino 61.5% / 72.8%; [retrospective results](docs/CORE_CHORD_SCREEN.md) |
 | Whole-sequence diagnostic | Complete, insufficient for acceptance | 25 cached comparisons; stable edit distance ranks the correct chart first in 3/4 procedural recordings, with a wrong extra repeat first in the fourth; [results](docs/ARRANGEMENT_SCREEN.md) |
+| Beginner repertoire seed | Complete | 100 source-linked title candidates from Hal Leonard lists; [catalogue and first ten](docs/CATALOGUE_SEED.md) |
+| First ten recording identities / teaching variants | Next | 1–2 focused hours for version selection, then about half a day for arrangement/difficulty inspection; no new songs imported yet |
 | Representative real references / learner validation | Next | Estimated 1.5–2.5 focused days for broader annotated/version-matched checks; founder transcription is not required |
 
 The synthetic suite compares the template baseline, BTC, CREMA, ChordMini/ChordNet and Chordino across clean triads, voicings/timbres, guitar-like attacks, distractors and timing/vocabulary complexity. ChordMini leads the original core metric including silence (94.7%) and boundary F1 (0.927); the baseline leads the new chord-only core metric (96.1%). Chordino scores 95.4% chord-only, with weaker silence and boundary handling. All audio in that suite is procedural; these are not real-song accuracy estimates and no production algorithm has been selected. The founder's previous analysis code was deleted; the older Expo app only displayed hardcoded sample chords. See [app-readiness criteria](docs/APP_READINESS.md).
@@ -78,6 +80,8 @@ Open [the player](http://127.0.0.1:8068/), choose a song and press play. The cur
 If something feels wrong, tap **Something feels wrong**. The page captures the playback time and chord and saves the issue automatically in this browser. A reason or note is optional. Model disagreements, other charts and manual corrections are under optional details; none is a checklist you must finish. [Instructions](docs/LISTENING_REVIEW.md) explain storage and practice views. The synthetic bench on port 8067 remains optional.
 
 Choose **Chord detail → Core chords** for the simpler view. The current full detected shape appears underneath when it differs. This may change the sound; it is not a verified beginner arrangement. Choice stays with the song during the tab session and returns to Full chords after reload. Issue reports record the quality view used at the tap.
+
+The [100-song candidate pool](catalogue/rock-candidates.json) seeds future work, with a [proposed first ten](docs/CATALOGUE_SEED.md). It does not add 100 playable or verified songs to the current player. Exact recordings, shapes, strumming and progression are the next curation steps.
 
 ## Automated synthetic tests
 
