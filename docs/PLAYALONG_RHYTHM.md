@@ -115,6 +115,12 @@ real-song meter. The UI uses seconds outside observed coverage. Exact inputs,
 references and native predictions are saved in the ignored local
 `experiments/generated/rhythm-screen-v1/` pack; their hashes are in the report.
 
+The subsequent [six-recording paired diagnostic](RHYTHM_REFERENCE_CHECK.md)
+checks nominal-grid pulse agreement and half/one/two-bar duration counts. A tempo
+range fixes one pulse-level failure, but phase remains uneven; no downbeats or
+first-ten arrangements are verified. The frozen fresh selection awaits its
+source host. This continuation adds 20 evaluator checks, with no player changes.
+
 The [deployment snapshot](PLAYALONG_RHYTHM_RESULTS.json) records code/config/data
 hashes and the saved preview. The player is a session-local server; restart
 `automatic_drafts.py serve --pack experiments/generated/automatic-first-ten-v1

@@ -1,0 +1,182 @@
+{
+  "schema_version": "rhythm-reference-selection-1.0",
+  "selected_date": "2026-10-12",
+  "status": "Frozen before new audio acquisition/pulse inference",
+  "seed": 20261012,
+  "selection_rule": "Fixed style/task quota; seeded filename choice, 10 distinct progression/tempo/key groups; exclude every composition group used by prior six performances; no detector outcomes used",
+  "scope": "Nominal GuitarSet beat-position grid for isolated guitar; neither full-mix rock accuracy nor physical played-onset/downbeat detection",
+  "prior_pilot_excluded_ids": [
+    "00_SS3-84-Bb_comp",
+    "01_Rock1-90-C#_comp",
+    "02_Funk1-97-C_comp",
+    "03_BN1-129-Eb_comp",
+    "04_Rock2-142-D_comp",
+    "05_Jazz3-150-C_comp"
+  ],
+  "cases": [
+    {
+      "id": "guitarset-rhythm-03-rock3-148-c-comp",
+      "original_id": "03_Rock3-148-C_comp",
+      "split": "development",
+      "nominal_bpm": 148.0,
+      "source_jams_sha256": "609687bcd7b9dc932d52981cb5f54b91ef004125c8ce36338011a56a3521c036",
+      "zip_entry": {
+        "name": "03_Rock3-148-C_comp_mic.wav",
+        "method": 8,
+        "crc": 1860533867,
+        "compressed_size": 1790084,
+        "size": 2288022,
+        "local_offset": 385857616
+      }
+    },
+    {
+      "id": "guitarset-rhythm-01-rock1-130-a-solo",
+      "original_id": "01_Rock1-130-A_solo",
+      "split": "development",
+      "nominal_bpm": 130.0,
+      "source_jams_sha256": "a49b8dfbf4e98c5e05151ed591b8d0546d9c10cdba3b47d45d5a3a2d8c2fd220",
+      "zip_entry": {
+        "name": "01_Rock1-130-A_solo_mic.wav",
+        "method": 8,
+        "crc": 1010687655,
+        "compressed_size": 1373648,
+        "size": 1953428,
+        "local_offset": 651120495
+      }
+    },
+    {
+      "id": "guitarset-rhythm-02-funk3-98-a-comp",
+      "original_id": "02_Funk3-98-A_comp",
+      "split": "development",
+      "nominal_bpm": 98.0,
+      "source_jams_sha256": "df788d7a5655f1b8a75f6540fef717111748162cddf18fd3275d76143ce81ef3",
+      "zip_entry": {
+        "name": "02_Funk3-98-A_comp_mic.wav",
+        "method": 8,
+        "crc": 676526135,
+        "compressed_size": 2343374,
+        "size": 3455614,
+        "local_offset": 455516712
+      }
+    },
+    {
+      "id": "guitarset-rhythm-02-ss2-107-ab-solo",
+      "original_id": "02_SS2-107-Ab_solo",
+      "split": "development",
+      "nominal_bpm": 107.0,
+      "source_jams_sha256": "38ba295df29b31a842aa37d28a9b6ed6b3e36f648566dfab60a9647bc89e428b",
+      "zip_entry": {
+        "name": "02_SS2-107-Ab_solo_mic.wav",
+        "method": 8,
+        "crc": 1412712544,
+        "compressed_size": 2069742,
+        "size": 3165224,
+        "local_offset": 121565815
+      }
+    },
+    {
+      "id": "guitarset-rhythm-04-rock2-85-f-comp",
+      "original_id": "04_Rock2-85-F_comp",
+      "split": "holdout",
+      "nominal_bpm": 85.0,
+      "source_jams_sha256": "19909e5f07540e8c368f053c1995398e021afdf7e00446f61ddb96439f625c52",
+      "zip_entry": {
+        "name": "04_Rock2-85-F_comp_mic.wav",
+        "method": 8,
+        "crc": 1885388364,
+        "compressed_size": 2924717,
+        "size": 3984320,
+        "local_offset": 420130007
+      }
+    },
+    {
+      "id": "guitarset-rhythm-05-bn3-119-g-solo",
+      "original_id": "05_BN3-119-G_solo",
+      "split": "holdout",
+      "nominal_bpm": 119.0,
+      "source_jams_sha256": "31ef06d39ed934a388232957043368cba6d35ddeb231d7d47bf50f32b8db8d0c",
+      "zip_entry": {
+        "name": "05_BN3-119-G_solo_mic.wav",
+        "method": 8,
+        "crc": 2430399302,
+        "compressed_size": 1953582,
+        "size": 2845658,
+        "local_offset": 2328214
+      }
+    },
+    {
+      "id": "guitarset-rhythm-04-ss1-100-csharp-comp",
+      "original_id": "04_SS1-100-C#_comp",
+      "split": "holdout",
+      "nominal_bpm": 100.0,
+      "source_jams_sha256": "9cee71992ad50e4aca49266702a4c92098a9299bc4051c3daf7aed160ec5914c",
+      "zip_entry": {
+        "name": "04_SS1-100-C#_comp_mic.wav",
+        "method": 8,
+        "crc": 3787208422,
+        "compressed_size": 1736083,
+        "size": 2540204,
+        "local_offset": 164070126
+      }
+    },
+    {
+      "id": "guitarset-rhythm-02-jazz2-187-fsharp-solo",
+      "original_id": "02_Jazz2-187-F#_solo",
+      "split": "holdout",
+      "nominal_bpm": 187.0,
+      "source_jams_sha256": "7cc9c5a06ca1108718c3cd824c09f6e10e8e14959b930e62b06a66e48313313d",
+      "zip_entry": {
+        "name": "02_Jazz2-187-F#_solo_mic.wav",
+        "method": 8,
+        "crc": 839144082,
+        "compressed_size": 1146839,
+        "size": 1810966,
+        "local_offset": 140488606
+      }
+    },
+    {
+      "id": "guitarset-rhythm-00-funk3-112-csharp-solo",
+      "original_id": "00_Funk3-112-C#_solo",
+      "split": "holdout",
+      "nominal_bpm": 112.0,
+      "source_jams_sha256": "0a504b084293001c7626341e37c271df850c8aa4e4ab8e70f1814a5bd22bb817",
+      "zip_entry": {
+        "name": "00_Funk3-112-C#_solo_mic.wav",
+        "method": 8,
+        "crc": 3753312193,
+        "compressed_size": 1909926,
+        "size": 3023928,
+        "local_offset": 498269472
+      }
+    },
+    {
+      "id": "guitarset-rhythm-02-rock3-117-bb-solo",
+      "original_id": "02_Rock3-117-Bb_solo",
+      "split": "holdout",
+      "nominal_bpm": 117.0,
+      "source_jams_sha256": "d7ef83d366385972db702ec64cb7908bea566b7485c8835cb0ee06dd9f595d57",
+      "zip_entry": {
+        "name": "02_Rock3-117-Bb_solo_mic.wav",
+        "method": 8,
+        "crc": 1080130376,
+        "compressed_size": 2110469,
+        "size": 2894450,
+        "local_offset": 353965525
+      }
+    }
+  ],
+  "conditions": [
+    {
+      "id": "default-120",
+      "start_bpm": 120,
+      "tempo_range": null,
+      "input_guidance": "No JAMS tempo, positions, timestamps, filename tempo or beat labels supplied to tracker"
+    },
+    {
+      "id": "nominal-tempo-guided",
+      "start_bpm": "filename nominal BPM",
+      "tempo_range": "0.85..1.15 times nominal BPM",
+      "input_guidance": "Explicit source tempo-level hypothesis only; reference timestamps/beat positions withheld"
+    }
+  ]
+}
