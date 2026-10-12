@@ -29,6 +29,7 @@ project_plan/
 .venv-chordmini/
 .venv-pilot/
 .venv-youtube/
+.venv-beatthis/
 experiments/candidate-assets/
 experiments/generated/
 experiments/local-audio/

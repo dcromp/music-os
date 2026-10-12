@@ -1,0 +1,2771 @@
+{
+  "schema_version": "fresh-guitarset-rhythm-results-1.0",
+  "date": "2026-10-12",
+  "status": "Completed frozen ten-input comparison, no retuning",
+  "selection_sha256": "597f4c82625a82cddebd67f9d5523b7afd4c36d5ed7be798347f6ae25b6a7c12",
+  "tracker_sha256": "b18efd3d3c6eaeec7bfb847ae30b4cc661850b209ddf4f6919200051d88e60de",
+  "evaluator_sha256": "eb213daf06d4b18ccc8bbecb0c76628520b4db1aa90fae8ed550b9d2ea65a1bd",
+  "source_provenance": {
+    "selection_sha256": "597f4c82625a82cddebd67f9d5523b7afd4c36d5ed7be798347f6ae25b6a7c12",
+    "files": [
+      {
+        "original_id": "03_Rock3-148-C_comp",
+        "source_url": "https://zenodo.org/api/records/3371780/files/audio_mono-mic.zip/content",
+        "retrieval_url": "https://huggingface.co/datasets/EZMONYI/music-ai-human-test-audio/resolve/4b649de5ebc78328b3b1e1df5ea1196c2646e143/external_controls/guitarset_source_v1/audio_mono-mic.zip",
+        "retrieval_mirror_revision": "4b649de5ebc78328b3b1e1df5ea1196c2646e143",
+        "mirror_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "official_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "source_archive_declared_md5": "md5:275966d6610ac34999b58426beb119c3",
+        "full_audio_archive_verified": false,
+        "entry_crc32": 1860533867,
+        "entry_size_bytes": 2288022,
+        "source_audio_sha256": "f427266c83e2cd89bfbe76ba99172457537357bc14e83c1ee7cd556dbd576775",
+        "source_jams_sha256": "609687bcd7b9dc932d52981cb5f54b91ef004125c8ce36338011a56a3521c036",
+        "annotation_archive_sha256": "8daa02e6417ccca1685feb44b135e95928ad7037e5032ecb326b5791856fda99",
+        "prepared_audio_sha256": "7af4e0e777eb4bb21edbcbc5c44042fbcc20a27046dd2373934661b3073b9d2d",
+        "time_origin_seconds": 0,
+        "preparation": "FFmpeg mono22050Hz PCM16, notrim/padding/offset",
+        "dataset_doi": "10.5281/zenodo.3371780",
+        "dataset_version": "1.1.0",
+        "selection_sha256": "597f4c82625a82cddebd67f9d5523b7afd4c36d5ed7be798347f6ae25b6a7c12"
+      },
+      {
+        "original_id": "01_Rock1-130-A_solo",
+        "source_url": "https://zenodo.org/api/records/3371780/files/audio_mono-mic.zip/content",
+        "retrieval_url": "https://huggingface.co/datasets/EZMONYI/music-ai-human-test-audio/resolve/4b649de5ebc78328b3b1e1df5ea1196c2646e143/external_controls/guitarset_source_v1/audio_mono-mic.zip",
+        "retrieval_mirror_revision": "4b649de5ebc78328b3b1e1df5ea1196c2646e143",
+        "mirror_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "official_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "source_archive_declared_md5": "md5:275966d6610ac34999b58426beb119c3",
+        "full_audio_archive_verified": false,
+        "entry_crc32": 1010687655,
+        "entry_size_bytes": 1953428,
+        "source_audio_sha256": "650a35f45d80be91e46859568fbb1a85392bcd7a8a5116dbf02b8ac9cba47fb1",
+        "source_jams_sha256": "a49b8dfbf4e98c5e05151ed591b8d0546d9c10cdba3b47d45d5a3a2d8c2fd220",
+        "annotation_archive_sha256": "8daa02e6417ccca1685feb44b135e95928ad7037e5032ecb326b5791856fda99",
+        "prepared_audio_sha256": "cda49647c17389608b12cd668c3837a4c9ebcd13aacae850d1aac37ab934e130",
+        "time_origin_seconds": 0,
+        "preparation": "FFmpeg mono22050Hz PCM16, notrim/padding/offset",
+        "dataset_doi": "10.5281/zenodo.3371780",
+        "dataset_version": "1.1.0",
+        "selection_sha256": "597f4c82625a82cddebd67f9d5523b7afd4c36d5ed7be798347f6ae25b6a7c12"
+      },
+      {
+        "original_id": "02_Funk3-98-A_comp",
+        "source_url": "https://zenodo.org/api/records/3371780/files/audio_mono-mic.zip/content",
+        "retrieval_url": "https://huggingface.co/datasets/EZMONYI/music-ai-human-test-audio/resolve/4b649de5ebc78328b3b1e1df5ea1196c2646e143/external_controls/guitarset_source_v1/audio_mono-mic.zip",
+        "retrieval_mirror_revision": "4b649de5ebc78328b3b1e1df5ea1196c2646e143",
+        "mirror_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "official_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "source_archive_declared_md5": "md5:275966d6610ac34999b58426beb119c3",
+        "full_audio_archive_verified": false,
+        "entry_crc32": 676526135,
+        "entry_size_bytes": 3455614,
+        "source_audio_sha256": "9fced33aa426bd1622a70f66d173c1689c0d5198e5664265c8e26c24cafa5d64",
+        "source_jams_sha256": "df788d7a5655f1b8a75f6540fef717111748162cddf18fd3275d76143ce81ef3",
+        "annotation_archive_sha256": "8daa02e6417ccca1685feb44b135e95928ad7037e5032ecb326b5791856fda99",
+        "prepared_audio_sha256": "616422b9aa3458556eb117dc4541c926be5fbc5f3080c757a7211d45f6623dd5",
+        "time_origin_seconds": 0,
+        "preparation": "FFmpeg mono22050Hz PCM16, notrim/padding/offset",
+        "dataset_doi": "10.5281/zenodo.3371780",
+        "dataset_version": "1.1.0",
+        "selection_sha256": "597f4c82625a82cddebd67f9d5523b7afd4c36d5ed7be798347f6ae25b6a7c12"
+      },
+      {
+        "original_id": "02_SS2-107-Ab_solo",
+        "source_url": "https://zenodo.org/api/records/3371780/files/audio_mono-mic.zip/content",
+        "retrieval_url": "https://huggingface.co/datasets/EZMONYI/music-ai-human-test-audio/resolve/4b649de5ebc78328b3b1e1df5ea1196c2646e143/external_controls/guitarset_source_v1/audio_mono-mic.zip",
+        "retrieval_mirror_revision": "4b649de5ebc78328b3b1e1df5ea1196c2646e143",
+        "mirror_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "official_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "source_archive_declared_md5": "md5:275966d6610ac34999b58426beb119c3",
+        "full_audio_archive_verified": false,
+        "entry_crc32": 1412712544,
+        "entry_size_bytes": 3165224,
+        "source_audio_sha256": "62dd76b1551d81484981161808a281eb5785027110b6ace56c701edd04320685",
+        "source_jams_sha256": "38ba295df29b31a842aa37d28a9b6ed6b3e36f648566dfab60a9647bc89e428b",
+        "annotation_archive_sha256": "8daa02e6417ccca1685feb44b135e95928ad7037e5032ecb326b5791856fda99",
+        "prepared_audio_sha256": "71dab38116c97f0528c818e0d0f41fe150bd90c4f12296b030217298e05ee2b4",
+        "time_origin_seconds": 0,
+        "preparation": "FFmpeg mono22050Hz PCM16, notrim/padding/offset",
+        "dataset_doi": "10.5281/zenodo.3371780",
+        "dataset_version": "1.1.0",
+        "selection_sha256": "597f4c82625a82cddebd67f9d5523b7afd4c36d5ed7be798347f6ae25b6a7c12"
+      },
+      {
+        "original_id": "04_Rock2-85-F_comp",
+        "source_url": "https://zenodo.org/api/records/3371780/files/audio_mono-mic.zip/content",
+        "retrieval_url": "https://huggingface.co/datasets/EZMONYI/music-ai-human-test-audio/resolve/4b649de5ebc78328b3b1e1df5ea1196c2646e143/external_controls/guitarset_source_v1/audio_mono-mic.zip",
+        "retrieval_mirror_revision": "4b649de5ebc78328b3b1e1df5ea1196c2646e143",
+        "mirror_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "official_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "source_archive_declared_md5": "md5:275966d6610ac34999b58426beb119c3",
+        "full_audio_archive_verified": false,
+        "entry_crc32": 1885388364,
+        "entry_size_bytes": 3984320,
+        "source_audio_sha256": "922c7bf773689e55e059c86fd7055fcdc5b3dc33bda75d2ecc4a97ac1f5f431b",
+        "source_jams_sha256": "19909e5f07540e8c368f053c1995398e021afdf7e00446f61ddb96439f625c52",
+        "annotation_archive_sha256": "8daa02e6417ccca1685feb44b135e95928ad7037e5032ecb326b5791856fda99",
+        "prepared_audio_sha256": "ac3151f2a50520c7c80ee65c02ded84d7112add95a686d8d3359cc513e17a972",
+        "time_origin_seconds": 0,
+        "preparation": "FFmpeg mono22050Hz PCM16, notrim/padding/offset",
+        "dataset_doi": "10.5281/zenodo.3371780",
+        "dataset_version": "1.1.0",
+        "selection_sha256": "597f4c82625a82cddebd67f9d5523b7afd4c36d5ed7be798347f6ae25b6a7c12"
+      },
+      {
+        "original_id": "05_BN3-119-G_solo",
+        "source_url": "https://zenodo.org/api/records/3371780/files/audio_mono-mic.zip/content",
+        "retrieval_url": "https://huggingface.co/datasets/EZMONYI/music-ai-human-test-audio/resolve/4b649de5ebc78328b3b1e1df5ea1196c2646e143/external_controls/guitarset_source_v1/audio_mono-mic.zip",
+        "retrieval_mirror_revision": "4b649de5ebc78328b3b1e1df5ea1196c2646e143",
+        "mirror_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "official_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "source_archive_declared_md5": "md5:275966d6610ac34999b58426beb119c3",
+        "full_audio_archive_verified": false,
+        "entry_crc32": 2430399302,
+        "entry_size_bytes": 2845658,
+        "source_audio_sha256": "38f4482cf1e54ae2d4e029960b8fccdd896c2385a17fcd29f6565c06fa74129d",
+        "source_jams_sha256": "31ef06d39ed934a388232957043368cba6d35ddeb231d7d47bf50f32b8db8d0c",
+        "annotation_archive_sha256": "8daa02e6417ccca1685feb44b135e95928ad7037e5032ecb326b5791856fda99",
+        "prepared_audio_sha256": "f025005376535c1c1d462e57cfff301447cf4891f0d3bfb29acfe4f69f3ff10b",
+        "time_origin_seconds": 0,
+        "preparation": "FFmpeg mono22050Hz PCM16, notrim/padding/offset",
+        "dataset_doi": "10.5281/zenodo.3371780",
+        "dataset_version": "1.1.0",
+        "selection_sha256": "597f4c82625a82cddebd67f9d5523b7afd4c36d5ed7be798347f6ae25b6a7c12"
+      },
+      {
+        "original_id": "04_SS1-100-C#_comp",
+        "source_url": "https://zenodo.org/api/records/3371780/files/audio_mono-mic.zip/content",
+        "retrieval_url": "https://huggingface.co/datasets/EZMONYI/music-ai-human-test-audio/resolve/4b649de5ebc78328b3b1e1df5ea1196c2646e143/external_controls/guitarset_source_v1/audio_mono-mic.zip",
+        "retrieval_mirror_revision": "4b649de5ebc78328b3b1e1df5ea1196c2646e143",
+        "mirror_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "official_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "source_archive_declared_md5": "md5:275966d6610ac34999b58426beb119c3",
+        "full_audio_archive_verified": false,
+        "entry_crc32": 3787208422,
+        "entry_size_bytes": 2540204,
+        "source_audio_sha256": "39b592e5ab79e457a7901e865b4320e04014903465acdebd64235b4f44416650",
+        "source_jams_sha256": "9cee71992ad50e4aca49266702a4c92098a9299bc4051c3daf7aed160ec5914c",
+        "annotation_archive_sha256": "8daa02e6417ccca1685feb44b135e95928ad7037e5032ecb326b5791856fda99",
+        "prepared_audio_sha256": "eb13ebe84440b0bc3bc60c5da992eb6f63a39555093e23fc352f2d5518f98655",
+        "time_origin_seconds": 0,
+        "preparation": "FFmpeg mono22050Hz PCM16, notrim/padding/offset",
+        "dataset_doi": "10.5281/zenodo.3371780",
+        "dataset_version": "1.1.0",
+        "selection_sha256": "597f4c82625a82cddebd67f9d5523b7afd4c36d5ed7be798347f6ae25b6a7c12"
+      },
+      {
+        "original_id": "02_Jazz2-187-F#_solo",
+        "source_url": "https://zenodo.org/api/records/3371780/files/audio_mono-mic.zip/content",
+        "retrieval_url": "https://huggingface.co/datasets/EZMONYI/music-ai-human-test-audio/resolve/4b649de5ebc78328b3b1e1df5ea1196c2646e143/external_controls/guitarset_source_v1/audio_mono-mic.zip",
+        "retrieval_mirror_revision": "4b649de5ebc78328b3b1e1df5ea1196c2646e143",
+        "mirror_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "official_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "source_archive_declared_md5": "md5:275966d6610ac34999b58426beb119c3",
+        "full_audio_archive_verified": false,
+        "entry_crc32": 839144082,
+        "entry_size_bytes": 1810966,
+        "source_audio_sha256": "218d77c69150fd0bf4dd05cd21df88920dea4d25dddefddc4b7f00f22f097894",
+        "source_jams_sha256": "7cc9c5a06ca1108718c3cd824c09f6e10e8e14959b930e62b06a66e48313313d",
+        "annotation_archive_sha256": "8daa02e6417ccca1685feb44b135e95928ad7037e5032ecb326b5791856fda99",
+        "prepared_audio_sha256": "85a80182ec83d45bc15ec7a9de47a1dd71ef0a6d59fa2cbeb44e0f2072abafb2",
+        "time_origin_seconds": 0,
+        "preparation": "FFmpeg mono22050Hz PCM16, notrim/padding/offset",
+        "dataset_doi": "10.5281/zenodo.3371780",
+        "dataset_version": "1.1.0",
+        "selection_sha256": "597f4c82625a82cddebd67f9d5523b7afd4c36d5ed7be798347f6ae25b6a7c12"
+      },
+      {
+        "original_id": "00_Funk3-112-C#_solo",
+        "source_url": "https://zenodo.org/api/records/3371780/files/audio_mono-mic.zip/content",
+        "retrieval_url": "https://huggingface.co/datasets/EZMONYI/music-ai-human-test-audio/resolve/4b649de5ebc78328b3b1e1df5ea1196c2646e143/external_controls/guitarset_source_v1/audio_mono-mic.zip",
+        "retrieval_mirror_revision": "4b649de5ebc78328b3b1e1df5ea1196c2646e143",
+        "mirror_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "official_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "source_archive_declared_md5": "md5:275966d6610ac34999b58426beb119c3",
+        "full_audio_archive_verified": false,
+        "entry_crc32": 3753312193,
+        "entry_size_bytes": 3023928,
+        "source_audio_sha256": "42251765d19c8da0faa5f098f1a963310b149435cf21da420035eaa8e0a5e1d1",
+        "source_jams_sha256": "0a504b084293001c7626341e37c271df850c8aa4e4ab8e70f1814a5bd22bb817",
+        "annotation_archive_sha256": "8daa02e6417ccca1685feb44b135e95928ad7037e5032ecb326b5791856fda99",
+        "prepared_audio_sha256": "b64051609a6b49123a70e5399191df7bd865a9a9cd98460ff5d4d1ca91fb4dc9",
+        "time_origin_seconds": 0,
+        "preparation": "FFmpeg mono22050Hz PCM16, notrim/padding/offset",
+        "dataset_doi": "10.5281/zenodo.3371780",
+        "dataset_version": "1.1.0",
+        "selection_sha256": "597f4c82625a82cddebd67f9d5523b7afd4c36d5ed7be798347f6ae25b6a7c12"
+      },
+      {
+        "original_id": "02_Rock3-117-Bb_solo",
+        "source_url": "https://zenodo.org/api/records/3371780/files/audio_mono-mic.zip/content",
+        "retrieval_url": "https://huggingface.co/datasets/EZMONYI/music-ai-human-test-audio/resolve/4b649de5ebc78328b3b1e1df5ea1196c2646e143/external_controls/guitarset_source_v1/audio_mono-mic.zip",
+        "retrieval_mirror_revision": "4b649de5ebc78328b3b1e1df5ea1196c2646e143",
+        "mirror_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "official_tail_sha256": "3932fd9aa5592708867be7c129835d92e7bd5c1f12a92bde377344ab2c2c19e3",
+        "source_archive_declared_md5": "md5:275966d6610ac34999b58426beb119c3",
+        "full_audio_archive_verified": false,
+        "entry_crc32": 1080130376,
+        "entry_size_bytes": 2894450,
+        "source_audio_sha256": "2401b959b0398d01a560f57649663a0ebb893f9dfbfc334bd815fa7106ccb8c4",
+        "source_jams_sha256": "d7ef83d366385972db702ec64cb7908bea566b7485c8835cb0ee06dd9f595d57",
+        "annotation_archive_sha256": "8daa02e6417ccca1685feb44b135e95928ad7037e5032ecb326b5791856fda99",
+        "prepared_audio_sha256": "70eb3e83acd6ed2ab0d4fdb882c501e48458d39ffb75b13716fb456d952ef382",
+        "time_origin_seconds": 0,
+        "preparation": "FFmpeg mono22050Hz PCM16, notrim/padding/offset",
+        "dataset_doi": "10.5281/zenodo.3371780",
+        "dataset_version": "1.1.0",
+        "selection_sha256": "597f4c82625a82cddebd67f9d5523b7afd4c36d5ed7be798347f6ae25b6a7c12"
+      }
+    ]
+  },
+  "conditions": [
+    {
+      "condition": "default-120",
+      "report_sha256": "a76cc379fd05c81cf1b42c1c1b159fba042b9dc988cee2a4d54c12b58670dc69",
+      "predictions_sha256": "397e7394ce0ba765a9b4bfbf5837fb14bb7ed052c9c9dcd5606fbb71e93cf118",
+      "references_sha256": "40227dc4530e36def5b3482372d1b071f954fdb4b64bfb22a61be05b4a9e89ed",
+      "aggregate": {
+        "recordings": 10,
+        "duration_seconds": 317.0224943310658,
+        "whole_recording": {
+          "f1_70ms": {
+            "matched_pulses": 396,
+            "missed_reference_pulses": 212,
+            "extra_estimated_pulses": 248,
+            "micro_f_measure": 0.6325878594249201,
+            "macro_f_measure": 0.6286766782386044
+          },
+          "f1_150ms": {
+            "matched_pulses": 475,
+            "missed_reference_pulses": 133,
+            "extra_estimated_pulses": 169,
+            "micro_f_measure": 0.7587859424920128,
+            "macro_f_measure": 0.7628835158087576
+          }
+        },
+        "standard_after_5s_macro": {
+          "measured_recordings": 10,
+          "metrics": {
+            "f_measure_70ms": 0.6524797292113264,
+            "cemgil_sigma_40ms": 0.4465626106808148,
+            "cemgil_any_metrical_level": 0.5300252874929067,
+            "cmlc": 0.514055874055874,
+            "cmlt": 0.5729447629447629,
+            "amlc": 0.6896339163839164,
+            "amlt": 0.8071696306696307
+          }
+        },
+        "count_windows": {
+          "requested_windows": 568,
+          "supported_windows": 533,
+          "unsupported_windows": 35,
+          "absolute_beat_count_error_mean": 0.7793554941395655,
+          "absolute_beat_count_error_p90": 2.0915498846597447,
+          "absolute_equivalent_bar_length_error_mean": 0.19483887353489138
+        }
+      },
+      "by_split": {
+        "development": {
+          "recordings": 4,
+          "duration_seconds": 123.15324263038549,
+          "whole_recording": {
+            "f1_70ms": {
+              "matched_pulses": 190,
+              "missed_reference_pulses": 50,
+              "extra_estimated_pulses": 44,
+              "micro_f_measure": 0.8016877637130801,
+              "macro_f_measure": 0.809110554729046
+            },
+            "f1_150ms": {
+              "matched_pulses": 206,
+              "missed_reference_pulses": 34,
+              "extra_estimated_pulses": 28,
+              "micro_f_measure": 0.869198312236287,
+              "macro_f_measure": 0.8752313218912152
+            }
+          },
+          "standard_after_5s_macro": {
+            "measured_recordings": 4,
+            "metrics": {
+              "f_measure_70ms": 0.8664983164983165,
+              "cemgil_sigma_40ms": 0.5813868271441379,
+              "cemgil_any_metrical_level": 0.5813868271441379,
+              "cmlc": 0.8592137592137592,
+              "cmlt": 0.9092137592137592,
+              "amlc": 0.8592137592137592,
+              "amlt": 0.9092137592137592
+            }
+          },
+          "count_windows": {
+            "requested_windows": 224,
+            "supported_windows": 210,
+            "unsupported_windows": 14,
+            "absolute_beat_count_error_mean": 0.06285037505864736,
+            "absolute_beat_count_error_p90": 0.14235487059669083,
+            "absolute_equivalent_bar_length_error_mean": 0.01571259376466184
+          }
+        },
+        "holdout": {
+          "recordings": 6,
+          "duration_seconds": 193.86925170068028,
+          "whole_recording": {
+            "f1_70ms": {
+              "matched_pulses": 206,
+              "missed_reference_pulses": 162,
+              "extra_estimated_pulses": 204,
+              "micro_f_measure": 0.5295629820051414,
+              "macro_f_measure": 0.5083874272449768
+            },
+            "f1_150ms": {
+              "matched_pulses": 269,
+              "missed_reference_pulses": 99,
+              "extra_estimated_pulses": 141,
+              "micro_f_measure": 0.6915167095115681,
+              "macro_f_measure": 0.6879849784204524
+            }
+          },
+          "standard_after_5s_macro": {
+            "measured_recordings": 6,
+            "metrics": {
+              "f_measure_70ms": 0.5098006710199997,
+              "cemgil_sigma_40ms": 0.35667979970526603,
+              "cemgil_any_metrical_level": 0.49578426105875245,
+              "cmlc": 0.2839506172839506,
+              "cmlt": 0.3487654320987654,
+              "amlc": 0.5765806878306878,
+              "amlt": 0.7391402116402116
+            }
+          },
+          "count_windows": {
+            "requested_windows": 344,
+            "supported_windows": 323,
+            "unsupported_windows": 21,
+            "absolute_beat_count_error_mean": 1.2451947356472832,
+            "absolute_beat_count_error_p90": 3.907778958174178,
+            "absolute_equivalent_bar_length_error_mean": 0.3112986839118208
+          }
+        }
+      },
+      "cases": [
+        {
+          "recording": {
+            "id": "guitarset-rhythm-03-rock3-148-c-comp",
+            "title": "03_Rock3-148-C_comp / microphone performance",
+            "audio_sha256": "7af4e0e777eb4bb21edbcbc5c44042fbcc20a27046dd2373934661b3073b9d2d",
+            "duration_seconds": 25.940816326530612,
+            "sample_rate_hz": 22050
+          },
+          "split": "development",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 64,
+          "estimated_pulses": 64,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 25.54054054054054,
+            "first_estimated_pulse_seconds": 0.023219954648526078,
+            "last_estimated_pulse_seconds": 25.56517006802721,
+            "reference_pulses_inside_estimated_coverage": 63,
+            "reference_pulses_outside_estimated_coverage": 1
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 64,
+              "missed_reference_pulses": 0,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f_measure": 1.0,
+              "matched_error_median_seconds": 0.036148801863086444,
+              "matched_error_p90_seconds": 0.052223080223078804,
+              "matched_error_max_seconds": 0.06163142734571281
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 64,
+              "missed_reference_pulses": 0,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f_measure": 1.0,
+              "matched_error_median_seconds": 0.036148801863086444,
+              "matched_error_p90_seconds": 0.052223080223078804,
+              "matched_error_max_seconds": 0.06163142734571281
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.036148801863086444,
+            "p90": 0.052223080223078804,
+            "max": 0.06163142734571281,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 51,
+            "estimated_pulses": 51,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 1.0,
+              "cemgil_sigma_40ms": 0.6508857966351743,
+              "cemgil_any_metrical_level": 0.6508857966351743,
+              "cmlc": 1.0,
+              "cmlt": 1.0,
+              "amlc": 1.0,
+              "amlt": 1.0
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 57,
+              "unsupported_windows": 3,
+              "absolute_beat_count_error_mean": 0.030974494587874636,
+              "absolute_beat_count_error_p90": 0.0663894133103696,
+              "absolute_equivalent_bar_length_error_mean": 0.007743623646968659
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 30,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.027505671790210757,
+                "absolute_beat_count_error_p90": 0.05663386272301736,
+                "absolute_equivalent_bar_length_error_mean": 0.006876417947552689
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.030229546773666374,
+                "absolute_beat_count_error_p90": 0.06264904610493238,
+                "absolute_equivalent_bar_length_error_mean": 0.007557386693416593
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.039781721767015554,
+                "absolute_beat_count_error_p90": 0.0779511128775848,
+                "absolute_equivalent_bar_length_error_mean": 0.009945430441753889
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-rhythm-01-rock1-130-a-solo",
+            "title": "01_Rock1-130-A_solo / microphone performance",
+            "audio_sha256": "cda49647c17389608b12cd668c3837a4c9ebcd13aacae850d1aac37ab934e130",
+            "duration_seconds": 22.14721088435374,
+            "sample_rate_hz": 22050
+          },
+          "split": "development",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 48,
+          "estimated_pulses": 45,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 21.692307692307693,
+            "first_estimated_pulse_seconds": 0.5340589569160997,
+            "last_estimated_pulse_seconds": 20.712199546485262,
+            "reference_pulses_inside_estimated_coverage": 43,
+            "reference_pulses_outside_estimated_coverage": 5
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 43,
+              "missed_reference_pulses": 5,
+              "extra_estimated_pulses": 2,
+              "precision": 0.9555555555555556,
+              "recall": 0.8958333333333334,
+              "f_measure": 0.9247311827956989,
+              "matched_error_median_seconds": 0.02541077969649308,
+              "matched_error_p90_seconds": 0.043177394034536756,
+              "matched_error_max_seconds": 0.05703122274550765
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 45,
+              "missed_reference_pulses": 3,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 0.9375,
+              "f_measure": 0.967741935483871,
+              "matched_error_median_seconds": 0.025745682888540067,
+              "matched_error_p90_seconds": 0.045569160997732006,
+              "matched_error_max_seconds": 0.07252049537763816
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.02810395953253053,
+            "p90": 0.061175649747077246,
+            "max": 0.980108145822431,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 37,
+            "estimated_pulses": 35,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.9444444444444445,
+              "cemgil_sigma_40ms": 0.7603288256398448,
+              "cemgil_any_metrical_level": 0.7603288256398448,
+              "cmlc": 0.9459459459459459,
+              "cmlt": 0.9459459459459459,
+              "amlc": 0.9459459459459459,
+              "amlt": 0.9459459459459459
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 44,
+              "supported_windows": 40,
+              "unsupported_windows": 4,
+              "absolute_beat_count_error_mean": 0.0479737214996264,
+              "absolute_beat_count_error_p90": 0.09560391363023017,
+              "absolute_equivalent_bar_length_error_mean": 0.0119934303749066
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 23,
+                "supported_windows": 21,
+                "unsupported_windows": 2,
+                "absolute_beat_count_error_mean": 0.03934993795191116,
+                "absolute_beat_count_error_p90": 0.08768028846153797,
+                "absolute_equivalent_bar_length_error_mean": 0.00983748448797779
+              },
+              "one_bar": {
+                "requested_windows": 11,
+                "supported_windows": 10,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.06446185941251859,
+                "absolute_beat_count_error_p90": 0.12759317436949108,
+                "absolute_equivalent_bar_length_error_mean": 0.016115464853129646
+              },
+              "two_bars": {
+                "requested_windows": 10,
+                "supported_windows": 9,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.04977572987441508,
+                "absolute_beat_count_error_p90": 0.09651918257181506,
+                "absolute_equivalent_bar_length_error_mean": 0.01244393246860377
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-rhythm-02-funk3-98-a-comp",
+            "title": "02_Funk3-98-A_comp / microphone performance",
+            "audio_sha256": "616422b9aa3458556eb117dc4541c926be5fbc5f3080c757a7211d45f6623dd5",
+            "duration_seconds": 39.178820861678005,
+            "sample_rate_hz": 22050
+          },
+          "split": "development",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 64,
+          "estimated_pulses": 63,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 38.57142857142857,
+            "first_estimated_pulse_seconds": 0.34829931972789113,
+            "last_estimated_pulse_seconds": 37.98784580498866,
+            "reference_pulses_inside_estimated_coverage": 62,
+            "reference_pulses_outside_estimated_coverage": 2
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 46,
+              "missed_reference_pulses": 18,
+              "extra_estimated_pulses": 17,
+              "precision": 0.7301587301587301,
+              "recall": 0.71875,
+              "f_measure": 0.7244094488188977,
+              "matched_error_median_seconds": 0.03972789115646158,
+              "matched_error_p90_seconds": 0.062403628117913,
+              "matched_error_max_seconds": 0.06929705215419446
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 52,
+              "missed_reference_pulses": 12,
+              "extra_estimated_pulses": 11,
+              "precision": 0.8253968253968254,
+              "recall": 0.8125,
+              "f_measure": 0.8188976377952756,
+              "matched_error_median_seconds": 0.04399092970521501,
+              "matched_error_p90_seconds": 0.07141950113378748,
+              "matched_error_max_seconds": 0.12517006802720942
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.050158730158729625,
+            "p90": 0.2509024943310661,
+            "max": 0.5835827664399105,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 55,
+            "estimated_pulses": 55,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.8363636363636363,
+              "cemgil_sigma_40ms": 0.5027972596455177,
+              "cemgil_any_metrical_level": 0.5027972596455177,
+              "cmlc": 0.7818181818181819,
+              "cmlt": 0.9090909090909091,
+              "amlc": 0.7818181818181819,
+              "amlt": 0.9090909090909091
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 57,
+              "unsupported_windows": 3,
+              "absolute_beat_count_error_mean": 0.06615738649550008,
+              "absolute_beat_count_error_p90": 0.12347658862876255,
+              "absolute_equivalent_bar_length_error_mean": 0.01653934662387502
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 30,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.04381356735272058,
+                "absolute_beat_count_error_p90": 0.09195615053050406,
+                "absolute_equivalent_bar_length_error_mean": 0.010953391838180145
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.07986838292545022,
+                "absolute_beat_count_error_p90": 0.1311132943143813,
+                "absolute_equivalent_bar_length_error_mean": 0.019967095731362555
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.10295435759273726,
+                "absolute_beat_count_error_p90": 0.3396588628762549,
+                "absolute_equivalent_bar_length_error_mean": 0.025738589398184315
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-rhythm-02-ss2-107-ab-solo",
+            "title": "02_SS2-107-Ab_solo / microphone performance",
+            "audio_sha256": "71dab38116c97f0528c818e0d0f41fe150bd90c4f12296b030217298e05ee2b4",
+            "duration_seconds": 35.88639455782313,
+            "sample_rate_hz": 22050
+          },
+          "split": "development",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 64,
+          "estimated_pulses": 62,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 35.32710280373831,
+            "first_estimated_pulse_seconds": 0.3250793650793651,
+            "last_estimated_pulse_seconds": 34.76027210884354,
+            "reference_pulses_inside_estimated_coverage": 61,
+            "reference_pulses_outside_estimated_coverage": 3
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 37,
+              "missed_reference_pulses": 27,
+              "extra_estimated_pulses": 25,
+              "precision": 0.5967741935483871,
+              "recall": 0.578125,
+              "f_measure": 0.5873015873015873,
+              "matched_error_median_seconds": 0.04431729077924107,
+              "matched_error_p90_seconds": 0.060925932990020464,
+              "matched_error_max_seconds": 0.06888337889673224
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 45,
+              "missed_reference_pulses": 19,
+              "extra_estimated_pulses": 17,
+              "precision": 0.7258064516129032,
+              "recall": 0.703125,
+              "f_measure": 0.7142857142857143,
+              "matched_error_median_seconds": 0.04700955771716764,
+              "matched_error_p90_seconds": 0.08154178057515865,
+              "matched_error_max_seconds": 0.13152775128742888
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.0590077775658564,
+            "p90": 0.23856231589208896,
+            "max": 0.5668306948947759,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 55,
+            "estimated_pulses": 53,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.6851851851851852,
+              "cemgil_sigma_40ms": 0.41153542665601495,
+              "cemgil_any_metrical_level": 0.41153542665601495,
+              "cmlc": 0.7090909090909091,
+              "cmlt": 0.7818181818181819,
+              "amlc": 0.7090909090909091,
+              "amlt": 0.7818181818181819
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 56,
+              "unsupported_windows": 4,
+              "absolute_beat_count_error_mean": 0.10255558358175947,
+              "absolute_beat_count_error_p90": 0.28383170081475484,
+              "absolute_equivalent_bar_length_error_mean": 0.025638895895439866
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 29,
+                "unsupported_windows": 2,
+                "absolute_beat_count_error_mean": 0.06497840846880262,
+                "absolute_beat_count_error_p90": 0.15307538791037553,
+                "absolute_equivalent_bar_length_error_mean": 0.016244602117200656
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.10939028189574243,
+                "absolute_beat_count_error_p90": 0.2783351578328187,
+                "absolute_equivalent_bar_length_error_mean": 0.027347570473935608
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.17902114526483542,
+                "absolute_beat_count_error_p90": 0.45685135736537785,
+                "absolute_equivalent_bar_length_error_mean": 0.044755286316208856
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-rhythm-04-rock2-85-f-comp",
+            "title": "04_Rock2-85-F_comp / microphone performance",
+            "audio_sha256": "ac3151f2a50520c7c80ee65c02ded84d7112add95a686d8d3359cc513e17a972",
+            "duration_seconds": 45.173197278911566,
+            "sample_rate_hz": 22050
+          },
+          "split": "holdout",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 64,
+          "estimated_pulses": 127,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 44.47058823529412,
+            "first_estimated_pulse_seconds": 0.09287981859410431,
+            "last_estimated_pulse_seconds": 44.51265306122449,
+            "reference_pulses_inside_estimated_coverage": 63,
+            "reference_pulses_outside_estimated_coverage": 1
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 63,
+              "missed_reference_pulses": 1,
+              "extra_estimated_pulses": 64,
+              "precision": 0.49606299212598426,
+              "recall": 0.984375,
+              "f_measure": 0.6596858638743456,
+              "matched_error_median_seconds": 0.023283980258769432,
+              "matched_error_p90_seconds": 0.04568440709616939,
+              "matched_error_max_seconds": 0.06983059890622556
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 64,
+              "missed_reference_pulses": 0,
+              "extra_estimated_pulses": 63,
+              "precision": 0.5039370078740157,
+              "recall": 1.0,
+              "f_measure": 0.6701570680628273,
+              "matched_error_median_seconds": 0.023294651193809912,
+              "matched_error_p90_seconds": 0.049801253834865215,
+              "matched_error_max_seconds": 0.09287981859410431
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.023294651193809912,
+            "p90": 0.049801253834865215,
+            "max": 0.09287981859410431,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 56,
+            "estimated_pulses": 112,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.6666666666666666,
+              "cemgil_sigma_40ms": 0.5277782095982451,
+              "cemgil_any_metrical_level": 0.790683926651558,
+              "cmlc": 0.0,
+              "cmlt": 0.0,
+              "amlc": 0.5089285714285714,
+              "amlt": 0.9642857142857143
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 57,
+              "unsupported_windows": 3,
+              "absolute_beat_count_error_mean": 3.863022848942209,
+              "absolute_beat_count_error_p90": 8.068141039504036,
+              "absolute_equivalent_bar_length_error_mean": 0.9657557122355522
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 30,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 1.9998087724673204,
+                "absolute_beat_count_error_p90": 2.100322772491347,
+                "absolute_equivalent_bar_length_error_mean": 0.4999521931168301
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 4.006617647058825,
+                "absolute_beat_count_error_p90": 4.099954044117662,
+                "absolute_equivalent_bar_length_error_mean": 1.0016544117647062
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 8.008107088989442,
+                "absolute_beat_count_error_p90": 8.079901960784316,
+                "absolute_equivalent_bar_length_error_mean": 2.0020267722473606
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-rhythm-05-bn3-119-g-solo",
+            "title": "05_BN3-119-G_solo / microphone performance",
+            "audio_sha256": "f025005376535c1c1d462e57cfff301447cf4891f0d3bfb29acfe4f69f3ff10b",
+            "duration_seconds": 32.26321995464853,
+            "sample_rate_hz": 22050
+          },
+          "split": "holdout",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 64,
+          "estimated_pulses": 65,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 31.764705882352942,
+            "first_estimated_pulse_seconds": 0.301859410430839,
+            "last_estimated_pulse_seconds": 30.53424036281179,
+            "reference_pulses_inside_estimated_coverage": 60,
+            "reference_pulses_outside_estimated_coverage": 4
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 11,
+              "missed_reference_pulses": 53,
+              "extra_estimated_pulses": 54,
+              "precision": 0.16923076923076924,
+              "recall": 0.171875,
+              "f_measure": 0.17054263565891473,
+              "matched_error_median_seconds": 0.023241296518607513,
+              "matched_error_p90_seconds": 0.05655595571561989,
+              "matched_error_max_seconds": 0.06622382286247941
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 21,
+              "missed_reference_pulses": 43,
+              "extra_estimated_pulses": 44,
+              "precision": 0.3230769230769231,
+              "recall": 0.328125,
+              "f_measure": 0.32558139534883723,
+              "matched_error_median_seconds": 0.06622382286247941,
+              "matched_error_p90_seconds": 0.1292463652127509,
+              "matched_error_max_seconds": 0.14606375883686695
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.2040069361077764,
+            "p90": 0.2510188075230085,
+            "max": 1.230465519541152,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 54,
+            "estimated_pulses": 54,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.16666666666666666,
+              "cemgil_sigma_40ms": 0.1291033323152315,
+              "cemgil_any_metrical_level": 0.4954205030249828,
+              "cmlc": 0.09259259259259259,
+              "cmlt": 0.18518518518518517,
+              "amlc": 0.4444444444444444,
+              "amlt": 0.6481481481481481
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 56,
+              "unsupported_windows": 4,
+              "absolute_beat_count_error_mean": 0.2698932820919576,
+              "absolute_beat_count_error_p90": 0.6646062875614618,
+              "absolute_equivalent_bar_length_error_mean": 0.0674733205229894
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 29,
+                "unsupported_windows": 2,
+                "absolute_beat_count_error_mean": 0.14906944684647713,
+                "absolute_beat_count_error_p90": 0.30898452518261904,
+                "absolute_equivalent_bar_length_error_mean": 0.03726736171161928
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.2847584068212264,
+                "absolute_beat_count_error_p90": 0.5483467678515211,
+                "absolute_equivalent_bar_length_error_mean": 0.0711896017053066
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.5234147802388169,
+                "absolute_beat_count_error_p90": 1.03384928436615,
+                "absolute_equivalent_bar_length_error_mean": 0.13085369505970423
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-rhythm-04-ss1-100-csharp-comp",
+            "title": "04_SS1-100-C#_comp / microphone performance",
+            "audio_sha256": "eb13ebe84440b0bc3bc60c5da992eb6f63a39555093e23fc352f2d5518f98655",
+            "duration_seconds": 28.8,
+            "sample_rate_hz": 22050
+          },
+          "split": "holdout",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 48,
+          "estimated_pulses": 61,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 28.2,
+            "first_estimated_pulse_seconds": 0.3250793650793651,
+            "last_estimated_pulse_seconds": 26.888707482993198,
+            "reference_pulses_inside_estimated_coverage": 44,
+            "reference_pulses_outside_estimated_coverage": 4
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 14,
+              "missed_reference_pulses": 34,
+              "extra_estimated_pulses": 47,
+              "precision": 0.22950819672131148,
+              "recall": 0.2916666666666667,
+              "f_measure": 0.25688073394495414,
+              "matched_error_median_seconds": 0.03764172335600935,
+              "matched_error_p90_seconds": 0.05191836734693825,
+              "matched_error_max_seconds": 0.06421768707483366
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 27,
+              "missed_reference_pulses": 21,
+              "extra_estimated_pulses": 34,
+              "precision": 0.4426229508196721,
+              "recall": 0.5625,
+              "f_measure": 0.4954128440366973,
+              "matched_error_median_seconds": 0.06421768707483366,
+              "matched_error_p90_seconds": 0.10432653061224466,
+              "matched_error_max_seconds": 0.11691609977324191
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.10535147392290245,
+            "p90": 0.21375963718820865,
+            "max": 1.3112925170068017,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 39,
+            "estimated_pulses": 50,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.24719101123595508,
+              "cemgil_sigma_40ms": 0.17521424260538157,
+              "cemgil_any_metrical_level": 0.2094494446899462,
+              "cmlc": 0.0,
+              "cmlt": 0.0,
+              "amlc": 0.02,
+              "amlt": 0.04
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 44,
+              "supported_windows": 40,
+              "unsupported_windows": 4,
+              "absolute_beat_count_error_mean": 1.3488318740325076,
+              "absolute_beat_count_error_p90": 2.7897547407120764,
+              "absolute_equivalent_bar_length_error_mean": 0.3372079685081269
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 23,
+                "supported_windows": 21,
+                "unsupported_windows": 2,
+                "absolute_beat_count_error_mean": 0.707251815199764,
+                "absolute_beat_count_error_p90": 0.8746855650154828,
+                "absolute_equivalent_bar_length_error_mean": 0.176812953799941
+              },
+              "one_bar": {
+                "requested_windows": 11,
+                "supported_windows": 10,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 1.397861842105263,
+                "absolute_beat_count_error_p90": 1.573895144871449,
+                "absolute_equivalent_bar_length_error_mean": 0.3494654605263158
+              },
+              "two_bars": {
+                "requested_windows": 10,
+                "supported_windows": 9,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 2.7913742690058476,
+                "absolute_beat_count_error_p90": 3.0680892448512616,
+                "absolute_equivalent_bar_length_error_mean": 0.6978435672514619
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-rhythm-02-jazz2-187-fsharp-solo",
+            "title": "02_Jazz2-187-F#_solo / microphone performance",
+            "audio_sha256": "85a80182ec83d45bc15ec7a9de47a1dd71ef0a6d59fa2cbeb44e0f2072abafb2",
+            "duration_seconds": 20.532018140589567,
+            "sample_rate_hz": 22050
+          },
+          "split": "holdout",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 64,
+          "estimated_pulses": 31,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 20.21390374331551,
+            "first_estimated_pulse_seconds": 0.5340589569160997,
+            "last_estimated_pulse_seconds": 19.388662131519276,
+            "reference_pulses_inside_estimated_coverage": 59,
+            "reference_pulses_outside_estimated_coverage": 5
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 20,
+              "missed_reference_pulses": 44,
+              "extra_estimated_pulses": 11,
+              "precision": 0.6451612903225806,
+              "recall": 0.3125,
+              "f_measure": 0.42105263157894735,
+              "matched_error_median_seconds": 0.028547661488837583,
+              "matched_error_p90_seconds": 0.0572755647713628,
+              "matched_error_max_seconds": 0.06339893533170837
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 31,
+              "missed_reference_pulses": 33,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 0.484375,
+              "f_measure": 0.6526315789473685,
+              "matched_error_median_seconds": 0.04862648089538801,
+              "matched_error_p90_seconds": 0.10765227303042435,
+              "matched_error_max_seconds": 0.13732523312355482
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.19307116786108436,
+            "p90": 0.31037307044029705,
+            "max": 0.8252416117962333,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 48,
+            "estimated_pulses": 24,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.47222222222222227,
+              "cemgil_sigma_40ms": 0.34362760647357415,
+              "cemgil_any_metrical_level": 0.5147962847468636,
+              "cmlc": 0.0,
+              "cmlt": 0.0,
+              "amlc": 0.875,
+              "amlt": 0.875
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 56,
+              "unsupported_windows": 4,
+              "absolute_beat_count_error_mean": 1.9031432740013021,
+              "absolute_beat_count_error_p90": 3.9183764730639723,
+              "absolute_equivalent_bar_length_error_mean": 0.47578581850032553
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 29,
+                "unsupported_windows": 2,
+                "absolute_beat_count_error_mean": 0.9795272364566842,
+                "absolute_beat_count_error_p90": 1.0210254591213004,
+                "absolute_equivalent_bar_length_error_mean": 0.24488180911417104
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 1.9548300538649808,
+                "absolute_beat_count_error_p90": 2.0269484056248777,
+                "absolute_equivalent_bar_length_error_mean": 0.4887075134662452
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 3.9078548255937964,
+                "absolute_beat_count_error_p90": 4.034169479757715,
+                "absolute_equivalent_bar_length_error_mean": 0.9769637063984491
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-rhythm-00-funk3-112-csharp-solo",
+            "title": "00_Funk3-112-C#_solo / microphone performance",
+            "audio_sha256": "b64051609a6b49123a70e5399191df7bd865a9a9cd98460ff5d4d1ca91fb4dc9",
+            "duration_seconds": 34.284399092970524,
+            "sample_rate_hz": 22050
+          },
+          "split": "holdout",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 64,
+          "estimated_pulses": 64,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 33.75,
+            "first_estimated_pulse_seconds": 0.06965986394557823,
+            "last_estimated_pulse_seconds": 33.78503401360544,
+            "reference_pulses_inside_estimated_coverage": 63,
+            "reference_pulses_outside_estimated_coverage": 1
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 54,
+              "missed_reference_pulses": 10,
+              "extra_estimated_pulses": 10,
+              "precision": 0.84375,
+              "recall": 0.84375,
+              "f_measure": 0.84375,
+              "matched_error_median_seconds": 0.03418367346938744,
+              "matched_error_p90_seconds": 0.06254195011337878,
+              "matched_error_max_seconds": 0.06965986394557823
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 64,
+              "missed_reference_pulses": 0,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f_measure": 1.0,
+              "matched_error_median_seconds": 0.03917233560090949,
+              "matched_error_p90_seconds": 0.07304761904761818,
+              "matched_error_max_seconds": 0.08965986394558101
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.03917233560090949,
+            "p90": 0.07304761904761818,
+            "max": 0.08965986394558101,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 54,
+            "estimated_pulses": 54,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.8518518518518519,
+              "cemgil_sigma_40ms": 0.5926238983556215,
+              "cemgil_any_metrical_level": 0.5926238983556215,
+              "cmlc": 1.0,
+              "cmlt": 1.0,
+              "amlc": 1.0,
+              "amlt": 1.0
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 57,
+              "unsupported_windows": 3,
+              "absolute_beat_count_error_mean": 0.05627274115170983,
+              "absolute_beat_count_error_p90": 0.11226243044772201,
+              "absolute_equivalent_bar_length_error_mean": 0.014068185287927458
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 30,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.05513789020837224,
+                "absolute_beat_count_error_p90": 0.0876453218005962,
+                "absolute_equivalent_bar_length_error_mean": 0.01378447255209306
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.06036282745867659,
+                "absolute_beat_count_error_p90": 0.15574753736412966,
+                "absolute_equivalent_bar_length_error_mean": 0.015090706864669148
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.054486919613447767,
+                "absolute_beat_count_error_p90": 0.10246687370600256,
+                "absolute_equivalent_bar_length_error_mean": 0.013621729903361942
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-rhythm-02-rock3-117-bb-solo",
+            "title": "02_Rock3-117-Bb_solo / microphone performance",
+            "audio_sha256": "70eb3e83acd6ed2ab0d4fdb882c501e48458d39ffb75b13716fb456d952ef382",
+            "duration_seconds": 32.81641723356009,
+            "sample_rate_hz": 22050
+          },
+          "split": "holdout",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 64,
+          "estimated_pulses": 62,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 32.30769230769231,
+            "first_estimated_pulse_seconds": 0.5572789115646258,
+            "last_estimated_pulse_seconds": 31.880997732426305,
+            "reference_pulses_inside_estimated_coverage": 61,
+            "reference_pulses_outside_estimated_coverage": 3
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 44,
+              "missed_reference_pulses": 20,
+              "extra_estimated_pulses": 18,
+              "precision": 0.7096774193548387,
+              "recall": 0.6875,
+              "f_measure": 0.6984126984126984,
+              "matched_error_median_seconds": 0.0519797662654824,
+              "matched_error_p90_seconds": 0.06651735566021436,
+              "matched_error_max_seconds": 0.06940868655154375
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 62,
+              "missed_reference_pulses": 2,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 0.96875,
+              "f_measure": 0.9841269841269841,
+              "matched_error_median_seconds": 0.06033839176696354,
+              "matched_error_p90_seconds": 0.08372579801151314,
+              "matched_error_max_seconds": 0.11132740275597897
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.061608233036804405,
+            "p90": 0.08560683760684054,
+            "max": 0.5572789115646258,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 54,
+            "estimated_pulses": 53,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.6542056074766356,
+              "cemgil_sigma_40ms": 0.3717315088835428,
+              "cemgil_any_metrical_level": 0.3717315088835428,
+              "cmlc": 0.6111111111111112,
+              "cmlt": 0.9074074074074074,
+              "amlc": 0.6111111111111112,
+              "amlt": 0.9074074074074074
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 57,
+              "unsupported_windows": 3,
+              "absolute_beat_count_error_mean": 0.05534612063502208,
+              "absolute_beat_count_error_p90": 0.11164919772256496,
+              "absolute_equivalent_bar_length_error_mean": 0.01383653015875552
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 30,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.04991124515580973,
+                "absolute_beat_count_error_p90": 0.10452201783723362,
+                "absolute_equivalent_bar_length_error_mean": 0.012477811288952433
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.06224221075249879,
+                "absolute_beat_count_error_p90": 0.13389037366619266,
+                "absolute_equivalent_bar_length_error_mean": 0.015560552688124698
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.06046158238361411,
+                "absolute_beat_count_error_p90": 0.09309847760934532,
+                "absolute_equivalent_bar_length_error_mean": 0.015115395595903528
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "condition": "nominal-tempo-guided",
+      "report_sha256": "29555337c43ad23beca01ca75b166126a0c23beb325863dd2cdc0badc9f1ed94",
+      "predictions_sha256": "71173869db3aa619937d3f5af07f4a19d48916ffcf8938c8d6d055ee7d460488",
+      "references_sha256": "40227dc4530e36def5b3482372d1b071f954fdb4b64bfb22a61be05b4a9e89ed",
+      "aggregate": {
+        "recordings": 10,
+        "duration_seconds": 317.0224943310658,
+        "whole_recording": {
+          "f1_70ms": {
+            "matched_pulses": 400,
+            "missed_reference_pulses": 208,
+            "extra_estimated_pulses": 194,
+            "micro_f_measure": 0.6655574043261231,
+            "macro_f_measure": 0.6774931911230315
+          },
+          "f1_150ms": {
+            "matched_pulses": 487,
+            "missed_reference_pulses": 121,
+            "extra_estimated_pulses": 107,
+            "micro_f_measure": 0.8103161397670549,
+            "macro_f_measure": 0.8201831664791935
+          }
+        },
+        "standard_after_5s_macro": {
+          "measured_recordings": 10,
+          "metrics": {
+            "f_measure_70ms": 0.7058211875999033,
+            "cemgil_sigma_40ms": 0.4679005432851902,
+            "cemgil_any_metrical_level": 0.5258881207414847,
+            "cmlc": 0.6802417714917716,
+            "cmlt": 0.7703806603806604,
+            "amlc": 0.7386412423912424,
+            "amlt": 0.8398912423912425
+          }
+        },
+        "count_windows": {
+          "requested_windows": 568,
+          "supported_windows": 531,
+          "unsupported_windows": 37,
+          "absolute_beat_count_error_mean": 0.08387367824459561,
+          "absolute_beat_count_error_p90": 0.2131075755364158,
+          "absolute_equivalent_bar_length_error_mean": 0.020968419561148904
+        }
+      },
+      "by_split": {
+        "development": {
+          "recordings": 4,
+          "duration_seconds": 123.15324263038549,
+          "whole_recording": {
+            "f1_70ms": {
+              "matched_pulses": 190,
+              "missed_reference_pulses": 50,
+              "extra_estimated_pulses": 44,
+              "micro_f_measure": 0.8016877637130801,
+              "macro_f_measure": 0.809110554729046
+            },
+            "f1_150ms": {
+              "matched_pulses": 206,
+              "missed_reference_pulses": 34,
+              "extra_estimated_pulses": 28,
+              "micro_f_measure": 0.869198312236287,
+              "macro_f_measure": 0.8752313218912152
+            }
+          },
+          "standard_after_5s_macro": {
+            "measured_recordings": 4,
+            "metrics": {
+              "f_measure_70ms": 0.8664983164983165,
+              "cemgil_sigma_40ms": 0.5830585566857842,
+              "cemgil_any_metrical_level": 0.5830585566857842,
+              "cmlc": 0.8592137592137592,
+              "cmlt": 0.9092137592137592,
+              "amlc": 0.8592137592137592,
+              "amlt": 0.9092137592137592
+            }
+          },
+          "count_windows": {
+            "requested_windows": 224,
+            "supported_windows": 210,
+            "unsupported_windows": 14,
+            "absolute_beat_count_error_mean": 0.06338859053252471,
+            "absolute_beat_count_error_p90": 0.14235487059669083,
+            "absolute_equivalent_bar_length_error_mean": 0.01584714763313118
+          }
+        },
+        "holdout": {
+          "recordings": 6,
+          "duration_seconds": 193.86925170068028,
+          "whole_recording": {
+            "f1_70ms": {
+              "matched_pulses": 210,
+              "missed_reference_pulses": 158,
+              "extra_estimated_pulses": 150,
+              "micro_f_measure": 0.5769230769230769,
+              "macro_f_measure": 0.5897482820523553
+            },
+            "f1_150ms": {
+              "matched_pulses": 281,
+              "missed_reference_pulses": 87,
+              "extra_estimated_pulses": 79,
+              "micro_f_measure": 0.771978021978022,
+              "macro_f_measure": 0.7834843962045125
+            }
+          },
+          "standard_after_5s_macro": {
+            "measured_recordings": 6,
+            "metrics": {
+              "f_measure_70ms": 0.5987031016676279,
+              "cemgil_sigma_40ms": 0.39112853435146083,
+              "cemgil_any_metrical_level": 0.48777449677861834,
+              "cmlc": 0.5609271130104464,
+              "cmlt": 0.6778252611585945,
+              "amlc": 0.6582595645095645,
+              "amlt": 0.7936762311762312
+            }
+          },
+          "count_windows": {
+            "requested_windows": 344,
+            "supported_windows": 321,
+            "unsupported_windows": 23,
+            "absolute_beat_count_error_mean": 0.09727513749548312,
+            "absolute_beat_count_error_p90": 0.2727377172459917,
+            "absolute_equivalent_bar_length_error_mean": 0.02431878437387078
+          }
+        }
+      },
+      "cases": [
+        {
+          "recording": {
+            "id": "guitarset-rhythm-03-rock3-148-c-comp",
+            "title": "03_Rock3-148-C_comp / microphone performance",
+            "audio_sha256": "7af4e0e777eb4bb21edbcbc5c44042fbcc20a27046dd2373934661b3073b9d2d",
+            "duration_seconds": 25.940816326530612,
+            "sample_rate_hz": 22050
+          },
+          "split": "development",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 64,
+          "estimated_pulses": 64,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 25.54054054054054,
+            "first_estimated_pulse_seconds": 0.06965986394557823,
+            "last_estimated_pulse_seconds": 25.56517006802721,
+            "reference_pulses_inside_estimated_coverage": 63,
+            "reference_pulses_outside_estimated_coverage": 1
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 64,
+              "missed_reference_pulses": 0,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f_measure": 1.0,
+              "matched_error_median_seconds": 0.036148801863086444,
+              "matched_error_p90_seconds": 0.053223754366611066,
+              "matched_error_max_seconds": 0.06965986394557823
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 64,
+              "missed_reference_pulses": 0,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f_measure": 1.0,
+              "matched_error_median_seconds": 0.036148801863086444,
+              "matched_error_p90_seconds": 0.053223754366611066,
+              "matched_error_max_seconds": 0.06965986394557823
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.036148801863086444,
+            "p90": 0.053223754366611066,
+            "max": 0.06965986394557823,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 51,
+            "estimated_pulses": 51,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 1.0,
+              "cemgil_sigma_40ms": 0.6575727148017593,
+              "cemgil_any_metrical_level": 0.6575727148017593,
+              "cmlc": 1.0,
+              "cmlt": 1.0,
+              "amlc": 1.0,
+              "amlt": 1.0
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 57,
+              "unsupported_windows": 3,
+              "absolute_beat_count_error_mean": 0.032957393702159624,
+              "absolute_beat_count_error_p90": 0.0663894133103696,
+              "absolute_equivalent_bar_length_error_mean": 0.008239348425539906
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 30,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.0275233825156424,
+                "absolute_beat_count_error_p90": 0.05663386272301736,
+                "absolute_equivalent_bar_length_error_mean": 0.0068808456289106
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.03726665215636008,
+                "absolute_beat_count_error_p90": 0.06613175675675738,
+                "absolute_equivalent_bar_length_error_mean": 0.00931666303909002
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.04085667964344503,
+                "absolute_beat_count_error_p90": 0.0779511128775848,
+                "absolute_equivalent_bar_length_error_mean": 0.010214169910861258
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-rhythm-01-rock1-130-a-solo",
+            "title": "01_Rock1-130-A_solo / microphone performance",
+            "audio_sha256": "cda49647c17389608b12cd668c3837a4c9ebcd13aacae850d1aac37ab934e130",
+            "duration_seconds": 22.14721088435374,
+            "sample_rate_hz": 22050
+          },
+          "split": "development",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 48,
+          "estimated_pulses": 45,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 21.692307692307693,
+            "first_estimated_pulse_seconds": 0.5340589569160997,
+            "last_estimated_pulse_seconds": 20.712199546485262,
+            "reference_pulses_inside_estimated_coverage": 43,
+            "reference_pulses_outside_estimated_coverage": 5
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 43,
+              "missed_reference_pulses": 5,
+              "extra_estimated_pulses": 2,
+              "precision": 0.9555555555555556,
+              "recall": 0.8958333333333334,
+              "f_measure": 0.9247311827956989,
+              "matched_error_median_seconds": 0.02541077969649308,
+              "matched_error_p90_seconds": 0.043177394034536756,
+              "matched_error_max_seconds": 0.05703122274550765
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 45,
+              "missed_reference_pulses": 3,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 0.9375,
+              "f_measure": 0.967741935483871,
+              "matched_error_median_seconds": 0.025745682888540067,
+              "matched_error_p90_seconds": 0.045569160997732006,
+              "matched_error_max_seconds": 0.07252049537763816
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.02810395953253053,
+            "p90": 0.061175649747077246,
+            "max": 0.980108145822431,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 37,
+            "estimated_pulses": 35,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.9444444444444445,
+              "cemgil_sigma_40ms": 0.7603288256398448,
+              "cemgil_any_metrical_level": 0.7603288256398448,
+              "cmlc": 0.9459459459459459,
+              "cmlt": 0.9459459459459459,
+              "amlc": 0.9459459459459459,
+              "amlt": 0.9459459459459459
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 44,
+              "supported_windows": 40,
+              "unsupported_windows": 4,
+              "absolute_beat_count_error_mean": 0.0479737214996264,
+              "absolute_beat_count_error_p90": 0.09560391363023017,
+              "absolute_equivalent_bar_length_error_mean": 0.0119934303749066
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 23,
+                "supported_windows": 21,
+                "unsupported_windows": 2,
+                "absolute_beat_count_error_mean": 0.03934993795191116,
+                "absolute_beat_count_error_p90": 0.08768028846153797,
+                "absolute_equivalent_bar_length_error_mean": 0.00983748448797779
+              },
+              "one_bar": {
+                "requested_windows": 11,
+                "supported_windows": 10,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.06446185941251859,
+                "absolute_beat_count_error_p90": 0.12759317436949108,
+                "absolute_equivalent_bar_length_error_mean": 0.016115464853129646
+              },
+              "two_bars": {
+                "requested_windows": 10,
+                "supported_windows": 9,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.04977572987441508,
+                "absolute_beat_count_error_p90": 0.09651918257181506,
+                "absolute_equivalent_bar_length_error_mean": 0.01244393246860377
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-rhythm-02-funk3-98-a-comp",
+            "title": "02_Funk3-98-A_comp / microphone performance",
+            "audio_sha256": "616422b9aa3458556eb117dc4541c926be5fbc5f3080c757a7211d45f6623dd5",
+            "duration_seconds": 39.178820861678005,
+            "sample_rate_hz": 22050
+          },
+          "split": "development",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 64,
+          "estimated_pulses": 63,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 38.57142857142857,
+            "first_estimated_pulse_seconds": 0.34829931972789113,
+            "last_estimated_pulse_seconds": 37.98784580498866,
+            "reference_pulses_inside_estimated_coverage": 62,
+            "reference_pulses_outside_estimated_coverage": 2
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 46,
+              "missed_reference_pulses": 18,
+              "extra_estimated_pulses": 17,
+              "precision": 0.7301587301587301,
+              "recall": 0.71875,
+              "f_measure": 0.7244094488188977,
+              "matched_error_median_seconds": 0.03972789115646158,
+              "matched_error_p90_seconds": 0.062403628117913,
+              "matched_error_max_seconds": 0.06929705215419446
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 52,
+              "missed_reference_pulses": 12,
+              "extra_estimated_pulses": 11,
+              "precision": 0.8253968253968254,
+              "recall": 0.8125,
+              "f_measure": 0.8188976377952756,
+              "matched_error_median_seconds": 0.04399092970521501,
+              "matched_error_p90_seconds": 0.07141950113378748,
+              "matched_error_max_seconds": 0.12517006802720942
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.050158730158729625,
+            "p90": 0.2509024943310661,
+            "max": 0.5835827664399105,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 55,
+            "estimated_pulses": 55,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.8363636363636363,
+              "cemgil_sigma_40ms": 0.5027972596455177,
+              "cemgil_any_metrical_level": 0.5027972596455177,
+              "cmlc": 0.7818181818181819,
+              "cmlt": 0.9090909090909091,
+              "amlc": 0.7818181818181819,
+              "amlt": 0.9090909090909091
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 57,
+              "unsupported_windows": 3,
+              "absolute_beat_count_error_mean": 0.06615738649550008,
+              "absolute_beat_count_error_p90": 0.12347658862876255,
+              "absolute_equivalent_bar_length_error_mean": 0.01653934662387502
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 30,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.04381356735272058,
+                "absolute_beat_count_error_p90": 0.09195615053050406,
+                "absolute_equivalent_bar_length_error_mean": 0.010953391838180145
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.07986838292545022,
+                "absolute_beat_count_error_p90": 0.1311132943143813,
+                "absolute_equivalent_bar_length_error_mean": 0.019967095731362555
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.10295435759273726,
+                "absolute_beat_count_error_p90": 0.3396588628762549,
+                "absolute_equivalent_bar_length_error_mean": 0.025738589398184315
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-rhythm-02-ss2-107-ab-solo",
+            "title": "02_SS2-107-Ab_solo / microphone performance",
+            "audio_sha256": "71dab38116c97f0528c818e0d0f41fe150bd90c4f12296b030217298e05ee2b4",
+            "duration_seconds": 35.88639455782313,
+            "sample_rate_hz": 22050
+          },
+          "split": "development",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 64,
+          "estimated_pulses": 62,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 35.32710280373831,
+            "first_estimated_pulse_seconds": 0.3250793650793651,
+            "last_estimated_pulse_seconds": 34.76027210884354,
+            "reference_pulses_inside_estimated_coverage": 61,
+            "reference_pulses_outside_estimated_coverage": 3
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 37,
+              "missed_reference_pulses": 27,
+              "extra_estimated_pulses": 25,
+              "precision": 0.5967741935483871,
+              "recall": 0.578125,
+              "f_measure": 0.5873015873015873,
+              "matched_error_median_seconds": 0.04431729077924107,
+              "matched_error_p90_seconds": 0.060925932990020464,
+              "matched_error_max_seconds": 0.06888337889673224
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 45,
+              "missed_reference_pulses": 19,
+              "extra_estimated_pulses": 17,
+              "precision": 0.7258064516129032,
+              "recall": 0.703125,
+              "f_measure": 0.7142857142857143,
+              "matched_error_median_seconds": 0.04700955771716764,
+              "matched_error_p90_seconds": 0.08154178057515865,
+              "matched_error_max_seconds": 0.13152775128742888
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.0590077775658564,
+            "p90": 0.23856231589208896,
+            "max": 0.5668306948947759,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 55,
+            "estimated_pulses": 53,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.6851851851851852,
+              "cemgil_sigma_40ms": 0.41153542665601495,
+              "cemgil_any_metrical_level": 0.41153542665601495,
+              "cmlc": 0.7090909090909091,
+              "cmlt": 0.7818181818181819,
+              "amlc": 0.7090909090909091,
+              "amlt": 0.7818181818181819
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 56,
+              "unsupported_windows": 4,
+              "absolute_beat_count_error_mean": 0.10255558358175947,
+              "absolute_beat_count_error_p90": 0.28383170081475484,
+              "absolute_equivalent_bar_length_error_mean": 0.025638895895439866
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 29,
+                "unsupported_windows": 2,
+                "absolute_beat_count_error_mean": 0.06497840846880262,
+                "absolute_beat_count_error_p90": 0.15307538791037553,
+                "absolute_equivalent_bar_length_error_mean": 0.016244602117200656
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.10939028189574243,
+                "absolute_beat_count_error_p90": 0.2783351578328187,
+                "absolute_equivalent_bar_length_error_mean": 0.027347570473935608
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.17902114526483542,
+                "absolute_beat_count_error_p90": 0.45685135736537785,
+                "absolute_equivalent_bar_length_error_mean": 0.044755286316208856
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-rhythm-04-rock2-85-f-comp",
+            "title": "04_Rock2-85-F_comp / microphone performance",
+            "audio_sha256": "ac3151f2a50520c7c80ee65c02ded84d7112add95a686d8d3359cc513e17a972",
+            "duration_seconds": 45.173197278911566,
+            "sample_rate_hz": 22050
+          },
+          "split": "holdout",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 64,
+          "estimated_pulses": 64,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 44.47058823529412,
+            "first_estimated_pulse_seconds": 0.09287981859410431,
+            "last_estimated_pulse_seconds": 44.14113378684807,
+            "reference_pulses_inside_estimated_coverage": 62,
+            "reference_pulses_outside_estimated_coverage": 2
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 27,
+              "missed_reference_pulses": 37,
+              "extra_estimated_pulses": 37,
+              "precision": 0.421875,
+              "recall": 0.421875,
+              "f_measure": 0.421875,
+              "matched_error_median_seconds": 0.018652794451112342,
+              "matched_error_p90_seconds": 0.03911537948512561,
+              "matched_error_max_seconds": 0.055830332132853044
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 29,
+              "missed_reference_pulses": 35,
+              "extra_estimated_pulses": 35,
+              "precision": 0.453125,
+              "recall": 0.453125,
+              "f_measure": 0.453125,
+              "matched_error_median_seconds": 0.02324129651860707,
+              "matched_error_p90_seconds": 0.052108309990661184,
+              "matched_error_max_seconds": 0.09740429505135495
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.2947205548886238,
+            "p90": 0.3388107242897185,
+            "max": 0.36665332799787365,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 56,
+            "estimated_pulses": 56,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.35714285714285715,
+              "cemgil_sigma_40ms": 0.29690255133971816,
+              "cemgil_any_metrical_level": 0.5104611551929117,
+              "cmlc": 0.375,
+              "cmlt": 0.375,
+              "amlc": 0.6071428571428571,
+              "amlt": 0.6071428571428571
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 57,
+              "unsupported_windows": 3,
+              "absolute_beat_count_error_mean": 0.06353686593433143,
+              "absolute_beat_count_error_p90": 0.20212085826886506,
+              "absolute_equivalent_bar_length_error_mean": 0.015884216483582857
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 30,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.03862171365948917,
+                "absolute_beat_count_error_p90": 0.057180523549449636,
+                "absolute_equivalent_bar_length_error_mean": 0.009655428414872292
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.07194697904885304,
+                "absolute_beat_count_error_p90": 0.18942518316434925,
+                "absolute_equivalent_bar_length_error_mean": 0.01798674476221326
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.11197632629140568,
+                "absolute_beat_count_error_p90": 0.2588173591114761,
+                "absolute_equivalent_bar_length_error_mean": 0.02799408157285142
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-rhythm-05-bn3-119-g-solo",
+            "title": "05_BN3-119-G_solo / microphone performance",
+            "audio_sha256": "f025005376535c1c1d462e57cfff301447cf4891f0d3bfb29acfe4f69f3ff10b",
+            "duration_seconds": 32.26321995464853,
+            "sample_rate_hz": 22050
+          },
+          "split": "holdout",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 64,
+          "estimated_pulses": 65,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 31.764705882352942,
+            "first_estimated_pulse_seconds": 0.301859410430839,
+            "last_estimated_pulse_seconds": 30.53424036281179,
+            "reference_pulses_inside_estimated_coverage": 60,
+            "reference_pulses_outside_estimated_coverage": 4
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 11,
+              "missed_reference_pulses": 53,
+              "extra_estimated_pulses": 54,
+              "precision": 0.16923076923076924,
+              "recall": 0.171875,
+              "f_measure": 0.17054263565891473,
+              "matched_error_median_seconds": 0.023241296518607513,
+              "matched_error_p90_seconds": 0.05655595571561989,
+              "matched_error_max_seconds": 0.06622382286247941
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 21,
+              "missed_reference_pulses": 43,
+              "extra_estimated_pulses": 44,
+              "precision": 0.3230769230769231,
+              "recall": 0.328125,
+              "f_measure": 0.32558139534883723,
+              "matched_error_median_seconds": 0.06622382286247941,
+              "matched_error_p90_seconds": 0.1292463652127509,
+              "matched_error_max_seconds": 0.14606375883686695
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.2040069361077764,
+            "p90": 0.2510188075230085,
+            "max": 1.230465519541152,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 54,
+            "estimated_pulses": 54,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.16666666666666666,
+              "cemgil_sigma_40ms": 0.1291033323152315,
+              "cemgil_any_metrical_level": 0.4954205030249828,
+              "cmlc": 0.09259259259259259,
+              "cmlt": 0.18518518518518517,
+              "amlc": 0.4444444444444444,
+              "amlt": 0.6481481481481481
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 56,
+              "unsupported_windows": 4,
+              "absolute_beat_count_error_mean": 0.2698932820919576,
+              "absolute_beat_count_error_p90": 0.6646062875614618,
+              "absolute_equivalent_bar_length_error_mean": 0.0674733205229894
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 29,
+                "unsupported_windows": 2,
+                "absolute_beat_count_error_mean": 0.14906944684647713,
+                "absolute_beat_count_error_p90": 0.30898452518261904,
+                "absolute_equivalent_bar_length_error_mean": 0.03726736171161928
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.2847584068212264,
+                "absolute_beat_count_error_p90": 0.5483467678515211,
+                "absolute_equivalent_bar_length_error_mean": 0.0711896017053066
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.5234147802388169,
+                "absolute_beat_count_error_p90": 1.03384928436615,
+                "absolute_equivalent_bar_length_error_mean": 0.13085369505970423
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-rhythm-04-ss1-100-csharp-comp",
+            "title": "04_SS1-100-C#_comp / microphone performance",
+            "audio_sha256": "eb13ebe84440b0bc3bc60c5da992eb6f63a39555093e23fc352f2d5518f98655",
+            "duration_seconds": 28.8,
+            "sample_rate_hz": 22050
+          },
+          "split": "holdout",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 48,
+          "estimated_pulses": 46,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 28.2,
+            "first_estimated_pulse_seconds": 0.6501587301587302,
+            "last_estimated_pulse_seconds": 27.631746031746033,
+            "reference_pulses_inside_estimated_coverage": 45,
+            "reference_pulses_outside_estimated_coverage": 3
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 40,
+              "missed_reference_pulses": 8,
+              "extra_estimated_pulses": 6,
+              "precision": 0.8695652173913043,
+              "recall": 0.8333333333333334,
+              "f_measure": 0.851063829787234,
+              "matched_error_median_seconds": 0.04970521541950107,
+              "matched_error_p90_seconds": 0.06513378684807285,
+              "matched_error_max_seconds": 0.06975056689342374
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 46,
+              "missed_reference_pulses": 2,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 0.9583333333333334,
+              "f_measure": 0.9787234042553191,
+              "matched_error_median_seconds": 0.05170068027210917,
+              "matched_error_p90_seconds": 0.07160997732426377,
+              "matched_error_max_seconds": 0.08643990929705225
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.05256235827664524,
+            "p90": 0.07579138321995542,
+            "max": 0.6501587301587302,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 39,
+            "estimated_pulses": 38,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.8311688311688312,
+              "cemgil_sigma_40ms": 0.4254793448249371,
+              "cemgil_any_metrical_level": 0.4254793448249371,
+              "cmlc": 0.9743589743589743,
+              "cmlt": 0.9743589743589743,
+              "amlc": 0.9743589743589743,
+              "amlt": 0.9743589743589743
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 44,
+              "supported_windows": 41,
+              "unsupported_windows": 3,
+              "absolute_beat_count_error_mean": 0.030494126645995087,
+              "absolute_beat_count_error_p90": 0.05349392361110894,
+              "absolute_equivalent_bar_length_error_mean": 0.007623531661498772
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 23,
+                "supported_windows": 22,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.036313095902941205,
+                "absolute_beat_count_error_p90": 0.06138304620726471,
+                "absolute_equivalent_bar_length_error_mean": 0.009078273975735301
+              },
+              "one_bar": {
+                "requested_windows": 11,
+                "supported_windows": 10,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.023603543447292808,
+                "absolute_beat_count_error_p90": 0.04849091880341785,
+                "absolute_equivalent_bar_length_error_mean": 0.005900885861823202
+              },
+              "two_bars": {
+                "requested_windows": 10,
+                "supported_windows": 9,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.02392618312757379,
+                "absolute_beat_count_error_p90": 0.04521901709401704,
+                "absolute_equivalent_bar_length_error_mean": 0.005981545781893447
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-rhythm-02-jazz2-187-fsharp-solo",
+            "title": "02_Jazz2-187-F#_solo / microphone performance",
+            "audio_sha256": "85a80182ec83d45bc15ec7a9de47a1dd71ef0a6d59fa2cbeb44e0f2072abafb2",
+            "duration_seconds": 20.532018140589567,
+            "sample_rate_hz": 22050
+          },
+          "split": "holdout",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 64,
+          "estimated_pulses": 59,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 20.21390374331551,
+            "first_estimated_pulse_seconds": 0.5340589569160997,
+            "last_estimated_pulse_seconds": 19.17968253968254,
+            "reference_pulses_inside_estimated_coverage": 58,
+            "reference_pulses_outside_estimated_coverage": 6
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 34,
+              "missed_reference_pulses": 30,
+              "extra_estimated_pulses": 25,
+              "precision": 0.576271186440678,
+              "recall": 0.53125,
+              "f_measure": 0.5528455284552846,
+              "matched_error_median_seconds": 0.0306702074769305,
+              "matched_error_p90_seconds": 0.0564372173111666,
+              "matched_error_max_seconds": 0.06339893533170837
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 59,
+              "missed_reference_pulses": 5,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 0.921875,
+              "f_measure": 0.959349593495935,
+              "matched_error_median_seconds": 0.05495143511950218,
+              "matched_error_p90_seconds": 0.09540126353571728,
+              "matched_error_max_seconds": 0.11176931378611954
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.06023645821965129,
+            "p90": 0.10762026022530198,
+            "max": 1.0342212036329705,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 48,
+            "estimated_pulses": 45,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.7311827956989247,
+              "cemgil_sigma_40ms": 0.5309305703897139,
+              "cemgil_any_metrical_level": 0.5309305703897139,
+              "cmlc": 0.3125,
+              "cmlt": 0.625,
+              "amlc": 0.3125,
+              "amlt": 0.625
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 53,
+              "unsupported_windows": 7,
+              "absolute_beat_count_error_mean": 0.09202188049649147,
+              "absolute_beat_count_error_p90": 0.2610341864018383,
+              "absolute_equivalent_bar_length_error_mean": 0.02300547012412287
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 28,
+                "unsupported_windows": 3,
+                "absolute_beat_count_error_mean": 0.0686807305964336,
+                "absolute_beat_count_error_p90": 0.1701494736880669,
+                "absolute_equivalent_bar_length_error_mean": 0.0171701826491084
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 13,
+                "unsupported_windows": 2,
+                "absolute_beat_count_error_mean": 0.09962675898761837,
+                "absolute_beat_count_error_p90": 0.2677194129400009,
+                "absolute_equivalent_bar_length_error_mean": 0.024906689746904593
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 12,
+                "unsupported_windows": 2,
+                "absolute_beat_count_error_mean": 0.138245945231239,
+                "absolute_beat_count_error_p90": 0.3866563813025213,
+                "absolute_equivalent_bar_length_error_mean": 0.03456148630780975
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-rhythm-00-funk3-112-csharp-solo",
+            "title": "00_Funk3-112-C#_solo / microphone performance",
+            "audio_sha256": "b64051609a6b49123a70e5399191df7bd865a9a9cd98460ff5d4d1ca91fb4dc9",
+            "duration_seconds": 34.284399092970524,
+            "sample_rate_hz": 22050
+          },
+          "split": "holdout",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 64,
+          "estimated_pulses": 64,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 33.75,
+            "first_estimated_pulse_seconds": 0.06965986394557823,
+            "last_estimated_pulse_seconds": 33.78503401360544,
+            "reference_pulses_inside_estimated_coverage": 63,
+            "reference_pulses_outside_estimated_coverage": 1
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 54,
+              "missed_reference_pulses": 10,
+              "extra_estimated_pulses": 10,
+              "precision": 0.84375,
+              "recall": 0.84375,
+              "f_measure": 0.84375,
+              "matched_error_median_seconds": 0.03418367346938744,
+              "matched_error_p90_seconds": 0.06254195011337878,
+              "matched_error_max_seconds": 0.06965986394557823
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 64,
+              "missed_reference_pulses": 0,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f_measure": 1.0,
+              "matched_error_median_seconds": 0.03917233560090949,
+              "matched_error_p90_seconds": 0.07304761904761818,
+              "matched_error_max_seconds": 0.08965986394558101
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.03917233560090949,
+            "p90": 0.07304761904761818,
+            "max": 0.08965986394558101,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 54,
+            "estimated_pulses": 54,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.8518518518518519,
+              "cemgil_sigma_40ms": 0.5926238983556215,
+              "cemgil_any_metrical_level": 0.5926238983556215,
+              "cmlc": 1.0,
+              "cmlt": 1.0,
+              "amlc": 1.0,
+              "amlt": 1.0
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 57,
+              "unsupported_windows": 3,
+              "absolute_beat_count_error_mean": 0.05627274115170983,
+              "absolute_beat_count_error_p90": 0.11226243044772201,
+              "absolute_equivalent_bar_length_error_mean": 0.014068185287927458
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 30,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.05513789020837224,
+                "absolute_beat_count_error_p90": 0.0876453218005962,
+                "absolute_equivalent_bar_length_error_mean": 0.01378447255209306
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.06036282745867659,
+                "absolute_beat_count_error_p90": 0.15574753736412966,
+                "absolute_equivalent_bar_length_error_mean": 0.015090706864669148
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.054486919613447767,
+                "absolute_beat_count_error_p90": 0.10246687370600256,
+                "absolute_equivalent_bar_length_error_mean": 0.013621729903361942
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-rhythm-02-rock3-117-bb-solo",
+            "title": "02_Rock3-117-Bb_solo / microphone performance",
+            "audio_sha256": "70eb3e83acd6ed2ab0d4fdb882c501e48458d39ffb75b13716fb456d952ef382",
+            "duration_seconds": 32.81641723356009,
+            "sample_rate_hz": 22050
+          },
+          "split": "holdout",
+          "beat_reference_semantics": "GuitarSet nominal metronome/lead-sheet beat-position grid; not manually marked physical played attacks or predicted downbeats",
+          "reference_pulses": 64,
+          "estimated_pulses": 62,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 32.30769230769231,
+            "first_estimated_pulse_seconds": 0.5572789115646258,
+            "last_estimated_pulse_seconds": 31.880997732426305,
+            "reference_pulses_inside_estimated_coverage": 61,
+            "reference_pulses_outside_estimated_coverage": 3
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 44,
+              "missed_reference_pulses": 20,
+              "extra_estimated_pulses": 18,
+              "precision": 0.7096774193548387,
+              "recall": 0.6875,
+              "f_measure": 0.6984126984126984,
+              "matched_error_median_seconds": 0.0519797662654824,
+              "matched_error_p90_seconds": 0.06651735566021436,
+              "matched_error_max_seconds": 0.06940868655154375
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 62,
+              "missed_reference_pulses": 2,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 0.96875,
+              "f_measure": 0.9841269841269841,
+              "matched_error_median_seconds": 0.06033839176696354,
+              "matched_error_p90_seconds": 0.08372579801151314,
+              "matched_error_max_seconds": 0.11132740275597897
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.061608233036804405,
+            "p90": 0.08560683760684054,
+            "max": 0.5572789115646258,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 54,
+            "estimated_pulses": 53,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.6542056074766356,
+              "cemgil_sigma_40ms": 0.3717315088835428,
+              "cemgil_any_metrical_level": 0.3717315088835428,
+              "cmlc": 0.6111111111111112,
+              "cmlt": 0.9074074074074074,
+              "amlc": 0.6111111111111112,
+              "amlt": 0.9074074074074074
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 57,
+              "unsupported_windows": 3,
+              "absolute_beat_count_error_mean": 0.05534612063502208,
+              "absolute_beat_count_error_p90": 0.11164919772256496,
+              "absolute_equivalent_bar_length_error_mean": 0.01383653015875552
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 30,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.04991124515580973,
+                "absolute_beat_count_error_p90": 0.10452201783723362,
+                "absolute_equivalent_bar_length_error_mean": 0.012477811288952433
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.06224221075249879,
+                "absolute_beat_count_error_p90": 0.13389037366619266,
+                "absolute_equivalent_bar_length_error_mean": 0.015560552688124698
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.06046158238361411,
+                "absolute_beat_count_error_p90": 0.09309847760934532,
+                "absolute_equivalent_bar_length_error_mean": 0.015115395595903528
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Nominal metronome/lead-sheet grid, not manually marked guitar attacks.",
+    "Four development/six experiment holdout recordings; not proven pretrained-model holdout.",
+    "568 overlapping count windows do not represent 568 independent recordings.",
+    "No downbeat, physical chord-boundary or rock full-mix accuracy score."
+  ]
+}

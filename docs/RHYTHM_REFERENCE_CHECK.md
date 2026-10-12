@@ -8,6 +8,10 @@ identity, configuration and report hash, per-recording metrics and missing
 coverage. Full predictions and per-window reports remain in the ignored local
 `experiments/generated/guitarset-rhythm-cached-v1/` packet.
 
+Subsequent work resolved the acquisition dependency through a verified public
+archive mirror. The [fresh ten-input check](FRESH_GUITARSET_RHYTHM_CHECK.md) is
+complete. The blocked-attempt notes below describe the earlier checkpoint.
+
 ## Method and scope
 
 The same six performances used by the chord pilot total 182.362 seconds. All are

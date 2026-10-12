@@ -1,0 +1,4459 @@
+{
+  "schema_version": "jazzsamba-conditional-alignment-check-1.0",
+  "date": "2026-10-12",
+  "local_report_sha256": "3bc4eb0452ff642ea6eebc1194bad7ea5d56cf337fb6cca38e1135a82ac6bacd",
+  "local_report_path": "experiments/generated/jazzsamba-alignment-v1/report.json",
+  "protocol": {
+    "schema_version": "jazzsamba-conditional-alignment-protocol-1.0",
+    "frozen_at_utc": "2026-10-12T12:43:39.416196+00:00",
+    "input_pack": "/private/tmp/music-os-plan-20261010/experiments/generated/jazzsamba-reference-v1",
+    "manifest_sha256": "10e83d25a5945a2bf0af6f42d0be745924973813501753e24c67446ec1e4567e",
+    "conditions": [
+      "source-triad-runs",
+      "wrong-root-plus-one-semitone"
+    ],
+    "algorithms": [
+      "frozen-nnls",
+      "guarded-nnls"
+    ],
+    "frozen_policy_sha256": "7a75786e45528622a86b5a6998452ef252c908f43a796c80d447c81b259c9ff3",
+    "selected_guard_policy": "balanced",
+    "guarded_parameters": {
+      "hop_seconds": 0.025,
+      "window_seconds": 0.18,
+      "min_chord_seconds": 0.15,
+      "transition_penalty": 0.12,
+      "unknown_score": 0.45,
+      "mismatch_margin": 0.3,
+      "max_audio_seconds": 600,
+      "quality_margin": 0.08,
+      "added_tone_ratio": 0.12,
+      "added_tone_fraction": 0.5
+    },
+    "baseline_parameters": {
+      "hop_seconds": 0.025,
+      "window_seconds": 0.18,
+      "min_chord_seconds": 0.15,
+      "transition_penalty": 0.12,
+      "unknown_score": 0.45,
+      "mismatch_margin": 0.3,
+      "max_audio_seconds": 600
+    },
+    "implementation_sha256": {
+      "experiments/analysis/chart_aligner.py": "e21dc021cc8c508fea583ca4e11d293e6cfaf443535c4c370532cd9ff6a8a3e9",
+      "experiments/analysis/guarded_aligner.py": "f25536fdf9c56e5fdb0d03e8441c91a60ee91961272afa47011b5b815e24e6b0",
+      "experiments/analysis/candidates/nnls_chroma_adapter.py": "6e0970496adb5d20c42dc3400d9a87db3d7b991463740d39813c5e621cd8a7a5",
+      "experiments/generated/acceptance-development-v1/frozen-policy.json": "7a75786e45528622a86b5a6998452ef252c908f43a796c80d447c81b259c9ff3",
+      "experiments/analysis/jazzsamba_alignment_check.py": "05dc2e5e4c16590ea1140520e91fb14d7bffed16793b8b0405d8ef632694033d",
+      "experiments/analysis/alignment_screen.py": "7a09c887ccd18d075bd4922344d339683c0d72e5239d0be6494c52c6678f289e",
+      "experiments/analysis/guitarset_pilot.py": "a6b8b9bbb27e88969520f7d9f2be92ffc1d71bc4c7d20026fe04c56bba42288f",
+      "experiments/analysis/guitarset_validation.py": "b33822cddd304a5762de44c0f5770fff495b3f644b8faf091a33dbf886c8de1c",
+      "experiments/candidate-assets/nnls-chroma-evidence-native/buildinfo.json": "9fe86880de3c64a1fc3e4414aa31b84082888307a0f2f4015d0aad1d26ef8e6f",
+      "experiments/candidate-assets/nnls-chroma-evidence-native/nnls-chroma-host": "c8342cf2dd20691b18744cd821b735a6c397247a7598cb68f5e344cbc83bb550",
+      "experiments/candidate-assets/chordino-native/nnls-chroma.dylib": "1931ae144335ce192742509184b657d8cd7815f139b23f7d43df63d08acb5896"
+    },
+    "cases": [
+      {
+        "id": "jazzsamba-07-blue-bossa-preferred-first60",
+        "split": "development",
+        "inputs": {
+          "id": "jazzsamba-07-blue-bossa-preferred-first60",
+          "original_id": "07-blue_bossa",
+          "audio": "cases/jazzsamba-07-blue-bossa-preferred-first60/audio.wav",
+          "reference": "cases/jazzsamba-07-blue-bossa-preferred-first60/intended.json",
+          "core_reference": "cases/jazzsamba-07-blue-bossa-preferred-first60/core-reference.json",
+          "intended_reference_sha256": "51b3de52f4f22a8f5c63d96759fc765628cdf59db9f91f8efc2e58ddf907d886",
+          "split": "development",
+          "source": {
+            "dataset_doi": "10.5281/zenodo.22943963",
+            "dataset_version": "1.0.0",
+            "publisher_demo_commit": "3715097238b33593d865d05b772e094642843612",
+            "official_demo_mp3": {
+              "url": "https://raw.githubusercontent.com/pnlong/jazzsamba-demo/3715097238b33593d865d05b772e094642843612/audio/async/07-blue_bossa/better/mixture.mp3",
+              "path": "audio/async/07-blue_bossa/better/mixture.mp3",
+              "bytes": 7317645,
+              "sha256": "4e5231c583e80ae0365ecab2f0cfad74bc9daa3f0ef2b58049bb9d0df0b61873",
+              "git_blob_sha1": "60e6b09a29c81fb9105d66dd07003972c3267ce2"
+            },
+            "official_annotation": {
+              "url": "https://raw.githubusercontent.com/pnlong/jazzsamba-demo/3715097238b33593d865d05b772e094642843612/data/annotations/async/07-blue_bossa.json",
+              "path": "data/annotations/async/07-blue_bossa.json",
+              "bytes": 162585,
+              "sha256": "027bf70ba3f739b489bbf4770ff9cd71c14fff23d4502ce72ba5109605d1bacf",
+              "git_blob_sha1": "9e325026950483261e819f6f743fe098d5173fc7"
+            },
+            "prepared_audio_sha256": "ed3aaa7e77278ddb01dc4999c730586aa9937141102b301f6f37dde1c51a4099",
+            "prepared_duration_seconds": 60.0,
+            "preparation": "FFmpeg MP3 decoder honors codec delay/padding metadata; mono 22050Hz PCM16 first 60.000s from zero; no arbitrary offset, trim, gain or endpoint scaling",
+            "mp3_scope": "Publisher 24kHz stereo/192kbps web export, not original 48kHz FLAC archive",
+            "source_metadata": {
+              "song_id": 7,
+              "title": "Blue Bossa",
+              "artist": "Kenny Durham",
+              "genre": "bossa nova",
+              "year": "1965",
+              "key_signature": "C minor",
+              "time_signature": "4/4",
+              "bpm": "160.0",
+              "form": "ABAB",
+              "tempo_text": "Med. Up Bossa",
+              "is_swung": "False",
+              "synchronous": false,
+              "song_subdir_basename": "07-blue_bossa",
+              "playing.musician_ids": "0-1-2-3-4",
+              "is_trumpet_lead": "True",
+              "is_saxophone_lead": "True",
+              "protocol": "async",
+              "audio_url": "audio/async/07-blue_bossa/better/mixture.mp3",
+              "peaks_url": "data/peaks/async/07-blue_bossa.json",
+              "annotations_url": "data/annotations/async/07-blue_bossa.json",
+              "preview_audio_url": "audio/async/07-blue_bossa/better/preview/mixture.mp3",
+              "stems": [
+                {
+                  "id": "drums",
+                  "label": "Drums",
+                  "url": "audio/async/07-blue_bossa/better/preview/stems/drums.mp3"
+                },
+                {
+                  "id": "bass",
+                  "label": "Bass",
+                  "url": "audio/async/07-blue_bossa/better/preview/stems/bass.mp3"
+                },
+                {
+                  "id": "piano",
+                  "label": "Piano",
+                  "url": "audio/async/07-blue_bossa/better/preview/stems/piano.mp3"
+                },
+                {
+                  "id": "trumpet",
+                  "label": "Trumpet (Lead)",
+                  "url": "audio/async/07-blue_bossa/better/preview/stems/trumpet.mp3"
+                },
+                {
+                  "id": "saxophone_alto",
+                  "label": "Alto Saxophone (Lead)",
+                  "url": "audio/async/07-blue_bossa/better/preview/stems/saxophone_alto.mp3"
+                }
+              ]
+            },
+            "split": "development",
+            "selection_sha256": "4801496826f97580bad40b2b07ddc952ed410642acf6ea1f71d462240f7c3e96",
+            "source_annotation_sha256": "027bf70ba3f739b489bbf4770ff9cd71c14fff23d4502ce72ba5109605d1bacf"
+          }
+        },
+        "source_hashes": {
+          "audio": "ed3aaa7e77278ddb01dc4999c730586aa9937141102b301f6f37dde1c51a4099",
+          "reference": "51b3de52f4f22a8f5c63d96759fc765628cdf59db9f91f8efc2e58ddf907d886",
+          "core_reference": "b6d29e61c8aa32ba6193e27ae7d600110ff3883d2631a056c72ae278503c1c12"
+        },
+        "untimed_charts": {
+          "source-triad-runs": "cases/jazzsamba-07-blue-bossa-preferred-first60/source-triad-runs-untimed.json",
+          "wrong-root-plus-one-semitone": "cases/jazzsamba-07-blue-bossa-preferred-first60/wrong-root-plus-one-semitone-untimed.json"
+        },
+        "raw_context": {
+          "baseline": {
+            "path": "cases/jazzsamba-07-blue-bossa-preferred-first60/baseline.json",
+            "sha256": "32eb1e28447e116044100f6ecbb40a2c22bdf1d27dddce8b3c02aa5359e96bac"
+          },
+          "btc": {
+            "path": "cases/jazzsamba-07-blue-bossa-preferred-first60/btc.json",
+            "sha256": "52d0a20af66ef0ac89e064d40bd0774d359e5334f2c2f2c6995259d58c93d778"
+          },
+          "crema": {
+            "path": "cases/jazzsamba-07-blue-bossa-preferred-first60/crema.json",
+            "sha256": "e2d96b7ba074ed6b57fce65336a7c20c2cbaf690409214e32be6817f7d4e8810"
+          },
+          "chordmini": {
+            "path": "cases/jazzsamba-07-blue-bossa-preferred-first60/chordmini.json",
+            "sha256": "72e94787f9d0d5a9c426d1b12f969579d027baa40101893f10ad16efa26c095c"
+          },
+          "chordino": {
+            "path": "cases/jazzsamba-07-blue-bossa-preferred-first60/chordino.json",
+            "sha256": "5a130bf10e07c05e09c10efa514a91ab9484304fe1d786c786269f198a9e14bf"
+          }
+        },
+        "untimed_sha256": {
+          "source-triad-runs": "ee638df8ee4dd00d486496e2c494789f7b1c2ba1a215dfd439193c17d53608c6",
+          "wrong-root-plus-one-semitone": "a93dd650269d7538b7f59c755a708fb17057ef0906e9e2990f7fd1d1f823d695"
+        }
+      },
+      {
+        "id": "jazzsamba-51-amazing-grace-preferred-first60",
+        "split": "holdout",
+        "inputs": {
+          "id": "jazzsamba-51-amazing-grace-preferred-first60",
+          "original_id": "51-amazing_grace",
+          "audio": "cases/jazzsamba-51-amazing-grace-preferred-first60/audio.wav",
+          "reference": "cases/jazzsamba-51-amazing-grace-preferred-first60/intended.json",
+          "core_reference": "cases/jazzsamba-51-amazing-grace-preferred-first60/core-reference.json",
+          "intended_reference_sha256": "4f601631c20735ab72c1771b5854c55a876d9804549592a958a1ebe85a11650b",
+          "split": "holdout",
+          "source": {
+            "dataset_doi": "10.5281/zenodo.22943963",
+            "dataset_version": "1.0.0",
+            "publisher_demo_commit": "3715097238b33593d865d05b772e094642843612",
+            "official_demo_mp3": {
+              "url": "https://raw.githubusercontent.com/pnlong/jazzsamba-demo/3715097238b33593d865d05b772e094642843612/audio/sync/51-amazing_grace/better/mixture.mp3",
+              "path": "audio/sync/51-amazing_grace/better/mixture.mp3",
+              "bytes": 2234445,
+              "sha256": "5014bfb20688a41cb7116c4baa24267a57589a79dd84a3484313d72140472854",
+              "git_blob_sha1": "3ef2a640e3ccede490f949f127a03365aa5ff785"
+            },
+            "official_annotation": {
+              "url": "https://raw.githubusercontent.com/pnlong/jazzsamba-demo/3715097238b33593d865d05b772e094642843612/data/annotations/sync/51-amazing_grace.json",
+              "path": "data/annotations/sync/51-amazing_grace.json",
+              "bytes": 74184,
+              "sha256": "694ff2dd4f57ba497d6942d854c5ac4da67c4270d5c6c7d87213728a0a1c59df",
+              "git_blob_sha1": "f4c2edc9e4d02c65da8e36f5445a0ccf69085008"
+            },
+            "prepared_audio_sha256": "35da08247314800b868cd2740635cb466801387525af1b0e66c4fd7eab69fffd",
+            "prepared_duration_seconds": 60.0,
+            "preparation": "FFmpeg MP3 decoder honors codec delay/padding metadata; mono 22050Hz PCM16 first 60.000s from zero; no arbitrary offset, trim, gain or endpoint scaling",
+            "mp3_scope": "Publisher 24kHz stereo/192kbps web export, not original 48kHz FLAC archive",
+            "source_metadata": {
+              "song_id": 51,
+              "title": "Amazing Grace",
+              "artist": "Traditional",
+              "genre": "swing",
+              "year": "1779",
+              "key_signature": "F Major",
+              "time_signature": "4/4",
+              "bpm": "155.0",
+              "form": "ABAB",
+              "tempo_text": "Bright",
+              "is_swung": "True",
+              "synchronous": true,
+              "song_subdir_basename": "51-amazing_grace",
+              "playing.musician_ids": "0-2-3-7",
+              "is_trumpet_lead": "True",
+              "is_saxophone_lead": "NA",
+              "protocol": "sync",
+              "audio_url": "audio/sync/51-amazing_grace/better/mixture.mp3",
+              "peaks_url": "data/peaks/sync/51-amazing_grace.json",
+              "annotations_url": "data/annotations/sync/51-amazing_grace.json",
+              "preview_audio_url": "audio/sync/51-amazing_grace/better/preview/mixture.mp3",
+              "stems": [
+                {
+                  "id": "drums",
+                  "label": "Drums",
+                  "url": "audio/sync/51-amazing_grace/better/preview/stems/drums.mp3"
+                },
+                {
+                  "id": "bass",
+                  "label": "Bass",
+                  "url": "audio/sync/51-amazing_grace/better/preview/stems/bass.mp3"
+                },
+                {
+                  "id": "piano",
+                  "label": "Piano",
+                  "url": "audio/sync/51-amazing_grace/better/preview/stems/piano.mp3"
+                },
+                {
+                  "id": "trumpet",
+                  "label": "Trumpet (Lead)",
+                  "url": "audio/sync/51-amazing_grace/better/preview/stems/trumpet.mp3"
+                }
+              ]
+            },
+            "split": "holdout",
+            "selection_sha256": "4801496826f97580bad40b2b07ddc952ed410642acf6ea1f71d462240f7c3e96",
+            "source_annotation_sha256": "694ff2dd4f57ba497d6942d854c5ac4da67c4270d5c6c7d87213728a0a1c59df"
+          }
+        },
+        "source_hashes": {
+          "audio": "35da08247314800b868cd2740635cb466801387525af1b0e66c4fd7eab69fffd",
+          "reference": "4f601631c20735ab72c1771b5854c55a876d9804549592a958a1ebe85a11650b",
+          "core_reference": "0d776512331e631452bf2e37cf32bb229c3b5ed6c0df512887d0451fa5721c2a"
+        },
+        "untimed_charts": {
+          "source-triad-runs": "cases/jazzsamba-51-amazing-grace-preferred-first60/source-triad-runs-untimed.json",
+          "wrong-root-plus-one-semitone": "cases/jazzsamba-51-amazing-grace-preferred-first60/wrong-root-plus-one-semitone-untimed.json"
+        },
+        "raw_context": {
+          "baseline": {
+            "path": "cases/jazzsamba-51-amazing-grace-preferred-first60/baseline.json",
+            "sha256": "02ab23f6b8943651c97be59a9519fc77c8ee3fd21c38b7f2d3ddb5637269716f"
+          },
+          "btc": {
+            "path": "cases/jazzsamba-51-amazing-grace-preferred-first60/btc.json",
+            "sha256": "031f26ee4726dca5b360af5e45f6c3f1fc89fb2b53b67847a22abbf9f3d91fb7"
+          },
+          "crema": {
+            "path": "cases/jazzsamba-51-amazing-grace-preferred-first60/crema.json",
+            "sha256": "f218634a56db001df04e1127ddbe502dde4ae088a5abb0ce47cd710cd211db07"
+          },
+          "chordmini": {
+            "path": "cases/jazzsamba-51-amazing-grace-preferred-first60/chordmini.json",
+            "sha256": "b4a858eed0a786956a2e85d1ef82048bf5c0fcf40ac771be5d868bdcb8e431d3"
+          },
+          "chordino": {
+            "path": "cases/jazzsamba-51-amazing-grace-preferred-first60/chordino.json",
+            "sha256": "40321819d608281c91fcbc699930812a256d88d68dafbf1df55f6c401efbd2c8"
+          }
+        },
+        "untimed_sha256": {
+          "source-triad-runs": "fa5d65f7477fb64f6128ef259b879b937116f5540ebb5c05c32c90c614c3b3db",
+          "wrong-root-plus-one-semitone": "573766dbe014049eed41195d3960d683db437e6ea92a013ef21784dde7fc32e2"
+        }
+      },
+      {
+        "id": "jazzsamba-75-when-the-saints-go-marching-in-preferred-first60",
+        "split": "holdout",
+        "inputs": {
+          "id": "jazzsamba-75-when-the-saints-go-marching-in-preferred-first60",
+          "original_id": "75-when_the_saints_go_marching_in",
+          "audio": "cases/jazzsamba-75-when-the-saints-go-marching-in-preferred-first60/audio.wav",
+          "reference": "cases/jazzsamba-75-when-the-saints-go-marching-in-preferred-first60/intended.json",
+          "core_reference": "cases/jazzsamba-75-when-the-saints-go-marching-in-preferred-first60/core-reference.json",
+          "intended_reference_sha256": "e5d257010c00d8c9ccf352376ec558a3ca66cead0c67d4484f7c7b1368ae2018",
+          "split": "holdout",
+          "source": {
+            "dataset_doi": "10.5281/zenodo.22943963",
+            "dataset_version": "1.0.0",
+            "publisher_demo_commit": "3715097238b33593d865d05b772e094642843612",
+            "official_demo_mp3": {
+              "url": "https://raw.githubusercontent.com/pnlong/jazzsamba-demo/3715097238b33593d865d05b772e094642843612/audio/sync/75-when_the_saints_go_marching_in/better/mixture.mp3",
+              "path": "audio/sync/75-when_the_saints_go_marching_in/better/mixture.mp3",
+              "bytes": 4027725,
+              "sha256": "4bee09491c5dacb8562e6e8b45008701e07c2136eabde9d914d39bc62fc95574",
+              "git_blob_sha1": "c37b3b46b54e699be0e31119fd8fc9d78ecb5338"
+            },
+            "official_annotation": {
+              "url": "https://raw.githubusercontent.com/pnlong/jazzsamba-demo/3715097238b33593d865d05b772e094642843612/data/annotations/sync/75-when_the_saints_go_marching_in.json",
+              "path": "data/annotations/sync/75-when_the_saints_go_marching_in.json",
+              "bytes": 113504,
+              "sha256": "eef2a7426ca7e24a5c125b9d38b2e96cc920761dcdb7c4ed6c1cc7226c52b2be",
+              "git_blob_sha1": "3e93063bce840ebca871f19cd00530ab186ef0b4"
+            },
+            "prepared_audio_sha256": "f24d19d9886c55094c03e33f0b668803bd5782592e0a29d06e7ab142e9c59444",
+            "prepared_duration_seconds": 60.0,
+            "preparation": "FFmpeg MP3 decoder honors codec delay/padding metadata; mono 22050Hz PCM16 first 60.000s from zero; no arbitrary offset, trim, gain or endpoint scaling",
+            "mp3_scope": "Publisher 24kHz stereo/192kbps web export, not original 48kHz FLAC archive",
+            "source_metadata": {
+              "song_id": 75,
+              "title": "When the Saints Go Marching In",
+              "artist": "Traditional",
+              "genre": "swing",
+              "year": "1896",
+              "key_signature": "F Major",
+              "time_signature": "4/4",
+              "bpm": "210.0",
+              "form": "ABAB",
+              "tempo_text": "Bright",
+              "is_swung": "True",
+              "synchronous": true,
+              "song_subdir_basename": "75-when_the_saints_go_marching_in",
+              "playing.musician_ids": "0-2-3-7",
+              "is_trumpet_lead": "True",
+              "is_saxophone_lead": "NA",
+              "protocol": "sync",
+              "audio_url": "audio/sync/75-when_the_saints_go_marching_in/better/mixture.mp3",
+              "peaks_url": "data/peaks/sync/75-when_the_saints_go_marching_in.json",
+              "annotations_url": "data/annotations/sync/75-when_the_saints_go_marching_in.json"
+            },
+            "split": "holdout",
+            "selection_sha256": "4801496826f97580bad40b2b07ddc952ed410642acf6ea1f71d462240f7c3e96",
+            "source_annotation_sha256": "eef2a7426ca7e24a5c125b9d38b2e96cc920761dcdb7c4ed6c1cc7226c52b2be"
+          }
+        },
+        "source_hashes": {
+          "audio": "f24d19d9886c55094c03e33f0b668803bd5782592e0a29d06e7ab142e9c59444",
+          "reference": "e5d257010c00d8c9ccf352376ec558a3ca66cead0c67d4484f7c7b1368ae2018",
+          "core_reference": "0f2a9a8555edc4a906034489d52105e46cc30af198b85379ce7e0a38fc7bed30"
+        },
+        "untimed_charts": {
+          "source-triad-runs": "cases/jazzsamba-75-when-the-saints-go-marching-in-preferred-first60/source-triad-runs-untimed.json",
+          "wrong-root-plus-one-semitone": "cases/jazzsamba-75-when-the-saints-go-marching-in-preferred-first60/wrong-root-plus-one-semitone-untimed.json"
+        },
+        "raw_context": {
+          "baseline": {
+            "path": "cases/jazzsamba-75-when-the-saints-go-marching-in-preferred-first60/baseline.json",
+            "sha256": "020788609403d952b66a905f647b98efa5ea9faa96b2393520d6341b26fb407d"
+          },
+          "btc": {
+            "path": "cases/jazzsamba-75-when-the-saints-go-marching-in-preferred-first60/btc.json",
+            "sha256": "1e7c9206e871f420cff245db0d13c3b4d644a246b96f36bcf57f410eca956dc2"
+          },
+          "crema": {
+            "path": "cases/jazzsamba-75-when-the-saints-go-marching-in-preferred-first60/crema.json",
+            "sha256": "fc67599a46ac29cc05cafb87c306f045d00dc94218f914f9f71a92026a952091"
+          },
+          "chordmini": {
+            "path": "cases/jazzsamba-75-when-the-saints-go-marching-in-preferred-first60/chordmini.json",
+            "sha256": "9e2fde7e990c45f0cc764d9ce5b8d1880599f6d90c1b1839decca5bf024f7468"
+          },
+          "chordino": {
+            "path": "cases/jazzsamba-75-when-the-saints-go-marching-in-preferred-first60/chordino.json",
+            "sha256": "b47b98ad7f165d88291f6b96283acb642e818e4c5f20c21569ab8f566c8bd6f3"
+          }
+        },
+        "untimed_sha256": {
+          "source-triad-runs": "0f1717ba1e882785b0ed892b3df5483dc40fadc7eef11ac0906675bf9f276124",
+          "wrong-root-plus-one-semitone": "ffe1f926508e2ad00e0a91ffd8a59507aeb5d1322217999fd6248e133280b2a7"
+        }
+      }
+    ],
+    "boundary_tolerance_seconds": 0.15,
+    "boundary_definition": "Differing adjacent projected harmonies only; contiguous supported reference spans; N/X edges, identical repeated chords and gap edges excluded. Output N/X edges do not earn timing credit.",
+    "no_tuning": true,
+    "source_timestamps_withheld": true,
+    "training_exclusion_proven": false,
+    "arrangement_promotion": false,
+    "reference_semantics": "Written sheet-derived chart targets on publisher bar grids; not individually marked physical attacks or performed notes",
+    "experiment_status": "Retrospective method extension on already exposed three paired clips; split labels inherited, not fresh after raw-model outcomes"
+  },
+  "protocol_sha256": "9ee7df9d413bf45126c73901469d7f670d0279347484368f91aa692b6012754e",
+  "evidence": [
+    {
+      "id": "jazzsamba-07-blue-bossa-preferred-first60",
+      "sha256": "6fb13ebefb7ddad96d8b0c5d91cbaa53c5bcbfe27a9ea60067e657860f476880",
+      "extraction_seconds": 0.24812087509781122
+    },
+    {
+      "id": "jazzsamba-51-amazing-grace-preferred-first60",
+      "sha256": "b2c80901efb0b6f74bf16042faf1f29cbf13d4730829eef96f31f481324ef038",
+      "extraction_seconds": 0.2544683748856187
+    },
+    {
+      "id": "jazzsamba-75-when-the-saints-go-marching-in-preferred-first60",
+      "sha256": "94f503c315ca6fef8b04667506f1d8c421b913600c310b4adbe04ecc83338ed6",
+      "extraction_seconds": 0.26219545770436525
+    }
+  ],
+  "summary": [
+    {
+      "condition": "source-triad-runs",
+      "algorithm": "frozen-nnls",
+      "split": "all",
+      "cases": 3,
+      "duration_seconds": 180.0,
+      "root": 0.6239089590768118,
+      "root_eligible_seconds": 167.397042,
+      "root_reference_coverage": 0.9299835666666667,
+      "majmin": 0.6188667896779619,
+      "majmin_eligible_seconds": 167.397042,
+      "majmin_reference_coverage": 0.9299835666666667,
+      "estimated_unknown_seconds": 34.28888888888892,
+      "retained_harmonic_seconds": 138.31446712018138,
+      "retained_wrong_majmin_seconds": 29.536500537414966,
+      "retained_correct_majmin_seconds": 103.59646998412697,
+      "retained_harmonic_on_unknown_reference_seconds": 5.181496598639451,
+      "unvisited_sequence_positions": 0,
+      "matched_grid_boundaries_150ms": 26,
+      "reference_supported_grid_boundaries": 95,
+      "predicted_supported_harmonic_boundaries": 53,
+      "grid_boundary_f1_150ms": 0.35135135135135137
+    },
+    {
+      "condition": "source-triad-runs",
+      "algorithm": "frozen-nnls",
+      "split": "development",
+      "cases": 1,
+      "duration_seconds": 60.0,
+      "root": 0.3395281614329232,
+      "root_eligible_seconds": 49.5,
+      "root_reference_coverage": 0.825,
+      "majmin": 0.3395281614329232,
+      "majmin_eligible_seconds": 49.5,
+      "majmin_reference_coverage": 0.825,
+      "estimated_unknown_seconds": 20.617868480725644,
+      "retained_harmonic_seconds": 35.70879818594102,
+      "retained_wrong_majmin_seconds": 13.720657596371876,
+      "retained_correct_majmin_seconds": 16.806643990929697,
+      "retained_harmonic_on_unknown_reference_seconds": 5.181496598639451,
+      "unvisited_sequence_positions": 0,
+      "matched_grid_boundaries_150ms": 2,
+      "reference_supported_grid_boundaries": 19,
+      "predicted_supported_harmonic_boundaries": 6,
+      "grid_boundary_f1_150ms": 0.16
+    },
+    {
+      "condition": "source-triad-runs",
+      "algorithm": "frozen-nnls",
+      "split": "holdout",
+      "cases": 2,
+      "duration_seconds": 120.0,
+      "root": 0.7433084727929615,
+      "root_eligible_seconds": 117.897042,
+      "root_reference_coverage": 0.98247535,
+      "majmin": 0.7361493089300516,
+      "majmin_eligible_seconds": 117.897042,
+      "majmin_reference_coverage": 0.98247535,
+      "estimated_unknown_seconds": 13.671020408163272,
+      "retained_harmonic_seconds": 102.60566893424036,
+      "retained_wrong_majmin_seconds": 15.81584294104309,
+      "retained_correct_majmin_seconds": 86.78982599319727,
+      "retained_harmonic_on_unknown_reference_seconds": 0.0,
+      "unvisited_sequence_positions": 0,
+      "matched_grid_boundaries_150ms": 24,
+      "reference_supported_grid_boundaries": 76,
+      "predicted_supported_harmonic_boundaries": 47,
+      "grid_boundary_f1_150ms": 0.3902439024390244
+    },
+    {
+      "condition": "source-triad-runs",
+      "algorithm": "guarded-nnls",
+      "split": "all",
+      "cases": 3,
+      "duration_seconds": 180.0,
+      "root": 0.33866701928759685,
+      "root_eligible_seconds": 167.397042,
+      "root_reference_coverage": 0.9299835666666667,
+      "majmin": 0.3370715536865845,
+      "majmin_eligible_seconds": 167.397042,
+      "majmin_reference_coverage": 0.9299835666666667,
+      "estimated_unknown_seconds": 99.23664399092972,
+      "retained_harmonic_seconds": 73.36671201814057,
+      "retained_wrong_majmin_seconds": 16.066647541950132,
+      "retained_correct_majmin_seconds": 56.42478102947844,
+      "retained_harmonic_on_unknown_reference_seconds": 0.875283446712011,
+      "unvisited_sequence_positions": 26,
+      "matched_grid_boundaries_150ms": 5,
+      "reference_supported_grid_boundaries": 95,
+      "predicted_supported_harmonic_boundaries": 15,
+      "grid_boundary_f1_150ms": 0.09090909090909091
+    },
+    {
+      "condition": "source-triad-runs",
+      "algorithm": "guarded-nnls",
+      "split": "development",
+      "cases": 1,
+      "duration_seconds": 60.0,
+      "root": 0.09005061957442885,
+      "root_eligible_seconds": 49.5,
+      "root_reference_coverage": 0.825,
+      "majmin": 0.09005061957442885,
+      "majmin_eligible_seconds": 49.5,
+      "majmin_reference_coverage": 0.825,
+      "estimated_unknown_seconds": 47.00589569161001,
+      "retained_harmonic_seconds": 9.32077097505666,
+      "retained_wrong_majmin_seconds": 3.9879818594104215,
+      "retained_correct_majmin_seconds": 4.457505668934228,
+      "retained_harmonic_on_unknown_reference_seconds": 0.875283446712011,
+      "unvisited_sequence_positions": 15,
+      "matched_grid_boundaries_150ms": 0,
+      "reference_supported_grid_boundaries": 19,
+      "predicted_supported_harmonic_boundaries": 1,
+      "grid_boundary_f1_150ms": 0.0
+    },
+    {
+      "condition": "source-triad-runs",
+      "algorithm": "guarded-nnls",
+      "split": "holdout",
+      "cases": 2,
+      "duration_seconds": 120.0,
+      "root": 0.44305056934987763,
+      "root_eligible_seconds": 117.897042,
+      "root_reference_coverage": 0.98247535,
+      "majmin": 0.4407852349725976,
+      "majmin_eligible_seconds": 117.897042,
+      "majmin_reference_coverage": 0.98247535,
+      "estimated_unknown_seconds": 52.230748299319714,
+      "retained_harmonic_seconds": 64.04594104308391,
+      "retained_wrong_majmin_seconds": 12.078665682539711,
+      "retained_correct_majmin_seconds": 51.96727536054421,
+      "retained_harmonic_on_unknown_reference_seconds": 0.0,
+      "unvisited_sequence_positions": 11,
+      "matched_grid_boundaries_150ms": 5,
+      "reference_supported_grid_boundaries": 76,
+      "predicted_supported_harmonic_boundaries": 14,
+      "grid_boundary_f1_150ms": 0.1111111111111111
+    },
+    {
+      "condition": "wrong-root-plus-one-semitone",
+      "algorithm": "frozen-nnls",
+      "split": "all",
+      "cases": 3,
+      "duration_seconds": 180.0,
+      "root": 0.007551126746786489,
+      "root_eligible_seconds": 167.397042,
+      "root_reference_coverage": 0.9299835666666667,
+      "majmin": 0.007551126746786489,
+      "majmin_eligible_seconds": 167.397042,
+      "majmin_reference_coverage": 0.9299835666666667,
+      "estimated_unknown_seconds": 140.64285714285717,
+      "retained_harmonic_seconds": 31.960498866213136,
+      "retained_wrong_majmin_seconds": 27.915238095238088,
+      "retained_correct_majmin_seconds": 1.2640362811791412,
+      "retained_harmonic_on_unknown_reference_seconds": 2.7812244897959104,
+      "unvisited_sequence_positions": 0,
+      "matched_grid_boundaries_150ms": 1,
+      "reference_supported_grid_boundaries": 95,
+      "predicted_supported_harmonic_boundaries": 4,
+      "grid_boundary_f1_150ms": 0.020202020202020204
+    },
+    {
+      "condition": "wrong-root-plus-one-semitone",
+      "algorithm": "frozen-nnls",
+      "split": "development",
+      "cases": 1,
+      "duration_seconds": 60.0,
+      "root": 0.0255360864884675,
+      "root_eligible_seconds": 49.5,
+      "root_reference_coverage": 0.825,
+      "majmin": 0.0255360864884675,
+      "majmin_eligible_seconds": 49.5,
+      "majmin_reference_coverage": 0.825,
+      "estimated_unknown_seconds": 34.43659863945579,
+      "retained_harmonic_seconds": 21.890068027210873,
+      "retained_wrong_majmin_seconds": 17.844807256235825,
+      "retained_correct_majmin_seconds": 1.2640362811791412,
+      "retained_harmonic_on_unknown_reference_seconds": 2.7812244897959104,
+      "unvisited_sequence_positions": 0,
+      "matched_grid_boundaries_150ms": 0,
+      "reference_supported_grid_boundaries": 19,
+      "predicted_supported_harmonic_boundaries": 3,
+      "grid_boundary_f1_150ms": 0.0
+    },
+    {
+      "condition": "wrong-root-plus-one-semitone",
+      "algorithm": "frozen-nnls",
+      "split": "holdout",
+      "cases": 2,
+      "duration_seconds": 120.0,
+      "root": 0.0,
+      "root_eligible_seconds": 117.897042,
+      "root_reference_coverage": 0.98247535,
+      "majmin": 0.0,
+      "majmin_eligible_seconds": 117.897042,
+      "majmin_reference_coverage": 0.98247535,
+      "estimated_unknown_seconds": 106.20625850340136,
+      "retained_harmonic_seconds": 10.070430839002263,
+      "retained_wrong_majmin_seconds": 10.070430839002263,
+      "retained_correct_majmin_seconds": 0.0,
+      "retained_harmonic_on_unknown_reference_seconds": 0.0,
+      "unvisited_sequence_positions": 0,
+      "matched_grid_boundaries_150ms": 1,
+      "reference_supported_grid_boundaries": 76,
+      "predicted_supported_harmonic_boundaries": 1,
+      "grid_boundary_f1_150ms": 0.025974025974025976
+    },
+    {
+      "condition": "wrong-root-plus-one-semitone",
+      "algorithm": "guarded-nnls",
+      "split": "all",
+      "cases": 3,
+      "duration_seconds": 180.0,
+      "root": 0.0,
+      "root_eligible_seconds": 167.397042,
+      "root_reference_coverage": 0.9299835666666667,
+      "majmin": 0.0,
+      "majmin_eligible_seconds": 167.397042,
+      "majmin_reference_coverage": 0.9299835666666667,
+      "estimated_unknown_seconds": 168.50521541950116,
+      "retained_harmonic_seconds": 4.0981405895691445,
+      "retained_wrong_majmin_seconds": 3.9228798185940867,
+      "retained_correct_majmin_seconds": 0.0,
+      "retained_harmonic_on_unknown_reference_seconds": 0.17526077097505777,
+      "unvisited_sequence_positions": 108,
+      "matched_grid_boundaries_150ms": 0,
+      "reference_supported_grid_boundaries": 95,
+      "predicted_supported_harmonic_boundaries": 0,
+      "grid_boundary_f1_150ms": 0.0
+    },
+    {
+      "condition": "wrong-root-plus-one-semitone",
+      "algorithm": "guarded-nnls",
+      "split": "development",
+      "cases": 1,
+      "duration_seconds": 60.0,
+      "root": 0.0,
+      "root_eligible_seconds": 49.5,
+      "root_reference_coverage": 0.825,
+      "majmin": 0.0,
+      "majmin_eligible_seconds": 49.5,
+      "majmin_reference_coverage": 0.825,
+      "estimated_unknown_seconds": 53.402993197278924,
+      "retained_harmonic_seconds": 2.9236734693877393,
+      "retained_wrong_majmin_seconds": 2.7484126984126815,
+      "retained_correct_majmin_seconds": 0.0,
+      "retained_harmonic_on_unknown_reference_seconds": 0.17526077097505777,
+      "unvisited_sequence_positions": 33,
+      "matched_grid_boundaries_150ms": 0,
+      "reference_supported_grid_boundaries": 19,
+      "predicted_supported_harmonic_boundaries": 0,
+      "grid_boundary_f1_150ms": 0.0
+    },
+    {
+      "condition": "wrong-root-plus-one-semitone",
+      "algorithm": "guarded-nnls",
+      "split": "holdout",
+      "cases": 2,
+      "duration_seconds": 120.0,
+      "root": 0.0,
+      "root_eligible_seconds": 117.897042,
+      "root_reference_coverage": 0.98247535,
+      "majmin": 0.0,
+      "majmin_eligible_seconds": 117.897042,
+      "majmin_reference_coverage": 0.98247535,
+      "estimated_unknown_seconds": 115.10222222222222,
+      "retained_harmonic_seconds": 1.1744671201814054,
+      "retained_wrong_majmin_seconds": 1.1744671201814054,
+      "retained_correct_majmin_seconds": 0.0,
+      "retained_harmonic_on_unknown_reference_seconds": 0.0,
+      "unvisited_sequence_positions": 75,
+      "matched_grid_boundaries_150ms": 0,
+      "reference_supported_grid_boundaries": 76,
+      "predicted_supported_harmonic_boundaries": 0,
+      "grid_boundary_f1_150ms": 0.0
+    }
+  ],
+  "cases": [
+    {
+      "id": "jazzsamba-07-blue-bossa-preferred-first60",
+      "split": "development",
+      "condition": "source-triad-runs",
+      "algorithm": "frozen-nnls",
+      "status": "ok",
+      "prediction_sha256": "908d5cc5f5981c68c3a26a2ff57018828d86cd138a93f015b55169201893a502",
+      "prediction": "cases/jazzsamba-07-blue-bossa-preferred-first60/source-triad-runs-frozen-nnls.json",
+      "wall_seconds": 0.11767574958503246,
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 49.5,
+        "reference_chord_coverage": 0.825,
+        "root": 0.3395281614329232,
+        "root_eligible_seconds": 49.5,
+        "root_reference_coverage": 0.825,
+        "root_chord_only": 0.3395281614329232,
+        "root_chord_only_eligible_seconds": 49.5,
+        "root_chord_only_reference_coverage": 0.825,
+        "majmin": 0.3395281614329232,
+        "majmin_eligible_seconds": 49.5,
+        "majmin_reference_coverage": 0.825,
+        "majmin_chord_only": 0.3395281614329232,
+        "majmin_chord_only_eligible_seconds": 49.5,
+        "majmin_chord_only_reference_coverage": 0.825,
+        "estimated_unknown_seconds": 20.617868480725644,
+        "estimated_no_chord_seconds_on_reference_chords": 2.204444444444444,
+        "predicted_events": 121,
+        "analysis_runtime_seconds": 0.10658725071698427,
+        "prediction_label_conversion": [
+          [
+            "Ab:maj",
+            "Ab:maj"
+          ],
+          [
+            "Bb:maj",
+            "Bb:maj"
+          ],
+          [
+            "C:min",
+            "C:min"
+          ],
+          [
+            "Db:maj",
+            "Db:maj"
+          ],
+          [
+            "Eb:min",
+            "Eb:min"
+          ],
+          [
+            "F:min",
+            "F:min"
+          ],
+          [
+            "G:maj",
+            "G:maj"
+          ],
+          [
+            "N",
+            "N"
+          ],
+          [
+            "X",
+            "X"
+          ]
+        ],
+        "retained_harmonic_seconds": 35.70879818594102,
+        "retained_wrong_majmin_seconds": 13.720657596371876,
+        "retained_correct_majmin_seconds": 16.806643990929697,
+        "retained_harmonic_on_unknown_reference_seconds": 5.181496598639451
+      },
+      "boundary": {
+        "reference_supported_grid_boundaries": 19,
+        "predicted_supported_harmonic_boundaries": 6,
+        "matched_grid_boundaries_150ms": 2,
+        "grid_boundary_precision_150ms": 0.3333333333333333,
+        "grid_boundary_recall_150ms": 0.10526315789473684,
+        "grid_boundary_f1_150ms": 0.16,
+        "matched_grid_boundary_mean_error_seconds": 0.06723356009070258,
+        "reference_grid_boundaries_seconds": [
+          3.0,
+          4.5,
+          10.5,
+          13.5,
+          16.5,
+          18.0,
+          22.5,
+          25.5,
+          27.0,
+          28.5,
+          34.5,
+          37.5,
+          40.5,
+          42.0,
+          46.5,
+          49.5,
+          51.0,
+          52.5,
+          58.5
+        ],
+        "predicted_harmonic_boundaries_seconds": [
+          4.522947845804989,
+          18.26671201814059,
+          25.388480725623584,
+          37.30807256235828,
+          42.930521541950114,
+          51.37668934240363
+        ],
+        "physical_attack_accuracy": "not measured"
+      },
+      "diagnostics": {
+        "acoustic_fit_status": "needs_review",
+        "always_requires_human_review": true,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 2255,
+        "silent_frame_fraction": 0.06119900083263947,
+        "active_mismatch_fraction": 0.34988913525498894,
+        "conflicting_proposed_event_indices": [
+          3,
+          6,
+          9,
+          15,
+          17,
+          19,
+          20,
+          31,
+          33,
+          34
+        ],
+        "unvisited_sequence_indices": [],
+        "path_transitions": 34,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "cycle_wraps_observed": 0,
+        "viterbi_objective": 1407.7762418820328
+      }
+    },
+    {
+      "id": "jazzsamba-07-blue-bossa-preferred-first60",
+      "split": "development",
+      "condition": "source-triad-runs",
+      "algorithm": "guarded-nnls",
+      "status": "ok",
+      "prediction_sha256": "7e81a877b76b4810980e3c3f4dc0fc2a267cb68ca8705867ed167e6ab54932b4",
+      "prediction": "cases/jazzsamba-07-blue-bossa-preferred-first60/source-triad-runs-guarded-nnls.json",
+      "wall_seconds": 0.15798108279705048,
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 49.5,
+        "reference_chord_coverage": 0.825,
+        "root": 0.09005061957442885,
+        "root_eligible_seconds": 49.5,
+        "root_reference_coverage": 0.825,
+        "root_chord_only": 0.09005061957442885,
+        "root_chord_only_eligible_seconds": 49.5,
+        "root_chord_only_reference_coverage": 0.825,
+        "majmin": 0.09005061957442885,
+        "majmin_eligible_seconds": 49.5,
+        "majmin_reference_coverage": 0.825,
+        "majmin_chord_only": 0.09005061957442885,
+        "majmin_chord_only_eligible_seconds": 49.5,
+        "majmin_chord_only_reference_coverage": 0.825,
+        "estimated_unknown_seconds": 47.00589569161001,
+        "estimated_no_chord_seconds_on_reference_chords": 2.204444444444444,
+        "predicted_events": 89,
+        "analysis_runtime_seconds": 0.14042862504720688,
+        "prediction_label_conversion": [
+          [
+            "Ab:maj",
+            "Ab:maj"
+          ],
+          [
+            "Bb:maj",
+            "Bb:maj"
+          ],
+          [
+            "C:min",
+            "C:min"
+          ],
+          [
+            "Db:maj",
+            "Db:maj"
+          ],
+          [
+            "F:min",
+            "F:min"
+          ],
+          [
+            "G:maj",
+            "G:maj"
+          ],
+          [
+            "N",
+            "N"
+          ],
+          [
+            "X",
+            "X"
+          ]
+        ],
+        "retained_harmonic_seconds": 9.32077097505666,
+        "retained_wrong_majmin_seconds": 3.9879818594104215,
+        "retained_correct_majmin_seconds": 4.457505668934228,
+        "retained_harmonic_on_unknown_reference_seconds": 0.875283446712011
+      },
+      "boundary": {
+        "reference_supported_grid_boundaries": 19,
+        "predicted_supported_harmonic_boundaries": 1,
+        "matched_grid_boundaries_150ms": 0,
+        "grid_boundary_precision_150ms": 0.0,
+        "grid_boundary_recall_150ms": 0.0,
+        "grid_boundary_f1_150ms": 0.0,
+        "matched_grid_boundary_mean_error_seconds": null,
+        "reference_grid_boundaries_seconds": [
+          3.0,
+          4.5,
+          10.5,
+          13.5,
+          16.5,
+          18.0,
+          22.5,
+          25.5,
+          27.0,
+          28.5,
+          34.5,
+          37.5,
+          40.5,
+          42.0,
+          46.5,
+          49.5,
+          51.0,
+          52.5,
+          58.5
+        ],
+        "predicted_harmonic_boundaries_seconds": [
+          51.37668934240363
+        ],
+        "physical_attack_accuracy": "not measured"
+      },
+      "diagnostics": {
+        "endpoint_reached": false,
+        "partial": true,
+        "terminal_sequence_index": 19,
+        "terminal_active_evidence_age_frames": 7,
+        "acoustic_fit_status": "partial_endpoint_abstention",
+        "always_requires_human_review": true,
+        "accepted_for_playback": false,
+        "arrangement_verified": false,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 2255,
+        "silent_frame_fraction": 0.06119900083263947,
+        "active_mismatch_fraction": 0.834589800443459,
+        "rejected_quality_frames": 1370,
+        "rejected_quality_seconds": 34.2117006802721,
+        "quality_abstention_fraction_of_active_audio": 0.6073801754102044,
+        "retained_harmonic_seconds": 9.320770975056675,
+        "unvisited_sequence_indices": [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34
+        ],
+        "insufficient_active_evidence_sequence_indices": [],
+        "supplied_positions_without_minimum_evidence_count": 15,
+        "no_active_evidence_position_count": 0,
+        "no_active_evidence_supplied_position_count": 12,
+        "near_minimum_active_evidence_sequence_indices": [
+          3,
+          6,
+          15
+        ],
+        "near_minimum_dwell_semantics": "At most 1.5 times the declared minimum supporting evidence; density diagnostic only, not a verified compression error",
+        "silent_position_advance_count": 0,
+        "path_transitions": 19,
+        "cycle_wraps_observed": 0,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "viterbi_objective": 895.4215659867474,
+        "position_active_seconds": [
+          8.471156462585032,
+          9.5956462585034,
+          5.897324263038549,
+          1.5492970521541942,
+          2.623809523809524,
+          4.323038548752834,
+          0.1749206349206349,
+          0.1749206349206349,
+          0.824625850340136,
+          2.448888888888889,
+          3.173560090702949,
+          2.573832199546486,
+          0.6247165532879818,
+          0.34984126984126984,
+          1.9491156462585024,
+          0.1749206349206349,
+          2.77374149659864,
+          4.073151927437641,
+          0.42480725623582766,
+          4.125351473922903,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position_matched_evidence_seconds": [
+          8.471156462585032,
+          1.324399092970521,
+          3.1485714285714295,
+          0.22489795918367345,
+          2.623809523809524,
+          1.9741043083900216,
+          0.1749206349206349,
+          0.1749206349206349,
+          0.824625850340136,
+          2.1740136054421773,
+          2.1990022675736958,
+          2.2989569160997734,
+          0.6247165532879818,
+          0.34984126984126984,
+          0.7746485260770976,
+          0.1749206349206349,
+          0.8746031746031746,
+          1.9241269841269832,
+          0.42480725623582766,
+          1.951337868480725,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "compression_warning": "Minimum dwell prevents unsupported silent traversal; extra repeats may still compress across active music. No section correctness guarantee."
+      }
+    },
+    {
+      "id": "jazzsamba-07-blue-bossa-preferred-first60",
+      "split": "development",
+      "condition": "wrong-root-plus-one-semitone",
+      "algorithm": "frozen-nnls",
+      "status": "ok",
+      "prediction_sha256": "c0512f01c33d4453d15c7c236808af82847ecb20bfdcc5ad50a4c9e0bcfe0348",
+      "prediction": "cases/jazzsamba-07-blue-bossa-preferred-first60/wrong-root-plus-one-semitone-frozen-nnls.json",
+      "wall_seconds": 0.11763670947402716,
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 49.5,
+        "reference_chord_coverage": 0.825,
+        "root": 0.0255360864884675,
+        "root_eligible_seconds": 49.5,
+        "root_reference_coverage": 0.825,
+        "root_chord_only": 0.0255360864884675,
+        "root_chord_only_eligible_seconds": 49.5,
+        "root_chord_only_reference_coverage": 0.825,
+        "majmin": 0.0255360864884675,
+        "majmin_eligible_seconds": 49.5,
+        "majmin_reference_coverage": 0.825,
+        "majmin_chord_only": 0.0255360864884675,
+        "majmin_chord_only_eligible_seconds": 49.5,
+        "majmin_chord_only_reference_coverage": 0.825,
+        "estimated_unknown_seconds": 34.43659863945579,
+        "estimated_no_chord_seconds_on_reference_chords": 2.204444444444444,
+        "predicted_events": 115,
+        "analysis_runtime_seconds": 0.10592879261821508,
+        "prediction_label_conversion": [
+          [
+            "B:maj",
+            "B:maj"
+          ],
+          [
+            "C#:min",
+            "C#:min"
+          ],
+          [
+            "D:maj",
+            "D:maj"
+          ],
+          [
+            "E:min",
+            "E:min"
+          ],
+          [
+            "F#:min",
+            "F#:min"
+          ],
+          [
+            "G#:maj",
+            "G#:maj"
+          ],
+          [
+            "N",
+            "N"
+          ],
+          [
+            "X",
+            "X"
+          ]
+        ],
+        "retained_harmonic_seconds": 21.890068027210873,
+        "retained_wrong_majmin_seconds": 17.844807256235825,
+        "retained_correct_majmin_seconds": 1.2640362811791412,
+        "retained_harmonic_on_unknown_reference_seconds": 2.7812244897959104
+      },
+      "boundary": {
+        "reference_supported_grid_boundaries": 19,
+        "predicted_supported_harmonic_boundaries": 3,
+        "matched_grid_boundaries_150ms": 0,
+        "grid_boundary_precision_150ms": 0.0,
+        "grid_boundary_recall_150ms": 0.0,
+        "grid_boundary_f1_150ms": 0.0,
+        "matched_grid_boundary_mean_error_seconds": null,
+        "reference_grid_boundaries_seconds": [
+          3.0,
+          4.5,
+          10.5,
+          13.5,
+          16.5,
+          18.0,
+          22.5,
+          25.5,
+          27.0,
+          28.5,
+          34.5,
+          37.5,
+          40.5,
+          42.0,
+          46.5,
+          49.5,
+          51.0,
+          52.5,
+          58.5
+        ],
+        "predicted_harmonic_boundaries_seconds": [
+          51.42666666666667,
+          52.05138321995465,
+          52.30126984126984
+        ],
+        "physical_attack_accuracy": "not measured"
+      },
+      "diagnostics": {
+        "acoustic_fit_status": "needs_review",
+        "always_requires_human_review": true,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 2255,
+        "silent_frame_fraction": 0.06119900083263947,
+        "active_mismatch_fraction": 0.5929046563192905,
+        "conflicting_proposed_event_indices": [
+          1,
+          5,
+          6,
+          9,
+          11,
+          13,
+          14,
+          15,
+          16,
+          19,
+          22,
+          28,
+          29,
+          30,
+          31,
+          33,
+          34
+        ],
+        "unvisited_sequence_indices": [],
+        "path_transitions": 34,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "cycle_wraps_observed": 0,
+        "viterbi_objective": 1087.5179561148743
+      }
+    },
+    {
+      "id": "jazzsamba-07-blue-bossa-preferred-first60",
+      "split": "development",
+      "condition": "wrong-root-plus-one-semitone",
+      "algorithm": "guarded-nnls",
+      "status": "ok",
+      "prediction_sha256": "d1239a61dc581249882b8ba7cf1570f44359be3e472933ae3688c8fcaaeb7330",
+      "prediction": "cases/jazzsamba-07-blue-bossa-preferred-first60/wrong-root-plus-one-semitone-guarded-nnls.json",
+      "wall_seconds": 0.1613342920318246,
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 49.5,
+        "reference_chord_coverage": 0.825,
+        "root": 0.0,
+        "root_eligible_seconds": 49.5,
+        "root_reference_coverage": 0.825,
+        "root_chord_only": 0.0,
+        "root_chord_only_eligible_seconds": 49.5,
+        "root_chord_only_reference_coverage": 0.825,
+        "majmin": 0.0,
+        "majmin_eligible_seconds": 49.5,
+        "majmin_reference_coverage": 0.825,
+        "majmin_chord_only": 0.0,
+        "majmin_chord_only_eligible_seconds": 49.5,
+        "majmin_chord_only_reference_coverage": 0.825,
+        "estimated_unknown_seconds": 53.402993197278924,
+        "estimated_no_chord_seconds_on_reference_chords": 2.204444444444444,
+        "predicted_events": 58,
+        "analysis_runtime_seconds": 0.1436877502128482,
+        "prediction_label_conversion": [
+          [
+            "E:min",
+            "E:min"
+          ],
+          [
+            "N",
+            "N"
+          ],
+          [
+            "X",
+            "X"
+          ]
+        ],
+        "retained_harmonic_seconds": 2.9236734693877393,
+        "retained_wrong_majmin_seconds": 2.7484126984126815,
+        "retained_correct_majmin_seconds": 0.0,
+        "retained_harmonic_on_unknown_reference_seconds": 0.17526077097505777
+      },
+      "boundary": {
+        "reference_supported_grid_boundaries": 19,
+        "predicted_supported_harmonic_boundaries": 0,
+        "matched_grid_boundaries_150ms": 0,
+        "grid_boundary_precision_150ms": 0.0,
+        "grid_boundary_recall_150ms": 0.0,
+        "grid_boundary_f1_150ms": 0.0,
+        "matched_grid_boundary_mean_error_seconds": null,
+        "reference_grid_boundaries_seconds": [
+          3.0,
+          4.5,
+          10.5,
+          13.5,
+          16.5,
+          18.0,
+          22.5,
+          25.5,
+          27.0,
+          28.5,
+          34.5,
+          37.5,
+          40.5,
+          42.0,
+          46.5,
+          49.5,
+          51.0,
+          52.5,
+          58.5
+        ],
+        "predicted_harmonic_boundaries_seconds": [],
+        "physical_attack_accuracy": "not measured"
+      },
+      "diagnostics": {
+        "endpoint_reached": false,
+        "partial": true,
+        "terminal_sequence_index": 1,
+        "terminal_active_evidence_age_frames": 0,
+        "acoustic_fit_status": "partial_endpoint_abstention",
+        "always_requires_human_review": true,
+        "accepted_for_playback": false,
+        "arrangement_verified": false,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 2255,
+        "silent_frame_fraction": 0.06119900083263947,
+        "active_mismatch_fraction": 0.9481152993348115,
+        "rejected_quality_frames": 1931,
+        "rejected_quality_seconds": 48.23034013605442,
+        "quality_abstention_fraction_of_active_audio": 0.8562612167603462,
+        "retained_harmonic_seconds": 2.923673469387756,
+        "unvisited_sequence_indices": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34
+        ],
+        "insufficient_active_evidence_sequence_indices": [],
+        "supplied_positions_without_minimum_evidence_count": 33,
+        "no_active_evidence_position_count": 0,
+        "no_active_evidence_supplied_position_count": 26,
+        "near_minimum_active_evidence_sequence_indices": [],
+        "near_minimum_dwell_semantics": "At most 1.5 times the declared minimum supporting evidence; density diagnostic only, not a verified compression error",
+        "silent_position_advance_count": 0,
+        "path_transitions": 1,
+        "cycle_wraps_observed": 0,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "viterbi_objective": 502.3334285559983,
+        "position_active_seconds": [
+          1.899138321995464,
+          54.427528344671195,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position_matched_evidence_seconds": [
+          1.899138321995464,
+          4.647891156462585,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "compression_warning": "Minimum dwell prevents unsupported silent traversal; extra repeats may still compress across active music. No section correctness guarantee."
+      }
+    },
+    {
+      "id": "jazzsamba-51-amazing-grace-preferred-first60",
+      "split": "holdout",
+      "condition": "source-triad-runs",
+      "algorithm": "frozen-nnls",
+      "status": "ok",
+      "prediction_sha256": "2435012ce181d7ec3d0ea2a733fbaaec754d375ca7ded26a0c54909c4d08fe07",
+      "prediction": "cases/jazzsamba-51-amazing-grace-preferred-first60/source-triad-runs-frozen-nnls.json",
+      "wall_seconds": 0.13211470935493708,
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 58.924,
+        "reference_chord_coverage": 0.9820666666666666,
+        "root": 0.7210561481171563,
+        "root_eligible_seconds": 58.924,
+        "root_reference_coverage": 0.9820666666666666,
+        "root_chord_only": 0.7210561481171563,
+        "root_chord_only_eligible_seconds": 58.924,
+        "root_chord_only_reference_coverage": 0.9820666666666666,
+        "majmin": 0.7210561481171563,
+        "majmin_eligible_seconds": 58.924,
+        "majmin_reference_coverage": 0.9820666666666666,
+        "majmin_chord_only": 0.7210561481171563,
+        "majmin_chord_only_eligible_seconds": 58.924,
+        "majmin_chord_only_reference_coverage": 0.9820666666666666,
+        "estimated_unknown_seconds": 5.299818594104306,
+        "estimated_no_chord_seconds_on_reference_chords": 0.6981950113378643,
+        "predicted_events": 97,
+        "analysis_runtime_seconds": 0.12043370772153139,
+        "prediction_label_conversion": [
+          [
+            "Bb:maj",
+            "Bb:maj"
+          ],
+          [
+            "C:maj",
+            "C:maj"
+          ],
+          [
+            "D:min",
+            "D:min"
+          ],
+          [
+            "F:maj",
+            "F:maj"
+          ],
+          [
+            "G:maj",
+            "G:maj"
+          ],
+          [
+            "N",
+            "N"
+          ],
+          [
+            "X",
+            "X"
+          ]
+        ],
+        "retained_harmonic_seconds": 52.92598639455783,
+        "retained_wrong_majmin_seconds": 10.438473922902503,
+        "retained_correct_majmin_seconds": 42.48751247165533,
+        "retained_harmonic_on_unknown_reference_seconds": 0.0
+      },
+      "boundary": {
+        "reference_supported_grid_boundaries": 44,
+        "predicted_supported_harmonic_boundaries": 32,
+        "matched_grid_boundaries_150ms": 16,
+        "grid_boundary_precision_150ms": 0.5,
+        "grid_boundary_recall_150ms": 0.36363636363636365,
+        "grid_boundary_f1_150ms": 0.4210526315789474,
+        "matched_grid_boundary_mean_error_seconds": 0.07275524376417214,
+        "reference_grid_boundaries_seconds": [
+          2.191,
+          3.267,
+          4.355,
+          5.381,
+          7.585,
+          8.704,
+          9.762,
+          10.844,
+          11.977,
+          14.042,
+          16.233,
+          17.33,
+          18.425,
+          19.521,
+          20.541,
+          21.624,
+          22.707,
+          24.837,
+          25.901,
+          26.966,
+          28.031,
+          29.096,
+          31.225,
+          33.377,
+          34.452,
+          35.528,
+          36.604,
+          37.68,
+          38.755,
+          39.831,
+          41.96,
+          43.024,
+          44.088,
+          45.152,
+          46.217,
+          48.345,
+          50.464,
+          51.523,
+          52.582,
+          53.642,
+          54.701,
+          55.76,
+          56.819,
+          58.941
+        ],
+        "predicted_harmonic_boundaries_seconds": [
+          5.222630385487529,
+          7.24671201814059,
+          7.521587301587301,
+          7.796462585034013,
+          8.571111111111112,
+          10.195374149659864,
+          13.943673469387756,
+          16.19265306122449,
+          17.392108843537414,
+          18.366666666666667,
+          19.54113378684807,
+          19.716054421768707,
+          20.540680272108844,
+          22.04,
+          26.762857142857143,
+          27.88734693877551,
+          28.96185941043084,
+          31.060907029478457,
+          33.284897959183674,
+          34.23446712018141,
+          35.48390022675737,
+          39.05727891156462,
+          39.706984126984125,
+          42.855555555555554,
+          44.10498866213152,
+          45.52934240362812,
+          47.25356009070295,
+          50.4271201814059,
+          51.42666666666667,
+          51.95142857142857,
+          54.50027210884354,
+          55.524807256235825
+        ],
+        "physical_attack_accuracy": "not measured"
+      },
+      "diagnostics": {
+        "acoustic_fit_status": "needs_review",
+        "always_requires_human_review": true,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 2331,
+        "silent_frame_fraction": 0.029558701082431308,
+        "active_mismatch_fraction": 0.09137709137709138,
+        "conflicting_proposed_event_indices": [
+          2,
+          9
+        ],
+        "unvisited_sequence_indices": [],
+        "path_transitions": 45,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "cycle_wraps_observed": 0,
+        "viterbi_objective": 1801.4254069401734
+      }
+    },
+    {
+      "id": "jazzsamba-51-amazing-grace-preferred-first60",
+      "split": "holdout",
+      "condition": "source-triad-runs",
+      "algorithm": "guarded-nnls",
+      "status": "ok",
+      "prediction_sha256": "f24a185bc9d0bc4a77b46514e65e6c08ac9eafb1c068d77b732a97059fc55a75",
+      "prediction": "cases/jazzsamba-51-amazing-grace-preferred-first60/source-triad-runs-guarded-nnls.json",
+      "wall_seconds": 0.18454500008374453,
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 58.924,
+        "reference_chord_coverage": 0.9820666666666666,
+        "root": 0.3968163533147966,
+        "root_eligible_seconds": 58.924,
+        "root_reference_coverage": 0.9820666666666666,
+        "root_chord_only": 0.3968163533147966,
+        "root_chord_only_eligible_seconds": 58.924,
+        "root_chord_only_reference_coverage": 0.9820666666666666,
+        "majmin": 0.3968163533147966,
+        "majmin_eligible_seconds": 58.924,
+        "majmin_reference_coverage": 0.9820666666666666,
+        "majmin_chord_only": 0.3968163533147966,
+        "majmin_chord_only_eligible_seconds": 58.924,
+        "majmin_chord_only_reference_coverage": 0.9820666666666666,
+        "estimated_unknown_seconds": 24.84095238095238,
+        "estimated_no_chord_seconds_on_reference_chords": 0.6981950113378643,
+        "predicted_events": 135,
+        "analysis_runtime_seconds": 0.16582037508487701,
+        "prediction_label_conversion": [
+          [
+            "Bb:maj",
+            "Bb:maj"
+          ],
+          [
+            "C:maj",
+            "C:maj"
+          ],
+          [
+            "D:min",
+            "D:min"
+          ],
+          [
+            "F:maj",
+            "F:maj"
+          ],
+          [
+            "G:maj",
+            "G:maj"
+          ],
+          [
+            "N",
+            "N"
+          ],
+          [
+            "X",
+            "X"
+          ]
+        ],
+        "retained_harmonic_seconds": 33.38485260770975,
+        "retained_wrong_majmin_seconds": 10.002845804988683,
+        "retained_correct_majmin_seconds": 23.382006802721072,
+        "retained_harmonic_on_unknown_reference_seconds": 0.0
+      },
+      "boundary": {
+        "reference_supported_grid_boundaries": 44,
+        "predicted_supported_harmonic_boundaries": 9,
+        "matched_grid_boundaries_150ms": 4,
+        "grid_boundary_precision_150ms": 0.4444444444444444,
+        "grid_boundary_recall_150ms": 0.09090909090909091,
+        "grid_boundary_f1_150ms": 0.1509433962264151,
+        "matched_grid_boundary_mean_error_seconds": 0.07330952380952471,
+        "reference_grid_boundaries_seconds": [
+          2.191,
+          3.267,
+          4.355,
+          5.381,
+          7.585,
+          8.704,
+          9.762,
+          10.844,
+          11.977,
+          14.042,
+          16.233,
+          17.33,
+          18.425,
+          19.521,
+          20.541,
+          21.624,
+          22.707,
+          24.837,
+          25.901,
+          26.966,
+          28.031,
+          29.096,
+          31.225,
+          33.377,
+          34.452,
+          35.528,
+          36.604,
+          37.68,
+          38.755,
+          39.831,
+          41.96,
+          43.024,
+          44.088,
+          45.152,
+          46.217,
+          48.345,
+          50.464,
+          51.523,
+          52.582,
+          53.642,
+          54.701,
+          55.76,
+          56.819,
+          58.941
+        ],
+        "predicted_harmonic_boundaries_seconds": [
+          13.943673469387756,
+          26.762857142857143,
+          34.009569160997735,
+          35.23401360544218,
+          35.58385487528345,
+          45.52934240362812,
+          51.42666666666667,
+          58.89827664399093,
+          59.847845804988665
+        ],
+        "physical_attack_accuracy": "not measured"
+      },
+      "diagnostics": {
+        "endpoint_reached": false,
+        "partial": true,
+        "terminal_sequence_index": 34,
+        "terminal_active_evidence_age_frames": 7,
+        "acoustic_fit_status": "partial_endpoint_abstention",
+        "always_requires_human_review": true,
+        "accepted_for_playback": false,
+        "arrangement_verified": false,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 2331,
+        "silent_frame_fraction": 0.029558701082431308,
+        "active_mismatch_fraction": 0.4268554268554269,
+        "rejected_quality_frames": 890,
+        "rejected_quality_seconds": 22.217142857142857,
+        "quality_abstention_fraction_of_active_audio": 0.3815686680754184,
+        "retained_harmonic_seconds": 33.384852607710286,
+        "unvisited_sequence_indices": [
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45
+        ],
+        "insufficient_active_evidence_sequence_indices": [],
+        "supplied_positions_without_minimum_evidence_count": 11,
+        "no_active_evidence_position_count": 0,
+        "no_active_evidence_supplied_position_count": 11,
+        "near_minimum_active_evidence_sequence_indices": [
+          13,
+          15,
+          17,
+          18,
+          31,
+          33,
+          34
+        ],
+        "near_minimum_dwell_semantics": "At most 1.5 times the declared minimum supporting evidence; density diagnostic only, not a verified compression error",
+        "silent_position_advance_count": 0,
+        "path_transitions": 34,
+        "cycle_wraps_observed": 0,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "viterbi_objective": 1672.2420822769445,
+        "position_active_seconds": [
+          1.4493424036281175,
+          4.0981405895691605,
+          0.29986394557823126,
+          3.923219954648526,
+          2.4988662131519277,
+          2.2489795918367346,
+          1.199455782312925,
+          9.370748299319729,
+          1.1244897959183668,
+          1.0745124716553285,
+          2.099047619047619,
+          2.223990929705215,
+          0.549750566893424,
+          0.1749206349206349,
+          0.37482993197278913,
+          0.1749206349206349,
+          0.6746938775510204,
+          0.1749206349206349,
+          0.1749206349206349,
+          0.27487528344671197,
+          8.246258503401359,
+          1.4243537414965983,
+          1.7242176870748291,
+          1.2494331065759634,
+          1.9241269841269832,
+          0.999546485260771,
+          0.5247619047619048,
+          3.573378684807255,
+          0.44979591836734695,
+          2.4738775510204083,
+          0.27487528344671197,
+          0.1749206349206349,
+          0.6746938775510204,
+          0.1749206349206349,
+          0.1521541950113382,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position_matched_evidence_seconds": [
+          1.4493424036281175,
+          2.523854875283447,
+          0.29986394557823126,
+          3.398458049886621,
+          2.4988662131519277,
+          2.2489795918367346,
+          1.199455782312925,
+          7.121768707482992,
+          1.1244897959183668,
+          1.0745124716553285,
+          2.099047619047619,
+          2.0740589569160996,
+          0.549750566893424,
+          0.1749206349206349,
+          0.37482993197278913,
+          0.1749206349206349,
+          0.6746938775510204,
+          0.1749206349206349,
+          0.1749206349206349,
+          0.27487528344671197,
+          5.822358276643991,
+          1.4243537414965983,
+          1.7242176870748291,
+          1.2494331065759634,
+          1.7991836734693873,
+          0.999546485260771,
+          0.5247619047619048,
+          2.648798185941043,
+          0.44979591836734695,
+          1.899138321995464,
+          0.27487528344671197,
+          0.1749206349206349,
+          0.5747392290249433,
+          0.1749206349206349,
+          0.1521541950113382,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "compression_warning": "Minimum dwell prevents unsupported silent traversal; extra repeats may still compress across active music. No section correctness guarantee."
+      }
+    },
+    {
+      "id": "jazzsamba-51-amazing-grace-preferred-first60",
+      "split": "holdout",
+      "condition": "wrong-root-plus-one-semitone",
+      "algorithm": "frozen-nnls",
+      "status": "ok",
+      "prediction_sha256": "041ca6220bddb9e98c52135f013e881c447665316fe992803795d1bd2fdd0243",
+      "prediction": "cases/jazzsamba-51-amazing-grace-preferred-first60/wrong-root-plus-one-semitone-frozen-nnls.json",
+      "wall_seconds": 0.12777254171669483,
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 58.924,
+        "reference_chord_coverage": 0.9820666666666666,
+        "root": 0.0,
+        "root_eligible_seconds": 58.924,
+        "root_reference_coverage": 0.9820666666666666,
+        "root_chord_only": 0.0,
+        "root_chord_only_eligible_seconds": 58.924,
+        "root_chord_only_reference_coverage": 0.9820666666666666,
+        "majmin": 0.0,
+        "majmin_eligible_seconds": 58.924,
+        "majmin_reference_coverage": 0.9820666666666666,
+        "majmin_chord_only": 0.0,
+        "majmin_chord_only_eligible_seconds": 58.924,
+        "majmin_chord_only_reference_coverage": 0.9820666666666666,
+        "estimated_unknown_seconds": 52.67832199546486,
+        "estimated_no_chord_seconds_on_reference_chords": 0.6981950113378643,
+        "predicted_events": 59,
+        "analysis_runtime_seconds": 0.11317958403378725,
+        "prediction_label_conversion": [
+          [
+            "C#:maj",
+            "C#:maj"
+          ],
+          [
+            "D#:min",
+            "D#:min"
+          ],
+          [
+            "G#:maj",
+            "G#:maj"
+          ],
+          [
+            "N",
+            "N"
+          ],
+          [
+            "X",
+            "X"
+          ]
+        ],
+        "retained_harmonic_seconds": 5.547482993197278,
+        "retained_wrong_majmin_seconds": 5.547482993197278,
+        "retained_correct_majmin_seconds": 0.0,
+        "retained_harmonic_on_unknown_reference_seconds": 0.0
+      },
+      "boundary": {
+        "reference_supported_grid_boundaries": 44,
+        "predicted_supported_harmonic_boundaries": 0,
+        "matched_grid_boundaries_150ms": 0,
+        "grid_boundary_precision_150ms": 0.0,
+        "grid_boundary_recall_150ms": 0.0,
+        "grid_boundary_f1_150ms": 0.0,
+        "matched_grid_boundary_mean_error_seconds": null,
+        "reference_grid_boundaries_seconds": [
+          2.191,
+          3.267,
+          4.355,
+          5.381,
+          7.585,
+          8.704,
+          9.762,
+          10.844,
+          11.977,
+          14.042,
+          16.233,
+          17.33,
+          18.425,
+          19.521,
+          20.541,
+          21.624,
+          22.707,
+          24.837,
+          25.901,
+          26.966,
+          28.031,
+          29.096,
+          31.225,
+          33.377,
+          34.452,
+          35.528,
+          36.604,
+          37.68,
+          38.755,
+          39.831,
+          41.96,
+          43.024,
+          44.088,
+          45.152,
+          46.217,
+          48.345,
+          50.464,
+          51.523,
+          52.582,
+          53.642,
+          54.701,
+          55.76,
+          56.819,
+          58.941
+        ],
+        "predicted_harmonic_boundaries_seconds": [],
+        "physical_attack_accuracy": "not measured"
+      },
+      "diagnostics": {
+        "acoustic_fit_status": "needs_review",
+        "always_requires_human_review": true,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 2331,
+        "silent_frame_fraction": 0.029558701082431308,
+        "active_mismatch_fraction": 0.9047619047619048,
+        "conflicting_proposed_event_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45
+        ],
+        "unvisited_sequence_indices": [],
+        "path_transitions": 45,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "cycle_wraps_observed": 0,
+        "viterbi_objective": 797.9671359058719
+      }
+    },
+    {
+      "id": "jazzsamba-51-amazing-grace-preferred-first60",
+      "split": "holdout",
+      "condition": "wrong-root-plus-one-semitone",
+      "algorithm": "guarded-nnls",
+      "status": "ok",
+      "prediction_sha256": "46a8ead024d575d5dc6e0ff1116dc72d0abc7ea608d78112b82403760349f4c1",
+      "prediction": "cases/jazzsamba-51-amazing-grace-preferred-first60/wrong-root-plus-one-semitone-guarded-nnls.json",
+      "wall_seconds": 0.1711735837161541,
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 58.924,
+        "reference_chord_coverage": 0.9820666666666666,
+        "root": 0.0,
+        "root_eligible_seconds": 58.924,
+        "root_reference_coverage": 0.9820666666666666,
+        "root_chord_only": 0.0,
+        "root_chord_only_eligible_seconds": 58.924,
+        "root_chord_only_reference_coverage": 0.9820666666666666,
+        "majmin": 0.0,
+        "majmin_eligible_seconds": 58.924,
+        "majmin_reference_coverage": 0.9820666666666666,
+        "majmin_chord_only": 0.0,
+        "majmin_chord_only_eligible_seconds": 58.924,
+        "majmin_chord_only_reference_coverage": 0.9820666666666666,
+        "estimated_unknown_seconds": 58.1758276643991,
+        "estimated_no_chord_seconds_on_reference_chords": 0.6981950113378643,
+        "predicted_events": 16,
+        "analysis_runtime_seconds": 0.15326458308845758,
+        "prediction_label_conversion": [
+          [
+            "D#:min",
+            "D#:min"
+          ],
+          [
+            "N",
+            "N"
+          ],
+          [
+            "X",
+            "X"
+          ]
+        ],
+        "retained_harmonic_seconds": 0.04997732426303969,
+        "retained_wrong_majmin_seconds": 0.04997732426303969,
+        "retained_correct_majmin_seconds": 0.0,
+        "retained_harmonic_on_unknown_reference_seconds": 0.0
+      },
+      "boundary": {
+        "reference_supported_grid_boundaries": 44,
+        "predicted_supported_harmonic_boundaries": 0,
+        "matched_grid_boundaries_150ms": 0,
+        "grid_boundary_precision_150ms": 0.0,
+        "grid_boundary_recall_150ms": 0.0,
+        "grid_boundary_f1_150ms": 0.0,
+        "matched_grid_boundary_mean_error_seconds": null,
+        "reference_grid_boundaries_seconds": [
+          2.191,
+          3.267,
+          4.355,
+          5.381,
+          7.585,
+          8.704,
+          9.762,
+          10.844,
+          11.977,
+          14.042,
+          16.233,
+          17.33,
+          18.425,
+          19.521,
+          20.541,
+          21.624,
+          22.707,
+          24.837,
+          25.901,
+          26.966,
+          28.031,
+          29.096,
+          31.225,
+          33.377,
+          34.452,
+          35.528,
+          36.604,
+          37.68,
+          38.755,
+          39.831,
+          41.96,
+          43.024,
+          44.088,
+          45.152,
+          46.217,
+          48.345,
+          50.464,
+          51.523,
+          52.582,
+          53.642,
+          54.701,
+          55.76,
+          56.819,
+          58.941
+        ],
+        "predicted_harmonic_boundaries_seconds": [],
+        "physical_attack_accuracy": "not measured"
+      },
+      "diagnostics": {
+        "endpoint_reached": false,
+        "partial": true,
+        "terminal_sequence_index": 1,
+        "terminal_active_evidence_age_frames": 0,
+        "acoustic_fit_status": "partial_endpoint_abstention",
+        "always_requires_human_review": true,
+        "accepted_for_playback": false,
+        "arrangement_verified": false,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 2331,
+        "silent_frame_fraction": 0.029558701082431308,
+        "active_mismatch_fraction": 0.9991419991419992,
+        "rejected_quality_frames": 2322,
+        "rejected_quality_seconds": 58.00090702947845,
+        "quality_abstention_fraction_of_active_audio": 0.9961374864765293,
+        "retained_harmonic_seconds": 0.049977324263038546,
+        "unvisited_sequence_indices": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45
+        ],
+        "insufficient_active_evidence_sequence_indices": [],
+        "supplied_positions_without_minimum_evidence_count": 44,
+        "no_active_evidence_position_count": 0,
+        "no_active_evidence_supplied_position_count": 44,
+        "near_minimum_active_evidence_sequence_indices": [],
+        "near_minimum_dwell_semantics": "At most 1.5 times the declared minimum supporting evidence; density diagnostic only, not a verified compression error",
+        "silent_position_advance_count": 0,
+        "path_transitions": 1,
+        "cycle_wraps_observed": 0,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "viterbi_objective": 335.5952123712162,
+        "position_active_seconds": [
+          0.1749206349206349,
+          58.05088435374149,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position_matched_evidence_seconds": [
+          0.1749206349206349,
+          0.6746938775510204,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "compression_warning": "Minimum dwell prevents unsupported silent traversal; extra repeats may still compress across active music. No section correctness guarantee."
+      }
+    },
+    {
+      "id": "jazzsamba-75-when-the-saints-go-marching-in-preferred-first60",
+      "split": "holdout",
+      "condition": "source-triad-runs",
+      "algorithm": "frozen-nnls",
+      "status": "ok",
+      "prediction_sha256": "913c57db4004b9b95eadd14830d92b04bb949b6e1b8f82a5a3425a0b6cb2fb83",
+      "prediction": "cases/jazzsamba-75-when-the-saints-go-marching-in-preferred-first60/source-triad-runs-frozen-nnls.json",
+      "wall_seconds": 0.11947000026702881,
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 58.973042,
+        "reference_chord_coverage": 0.9828840333333333,
+        "root": 0.7655422924286714,
+        "root_eligible_seconds": 58.973042,
+        "root_reference_coverage": 0.9828840333333333,
+        "root_chord_only": 0.7655422924286714,
+        "root_chord_only_eligible_seconds": 58.973042,
+        "root_chord_only_reference_coverage": 0.9828840333333333,
+        "majmin": 0.7512299182657382,
+        "majmin_eligible_seconds": 58.973042,
+        "majmin_reference_coverage": 0.9828840333333333,
+        "majmin_chord_only": 0.7512299182657382,
+        "majmin_chord_only_eligible_seconds": 58.973042,
+        "majmin_chord_only_reference_coverage": 0.9828840333333333,
+        "estimated_unknown_seconds": 8.371201814058967,
+        "estimated_no_chord_seconds_on_reference_chords": 0.9745578231292522,
+        "predicted_events": 118,
+        "analysis_runtime_seconds": 0.10739166755229235,
+        "prediction_label_conversion": [
+          [
+            "Bb:maj",
+            "Bb:maj"
+          ],
+          [
+            "Bb:min",
+            "Bb:min"
+          ],
+          [
+            "C:maj",
+            "C:maj"
+          ],
+          [
+            "F:maj",
+            "F:maj"
+          ],
+          [
+            "N",
+            "N"
+          ],
+          [
+            "X",
+            "X"
+          ]
+        ],
+        "retained_harmonic_seconds": 49.67968253968253,
+        "retained_wrong_majmin_seconds": 5.3773690181405875,
+        "retained_correct_majmin_seconds": 44.30231352154194,
+        "retained_harmonic_on_unknown_reference_seconds": 0.0
+      },
+      "boundary": {
+        "reference_supported_grid_boundaries": 32,
+        "predicted_supported_harmonic_boundaries": 15,
+        "matched_grid_boundaries_150ms": 8,
+        "grid_boundary_precision_150ms": 0.5333333333333333,
+        "grid_boundary_recall_150ms": 0.25,
+        "grid_boundary_f1_150ms": 0.3404255319148936,
+        "matched_grid_boundary_mean_error_seconds": 0.05825488321995431,
+        "reference_grid_boundaries_seconds": [
+          2.567396,
+          3.080875,
+          4.611937,
+          5.122292,
+          11.194667,
+          13.218792,
+          15.196167,
+          16.184854,
+          17.173542,
+          18.656573,
+          19.150917,
+          20.633948,
+          21.128292,
+          27.168417,
+          29.165125,
+          31.160625,
+          32.158375,
+          33.156125,
+          34.65275,
+          35.151625,
+          36.64825,
+          37.147125,
+          43.0465,
+          45.012958,
+          47.003625,
+          47.998958,
+          48.994292,
+          50.487291,
+          50.984958,
+          52.477958,
+          52.975625,
+          58.929625
+        ],
+        "predicted_harmonic_boundaries_seconds": [
+          5.147664399092971,
+          15.218095238095238,
+          15.89278911564626,
+          27.087709750566894,
+          28.761950113378685,
+          29.136780045351475,
+          32.11043083900227,
+          33.06,
+          42.98049886621315,
+          46.8037641723356,
+          48.50299319727891,
+          48.7528798185941,
+          52.32625850340136,
+          52.876009070294785,
+          59.62294784580499
+        ],
+        "physical_attack_accuracy": "not measured"
+      },
+      "diagnostics": {
+        "acoustic_fit_status": "needs_review",
+        "always_requires_human_review": true,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 2324,
+        "silent_frame_fraction": 0.0324729392173189,
+        "active_mismatch_fraction": 0.14414802065404475,
+        "conflicting_proposed_event_indices": [
+          2,
+          4,
+          20,
+          22,
+          29
+        ],
+        "unvisited_sequence_indices": [],
+        "path_transitions": 33,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "cycle_wraps_observed": 0,
+        "viterbi_objective": 1741.1848559531225
+      }
+    },
+    {
+      "id": "jazzsamba-75-when-the-saints-go-marching-in-preferred-first60",
+      "split": "holdout",
+      "condition": "source-triad-runs",
+      "algorithm": "guarded-nnls",
+      "status": "ok",
+      "prediction_sha256": "817b5413d41d662b450b421517677a2a661b0fc8701ffcba0b29961b5bd2bb6d",
+      "prediction": "cases/jazzsamba-75-when-the-saints-go-marching-in-preferred-first60/source-triad-runs-guarded-nnls.json",
+      "wall_seconds": 0.1659890003502369,
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 58.973042,
+        "reference_chord_coverage": 0.9828840333333333,
+        "root": 0.4892463369965782,
+        "root_eligible_seconds": 58.973042,
+        "root_reference_coverage": 0.9828840333333333,
+        "root_chord_only": 0.4892463369965782,
+        "root_chord_only_eligible_seconds": 58.973042,
+        "root_chord_only_reference_coverage": 0.9828840333333333,
+        "majmin": 0.48471755209478823,
+        "majmin_eligible_seconds": 58.973042,
+        "majmin_reference_coverage": 0.9828840333333333,
+        "majmin_chord_only": 0.48471755209478823,
+        "majmin_chord_only_eligible_seconds": 58.973042,
+        "majmin_chord_only_reference_coverage": 0.9828840333333333,
+        "estimated_unknown_seconds": 27.38979591836733,
+        "estimated_no_chord_seconds_on_reference_chords": 0.9745578231292522,
+        "predicted_events": 143,
+        "analysis_runtime_seconds": 0.14870925061404705,
+        "prediction_label_conversion": [
+          [
+            "Bb:maj",
+            "Bb:maj"
+          ],
+          [
+            "Bb:min",
+            "Bb:min"
+          ],
+          [
+            "C:maj",
+            "C:maj"
+          ],
+          [
+            "F:maj",
+            "F:maj"
+          ],
+          [
+            "N",
+            "N"
+          ],
+          [
+            "X",
+            "X"
+          ]
+        ],
+        "retained_harmonic_seconds": 30.661088435374165,
+        "retained_wrong_majmin_seconds": 2.0758198775510284,
+        "retained_correct_majmin_seconds": 28.585268557823134,
+        "retained_harmonic_on_unknown_reference_seconds": 0.0
+      },
+      "boundary": {
+        "reference_supported_grid_boundaries": 32,
+        "predicted_supported_harmonic_boundaries": 5,
+        "matched_grid_boundaries_150ms": 1,
+        "grid_boundary_precision_150ms": 0.2,
+        "grid_boundary_recall_150ms": 0.03125,
+        "grid_boundary_f1_150ms": 0.05405405405405406,
+        "matched_grid_boundary_mean_error_seconds": 0.06284982312924825,
+        "reference_grid_boundaries_seconds": [
+          2.567396,
+          3.080875,
+          4.611937,
+          5.122292,
+          11.194667,
+          13.218792,
+          15.196167,
+          16.184854,
+          17.173542,
+          18.656573,
+          19.150917,
+          20.633948,
+          21.128292,
+          27.168417,
+          29.165125,
+          31.160625,
+          32.158375,
+          33.156125,
+          34.65275,
+          35.151625,
+          36.64825,
+          37.147125,
+          43.0465,
+          45.012958,
+          47.003625,
+          47.998958,
+          48.994292,
+          50.487291,
+          50.984958,
+          52.477958,
+          52.975625,
+          58.929625
+        ],
+        "predicted_harmonic_boundaries_seconds": [
+          5.547482993197279,
+          7.471609977324263,
+          7.646530612244898,
+          21.06544217687075,
+          48.7528798185941
+        ],
+        "physical_attack_accuracy": "not measured"
+      },
+      "diagnostics": {
+        "endpoint_reached": true,
+        "partial": false,
+        "terminal_sequence_index": 33,
+        "terminal_active_evidence_age_frames": 7,
+        "acoustic_fit_status": "needs_review_with_abstentions",
+        "always_requires_human_review": true,
+        "accepted_for_playback": false,
+        "arrangement_verified": false,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 2324,
+        "silent_frame_fraction": 0.0324729392173189,
+        "active_mismatch_fraction": 0.47203098106712565,
+        "rejected_quality_frames": 1000,
+        "rejected_quality_seconds": 24.96589569160998,
+        "quality_abstention_fraction_of_active_audio": 0.43006917068612893,
+        "retained_harmonic_seconds": 30.661088435374623,
+        "unvisited_sequence_indices": [],
+        "insufficient_active_evidence_sequence_indices": [],
+        "supplied_positions_without_minimum_evidence_count": 0,
+        "no_active_evidence_position_count": 0,
+        "no_active_evidence_supplied_position_count": 0,
+        "near_minimum_active_evidence_sequence_indices": [
+          2,
+          4,
+          6,
+          13,
+          15,
+          18,
+          22
+        ],
+        "near_minimum_dwell_semantics": "At most 1.5 times the declared minimum supporting evidence; density diagnostic only, not a verified compression error",
+        "silent_position_advance_count": 0,
+        "path_transitions": 33,
+        "cycle_wraps_observed": 0,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "viterbi_objective": 1624.6088654707435,
+        "position_active_seconds": [
+          1.5742857142857134,
+          2.024081632653061,
+          0.1749206349206349,
+          1.7492063492063483,
+          0.1749206349206349,
+          1.6242630385487524,
+          0.1749206349206349,
+          5.772380952380953,
+          0.6746938775510204,
+          0.549750566893424,
+          3.7732879818594087,
+          0.8496145124716553,
+          0.6247165532879818,
+          0.22489795918367345,
+          0.9245804988662132,
+          0.29986394557823126,
+          3.048616780045352,
+          0.34984126984126984,
+          0.1749206349206349,
+          0.37482993197278913,
+          2.0490702947845802,
+          1.5492970521541942,
+          0.22489795918367345,
+          12.06952380952381,
+          1.2494331065759634,
+          2.573832199546486,
+          1.69922902494331,
+          0.2498866213151927,
+          3.573378684807255,
+          0.549750566893424,
+          6.1721995464852615,
+          0.2498866213151927,
+          0.32485260770975055,
+          0.3770521541950117
+        ],
+        "position_matched_evidence_seconds": [
+          1.5742857142857134,
+          1.69922902494331,
+          0.1749206349206349,
+          1.7492063492063483,
+          0.1749206349206349,
+          1.6242630385487524,
+          0.1749206349206349,
+          3.173560090702949,
+          0.6746938775510204,
+          0.549750566893424,
+          2.8487074829931975,
+          0.29986394557823126,
+          0.6247165532879818,
+          0.22489795918367345,
+          0.9245804988662132,
+          0.19990929705215418,
+          3.048616780045352,
+          0.34984126984126984,
+          0.1749206349206349,
+          0.34984126984126984,
+          1.1744671201814052,
+          1.5492970521541942,
+          0.22489795918367345,
+          8.845986394557823,
+          1.0245351473922901,
+          1.899138321995464,
+          1.3493877551020401,
+          0.2498866213151927,
+          2.748752834467121,
+          0.37482993197278913,
+          5.422539682539682,
+          0.2498866213151927,
+          0.32485260770975055,
+          0.3770521541950117
+        ],
+        "compression_warning": "Minimum dwell prevents unsupported silent traversal; extra repeats may still compress across active music. No section correctness guarantee."
+      }
+    },
+    {
+      "id": "jazzsamba-75-when-the-saints-go-marching-in-preferred-first60",
+      "split": "holdout",
+      "condition": "wrong-root-plus-one-semitone",
+      "algorithm": "frozen-nnls",
+      "status": "ok",
+      "prediction_sha256": "e6e97852a9a9ebd1acb121d724436968d51741ed9f46af8f01026e10b45cfd00",
+      "prediction": "cases/jazzsamba-75-when-the-saints-go-marching-in-preferred-first60/wrong-root-plus-one-semitone-frozen-nnls.json",
+      "wall_seconds": 0.12194675020873547,
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 58.973042,
+        "reference_chord_coverage": 0.9828840333333333,
+        "root": 0.0,
+        "root_eligible_seconds": 58.973042,
+        "root_reference_coverage": 0.9828840333333333,
+        "root_chord_only": 0.0,
+        "root_chord_only_eligible_seconds": 58.973042,
+        "root_chord_only_reference_coverage": 0.9828840333333333,
+        "majmin": 0.0,
+        "majmin_eligible_seconds": 58.973042,
+        "majmin_reference_coverage": 0.9828840333333333,
+        "majmin_chord_only": 0.0,
+        "majmin_chord_only_eligible_seconds": 58.973042,
+        "majmin_chord_only_reference_coverage": 0.9828840333333333,
+        "estimated_unknown_seconds": 53.5279365079365,
+        "estimated_no_chord_seconds_on_reference_chords": 0.9745578231292522,
+        "predicted_events": 57,
+        "analysis_runtime_seconds": 0.1114752097055316,
+        "prediction_label_conversion": [
+          [
+            "B:maj",
+            "B:maj"
+          ],
+          [
+            "C#:maj",
+            "C#:maj"
+          ],
+          [
+            "F#:maj",
+            "F#:maj"
+          ],
+          [
+            "N",
+            "N"
+          ],
+          [
+            "X",
+            "X"
+          ]
+        ],
+        "retained_harmonic_seconds": 4.522947845804985,
+        "retained_wrong_majmin_seconds": 4.522947845804985,
+        "retained_correct_majmin_seconds": 0.0,
+        "retained_harmonic_on_unknown_reference_seconds": 0.0
+      },
+      "boundary": {
+        "reference_supported_grid_boundaries": 32,
+        "predicted_supported_harmonic_boundaries": 1,
+        "matched_grid_boundaries_150ms": 1,
+        "grid_boundary_precision_150ms": 1.0,
+        "grid_boundary_recall_150ms": 0.03125,
+        "grid_boundary_f1_150ms": 0.06060606060606061,
+        "matched_grid_boundary_mean_error_seconds": 0.057776385487528614,
+        "reference_grid_boundaries_seconds": [
+          2.567396,
+          3.080875,
+          4.611937,
+          5.122292,
+          11.194667,
+          13.218792,
+          15.196167,
+          16.184854,
+          17.173542,
+          18.656573,
+          19.150917,
+          20.633948,
+          21.128292,
+          27.168417,
+          29.165125,
+          31.160625,
+          32.158375,
+          33.156125,
+          34.65275,
+          35.151625,
+          36.64825,
+          37.147125,
+          43.0465,
+          45.012958,
+          47.003625,
+          47.998958,
+          48.994292,
+          50.487291,
+          50.984958,
+          52.477958,
+          52.975625,
+          58.929625
+        ],
+        "predicted_harmonic_boundaries_seconds": [
+          16.24263038548753
+        ],
+        "physical_attack_accuracy": "not measured"
+      },
+      "diagnostics": {
+        "acoustic_fit_status": "needs_review",
+        "always_requires_human_review": true,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 2324,
+        "silent_frame_fraction": 0.0324729392173189,
+        "active_mismatch_fraction": 0.9221170395869192,
+        "conflicting_proposed_event_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33
+        ],
+        "unvisited_sequence_indices": [],
+        "path_transitions": 33,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "cycle_wraps_observed": 0,
+        "viterbi_objective": 800.5149628637557
+      }
+    },
+    {
+      "id": "jazzsamba-75-when-the-saints-go-marching-in-preferred-first60",
+      "split": "holdout",
+      "condition": "wrong-root-plus-one-semitone",
+      "algorithm": "guarded-nnls",
+      "status": "ok",
+      "prediction_sha256": "62f6d72306fec0f84f28e6afb928316218acb9423b71d18768d714057d56f4ca",
+      "prediction": "cases/jazzsamba-75-when-the-saints-go-marching-in-preferred-first60/wrong-root-plus-one-semitone-guarded-nnls.json",
+      "wall_seconds": 0.16675162501633167,
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 58.973042,
+        "reference_chord_coverage": 0.9828840333333333,
+        "root": 0.0,
+        "root_eligible_seconds": 58.973042,
+        "root_reference_coverage": 0.9828840333333333,
+        "root_chord_only": 0.0,
+        "root_chord_only_eligible_seconds": 58.973042,
+        "root_chord_only_reference_coverage": 0.9828840333333333,
+        "majmin": 0.0,
+        "majmin_eligible_seconds": 58.973042,
+        "majmin_reference_coverage": 0.9828840333333333,
+        "majmin_chord_only": 0.0,
+        "majmin_chord_only_eligible_seconds": 58.973042,
+        "majmin_chord_only_reference_coverage": 0.9828840333333333,
+        "estimated_unknown_seconds": 56.92639455782313,
+        "estimated_no_chord_seconds_on_reference_chords": 0.9745578231292522,
+        "predicted_events": 34,
+        "analysis_runtime_seconds": 0.14926245901733637,
+        "prediction_label_conversion": [
+          [
+            "C#:maj",
+            "C#:maj"
+          ],
+          [
+            "F#:maj",
+            "F#:maj"
+          ],
+          [
+            "N",
+            "N"
+          ],
+          [
+            "X",
+            "X"
+          ]
+        ],
+        "retained_harmonic_seconds": 1.1244897959183657,
+        "retained_wrong_majmin_seconds": 1.1244897959183657,
+        "retained_correct_majmin_seconds": 0.0,
+        "retained_harmonic_on_unknown_reference_seconds": 0.0
+      },
+      "boundary": {
+        "reference_supported_grid_boundaries": 32,
+        "predicted_supported_harmonic_boundaries": 0,
+        "matched_grid_boundaries_150ms": 0,
+        "grid_boundary_precision_150ms": 0.0,
+        "grid_boundary_recall_150ms": 0.0,
+        "grid_boundary_f1_150ms": 0.0,
+        "matched_grid_boundary_mean_error_seconds": null,
+        "reference_grid_boundaries_seconds": [
+          2.567396,
+          3.080875,
+          4.611937,
+          5.122292,
+          11.194667,
+          13.218792,
+          15.196167,
+          16.184854,
+          17.173542,
+          18.656573,
+          19.150917,
+          20.633948,
+          21.128292,
+          27.168417,
+          29.165125,
+          31.160625,
+          32.158375,
+          33.156125,
+          34.65275,
+          35.151625,
+          36.64825,
+          37.147125,
+          43.0465,
+          45.012958,
+          47.003625,
+          47.998958,
+          48.994292,
+          50.487291,
+          50.984958,
+          52.477958,
+          52.975625,
+          58.929625
+        ],
+        "predicted_harmonic_boundaries_seconds": [],
+        "physical_attack_accuracy": "not measured"
+      },
+      "diagnostics": {
+        "endpoint_reached": false,
+        "partial": true,
+        "terminal_sequence_index": 2,
+        "terminal_active_evidence_age_frames": 0,
+        "acoustic_fit_status": "partial_endpoint_abstention",
+        "always_requires_human_review": true,
+        "accepted_for_playback": false,
+        "arrangement_verified": false,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 2324,
+        "silent_frame_fraction": 0.0324729392173189,
+        "active_mismatch_fraction": 0.9806368330464716,
+        "rejected_quality_frames": 2188,
+        "rejected_quality_seconds": 54.65242630385487,
+        "quality_abstention_fraction_of_active_audio": 0.941457256203409,
+        "retained_harmonic_seconds": 1.1244897959183673,
+        "unvisited_sequence_indices": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33
+        ],
+        "insufficient_active_evidence_sequence_indices": [],
+        "supplied_positions_without_minimum_evidence_count": 31,
+        "no_active_evidence_position_count": 0,
+        "no_active_evidence_supplied_position_count": 31,
+        "near_minimum_active_evidence_sequence_indices": [],
+        "near_minimum_dwell_semantics": "At most 1.5 times the declared minimum supporting evidence; density diagnostic only, not a verified compression error",
+        "silent_position_advance_count": 0,
+        "path_transitions": 2,
+        "cycle_wraps_observed": 0,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "viterbi_objective": 636.172397212654,
+        "position_active_seconds": [
+          0.5247619047619048,
+          13.768752834467117,
+          43.75736961451247,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position_matched_evidence_seconds": [
+          0.5247619047619048,
+          0.7996371882086167,
+          2.2489795918367346,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "compression_warning": "Minimum dwell prevents unsupported silent traversal; extra repeats may still compress across active music. No section correctness guarantee."
+      }
+    }
+  ],
+  "raw_context": [
+    {
+      "id": "jazzsamba-07-blue-bossa-preferred-first60",
+      "split": "development",
+      "candidate": "baseline",
+      "status": "ok",
+      "prediction_sha256": "32eb1e28447e116044100f6ecbb40a2c22bdf1d27dddce8b3c02aa5359e96bac",
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 49.5,
+        "reference_chord_coverage": 0.825,
+        "root": 0.1919879062736204,
+        "root_eligible_seconds": 49.5,
+        "root_reference_coverage": 0.825,
+        "root_chord_only": 0.1919879062736204,
+        "root_chord_only_eligible_seconds": 49.5,
+        "root_chord_only_reference_coverage": 0.825,
+        "majmin": 0.11561144323049091,
+        "majmin_eligible_seconds": 49.5,
+        "majmin_reference_coverage": 0.825,
+        "majmin_chord_only": 0.11561144323049091,
+        "majmin_chord_only_eligible_seconds": 49.5,
+        "majmin_chord_only_reference_coverage": 0.825,
+        "estimated_unknown_seconds": 0.0,
+        "estimated_no_chord_seconds_on_reference_chords": 2.204444444444444,
+        "predicted_events": 603,
+        "analysis_runtime_seconds": 0.0730968751013279,
+        "prediction_label_conversion": [
+          [
+            "A",
+            "A:maj"
+          ],
+          [
+            "A#",
+            "A#:maj"
+          ],
+          [
+            "A#m",
+            "A#:min"
+          ],
+          [
+            "Am",
+            "A:min"
+          ],
+          [
+            "Bm",
+            "B:min"
+          ],
+          [
+            "C",
+            "C:maj"
+          ],
+          [
+            "C#",
+            "C#:maj"
+          ],
+          [
+            "C#m",
+            "C#:min"
+          ],
+          [
+            "Cm",
+            "C:min"
+          ],
+          [
+            "D",
+            "D:maj"
+          ],
+          [
+            "D#",
+            "D#:maj"
+          ],
+          [
+            "D#m",
+            "D#:min"
+          ],
+          [
+            "Dm",
+            "D:min"
+          ],
+          [
+            "E",
+            "E:maj"
+          ],
+          [
+            "Em",
+            "E:min"
+          ],
+          [
+            "F",
+            "F:maj"
+          ],
+          [
+            "F#",
+            "F#:maj"
+          ],
+          [
+            "F#m",
+            "F#:min"
+          ],
+          [
+            "Fm",
+            "F:min"
+          ],
+          [
+            "G",
+            "G:maj"
+          ],
+          [
+            "G#",
+            "G#:maj"
+          ],
+          [
+            "G#m",
+            "G#:min"
+          ],
+          [
+            "Gm",
+            "G:min"
+          ],
+          [
+            "N",
+            "N"
+          ]
+        ],
+        "retained_harmonic_seconds": 56.32666666666667,
+        "retained_wrong_majmin_seconds": 41.57278911564626,
+        "retained_correct_majmin_seconds": 5.7227664399093,
+        "retained_harmonic_on_unknown_reference_seconds": 9.031111111111112
+      },
+      "task": "Audio-only raw recognizer; no supplied label order"
+    },
+    {
+      "id": "jazzsamba-07-blue-bossa-preferred-first60",
+      "split": "development",
+      "candidate": "btc",
+      "status": "ok",
+      "prediction_sha256": "52d0a20af66ef0ac89e064d40bd0774d359e5334f2c2f2c6995259d58c93d778",
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 49.5,
+        "reference_chord_coverage": 0.825,
+        "root": 0.37633294395199135,
+        "root_eligible_seconds": 49.5,
+        "root_reference_coverage": 0.825,
+        "root_chord_only": 0.37633294395199135,
+        "root_chord_only_eligible_seconds": 49.5,
+        "root_chord_only_reference_coverage": 0.825,
+        "majmin": 0.3690162394924298,
+        "majmin_eligible_seconds": 49.5,
+        "majmin_reference_coverage": 0.825,
+        "majmin_chord_only": 0.3690162394924298,
+        "majmin_chord_only_eligible_seconds": 49.5,
+        "majmin_chord_only_reference_coverage": 0.825,
+        "estimated_unknown_seconds": 0.0,
+        "estimated_no_chord_seconds_on_reference_chords": 0.7291156462585033,
+        "predicted_events": 36,
+        "analysis_runtime_seconds": 2.6676638331264257,
+        "prediction_label_conversion": [
+          [
+            "A#",
+            "A#:maj"
+          ],
+          [
+            "A#m",
+            "A#:min"
+          ],
+          [
+            "Cm",
+            "C:min"
+          ],
+          [
+            "D#",
+            "D#:maj"
+          ],
+          [
+            "D#m",
+            "D#:min"
+          ],
+          [
+            "F#",
+            "F#:maj"
+          ],
+          [
+            "Fm",
+            "F:min"
+          ],
+          [
+            "G#",
+            "G#:maj"
+          ],
+          [
+            "G#m",
+            "G#:min"
+          ],
+          [
+            "Gm",
+            "G:min"
+          ],
+          [
+            "N",
+            "N"
+          ]
+        ],
+        "retained_harmonic_seconds": 57.770884353741494,
+        "retained_wrong_majmin_seconds": 30.504580498866222,
+        "retained_correct_majmin_seconds": 18.266303854875275,
+        "retained_harmonic_on_unknown_reference_seconds": 9.0
+      },
+      "task": "Audio-only raw recognizer; no supplied label order"
+    },
+    {
+      "id": "jazzsamba-07-blue-bossa-preferred-first60",
+      "split": "development",
+      "candidate": "crema",
+      "status": "ok",
+      "prediction_sha256": "e2d96b7ba074ed6b57fce65336a7c20c2cbaf690409214e32be6817f7d4e8810",
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 49.5,
+        "reference_chord_coverage": 0.825,
+        "root": 0.3919778281683041,
+        "root_eligible_seconds": 49.5,
+        "root_reference_coverage": 0.825,
+        "root_chord_only": 0.3919778281683041,
+        "root_chord_only_eligible_seconds": 49.5,
+        "root_chord_only_reference_coverage": 0.825,
+        "majmin": 0.3361497056735151,
+        "majmin_eligible_seconds": 49.5,
+        "majmin_reference_coverage": 0.825,
+        "majmin_chord_only": 0.3361497056735151,
+        "majmin_chord_only_eligible_seconds": 49.5,
+        "majmin_chord_only_reference_coverage": 0.825,
+        "estimated_unknown_seconds": 0.0,
+        "estimated_no_chord_seconds_on_reference_chords": 0.8219954648526078,
+        "predicted_events": 17,
+        "analysis_runtime_seconds": 2.582386000081897,
+        "prediction_label_conversion": [
+          [
+            "A#:7",
+            "A#:7"
+          ],
+          [
+            "C:min",
+            "C:min"
+          ],
+          [
+            "C:min7",
+            "C:min7"
+          ],
+          [
+            "D#:7",
+            "D#:7"
+          ],
+          [
+            "D#:maj/3",
+            "D#:maj/3"
+          ],
+          [
+            "D#:maj7/3",
+            "D#:maj7/3"
+          ],
+          [
+            "F:min7",
+            "F:min7"
+          ],
+          [
+            "G#:7",
+            "G#:7"
+          ],
+          [
+            "G#:maj",
+            "G#:maj"
+          ],
+          [
+            "G:min",
+            "G:min"
+          ],
+          [
+            "N",
+            "N"
+          ]
+        ],
+        "retained_harmonic_seconds": 57.678004535147394,
+        "retained_wrong_majmin_seconds": 32.038594104308395,
+        "retained_correct_majmin_seconds": 16.639410430838996,
+        "retained_harmonic_on_unknown_reference_seconds": 9.0
+      },
+      "task": "Audio-only raw recognizer; no supplied label order"
+    },
+    {
+      "id": "jazzsamba-07-blue-bossa-preferred-first60",
+      "split": "development",
+      "candidate": "chordmini",
+      "status": "ok",
+      "prediction_sha256": "72e94787f9d0d5a9c426d1b12f969579d027baa40101893f10ad16efa26c095c",
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 49.5,
+        "reference_chord_coverage": 0.825,
+        "root": 0.3564268535697111,
+        "root_eligible_seconds": 49.5,
+        "root_reference_coverage": 0.825,
+        "root_chord_only": 0.3564268535697111,
+        "root_chord_only_eligible_seconds": 49.5,
+        "root_chord_only_reference_coverage": 0.825,
+        "majmin": 0.3356870290203626,
+        "majmin_eligible_seconds": 49.5,
+        "majmin_reference_coverage": 0.825,
+        "majmin_chord_only": 0.3356870290203626,
+        "majmin_chord_only_eligible_seconds": 49.5,
+        "majmin_chord_only_reference_coverage": 0.825,
+        "estimated_unknown_seconds": 0.0,
+        "estimated_no_chord_seconds_on_reference_chords": 2.215192743764174,
+        "predicted_events": 195,
+        "analysis_runtime_seconds": 0.7151974588632584,
+        "prediction_label_conversion": [
+          [
+            "Ab",
+            "Ab:maj"
+          ],
+          [
+            "Ab:7",
+            "Ab:7"
+          ],
+          [
+            "Bb",
+            "Bb:maj"
+          ],
+          [
+            "Bb:7",
+            "Bb:7"
+          ],
+          [
+            "Bb:min",
+            "Bb:min"
+          ],
+          [
+            "Bb:min7",
+            "Bb:min7"
+          ],
+          [
+            "C",
+            "C:maj"
+          ],
+          [
+            "C:min",
+            "C:min"
+          ],
+          [
+            "C:min7",
+            "C:min7"
+          ],
+          [
+            "C:sus4",
+            "C:sus4"
+          ],
+          [
+            "Db:maj7",
+            "Db:maj7"
+          ],
+          [
+            "Eb",
+            "Eb:maj"
+          ],
+          [
+            "Eb:7",
+            "Eb:7"
+          ],
+          [
+            "Eb:maj7",
+            "Eb:maj7"
+          ],
+          [
+            "Eb:min7",
+            "Eb:min7"
+          ],
+          [
+            "F:min",
+            "F:min"
+          ],
+          [
+            "F:min7",
+            "F:min7"
+          ],
+          [
+            "G:min",
+            "G:min"
+          ],
+          [
+            "N",
+            "N"
+          ]
+        ],
+        "retained_harmonic_seconds": 56.00616780045351,
+        "retained_wrong_majmin_seconds": 30.668299319727872,
+        "retained_correct_majmin_seconds": 16.61650793650795,
+        "retained_harmonic_on_unknown_reference_seconds": 8.721360544217687
+      },
+      "task": "Audio-only raw recognizer; no supplied label order"
+    },
+    {
+      "id": "jazzsamba-07-blue-bossa-preferred-first60",
+      "split": "development",
+      "candidate": "chordino",
+      "status": "ok",
+      "prediction_sha256": "5a130bf10e07c05e09c10efa514a91ab9484304fe1d786c786269f198a9e14bf",
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 49.5,
+        "reference_chord_coverage": 0.825,
+        "root": 0.3259685288484849,
+        "root_eligible_seconds": 49.5,
+        "root_reference_coverage": 0.825,
+        "root_chord_only": 0.3259685288484849,
+        "root_chord_only_eligible_seconds": 49.5,
+        "root_chord_only_reference_coverage": 0.825,
+        "majmin": 0.2863835635555556,
+        "majmin_eligible_seconds": 49.5,
+        "majmin_reference_coverage": 0.825,
+        "majmin_chord_only": 0.2863835635555556,
+        "majmin_chord_only_eligible_seconds": 49.5,
+        "majmin_chord_only_reference_coverage": 0.825,
+        "estimated_unknown_seconds": 0.0,
+        "estimated_no_chord_seconds_on_reference_chords": 0.0,
+        "predicted_events": 30,
+        "analysis_runtime_seconds": 0.3065419578924775,
+        "prediction_label_conversion": [
+          [
+            "Ab",
+            "Ab:maj"
+          ],
+          [
+            "Ab6",
+            "Ab:maj6"
+          ],
+          [
+            "Bb",
+            "Bb:maj"
+          ],
+          [
+            "Bb/Ab",
+            "Bb:maj/b7"
+          ],
+          [
+            "Bb/D",
+            "Bb:maj/3"
+          ],
+          [
+            "Bb7/D",
+            "Bb:7/3"
+          ],
+          [
+            "Bbm",
+            "Bb:min"
+          ],
+          [
+            "C",
+            "C:maj"
+          ],
+          [
+            "C#",
+            "C#:maj"
+          ],
+          [
+            "Cm",
+            "C:min"
+          ],
+          [
+            "Cm6",
+            "C:min6"
+          ],
+          [
+            "Cm7b5",
+            "C:hdim7"
+          ],
+          [
+            "Ebm7",
+            "Eb:min7"
+          ],
+          [
+            "Ebm7b5",
+            "Eb:hdim7"
+          ],
+          [
+            "F",
+            "F:maj"
+          ],
+          [
+            "F#",
+            "F#:maj"
+          ],
+          [
+            "G",
+            "G:maj"
+          ],
+          [
+            "G7",
+            "G:7"
+          ],
+          [
+            "Gm",
+            "G:min"
+          ],
+          [
+            "N",
+            "N"
+          ]
+        ],
+        "retained_harmonic_seconds": 58.978321995,
+        "retained_wrong_majmin_seconds": 35.324013604,
+        "retained_correct_majmin_seconds": 14.175986396000003,
+        "retained_harmonic_on_unknown_reference_seconds": 9.478321995
+      },
+      "task": "Audio-only raw recognizer; no supplied label order"
+    },
+    {
+      "id": "jazzsamba-51-amazing-grace-preferred-first60",
+      "split": "holdout",
+      "candidate": "baseline",
+      "status": "ok",
+      "prediction_sha256": "02ab23f6b8943651c97be59a9519fc77c8ee3fd21c38b7f2d3ddb5637269716f",
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 58.924,
+        "reference_chord_coverage": 0.9820666666666666,
+        "root": 0.4641549874537643,
+        "root_eligible_seconds": 58.924,
+        "root_reference_coverage": 0.9820666666666666,
+        "root_chord_only": 0.4641549874537643,
+        "root_chord_only_eligible_seconds": 58.924,
+        "root_chord_only_reference_coverage": 0.9820666666666666,
+        "majmin": 0.41028071672630734,
+        "majmin_eligible_seconds": 58.924,
+        "majmin_reference_coverage": 0.9820666666666666,
+        "majmin_chord_only": 0.41028071672630734,
+        "majmin_chord_only_eligible_seconds": 58.924,
+        "majmin_chord_only_reference_coverage": 0.9820666666666666,
+        "estimated_unknown_seconds": 0.0,
+        "estimated_no_chord_seconds_on_reference_chords": 0.6981950113378643,
+        "predicted_events": 556,
+        "analysis_runtime_seconds": 0.07312562502920628,
+        "prediction_label_conversion": [
+          [
+            "A",
+            "A:maj"
+          ],
+          [
+            "A#",
+            "A#:maj"
+          ],
+          [
+            "A#m",
+            "A#:min"
+          ],
+          [
+            "Am",
+            "A:min"
+          ],
+          [
+            "B",
+            "B:maj"
+          ],
+          [
+            "Bm",
+            "B:min"
+          ],
+          [
+            "C",
+            "C:maj"
+          ],
+          [
+            "C#",
+            "C#:maj"
+          ],
+          [
+            "C#m",
+            "C#:min"
+          ],
+          [
+            "Cm",
+            "C:min"
+          ],
+          [
+            "D",
+            "D:maj"
+          ],
+          [
+            "D#",
+            "D#:maj"
+          ],
+          [
+            "D#m",
+            "D#:min"
+          ],
+          [
+            "Dm",
+            "D:min"
+          ],
+          [
+            "E",
+            "E:maj"
+          ],
+          [
+            "Em",
+            "E:min"
+          ],
+          [
+            "F",
+            "F:maj"
+          ],
+          [
+            "F#m",
+            "F#:min"
+          ],
+          [
+            "Fm",
+            "F:min"
+          ],
+          [
+            "G",
+            "G:maj"
+          ],
+          [
+            "G#",
+            "G#:maj"
+          ],
+          [
+            "G#m",
+            "G#:min"
+          ],
+          [
+            "Gm",
+            "G:min"
+          ],
+          [
+            "N",
+            "N"
+          ]
+        ],
+        "retained_harmonic_seconds": 58.225804988662134,
+        "retained_wrong_majmin_seconds": 34.0504240362812,
+        "retained_correct_majmin_seconds": 24.175380952380934,
+        "retained_harmonic_on_unknown_reference_seconds": 0.0
+      },
+      "task": "Audio-only raw recognizer; no supplied label order"
+    },
+    {
+      "id": "jazzsamba-51-amazing-grace-preferred-first60",
+      "split": "holdout",
+      "candidate": "btc",
+      "status": "ok",
+      "prediction_sha256": "031f26ee4726dca5b360af5e45f6c3f1fc89fb2b53b67847a22abbf9f3d91fb7",
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 58.924,
+        "reference_chord_coverage": 0.9820666666666666,
+        "root": 0.8329321093268839,
+        "root_eligible_seconds": 58.924,
+        "root_reference_coverage": 0.9820666666666666,
+        "root_chord_only": 0.8329321093268839,
+        "root_chord_only_eligible_seconds": 58.924,
+        "root_chord_only_reference_coverage": 0.9820666666666666,
+        "majmin": 0.7967838505528699,
+        "majmin_eligible_seconds": 58.924,
+        "majmin_reference_coverage": 0.9820666666666666,
+        "majmin_chord_only": 0.7967838505528699,
+        "majmin_chord_only_eligible_seconds": 58.924,
+        "majmin_chord_only_reference_coverage": 0.9820666666666666,
+        "estimated_unknown_seconds": 0.0,
+        "estimated_no_chord_seconds_on_reference_chords": 4.31102947845805,
+        "predicted_events": 46,
+        "analysis_runtime_seconds": 0.18080987501889467,
+        "prediction_label_conversion": [
+          [
+            "A#",
+            "A#:maj"
+          ],
+          [
+            "Am",
+            "A:min"
+          ],
+          [
+            "C",
+            "C:maj"
+          ],
+          [
+            "Dm",
+            "D:min"
+          ],
+          [
+            "F",
+            "F:maj"
+          ],
+          [
+            "G",
+            "G:maj"
+          ],
+          [
+            "Gm",
+            "G:min"
+          ],
+          [
+            "N",
+            "N"
+          ]
+        ],
+        "retained_harmonic_seconds": 54.612970521541946,
+        "retained_wrong_majmin_seconds": 7.663278911564649,
+        "retained_correct_majmin_seconds": 46.9496916099773,
+        "retained_harmonic_on_unknown_reference_seconds": 0.0
+      },
+      "task": "Audio-only raw recognizer; no supplied label order"
+    },
+    {
+      "id": "jazzsamba-51-amazing-grace-preferred-first60",
+      "split": "holdout",
+      "candidate": "crema",
+      "status": "ok",
+      "prediction_sha256": "f218634a56db001df04e1127ddbe502dde4ae088a5abb0ce47cd710cd211db07",
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 58.924,
+        "reference_chord_coverage": 0.9820666666666666,
+        "root": 0.7498548035510904,
+        "root_eligible_seconds": 58.924,
+        "root_reference_coverage": 0.9820666666666666,
+        "root_chord_only": 0.7498548035510904,
+        "root_chord_only_eligible_seconds": 58.924,
+        "root_chord_only_reference_coverage": 0.9820666666666666,
+        "majmin": 0.6902676509700569,
+        "majmin_eligible_seconds": 58.924,
+        "majmin_reference_coverage": 0.9820666666666666,
+        "majmin_chord_only": 0.6902676509700569,
+        "majmin_chord_only_eligible_seconds": 58.924,
+        "majmin_chord_only_reference_coverage": 0.9820666666666666,
+        "estimated_unknown_seconds": 0.0,
+        "estimated_no_chord_seconds_on_reference_chords": 4.31102947845805,
+        "predicted_events": 30,
+        "analysis_runtime_seconds": 1.7606514999642968,
+        "prediction_label_conversion": [
+          [
+            "A#:maj",
+            "A#:maj"
+          ],
+          [
+            "C:7",
+            "C:7"
+          ],
+          [
+            "C:maj",
+            "C:maj"
+          ],
+          [
+            "C:min",
+            "C:min"
+          ],
+          [
+            "D:min",
+            "D:min"
+          ],
+          [
+            "F:maj",
+            "F:maj"
+          ],
+          [
+            "G:min",
+            "G:min"
+          ],
+          [
+            "G:min7",
+            "G:min7"
+          ],
+          [
+            "N",
+            "N"
+          ]
+        ],
+        "retained_harmonic_seconds": 54.612970521541946,
+        "retained_wrong_majmin_seconds": 13.939639455782311,
+        "retained_correct_majmin_seconds": 40.67333106575964,
+        "retained_harmonic_on_unknown_reference_seconds": 0.0
+      },
+      "task": "Audio-only raw recognizer; no supplied label order"
+    },
+    {
+      "id": "jazzsamba-51-amazing-grace-preferred-first60",
+      "split": "holdout",
+      "candidate": "chordmini",
+      "status": "ok",
+      "prediction_sha256": "b4a858eed0a786956a2e85d1ef82048bf5c0fcf40ac771be5d868bdcb8e431d3",
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 58.924,
+        "reference_chord_coverage": 0.9820666666666666,
+        "root": 0.6819781767389828,
+        "root_eligible_seconds": 58.924,
+        "root_reference_coverage": 0.9820666666666666,
+        "root_chord_only": 0.6819781767389828,
+        "root_chord_only_eligible_seconds": 58.924,
+        "root_chord_only_reference_coverage": 0.9820666666666666,
+        "majmin": 0.6522397273801022,
+        "majmin_eligible_seconds": 58.924,
+        "majmin_reference_coverage": 0.9820666666666666,
+        "majmin_chord_only": 0.6522397273801022,
+        "majmin_chord_only_eligible_seconds": 58.924,
+        "majmin_chord_only_reference_coverage": 0.9820666666666666,
+        "estimated_unknown_seconds": 0.0,
+        "estimated_no_chord_seconds_on_reference_chords": 4.032390022675736,
+        "predicted_events": 136,
+        "analysis_runtime_seconds": 0.047805583104491234,
+        "prediction_label_conversion": [
+          [
+            "A:min",
+            "A:min"
+          ],
+          [
+            "Bb",
+            "Bb:maj"
+          ],
+          [
+            "Bb:maj7",
+            "Bb:maj7"
+          ],
+          [
+            "C",
+            "C:maj"
+          ],
+          [
+            "D:min",
+            "D:min"
+          ],
+          [
+            "F",
+            "F:maj"
+          ],
+          [
+            "G",
+            "G:maj"
+          ],
+          [
+            "G:7",
+            "G:7"
+          ],
+          [
+            "G:min",
+            "G:min"
+          ],
+          [
+            "G:min7",
+            "G:min7"
+          ],
+          [
+            "N",
+            "N"
+          ]
+        ],
+        "retained_harmonic_seconds": 54.891609977324265,
+        "retained_wrong_majmin_seconds": 16.459036281179124,
+        "retained_correct_majmin_seconds": 38.43257369614514,
+        "retained_harmonic_on_unknown_reference_seconds": 0.0
+      },
+      "task": "Audio-only raw recognizer; no supplied label order"
+    },
+    {
+      "id": "jazzsamba-51-amazing-grace-preferred-first60",
+      "split": "holdout",
+      "candidate": "chordino",
+      "status": "ok",
+      "prediction_sha256": "40321819d608281c91fcbc699930812a256d88d68dafbf1df55f6c401efbd2c8",
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 58.92400000000001,
+        "reference_chord_coverage": 0.9820666666666668,
+        "root": 0.6802941595954108,
+        "root_eligible_seconds": 58.92400000000001,
+        "root_reference_coverage": 0.9820666666666668,
+        "root_chord_only": 0.6802941595954108,
+        "root_chord_only_eligible_seconds": 58.92400000000001,
+        "root_chord_only_reference_coverage": 0.9820666666666668,
+        "majmin": 0.6460341088690513,
+        "majmin_eligible_seconds": 58.92400000000001,
+        "majmin_reference_coverage": 0.9820666666666668,
+        "majmin_chord_only": 0.6460341088690513,
+        "majmin_chord_only_eligible_seconds": 58.92400000000001,
+        "majmin_chord_only_reference_coverage": 0.9820666666666668,
+        "estimated_unknown_seconds": 0.0,
+        "estimated_no_chord_seconds_on_reference_chords": 0.0,
+        "predicted_events": 27,
+        "analysis_runtime_seconds": 0.27921566739678383,
+        "prediction_label_conversion": [
+          [
+            "Bb",
+            "Bb:maj"
+          ],
+          [
+            "Bb6",
+            "Bb:maj6"
+          ],
+          [
+            "C",
+            "C:maj"
+          ],
+          [
+            "C6",
+            "C:maj6"
+          ],
+          [
+            "Cm",
+            "C:min"
+          ],
+          [
+            "Dm",
+            "D:min"
+          ],
+          [
+            "Dm7",
+            "D:min7"
+          ],
+          [
+            "Eb/G",
+            "Eb:maj/3"
+          ],
+          [
+            "F",
+            "F:maj"
+          ],
+          [
+            "F/C",
+            "F:maj/5"
+          ],
+          [
+            "F6",
+            "F:maj6"
+          ],
+          [
+            "G",
+            "G:maj"
+          ],
+          [
+            "G7",
+            "G:7"
+          ],
+          [
+            "Gm7",
+            "G:min7"
+          ],
+          [
+            "N",
+            "N"
+          ]
+        ],
+        "retained_harmonic_seconds": 58.978321995,
+        "retained_wrong_majmin_seconds": 20.857086169000013,
+        "retained_correct_majmin_seconds": 38.06691383099999,
+        "retained_harmonic_on_unknown_reference_seconds": 0.05432199500000001
+      },
+      "task": "Audio-only raw recognizer; no supplied label order"
+    },
+    {
+      "id": "jazzsamba-75-when-the-saints-go-marching-in-preferred-first60",
+      "split": "holdout",
+      "candidate": "baseline",
+      "status": "ok",
+      "prediction_sha256": "020788609403d952b66a905f647b98efa5ea9faa96b2393520d6341b26fb407d",
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 58.973042,
+        "reference_chord_coverage": 0.9828840333333333,
+        "root": 0.34679581688148975,
+        "root_eligible_seconds": 58.973042,
+        "root_reference_coverage": 0.9828840333333333,
+        "root_chord_only": 0.34679581688148975,
+        "root_chord_only_eligible_seconds": 58.973042,
+        "root_chord_only_reference_coverage": 0.9828840333333333,
+        "majmin": 0.3123738373301382,
+        "majmin_eligible_seconds": 58.973042,
+        "majmin_reference_coverage": 0.9828840333333333,
+        "majmin_chord_only": 0.3123738373301382,
+        "majmin_chord_only_eligible_seconds": 58.973042,
+        "majmin_chord_only_reference_coverage": 0.9828840333333333,
+        "estimated_unknown_seconds": 0.0,
+        "estimated_no_chord_seconds_on_reference_chords": 0.9745578231292522,
+        "predicted_events": 686,
+        "analysis_runtime_seconds": 0.06963841710239649,
+        "prediction_label_conversion": [
+          [
+            "A",
+            "A:maj"
+          ],
+          [
+            "A#",
+            "A#:maj"
+          ],
+          [
+            "A#m",
+            "A#:min"
+          ],
+          [
+            "Am",
+            "A:min"
+          ],
+          [
+            "B",
+            "B:maj"
+          ],
+          [
+            "Bm",
+            "B:min"
+          ],
+          [
+            "C",
+            "C:maj"
+          ],
+          [
+            "C#",
+            "C#:maj"
+          ],
+          [
+            "C#m",
+            "C#:min"
+          ],
+          [
+            "Cm",
+            "C:min"
+          ],
+          [
+            "D",
+            "D:maj"
+          ],
+          [
+            "D#",
+            "D#:maj"
+          ],
+          [
+            "D#m",
+            "D#:min"
+          ],
+          [
+            "Dm",
+            "D:min"
+          ],
+          [
+            "E",
+            "E:maj"
+          ],
+          [
+            "Em",
+            "E:min"
+          ],
+          [
+            "F",
+            "F:maj"
+          ],
+          [
+            "F#",
+            "F#:maj"
+          ],
+          [
+            "F#m",
+            "F#:min"
+          ],
+          [
+            "Fm",
+            "F:min"
+          ],
+          [
+            "G",
+            "G:maj"
+          ],
+          [
+            "G#",
+            "G#:maj"
+          ],
+          [
+            "G#m",
+            "G#:min"
+          ],
+          [
+            "Gm",
+            "G:min"
+          ],
+          [
+            "N",
+            "N"
+          ]
+        ],
+        "retained_harmonic_seconds": 58.050884353741495,
+        "retained_wrong_majmin_seconds": 39.57684874829934,
+        "retained_correct_majmin_seconds": 18.421635428571406,
+        "retained_harmonic_on_unknown_reference_seconds": 0.05240017687074838
+      },
+      "task": "Audio-only raw recognizer; no supplied label order"
+    },
+    {
+      "id": "jazzsamba-75-when-the-saints-go-marching-in-preferred-first60",
+      "split": "holdout",
+      "candidate": "btc",
+      "status": "ok",
+      "prediction_sha256": "1e7c9206e871f420cff245db0d13c3b4d644a246b96f36bcf57f410eca956dc2",
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 58.97304200000001,
+        "reference_chord_coverage": 0.9828840333333334,
+        "root": 0.784284774445087,
+        "root_eligible_seconds": 58.97304200000001,
+        "root_reference_coverage": 0.9828840333333334,
+        "root_chord_only": 0.784284774445087,
+        "root_chord_only_eligible_seconds": 58.97304200000001,
+        "root_chord_only_reference_coverage": 0.9828840333333334,
+        "majmin": 0.7634482905263866,
+        "majmin_eligible_seconds": 58.97304200000001,
+        "majmin_reference_coverage": 0.9828840333333334,
+        "majmin_chord_only": 0.7634482905263866,
+        "majmin_chord_only_eligible_seconds": 58.97304200000001,
+        "majmin_chord_only_reference_coverage": 0.9828840333333334,
+        "estimated_unknown_seconds": 0.0,
+        "estimated_no_chord_seconds_on_reference_chords": 3.895672385487528,
+        "predicted_events": 37,
+        "analysis_runtime_seconds": 0.17509870789945126,
+        "prediction_label_conversion": [
+          [
+            "A",
+            "A:maj"
+          ],
+          [
+            "A#",
+            "A#:maj"
+          ],
+          [
+            "A#m",
+            "A#:min"
+          ],
+          [
+            "C",
+            "C:maj"
+          ],
+          [
+            "Dm",
+            "D:min"
+          ],
+          [
+            "F",
+            "F:maj"
+          ],
+          [
+            "G",
+            "G:maj"
+          ],
+          [
+            "G#",
+            "G#:maj"
+          ],
+          [
+            "N",
+            "N"
+          ]
+        ],
+        "retained_harmonic_seconds": 55.07736961451247,
+        "retained_wrong_majmin_seconds": 10.054501512471669,
+        "retained_correct_majmin_seconds": 45.0228681020408,
+        "retained_harmonic_on_unknown_reference_seconds": 0.0
+      },
+      "task": "Audio-only raw recognizer; no supplied label order"
+    },
+    {
+      "id": "jazzsamba-75-when-the-saints-go-marching-in-preferred-first60",
+      "split": "holdout",
+      "candidate": "crema",
+      "status": "ok",
+      "prediction_sha256": "fc67599a46ac29cc05cafb87c306f045d00dc94218f914f9f71a92026a952091",
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 58.973042,
+        "reference_chord_coverage": 0.9828840333333333,
+        "root": 0.8189855550848972,
+        "root_eligible_seconds": 58.973042,
+        "root_reference_coverage": 0.9828840333333333,
+        "root_chord_only": 0.8189855550848972,
+        "root_chord_only_eligible_seconds": 58.973042,
+        "root_chord_only_reference_coverage": 0.9828840333333333,
+        "majmin": 0.7768995459533524,
+        "majmin_eligible_seconds": 58.973042,
+        "majmin_reference_coverage": 0.9828840333333333,
+        "majmin_chord_only": 0.7768995459533524,
+        "majmin_chord_only_eligible_seconds": 58.973042,
+        "majmin_chord_only_reference_coverage": 0.9828840333333333,
+        "estimated_unknown_seconds": 0.0,
+        "estimated_no_chord_seconds_on_reference_chords": 3.9885522040816324,
+        "predicted_events": 17,
+        "analysis_runtime_seconds": 1.6657026670873165,
+        "prediction_label_conversion": [
+          [
+            "A#:maj",
+            "A#:maj"
+          ],
+          [
+            "C:7",
+            "C:7"
+          ],
+          [
+            "C:maj",
+            "C:maj"
+          ],
+          [
+            "F:maj",
+            "F:maj"
+          ],
+          [
+            "N",
+            "N"
+          ]
+        ],
+        "retained_harmonic_seconds": 54.984489795918364,
+        "retained_wrong_majmin_seconds": 9.168360242630392,
+        "retained_correct_majmin_seconds": 45.81612955328798,
+        "retained_harmonic_on_unknown_reference_seconds": 0.0
+      },
+      "task": "Audio-only raw recognizer; no supplied label order"
+    },
+    {
+      "id": "jazzsamba-75-when-the-saints-go-marching-in-preferred-first60",
+      "split": "holdout",
+      "candidate": "chordmini",
+      "status": "ok",
+      "prediction_sha256": "9e2fde7e990c45f0cc764d9ce5b8d1880599f6d90c1b1839decca5bf024f7468",
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 58.973042,
+        "reference_chord_coverage": 0.9828840333333333,
+        "root": 0.7521035632293773,
+        "root_eligible_seconds": 58.973042,
+        "root_reference_coverage": 0.9828840333333333,
+        "root_chord_only": 0.7521035632293773,
+        "root_chord_only_eligible_seconds": 58.973042,
+        "root_chord_only_reference_coverage": 0.9828840333333333,
+        "majmin": 0.713505043353349,
+        "majmin_eligible_seconds": 58.973042,
+        "majmin_reference_coverage": 0.9828840333333333,
+        "majmin_chord_only": 0.713505043353349,
+        "majmin_chord_only_eligible_seconds": 58.973042,
+        "majmin_chord_only_reference_coverage": 0.9828840333333333,
+        "estimated_unknown_seconds": 0.0,
+        "estimated_no_chord_seconds_on_reference_chords": 3.5241531111111115,
+        "predicted_events": 145,
+        "analysis_runtime_seconds": 0.04372475016862154,
+        "prediction_label_conversion": [
+          [
+            "Bb",
+            "Bb:maj"
+          ],
+          [
+            "Bb:maj7",
+            "Bb:maj7"
+          ],
+          [
+            "C",
+            "C:maj"
+          ],
+          [
+            "C:7",
+            "C:7"
+          ],
+          [
+            "C:sus4",
+            "C:sus4"
+          ],
+          [
+            "D:min7",
+            "D:min7"
+          ],
+          [
+            "F",
+            "F:maj"
+          ],
+          [
+            "F:sus4",
+            "F:sus4"
+          ],
+          [
+            "N",
+            "N"
+          ]
+        ],
+        "retained_harmonic_seconds": 55.44888888888889,
+        "retained_wrong_majmin_seconds": 13.371326000000018,
+        "retained_correct_majmin_seconds": 42.07756288888888,
+        "retained_harmonic_on_unknown_reference_seconds": 0.0
+      },
+      "task": "Audio-only raw recognizer; no supplied label order"
+    },
+    {
+      "id": "jazzsamba-75-when-the-saints-go-marching-in-preferred-first60",
+      "split": "holdout",
+      "candidate": "chordino",
+      "status": "ok",
+      "prediction_sha256": "b47b98ad7f165d88291f6b96283acb642e818e4c5f20c21569ab8f566c8bd6f3",
+      "semantic": {
+        "duration_seconds": 60.0,
+        "reference_chord_seconds": 58.973042,
+        "reference_chord_coverage": 0.9828840333333333,
+        "root": 0.8000003156696578,
+        "root_eligible_seconds": 58.973042,
+        "root_reference_coverage": 0.9828840333333333,
+        "root_chord_only": 0.8000003156696578,
+        "root_chord_only_eligible_seconds": 58.973042,
+        "root_chord_only_reference_coverage": 0.9828840333333333,
+        "majmin": 0.6905896371769323,
+        "majmin_eligible_seconds": 58.973042,
+        "majmin_reference_coverage": 0.9828840333333333,
+        "majmin_chord_only": 0.6905896371769323,
+        "majmin_chord_only_eligible_seconds": 58.973042,
+        "majmin_chord_only_reference_coverage": 0.9828840333333333,
+        "estimated_unknown_seconds": 0.0,
+        "estimated_no_chord_seconds_on_reference_chords": 3.059754018,
+        "predicted_events": 15,
+        "analysis_runtime_seconds": 0.25242724921554327,
+        "prediction_label_conversion": [
+          [
+            "Bb",
+            "Bb:maj"
+          ],
+          [
+            "Bb/C",
+            "Bb:maj/2"
+          ],
+          [
+            "Bbm",
+            "Bb:min"
+          ],
+          [
+            "C",
+            "C:maj"
+          ],
+          [
+            "C6",
+            "C:maj6"
+          ],
+          [
+            "Cm6",
+            "C:min6"
+          ],
+          [
+            "Em7b5",
+            "E:hdim7"
+          ],
+          [
+            "F",
+            "F:maj"
+          ],
+          [
+            "F/G",
+            "F:maj/2"
+          ],
+          [
+            "F6",
+            "F:maj6"
+          ],
+          [
+            "N",
+            "N"
+          ]
+        ],
+        "retained_harmonic_seconds": 55.913287982,
+        "retained_wrong_majmin_seconds": 15.187116304000007,
+        "retained_correct_majmin_seconds": 40.72617167799999,
+        "retained_harmonic_on_unknown_reference_seconds": 0.0
+      },
+      "task": "Audio-only raw recognizer; no supplied label order"
+    }
+  ],
+  "limitations": [
+    "Supplied projected labels/order make this a conditional timing task, distinct from audio-only recognition.",
+    "Written source grids do not establish individually performed chord attacks or playable beginner substitutions.",
+    "Unknown source positions and unannotated gaps are X; their duration is excluded from eligible agreement and reported separately.",
+    "Wrong-root chart can retain wrong cues despite heuristic guards; no arrangement is promoted.",
+    "Three previously exposed jazz clips are a retrospective extension, not a fresh rock test or pretrained-model exclusion guarantee.",
+    "Frozen thresholds and policy are unchanged; no source separation, key hints, tempo snapping, offset fitting or endpoint scaling.",
+    "Native chroma uses about 743ms support and 93ms hop at 22050Hz; 25ms decoder sampling adds no acoustic resolution.",
+    "Source media/annotations remain local and untracked; dataset licence clarification remains pending."
+  ]
+}
