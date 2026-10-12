@@ -1,7 +1,7 @@
 {
   "schema_version": "playalong-rhythm-results-1.0",
   "checked_date": "2026-10-12",
-  "status": "Implementation and isolated browser checks passed; Mac deployment verification pending",
+  "status": "Deployed and browser verified on Mac localhost8070",
   "gold": false,
   "chord_boundaries_modified": false,
   "audio_or_pack_identity_modified": false,
@@ -22,7 +22,18 @@
     "isolated_browser_core_view": true,
     "isolated_browser_feedback_capture_reload": true,
     "isolated_browser_proportional_widths": true,
-    "normal_player_test_feedback_added": false
+    "normal_player_test_feedback_added": false,
+    "mac_all_public_assets_matching_bytes": 47,
+    "mac_sampled_private_paths_404": 3,
+    "mac_all_ten_guides_ready": true,
+    "mac_strumming_pattern_selection": true,
+    "mac_playback_pause_hold_progress": true,
+    "original_local_servers_restored": [
+      8067,
+      8068
+    ],
+    "source_pack_identity_unchanged": true,
+    "screenshot_sha256": "80fdf6684a78753c7d8ee425e9bf96c0dcc7e345938e8f0353f5cf17d92ac836"
   },
   "cases": [
     {

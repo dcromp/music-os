@@ -1,6 +1,6 @@
 # Chord duration and suggested strumming
 
-Implementation and isolated browser checks complete, 12 October 2026. Mac deployment verification follows. This continuation addresses two founder
+Deployed and browser verified, 12 October 2026. This continuation addresses two founder
 observations: the equally sized upcoming cards did not show how long to hold a
 chord, and the player supplied no suggested strumming rhythm.
 
@@ -93,7 +93,7 @@ to belong to the same recording.
 
 ## Status and next checks
 
-Implementation passes 47 JavaScript helper checks and 239 distinct Python checks (223 in the standard environment plus 16 in the pinned evaluation environment). Isolated browser QA verifies estimated/seconds views, Core merging, 6/8 and syncopation choices, proportional strip widths, and feedback capture/persistence on a separate origin. Mac deployment verification follows. Next evaluate
+Implementation passes 47 JavaScript helper checks and 239 distinct Python checks (223 in the standard environment plus 16 in the pinned evaluation environment). Isolated browser QA verifies estimated/seconds views, Core merging, 6/8 and syncopation choices, proportional strip widths, and feedback capture/persistence on a separate origin. The deployed port-8070 player verifies all ten guides, pattern selection, playback/pause and advancing hold progress. All 47 public assets match the Mac checkout; three sampled private paths return 404, and ports 8067/8068 are restored. The pack identity is unchanged, with no test issues added to the normal players. Next evaluate
 beat-level/count usefulness against independently checked real excerpts, verify
 recording-compatible strumming by section, and measure followability during
 normal guitar practice. The broader reference milestone remains 1.5–2.5 focused
@@ -114,3 +114,9 @@ They do not validate the chosen musical beat unit, downbeats, bar phase or
 real-song meter. The UI uses seconds outside observed coverage. Exact inputs,
 references and native predictions are saved in the ignored local
 `experiments/generated/rhythm-screen-v1/` pack; their hashes are in the report.
+
+The [deployment snapshot](PLAYALONG_RHYTHM_RESULTS.json) records code/config/data
+hashes and the saved preview. The player is a session-local server; restart
+`automatic_drafts.py serve --pack experiments/generated/automatic-first-ten-v1
+--port 8070` after reboot or an interrupted tool session. The local screenshot
+is `experiments/generated/player-proof-20261012/rhythm-strumming.jpg`.

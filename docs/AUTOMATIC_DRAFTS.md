@@ -149,3 +149,13 @@ selected upload comes from an unofficial tribute channel. These are requested
 local experiments; technical acquisition success does not establish commercial
 distribution clearance. Accuracy evaluation continues through the automated
 annotated-data screen, separate from ordinary play-along feedback.
+
+## Rhythm interface follow-up · 12 October
+
+The existing ten-song pack on 8070 now adds hold lengths/progress, a proportional
+timeline, approximate beat/bar units and two original strumming practice drills
+per song. The original audio, charts and pack identity are unchanged.
+[Rhythm evidence](PLAYALONG_RHYTHM.md) reports 239 distinct Python checks,
+47 JavaScript helper checks and 47 matching served assets (the initial ten-song
+deployment above had 45). Counts and suggested patterns remain unverified
+practice aids; Wonderwall has beat lengths only while meter changes are unmapped.
