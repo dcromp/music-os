@@ -328,6 +328,12 @@ def public_files(pack: Path) -> dict[str, Path]:
         raise ValueError("Invalid automatic play-along manifest")
     files = {"/": STATIC / "index.html", "/index.html": STATIC / "index.html", "/app.js": STATIC / "app.js",
              "/style.css": STATIC / "style.css", "/manifest.json": pack / "manifest.json"}
+    # Optional duration/practice metadata has fixed static URLs; never accept
+    # caller-supplied paths or expose arbitrary repository files.
+    for name in ("rhythm.json", "practice.json"):
+        path = STATIC / name
+        if path.exists() or path.is_symlink():
+            files["/" + name] = path
     seen = set()
     for case in manifest["cases"]:
         identifier = case["id"]

@@ -186,5 +186,34 @@ class AutomaticDraftTests(unittest.TestCase):
                     drafts.public_files(output)
 
 
+    def test_optional_practice_metadata_uses_only_fixed_static_routes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            _, _, manifest = self.fixture(root)
+            output = root / "output"
+            drafts.build(manifest, output, root)
+            static = root / "static"
+            static.mkdir()
+            for name in ("index.html", "app.js", "style.css"):
+                (static / name).write_text("fixture")
+            with patch.object(drafts, "STATIC", static), patch.object(drafts.review_pack, "STATIC", static):
+                self.assertNotIn("/rhythm.json", drafts.public_files(output))
+                for name in ("rhythm.json", "practice.json"):
+                    (static / name).write_text('{"fixture": true}')
+                files = drafts.public_files(output)
+                self.assertEqual(files["/rhythm.json"], static / "rhythm.json")
+                self.assertEqual(files["/practice.json"], static / "practice.json")
+                handler = drafts.review_pack.ReviewHandler.__new__(drafts.review_pack.ReviewHandler)
+                handler.public_files = files
+                self.assertEqual(handler.translate_path("/practice.json"), str(static / "practice.json"))
+                for url in ("/practice.json?path=secret", "/rhythm-config.json", "/../practice.json"):
+                    self.assertEqual(handler.translate_path(url), str(static / "__not_found__"))
+                (static / "practice.json").unlink()
+                (static / "practice.json").symlink_to(output / "build-spec.json")
+                self.assertEqual(handler.translate_path("/practice.json"), str(static / "__not_found__"))
+                with self.assertRaises(ValueError):
+                    drafts.public_files(output)
+
+
 if __name__ == "__main__":
     unittest.main()

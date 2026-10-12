@@ -36,6 +36,25 @@ tr.active { background: #e3f2e8; }
 #play-current { display: block; font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; color: #22543e; }
 #next-change { display: block; min-height: 20px; margin-top: 10px; }
 #full-chord { display: block; margin-top: 6px; }
+#current-hold { margin: 10px 0 6px; }
+.hold-progress { height: 8px; overflow: hidden; border-radius: 4px; background: #d2e3d9; }
+#hold-progress-fill { display: block; height: 100%; background: #347458; }
+.timing-view { margin: 24px 0 16px; }
+#timing-range { margin-bottom: 22px; }
+.timing-track { height: 50px; position: relative; background: #f7faf8; border: 1px solid #c9dad3; border-radius: 5px; }
+.timing-block { position: absolute; top: 0; bottom: 0; padding: 14px 0; text-indent: 5px; background: #dceee2; border: 0; box-shadow: inset -1px 0 white; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: .85rem; font-weight: 600; }
+.timing-gap { color: #73807a; background: transparent; font-weight: 400; }
+.timing-unclear { background: #f3e8c9; color: #765d28; }
+.timing-silence { background: #e5eae7; color: #566a60; }
+.timing-playhead { position: absolute; top: -5px; bottom: -5px; width: 2px; background: #22543e; pointer-events: none; }
+.timing-playhead span { position: absolute; left: -12px; top: -19px; font-size: .75rem; font-weight: 600; background: white; padding: 0 2px; }
+.strum-panel { border-top: 1px solid #d6e3dc; padding-top: 16px; margin-top: 20px; }
+.strum-panel h3 { margin: 0; font-size: 1.05rem; }
+.strum-grid { display: grid; gap: 4px; margin: 12px 0; max-width: 650px; }
+.strum-box { background: #eef6f1; border: 1px solid #d1e1d7; text-align: center; padding: 8px 2px; border-radius: 5px; }
+.strum-count { display: block; color: #526e62; font-size: .8rem; }
+.strum-box strong { display: block; white-space: nowrap; font-size: 1rem; }
+.strum-rest strong { color: #8c9892; }
 .upcoming { display: flex; gap: 18px; flex-wrap: wrap; }
 .upcoming-chord { min-width: 72px; display: flex; flex-direction: column; }
 .upcoming-chord strong { font-size: 1.7rem; }

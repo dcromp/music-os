@@ -1,6 +1,7 @@
 "use strict";
 const assert = require("node:assert/strict");
-const { annotationExport, validateCandidate, currentEvent, exposureKey, loadExposure, recordExposure, refreshExposure, validateEvidence, clampSeek, playbackSnapshot, feedbackKey, feedbackExport, captureFeedback, loadFeedback, saveFeedback, transposePracticeLabel, practiceLabel, coreChordLabel, displayedChord, practiceTimeline } = require("./app.js");
+const { annotationExport, validateCandidate, currentEvent, exposureKey, loadExposure, recordExposure, refreshExposure, validateEvidence, clampSeek, playbackSnapshot, feedbackKey, feedbackExport, captureFeedback, loadFeedback, saveFeedback, transposePracticeLabel, practiceLabel, coreChordLabel, displayedChord, practiceTimeline,
+  currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, validatePracticeManifest } = require("./app.js");
 let checks = 0;
 function test(name, callback) { callback(); checks++; console.log(`ok ${name}`); }
 const recording = { id: "excerpt", title: "Generated", audio_sha256: "hash", duration_seconds: 20, sample_rate_hz: 100 };
@@ -290,5 +291,175 @@ test("core timeline never bridges gaps, silence, uncertainty or suspended-to-maj
   assert.equal(currentEvent(displayed, 3.5).label, "X");
   assert.equal(currentEvent(displayed, 5.5).label, "N");
   assert.equal(currentEvent(displayed, 7.5).label, "Dsus4");
+});
+test("current hold measures full duration and stops at its own end before an uncovered gap", () => {
+  const held = currentHold(chart.chords, 4);
+  assert.deepEqual([held.total_seconds, held.elapsed_seconds, held.remaining_seconds, held.progress_fraction], [5, 4, 1, 0.8]);
+  assert.equal(currentHold(chart.chords, 5), null);
+  assert.equal(currentHold(chart.chords, 5.9), null);
+  assert.equal(currentHold(chart.chords, 6).event.label, "G");
+  assert.equal(currentHold(chart.chords, 6).progress_fraction, 0);
+  assert.equal(currentHold(chart.chords, 20), null);
+});
+test("current hold and proportional window recalculate from the audio clock after backward seek", () => {
+  assert.equal(currentHold(chart.chords, 18).remaining_seconds, 2);
+  assert.equal(currentHold(chart.chords, 1).remaining_seconds, 4);
+  const later = timingWindow(chart.chords, 18, 20), earlier = timingWindow(chart.chords, 1, 20);
+  assert.equal(later.now_seconds, 18); assert.equal(earlier.now_seconds, 1);
+  assert.equal(earlier.blocks[0].event.label, "C");
+  assert.equal(later.blocks[0].event.label, "G");
+  assert.throws(() => currentHold(chart.chords, NaN));
+  assert.throws(() => timingWindow(chart.chords, NaN, 20));
+});
+test("timeline geometry reflects a two-to-one duration ratio rather than equal chord cards", () => {
+  const events = [{start_seconds: 0, end_seconds: 4, label: "C"}, {start_seconds: 4, end_seconds: 6, label: "G"}];
+  const window = timingWindow(events, 0, 6, 6, 0);
+  assert.equal(window.blocks[0].width_fraction, 2 / 3);
+  assert.equal(window.blocks[1].width_fraction, 1 / 3);
+  assert.equal(window.blocks[1].offset_fraction, 2 / 3);
+  assert.equal(window.playhead_fraction, 0);
+  assert.equal(timingWindow(events, 2, 6, 6, 4).playhead_fraction, 1 / 3);
+});
+test("timing strip represents uncovered gaps, unknown labels and silence as distinct intervals", () => {
+  const events = [{start_seconds: 1, end_seconds: 2, label: "C"}, {start_seconds: 3, end_seconds: 4, label: "X"},
+    {start_seconds: 4, end_seconds: 5, label: "N"}];
+  const blocks = timingWindow(events, 0, 6, 6, 0).blocks;
+  assert.deepEqual(blocks.map(block => block.kind), ["gap", "chord", "gap", "unclear", "silence", "gap"]);
+  assert.deepEqual(blocks.map(block => [block.start_seconds, block.end_seconds]), [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6]]);
+  assert.ok(Math.abs(blocks.reduce((sum, block) => sum + block.width_fraction, 0) - 1) < 1e-12);
+});
+test("window clipping preserves the original long hold and never extends beyond the recording", () => {
+  const events = [{start_seconds: 0, end_seconds: 20, label: "C"}];
+  const original = JSON.stringify(events);
+  const window = timingWindow(events, 10, 20, 8, 2);
+  assert.deepEqual([window.start_seconds, window.end_seconds], [8, 16]);
+  assert.equal(window.blocks[0].width_fraction, 1);
+  assert.equal(window.blocks[0].event.start_seconds, 0);
+  assert.equal(window.blocks[0].event.end_seconds, 20);
+  assert.equal(window.playhead_fraction, 0.25);
+  assert.equal(timingWindow(events, 20, 20).playhead_fraction, 1);
+  assert.deepEqual(timingWindow(events, 20, 20, 8, 0).blocks, []);
+  assert.equal(JSON.stringify(events), original);
+});
+test("timing window rejects overlapping, invalid or nonfinite spans and empty duration", () => {
+  for (const events of [[{start_seconds: 0, end_seconds: 21, label: "C"}],
+    [{start_seconds: 0, end_seconds: 4, label: "C"}, {start_seconds: 3, end_seconds: 5, label: "G"}],
+    [{start_seconds: 0, end_seconds: Infinity, label: "C"}]]) assert.throws(() => timingWindow(events, 0, 20));
+  assert.throws(() => timingWindow([], 0, 0));
+  assert.throws(() => timingWindow([], 0, 20, 0));
+  assert.throws(() => timingWindow([], 0, 20, 4, 4));
+});
+test("core merged hold duration uses the whole displayed span without changing feedback or raw times", () => {
+  const events = [{start_seconds: 0, end_seconds: 5, label: "F#m7"}, {start_seconds: 5, end_seconds: 10, label: "F#m"},
+    {start_seconds: 10, end_seconds: 20, label: "Esus4"}];
+  const raw = JSON.stringify(events), displayed = practiceTimeline(events, "capo-shapes", 2, "core-chords");
+  const hold = currentHold(displayed, 7);
+  assert.equal(hold.event.label, "Em"); assert.equal(hold.total_seconds, 10); assert.equal(hold.remaining_seconds, 3);
+  const reported = captureFeedback(reviewCase, 7, {...chart, chords: events}, "tap", "now", {view: "capo-shapes", capo: 2, qualityMode: "core-chords"});
+  assert.equal(reported.raw_sounding_chord, "F#m"); assert.equal(reported.playback_seconds, 7);
+  assert.equal(JSON.stringify(events), raw);
+});
+const timedRecording = {...recording, audio_sha256: "a".repeat(64)};
+const timedCase = {...reviewCase, recording: timedRecording};
+const rhythmCase = {recording: timedRecording, beat_times_seconds: Array.from({length: 41}, (_, index) => index * 0.5),
+  pulse_bpm: 120, beats_per_bar: 4, meter_label: "4/4 assumed", status: "estimated"};
+const rhythmManifest = {schema_version: "playalong-rhythm-1.0", cases: [rhythmCase]};
+const copied = value => JSON.parse(JSON.stringify(value));
+test("valid beat grids are paired to the exact recording and offer approximate full and half bars", () => {
+  const paired = validateRhythmManifest(rhythmManifest, [timedCase]).get(recording.id);
+  assert.equal(paired, rhythmCase);
+  assert.deepEqual(estimatedSpan(paired, 0, 2), {beats: 4, bars: 1});
+  assert.deepEqual(estimatedSpan(paired, 0, 1), {beats: 2, bars: 0.5});
+  assert.equal(durationCaption(0, 1, paired), "~0.5 bars · 1.0 s");
+  assert.equal(durationCaption(0, 4, paired), "~2 bars · 4.0 s");
+});
+test("positive short holds never round to zero bars or beats", () => {
+  assert.equal(durationCaption(0, 0.03, rhythmCase), "<0.1 bar · <0.1 s");
+  assert.equal(durationCaption(0, 0.01, {...rhythmCase, beats_per_bar: null}), "<0.1 beat · <0.1 s");
+});
+test("fractional beat interpolation follows varying beat intervals without snapping chord boundaries", () => {
+  const variable = {...rhythmCase, beat_times_seconds: [0, 0.5, 1.5, 2, 3]};
+  assert.equal(beatPosition(variable.beat_times_seconds, 1), 1.5);
+  assert.deepEqual(estimatedSpan(variable, 0.25, 2.5), {beats: 3, bars: 0.75});
+  assert.equal(beatPosition(variable.beat_times_seconds, 3), 4);
+  assert.equal(beatPosition(variable.beat_times_seconds, -0.01), null);
+  assert.equal(beatPosition(variable.beat_times_seconds, 3.01), null);
+});
+test("beat estimates fall back to seconds outside covered pulses instead of extrapolating silence or outro", () => {
+  const trimmed = {...rhythmCase, beat_times_seconds: [1, 2, 3]};
+  assert.equal(estimatedSpan(trimmed, 0, 2), null);
+  assert.equal(estimatedSpan(trimmed, 2, 4), null);
+  assert.equal(durationCaption(0, 2, trimmed), "2.0 s");
+  assert.equal(durationCaption(2, 4, trimmed), "2.0 s");
+  assert.equal(durationCaption(0, 2, null), "2.0 s");
+  assert.equal(beatPosition([], 1), null);
+});
+test("compound meter only gets bars when pulse unit is stated; variable meter remains beat-count only", () => {
+  const compound = {...rhythmCase, beats_per_bar: 2, meter_label: "6/8 · 2 dotted-quarter beats per bar"};
+  assert.equal(validateRhythmManifest({...rhythmManifest, cases: [compound]}, [timedCase]).size, 1);
+  assert.equal(durationCaption(0, 1, compound), "~1 bar · 1.0 s");
+  const unverified = {...rhythmCase, beats_per_bar: null, meter_label: "6/8; pulse unverified"};
+  assert.equal(durationCaption(0, 1, unverified), "~2 beats · 1.0 s");
+  const varies = {...unverified, meter_label: "Beat count; meter varies"};
+  assert.equal(validateRhythmManifest({...rhythmManifest, cases: [varies]}, [timedCase]).get(recording.id).beats_per_bar, null);
+  assert.equal(estimatedSpan(varies, 0, 4).bars, null);
+});
+test("rhythm payload validates all timestamps and rejects duplicate identities or malformed pulse metadata", () => {
+  for (const change of [{beat_times_seconds: [0]}, {beat_times_seconds: [0, 0]}, {beat_times_seconds: [-0.1, 1]},
+    {beat_times_seconds: [0, 21]}, {beat_times_seconds: [0, NaN]}, {beat_times_seconds: [1, 0]},
+    {beat_times_seconds: Array.from({length: 5001}, (_, index) => index / 1000)}, {pulse_bpm: 0}, {pulse_bpm: 301},
+    {pulse_bpm: Infinity}, {beats_per_bar: 3}, {meter_label: ""}, {status: "verified"}]) {
+    assert.throws(() => validateRhythmManifest({...rhythmManifest, cases: [{...rhythmCase, ...change}]}, [timedCase]));
+  }
+  assert.throws(() => validateRhythmManifest({...rhythmManifest, cases: [rhythmCase, rhythmCase]}, [timedCase]));
+  assert.throws(() => validateRhythmManifest({schema_version: "wrong", cases: [rhythmCase]}, [timedCase]));
+});
+test("mismatched rhythm hashes fall back per case while larger valid packs retain matching old songs", () => {
+  const otherRecording = {...timedRecording, id: "other", audio_sha256: "b".repeat(64)};
+  const other = {...rhythmCase, recording: otherRecording};
+  const extended = {...rhythmManifest, cases: [rhythmCase, other]};
+  assert.equal(validateRhythmManifest(extended, [timedCase]).size, 1);
+  const wrong = {...rhythmCase, recording: {...timedRecording, audio_sha256: "c".repeat(64)}};
+  const matches = validateRhythmManifest({...rhythmManifest, cases: [wrong, other]}, [timedCase, {recording: otherRecording}]);
+  assert.equal(matches.has(recording.id), false); assert.equal(matches.has("other"), true);
+  for (const change of [{sample_rate_hz: 200}, {duration_seconds: 21}]) {
+    assert.equal(validateRhythmManifest({...rhythmManifest, cases: [{...rhythmCase, recording: {...timedRecording, ...change}}]}, [timedCase]).size, 0);
+  }
+});
+const practiceCase = {recording: timedRecording, meter_label: "4/4 practice", beats_description: "Count four beats", status: "practice-suggestion", note: "Recorded parts may differ.",
+  patterns: [{id: "start", name: "Steady downstrokes", counts: ["1", "2", "3", "4"], strokes: ["D", "D", "D", "D"], description: "Start slowly."},
+    {id: "next", name: "Down and up", counts: ["1", "&", "2", "&", "3", "&", "4", "&"], strokes: ["D", "U", "D", "U", "D", "U", "D", "U"], description: "Keep the hand moving."}]};
+const practiceManifest = {schema_version: "playalong-practice-1.0", cases: [practiceCase]};
+test("practice suggestions validate two original drills without treating them as detected strumming", () => {
+  assert.equal(validatePracticeManifest(practiceManifest, [timedCase]).get(recording.id), practiceCase);
+  assert.equal(practiceCase.status, "practice-suggestion");
+  assert.equal(practiceCase.patterns[0].strokes.length, 4);
+  const house = {...practiceCase, meter_label: "6/8", patterns: [{...practiceCase.patterns[0], counts: ["1", "2", "3", "4", "5", "6"], strokes: ["D", "—", "—", "D", "—", "—"]}]};
+  assert.equal(validatePracticeManifest({...practiceManifest, cases: [house]}, [timedCase]).size, 1);
+});
+test("practice data rejects invalid counts, strokes, duplicate patterns and oversized text", () => {
+  for (const change of [{counts: []}, {counts: ["1"]}, {strokes: ["D", "D", "X", "D"]},
+    {counts: Array(13).fill("1"), strokes: Array(13).fill("D")}, {counts: ["1", "2", "", "4"]},
+    {id: ""}, {name: "x".repeat(101)}, {description: "x".repeat(601)}]) {
+    assert.throws(() => validatePracticeManifest({...practiceManifest, cases: [{...practiceCase, patterns: [{...practiceCase.patterns[0], ...change}]}]}, [timedCase]));
+  }
+  assert.throws(() => validatePracticeManifest({...practiceManifest, cases: [{...practiceCase, patterns: [practiceCase.patterns[0], practiceCase.patterns[0]]}]}, [timedCase]));
+  assert.throws(() => validatePracticeManifest({...practiceManifest, cases: [{...practiceCase, patterns: Array(3).fill(practiceCase.patterns[0])}]}, [timedCase]));
+  assert.throws(() => validatePracticeManifest({...practiceManifest, cases: [practiceCase, practiceCase]}, [timedCase]));
+});
+test("practice pairing is per recording and independent from a missing or invalid beat grid", () => {
+  const wrong = {...practiceCase, recording: {...timedRecording, audio_sha256: "d".repeat(64)}};
+  assert.equal(validatePracticeManifest({...practiceManifest, cases: [wrong]}, [timedCase]).size, 0);
+  assert.throws(() => validateRhythmManifest({schema_version: "broken"}, [timedCase]));
+  assert.equal(validatePracticeManifest(practiceManifest, [timedCase]).size, 1);
+  const other = {...practiceCase, recording: {...timedRecording, id: "new-other", audio_sha256: "e".repeat(64)}};
+  assert.equal(validatePracticeManifest({...practiceManifest, cases: [practiceCase, other]}, [timedCase]).size, 1);
+});
+test("duration and strumming validation never changes saved feedback or source chart bytes", () => {
+  const sourceBefore = JSON.stringify(chart), reports = [captureFeedback(reviewCase, 6, chart, "preserved", "now")];
+  const feedbackBefore = JSON.stringify(reports);
+  validateRhythmManifest(rhythmManifest, [timedCase]); validatePracticeManifest(practiceManifest, [timedCase]);
+  currentHold(chart.chords, 6); timingWindow(chart.chords, 6, 20); durationCaption(6, 20, rhythmCase);
+  assert.equal(JSON.stringify(chart), sourceBefore); assert.equal(JSON.stringify(reports), feedbackBefore);
 });
 console.log(`${checks} review helper checks passed`);

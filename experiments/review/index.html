@@ -22,14 +22,24 @@
       <div id="chord-view-choice" class="controls" hidden><label for="chord-view">Chord display</label><select id="chord-view"><option value="capo-shapes">Capo shapes</option><option value="sounding-pitches">Sounding pitches</option></select></div>
       <div class="controls"><label for="quality-mode">Chord detail</label><select id="quality-mode" disabled><option value="full-chords">Full chords</option><option value="core-chords">Core chords</option></select></div>
       <p id="quality-info" class="note" hidden>Core chords leave out some added notes, such as Em7 → Em and Cadd9 → C. Suspended chords stay suspended: Dsus4 stays Dsus4. This can help you start playing, but may change the sound.</p>
+      <div class="controls"><label for="duration-mode">Chord lengths</label><select id="duration-mode" disabled><option value="estimated">Estimated beats / bars</option><option value="seconds">Seconds</option></select></div>
+      <p id="rhythm-note" class="small" hidden></p>
       <audio id="audio" controls preload="metadata"></audio>
       <p id="position" class="position">0:00</p>
       <div class="chord-strip" aria-label="Automatic chord draft">
-        <div class="now-card"><span class="chord-caption">Now</span><strong id="play-current">Loading…</strong><span id="full-chord" class="small" hidden></span><span id="next-change" class="small"></span></div>
+        <div class="now-card"><span class="chord-caption">Now</span><strong id="play-current">Loading…</strong><span id="full-chord" class="small" hidden></span><p id="current-hold" class="small"></p><div id="hold-progress" class="hold-progress" role="progressbar" aria-label="Progress through current timing span" aria-valuemin="0" aria-valuemax="100" hidden><span id="hold-progress-fill"></span></div><span id="next-change" class="small"></span></div>
         <div class="upcoming-card"><span class="chord-caption">Coming up</span><div id="upcoming" class="upcoming"></div></div>
       </div>
+      <div class="timing-view"><p id="timing-range" class="small"></p><div id="timing-track" class="timing-track" role="img" aria-label="Chord timing"><div id="timing-blocks"></div><div id="timing-playhead" class="timing-playhead"><span>Now</span></div></div></div>
       <div class="controls"><button id="restart" disabled>Restart</button><button id="back" disabled>Back 2 seconds</button></div>
       <p id="point-notice" class="note" hidden></p>
+      <div id="strumming" class="strum-panel" hidden>
+        <h3>Suggested strumming</h3><p class="note">Practice suggestion; recorded parts may differ.</p>
+        <label for="strum-pattern">Pattern</label><select id="strum-pattern" disabled></select>
+        <p id="strum-meter" class="small"></p><div id="strum-grid" class="strum-grid" aria-label="Suggested strum counts and strokes"></div>
+        <p class="small">↓ D: downstroke · ↑ U: upstroke · —: skip a stroke and keep your hand moving.</p>
+        <p id="strum-description" class="note"></p><p id="strum-note" class="small"></p>
+      </div>
     </section>
     <section aria-labelledby="feedback-heading">
       <h2 id="feedback-heading">Only tell us when something feels wrong</h2>

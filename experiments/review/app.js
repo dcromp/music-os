@@ -158,6 +158,125 @@ function practiceTimeline(events, view, capo, qualityMode = "full-chords") {
   }
   return result;
 }
+function currentHold(events, seconds) {
+  if (!validNumber(seconds) || seconds < 0) throw new Error("Use a valid playback time.");
+  const event = currentEvent(events, seconds);
+  if (!event) return null;
+  const duration = event.end_seconds - event.start_seconds;
+  return { event, total_seconds: duration, elapsed_seconds: seconds - event.start_seconds,
+    remaining_seconds: event.end_seconds - seconds, progress_fraction: (seconds - event.start_seconds) / duration };
+}
+function timingWindow(events, seconds, duration, horizon = 16, history = 4) {
+  const now = clampSeek(seconds, duration);
+  if (!Array.isArray(events) || !validNumber(horizon) || horizon <= 0 ||
+      !validNumber(history) || history < 0 || history >= horizon) throw new Error("Invalid timing window.");
+  let previousEnd = 0;
+  for (const event of events) {
+    if (!validNumber(event.start_seconds) || !validNumber(event.end_seconds) || event.start_seconds < previousEnd ||
+        event.end_seconds <= event.start_seconds || event.end_seconds > duration || typeof event.label !== "string") throw new Error("Invalid timing events.");
+    previousEnd = event.end_seconds;
+  }
+  const start = Math.max(0, now - history), end = Math.min(duration, start + horizon), span = end - start;
+  const blocks = [];
+  function add(first, last, event = null) {
+    blocks.push({ start_seconds: first, end_seconds: last, event,
+      kind: !event ? "gap" : event.label === "X" ? "unclear" : event.label === "N" ? "silence" : "chord",
+      offset_fraction: (first - start) / span, width_fraction: (last - first) / span });
+  }
+  let cursor = start;
+  if (span > 0) {
+    for (const event of events) {
+      if (event.end_seconds <= start || event.start_seconds >= end) continue;
+      const first = Math.max(start, event.start_seconds), last = Math.min(end, event.end_seconds);
+      if (first > cursor) add(cursor, first);
+      add(first, last, event); cursor = last;
+    }
+    if (cursor < end) add(cursor, end);
+  }
+  return { start_seconds: start, end_seconds: end, now_seconds: now,
+    playhead_fraction: span > 0 ? (now - start) / span : 0, blocks };
+}
+function boundedText(value, limit, allowEmpty = false) {
+  return typeof value === "string" && value.length <= limit && !/[\r\n]/.test(value) && (allowEmpty || Boolean(value.trim()));
+}
+function pairedMetadataCases(payload, schema, reviewCases) {
+  if (!payload || payload.schema_version !== schema || !Array.isArray(payload.cases) ||
+      !payload.cases.length || payload.cases.length > 64) throw new Error("Invalid optional practice data.");
+  const expected = new Map(reviewCases.map(item => [item.recording?.id, item.recording])), seen = new Set();
+  for (const item of payload.cases) {
+    const recording = item?.recording, id = recording?.id;
+    if (typeof id !== "string" || !/^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$/.test(id) || seen.has(id) ||
+        typeof recording.audio_sha256 !== "string" || !/^[a-f0-9]{64}$/.test(recording.audio_sha256) ||
+        !Number.isInteger(recording.sample_rate_hz) || recording.sample_rate_hz <= 0 ||
+        !validNumber(recording.duration_seconds) || recording.duration_seconds <= 0) {
+      throw new Error("Invalid optional practice recording identity.");
+    }
+    seen.add(id);
+  }
+  return { cases: payload.cases, expected };
+}
+function validateRhythmManifest(payload, reviewCases) {
+  const { cases, expected } = pairedMetadataCases(payload, "playalong-rhythm-1.0", reviewCases), result = new Map();
+  for (const item of cases) {
+    const beats = item.beat_times_seconds;
+    if (item.status !== "estimated" || !Array.isArray(beats) || beats.length < 2 || beats.length > 5000 ||
+        !validNumber(item.pulse_bpm) || item.pulse_bpm < 20 || item.pulse_bpm > 300 ||
+        ![2, 4, null].includes(item.beats_per_bar) || !boundedText(item.meter_label, 100)) throw new Error("Invalid estimated beat grid.");
+    let previous = -1;
+    for (const beat of beats) {
+      if (!validNumber(beat) || beat < 0 || beat > item.recording.duration_seconds || beat <= previous) throw new Error("Invalid estimated beat timestamps.");
+      previous = beat;
+    }
+    if (expected.has(item.recording.id) && pairedRecording(item.recording, expected.get(item.recording.id))) result.set(item.recording.id, item);
+  }
+  return result;
+}
+function beatPosition(beats, seconds) {
+  if (!Array.isArray(beats) || beats.length < 2) return null;
+  if (!validNumber(seconds) || seconds < beats[0] || seconds > beats[beats.length - 1]) return null;
+  if (seconds === beats[beats.length - 1]) return beats.length - 1;
+  let low = 0, high = beats.length - 1;
+  while (low + 1 < high) { const middle = Math.floor((low + high) / 2); if (beats[middle] <= seconds) low = middle; else high = middle; }
+  return low + (seconds - beats[low]) / (beats[low + 1] - beats[low]);
+}
+function estimatedSpan(rhythm, start, end) {
+  if (!rhythm || !validNumber(start) || !validNumber(end) || end <= start) return null;
+  const first = beatPosition(rhythm.beat_times_seconds, start), last = beatPosition(rhythm.beat_times_seconds, end);
+  if (first === null || last === null) return null;
+  const beats = last - first;
+  return { beats, bars: rhythm.beats_per_bar === null ? null : beats / rhythm.beats_per_bar };
+}
+function durationCaption(start, end, rhythm = null) {
+  const duration = end - start, seconds = duration > 0 && duration < 0.05 ? "<0.1 s" : `${duration.toFixed(1)} s`, estimate = estimatedSpan(rhythm, start, end);
+  if (!estimate) return seconds;
+  const rounded = value => value > 0 && value < 0.05 ? "<0.1" : value.toFixed(1).replace(/\.0$/, "");
+  if (estimate.bars !== null) {
+    if (estimate.bars < 0.05) return `<0.1 bar · ${seconds}`;
+    const count = rounded(estimate.bars);
+    return `~${count} ${count === "1" ? "bar" : "bars"} · ${seconds}`;
+  }
+  if (estimate.beats < 0.05) return `<0.1 beat · ${seconds}`;
+  const count = rounded(estimate.beats);
+  return `~${count} ${count === "1" ? "beat" : "beats"} · ${seconds}`;
+}
+function validatePracticeManifest(payload, reviewCases) {
+  const { cases, expected } = pairedMetadataCases(payload, "playalong-practice-1.0", reviewCases), result = new Map();
+  for (const item of cases) {
+    if (item.status !== "practice-suggestion" || !boundedText(item.meter_label, 100) ||
+        !boundedText(item.beats_description, 300) || !boundedText(item.note, 600, true) ||
+        !Array.isArray(item.patterns) || !item.patterns.length || item.patterns.length > 2) throw new Error("Invalid suggested strumming.");
+    const ids = new Set();
+    for (const pattern of item.patterns) {
+      if (!pattern || !boundedText(pattern.id, 64) || ids.has(pattern.id) || !boundedText(pattern.name, 100) ||
+          !boundedText(pattern.description, 600) || !Array.isArray(pattern.counts) || !Array.isArray(pattern.strokes) ||
+          !pattern.counts.length || pattern.counts.length > 12 || pattern.counts.length !== pattern.strokes.length ||
+          !pattern.counts.every(count => boundedText(count, 20)) || !pattern.strokes.every(stroke => ["D", "U", "—"].includes(stroke))) throw new Error("Invalid suggested strumming pattern.");
+      ids.add(pattern.id);
+    }
+    if (expected.has(item.recording.id) && pairedRecording(item.recording, expected.get(item.recording.id))) result.set(item.recording.id, item);
+  }
+  return result;
+}
 function feedbackKey(packId, reviewCase) {
   return "music-os-playalong-feedback:" + JSON.stringify([packId, reviewCase.id, reviewCase.recording.audio_sha256]);
 }
@@ -214,12 +333,14 @@ function timeLabel(seconds) {
 if (typeof module !== "undefined" && module.exports) {
   module.exports = { annotationExport, validateCandidate, currentEvent, exposureKey, loadExposure, recordExposure,
     refreshExposure, pairedRecording, validateEvidence, clampSeek, playbackSnapshot, feedbackKey, feedbackExport,
-    captureFeedback, loadFeedback, saveFeedback, timeLabel, transposePracticeLabel, practiceLabel, coreChordLabel, displayedChord, practiceTimeline };
+    captureFeedback, loadFeedback, saveFeedback, timeLabel, transposePracticeLabel, practiceLabel, coreChordLabel, displayedChord, practiceTimeline,
+    currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, validatePracticeManifest };
 }
 
 if (typeof document !== "undefined") {
   const el = id => document.getElementById(id), audio = el("audio"), states = new Map();
   let cases = [], selected = null, state = null, generation = 0, packId = "", feedbackCounter = 0;
+  let rhythmById = new Map(), practiceById = new Map();
   const storage = { getItem: key => window.localStorage.getItem(key), setItem: (key, value) => window.localStorage.setItem(key, value) };
   const status = text => { el("status").textContent = text; };
   const safeURL = value => {
@@ -233,7 +354,8 @@ if (typeof document !== "undefined") {
     return response.json();
   }
   function controls(enabled) {
-    for (const id of ["restart", "go", "back", "mark", "save", "show", "reveal", "problem", "save-feedback", "copy-feedback", "quality-mode"]) el(id).disabled = !enabled;
+    for (const id of ["restart", "go", "back", "mark", "save", "show", "reveal", "problem", "save-feedback", "copy-feedback", "quality-mode", "duration-mode", "strum-pattern"]) el(id).disabled = !enabled;
+    if (enabled) { el("duration-mode").disabled = !state?.rhythm; el("strum-pattern").disabled = !state?.strumming; }
   }
   function readyControls() { controls(Boolean(state?.primary && state.audioReady)); }
   function seek(seconds) {
@@ -315,6 +437,40 @@ if (typeof document !== "undefined") {
       ? `Capo ${capo} on your guitar. Chords below are the shapes you play.`
       : "Chords below show sounding pitches, with no display transposition.";
   }
+  function durationInfo() {
+    const rhythm = state?.rhythm;
+    el("duration-mode").value = rhythm ? state.durationMode : "seconds";
+    el("duration-mode").disabled = !rhythm || !state?.primary || !state.audioReady;
+    el("rhythm-note").hidden = !rhythm || state.durationMode !== "estimated";
+    if (rhythm) el("rhythm-note").textContent = `Estimated beat grid · ${rhythm.beats_per_bar === null ? "beat count only" : `${rhythm.beats_per_bar} beats per bar`} · ~${Math.round(rhythm.pulse_bpm)} BPM · ${rhythm.meter_label}. Approximate counts; beat grid and meter need checking.`;
+  }
+  function renderStrumming() {
+    const practice = state?.strumming;
+    el("strumming").hidden = !practice;
+    if (!practice) return;
+    if (!practice.patterns.some(pattern => pattern.id === state.strumPatternId)) state.strumPatternId = practice.patterns[0].id;
+    el("strum-pattern").replaceChildren();
+    practice.patterns.forEach((pattern, index) => {
+      const option = document.createElement("option"); option.value = pattern.id;
+      option.textContent = /^(?:start(?:ing)?|next)\s*:/i.test(pattern.name) ? pattern.name : `${index ? "Next" : "Starting"}: ${pattern.name}`;
+      el("strum-pattern").append(option);
+    });
+    el("strum-pattern").value = state.strumPatternId;
+    const pattern = practice.patterns.find(item => item.id === state.strumPatternId);
+    el("strum-description").textContent = pattern.description;
+    el("strum-meter").textContent = `${practice.meter_label} · ${practice.beats_description}`;
+    el("strum-note").textContent = practice.note;
+    el("strum-grid").replaceChildren(); el("strum-grid").style.gridTemplateColumns = `repeat(${pattern.counts.length}, minmax(0, 1fr))`;
+    pattern.counts.forEach((count, index) => {
+      const box = document.createElement("div"); box.className = "strum-box";
+      const number = document.createElement("span"); number.className = "strum-count"; number.textContent = count;
+      const stroke = document.createElement("strong"), value = pattern.strokes[index];
+      stroke.textContent = value === "D" ? "D ↓" : value === "U" ? "U ↑" : "—";
+      stroke.setAttribute("aria-label", value === "D" ? "Downstroke" : value === "U" ? "Upstroke" : "Skip stroke; keep hand moving");
+      if (value === "—") box.classList.add("strum-rest"); box.append(number, stroke); el("strum-grid").append(box);
+    });
+    readyControls();
+  }
   async function selectCase(index) {
     const token = ++generation; selected = cases[index];
     if (!states.has(selected.id)) {
@@ -322,17 +478,20 @@ if (typeof document !== "undefined") {
       states.set(selected.id, { marks: [], notes: "", ...loadExposure(storage, key), exposureKey: key, packId,
         ...saved, feedbackKey: feedbackKey(packId, selected), primary: null, evidence: null, candidates: null,
         audioReady: false, practiceView: selected.practice?.capo ? "capo-shapes" : "sounding-pitches",
-        qualityMode: "full-chords", started: performance.now() });
+        qualityMode: "full-chords", durationMode: "estimated", strumPatternId: null, started: performance.now() });
     }
     state = states.get(selected.id); const target = state, reviewCase = selected;
+    state.rhythm = rhythmById.get(selected.recording.id) || null;
+    state.strumming = practiceById.get(selected.recording.id) || null;
     state.audioReady = false; controls(false); audio.pause(); audio.removeAttribute("src"); audio.load();
     el("comparison").hidden = true; el("candidate-events").replaceChildren(); el("candidate").replaceChildren();
     el("play-current").textContent = "Loading…"; el("upcoming").replaceChildren(); el("next-change").textContent = "";
     el("full-chord").hidden = true;
+    el("current-hold").textContent = ""; el("hold-progress").hidden = true; el("timing-blocks").replaceChildren(); el("timing-range").textContent = "";
     el("feedback-detail").hidden = true; state.activeFeedback = null;
     el("notes").value = state.notes; el("export").hidden = true; el("feedback-export").hidden = true;
     el("point-notice").hidden = true;
-    practiceInfo();
+    practiceInfo(); durationInfo(); renderStrumming();
     el("origin").textContent = JSON.stringify({ recording: selected.recording, origin: selected.origin || null,
       source: selected.source || selected.source_references || null, practice: selected.practice || null, summary: selected.summary || null }, null, 2);
     renderMarks(); renderFeedback(); renderPoints();
@@ -359,20 +518,44 @@ if (typeof document !== "undefined") {
     if (state?.primary) {
       const timeline = practiceTimeline(state.primary.chords, state.practiceView, selected.practice?.capo || 0, state.qualityMode);
       const snapshot = playbackSnapshot(timeline, audio.currentTime);
+      const hold = currentHold(timeline, audio.currentTime);
+      const rhythm = state.durationMode === "estimated" ? state.rhythm : null;
       const display = label => label === "N" ? "No chord" : label === "X" ? "Unclear" : label;
       el("play-current").textContent = snapshot.current ? display(snapshot.current.label) : "—";
       const rawCurrent = currentEvent(state.primary.chords, audio.currentTime);
       const fullLabel = rawCurrent ? displayedChord(rawCurrent.label, state.practiceView, selected.practice?.capo || 0) : null;
       el("full-chord").hidden = !snapshot.current || fullLabel === display(snapshot.current.label);
       el("full-chord").textContent = fullLabel ? `Full chord: ${fullLabel}` : "";
+      el("hold-progress").hidden = !hold;
+      el("current-hold").textContent = hold ? `${hold.event.label === "N" || hold.event.label === "X" ? "Span" : "Hold"}: ${durationCaption(hold.event.start_seconds, hold.event.end_seconds, rhythm)} · ${hold.remaining_seconds.toFixed(1)} s left` : "No charted chord at this moment.";
+      if (hold) {
+        el("hold-progress-fill").style.width = `${hold.progress_fraction * 100}%`;
+        el("hold-progress").setAttribute("aria-valuenow", String(Math.round(hold.progress_fraction * 100)));
+        el("hold-progress").setAttribute("aria-valuetext", `${hold.remaining_seconds.toFixed(1)} seconds left of ${hold.total_seconds.toFixed(1)} seconds`);
+      }
       el("next-change").textContent = snapshot.upcoming.length ? `Next in ${Math.max(0, snapshot.upcoming[0].start_seconds - audio.currentTime).toFixed(1)} s` : "";
       el("upcoming").replaceChildren();
       for (const event of snapshot.upcoming) {
         const node = document.createElement("div"); node.className = "upcoming-chord";
         const chord = document.createElement("strong"); chord.textContent = display(event.label);
         chord.title = `Full chord: ${display(event.full_label)}`;
-        const time = document.createElement("span"); time.textContent = timeLabel(event.start_seconds); node.append(chord, time); el("upcoming").append(node);
+        const time = document.createElement("span"); time.textContent = timeLabel(event.start_seconds);
+        const length = document.createElement("span"); length.textContent = durationCaption(event.start_seconds, event.end_seconds, rhythm);
+        node.append(chord, time, length); el("upcoming").append(node);
       }
+      const window = timingWindow(timeline, audio.currentTime, selected.recording.duration_seconds);
+      el("timing-range").textContent = `${timeLabel(window.start_seconds)}–${timeLabel(window.end_seconds)} · widths show time`;
+      el("timing-blocks").replaceChildren();
+      for (const block of window.blocks) {
+        const node = document.createElement("div"); node.className = `timing-block timing-${block.kind}`;
+        node.style.left = `${block.offset_fraction * 100}%`; node.style.width = `${block.width_fraction * 100}%`;
+        const label = block.event ? display(block.event.label) : "No chart";
+        node.textContent = label;
+        node.title = `${label} · ${block.event ? durationCaption(block.event.start_seconds, block.event.end_seconds, rhythm) : `${(block.end_seconds - block.start_seconds).toFixed(1)} s`}`;
+        el("timing-blocks").append(node);
+      }
+      el("timing-playhead").style.left = `${window.playhead_fraction * 100}%`;
+      el("timing-track").setAttribute("aria-label", `Chord timing from ${timeLabel(window.start_seconds)} to ${timeLabel(window.end_seconds)}. Current time ${timeLabel(window.now_seconds)}. Blank sections have no chart.`);
       const point = (state.evidence?.review_points || []).find(item => item.start_seconds <= audio.currentTime && audio.currentTime < item.end_seconds);
       el("point-notice").hidden = !point || !el("points-details").open;
       if (point) el("point-notice").textContent = "The algorithms disagree around here. This is only a suggested check — play on or flag it if it sounds wrong.";
@@ -450,6 +633,8 @@ if (typeof document !== "undefined") {
   el("candidate").addEventListener("change", renderCandidate);
   el("chord-view").addEventListener("change", () => { state.practiceView = el("chord-view").value; practiceInfo(); updateClock(); });
   el("quality-mode").addEventListener("change", () => { state.qualityMode = el("quality-mode").value; practiceInfo(); updateClock(); });
+  el("duration-mode").addEventListener("change", () => { state.durationMode = el("duration-mode").value; durationInfo(); updateClock(); });
+  el("strum-pattern").addEventListener("change", () => { state.strumPatternId = el("strum-pattern").value; renderStrumming(); });
   el("points-details").addEventListener("toggle", updateClock);
   audio.addEventListener("loadedmetadata", () => {
     if (!selected || audio.currentSrc !== safeURL(selected.audio_url)) return;
@@ -470,5 +655,19 @@ if (typeof document !== "undefined") {
       const option = document.createElement("option"); option.value = index; option.textContent = reviewCase.name; el("case").append(option);
     });
     el("case").disabled = false; await selectCase(0);
+    // Both files are optional and independent. Their absence or invalid data
+    // cannot prevent audio/chord playback or discard saved issue reports.
+    await Promise.all([
+      (async () => {
+        try { rhythmById = validateRhythmManifest(await getJSON("/rhythm.json"), cases); }
+        catch (_) { rhythmById = new Map(); }
+        if (state) { state.rhythm = rhythmById.get(selected.recording.id) || null; durationInfo(); readyControls(); updateClock(); }
+      })(),
+      (async () => {
+        try { practiceById = validatePracticeManifest(await getJSON("/practice.json"), cases); }
+        catch (_) { practiceById = new Map(); }
+        if (state) { state.strumming = practiceById.get(selected.recording.id) || null; renderStrumming(); }
+      })()
+    ]);
   })().catch(error => { controls(false); status(error.message); });
 }

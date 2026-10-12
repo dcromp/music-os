@@ -6,7 +6,7 @@ Development starts with choosing useful chord/rhythm algorithms on Mac and testi
 
 ## Current status
 
-Updated 11 October 2026. Status and deployment information belong in this README as work progresses. The full roadmap is in [plan.md](plan.md); source findings and existing-app checks are in [docs/REUSE_AUDIT.md](docs/REUSE_AUDIT.md).
+Updated 12 October 2026. Status and deployment information belong in this README as work progresses. The full roadmap is in [plan.md](plan.md); source findings and existing-app checks are in [docs/REUSE_AUDIT.md](docs/REUSE_AUDIT.md).
 
 | Mac experiment step | Status | Remaining ETA / evidence |
 |---|---|---|
@@ -42,6 +42,8 @@ Updated 11 October 2026. Status and deployment information belong in this README
 | First ten recording identities / teaching variants | Source review complete | Exact uploads and two proposed skill tracks saved; recording-compatible shapes/rhythm need checks; [review](docs/FIRST_TEN_REVIEW.md) |
 | First ten automatic preparation / raw drafts | Complete | Ten recordings and 20 charts; eight new inputs, two exact cache reuses, bounded failure recovery; [evidence](docs/FIRST_TEN_PREPARATION.json) |
 | Expanded ten-song playback | Deployed and browser verified | All ten load cues, playback/seek and Core chords work; 45 served assets match Mac bytes; original 8068 retained |
+| Chord hold lengths / estimated beats and bars | In progress | Duration-scaled strip, hold progress and approximate count units; about 20–30 minutes including deployment |
+| Suggested strumming practice | In progress | Count/arrow presets with 4/4 and 6/8 exercises; source-matched recorded patterns remain later work |
 | Representative real references / learner validation | Next | Estimated 1.5–2.5 focused days for broader annotated/version-matched checks; founder transcription is not required |
 
 The synthetic suite compares the template baseline, BTC, CREMA, ChordMini/ChordNet and Chordino across clean triads, voicings/timbres, guitar-like attacks, distractors and timing/vocabulary complexity. ChordMini leads the original core metric including silence (94.7%) and boundary F1 (0.927); the baseline leads the new chord-only core metric (96.1%). Chordino scores 95.4% chord-only, with weaker silence and boundary handling. All audio in that suite is procedural; these are not real-song accuracy estimates and no production algorithm has been selected. The founder's previous analysis code was deleted; the older Expo app only displayed hardcoded sample chords. See [app-readiness criteria](docs/APP_READINESS.md).

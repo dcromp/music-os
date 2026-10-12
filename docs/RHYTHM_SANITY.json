@@ -1,0 +1,194 @@
+{
+  "schema_version": "procedural-rhythm-screen-report-1.0",
+  "gold_for_real_music": false,
+  "scope": "Five generated percussive pulse-only fixtures; implementation sanity check, not music/beat/downbeat/bar accuracy. All known pulses scored, with no post-hoc trimming/exclusion.",
+  "parameters": {
+    "tolerance_seconds": 0.15,
+    "sample_rate_hz": 22050,
+    "hop_samples": 512,
+    "known_pulses_per_case": 32,
+    "leading_silence_seconds": 1.37,
+    "trailing_tail_seconds": 2.11,
+    "range_selection": "Declared independently from nominal rendered tempo; these fixtures are not a holdout tempo-selection benchmark"
+  },
+  "implementation_sha256": "b18efd3d3c6eaeec7bfb847ae30b4cc661850b209ddf4f6919200051d88e60de",
+  "manifest_sha256": "d87060f9913b847bbefb8447fc81586f8a30e20a19aeec787de070e6d7f7dad8",
+  "rows": [
+    {
+      "id": "steady-87",
+      "reference_pulses": 32,
+      "predicted_pulses": 31,
+      "matched_pulses": 31,
+      "missed_reference_pulses": 1,
+      "extra_predicted_pulses": 0,
+      "precision_150ms": 1.0,
+      "recall_150ms": 0.96875,
+      "f1_150ms": 0.9841269841269841,
+      "matched_mean_error_seconds": 0.021735059615244242,
+      "matched_max_error_seconds": 0.03229024943310588,
+      "all_reference_nearest_max_error_seconds": 0.6671201814058954,
+      "missed_reference_times_seconds": [
+        22.749297052154194
+      ],
+      "predicted_span_seconds": [
+        1.3931972789115645,
+        22.0821768707483
+      ],
+      "full_reference_span_seconds": [
+        1.3700226757369613,
+        22.749297052154194
+      ],
+      "predicted_pulses_in_silence_outside_tolerance": [],
+      "duration_seconds": 24.859319727891158,
+      "estimated_pulse_bpm": 86.1328125,
+      "declared_start_bpm": 87,
+      "runtime_seconds": 1.2164526670239866,
+      "audio_sha256": "9de32858c30b25d1f7431a481b18240df614db3b3751d91a4180cc2a5fbe9761",
+      "reference_sha256": "f08c49b95e9f15d8d7b9cd45b333f2295f1e34bd062d3a969dd8a2893c2f215a",
+      "prediction_sha256": "55400b1e73d31f3c8534211031b468fbfe9ad8d60ac0a685838146288a7b7c50"
+    },
+    {
+      "id": "steady-93",
+      "reference_pulses": 32,
+      "predicted_pulses": 31,
+      "matched_pulses": 31,
+      "missed_reference_pulses": 1,
+      "extra_predicted_pulses": 0,
+      "precision_150ms": 1.0,
+      "recall_150ms": 0.96875,
+      "f1_150ms": 0.9841269841269841,
+      "matched_mean_error_seconds": 0.021757003876819565,
+      "matched_max_error_seconds": 0.033197278911564876,
+      "all_reference_nearest_max_error_seconds": 0.6345578231292528,
+      "missed_reference_times_seconds": [
+        21.36997732426304
+      ],
+      "predicted_span_seconds": [
+        1.3931972789115645,
+        20.735419501133787
+      ],
+      "full_reference_span_seconds": [
+        1.3700226757369613,
+        21.36997732426304
+      ],
+      "predicted_pulses_in_silence_outside_tolerance": [],
+      "duration_seconds": 23.48,
+      "estimated_pulse_bpm": 92.28515625,
+      "declared_start_bpm": 93,
+      "runtime_seconds": 0.032501916866749525,
+      "audio_sha256": "2f02c08f979066b306f059d16d15d668811f0e16575958816613dbb879910fe5",
+      "reference_sha256": "0f2446f807a2e0cf8c8e4e134d80bdbd86ee87f2d6bd474cced5396926180b0c",
+      "prediction_sha256": "1f3dfd28a41772723cabd3e1dabed2717b2eab40eb28e8e1571649d061d6718d"
+    },
+    {
+      "id": "steady-124",
+      "reference_pulses": 32,
+      "predicted_pulses": 31,
+      "matched_pulses": 31,
+      "missed_reference_pulses": 1,
+      "extra_predicted_pulses": 0,
+      "precision_150ms": 1.0,
+      "recall_150ms": 0.96875,
+      "f1_150ms": 0.9841269841269841,
+      "matched_mean_error_seconds": 0.021742374369102507,
+      "matched_max_error_seconds": 0.03297052154194979,
+      "all_reference_nearest_max_error_seconds": 0.46435374149659836,
+      "missed_reference_times_seconds": [
+        16.370022675736962
+      ],
+      "predicted_span_seconds": [
+        1.3931972789115645,
+        15.905668934240364
+      ],
+      "full_reference_span_seconds": [
+        1.3700226757369613,
+        16.370022675736962
+      ],
+      "predicted_pulses_in_silence_outside_tolerance": [],
+      "duration_seconds": 18.480045351473922,
+      "estimated_pulse_bpm": 123.046875,
+      "declared_start_bpm": 124,
+      "runtime_seconds": 0.04720637481659651,
+      "audio_sha256": "030453b31459b2a3ad6810413633613e811f6991b517e44e5fbaf43c0a978db2",
+      "reference_sha256": "cb4e58021b4da657ec7880f842a02d237c02e95196b008429ccf0e6639aa81f2",
+      "prediction_sha256": "f4b5ec58a17218616e6f8bd52b5bd9ff23045f6a2120a2bdb0203461663fd9a7"
+    },
+    {
+      "id": "steady-151",
+      "reference_pulses": 32,
+      "predicted_pulses": 31,
+      "matched_pulses": 31,
+      "missed_reference_pulses": 1,
+      "extra_predicted_pulses": 0,
+      "precision_150ms": 1.0,
+      "recall_150ms": 0.96875,
+      "f1_150ms": 0.9841269841269841,
+      "matched_mean_error_seconds": 0.019973666886109215,
+      "matched_max_error_seconds": 0.030748299319727668,
+      "all_reference_nearest_max_error_seconds": 0.38285714285714256,
+      "missed_reference_times_seconds": [
+        13.687891156462586
+      ],
+      "predicted_span_seconds": [
+        1.3931972789115645,
+        13.305034013605443
+      ],
+      "full_reference_span_seconds": [
+        1.3700226757369613,
+        13.687891156462586
+      ],
+      "predicted_pulses_in_silence_outside_tolerance": [],
+      "duration_seconds": 15.797913832199546,
+      "estimated_pulse_bpm": 151.99908088235293,
+      "declared_start_bpm": 151,
+      "runtime_seconds": 0.04334779130294919,
+      "audio_sha256": "2c9b833ee1d4923155908b27ee5824442e2425f183348a8c38caa47d58be86e2",
+      "reference_sha256": "6feda9bb2f0e58e7d3e631a80a9d35795c8c584dac86b94f1954f37cf28a147d",
+      "prediction_sha256": "4e566696535f43cd9493033d5e3067e70c10256764d4f40a253ba0ab28f352b2"
+    },
+    {
+      "id": "ramp-78",
+      "reference_pulses": 32,
+      "predicted_pulses": 31,
+      "matched_pulses": 31,
+      "missed_reference_pulses": 1,
+      "extra_predicted_pulses": 0,
+      "precision_150ms": 1.0,
+      "recall_150ms": 0.96875,
+      "f1_150ms": 0.9841269841269841,
+      "matched_mean_error_seconds": 0.021895984200131734,
+      "matched_max_error_seconds": 0.033514739229024926,
+      "all_reference_nearest_max_error_seconds": 0.7085260770975061,
+      "missed_reference_times_seconds": [
+        25.298458049886623
+      ],
+      "predicted_span_seconds": [
+        1.3931972789115645,
+        24.589931972789117
+      ],
+      "full_reference_span_seconds": [
+        1.3700226757369613,
+        25.298458049886623
+      ],
+      "predicted_pulses_in_silence_outside_tolerance": [],
+      "duration_seconds": 27.408480725623583,
+      "estimated_pulse_bpm": 75.99954044117646,
+      "declared_start_bpm": 78,
+      "runtime_seconds": 0.051200250163674355,
+      "audio_sha256": "c8772b77c786fb50a9727c5e5c3bd41f7f6514f731f7bea30f0afa8378f801f3",
+      "reference_sha256": "f81623c33999684a360897a4be7645b090e2272b0b6b9fc5bdaa9e444b3b7e95",
+      "prediction_sha256": "dee46da2f2007c64b6c372202246438f7107653051f104d5ac77d3992e2e4777"
+    }
+  ],
+  "summary": {
+    "reference_pulses": 160,
+    "predicted_pulses": 155,
+    "matched_pulses": 155,
+    "precision_150ms": 1.0,
+    "recall_150ms": 0.96875,
+    "missed_reference_pulses": 5,
+    "extra_predicted_pulses": 0,
+    "matched_max_error_seconds": 0.033514739229024926,
+    "all_reference_nearest_max_error_seconds": 0.7085260770975061
+  }
+}
