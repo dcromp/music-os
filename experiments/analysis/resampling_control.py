@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import datetime
 import json
 from pathlib import Path
 import time
@@ -64,7 +65,8 @@ def prepare(pack: Path, expected: str) -> dict:
                       'difference_diagnostics': separation.amplitude(difference),
                       'difference_rms_ratio': separation.amplitude(difference)['rms'] / separation.amplitude(mono)['rms']})
     require_unexposed(pack)
-    packet = {'schema_version': 'resampling-control-protocol-1.0', 'date': '2026-10-12',
+    packet = {'schema_version': 'resampling-control-protocol-1.0',
+              'frozen_at_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
               'frozen_before': 'All six derivative BTC runs and all three resampling-only BTC outputs; prior original-mixture results exposed',
               'selection': 'All three original excerpts; retrospective diagnostic, no fresh holdout',
               'base_protocol_sha256': expected, 'condition': CONDITION,

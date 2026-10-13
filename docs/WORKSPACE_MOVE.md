@@ -10,7 +10,7 @@ Eighty-three runtime text files were relocated. CREMA now points to `.runtime/cp
 
 Three differing older local outputs were preserved before replacing their working copies: `baseline.json`, `metrics.json` and the initial GuitarSet pilot `report.json`. Their previous bytes are in `.migration-backup/2026-10-13/`. The complete transfer manifest and temporary research notes are in `experiments/local-research-notes/2026-10-13/`. One-off preparation/migration source scripts are committed under `experiments/archive/2026-10-13/`; current supported commands remain in the root README.
 
-Verification covers copied hashes, relocated environment imports/entry points, canonical Python prefixes, native library paths and the full analysis checks plus dependency-specific checks. No model inference or player change was required for moving the workspace. The three source-separation runs are complete; nine derivative/resampling-control BTC runs remain pending, with accurate status in [SEPARATION_CHECK.md](SEPARATION_CHECK.md).
+Verification covers copied hashes, relocated environment imports/entry points, canonical Python prefixes, native library paths and the full analysis checks plus dependency-specific checks. No model inference or player change was required for moving the workspace. At the time of the move, three source-separation runs were complete and nine derivative/resampling-control BTC runs remained pending. Subsequent status/results are in [SEPARATION_CHECK.md](SEPARATION_CHECK.md).
 
 Restart the existing player from this folder:
 

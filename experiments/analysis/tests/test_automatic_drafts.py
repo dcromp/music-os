@@ -198,21 +198,26 @@ class AutomaticDraftTests(unittest.TestCase):
                 (static / name).write_text("fixture")
             with patch.object(drafts, "STATIC", static), patch.object(drafts.review_pack, "STATIC", static):
                 self.assertNotIn("/rhythm.json", drafts.public_files(output))
-                for name in ("rhythm.json", "practice.json"):
+                for name in ("rhythm.json", "practice.json", "learning.json"):
                     (static / name).write_text('{"fixture": true}')
                 files = drafts.public_files(output)
                 self.assertEqual(files["/rhythm.json"], static / "rhythm.json")
                 self.assertEqual(files["/practice.json"], static / "practice.json")
+                self.assertEqual(files["/learning.json"], static / "learning.json")
                 handler = drafts.review_pack.ReviewHandler.__new__(drafts.review_pack.ReviewHandler)
                 handler.public_files = files
                 self.assertEqual(handler.translate_path("/practice.json"), str(static / "practice.json"))
-                for url in ("/practice.json?path=secret", "/rhythm-config.json", "/../practice.json"):
+                for url in ("/practice.json?path=secret", "/learning.json?path=secret", "/rhythm-config.json", "/../practice.json", "/../learning.json"):
                     self.assertEqual(handler.translate_path(url), str(static / "__not_found__"))
-                (static / "practice.json").unlink()
-                (static / "practice.json").symlink_to(output / "build-spec.json")
-                self.assertEqual(handler.translate_path("/practice.json"), str(static / "__not_found__"))
-                with self.assertRaises(ValueError):
-                    drafts.public_files(output)
+                for name in ("practice.json", "learning.json"):
+                    path = static / name
+                    path.unlink()
+                    path.symlink_to(output / "build-spec.json")
+                    self.assertEqual(handler.translate_path("/" + name), str(static / "__not_found__"))
+                    with self.assertRaises(ValueError):
+                        drafts.public_files(output)
+                    path.unlink()
+                    path.write_text('{"fixture": true}')
 
 
 if __name__ == "__main__":
