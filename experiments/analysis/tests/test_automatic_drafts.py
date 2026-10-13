@@ -45,6 +45,174 @@ class AutomaticDraftTests(unittest.TestCase):
         drafts.write_json(root / "pilot/manifest.json", manifest)
         return primary, secondary, root / "pilot/manifest.json"
 
+    def selected_fixture(self, root):
+        primary, _, manifest = self.fixture(root)
+        source = root / "pilot/cases/test-song"
+        primary["analysis"]["algorithm"] = "crema-pretrained"
+        drafts.write_json(source / "crema.json", primary)
+        btc = copy.deepcopy(primary)
+        btc["analysis"].update({"id": "btc", "algorithm": "BTC-ISMIR19"})
+        btc["chords"][0].update({"label": "C", "native_label": "C"})
+        btc_root = root / "btc-results"
+        folder = btc_root / "cases/test-song"
+        folder.mkdir(parents=True)
+        drafts.write_json(folder / "btc.json", btc)
+        return manifest, btc_root
+
+    def static_fixture(self, root):
+        static = root / "static"
+        static.mkdir()
+        for name in ("index.html", "app.js", "style.css"):
+            (static / name).write_text("fixture")
+        return static
+
+    def test_selected_btc_crema_pack_preserves_bytes_identity_and_fixed_routes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest, btc_root = self.selected_fixture(root)
+            source = root / "pilot/cases/test-song"
+            output = root / "selected-output"
+            result = drafts.build(manifest, output, root, primary_model="btc",
+                                  secondary_model="crema", primary_root=btc_root)
+            target = output / "cases/test-song"
+            self.assertEqual((target / "primary.json").read_bytes(), (btc_root / "cases/test-song/btc.json").read_bytes())
+            for name in ("audio.wav", "crema.json"):
+                self.assertEqual((target / name).read_bytes(), (source / name).read_bytes())
+            self.assertFalse((target / "chordino.json").exists())
+            self.assertEqual(result["model_selection"], {"primary": "btc", "secondary": "crema"})
+            case = result["cases"][0]
+            self.assertEqual(case["primary_name"], "BTC automatic draft")
+            self.assertEqual(case["secondary"], [{"name": "CREMA", "url": "/cases/test-song/crema.json"}])
+            self.assertEqual(case["origin"]["source_audio_sha256"], drafts.digest(source / "audio.wav"))
+            self.assertEqual(case["artifacts"]["crema_sha256"], drafts.digest(source / "crema.json"))
+            self.assertFalse(result["gold"])
+            evidence = json.loads((target / "evidence.json").read_text())
+            self.assertEqual(evidence["comparison"], {"primary_algorithm": "BTC-ISMIR19", "secondary_algorithm": "crema-pretrained"})
+            spec = json.loads((output / "build-spec.json").read_text())
+            self.assertEqual((spec["primary"], spec["secondary"], spec["primary_root"]), ("btc.json", "crema.json", "btc-results"))
+            static = self.static_fixture(root)
+            with patch.object(drafts, "STATIC", static), patch.object(drafts.review_pack, "STATIC", static):
+                files = drafts.public_files(output)
+                self.assertEqual(files["/cases/test-song/crema.json"], (target / "crema.json").resolve())
+                self.assertNotIn("/cases/test-song/chordino.json", files)
+                self.assertNotIn("/build-spec.json", files)
+            with self.assertRaises(ValueError):
+                drafts.build(manifest, output, root, primary_model="btc", secondary_model="crema", primary_root=btc_root)
+
+    def test_selected_models_accept_independent_batch_roots_without_moving_native_inputs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest, btc_root = self.selected_fixture(root)
+            source = root / "pilot/cases/test-song"
+            crema_root = root / "crema-results"
+            comparison = crema_root / "cases/test-song/crema.json"
+            comparison.parent.mkdir(parents=True)
+            comparison.write_bytes((source / "crema.json").read_bytes())
+            (source / "crema.json").unlink()
+            before = {path: path.read_bytes() for path in (source / "audio.wav", comparison, btc_root / "cases/test-song/btc.json")}
+            output = root / "independent-output"
+            built = drafts.build(manifest, output, root, primary_model="btc", secondary_model="crema",
+                                 primary_root=btc_root, secondary_root=crema_root)
+            target = output / "cases/test-song"
+            self.assertEqual((target / "crema.json").read_bytes(), before[comparison])
+            self.assertEqual((target / "primary.json").read_bytes(), before[btc_root / "cases/test-song/btc.json"])
+            self.assertEqual(built["cases"][0]["artifacts"]["crema_sha256"], drafts.digest(comparison))
+            spec = json.loads((output / "build-spec.json").read_text())
+            self.assertEqual((spec["primary_root"], spec["secondary_root"]), ("btc-results", "crema-results"))
+            self.assertEqual({path: path.read_bytes() for path in before}, before)
+            self.assertFalse((source / "crema.json").exists())
+
+    def test_secondary_batch_root_and_native_chart_cannot_leave_project(self):
+        with tempfile.TemporaryDirectory() as directory, tempfile.TemporaryDirectory() as outside:
+            root = Path(directory)
+            manifest, btc_root = self.selected_fixture(root)
+            alias = root / "comparison-alias"
+            alias.symlink_to(Path(outside), target_is_directory=True)
+            for comparison_root in (Path(outside), alias):
+                with self.subTest(root=comparison_root), self.assertRaises(ValueError):
+                    drafts.build(manifest, root / "bad-output", root, primary_model="btc", secondary_model="crema",
+                                 primary_root=btc_root, secondary_root=comparison_root)
+            comparison_root = root / "crema-results"
+            comparison = comparison_root / "cases/test-song/crema.json"
+            comparison.parent.mkdir(parents=True)
+            external = Path(outside) / "crema.json"
+            external.write_bytes((root / "pilot/cases/test-song/crema.json").read_bytes())
+            comparison.symlink_to(external)
+            with self.assertRaises(ValueError):
+                drafts.build(manifest, root / "bad-output", root, primary_model="btc", secondary_model="crema",
+                             primary_root=btc_root, secondary_root=comparison_root)
+            self.assertFalse((root / "bad-output").exists())
+            self.assertFalse(list(root.glob(".automatic-playalong-*")))
+
+    def test_explicit_model_selection_rejects_mislabeled_primary_or_comparison(self):
+        for model in ("btc", "crema"):
+            with self.subTest(model=model), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                manifest, btc_root = self.selected_fixture(root)
+                path = btc_root / "cases/test-song/btc.json" if model == "btc" else root / "pilot/cases/test-song/crema.json"
+                chart = json.loads(path.read_text())
+                chart["analysis"]["algorithm"] = "different-model"
+                drafts.write_json(path, chart)
+                with self.assertRaisesRegex(ValueError, "declared model"):
+                    drafts.build(manifest, root / "bad-output", root, primary_model="btc", secondary_model="crema", primary_root=btc_root)
+                self.assertFalse((root / "bad-output").exists())
+                self.assertFalse(list(root.glob(".automatic-playalong-*")))
+
+    def test_selected_model_chart_must_match_exact_source_recording(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest, btc_root = self.selected_fixture(root)
+            path = btc_root / "cases/test-song/btc.json"
+            chart = json.loads(path.read_text())
+            chart["recording"]["audio_sha256"] = "f" * 64
+            drafts.write_json(path, chart)
+            with self.assertRaisesRegex(ValueError, "audio_sha256"):
+                drafts.build(manifest, root / "bad-output", root, primary_model="btc", secondary_model="crema", primary_root=btc_root)
+            self.assertFalse((root / "bad-output").exists())
+
+    def test_selected_models_and_primary_root_are_bounded(self):
+        with tempfile.TemporaryDirectory() as directory, tempfile.TemporaryDirectory() as outside:
+            root = Path(directory)
+            manifest, btc_root = self.selected_fixture(root)
+            for primary, secondary in (("btc", "btc"), ("arbitrary", "crema"), ("btc", "../private"), ("", "crema")):
+                with self.subTest(primary=primary, secondary=secondary), self.assertRaises(ValueError):
+                    drafts.build(manifest, root / "bad-output", root, primary_model=primary, secondary_model=secondary, primary_root=btc_root)
+            for selected_root in (Path(outside), root / "outside-alias"):
+                if selected_root.parent == root:
+                    selected_root.symlink_to(Path(outside), target_is_directory=True)
+                with self.subTest(root=selected_root), self.assertRaises(ValueError):
+                    drafts.build(manifest, root / "bad-output", root, primary_model="btc", secondary_model="crema", primary_root=selected_root)
+            # A regular in-project batch root cannot hide an external chart either.
+            chart = btc_root / "cases/test-song/btc.json"
+            external = Path(outside) / "btc.json"
+            external.write_bytes(chart.read_bytes())
+            chart.unlink()
+            chart.symlink_to(external)
+            with self.assertRaises(ValueError):
+                drafts.build(manifest, root / "bad-output", root, primary_model="btc", secondary_model="crema", primary_root=btc_root)
+            self.assertFalse((root / "bad-output").exists())
+
+    def test_selected_comparison_route_cannot_expose_an_arbitrary_filename(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest, btc_root = self.selected_fixture(root)
+            output = root / "selected-output"
+            built = drafts.build(manifest, output, root, primary_model="btc", secondary_model="crema", primary_root=btc_root)
+            static = self.static_fixture(root)
+            with patch.object(drafts, "STATIC", static), patch.object(drafts.review_pack, "STATIC", static):
+                for name, url in (("CREMA", "/cases/test-song/private.json"), ("Chordino", "/cases/test-song/crema.json"), ("CREMA", "/cases/test-song/crema.json?path=private")):
+                    modified = copy.deepcopy(built)
+                    modified["cases"][0]["secondary"] = [{"name": name, "url": url}]
+                    drafts.write_json(output / "manifest.json", modified)
+                    with self.subTest(url=url, name=name), self.assertRaises(ValueError):
+                        drafts.public_files(output)
+                for selection in ({"primary": "btc", "secondary": "arbitrary"}, {"primary": "btc", "secondary": "btc"}, {"primary": [], "secondary": "crema"}, {"primary": "btc", "secondary": "crema", "filename": "private.json"}):
+                    modified = copy.deepcopy(built)
+                    modified["model_selection"] = selection
+                    drafts.write_json(output / "manifest.json", modified)
+                    with self.subTest(selection=selection), self.assertRaises(ValueError):
+                        drafts.public_files(output)
+
     def test_roots_enharmonics_inversions_and_unknown_qualities(self):
         for label, expected in (("C7/E", (0, "maj")), ("Db:min7/3", (1, "min")), ("C#m7", (1, "min")),
                                 ("Csus4", (0, None)), ("Cdim", (0, None)), ("Caug", (0, None)),

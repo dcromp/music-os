@@ -1,6 +1,7 @@
 """Prepare full-song play-along drafts automatically from saved detector outputs.
 
-CREMA remains the unchanged primary timeline. Other models provide disagreement
+Existing packs retain CREMA as their primary timeline. New packs can explicitly
+select a saved BTC, CREMA or Chordino chart; alternatives provide disagreement
 evidence, never a vote, reference annotation, or calibrated confidence score.
 """
 
@@ -27,7 +28,12 @@ DEFAULT_MANIFEST = ROOT / "experiments" / "generated" / "youtube-pilot" / "manif
 DEFAULT_OUTPUT = ROOT / "experiments" / "generated" / "automatic-playalong"
 SCHEMA = "automatic-drafts-1.0"
 EVIDENCE_SCHEMA = "automatic-draft-evidence-1.0"
-VERSION = "0.1.0"
+VERSION = "0.2.0"
+MODELS = {
+    "btc": {"filename": "btc.json", "name": "BTC", "algorithm": "BTC-ISMIR19"},
+    "crema": {"filename": "crema.json", "name": "CREMA", "algorithm": "crema-pretrained"},
+    "chordino": {"filename": "chordino.json", "name": "Chordino", "algorithm": "Chordino-NNLS-Chroma"},
+}
 LABEL_RE = re.compile(r"^([A-G](?:#|b)?)(.*)$")
 PITCH = {"C": 0, "D": 2, "E": 4, "F": 5, "G": 7, "A": 9, "B": 11}
 MAJOR = {"", "maj", "7", "maj7", "6", "maj6", "9", "maj9", "11", "13", "add9"}
@@ -235,9 +241,33 @@ def project_input(path: Path, root: Path) -> Path:
     return resolved
 
 
+def selected_models(primary_model: str, secondary_model: str) -> tuple[dict, dict]:
+    if (not isinstance(primary_model, str) or not isinstance(secondary_model, str)
+            or primary_model not in MODELS or secondary_model not in MODELS):
+        raise ValueError("Choose only btc, crema or chordino model names")
+    if primary_model == secondary_model:
+        raise ValueError("Primary and comparison models must differ")
+    return MODELS[primary_model], MODELS[secondary_model]
+
+
 def build(manifest_path: Path, output: Path = DEFAULT_OUTPUT, source_root: Path = ROOT,
-          additional: dict[str, list[Path]] | None = None) -> dict:
+          additional: dict[str, list[Path]] | None = None, *, primary_model: str | None = None,
+          secondary_model: str | None = None, primary_root: Path | None = None,
+          secondary_root: Path | None = None) -> dict:
     source_root = source_root.resolve()
+    explicit_models = (primary_model is not None or secondary_model is not None
+                       or primary_root is not None or secondary_root is not None)
+    primary_model = "crema" if primary_model is None else primary_model
+    secondary_model = "chordino" if secondary_model is None else secondary_model
+    primary_spec, secondary_spec = selected_models(primary_model, secondary_model)
+    if primary_root is not None:
+        primary_root = primary_root.resolve(strict=True)
+        if not primary_root.is_relative_to(source_root) or not primary_root.is_dir():
+            raise ValueError("Primary chart root must be an existing project-local directory")
+    if secondary_root is not None:
+        secondary_root = secondary_root.resolve(strict=True)
+        if not secondary_root.is_relative_to(source_root) or not secondary_root.is_dir():
+            raise ValueError("Comparison chart root must be an existing project-local directory")
     manifest_path = project_input(manifest_path, source_root)
     pilot = json.loads(manifest_path.read_text(encoding="utf-8"))
     cases = pilot.get("cases")
@@ -252,6 +282,10 @@ def build(manifest_path: Path, output: Path = DEFAULT_OUTPUT, source_root: Path 
               "gold": False, "semantics": "CREMA primary charts load immediately. Model disagreement suggests optional check spots; agreement is not accuracy. No manual timing annotation is required.",
               "primary_selection": "CREMA chosen from the small acoustic GuitarSet pilot; full-mix performance is unverified. Raw native outputs are unchanged.",
               "cases": []}
+    if explicit_models:
+        result["semantics"] = f"{primary_spec['name']} primary charts load immediately. Model disagreement suggests optional check spots; agreement is not accuracy. No manual timing annotation is required."
+        result["primary_selection"] = f"Explicit {primary_spec['name']} automatic draft with {secondary_spec['name']} review evidence. Full-mix correctness and reviewed teaching arrangements are not established. Raw native outputs are unchanged."
+        result["model_selection"] = {"primary": primary_model, "secondary": secondary_model}
     seen = set()
     additional = additional or {}
     try:
@@ -270,15 +304,21 @@ def build(manifest_path: Path, output: Path = DEFAULT_OUTPUT, source_root: Path 
             if source_recording.get("id") != identifier:
                 raise ValueError("Source metadata must identify this recording")
             verified_audio(audio_path, source_recording)
-            primary_path = project_input(audio_path.parent / "crema.json", source_root)
-            secondary_path = project_input(audio_path.parent / "chordino.json", source_root)
+            primary_folder = primary_root / "cases" / identifier if primary_root is not None else audio_path.parent
+            primary_path = project_input(primary_folder / primary_spec["filename"], source_root)
+            secondary_folder = secondary_root / "cases" / identifier if secondary_root is not None else audio_path.parent
+            secondary_path = project_input(secondary_folder / secondary_spec["filename"], source_root)
             primary = json.loads(primary_path.read_text(encoding="utf-8"))
             secondary = json.loads(secondary_path.read_text(encoding="utf-8"))
+            if explicit_models:
+                for chart, spec in ((primary, primary_spec), (secondary, secondary_spec)):
+                    if chart.get("analysis", {}).get("algorithm") != spec["algorithm"]:
+                        raise ValueError("Selected chart algorithm differs from its declared model")
             evidence = compare_charts(primary, secondary)
             paired_recording(primary, {**primary, "recording": source_recording})
             folder = staging / "cases" / identifier
             folder.mkdir(parents=True)
-            for source, name in ((audio_path, "audio.wav"), (primary_path, "primary.json"), (secondary_path, "chordino.json")):
+            for source, name in ((audio_path, "audio.wav"), (primary_path, "primary.json"), (secondary_path, secondary_spec["filename"])):
                 shutil.copyfile(source, folder / name)
                 if digest(folder / name) != digest(source):
                     raise ValueError("Copied automatic pack artifact hash differs")
@@ -300,10 +340,10 @@ def build(manifest_path: Path, output: Path = DEFAULT_OUTPUT, source_root: Path 
             result["cases"].append({"id": identifier, "name": record["title"], "recording": record,
                                     "audio_url": f"/cases/{identifier}/audio.wav", "primary_url": f"/cases/{identifier}/primary.json",
                                     "evidence_url": f"/cases/{identifier}/evidence.json",
-                                    "primary_name": "CREMA automatic draft", "primary_status": "Unreviewed native model output",
-                                    "secondary": [{"name": "Chordino", "url": f"/cases/{identifier}/chordino.json"}],
+                                    "primary_name": f"{primary_spec['name']} automatic draft", "primary_status": "Unreviewed native model output",
+                                    "secondary": [{"name": secondary_spec["name"], "url": f"/cases/{identifier}/{secondary_spec['filename']}"}],
                                     "additional": extras, "summary": evidence["metrics"], "source": case.get("source", {}),
-                                    "artifacts": {"primary_sha256": digest(primary_path), "chordino_sha256": digest(secondary_path)},
+                                    "artifacts": {"primary_sha256": digest(primary_path), f"{secondary_model}_sha256": digest(secondary_path)},
                                     "origin": {"source_recording_id": identifier, "source_audio_sha256": record["audio_sha256"], "source_offset_seconds": 0}})
             if identifier in PRACTICE_GUIDES:
                 result["cases"][-1]["practice"] = {**PRACTICE_GUIDES[identifier], "label_convention": "sounding pitches in raw charts",
@@ -311,8 +351,13 @@ def build(manifest_path: Path, output: Path = DEFAULT_OUTPUT, source_root: Path 
         if set(additional) - seen:
             raise ValueError("Additional evidence must identify an existing case")
         write_json(staging / "manifest.json", result)
-        write_json(staging / "build-spec.json", {"input_manifest": str(manifest_path.relative_to(source_root)),
-                                                   "version": VERSION, "primary": "crema.json", "secondary": "chordino.json"})
+        build_spec = {"input_manifest": str(manifest_path.relative_to(source_root)), "version": VERSION,
+                      "primary": primary_spec["filename"], "secondary": secondary_spec["filename"]}
+        if primary_root is not None:
+            build_spec["primary_root"] = str(primary_root.relative_to(source_root))
+        if secondary_root is not None:
+            build_spec["secondary_root"] = str(secondary_root.relative_to(source_root))
+        write_json(staging / "build-spec.json", build_spec)
         staging.rename(output)
     except Exception:
         shutil.rmtree(staging)
@@ -326,6 +371,13 @@ def public_files(pack: Path) -> dict[str, Path]:
     if (manifest.get("schema_version") != SCHEMA or not isinstance(manifest.get("cases"), list)
             or not 1 <= len(manifest["cases"]) <= 64):
         raise ValueError("Invalid automatic play-along manifest")
+    selection = manifest.get("model_selection")
+    if selection is not None:
+        if not isinstance(selection, dict) or set(selection) != {"primary", "secondary"}:
+            raise ValueError("Invalid automatic pack model selection")
+        _, secondary_spec = selected_models(selection["primary"], selection["secondary"])
+    else:
+        secondary_spec = MODELS["chordino"]
     files = {"/": STATIC / "index.html", "/index.html": STATIC / "index.html", "/app.js": STATIC / "app.js",
              "/style.css": STATIC / "style.css", "/manifest.json": pack / "manifest.json"}
     # Optional duration/practice metadata has fixed static URLs; never accept
@@ -342,8 +394,11 @@ def public_files(pack: Path) -> dict[str, Path]:
         seen.add(identifier)
         expected = [(case["audio_url"], "audio.wav"), (case["primary_url"], "primary.json"), (case["evidence_url"], "evidence.json")]
         if not isinstance(case.get("secondary"), list) or len(case["secondary"]) != 1:
-            raise ValueError("Automatic packs have exactly one Chordino comparison chart")
-        expected.append((case["secondary"][0]["url"], "chordino.json"))
+            raise ValueError("Automatic packs have exactly one comparison chart")
+        comparison = case["secondary"][0]
+        if not isinstance(comparison, dict) or comparison.get("name") != secondary_spec["name"]:
+            raise ValueError("Comparison chart differs from its selected model")
+        expected.append((comparison["url"], secondary_spec["filename"]))
         if not isinstance(case.get("additional", []), list) or len(case.get("additional", [])) > 4:
             raise ValueError("Automatic packs allow at most four additional charts")
         for index, item in enumerate(case.get("additional", [])):
@@ -381,6 +436,10 @@ def main() -> None:
     builder.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     builder.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     builder.add_argument("--additional", action="append", default=[], metavar="RECORDING_ID=PROJECT_PATH")
+    builder.add_argument("--primary-model", choices=sorted(MODELS))
+    builder.add_argument("--secondary-model", choices=sorted(MODELS))
+    builder.add_argument("--primary-root", type=Path, help="Project-local batch output root containing cases/ID/MODEL.json")
+    builder.add_argument("--secondary-root", type=Path, help="Project-local comparison batch root containing cases/ID/MODEL.json")
     server = sub.add_parser("serve")
     server.add_argument("--pack", type=Path, default=DEFAULT_OUTPUT)
     server.add_argument("--port", type=int, default=8068)
@@ -393,7 +452,9 @@ def main() -> None:
                 if not separator or not review_pack.safe_id(identifier) or Path(relative).is_absolute():
                     raise ValueError("Additional charts use RECORDING_ID=PROJECT_RELATIVE_PATH")
                 extra.setdefault(identifier, []).append(ROOT / relative)
-            result = build(args.manifest, args.output, additional=extra)
+            result = build(args.manifest, args.output, additional=extra, primary_model=args.primary_model,
+                           secondary_model=args.secondary_model, primary_root=args.primary_root,
+                           secondary_root=args.secondary_root)
             print(json.dumps({"pack": str(args.output.resolve()), "cases": len(result["cases"]), "status": result["status"]}))
         else:
             serve(args.pack, args.port)

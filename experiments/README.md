@@ -1,5 +1,7 @@
 # Mac analysis experiments
 
+The initial Mac algorithm selection is complete: **BTC for new basic-harmony drafts, CREMA for richer review, original mixes, guided librosa approximate pulses and authored practice drills**. See [the decision and replay commands](../docs/ALGORITHM_SELECTION.md). `automatic_drafts.py build` accepts explicit model choices and separate native-output roots; omitted choices retain the earlier CREMA/Chordino mode. The current player pack is preserved, and catalogue acceptance/correction effort follows.
+
 Phase 0 establishes a reproducible analysis environment and a local guitar test bench. Phase A compares recognition models, chart alignment and real recordings. These tools run independently of the older Expo app.
 
 ## Setup
