@@ -1,0 +1,22 @@
+{
+  "schema_version": "separation-progress-1.0",
+  "updated_date": "2026-10-13",
+  "status": "separation complete; derivative chord inference and resampling-only control pending",
+  "protocol_sha256": "dd24994ff9c59e259f9963799d87a995dfc9c4213e60e6aa6a3980ccd1cb7ecd",
+  "separator_successful_cases": 3,
+  "separator_failed_cases": 0,
+  "separation_runtime_seconds": 127.32913354225457,
+  "process_peak_rss_bytes": 2038087680,
+  "local_separation_report": "experiments/generated/separation-check-v1/separation-report.json",
+  "local_separation_report_sha256": "bfa389ea705b0846c97105787e536fe65feee025bf21d50e131e95dd4bcbe5c4",
+  "new_btc_outputs_completed": 0,
+  "planned_new_btc_outputs": 9,
+  "comparison_scores": null,
+  "accepted_for_playback": false,
+  "limitations": [
+    "No chord-agreement or separation-benefit result exists yet.",
+    "The separate resampling-only control source is saved but its pre-inference declaration has not yet been generated.",
+    "Existing original mixture predictions are retrospective cached controls.",
+    "Dataset and model weight commercial terms remain unresolved; media and weights are local ignored assets."
+  ]
+}
