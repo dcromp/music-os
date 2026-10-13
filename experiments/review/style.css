@@ -75,3 +75,14 @@ details[open] summary { margin-bottom: 18px; }
 #origin { white-space: pre-wrap; }
 #advanced h2 { margin-top: 28px; }
 @media (max-width: 600px) { .chord-strip { grid-template-columns: 1fr; gap: 12px; } .feedback-row { flex-wrap: wrap; } .feedback-row span { flex-basis: 100%; } details { padding: 16px; } #feedback-detail label { display: block; margin: 10px 0 4px; } }
+
+.learning-title { font-size: 1rem; margin: 0; }
+#learning-focus { margin: 8px 0; }
+#learning-path .small { margin: 8px 0; }
+.practice-check { display: inline-flex; align-items: center; gap: 7px; }
+.practice-check input { width: auto; margin: 0; }
+.learning-sources { border: 0; padding: 0; margin: 12px 0 0; }
+.learning-sources summary { font-size: .8rem; font-weight: 500; }
+.learning-sources[open] summary { margin-bottom: 8px; }
+#learning-sources { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: .8rem; }
+#learning-sources a { color: #285d49; }

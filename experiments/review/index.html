@@ -13,6 +13,19 @@
     <h1>Your song, ready to play</h1>
     <p class="lead">Press play and follow the automatic chord draft. Listen or pick up your guitar. If something sounds wrong, tap the button below — its time is captured for you.</p>
     <div id="status" role="status">Loading your songs…</div>
+    <section id="learning-path" aria-labelledby="learning-heading" hidden>
+      <h2 id="learning-heading">Suggested practice path</h2>
+      <p id="learning-order-note" class="note">Provisional order; choose any song.</p>
+      <h3 id="learning-title" class="learning-title"></h3>
+      <p id="learning-focus"></p><p id="learning-prerequisites" class="small"></p>
+      <p id="learning-setup" class="small"></p><p id="learning-guide-note" class="note" hidden></p>
+      <div id="learning-step-controls">
+        <div class="controls"><button id="start-path-drill" disabled>Use starting drill</button><button id="next-path-song" disabled>Try next song</button></div>
+        <label class="practice-check"><input id="practised-step" type="checkbox" disabled> Practised this step</label>
+      </div>
+      <p id="learning-progress" class="small" role="status"></p>
+      <details class="learning-sources"><summary>Teaching sources</summary><div id="learning-sources"></div></details>
+    </section>
     <section aria-labelledby="listen-heading">
       <h2 id="listen-heading">Play along</h2>
       <label for="case">Song</label>

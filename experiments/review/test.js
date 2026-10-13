@@ -1,7 +1,7 @@
 "use strict";
 const assert = require("node:assert/strict");
 const { annotationExport, validateCandidate, currentEvent, exposureKey, loadExposure, recordExposure, refreshExposure, validateEvidence, clampSeek, playbackSnapshot, feedbackKey, feedbackExport, captureFeedback, loadFeedback, saveFeedback, transposePracticeLabel, practiceLabel, coreChordLabel, displayedChord, practiceTimeline,
-  currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, validatePracticeManifest } = require("./app.js");
+  currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, validatePracticeManifest, safeTeachingURL, validateLearningManifest, practiceProgressKey, practiceProgressExport, loadPracticeProgress, savePracticeProgress, nextPracticeStep, initialPracticeStep } = require("./app.js");
 let checks = 0;
 function test(name, callback) { callback(); checks++; console.log(`ok ${name}`); }
 const recording = { id: "excerpt", title: "Generated", audio_sha256: "hash", duration_seconds: 20, sample_rate_hz: 100 };
@@ -462,4 +462,169 @@ test("duration and strumming validation never changes saved feedback or source c
   currentHold(chart.chords, 6); timingWindow(chart.chords, 6, 20); durationCaption(6, 20, rhythmCase);
   assert.equal(JSON.stringify(chart), sourceBefore); assert.equal(JSON.stringify(reports), feedbackBefore);
 });
+
+const fs = require("node:fs"), path = require("node:path"), crypto = require("node:crypto");
+const root = path.resolve(__dirname, "../.."), json = name => JSON.parse(fs.readFileSync(path.join(root, name), "utf8"));
+const learningFixture = json("experiments/review/learning.json"), arrangementFixture = json("docs/FIRST_TEN_ARRANGEMENT_CHECK.json");
+const learningCases = arrangementFixture.cases.map(item => ({id: item.recording.id, recording: item.recording}));
+const learningPractice = validatePracticeManifest(json("experiments/review/practice.json"), learningCases);
+const learning = validateLearningManifest(learningFixture, learningCases, learningPractice);
+const clone = value => JSON.parse(JSON.stringify(value));
+test("learning source pins, proposed order and exact audio identities match the reviewed first ten", () => {
+  const catalogue = json("catalogue/first-ten-review.json"), sources = new Map(arrangementFixture.sources.map(source => [source.id, source]));
+  for (const input of learningFixture.inputs) {
+    assert.equal(crypto.createHash("sha256").update(fs.readFileSync(path.join(root, input.path))).digest("hex"), input.sha256);
+  }
+  assert.equal(learning.steps.length, 8); assert.equal(learning.guides.length, 2);
+  assert.deepEqual(learning.steps.map(step => step.id), ["wild-thing", "love-me-do", "knockin-on-heaven-s-door", "brown-eyed-girl", "twist-and-shout", "the-house-of-the-rising-sun", "wonderwall", "creep"]);
+  for (const item of [...learning.steps, ...learning.guides]) {
+    const proposal = catalogue.songs.find(song => song.id === item.id), paired = arrangementFixture.cases.find(song => song.song_id === item.id);
+    assert.equal(item.recording.id, proposal.selected_recording.recording_id); assert.deepEqual(item.recording, paired.recording);
+    if (item.status === "practice-suggestion") {
+      assert.equal(proposal.practice_placement.track, "open-chord-rhythm"); assert.equal(item.order, proposal.practice_placement.proposed_order);
+      assert.equal(item.practice_pattern_id, learningPractice.get(item.recording.id).patterns[0].id);
+    }
+    for (const source of item.sources) assert.deepEqual(source, {id: sources.get(source.id).id, title: sources.get(source.id).title, url: sources.get(source.id).url});
+  }
+});
+test("learning validation leaves source metadata and practice patterns unchanged", () => {
+  const before = JSON.stringify(learningFixture), practiceBefore = JSON.stringify([...learningPractice]);
+  const reversed = {...learningFixture, steps: [...learningFixture.steps].reverse()};
+  assert.deepEqual(validateLearningManifest(reversed, learningCases, learningPractice).steps.map(step => step.order), [1, 2, 3, 4, 5, 6, 7, 8]);
+  assert.equal(JSON.stringify(learningFixture), before); assert.equal(JSON.stringify([...learningPractice]), practiceBefore);
+});
+test("learning paths filter unavailable recordings and preserve the source order in subset packs", () => {
+  const subset = learningCases.filter(item => [learning.steps[6].recording.id, learning.steps[7].recording.id].includes(item.recording.id));
+  const result = validateLearningManifest(learningFixture, subset, learningPractice);
+  assert.equal(result.total_steps, 8); assert.deepEqual(result.steps.map(step => step.order), [7, 8]); assert.deepEqual(result.guides, []);
+  const absent = validateLearningManifest(learningFixture, [{recording: {...learningCases[0].recording, id: "different-song"}}], learningPractice);
+  assert.deepEqual(absent.steps, []); assert.deepEqual(absent.guides, []);
+});
+test("learning paths reject duplicate step IDs, orders and recording identities", () => {
+  for (const mutate of [
+    data => { data.steps[1].id = data.steps[0].id; },
+    data => { data.steps[1].order = data.steps[0].order; },
+    data => { data.steps[1].recording = data.steps[0].recording; },
+    data => { data.guides[0].id = data.steps[0].id; },
+    data => { data.guides[0].recording = data.steps[0].recording; },
+    data => { data.steps[0].order = 0; },
+    data => { data.steps[0].order = 1.5; },
+  ]) {
+    const data = clone(learningFixture); mutate(data); assert.throws(() => validateLearningManifest(data, learningCases, learningPractice));
+  }
+});
+test("learning metadata rejects changed audio hash, rate or duration for an available recording", () => {
+  for (const change of [{audio_sha256: "f".repeat(64)}, {sample_rate_hz: 44100}, {duration_seconds: 1}, {duration_seconds: NaN}]) {
+    const data = clone(learningFixture); Object.assign(data.steps[0].recording, change);
+    assert.throws(() => validateLearningManifest(data, learningCases, learningPractice));
+  }
+});
+test("starting drills must exist on the exact paired practice recording, and riff guides cannot become strumming steps", () => {
+  const wrong = clone(learningFixture); wrong.steps[0].practice_pattern_id = "invented-drill";
+  assert.throws(() => validateLearningManifest(wrong, learningCases, learningPractice));
+  const mismatched = new Map(learningPractice), id = learning.steps[0].recording.id;
+  mismatched.set(id, {...mismatched.get(id), recording: {...learning.steps[0].recording, audio_sha256: "a".repeat(64)}});
+  assert.throws(() => validateLearningManifest(learningFixture, learningCases, mismatched));
+  assert.throws(() => validateLearningManifest(learningFixture, learningCases, new Map()));
+  for (const change of [{practice_pattern_id: "steady-down"}, {order: 1}, {status: "practice-suggestion"}]) {
+    const data = clone(learningFixture); Object.assign(data.guides[0], change);
+    assert.throws(() => validateLearningManifest(data, learningCases, learningPractice));
+  }
+  assert.equal(learning.guides.every(item => !item.practice_pattern_id && !item.order), true);
+});
+test("teaching links require public HTTPS and never accept executable, local or credentialled URLs", () => {
+  for (const value of ["javascript:alert(1)", "data:text/html,x", "file:///tmp/x", "http://example.com/a", "https://user:password@example.com/a",
+    "https://localhost/a", "https://x.localhost/a", "https://127.0.0.1/a", "https://[::1]/a", "https://example.com:8080/a", " https://example.com/a", "https://example.com/\\x", "https://example.com/a\n"]) {
+    assert.throws(() => safeTeachingURL(value));
+    const data = clone(learningFixture); data.steps[0].sources[0].url = value;
+    assert.throws(() => validateLearningManifest(data, learningCases, learningPractice));
+  }
+  assert.equal(safeTeachingURL("https://www.example.com/a%27b"), "https://www.example.com/a%27b");
+  const duplicate = clone(learningFixture); duplicate.steps[0].sources.push(duplicate.steps[0].sources[0]);
+  assert.throws(() => validateLearningManifest(duplicate, learningCases, learningPractice));
+});
+test("learning manifests reject malformed source pins and invalid optional metadata", () => {
+  for (const change of [{path: "../private.json"}, {path: "/private.json"}, {path: "docs//private.json"}, {path: "docs/x.json?secret"}, {sha256: "missing"}]) {
+    const data = clone(learningFixture); Object.assign(data.inputs[0], change);
+    assert.throws(() => validateLearningManifest(data, learningCases, learningPractice));
+  }
+  for (const change of [{schema_version: "other"}, {status: "verified-lesson"}, {path_id: ""}, {revision: ""}, {steps: []}, {guides: null}]) {
+    assert.throws(() => validateLearningManifest({...learningFixture, ...change}, learningCases, learningPractice));
+  }
+  const duplicated = clone(learningFixture); duplicated.inputs.push(duplicated.inputs[0]);
+  assert.throws(() => validateLearningManifest(duplicated, learningCases, learningPractice));
+});
+test("practice progress keys isolate path revision, pack, step and audio, separately from issue feedback", () => {
+  const step = learning.steps[0], key = practiceProgressKey(learning, "pack", step);
+  assert.match(key, /^music-os-practice-progress:/);
+  for (const other of [
+    practiceProgressKey({...learning, path_id: "other"}, "pack", step),
+    practiceProgressKey({...learning, revision: "2"}, "pack", step),
+    practiceProgressKey(learning, "other-pack", step),
+    practiceProgressKey(learning, "pack", {...step, id: "other-step"}),
+    practiceProgressKey(learning, "pack", {...step, recording: {...step.recording, audio_sha256: "other"}}),
+    feedbackKey("pack", {id: step.recording.id, recording: step.recording}),
+  ]) assert.notEqual(key, other);
+});
+test("explicit practice marking and unmarking survive reload without implying mastery or audio completion", () => {
+  const values = new Map(), storage = {getItem: key => values.get(key) ?? null, setItem: (key, value) => values.set(key, value)}, step = learning.steps[0];
+  assert.equal(loadPracticeProgress(storage, learning, "pack", step).practised, false);
+  assert.equal(savePracticeProgress(storage, learning, "pack", step, true), "saved-on-this-browser");
+  assert.deepEqual(loadPracticeProgress(storage, learning, "pack", step), {practised: true, persistence: "saved-on-this-browser"});
+  savePracticeProgress(storage, learning, "pack", step, false);
+  assert.equal(loadPracticeProgress(storage, learning, "pack", step).practised, false);
+  const value = practiceProgressExport(learning, "pack", step, true);
+  assert.equal(value.schema_version, "playalong-progress-1.0"); assert.equal(value.mastered, undefined); assert.equal(value.playback_seconds, undefined);
+  assert.match(value.semantics, /not mastery/);
+  assert.throws(() => savePracticeProgress(storage, learning, "pack", step, "true"));
+});
+test("saved practice progress cannot be reassigned to another path, step, pack or recording", () => {
+  const step = learning.steps[0], saved = practiceProgressExport(learning, "pack", step, true);
+  for (const change of [{schema_version: "wrong"}, {path_id: "other"}, {path_revision: "2"}, {step_id: "other"}, {pack_id: "other"}, {practised: "true"},
+    {recording: {...step.recording, id: "other"}}, {recording: {...step.recording, audio_sha256: "different"}},
+    {recording: {...step.recording, sample_rate_hz: 44100}}, {recording: {...step.recording, duration_seconds: 1}}]) {
+    assert.deepEqual(loadPracticeProgress({getItem: () => JSON.stringify({...saved, ...change})}, learning, "pack", step), {practised: false, persistence: "unavailable"});
+  }
+});
+test("unavailable or corrupt practice storage gives an honest tab-only fallback", () => {
+  const step = learning.steps[0], blocked = {getItem() { throw new Error("blocked"); }, setItem() { throw new Error("blocked"); }};
+  assert.deepEqual(loadPracticeProgress(blocked, learning, "pack", step), {practised: false, persistence: "unavailable"});
+  assert.equal(savePracticeProgress(blocked, learning, "pack", step, true), "unavailable");
+  for (const raw of ["broken", "null", "{}", "[]"]) {
+    assert.equal(loadPracticeProgress({getItem: () => raw}, learning, "pack", step).persistence, "unavailable");
+  }
+});
+test("next-song suggestions skip practised steps, wrap remaining gaps and never force a reset", () => {
+  const progress = new Map(), steps = learning.steps.slice(0, 3), first = steps[0], second = steps[1], third = steps[2];
+  assert.equal(nextPracticeStep(steps, progress), first);
+  assert.equal(nextPracticeStep(steps, progress, first.id), second);
+  progress.set(second.id, {practised: true}); assert.equal(nextPracticeStep(steps, progress, first.id), third);
+  assert.equal(nextPracticeStep(steps, progress, third.id), first);
+  progress.set(first.id, {practised: true}); progress.set(third.id, {practised: true});
+  assert.equal(nextPracticeStep(steps, progress), null); assert.equal(nextPracticeStep(steps, progress, third.id), null);
+  progress.set(first.id, {practised: false}); assert.equal(nextPracticeStep(steps, progress, first.id), null);
+  assert.equal(nextPracticeStep(steps, progress), first);
+  assert.equal(nextPracticeStep([], progress), null);
+});
+test("practice progress writes leave existing issue feedback and detector charts intact", () => {
+  const values = new Map(), storage = {getItem: key => values.get(key) ?? null, setItem: (key, value) => values.set(key, value)};
+  const report = captureFeedback(reviewCase, 6, chart, "unchanged", "now"), key = feedbackKey("pack", reviewCase), step = learning.steps[0];
+  saveFeedback(storage, key, reviewCase, "pack", [report]);
+  const before = values.get(key), chartBefore = JSON.stringify(chart), sourceBefore = JSON.stringify(learningFixture);
+  savePracticeProgress(storage, learning, "pack", step, true); savePracticeProgress(storage, learning, "pack", step, false);
+  nextPracticeStep(learning.steps, new Map([[step.id, {practised: true}]]), step.id);
+  assert.equal(values.get(key), before); assert.deepEqual(loadFeedback(storage, key, reviewCase, "pack").feedback, [report]);
+  assert.equal(JSON.stringify(chart), chartBefore); assert.equal(JSON.stringify(learningFixture), sourceBefore);
+});
+
+test("initial practice choice resumes the first unpractised available step and keeps a complete path revisitable", () => {
+  const progress = new Map(), steps = learning.steps.slice(0, 3), before = JSON.stringify(steps);
+  assert.equal(initialPracticeStep(steps, progress), steps[0]);
+  progress.set(steps[0].id, {practised: true}); assert.equal(initialPracticeStep(steps, progress), steps[1]);
+  progress.set(steps[2].id, {practised: true}); assert.equal(initialPracticeStep(steps, progress), steps[1]);
+  progress.set(steps[1].id, {practised: true}); assert.equal(initialPracticeStep([...steps].reverse(), progress), steps[0]);
+  assert.equal(initialPracticeStep([], progress), null); assert.equal(JSON.stringify(steps), before);
+  assert.equal(progress.get(steps[0].id).practised, true);
+});
+
 console.log(`${checks} review helper checks passed`);

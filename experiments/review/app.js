@@ -277,6 +277,99 @@ function validatePracticeManifest(payload, reviewCases) {
   }
   return result;
 }
+
+function safeTeachingURL(value) {
+  if (!boundedText(value, 2048) || /[\s\\\u0000-\u001f\u007f]/.test(value)) throw new Error("Invalid teaching source URL.");
+  let url;
+  try { url = new URL(value); } catch (_) { throw new Error("Invalid teaching source URL."); }
+  if (url.protocol !== "https:" || url.username || url.password || url.port ||
+      !url.hostname.includes(".") || /^(?:\d|\[)/.test(url.hostname) || url.hostname.endsWith(".localhost")) {
+    throw new Error("Teaching sources must use public HTTPS links.");
+  }
+  return url.href;
+}
+function validateLearningManifest(payload, reviewCases, practiceById) {
+  const safeId = value => boundedText(value, 64) && /^[a-z0-9][a-z0-9.-]*$/.test(value);
+  if (!payload || payload.schema_version !== "playalong-learning-1.0" ||
+      !safeId(payload.path_id) || !safeId(payload.revision) || payload.status !== "provisional-practice-path" ||
+      !boundedText(payload.title, 100) || !Array.isArray(payload.steps) || !payload.steps.length || payload.steps.length > 64 ||
+      !Array.isArray(payload.guides) || payload.guides.length > 16 || !Array.isArray(payload.inputs) || !payload.inputs.length || payload.inputs.length > 8 ||
+      !(practiceById instanceof Map)) throw new Error("Invalid optional learning path.");
+  const inputPaths = new Set();
+  for (const input of payload.inputs) {
+    if (!input || !boundedText(input.path, 240) || !/^[a-zA-Z0-9_./-]+\.json$/.test(input.path) ||
+        input.path.startsWith("/") || input.path.split("/").some(part => !part || part === "." || part === "..") ||
+        inputPaths.has(input.path) || typeof input.sha256 !== "string" || !/^[a-f0-9]{64}$/.test(input.sha256)) throw new Error("Invalid learning source pin.");
+    inputPaths.add(input.path);
+  }
+  const all = [...payload.steps, ...payload.guides];
+  const { expected } = pairedMetadataCases({schema_version: "playalong-learning-1.0", cases: all}, "playalong-learning-1.0", reviewCases);
+  const ids = new Set(), orders = new Set(), availableSteps = [], availableGuides = [];
+  for (const item of all) {
+    const isStep = payload.steps.includes(item);
+    if (!safeId(item.id) || ids.has(item.id) || !boundedText(item.title, 160) ||
+        !boundedText(item.skill_focus, 600) || !boundedText(item.prerequisites, 400) || !boundedText(item.setup_note, 600) ||
+        !Array.isArray(item.sources) || !item.sources.length || item.sources.length > 6) throw new Error("Invalid learning step.");
+    ids.add(item.id);
+    const sourceIds = new Set();
+    for (const source of item.sources) {
+      if (!source || !safeId(source.id) || sourceIds.has(source.id) || !boundedText(source.title, 300)) throw new Error("Invalid learning teaching source.");
+      sourceIds.add(source.id); safeTeachingURL(source.url);
+    }
+    if (isStep) {
+      if (item.status !== "practice-suggestion" || !Number.isInteger(item.order) || item.order < 1 || item.order > 64 || orders.has(item.order) ||
+          !safeId(item.practice_pattern_id)) throw new Error("Invalid practice path order or drill.");
+      orders.add(item.order);
+    } else if (item.status !== "riff-guide" || !boundedText(item.note, 600) || item.order !== undefined || item.practice_pattern_id !== undefined) {
+      throw new Error("Riff guides must stay separate from strumming steps.");
+    }
+    const recording = expected.get(item.recording.id);
+    if (!recording) continue;
+    if (!pairedRecording(item.recording, recording)) throw new Error("Learning metadata does not match the available recording.");
+    if (isStep) {
+      const practice = practiceById.get(recording.id);
+      if (!practice || !pairedRecording(practice.recording, recording) ||
+          !practice.patterns.some(pattern => pattern.id === item.practice_pattern_id)) throw new Error("Learning step references an unavailable practice drill.");
+      availableSteps.push(item);
+    } else availableGuides.push(item);
+  }
+  return {path_id: payload.path_id, revision: payload.revision, title: payload.title,
+    total_steps: payload.steps.length, steps: availableSteps.sort((a, b) => a.order - b.order), guides: availableGuides};
+}
+function practiceProgressKey(path, packId, step) {
+  return "music-os-practice-progress:" + JSON.stringify([path.path_id, path.revision, packId, step.id, step.recording.audio_sha256]);
+}
+function practiceProgressExport(path, packId, step, practised) {
+  if (typeof practised !== "boolean" || typeof packId !== "string" || !packId) throw new Error("Invalid practice progress.");
+  return {schema_version: "playalong-progress-1.0", path_id: path.path_id, path_revision: path.revision,
+    pack_id: packId, step_id: step.id, recording: {...step.recording}, practised,
+    semantics: "Optional self-report that this practice step was tried; not mastery or chord/timing accuracy."};
+}
+function loadPracticeProgress(storage, path, packId, step) {
+  try {
+    const raw = storage.getItem(practiceProgressKey(path, packId, step));
+    if (raw === null) return {practised: false, persistence: "saved-on-this-browser"};
+    const value = JSON.parse(raw);
+    if (value.schema_version !== "playalong-progress-1.0" || value.path_id !== path.path_id || value.path_revision !== path.revision ||
+        value.pack_id !== packId || value.step_id !== step.id || !pairedRecording(value.recording, step.recording) ||
+        typeof value.practised !== "boolean") throw new Error("Invalid saved practice progress.");
+    return {practised: value.practised, persistence: "saved-on-this-browser"};
+  } catch (_) { return {practised: false, persistence: "unavailable"}; }
+}
+function savePracticeProgress(storage, path, packId, step, practised) {
+  const value = practiceProgressExport(path, packId, step, practised);
+  try { storage.setItem(practiceProgressKey(path, packId, step), JSON.stringify(value)); return "saved-on-this-browser"; }
+  catch (_) { return "unavailable"; }
+}
+function initialPracticeStep(steps, progressById) {
+  return nextPracticeStep(steps, progressById) || [...steps].sort((a, b) => a.order - b.order)[0] || null;
+}
+function nextPracticeStep(steps, progressById, selectedStepId = null) {
+  const ordered = [...steps].sort((a, b) => a.order - b.order), current = ordered.findIndex(step => step.id === selectedStepId);
+  const following = current < 0 ? ordered : [...ordered.slice(current + 1), ...ordered.slice(0, current)];
+  return following.find(step => !progressById.get(step.id)?.practised) || null;
+}
+
 function feedbackKey(packId, reviewCase) {
   return "music-os-playalong-feedback:" + JSON.stringify([packId, reviewCase.id, reviewCase.recording.audio_sha256]);
 }
@@ -334,13 +427,14 @@ if (typeof module !== "undefined" && module.exports) {
   module.exports = { annotationExport, validateCandidate, currentEvent, exposureKey, loadExposure, recordExposure,
     refreshExposure, pairedRecording, validateEvidence, clampSeek, playbackSnapshot, feedbackKey, feedbackExport,
     captureFeedback, loadFeedback, saveFeedback, timeLabel, transposePracticeLabel, practiceLabel, coreChordLabel, displayedChord, practiceTimeline,
-    currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, validatePracticeManifest };
+    currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, validatePracticeManifest, safeTeachingURL, validateLearningManifest, practiceProgressKey, practiceProgressExport, loadPracticeProgress, savePracticeProgress, nextPracticeStep, initialPracticeStep };
 }
 
 if (typeof document !== "undefined") {
   const el = id => document.getElementById(id), audio = el("audio"), states = new Map();
   let cases = [], selected = null, state = null, generation = 0, packId = "", feedbackCounter = 0;
-  let rhythmById = new Map(), practiceById = new Map();
+  let rhythmById = new Map(), practiceById = new Map(), learningPath = null;
+  const progressById = new Map();
   const storage = { getItem: key => window.localStorage.getItem(key), setItem: (key, value) => window.localStorage.setItem(key, value) };
   const status = text => { el("status").textContent = text; };
   const safeURL = value => {
@@ -353,11 +447,51 @@ if (typeof document !== "undefined") {
     if (!response.ok) throw new Error(`Local song file unavailable (${response.status}).`);
     return response.json();
   }
+
+  function learningStep() { return learningPath?.steps.find(step => pairedRecording(step.recording, selected?.recording)) || null; }
+  function renderLearning() {
+    const step = learningStep(), guide = learningPath?.guides.find(item => pairedRecording(item.recording, selected?.recording));
+    const item = step || guide;
+    el("learning-path").hidden = !item;
+    if (!item) return;
+    el("learning-heading").textContent = guide ? "Riff learning guide" : "Suggested practice path";
+    el("learning-order-note").textContent = guide ? "A separate riff guide; choose any song." : "Provisional order; choose any song.";
+    el("learning-title").textContent = guide ? item.title : `Step ${step.order} of ${learningPath.total_steps} · ${item.title}`;
+    el("learning-focus").textContent = item.skill_focus;
+    el("learning-prerequisites").textContent = `Useful first: ${item.prerequisites}.`;
+    el("learning-setup").textContent = item.setup_note;
+    el("learning-guide-note").hidden = !guide;
+    el("learning-guide-note").textContent = guide?.note || "";
+    el("learning-step-controls").hidden = !step;
+    el("learning-sources").replaceChildren();
+    for (const source of item.sources) {
+      const link = document.createElement("a"); link.href = safeTeachingURL(source.url); link.textContent = source.title;
+      link.target = "_blank"; link.rel = "noopener noreferrer"; el("learning-sources").append(link);
+    }
+    if (!step) { el("learning-progress").textContent = "Use the guide for riff notes, fingering and setup."; return; }
+    const progress = progressById.get(step.id) || {practised: false, persistence: "unavailable"};
+    el("practised-step").checked = progress.practised;
+    el("practised-step").disabled = !state?.primary || !state.audioReady;
+    const drill = state?.strumming?.patterns.find(pattern => pattern.id === step.practice_pattern_id);
+    el("start-path-drill").disabled = !drill || !state?.primary || !state.audioReady;
+    el("start-path-drill").textContent = drill ? `Use starting drill: ${drill.name.replace(/^start:\s*/i, "")}` : "Starting drill unavailable";
+    const next = nextPracticeStep(learningPath.steps, progressById, step.id);
+    el("next-path-song").disabled = !next;
+    el("next-path-song").textContent = next ? `Try next: ${next.title}` : "No other unpractised steps";
+    const practised = learningPath.steps.filter(item => progressById.get(item.id)?.practised).length;
+    let message = `${practised}/${learningPath.steps.length} available steps marked practised. This is your own record of trying a step, not a skill assessment.`;
+    if (learningPath.steps.length < learningPath.total_steps) message += ` ${learningPath.steps.length} of ${learningPath.total_steps} path songs are available here.`;
+    if (practised === learningPath.steps.length) message += " All available steps are marked; revisit any song whenever you like.";
+    if (progress.persistence === "unavailable") message += " Browser storage is unavailable or the saved record was invalid; changes stay in this tab.";
+    el("learning-progress").textContent = message;
+  }
+
   function controls(enabled) {
     for (const id of ["restart", "go", "back", "mark", "save", "show", "reveal", "problem", "save-feedback", "copy-feedback", "quality-mode", "duration-mode", "strum-pattern"]) el(id).disabled = !enabled;
     if (enabled) { el("duration-mode").disabled = !state?.rhythm; el("strum-pattern").disabled = !state?.strumming; }
+    if (!enabled) { el("practised-step").disabled = true; el("start-path-drill").disabled = true; }
   }
-  function readyControls() { controls(Boolean(state?.primary && state.audioReady)); }
+  function readyControls() { controls(Boolean(state?.primary && state.audioReady)); renderLearning(); }
   function seek(seconds) {
     if (!selected || !Number.isFinite(audio.duration)) return;
     audio.currentTime = clampSeek(seconds, Math.min(audio.duration, selected.recording.duration_seconds));
@@ -491,7 +625,7 @@ if (typeof document !== "undefined") {
     el("feedback-detail").hidden = true; state.activeFeedback = null;
     el("notes").value = state.notes; el("export").hidden = true; el("feedback-export").hidden = true;
     el("point-notice").hidden = true;
-    practiceInfo(); durationInfo(); renderStrumming();
+    practiceInfo(); durationInfo(); renderStrumming(); renderLearning();
     el("origin").textContent = JSON.stringify({ recording: selected.recording, origin: selected.origin || null,
       source: selected.source || selected.source_references || null, practice: selected.practice || null, summary: selected.summary || null }, null, 2);
     renderMarks(); renderFeedback(); renderPoints();
@@ -586,6 +720,27 @@ if (typeof document !== "undefined") {
     const url = URL.createObjectURL(new Blob([text], { type: "application/json" }));
     const anchor = document.createElement("a"); anchor.href = url; anchor.download = filename; anchor.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
+
+  el("start-path-drill").addEventListener("click", () => {
+    const step = learningStep();
+    if (!step || !state?.primary || !state.audioReady || !state.strumming?.patterns.some(pattern => pattern.id === step.practice_pattern_id)) return;
+    state.strumPatternId = step.practice_pattern_id; renderStrumming();
+    el("strumming").scrollIntoView({block: "center"}); el("strum-pattern").focus({preventScroll: true});
+  });
+  el("next-path-song").addEventListener("click", () => {
+    const next = nextPracticeStep(learningPath?.steps || [], progressById, learningStep()?.id);
+    if (!next) return;
+    const index = cases.findIndex(item => pairedRecording(item.recording, next.recording));
+    if (index < 0) return;
+    el("case").value = String(index); selectCase(index).catch(error => status(error.message));
+  });
+  el("practised-step").addEventListener("change", () => {
+    const step = learningStep(); if (!step || !state?.primary || !state.audioReady) return;
+    const practised = el("practised-step").checked;
+    progressById.set(step.id, {practised, persistence: savePracticeProgress(storage, learningPath, packId, step, practised)});
+    renderLearning();
+  });
+
   el("case").addEventListener("change", () => selectCase(Number(el("case").value)).catch(error => status(error.message)));
   el("restart").addEventListener("click", () => seek(0)); el("back").addEventListener("click", () => seek(audio.currentTime - 2));
   el("go").addEventListener("click", () => { try { seek(Number(el("seek").value)); } catch (error) { status(error.message); } });
@@ -654,7 +809,9 @@ if (typeof document !== "undefined") {
       for (const candidate of [...(reviewCase.candidates || []), ...(reviewCase.secondary || []), ...(reviewCase.additional || [])]) safeURL(candidate.url);
       const option = document.createElement("option"); option.value = index; option.textContent = reviewCase.name; el("case").append(option);
     });
-    el("case").disabled = false; await selectCase(0);
+    el("case").disabled = false;
+    const initialGeneration = generation + 1;
+    await selectCase(0);
     // Both files are optional and independent. Their absence or invalid data
     // cannot prevent audio/chord playback or discard saved issue reports.
     await Promise.all([
@@ -669,5 +826,19 @@ if (typeof document !== "undefined") {
         if (state) { state.strumming = practiceById.get(selected.recording.id) || null; renderStrumming(); }
       })()
     ]);
+    try {
+      learningPath = validateLearningManifest(await getJSON("/learning.json"), cases, practiceById);
+      for (const step of learningPath.steps) progressById.set(step.id, loadPracticeProgress(storage, learningPath, packId, step));
+    } catch (_) { learningPath = null; progressById.clear(); }
+    // Resume only during untouched initial loading. A user song choice, seek or
+    // playback takes priority over a later optional-metadata response.
+    if (learningPath && generation === initialGeneration && audio.paused && audio.currentTime === 0) {
+      const first = initialPracticeStep(learningPath.steps, progressById);
+      const index = first ? cases.findIndex(item => pairedRecording(item.recording, first.recording)) : -1;
+      if (index >= 0 && selected !== cases[index]) {
+        el("case").value = String(index); await selectCase(index);
+      }
+    }
+    renderLearning();
   })().catch(error => { controls(false); status(error.message); });
 }
