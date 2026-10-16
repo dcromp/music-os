@@ -2,7 +2,9 @@
 
 **Checked 12 October 2026.** This is a product feasibility comparison using public first-party terms, not a negotiated licence or a conclusion that the current ten-song cache can be shipped.
 
-**Preferred route to scope first:** sell our learning paths, reviewed practice arrangements and progress tools; use the official YouTube player for available recordings, and obtain analysis audio separately under suitable permission. Start with original/artist-authorised music if popular-song permissions or prices are unsuitable. This is a recommendation, conditional on the selected content and implementation review.
+**16 October follow-up:** [A concrete original-exercise pilot](ORIGINAL_EXERCISE_ROUTE.md) now specifies input provenance, player behaviour, small catalogue scope, cost assumptions and ship/hold gates. It uses a project-generated control, not the popular-song research cache. Its three teaching drills remain planned and paid release remains on hold; the comparison below retains the later official-embed option.
+
+**Popular-song route to scope:** sell our learning paths, reviewed practice arrangements and progress tools; use the official YouTube player for available recordings, and obtain analysis audio separately under suitable permission. Start with original/artist-authorised music if popular-song permissions or prices are unsuitable. This is a recommendation, conditional on the selected content and implementation review.
 
 ## What YouTube and Chordify actually establish
 
