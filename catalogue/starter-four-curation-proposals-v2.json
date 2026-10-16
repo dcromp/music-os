@@ -1,0 +1,201 @@
+{
+  "schema_version": "starter-four-curation-proposals-1.0",
+  "prepared_at_utc": "2026-10-16T09:58:46.254516+00:00",
+  "status": "model-exposed editorial proposals; no approved lessons or learner promotion",
+  "gold": false,
+  "source_review_sha256": "564b33066eec4f9e1258a6d0168671fb9f27f470c3cd2e396b6124876f6f25ce",
+  "targeted_protocol_sha256": "c441763972fb591b8a7c4dc7f065445519c217eb3c3315cd60af6f679aa2b9e2",
+  "semantics": "Project-authored source/diagnostic notes, two provisional G labels at native BTC bounds, and two provisional common A-hold search windows. These windows are intersections of native harmonic holds, not verified formal sections. Session time covers UI entry only, not research, musical validation or human curation cost.",
+  "previous_version": {
+    "path": "catalogue/starter-four-curation-proposals-v1.json",
+    "sha256": "42cc93e09dc3d3cbd1866ff1af357dd0cedff0447d89a0e6cbb252ed43b36ec5"
+  },
+  "native_timing_report": {
+    "path": "experiments/generated/catalogue-starter-timing-v2-20261016/report.json",
+    "sha256": "9cbf0d2e388b340fee5835c7a0e0084780a9ee01c43d9c4c60ff33cd3c89c6a6"
+  },
+  "drafts": [
+    {
+      "schema_version": "catalogue-curation-draft-1.0",
+      "status": "model-exposed-curation-draft",
+      "gold": false,
+      "pack_id": "catalogue-curation-20261014",
+      "recording": {
+        "id": "troggs-wild-thing-youtube-20261011",
+        "title": "The Troggs - Wild Thing",
+        "duration_seconds": 155.3516553287982,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "base_artifacts": {
+        "primary_sha256": "aecee2605813eb56acd62971619080f8af1906b6f1319a2c737386d7f449a7c4",
+        "crema_sha256": "13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81"
+      },
+      "revision": 1,
+      "chord_edits": [],
+      "sections": [],
+      "checked_points": [],
+      "sessions": [
+        {
+          "id": "session-359a0926-ca66-4135-a1fa-ab4e1d659d77",
+          "actor": "agent",
+          "task": "setup",
+          "started_at": "2026-10-14T10:31:43.603Z",
+          "ended_at": "2026-10-14T10:31:43.910Z",
+          "active_seconds": 0.30719999980926516
+        }
+      ],
+      "setup_notes": "Teacher-supported practice proposal: EADGBE (Carl Brown), A/D/E main shapes; physical capo remains unknown, zero proposed. Optional A5/D5/E5 adaptation. Lauren Bateman supports a separate G/A note figure or adapted grips, so the main three-chord loop is not a complete arrangement. Exact cached guitar voicings remain unverified.",
+      "rhythm_notes": "Entry task: paired attacks with holds. Separate the contrasting note figure, instrumental material and ending. Existing steady drills are preparation; no recorded strumming pattern or section timestamps are asserted.",
+      "review_notes": "14 October pitch-class diagnostic: whole-recording spectral and NNLS checks both rank proposed shift zero first. Spectral 60\u201380 s differs locally; NNLS does not. C/Em/G outside-main-palette cues remain unresolved; no labels or timings were changed. Sources: https://guitarlessons365.com/wild-thing-guitar-lesson-the-troggs/ and https://www.laurenbateman.com/wild-thing-chord-chart/ . See catalogue/starter-four-teaching-review.json and the starter-four pitch report. Timed session records note-entry interaction only, excluding research and automated analysis."
+    },
+    {
+      "schema_version": "catalogue-curation-draft-1.0",
+      "status": "model-exposed-curation-draft",
+      "gold": false,
+      "pack_id": "catalogue-curation-20261014",
+      "recording": {
+        "id": "beatles-love-me-do-youtube-20261011",
+        "title": "The Beatles - Love Me Do",
+        "duration_seconds": 141.69832199546485,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "base_artifacts": {
+        "primary_sha256": "833d826283e403fc5edccd5720b6afe784a94bd6f900cc5fac70a3f877405d6b",
+        "crema_sha256": "a12394c6654f761febee240b95d60c45b7c55e33a6fb287225d181976e6531c4"
+      },
+      "revision": 1,
+      "chord_edits": [],
+      "sections": [],
+      "checked_points": [],
+      "sessions": [
+        {
+          "id": "session-8f0c55fc-9df6-4e4e-be32-c4ea301e94a3",
+          "actor": "agent",
+          "task": "setup",
+          "started_at": "2026-10-14T10:32:24.075Z",
+          "ended_at": "2026-10-14T10:32:24.379Z",
+          "active_seconds": 0.304
+        }
+      ],
+      "setup_notes": "Practice proposal: G/C/D in standard open shapes; physical capo and exact guitar setup are unverified. Andy Guitar and Brad Litton corroborate the main palette; Cadd9 is optional. A separate D/A/E adaptation should not be counted as contradictory chord evidence.",
+      "rhythm_notes": "Begin with on-beat changes, then add a long/short swing feel. A deliberate mute means stop the sound; it is different from a dash that skips an attack while letting strings ring. Locate the longer hold/stop, D-led contrasting middle and harmonica material before inserting section cues. No fixed recorded swing ratio is claimed.",
+      "review_notes": "14 October diagnostic: proposed shift zero ranks first on the whole recording in both acoustic methods, but several local windows prefer other shifts and the full-score margin is small. This does not verify key changes, capo or full arrangement. Native A/Em/Cm cues remain unresolved. Sources: https://www.andyguitar.co.uk/videos/beatles-guitar-day-01-love-me-do and https://www.simpleguitar.com/blog/howtoplaylovemedo . Timed session covers note entry only, excluding research/analysis."
+    },
+    {
+      "schema_version": "catalogue-curation-draft-1.0",
+      "status": "model-exposed-curation-draft",
+      "gold": false,
+      "pack_id": "catalogue-curation-20261014",
+      "recording": {
+        "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+        "title": "Bob Dylan - Knockin' On Heaven's Door",
+        "duration_seconds": 149.89496598639457,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "base_artifacts": {
+        "primary_sha256": "018dc316af89e4678d9a9718b26553d3f048e8f80deaedf8e5ea31c14303b78e",
+        "crema_sha256": "022405eadb0d332a34ca66b74989e72cc5e597e57417c1a289178e0a7a084082"
+      },
+      "revision": 2,
+      "chord_edits": [
+        {
+          "start_seconds": 29.473741496598638,
+          "end_seconds": 30.27863945578231,
+          "label": "G",
+          "note": "Provisional source-guided label edit. Teacher palette and CREMA support G; minus-vocals/other tests favour G over Gm in both acoustic methods with full cue support. Bounds are unchanged BTC predictions, not verified physical timing. Targeted protocol c4417639; no automatic lesson approval."
+        },
+        {
+          "start_seconds": 50.185759637188205,
+          "end_seconds": 51.02167800453515,
+          "label": "G",
+          "note": "Provisional source-guided label edit. Teacher palette and CREMA support G; minus-vocals/other tests favour G over Gm in both acoustic methods with full cue support. Bounds are unchanged BTC predictions, not verified physical timing. Targeted protocol c4417639; no automatic lesson approval."
+        }
+      ],
+      "sections": [],
+      "checked_points": [],
+      "sessions": [
+        {
+          "id": "session-d8f60671-fd36-40a7-ae1b-9a4fd496e912",
+          "actor": "agent",
+          "task": "setup",
+          "started_at": "2026-10-14T10:32:54.395Z",
+          "ended_at": "2026-10-14T10:32:54.694Z",
+          "active_seconds": 0.29839999961853025
+        },
+        {
+          "id": "session-89d1f9e8-db2b-4ff1-bbac-d66827f69ac4",
+          "actor": "agent",
+          "task": "chords-and-timing",
+          "started_at": "2026-10-14T10:35:22.652Z",
+          "ended_at": "2026-10-14T10:35:24.005Z",
+          "active_seconds": 1.353
+        }
+      ],
+      "setup_notes": "Dylan practice proposal: G/D/Am/C; Jon MacLennan states standard EADGBE. Physical capo remains unknown, zero proposed. Song Notes describes optional Am7; retain native richer minor chords rather than calling them errors solely because the entry palette uses Am. Different Guns N Roses/Clapton arrangements are excluded.",
+      "rhythm_notes": "Start with sparse attacks and sustained response shapes, then gradually add subdivision. The slow sixteenth feel and separate fingerstyle variant are teacher proposals, not a transcribed studio pattern. Locate alternating Am/C response material, intro/vocal contrast and outro before inserting timed section markers.",
+      "review_notes": "14 October: proposed pitch shift zero ranks first in both methods throughout all 20-second windows. Two provisional G-label edits replace native Gm at 29.474\u201330.279 s and 50.186\u201351.022 s in this working copy only. Removing estimated vocals and using the mixed other stem flip the G/Gm cosine preference in both methods; preprocessing control changes are below 0.000003, with no cue support lost. This is consistent with vocal influence; it does not prove a performed guitar chord. Exact bounds remain native predictions, with physical timing/sections/voicing unverified. Ordinary player and raw charts remain unchanged. Sources: https://www.jonmaclennan.com/blog/knockin-on-heaven%27s-door-chords and https://songnotes.net/lessons/88/ . Targeted protocol c441763972fb591b8a7c4dc7f065445519c217eb3c3315cd60af6f679aa2b9e2. Timed sessions cover draft entry only, excluding research/analysis."
+    },
+    {
+      "schema_version": "catalogue-curation-draft-1.0",
+      "status": "model-exposed-curation-draft",
+      "gold": false,
+      "pack_id": "catalogue-curation-20261014",
+      "recording": {
+        "id": "beatles-twist-and-shout-youtube-20261011",
+        "title": "The Beatles - Twist And Shout",
+        "duration_seconds": 155.23555555555555,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "base_artifacts": {
+        "primary_sha256": "e7ce805072c42e3ef39c15eadf8b3522534cc1274c5380b0553e52a1807b935c",
+        "crema_sha256": "09f64db9a6563e2256c528576bd9776b13c84128ce3b982810b8dfbe6145bb59"
+      },
+      "revision": 2,
+      "chord_edits": [],
+      "sections": [
+        {
+          "start_seconds": 82.87927437641723,
+          "end_seconds": 96.5944671201814,
+          "name": "A hold / build-up search window 1 (provisional)",
+          "note": ""
+        },
+        {
+          "start_seconds": 136.90485260770976,
+          "end_seconds": 145.85142857142858,
+          "name": "A hold / build-up search window 2 (provisional)",
+          "note": ""
+        }
+      ],
+      "checked_points": [],
+      "sessions": [
+        {
+          "id": "session-3a3002fb-8601-4d50-bdd8-a68d39b05ba2",
+          "actor": "agent",
+          "task": "setup",
+          "started_at": "2026-10-14T10:33:39.425Z",
+          "ended_at": "2026-10-14T10:33:39.731Z",
+          "active_seconds": 0.3053000001907349
+        },
+        {
+          "id": "session-70b72ae6-afb6-4a1d-945f-0ee2998e0693",
+          "actor": "agent",
+          "task": "sections-and-rhythm",
+          "started_at": "2026-10-16T09:56:27.767Z",
+          "ended_at": "2026-10-16T09:56:38.088Z",
+          "active_seconds": 10.32139999961853
+        }
+      ],
+      "setup_notes": "Beatles practice proposal: D/G/A. Jon MacLennan states standard EADGBE and key D; physical capo and exact cached guitar voicings remain unverified. D5 melody-friendly adaptation and A7 are optional teaching variants, not automatic raw-chord replacements. Exclude the higher-key Isley Brothers arrangement.",
+      "rhythm_notes": "Keep the main response groove separate from the sustained A build-up. Repeated downstroke eighths are a source-supported practice option; the current alternating down/up drill is a different exercise. Two provisional common A-hold search windows are saved at 82.879\u201396.594 s and 136.905\u2013145.851 s, using intersections of unchanged BTC/CREMA holds. These are harmonic review windows, not verified formal build-up extents, attack counts or bar counts. Solo/melody and ending work remain optional; exact recorded attack timing is unverified.",
+      "review_notes": "14 October pitch diagnostic: proposed shift zero ranks first for the whole recording in both acoustic methods. Some local windows prefer a different shared-chord palette shift; this is not evidence of a key change. Short F#m/Dm/Bm native cues remain unresolved, with mixed acoustic comparisons. Sources: https://www.andyguitar.co.uk/videos/beatles-guitar-day-02-twist-and-shout and https://www.jonmaclennan.com/blog/twist-and-shout-chords . 16 October native timing review: the two common A-hold intersections are provisional search windows only. The second raw hold ends at BTC 145.85142857142858 s versus CREMA 146.7501133786848 s, a 0.899 s unresolved difference. Cached NNLS supports A within both spans but has coarse windows and cannot verify physical boundary times or strumming. Model agreement can share errors; no chart label/time, learner content or arrangement acceptance is changed. See docs/STARTER_FOUR_TIMING_REVIEW.md and the separate catalogue-starter-timing-20261016 report. Agent session measures draft entry only, excluding research/analysis and musical validation; human correction cost remains unmeasured."
+    }
+  ]
+}

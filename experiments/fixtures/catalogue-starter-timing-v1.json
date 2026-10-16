@@ -1,0 +1,98 @@
+{
+  "schema_version": "catalogue-timing-review-spec-1.0",
+  "scope": "Retrospective native timing/contrast REVIEW; no acceptance or model/threshold tuning",
+  "pitch_spec_sha256": "c718236e5cde24083022ad4d891d5944789d7f029bb15c32d90b75527957e078",
+  "evidence_report_sha256": "d95efb7c2b0c677555abbc6ce4b6d8b9afbef7336b74dec1fca1689767ecf43f",
+  "policy": {
+    "pair_tolerance_seconds": 0.5,
+    "review_difference_seconds": 0.15,
+    "replay_padding_seconds": 1.5,
+    "max_pair_cells": 1000000,
+    "max_priority_windows": 12,
+    "seam_annotation_radius_seconds": 0.5,
+    "core_merge": "contiguous equivalent core only; no N/X/gap bridging",
+    "matching": "monotone maximum count of compatible directed transitions, then minimum total absolute time difference",
+    "uses_pulses": false,
+    "refines_native_times": false,
+    "accepts_arrangements": false
+  },
+  "profiles": {
+    "troggs-wild-thing-youtube-20261011": {
+      "hold_rules": [
+        {
+          "label": "A",
+          "minimum_seconds": 6,
+          "purpose": "Long A material: search for contrast; does not establish the source G/A figure"
+        }
+      ],
+      "acoustic_labels": [
+        "A",
+        "D",
+        "E",
+        "G",
+        "C"
+      ],
+      "response_labels": []
+    },
+    "beatles-love-me-do-youtube-20261011": {
+      "hold_rules": [
+        {
+          "label": "D",
+          "minimum_seconds": 1,
+          "purpose": "D-led contrasting material candidate; not a complete bridge map"
+        },
+        {
+          "label": "C",
+          "minimum_seconds": 5,
+          "purpose": "Long C hold: inspect hold/stop/mute separately"
+        }
+      ],
+      "acoustic_labels": [
+        "G",
+        "C",
+        "D",
+        "Am"
+      ],
+      "response_labels": []
+    },
+    "bob-dylan-knockin-heavens-door-youtube-20261011": {
+      "hold_rules": [
+        {
+          "label": "Am",
+          "minimum_seconds": 2,
+          "purpose": "Minor response candidate; shared C/E tones make nearest-template relabelling unsafe"
+        },
+        {
+          "label": "C",
+          "minimum_seconds": 2,
+          "purpose": "Major response candidate; inspect extra minor fragments separately"
+        }
+      ],
+      "acoustic_labels": [
+        "G",
+        "D",
+        "Am",
+        "C"
+      ],
+      "response_labels": [
+        "Am",
+        "C"
+      ]
+    },
+    "beatles-twist-and-shout-youtube-20261011": {
+      "hold_rules": [
+        {
+          "label": "A",
+          "minimum_seconds": 6,
+          "purpose": "Sustained A / build-up search candidate; all-down drill remains a teaching proposal"
+        }
+      ],
+      "acoustic_labels": [
+        "D",
+        "G",
+        "A"
+      ],
+      "response_labels": []
+    }
+  }
+}

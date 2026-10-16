@@ -2,6 +2,8 @@
 
 Updated 14 October 2026. **Stage 2 is in progress: automated preparation and the correction workspace are complete; recording acceptance is pending.** Ten exact cached recordings have source-guided worklists and a separate developer reviewer. The later [first-four continuation](STARTER_FOUR_CATALOGUE_CHECK.md) adds source notes and two provisional label edits. This page records the preceding tooling checks; its [machine-readable evidence](CATALOGUE_CURATION_RESULTS.json) remains historical. No accepted arrangements, human correction minutes or recording accuracy scores follow from these milestones.
 
+**16 October continuation:** the [native timing review](STARTER_FOUR_TIMING_REVIEW.md) adds a separate CLI queue and harmonic contrast inventory for the first four, checked automatically on all 64 cached synthetic cases. It does not replace this workspace's existing suggested replays. Twist and Shout revision 2 now stores two explicitly provisional A-hold search windows in `sections`; these are common model-hold intersections, not verified formal sections. [Editorial backup v2](../catalogue/starter-four-curation-proposals-v2.json) preserves the four note drafts, two earlier Dylan label proposals and these two windows. The fresh suite passes 386/406 tests with 20 optional skips; all 45 reviewer and 48 learner assets still match disk. The earlier tooling counts below remain historical.
+
 ## What is prepared
 
 The workspace contains 2,024.1 seconds of audio, unchanged native BTC/CREMA charts, 118 suggested replay windows and 32 project-authored grip examples across eight rhythm-song palettes. The two riff tracks retain distinct riff/section work items rather than invented strumming grips. Forty replay windows are fixed coverage samples, including places where both models might share an error; the other 78 come from bounded model disagreements. Short events, disagreement counts and their union duration are workload hints, not verified errors or correction cost.
@@ -60,7 +62,8 @@ Verification of software behavior does not certify musical accuracy. The 20 skip
 | Exact inputs, automatic worklists and source-guided grip proposals | Complete | Evidence above; no recording acceptance implied |
 | Separate correction persistence, explicit review timer and live QA | Complete | Developer reviewer available on port 8073 |
 | First four source/pitch pass and provisional content | Complete diagnostic | Four teaching proposals/note drafts; two provisional Dylan G labels after controlled vocal-removal checks |
-| First four physical timing, contrast and rhythm review | Next | Roughly half a focused day; note drafts and native bounds are not accepted timings |
+| First four timing/contrast review preparation | Complete review aid | 48 selected replay windows plus 16 fixed samples; 64 cached synthetic and eight symbolic controls; no physical timing acceptance |
+| First four physical timing, contrast and rhythm review | Next | Roughly half a focused day; note drafts, harmonic windows and native bounds are not accepted timings |
 | Contrasting rhythm/riff and setup/section checks | Pending | Roughly one focused day; investigate actual audio and retain unresolved spans |
 | Independent recording checks and correction-effort report | Pending | Roughly half to one focused day; source availability can extend elapsed time |
 | Founder practice usefulness trial | Stage 3 pending | Two-week elapsed trial after representative arrangements are checked |
