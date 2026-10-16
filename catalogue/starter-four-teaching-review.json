@@ -1,0 +1,505 @@
+{
+  "schema_version": "starter-four-teaching-review-1.0",
+  "checked_date": "2026-10-14",
+  "status": "Additive primary-source review; no recording or arrangement acceptance",
+  "scope": "Four teacher-supported main palettes, optional variants and qualitative section/rhythm tasks; exact cached audio remains unverified",
+  "inputs": [
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/troggs-wild-thing-youtube-20261011/review.json",
+      "sha256": "5bd9033994ef3ed0c9e3ecc9342f3e5483b68145634515926cf6cc29689fa91c"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/beatles-love-me-do-youtube-20261011/review.json",
+      "sha256": "4c78d2384d87b9442a76143707ddc4a336453c4a12e9c0f0d51d6070bcccc50d"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/bob-dylan-knockin-heavens-door-youtube-20261011/review.json",
+      "sha256": "e0b6c81da35a05fb088183a138969b89a537e66b38e050fdd47d1eeefd810c37"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/beatles-twist-and-shout-youtube-20261011/review.json",
+      "sha256": "b571630752c74442bd5f63f6f04ce71cac1b784cc832ac8744dfce6715c0b96c"
+    }
+  ],
+  "sources": [
+    {
+      "id": "wild-andy",
+      "title": "Andy Guitar: Wild Thing",
+      "url": "https://www.andyguitar.co.uk/videos/electric-guitar-day-7-wild-thing",
+      "checked_date": "2026-10-14",
+      "evidence_scope": "Public primary teacher text; main palette and paired attacks. No newly verified full recording arrangement."
+    },
+    {
+      "id": "wild-carl",
+      "title": "Carl Brown: Wild Thing",
+      "url": "https://guitarlessons365.com/wild-thing-guitar-lesson-the-troggs/",
+      "checked_date": "2026-10-14",
+      "evidence_scope": "Public primary teacher text; explicit standard tuning and multiple progressions. Video fingering not transcribed."
+    },
+    {
+      "id": "wild-lauren",
+      "title": "Lauren Bateman: Wild Thing",
+      "url": "https://www.laurenbateman.com/wild-thing-chord-chart/",
+      "checked_date": "2026-10-14",
+      "evidence_scope": "Primary teacher-hosted lesson; main palette, power-shape option and qualitative contrasting G/A figure. No chart, lyrics or tablature reproduced."
+    },
+    {
+      "id": "love-andy",
+      "title": "Andy Guitar: Love Me Do",
+      "url": "https://www.andyguitar.co.uk/videos/beatles-guitar-day-01-love-me-do",
+      "checked_date": "2026-10-14",
+      "evidence_scope": "Public primary teacher text/transcript; palette, optional Cadd9, deliberate silence and swing. Teaching counts are not recording timing evidence."
+    },
+    {
+      "id": "love-brad",
+      "title": "Brad Litton / Simple Guitar: Love Me Do",
+      "url": "https://www.simpleguitar.com/blog/howtoplaylovemedo",
+      "checked_date": "2026-10-14",
+      "evidence_scope": "Primary teacher-authored lesson prose; independently corroborates palette, swing and qualitative contrasting sections. No teacher bar counts copied."
+    },
+    {
+      "id": "love-justin",
+      "title": "JustinGuitar: Love Me Do",
+      "url": "https://www.justinguitar.com/songs/the-beatles-love-me-do-chords-tabs-guitar-lesson-bs-108",
+      "checked_date": "2026-10-14",
+      "evidence_scope": "Primary lesson indexed text supplied by web search; direct page extraction only returned a title/empty body. Lower evidential scope than newly extracted teacher prose."
+    },
+    {
+      "id": "dylan-jon",
+      "title": "Jon MacLennan: Knockin On Heavens Door",
+      "url": "https://www.jonmaclennan.com/blog/knockin-on-heaven%27s-door-chords",
+      "checked_date": "2026-10-14",
+      "evidence_scope": "Primary teacher prose; standard tuning, four-shape palette, subdivision and separate fingerstyle adaptation. Theory typo is explicitly excluded."
+    },
+    {
+      "id": "dylan-songnotes",
+      "title": "David Potts / Song Notes: Knockin On Heavens Door",
+      "url": "https://songnotes.net/lessons/88/",
+      "checked_date": "2026-10-14",
+      "evidence_scope": "Primary teacher-authored prose; corroborates palette, optional Am7 and progressively added attacks. No complete third-party chart copied."
+    },
+    {
+      "id": "dylan-goodguitarist",
+      "title": "Good Guitarist: Knockin On Heavens Door fingerstyle",
+      "url": "https://goodguitarist.com/youtube-post/knockin-on-heavens-door-fingerstyle-bob-dylan-guitar-tutorial/",
+      "checked_date": "2026-10-14",
+      "evidence_scope": "Primary teacher-hosted fingerstyle adaptation; corroborates four-shape palette and alternating response. Adaptation is separate from a studio transcription."
+    },
+    {
+      "id": "twist-andy",
+      "title": "Andy Guitar: Twist And Shout",
+      "url": "https://www.andyguitar.co.uk/videos/beatles-guitar-day-02-twist-and-shout",
+      "checked_date": "2026-10-14",
+      "evidence_scope": "Public primary teacher text/transcript; palette, optional melody/D5, build-up and ending tasks. No teacher repeat or bar counts copied."
+    },
+    {
+      "id": "twist-jon",
+      "title": "Jon MacLennan: Twist And Shout",
+      "url": "https://www.jonmaclennan.com/blog/twist-and-shout-chords",
+      "checked_date": "2026-10-14",
+      "evidence_scope": "Primary teacher prose; explicit standard tuning, Beatles key D, main palette, A7 option and downstroke eighth feel."
+    }
+  ],
+  "cases": [
+    {
+      "song_id": "wild-thing",
+      "recording": {
+        "id": "troggs-wild-thing-youtube-20261011",
+        "title": "The Troggs - Wild Thing",
+        "duration_seconds": 155.3516553287982,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf"
+      },
+      "status": "teacher-supported-review-proposal",
+      "label_convention": "Played-shape names in a separately declared teaching setup; not automatic sounding-chord replacements",
+      "main_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "optional_variants": [
+        {
+          "kind": "power-shape adaptation",
+          "shapes": [
+            "A5",
+            "D5",
+            "E5"
+          ],
+          "source_ids": [
+            "wild-lauren"
+          ]
+        }
+      ],
+      "contrasting_figures": [
+        {
+          "description": "Separate G/A note figure or adapted chord interpretation; this extends beyond the three-grip main entry.",
+          "source_ids": [
+            "wild-lauren"
+          ]
+        }
+      ],
+      "tuning_observations": [
+        {
+          "tuning": "EADGBE",
+          "source_status": "explicit teacher statement",
+          "source_ids": [
+            "wild-carl"
+          ]
+        },
+        {
+          "tuning": "EADGBE",
+          "source_status": "open-grip practice proposal; no explicit tuning sentence in freshly inspected Andy text",
+          "source_ids": [
+            "wild-andy"
+          ]
+        }
+      ],
+      "rhythm_tasks": [
+        "Practise paired attacks without assuming a constant attack count covers every section.",
+        "Distinguish struck attacks from held harmony and from the separate contrasting note figure."
+      ],
+      "section_tasks": [
+        "Main chord-riff material",
+        "Contrasting G/A figure and holds",
+        "Instrumental material and ending"
+      ],
+      "practice_gaps": [
+        "Current steady-down/down-up drills do not specifically teach the paired-attack groove or contrasting figure."
+      ],
+      "inconsistencies": [
+        "Andy overview says one main loop covers the whole song, while Carl describes several progressions and Lauren supplies a contrasting G/A figure. Retain the entry loop as a practice proposal, not a complete arrangement."
+      ],
+      "source_ids": [
+        "wild-andy",
+        "wild-carl",
+        "wild-lauren"
+      ],
+      "capo_observation": {
+        "source_assertion": null,
+        "project_proposal": 0,
+        "exact_recording_verified": false
+      },
+      "audio_setup_verified": false,
+      "exact_recording_pitch_verified": false,
+      "exact_section_times_verified": false,
+      "complete_recording_arrangement_verified": false,
+      "timing_transcription": false,
+      "strum_transcription": false,
+      "accepted": false
+    },
+    {
+      "song_id": "love-me-do",
+      "recording": {
+        "id": "beatles-love-me-do-youtube-20261011",
+        "title": "The Beatles - Love Me Do",
+        "duration_seconds": 141.69832199546485,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea"
+      },
+      "status": "teacher-supported-review-proposal",
+      "label_convention": "Played-shape names in a separately declared teaching setup; not automatic sounding-chord replacements",
+      "main_shapes": [
+        "G",
+        "C",
+        "D"
+      ],
+      "optional_variants": [
+        {
+          "kind": "optional shared-finger embellishment",
+          "shapes": [
+            "Cadd9"
+          ],
+          "source_ids": [
+            "love-andy"
+          ]
+        },
+        {
+          "kind": "transposed beginner adaptation",
+          "shapes": [
+            "D",
+            "A",
+            "E"
+          ],
+          "declared_capo_for_original_pitch": 10,
+          "source_ids": [
+            "love-justin"
+          ],
+          "limit": "Indexed teacher text only; no pitch check of the cached recording. This is separate from the G/C/D proposal."
+        }
+      ],
+      "contrasting_figures": [
+        {
+          "description": "Longer C-led hold followed by intentional silence; D-led middle material, also used for harmonica.",
+          "source_ids": [
+            "love-andy",
+            "love-brad"
+          ]
+        }
+      ],
+      "tuning_observations": [
+        {
+          "tuning": "EADGBE",
+          "source_status": "project open-grip proposal; no explicit tuning sentence in freshly inspected Andy/Brad prose",
+          "source_ids": [
+            "love-andy",
+            "love-brad"
+          ]
+        }
+      ],
+      "rhythm_tasks": [
+        "Begin with on-beat chord changes.",
+        "Treat deliberate muting as a separate action from skipped contact or continued sustain.",
+        "Teach long/short swing separately from a straight evenly divided eighth drill."
+      ],
+      "section_tasks": [
+        "G/C-led verse and hook material",
+        "Longer hold and deliberate stop",
+        "D-led contrasting middle",
+        "Harmonica contrast and ending"
+      ],
+      "practice_gaps": [
+        "Current dash means skip attack and cannot express deliberate muting.",
+        "Equal-width eighth slots do not encode a recorded swing ratio; swing guidance should remain qualitative until verified."
+      ],
+      "inconsistencies": [
+        "Justin indexed lesson uses D/A/E as a transposed beginner arrangement; capo 10 maps its sounding palette to the G/C/D proposal. This is not a raw chord-consensus conflict.",
+        "Teacher measure/strum descriptions differ and are not transferred to the cached 2009 album recording.",
+        "Section naming varies between teachers; qualitative tasks are retained without selecting a timed formal analysis."
+      ],
+      "source_ids": [
+        "love-andy",
+        "love-brad",
+        "love-justin"
+      ],
+      "capo_observation": {
+        "source_assertion": null,
+        "project_proposal": 0,
+        "exact_recording_verified": false
+      },
+      "audio_setup_verified": false,
+      "exact_recording_pitch_verified": false,
+      "exact_section_times_verified": false,
+      "complete_recording_arrangement_verified": false,
+      "timing_transcription": false,
+      "strum_transcription": false,
+      "accepted": false
+    },
+    {
+      "song_id": "knockin-on-heaven-s-door",
+      "recording": {
+        "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+        "title": "Bob Dylan - Knockin' On Heaven's Door",
+        "duration_seconds": 149.89496598639457,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f"
+      },
+      "status": "teacher-supported-review-proposal",
+      "label_convention": "Played-shape names in a separately declared teaching setup; not automatic sounding-chord replacements",
+      "main_shapes": [
+        "G",
+        "D",
+        "Am",
+        "C"
+      ],
+      "optional_variants": [
+        {
+          "kind": "richer minor grip / author interpretation",
+          "shapes": [
+            "Am7"
+          ],
+          "source_ids": [
+            "dylan-songnotes"
+          ],
+          "limit": "The teacher hears this option in Dylan; exact cached occurrence and voicing remain unverified."
+        },
+        {
+          "kind": "separate picking adaptation",
+          "shapes": [],
+          "source_ids": [
+            "dylan-jon",
+            "dylan-goodguitarist"
+          ]
+        }
+      ],
+      "contrasting_figures": [
+        {
+          "description": "Alternating minor and major response material using Am or C; optional bass/picking embellishments remain separate.",
+          "source_ids": [
+            "dylan-jon",
+            "dylan-songnotes",
+            "dylan-goodguitarist"
+          ]
+        }
+      ],
+      "tuning_observations": [
+        {
+          "tuning": "EADGBE",
+          "source_status": "explicit teacher statement for Dylan lesson",
+          "source_ids": [
+            "dylan-jon"
+          ]
+        }
+      ],
+      "rhythm_tasks": [
+        "Start with sparse on-beat attacks and sustained response shapes.",
+        "Add subdivisions gradually; Jon describes a slow sixteenth feel, while other teacher entry arrangements use simpler attacks.",
+        "Keep optional fingerstyle practice separate from claims about the studio strummed part."
+      ],
+      "section_tasks": [
+        "Intro versus vocal material",
+        "Alternating response phrases and holds",
+        "Refrain/outro coverage",
+        "Optional picking or bass embellishments"
+      ],
+      "practice_gaps": [
+        "Existing continuous eighth drill does not cover a later sixteenth-count task.",
+        "Native Am7 must not automatically be marked an error simply because the entry palette uses Am."
+      ],
+      "inconsistencies": [
+        "Jon labels the displayed Am triad ii7; this source theory typo is excluded from the proposal.",
+        "Teacher tempo/pulse and teaching bar-count conventions are not recording timing truth.",
+        "Guns N Roses and Clapton lessons are different arrangements and are excluded from this Dylan proposal."
+      ],
+      "source_ids": [
+        "dylan-jon",
+        "dylan-songnotes",
+        "dylan-goodguitarist"
+      ],
+      "capo_observation": {
+        "source_assertion": null,
+        "project_proposal": 0,
+        "exact_recording_verified": false
+      },
+      "audio_setup_verified": false,
+      "exact_recording_pitch_verified": false,
+      "exact_section_times_verified": false,
+      "complete_recording_arrangement_verified": false,
+      "timing_transcription": false,
+      "strum_transcription": false,
+      "accepted": false
+    },
+    {
+      "song_id": "twist-and-shout",
+      "recording": {
+        "id": "beatles-twist-and-shout-youtube-20261011",
+        "title": "The Beatles - Twist And Shout",
+        "duration_seconds": 155.23555555555555,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c"
+      },
+      "status": "teacher-supported-review-proposal",
+      "label_convention": "Played-shape names in a separately declared teaching setup; not automatic sounding-chord replacements",
+      "main_shapes": [
+        "D",
+        "G",
+        "A"
+      ],
+      "optional_variants": [
+        {
+          "kind": "melody-friendly power-shape adaptation",
+          "shapes": [
+            "D5"
+          ],
+          "source_ids": [
+            "twist-andy"
+          ]
+        },
+        {
+          "kind": "dominant variation",
+          "shapes": [
+            "A7"
+          ],
+          "source_ids": [
+            "twist-jon"
+          ]
+        }
+      ],
+      "contrasting_figures": [
+        {
+          "description": "Sustained A build-up, optional melody/solo work and a distinct ending exercise.",
+          "source_ids": [
+            "twist-andy",
+            "twist-jon"
+          ]
+        }
+      ],
+      "tuning_observations": [
+        {
+          "tuning": "EADGBE",
+          "source_status": "explicit teacher statement for Beatles arrangement",
+          "source_ids": [
+            "twist-jon"
+          ]
+        },
+        {
+          "tuning": "EADGBE",
+          "source_status": "standard-shape inference from teacher fret/string description",
+          "source_ids": [
+            "twist-andy"
+          ]
+        }
+      ],
+      "rhythm_tasks": [
+        "Separate the main chord-response groove from a sustained build-up.",
+        "Offer repeated downstroke eighths as a driving practice option; this differs from alternating D/U.",
+        "Keep riff, solo and ending work optional rather than generating chord events from teacher descriptions."
+      ],
+      "section_tasks": [
+        "Main accompaniment response",
+        "Sustained A build-up",
+        "Instrumental/solo material",
+        "Ending"
+      ],
+      "practice_gaps": [
+        "Current alternating eighth exercise does not teach the all-down build-up option."
+      ],
+      "inconsistencies": [
+        "Teachers include different optional variants; these are explicit adaptation choices, not proof of exact cached voicings.",
+        "Isley Brothers teaching appears on Jon page but is a higher-key separate arrangement and is excluded.",
+        "Teacher build-up repetitions are not transferred to cached 2009 remaster section durations."
+      ],
+      "source_ids": [
+        "twist-andy",
+        "twist-jon"
+      ],
+      "capo_observation": {
+        "source_assertion": null,
+        "project_proposal": 0,
+        "exact_recording_verified": false
+      },
+      "audio_setup_verified": false,
+      "exact_recording_pitch_verified": false,
+      "exact_section_times_verified": false,
+      "complete_recording_arrangement_verified": false,
+      "timing_transcription": false,
+      "strum_transcription": false,
+      "accepted": false
+    }
+  ],
+  "verification": {
+    "recording_metadata_paired_to_canonical_review": true,
+    "public_primary_teacher_text_checked": true,
+    "cached_audio_listened_through": false,
+    "audio_setup_verified": false,
+    "timing_transcription": false,
+    "strum_transcription": false,
+    "copied_full_charts_lyrics_tabs_or_teacher_bar_counts": false,
+    "raw_charts_changed": false,
+    "recording_accuracy_measured": false,
+    "human_correction_effort_measured": false,
+    "accepted_arrangements": 0,
+    "gold": false,
+    "founder_transcription_required": false
+  },
+  "source_support_limits": [
+    "Teachers describe their own arrangements, not independently paired audio annotations for these exact cached uploads.",
+    "Qualitative source corroboration does not establish played voicings, pitch, physical chord-change times, local beat phase or complete section coverage.",
+    "No source demo times, teacher bar counts, repeat counts or third-party charts are imported into recording timestamps.",
+    "No majority-vote chord correction, acceptance or model-confidence claim follows from these observations."
+  ],
+  "correction_effort": {
+    "human_seconds": null,
+    "agent_correction_seconds": null,
+    "status": "Unmeasured; this source research is not timed musical correction or commercial curation cost."
+  }
+}
