@@ -1,0 +1,353 @@
+{
+  "schema_version": "catalogue-first-ten-pitch-scope-1.0",
+  "scope": "Six remaining exact recordings; first four retain prior 14 October evidence. Riff cases receive descriptive pitch-class inventories without coerced triads.",
+  "pack_manifest_sha256": "64d67f29f6ff1ce91aeae6309e7102c2c2629e5c0fdcd061035de2a2e22f3fb5",
+  "policy": {
+    "shifts_semitones": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "spectral_hop_seconds": 0.05,
+    "spectral_window_seconds": 0.18,
+    "window_seconds": 20.0,
+    "tie_tolerance": 1e-12,
+    "max_outside_examples_per_model": 8,
+    "template": "equal pitch-class weights, L2-normalized; slash bass omitted",
+    "score": "duration-weighted nearest source-palette cosine on non-silent, nonzero frames",
+    "frame_duration": "cells split at adjacent feature-center midpoints, bounded to audio",
+    "acceptance_threshold": null,
+    "automatic_corrections": false,
+    "tuning_cents_estimation": false,
+    "physical_capo_recognition": false
+  },
+  "selected_case_ids": [
+    "van-morrison-brown-eyed-girl-youtube-20261011",
+    "white-stripes-seven-nation-army-youtube-20261011",
+    "nirvana-come-as-you-are-youtube-20261011",
+    "radiohead-creep-youtube-20261010",
+    "animals-house-rising-sun-official-20261011",
+    "oasis-wonderwall-youtube-20261010"
+  ],
+  "cases": [
+    {
+      "id": "troggs-wild-thing-youtube-20261011",
+      "recording": {
+        "id": "troggs-wild-thing-youtube-20261011",
+        "title": "The Troggs - Wild Thing",
+        "duration_seconds": 155.3516553287982,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "review_sha256": "5bd9033994ef3ed0c9e3ecc9342f3e5483b68145634515926cf6cc29689fa91c",
+      "analysis_kind": "source-palette-compatibility",
+      "shape_palette": [
+        "A",
+        "D",
+        "E"
+      ],
+      "source_setup": {
+        "tuning": "EADGBE",
+        "tuning_status": "Standard open-chord practice proposal; not explicitly asserted in newly inspected page text",
+        "capo": null,
+        "capo_status": "Unverified; zero proposed",
+        "exact_upload_pitch_checked": false
+      },
+      "expected_sounding_shift_semitones": 0,
+      "setup_mapping_status": "Teacher/setup theory proposal; not physical setup recognition or accepted recording truth",
+      "fixed_samples": 4,
+      "mapping_note": "Expected zero is an accompaniment setup proposal; pitch-class compatibility cannot prove physical tuning, capo or voicing.",
+      "historical_evidence": {
+        "path": "experiments/generated/catalogue-starter-four-pitch-v3-20261014/troggs-wild-thing-youtube-20261011/report.json",
+        "sha256": "84ee060d4362ed219a8aff7aa9860fc82e7e06cfb9b443de08ab82c5db8acaa6",
+        "rerun": false
+      }
+    },
+    {
+      "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+      "recording": {
+        "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+        "title": "Bob Dylan - Knockin' On Heaven's Door",
+        "duration_seconds": 149.89496598639457,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "review_sha256": "e0b6c81da35a05fb088183a138969b89a537e66b38e050fdd47d1eeefd810c37",
+      "analysis_kind": "source-palette-compatibility",
+      "shape_palette": [
+        "G",
+        "D",
+        "Am",
+        "C"
+      ],
+      "source_setup": {
+        "tuning": "EADGBE",
+        "tuning_status": "Explicit teacher setup",
+        "capo": null,
+        "capo_status": "Unverified; zero proposed",
+        "exact_upload_pitch_checked": false
+      },
+      "expected_sounding_shift_semitones": 0,
+      "setup_mapping_status": "Teacher/setup theory proposal; not physical setup recognition or accepted recording truth",
+      "fixed_samples": 4,
+      "mapping_note": "Expected zero is an accompaniment setup proposal; pitch-class compatibility cannot prove physical tuning, capo or voicing.",
+      "historical_evidence": {
+        "path": "experiments/generated/catalogue-starter-four-pitch-v3-20261014/bob-dylan-knockin-heavens-door-youtube-20261011/report.json",
+        "sha256": "a320c03b81e00d5159e6854ce2fb6f1f0a421989e9852c50b8b90a6f346d0046",
+        "rerun": false
+      }
+    },
+    {
+      "id": "van-morrison-brown-eyed-girl-youtube-20261011",
+      "recording": {
+        "id": "van-morrison-brown-eyed-girl-youtube-20261011",
+        "title": "Van Morrison - Brown Eyed Girl",
+        "duration_seconds": 186.55927437641722,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "review_sha256": "2954b3d877c653469e61b5f760660a4475a319e79151caf2df39c299bc630748",
+      "analysis_kind": "source-palette-compatibility",
+      "shape_palette": [
+        "G",
+        "C",
+        "D",
+        "Em"
+      ],
+      "source_setup": {
+        "tuning": "EADGBE",
+        "tuning_status": "Explicit in separate David Stanley teacher arrangement; exact selected upload pitch unmeasured",
+        "capo": null,
+        "capo_status": "Unverified; zero proposed",
+        "exact_upload_pitch_checked": false
+      },
+      "expected_sounding_shift_semitones": 0,
+      "setup_mapping_status": "Teacher/setup theory proposal; not physical setup recognition or accepted recording truth",
+      "fixed_samples": 4,
+      "mapping_note": "Expected zero is an accompaniment setup proposal; pitch-class compatibility cannot prove physical tuning, capo or voicing."
+    },
+    {
+      "id": "beatles-love-me-do-youtube-20261011",
+      "recording": {
+        "id": "beatles-love-me-do-youtube-20261011",
+        "title": "The Beatles - Love Me Do",
+        "duration_seconds": 141.69832199546485,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "review_sha256": "4c78d2384d87b9442a76143707ddc4a336453c4a12e9c0f0d51d6070bcccc50d",
+      "analysis_kind": "source-palette-compatibility",
+      "shape_palette": [
+        "G",
+        "C",
+        "D"
+      ],
+      "source_setup": {
+        "tuning": "EADGBE",
+        "tuning_status": "Standard open-chord practice proposal; no explicit tuning sentence inspected",
+        "capo": null,
+        "capo_status": "Unverified; zero proposed",
+        "exact_upload_pitch_checked": false
+      },
+      "expected_sounding_shift_semitones": 0,
+      "setup_mapping_status": "Teacher/setup theory proposal; not physical setup recognition or accepted recording truth",
+      "fixed_samples": 4,
+      "mapping_note": "Expected zero is an accompaniment setup proposal; pitch-class compatibility cannot prove physical tuning, capo or voicing.",
+      "historical_evidence": {
+        "path": "experiments/generated/catalogue-starter-four-pitch-v3-20261014/beatles-love-me-do-youtube-20261011/report.json",
+        "sha256": "3de8a2112357d09afd01a0c25a35059b3dad3ed5126d3edf6bb36076deec7d82",
+        "rerun": false
+      }
+    },
+    {
+      "id": "beatles-twist-and-shout-youtube-20261011",
+      "recording": {
+        "id": "beatles-twist-and-shout-youtube-20261011",
+        "title": "The Beatles - Twist And Shout",
+        "duration_seconds": 155.23555555555555,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "review_sha256": "b571630752c74442bd5f63f6f04ce71cac1b784cc832ac8744dfce6715c0b96c",
+      "analysis_kind": "source-palette-compatibility",
+      "shape_palette": [
+        "D",
+        "G",
+        "A"
+      ],
+      "source_setup": {
+        "tuning": "EADGBE",
+        "tuning_status": "Standard-shape proposal from teacher fret/string description; not an explicit newly inspected tuning sentence",
+        "capo": null,
+        "capo_status": "Unverified; zero proposed",
+        "exact_upload_pitch_checked": false
+      },
+      "expected_sounding_shift_semitones": 0,
+      "setup_mapping_status": "Teacher/setup theory proposal; not physical setup recognition or accepted recording truth",
+      "fixed_samples": 4,
+      "mapping_note": "Expected zero is an accompaniment setup proposal; pitch-class compatibility cannot prove physical tuning, capo or voicing.",
+      "historical_evidence": {
+        "path": "experiments/generated/catalogue-starter-four-pitch-v3-20261014/beatles-twist-and-shout-youtube-20261011/report.json",
+        "sha256": "c98d92c222872ed53ce4549017b631c4405932a27008941d6c4493b82efc2c42",
+        "rerun": false
+      }
+    },
+    {
+      "id": "white-stripes-seven-nation-army-youtube-20261011",
+      "recording": {
+        "id": "white-stripes-seven-nation-army-youtube-20261011",
+        "title": "The White Stripes - Seven Nation Army",
+        "duration_seconds": 232.1168253968254,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "394c791d799d7ff7ece36c1b93a434c1f600afe0265f5dfe1d6ad328626a6854",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "review_sha256": "4e55c1e75a5ade962656f02199b9aa9cbd1e56d6e50d9d47cfa301f8bfed44d8",
+      "analysis_kind": "riff-pitch-class-inventory",
+      "shape_palette": null,
+      "source_setup": {
+        "tuning": "EADGBE adaptation; original Open A",
+        "tuning_status": "Teacher explicitly distinguishes standard adaptation and Open A original",
+        "capo": null,
+        "capo_status": "Unverified; zero proposed for standard adaptation",
+        "exact_upload_pitch_checked": false
+      },
+      "expected_sounding_shift_semitones": null,
+      "setup_mapping_status": "Teacher/setup theory proposal; not physical setup recognition or accepted recording truth",
+      "fixed_samples": 4,
+      "mapping_note": "Standard-tuning riff/power adaptation and teacher-described original Open A are separate playing setups; no triad palette is forced over the riff."
+    },
+    {
+      "id": "nirvana-come-as-you-are-youtube-20261011",
+      "recording": {
+        "id": "nirvana-come-as-you-are-youtube-20261011",
+        "title": "Nirvana - Come As You Are",
+        "duration_seconds": 218.92789115646258,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "review_sha256": "d2ca8cef43fbaf3f089888ce5e4efb7a8e6fef90d19d319615f271eafe9adf87",
+      "analysis_kind": "riff-pitch-class-inventory",
+      "shape_palette": null,
+      "source_setup": {
+        "tuning": "DGCFAD",
+        "tuning_status": "Teacher explicitly specifies D standard for original studio recording; common live E-flat standard is separate",
+        "capo": null,
+        "capo_status": "Not explicitly asserted; zero proposed for studio-tuning lesson",
+        "exact_upload_pitch_checked": false
+      },
+      "expected_sounding_shift_semitones": null,
+      "setup_mapping_status": "Teacher/setup theory proposal; not physical setup recognition or accepted recording truth",
+      "fixed_samples": 4,
+      "mapping_note": "D-standard DGCFAD: conventional shape names are two semitones above sounding roots. No melody or major/minor palette is supplied; original studio versus live E-flat tuning remains distinct."
+    },
+    {
+      "id": "radiohead-creep-youtube-20261010",
+      "recording": {
+        "id": "radiohead-creep-youtube-20261010",
+        "title": "Radiohead - Creep",
+        "duration_seconds": 236.63455782312926,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "review_sha256": "c72976ddc407c1332f447c25e3143208e83091c89a3430779032c4ee067cfcae",
+      "analysis_kind": "source-palette-compatibility",
+      "shape_palette": [
+        "G",
+        "B",
+        "C",
+        "Cm"
+      ],
+      "source_setup": {
+        "tuning": "EADGBE",
+        "tuning_status": "Inferred from teacher root-six fret/shape description; exact upload pitch unmeasured",
+        "capo": null,
+        "capo_status": "Unverified; zero proposed",
+        "exact_upload_pitch_checked": false
+      },
+      "expected_sounding_shift_semitones": 0,
+      "setup_mapping_status": "Teacher/setup theory proposal; not physical setup recognition or accepted recording truth",
+      "fixed_samples": 4,
+      "mapping_note": "Expected zero is an accompaniment setup proposal; pitch-class compatibility cannot prove physical tuning, capo or voicing."
+    },
+    {
+      "id": "animals-house-rising-sun-official-20261011",
+      "recording": {
+        "id": "animals-house-rising-sun-official-20261011",
+        "title": "The Animals - The House Of The Rising Sun",
+        "duration_seconds": 269.91891156462583,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "review_sha256": "08adade026ea718b1d4b5e0fd81536098b484c8f08d3d97957d9a058be6c7c78",
+      "analysis_kind": "source-palette-compatibility",
+      "shape_palette": [
+        "Am",
+        "C",
+        "D",
+        "F",
+        "E",
+        "Dm"
+      ],
+      "source_setup": {
+        "tuning": "EADGBE",
+        "tuning_status": "Standard open-grip inference/prior teacher setup; not explicit in newly inspected prose",
+        "capo": 0,
+        "capo_status": "Explicit Richter teacher setup",
+        "exact_upload_pitch_checked": false
+      },
+      "expected_sounding_shift_semitones": 0,
+      "setup_mapping_status": "Teacher/setup theory proposal; not physical setup recognition or accepted recording truth",
+      "fixed_samples": 4,
+      "mapping_note": "Expected zero is an accompaniment setup proposal; pitch-class compatibility cannot prove physical tuning, capo or voicing."
+    },
+    {
+      "id": "oasis-wonderwall-youtube-20261010",
+      "recording": {
+        "id": "oasis-wonderwall-youtube-20261010",
+        "title": "Oasis - Wonderwall",
+        "duration_seconds": 277.78031746031746,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "review_sha256": "2571f29fdc1721aa2403dfa848e3528d68b0e06c127dab61797c1f5a257da5e5",
+      "analysis_kind": "source-palette-compatibility",
+      "shape_palette": [
+        "Em7",
+        "G",
+        "Dsus4",
+        "A7sus4",
+        "Cadd9"
+      ],
+      "source_setup": {
+        "tuning": "EADGBE",
+        "tuning_status": "Explicit Carl Brown teacher setup",
+        "capo": 2,
+        "capo_status": "Explicit Carl Brown and Greg Shute teacher setup",
+        "exact_upload_pitch_checked": false
+      },
+      "expected_sounding_shift_semitones": 2,
+      "setup_mapping_status": "Teacher/setup theory proposal; not physical setup recognition or accepted recording truth",
+      "fixed_samples": 4,
+      "mapping_note": "Standard tuning and capo2: sounded pitch classes = teacher shapes +2. Suspensions/extensions are retained in acoustic templates; simple core families do not reproduce recorded grips."
+    }
+  ]
+}

@@ -1,0 +1,467 @@
+{
+  "schema_version": "catalogue-curation-proposals-1.0",
+  "prepared_at_utc": "2026-10-16T15:26:51.386301+00:00",
+  "status": "ten model-exposed editorial drafts; no approved lessons or learner promotion",
+  "gold": false,
+  "prior_first_four": {
+    "path": "catalogue/starter-four-curation-proposals-v2.json",
+    "sha256": "b4f1618333abd4c1a7075fd2ec926ecaf8f18811f93129a3f391985a55304867"
+  },
+  "native_change_report": {
+    "path": "experiments/generated/catalogue-change-check-20261016/report.json",
+    "sha256": "c6c4d4d0161d5b2d77cc36aa7bd3e5500a5f9b3c34b8578e64560ef14efbe5c9"
+  },
+  "audio_rhythm_report": {
+    "path": "experiments/generated/catalogue-audio-rhythm-v2-20261016/report.json",
+    "sha256": "8605d1fe59a5e922fc2c70773b8b7428e3526337823bf612214eba8963898aae"
+  },
+  "remaining_six_pitch_report": {
+    "path": "experiments/generated/catalogue-remaining-six-pitch-20261016/report.json",
+    "sha256": "9427d542ea365134b064bbf388039674bd1c88be6df0addc31252e98fe3fa6ff"
+  },
+  "source_review": {
+    "path": "catalogue/remaining-six-teaching-review.json",
+    "sha256": "134eda4099bd1ba85d217098809935b7d9c656121038461bf2ad6ea81e05bbc3"
+  },
+  "semantics": "Sections contain provisional harmonic search or fixed-coverage replay windows. Batch note entry adds no timed session; existing actor sessions measure UI entry only. No human production effort or physical timing accuracy is measured.",
+  "private_before_sha256": {
+    "troggs-wild-thing-youtube-20261011": "cab2f7f43573bfb7697cdb5880417124646ebe1f38822d2df0328586e8795e9a",
+    "bob-dylan-knockin-heavens-door-youtube-20261011": "4c674d44319e1d61f5b016a6d5b4d31895a3fd996213c0f666972813a7f73e35",
+    "beatles-love-me-do-youtube-20261011": "483595986c7344b6062fc28104aeff38ee22d99cdddc75ea1d7a41774514744f",
+    "beatles-twist-and-shout-youtube-20261011": "f5569c5233b1a731c202b672209872021a038a154a91c075cb55687e1138cb8b"
+  },
+  "drafts": [
+    {
+      "schema_version": "catalogue-curation-draft-1.0",
+      "status": "model-exposed-curation-draft",
+      "gold": false,
+      "pack_id": "catalogue-curation-20261014",
+      "recording": {
+        "id": "troggs-wild-thing-youtube-20261011",
+        "title": "The Troggs - Wild Thing",
+        "duration_seconds": 155.3516553287982,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "base_artifacts": {
+        "primary_sha256": "aecee2605813eb56acd62971619080f8af1906b6f1319a2c737386d7f449a7c4",
+        "crema_sha256": "13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81"
+      },
+      "revision": 2,
+      "chord_edits": [],
+      "sections": [
+        {
+          "start_seconds": 104.64399092970521,
+          "end_seconds": 111.17714285714285,
+          "name": "A common-hold search (provisional)"
+        }
+      ],
+      "checked_points": [],
+      "sessions": [
+        {
+          "id": "session-359a0926-ca66-4135-a1fa-ab4e1d659d77",
+          "actor": "agent",
+          "task": "setup",
+          "started_at": "2026-10-14T10:31:43.603Z",
+          "ended_at": "2026-10-14T10:31:43.910Z",
+          "active_seconds": 0.30719999980926516
+        }
+      ],
+      "setup_notes": "Teacher-supported practice proposal: EADGBE (Carl Brown), A/D/E main shapes; physical capo remains unknown, zero proposed. Optional A5/D5/E5 adaptation. Lauren Bateman supports a separate G/A note figure or adapted grips, so the main three-chord loop is not a complete arrangement. Exact cached guitar voicings remain unverified.",
+      "rhythm_notes": "Entry task: paired attacks with holds. Separate the contrasting note figure, instrumental material and ending. Existing steady drills are preparation; no recorded strumming pattern or section timestamps are asserted. 16 October audio checks: full-mix transients, energy changes and cached pulse phases were measured automatically. Synthetic controls expose many extra detections and missed soft attacks, so these observations are not recorded guitar strumming, swing or mute transcription.",
+      "review_notes": "14 October pitch-class diagnostic: whole-recording spectral and NNLS checks both rank proposed shift zero first. Spectral 60\u201380 s differs locally; NNLS does not. C/Em/G outside-main-palette cues remain unresolved; no labels or timings were changed. Sources: https://guitarlessons365.com/wild-thing-guitar-lesson-the-troggs/ and https://www.laurenbateman.com/wild-thing-chord-chart/ . See catalogue/starter-four-teaching-review.json and the starter-four pitch report. Timed session records note-entry interaction only, excluding research and automated analysis. The long CREMA A regions contain repeated full-mix transients and deep energy dips (44.426 s and 109.343 s). The separate G/A figure is still not identified. Harmonic holds do not specify the paired attacks or prove continuous guitar sustain. Native chord changes remain unshifted; 12 selected timing windows and four fixed samples have automated measurements. Cached guided pulse 103.359 BPM is an unverified metrical hypothesis. No timing, guitar rhythm, formal section, capo or lesson is accepted. See docs/CATALOGUE_TIMING_RHYTHM_CHECK.md. Batch note entry adds no review session or human correction-cost estimate."
+    },
+    {
+      "schema_version": "catalogue-curation-draft-1.0",
+      "status": "model-exposed-curation-draft",
+      "gold": false,
+      "pack_id": "catalogue-curation-20261014",
+      "recording": {
+        "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+        "title": "Bob Dylan - Knockin' On Heaven's Door",
+        "duration_seconds": 149.89496598639457,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "base_artifacts": {
+        "primary_sha256": "018dc316af89e4678d9a9718b26553d3f048e8f80deaedf8e5ea31c14303b78e",
+        "crema_sha256": "022405eadb0d332a34ca66b74989e72cc5e597e57417c1a289178e0a7a084082"
+      },
+      "revision": 3,
+      "chord_edits": [
+        {
+          "start_seconds": 29.473741496598638,
+          "end_seconds": 30.27863945578231,
+          "label": "G",
+          "note": "Provisional source-guided label edit. Teacher palette and CREMA support G; minus-vocals/other tests favour G over Gm in both acoustic methods with full cue support. Bounds are unchanged BTC predictions, not verified physical timing. Targeted protocol c4417639; no automatic lesson approval."
+        },
+        {
+          "start_seconds": 50.185759637188205,
+          "end_seconds": 51.02167800453515,
+          "label": "G",
+          "note": "Provisional source-guided label edit. Teacher palette and CREMA support G; minus-vocals/other tests favour G over Gm in both acoustic methods with full cue support. Bounds are unchanged BTC predictions, not verified physical timing. Targeted protocol c4417639; no automatic lesson approval."
+        }
+      ],
+      "sections": [
+        {
+          "start_seconds": 4.08671201814059,
+          "end_seconds": 7.337505668934241,
+          "name": "Am common-hold search (provisional)"
+        },
+        {
+          "start_seconds": 11.145578231292516,
+          "end_seconds": 14.551111111111112,
+          "name": "C common-hold search (provisional)"
+        }
+      ],
+      "checked_points": [],
+      "sessions": [
+        {
+          "id": "session-d8f60671-fd36-40a7-ae1b-9a4fd496e912",
+          "actor": "agent",
+          "task": "setup",
+          "started_at": "2026-10-14T10:32:54.395Z",
+          "ended_at": "2026-10-14T10:32:54.694Z",
+          "active_seconds": 0.29839999961853025
+        },
+        {
+          "id": "session-89d1f9e8-db2b-4ff1-bbac-d66827f69ac4",
+          "actor": "agent",
+          "task": "chords-and-timing",
+          "started_at": "2026-10-14T10:35:22.652Z",
+          "ended_at": "2026-10-14T10:35:24.005Z",
+          "active_seconds": 1.353
+        }
+      ],
+      "setup_notes": "Dylan practice proposal: G/D/Am/C; Jon MacLennan states standard EADGBE. Physical capo remains unknown, zero proposed. Song Notes describes optional Am7; retain native richer minor chords rather than calling them errors solely because the entry palette uses Am. Different Guns N Roses/Clapton arrangements are excluded.",
+      "rhythm_notes": "Start with sparse attacks and sustained response shapes, then gradually add subdivision. The slow sixteenth feel and separate fingerstyle variant are teacher proposals, not a transcribed studio pattern. Locate alternating Am/C response material, intro/vocal contrast and outro before inserting timed section markers. 16 October audio checks: full-mix transients, energy changes and cached pulse phases were measured automatically. Synthetic controls expose many extra detections and missed soft attacks, so these observations are not recorded guitar strumming, swing or mute transcription.",
+      "review_notes": "14 October: proposed pitch shift zero ranks first in both methods throughout all 20-second windows. Two provisional G-label edits replace native Gm at 29.474\u201330.279 s and 50.186\u201351.022 s in this working copy only. Removing estimated vocals and using the mixed other stem flip the G/Gm cosine preference in both methods; preprocessing control changes are below 0.000003, with no cue support lost. This is consistent with vocal influence; it does not prove a performed guitar chord. Exact bounds remain native predictions, with physical timing/sections/voicing unverified. Ordinary player and raw charts remain unchanged. Sources: https://www.jonmaclennan.com/blog/knockin-on-heaven%27s-door-chords and https://songnotes.net/lessons/88/ . Targeted protocol c441763972fb591b8a7c4dc7f065445519c217eb3c3315cd60af6f679aa2b9e2. Timed sessions cover draft entry only, excluding research/analysis. The Am/C response inventory and native timings remain separate from repeat/section counts. Repeated full-mix attacks inside both kinds of hold do not create new harmonic changes. The short extra BTC Am near 82.508\u201383.065 s remains unresolved. The two earlier provisional G labels are retained at their original bounds. Native chord changes remain unshifted; 12 selected timing windows and four fixed samples have automated measurements. Cached guided pulse 69.837 BPM is an unverified metrical hypothesis. No timing, guitar rhythm, formal section, capo or lesson is accepted. See docs/CATALOGUE_TIMING_RHYTHM_CHECK.md. Batch note entry adds no review session or human correction-cost estimate."
+    },
+    {
+      "schema_version": "catalogue-curation-draft-1.0",
+      "status": "model-exposed-curation-draft",
+      "gold": false,
+      "pack_id": "catalogue-curation-20261014",
+      "recording": {
+        "id": "van-morrison-brown-eyed-girl-youtube-20261011",
+        "title": "Van Morrison - Brown Eyed Girl",
+        "duration_seconds": 186.55927437641722,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "base_artifacts": {
+        "primary_sha256": "3047f46334a44dfeb0ae5fe0ae235ab33afea06d435db40c221a3e72def6d47b",
+        "crema_sha256": "1bc1f1c9467a8bea0aab8e8ae9ea4ccbd3f71ce47c52a1376f591528bcb1170d"
+      },
+      "revision": 1,
+      "chord_edits": [],
+      "sections": [
+        {
+          "start_seconds": 44.210793650793654,
+          "end_seconds": 45.789750566893424,
+          "name": "Em common-hold search (provisional)"
+        },
+        {
+          "start_seconds": 82.60063492063492,
+          "end_seconds": 84.24199546485261,
+          "name": "Em common-hold search (provisional)"
+        }
+      ],
+      "checked_points": [],
+      "sessions": [],
+      "setup_notes": "Source-guided practice setup: {\"tuning\": \"EADGBE\", \"tuning_status\": \"Project open-chord practice proposal; explicit support exists in the older separate Stanley arrangement, which was not reopened in this pass\", \"source_capo\": null, \"proposed_capo\": 0, \"selected_recording_verified\": false}. Physical selected-recording setup remains unverified.",
+      "rhythm_notes": "Begin with steady strokes, then practise a ringing tie across an omitted attack. Keep the hand moving. This is a teacher-supported accompaniment exercise; its contacts are not an exact-upload strum transcription. 16 October audio checks: full-mix transients, energy changes and cached pulse phases were measured automatically. Synthetic controls expose many extra detections and missed soft attacks, so these observations are not recorded guitar strumming, swing or mute transcription.",
+      "review_notes": "Keep G/C/D/Em as source-supported practice shapes, inspect Em contrast and original-recording tempo independently, and leave lead/intro work optional. A skipped attack lets the prior sound ring; it is not a deliberate mute. G/C/D/Em expected-zero palette ranks first globally, in all four fixed samples, and in every active 20-second window for both methods. No inferred correction. Final 180\u2013186.559s has no active evidence at the fixed RMS threshold and is unscored. Remaining: Exact muted/skipped contacts, ties, intro/lead versus accompaniment, pulse/downbeat phase and teacher tempo140 versus existing ~152 estimate still require recording-specific rhythm evidence. Native chord changes remain unshifted; 12 selected timing windows and four fixed samples have automated measurements. Cached guided pulse 151.999 BPM is an unverified metrical hypothesis. No timing, guitar rhythm, formal section, capo or lesson is accepted. See docs/CATALOGUE_TIMING_RHYTHM_CHECK.md. Batch note entry adds no review session or human correction-cost estimate."
+    },
+    {
+      "schema_version": "catalogue-curation-draft-1.0",
+      "status": "model-exposed-curation-draft",
+      "gold": false,
+      "pack_id": "catalogue-curation-20261014",
+      "recording": {
+        "id": "beatles-love-me-do-youtube-20261011",
+        "title": "The Beatles - Love Me Do",
+        "duration_seconds": 141.69832199546485,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "base_artifacts": {
+        "primary_sha256": "833d826283e403fc5edccd5720b6afe784a94bd6f900cc5fac70a3f877405d6b",
+        "crema_sha256": "a12394c6654f761febee240b95d60c45b7c55e33a6fb287225d181976e6531c4"
+      },
+      "revision": 2,
+      "chord_edits": [],
+      "sections": [
+        {
+          "start_seconds": 21.578956916099774,
+          "end_seconds": 28.142585034013607,
+          "name": "C common-hold search (provisional)"
+        },
+        {
+          "start_seconds": 42.879274376417236,
+          "end_seconds": 49.47374149659864,
+          "name": "C common-hold search (provisional)"
+        }
+      ],
+      "checked_points": [],
+      "sessions": [
+        {
+          "id": "session-8f0c55fc-9df6-4e4e-be32-c4ea301e94a3",
+          "actor": "agent",
+          "task": "setup",
+          "started_at": "2026-10-14T10:32:24.075Z",
+          "ended_at": "2026-10-14T10:32:24.379Z",
+          "active_seconds": 0.304
+        }
+      ],
+      "setup_notes": "Practice proposal: G/C/D in standard open shapes; physical capo and exact guitar setup are unverified. Andy Guitar and Brad Litton corroborate the main palette; Cadd9 is optional. A separate D/A/E adaptation should not be counted as contradictory chord evidence.",
+      "rhythm_notes": "Begin with on-beat changes, then add a long/short swing feel. A deliberate mute means stop the sound; it is different from a dash that skips an attack while letting strings ring. Locate the longer hold/stop, D-led contrasting middle and harmonica material before inserting section cues. No fixed recorded swing ratio is claimed. 16 October audio checks: full-mix transients, energy changes and cached pulse phases were measured automatically. Synthetic controls expose many extra detections and missed soft attacks, so these observations are not recorded guitar strumming, swing or mute transcription.",
+      "review_notes": "14 October diagnostic: proposed shift zero ranks first on the whole recording in both acoustic methods, but several local windows prefer other shifts and the full-score margin is small. This does not verify key changes, capo or full arrangement. Native A/Em/Cm cues remain unresolved. Sources: https://www.andyguitar.co.uk/videos/beatles-guitar-day-01-love-me-do and https://www.simpleguitar.com/blog/howtoplaylovemedo . Timed session covers note entry only, excluding research/analysis. Long C regions contain recurrent low-energy centers near 27.167, 48.524, 82.930 and 123.385 s. These are stop/mute search landmarks in the full mix, not verified guitar mute times. Common D holds at about 56.037\u201359.288 and 62.508\u201365.759 s are saved as contrast search windows. A ringing skipped attack, an intentional damp and a swing subdivision are separate tasks; the transient detector cannot recover their recorded pattern reliably. Native chord changes remain unshifted; 12 selected timing windows and four fixed samples have automated measurements. Cached guided pulse 143.555 BPM is an unverified metrical hypothesis. No timing, guitar rhythm, formal section, capo or lesson is accepted. See docs/CATALOGUE_TIMING_RHYTHM_CHECK.md. Batch note entry adds no review session or human correction-cost estimate."
+    },
+    {
+      "schema_version": "catalogue-curation-draft-1.0",
+      "status": "model-exposed-curation-draft",
+      "gold": false,
+      "pack_id": "catalogue-curation-20261014",
+      "recording": {
+        "id": "beatles-twist-and-shout-youtube-20261011",
+        "title": "The Beatles - Twist And Shout",
+        "duration_seconds": 155.23555555555555,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "base_artifacts": {
+        "primary_sha256": "e7ce805072c42e3ef39c15eadf8b3522534cc1274c5380b0553e52a1807b935c",
+        "crema_sha256": "09f64db9a6563e2256c528576bd9776b13c84128ce3b982810b8dfbe6145bb59"
+      },
+      "revision": 3,
+      "chord_edits": [],
+      "sections": [
+        {
+          "start_seconds": 82.87927437641723,
+          "end_seconds": 96.5944671201814,
+          "name": "A hold / build-up search window 1 (provisional)",
+          "note": ""
+        },
+        {
+          "start_seconds": 136.90485260770976,
+          "end_seconds": 145.85142857142858,
+          "name": "A hold / build-up search window 2 (provisional)",
+          "note": ""
+        }
+      ],
+      "checked_points": [],
+      "sessions": [
+        {
+          "id": "session-3a3002fb-8601-4d50-bdd8-a68d39b05ba2",
+          "actor": "agent",
+          "task": "setup",
+          "started_at": "2026-10-14T10:33:39.425Z",
+          "ended_at": "2026-10-14T10:33:39.731Z",
+          "active_seconds": 0.3053000001907349
+        },
+        {
+          "id": "session-70b72ae6-afb6-4a1d-945f-0ee2998e0693",
+          "actor": "agent",
+          "task": "sections-and-rhythm",
+          "started_at": "2026-10-16T09:56:27.767Z",
+          "ended_at": "2026-10-16T09:56:38.088Z",
+          "active_seconds": 10.32139999961853
+        }
+      ],
+      "setup_notes": "Beatles practice proposal: D/G/A. Jon MacLennan states standard EADGBE and key D; physical capo and exact cached guitar voicings remain unverified. D5 melody-friendly adaptation and A7 are optional teaching variants, not automatic raw-chord replacements. Exclude the higher-key Isley Brothers arrangement.",
+      "rhythm_notes": "Keep the main response groove separate from the sustained A build-up. Repeated downstroke eighths are a source-supported practice option; the current alternating down/up drill is a different exercise. Two provisional common A-hold search windows are saved at 82.879\u201396.594 s and 136.905\u2013145.851 s, using intersections of unchanged BTC/CREMA holds. These are harmonic review windows, not verified formal build-up extents, attack counts or bar counts. Solo/melody and ending work remain optional; exact recorded attack timing is unverified. 16 October audio checks: full-mix transients, energy changes and cached pulse phases were measured automatically. Synthetic controls expose many extra detections and missed soft attacks, so these observations are not recorded guitar strumming, swing or mute transcription.",
+      "review_notes": "14 October pitch diagnostic: proposed shift zero ranks first for the whole recording in both acoustic methods. Some local windows prefer a different shared-chord palette shift; this is not evidence of a key change. Short F#m/Dm/Bm native cues remain unresolved, with mixed acoustic comparisons. Sources: https://www.andyguitar.co.uk/videos/beatles-guitar-day-02-twist-and-shout and https://www.jonmaclennan.com/blog/twist-and-shout-chords . 16 October native timing review: the two common A-hold intersections are provisional search windows only. The second raw hold ends at BTC 145.85142857142858 s versus CREMA 146.7501133786848 s, a 0.899 s unresolved difference. Cached NNLS supports A within both spans but has coarse windows and cannot verify physical boundary times or strumming. Model agreement can share errors; no chart label/time, learner content or arrangement acceptance is changed. See docs/STARTER_FOUR_TIMING_REVIEW.md and the separate catalogue-starter-timing-20261016 report. Agent session measures draft entry only, excluding research/analysis and musical validation; human correction cost remains unmeasured. The unchanged BTC A spans contain 31 and 24 candidate full-mix transients, versus 31 and 26 for CREMA spans. These are not guitar stroke counts. The second raw endings still differ by 0.899 s; no attack proximity resolves that difference. Keep source-supported all-down eighth practice separate from exact recorded contacts. Native chord changes remain unshifted; 12 selected timing windows and four fixed samples have automated measurements. Cached guided pulse 123.047 BPM is an unverified metrical hypothesis. No timing, guitar rhythm, formal section, capo or lesson is accepted. See docs/CATALOGUE_TIMING_RHYTHM_CHECK.md. Batch note entry adds no review session or human correction-cost estimate."
+    },
+    {
+      "schema_version": "catalogue-curation-draft-1.0",
+      "status": "model-exposed-curation-draft",
+      "gold": false,
+      "pack_id": "catalogue-curation-20261014",
+      "recording": {
+        "id": "white-stripes-seven-nation-army-youtube-20261011",
+        "title": "The White Stripes - Seven Nation Army",
+        "duration_seconds": 232.1168253968254,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "394c791d799d7ff7ece36c1b93a434c1f600afe0265f5dfe1d6ad328626a6854",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "base_artifacts": {
+        "primary_sha256": "0f69d5fb878bb87fa90d223a85cc16f49c01448da81f4e2c088d2fddf141e9e7",
+        "crema_sha256": "b7deadf0f4f816c2da6c91e1f8c807ceebc543c6b106e728d1e54bbedf2f0f9b"
+      },
+      "revision": 1,
+      "chord_edits": [],
+      "sections": [
+        {
+          "start_seconds": 20.211682539682542,
+          "end_seconds": 26.211682539682542,
+          "name": "Riff-track coverage replay 1 (provisional)"
+        },
+        {
+          "start_seconds": 78.24088888888888,
+          "end_seconds": 84.24088888888888,
+          "name": "Riff-track coverage replay 2 (provisional)"
+        }
+      ],
+      "checked_points": [],
+      "sessions": [],
+      "setup_notes": "Source-guided practice setup: {\"tuning\": \"EADGBE adaptation\", \"tuning_status\": \"Teacher explicitly distinguishes the standard adaptation from original Open A\", \"source_capo\": null, \"proposed_capo\": 0, \"selected_recording_verified\": false}. Physical selected-recording setup remains unverified.",
+      "rhythm_notes": "Practise the single-note groove and clean muting first. Introduce the power-chord variation as a separate task. A continuous chord strumming drill is accompaniment practice, not the main riff. 16 October audio checks: full-mix transients, energy changes and cached pulse phases were measured automatically. Synthetic controls expose many extra detections and missed soft attacks, so these observations are not recorded guitar strumming, swing or mute transcription.",
+      "review_notes": "Keep standard-tuning adaptation separate from original Open A. Major/minor labels over a monophonic riff do not establish played chord grips, and the Open A setup requires string-specific mapping. No harmonic palette imposed. NNLS full-mix activity led by E/B/C, while simple spectral ranks E/C#/F. The disagreement illustrates harmonic/noise sensitivity rather than establishing the riff melody or a tuning choice. Native E/Em and B/Bm labels retained. Remaining: Single-note onsets, muted articulation, power/slide variation and original Open A versus standard adaptation remain separate tasks; no key/quality/setup recognition is claimed. Native chord changes remain unshifted; 12 selected timing windows and four fixed samples have automated measurements. Cached guided pulse 123.047 BPM is an unverified metrical hypothesis. No timing, guitar rhythm, formal section, capo or lesson is accepted. See docs/CATALOGUE_TIMING_RHYTHM_CHECK.md. Batch note entry adds no review session or human correction-cost estimate."
+    },
+    {
+      "schema_version": "catalogue-curation-draft-1.0",
+      "status": "model-exposed-curation-draft",
+      "gold": false,
+      "pack_id": "catalogue-curation-20261014",
+      "recording": {
+        "id": "nirvana-come-as-you-are-youtube-20261011",
+        "title": "Nirvana - Come As You Are",
+        "duration_seconds": 218.92789115646258,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "base_artifacts": {
+        "primary_sha256": "b19ab0e6f3b711f8e5d7a5894ce87b34c108a95b974ec1d408417ad510ec3ef6",
+        "crema_sha256": "86371063c859a1b412d39a8ef4a87436863690d181838600946ce207f960bee1"
+      },
+      "revision": 1,
+      "chord_edits": [],
+      "sections": [
+        {
+          "start_seconds": 18.89278911564626,
+          "end_seconds": 24.89278911564626,
+          "name": "Riff-track coverage replay 1 (provisional)"
+        },
+        {
+          "start_seconds": 73.6247619047619,
+          "end_seconds": 79.6247619047619,
+          "name": "Riff-track coverage replay 2 (provisional)"
+        }
+      ],
+      "checked_points": [],
+      "sessions": [],
+      "setup_notes": "Source-guided practice setup: {\"tuning\": \"DGCFAD\", \"tuning_status\": \"Explicit teacher studio lesson setup; live E-flat standard is a separate variant\", \"source_capo\": null, \"proposed_capo\": 0, \"selected_recording_verified\": false}. Physical selected-recording setup remains unverified.",
+      "rhythm_notes": "Learn riff articulation and muting before the later chord rhythm. Keep the suspended-fourth option explicit; the major/minor detector cannot describe its full grip. 16 October audio checks: full-mix transients, energy changes and cached pulse phases were measured automatically. Synthetic controls expose many extra detections and missed soft attacks, so these observations are not recorded guitar strumming, swing or mute transcription.",
+      "review_notes": "D-standard is the teacher-supported studio setup, pending selected-upload pitch verification. Shape names are two semitones above sounding roots for this no-capo uniform retuning; this is a different mapping direction from capo 2. No harmonic palette imposed. NNLS activity led by D/E/G, spectral by E/D/G. Descriptive pitch classes cannot establish D-standard physically. Native Em/D/G/etc retained. Teacher D-standard mapping remains shape root=sounding root+2, opposite to Wonderwall capo2 direction. Remaining: Validate riff note sequence/onsets and power/sus4 sections on selected studio audio; do not replace studio setup with common live E-flat setup or infer grips directly from sounding roots. Native chord changes remain unshifted; 12 selected timing windows and four fixed samples have automated measurements. Cached guided pulse 123.047 BPM is an unverified metrical hypothesis. No timing, guitar rhythm, formal section, capo or lesson is accepted. See docs/CATALOGUE_TIMING_RHYTHM_CHECK.md. Batch note entry adds no review session or human correction-cost estimate."
+    },
+    {
+      "schema_version": "catalogue-curation-draft-1.0",
+      "status": "model-exposed-curation-draft",
+      "gold": false,
+      "pack_id": "catalogue-curation-20261014",
+      "recording": {
+        "id": "radiohead-creep-youtube-20261010",
+        "title": "Radiohead - Creep",
+        "duration_seconds": 236.63455782312926,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "base_artifacts": {
+        "primary_sha256": "31ab2f236db594ee83f3223ac168601435ba0ce83e7aea3f1a54d207ca9f2ec2",
+        "crema_sha256": "9ab5ce1f02b7ba127554937009f1747112e7fc3df583ddcd3b8abcfa9cdc191c"
+      },
+      "revision": 1,
+      "chord_edits": [],
+      "sections": [
+        {
+          "start_seconds": 15.139410430839002,
+          "end_seconds": 18.544943310657597,
+          "name": "Cm common-hold search (provisional)"
+        },
+        {
+          "start_seconds": 35.66585034013605,
+          "end_seconds": 39.00934240362812,
+          "name": "Cm common-hold search (provisional)"
+        }
+      ],
+      "checked_points": [],
+      "sessions": [],
+      "setup_notes": "Source-guided practice setup: {\"tuning\": \"EADGBE\", \"tuning_status\": \"Consistent with teacher fret/root-six descriptions; not an explicit newly checked tuning sentence\", \"source_capo\": null, \"proposed_capo\": 0, \"selected_recording_verified\": false}. Physical selected-recording setup remains unverified.",
+      "rhythm_notes": "Begin with controlled chord changes, then a flexible verse arpeggio and fuller chorus attack. Do not impose one fixed picking pattern across the recording. 16 October audio checks: full-mix transients, energy changes and cached pulse phases were measured automatically. Synthetic controls expose many extra detections and missed soft attacks, so these observations are not recorded guitar strumming, swing or mute transcription.",
+      "review_notes": "Preserve B major and C minor in main-chord mode; key-only substitution would erase the defining quality contrast. Treat acoustic sus4 additions and the optional chorus octave melody as separate choices. G/B/C/Cm expected-zero palette ranks first globally in both methods. NNLS all fixed samples/windows favour0; spectral sample198.139\u2013204.139s favours+1 by0.00838 and tail220\u2013236.635s favours+5 by0.00199. Do not relabel the recording based on these local mixed-content scores. Native Bm alternatives remain unresolved rather than globally changed toB. Remaining: B-major/C-minor contrast, variable verse arpeggios and final chorus extent/attack/dynamics require local checks; source vocabulary membership is not accuracy. Native chord changes remain unshifted; 12 selected timing windows and four fixed samples have automated measurements. Cached guided pulse 92.285 BPM is an unverified metrical hypothesis. No timing, guitar rhythm, formal section, capo or lesson is accepted. See docs/CATALOGUE_TIMING_RHYTHM_CHECK.md. Batch note entry adds no review session or human correction-cost estimate."
+    },
+    {
+      "schema_version": "catalogue-curation-draft-1.0",
+      "status": "model-exposed-curation-draft",
+      "gold": false,
+      "pack_id": "catalogue-curation-20261014",
+      "recording": {
+        "id": "animals-house-rising-sun-official-20261011",
+        "title": "The Animals - The House Of The Rising Sun",
+        "duration_seconds": 269.91891156462583,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "base_artifacts": {
+        "primary_sha256": "7ee27e5ecc662a1bd838663fdb89cc1e18736d8cf60b4f7cf059d6a6208edd31",
+        "crema_sha256": "71eb918cc9ef3662d5c6d75b49814f700b89a2fc15b73c1ce92d9bdb18dd6037"
+      },
+      "revision": 1,
+      "chord_edits": [],
+      "sections": [
+        {
+          "start_seconds": 246.31582766439908,
+          "end_seconds": 247.89478458049888,
+          "name": "Dm common-hold search (provisional)"
+        },
+        {
+          "start_seconds": 249.47519274376418,
+          "end_seconds": 250.96126984126985,
+          "name": "Dm common-hold search (provisional)"
+        }
+      ],
+      "checked_points": [],
+      "sessions": [],
+      "setup_notes": "Source-guided practice setup: {\"tuning\": \"EADGBE\", \"tuning_status\": \"Project standard open-grip proposal; not an explicit newly checked tuning sentence\", \"source_capo\": 0, \"capo_status\": \"Explicit Richter lesson setup\", \"selected_recording_verified\": false}. Physical selected-recording setup remains unverified.",
+      "rhythm_notes": "Start with six evenly spaced eighth-note counts grouped 3+3, then a root-led picked/raked arpeggio. Fingerstyle is an optional adaptation. Counts are a practice convention until the selected recording's pulse phase is checked. 16 October audio checks: full-mix transients, energy changes and cached pulse phases were measured automatically. Synthetic controls expose many extra detections and missed soft attacks, so these observations are not recorded guitar strumming, swing or mute transcription.",
+      "review_notes": "Retain D major and E major in the A-minor teaching palette, add the distinct Dm outro and a small-F choice. Inspect shorter changes within outro phrases. Do not infer numbered bars from a global pulse estimate. Am/C/D/F/E/Dm expected-zero palette ranks first globally, at all four fixed samples and every20swindow in both methods. Preserves selected269.919s label-distributed recording instead of legacy248.546s tribute. Native major/minor alternatives retained. Remaining: Physical6/8 phase/two-pulse bar length, rake order, later dynamics and within-bar Am/Dm outro changes remain unaccepted; no corpus-CD reference transfer from duration alone. Native chord changes remain unshifted; 12 selected timing windows and four fixed samples have automated measurements. Cached guided pulse 78.303 BPM is an unverified metrical hypothesis. No timing, guitar rhythm, formal section, capo or lesson is accepted. See docs/CATALOGUE_TIMING_RHYTHM_CHECK.md. Batch note entry adds no review session or human correction-cost estimate."
+    },
+    {
+      "schema_version": "catalogue-curation-draft-1.0",
+      "status": "model-exposed-curation-draft",
+      "gold": false,
+      "pack_id": "catalogue-curation-20261014",
+      "recording": {
+        "id": "oasis-wonderwall-youtube-20261010",
+        "title": "Oasis - Wonderwall",
+        "duration_seconds": 277.78031746031746,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "base_artifacts": {
+        "primary_sha256": "7ee7705e93646d4e4d2db07f1991cdee36ee7b1d45c1cfc37ec91f4efb8b7c17",
+        "crema_sha256": "1d696977fe56f91126f3e838903939a6670a335d7079fc297b45e6573a3c3e83"
+      },
+      "revision": 1,
+      "chord_edits": [],
+      "sections": [
+        {
+          "start_seconds": 37.15174603174603,
+          "end_seconds": 39.380861678004536,
+          "name": "F#m common-hold search (provisional)"
+        },
+        {
+          "start_seconds": 41.393197278911565,
+          "end_seconds": 45.015510204081636,
+          "name": "F#m common-hold search (provisional)"
+        }
+      ],
+      "checked_points": [],
+      "sessions": [],
+      "setup_notes": "Source-guided practice setup: {\"tuning\": \"EADGBE\", \"tuning_status\": \"Explicit Carl Brown lesson setup\", \"source_capo\": 2, \"capo_status\": \"Explicit Carl Brown and Greg Shute lesson setup\", \"selected_recording_verified\": false}. Physical selected-recording setup remains unverified.",
+      "rhythm_notes": "Keep a continuous subdivision motion while deciding which passes contact the strings. Practise verse, pre-chorus and chorus separately. The current generic syncopated drill is a preparatory exercise, not a complete recorded strum pattern. 16 October audio checks: full-mix transients, energy changes and cached pulse phases were measured automatically. Synthetic controls expose many extra detections and missed soft attacks, so these observations are not recorded guitar strumming, swing or mute transcription.",
+      "review_notes": "Preserve capo-2 played shapes separately from sounding labels. Offer shared-finger richer grips as a project practice option; simplifying to main chords loses the suspended/add-note colour. Section extents and local meter remain unverified. All12relative shifts scored against intact capo2shape paletteEm7/G/Dsus4/A7sus4/Cadd9. Expected+2 ranks first globally/bothmethods and all8fixedsamples. Sounding proposalF#m7/A/Esus4/B7sus4/Dadd9 is explicit; simple E/B-major detector labels remain distinct from sus4. NNLS260\u2013277.780s prefers+11 over+2 by0.01460 with9.584sactive evidence; original charts unchanged. Remaining: Shared-finger voicing, section-specific syncopation, muted versus omitted contacts, local meter and exact change times still need checking. Primary teacher text does not establish 4/4-to-2/4 changes. Native chord changes remain unshifted; 12 selected timing windows and four fixed samples have automated measurements. Cached guided pulse 86.133 BPM is an unverified metrical hypothesis. No timing, guitar rhythm, formal section, capo or lesson is accepted. See docs/CATALOGUE_TIMING_RHYTHM_CHECK.md. Batch note entry adds no review session or human correction-cost estimate."
+    }
+  ]
+}

@@ -1,0 +1,1734 @@
+{
+  "schema_version": "catalogue-timing-rhythm-summary-1.0",
+  "checked_at_utc": "2026-10-16T15:27:40.545414+00:00",
+  "status": "all-ten automated diagnostic pass complete; physical music acceptance pending",
+  "gold": false,
+  "reports": {
+    "native": {
+      "path": "experiments/generated/catalogue-change-check-20261016/report.json",
+      "sha256": "c6c4d4d0161d5b2d77cc36aa7bd3e5500a5f9b3c34b8578e64560ef14efbe5c9"
+    },
+    "pitch": {
+      "path": "experiments/generated/catalogue-remaining-six-pitch-20261016/report.json",
+      "sha256": "9427d542ea365134b064bbf388039674bd1c88be6df0addc31252e98fe3fa6ff"
+    },
+    "rhythm": {
+      "path": "experiments/generated/catalogue-audio-rhythm-v2-20261016/report.json",
+      "sha256": "8605d1fe59a5e922fc2c70773b8b7428e3526337823bf612214eba8963898aae"
+    }
+  },
+  "controls": {
+    "path": "experiments/generated/catalogue-audio-rhythm-v2-20261016/synthetic-controls.json",
+    "sha256": "4dfb9d0ee0f708296e95564efd3c1592538a3ccf52856b650590081fc2392b3d"
+  },
+  "source_review": {
+    "path": "catalogue/remaining-six-teaching-review.json",
+    "sha256": "134eda4099bd1ba85d217098809935b7d9c656121038461bf2ad6ea81e05bbc3"
+  },
+  "proposals": {
+    "path": "catalogue/first-ten-curation-proposals-v1.json",
+    "sha256": "c456fe320ac36b3bdb8c2b8657231cb15c04795076a627605d65fd9304a342ad"
+  },
+  "runtimes_seconds": {
+    "native": 0.19808470830321312,
+    "pitch": 8.756908292882144,
+    "rhythm": 3.076418166048825
+  },
+  "native_totals": {
+    "primary_boundaries": 1246,
+    "secondary_boundaries": 989,
+    "paired_boundaries": 796
+  },
+  "candidate_windows": 745,
+  "selected_windows": 120,
+  "fixed_samples": 40,
+  "saved_drafts": 10,
+  "provisional_search_windows": 19,
+  "provisional_label_edits": 2,
+  "accepted_arrangements": 0,
+  "physical_timing_accuracy": null,
+  "recorded_guitar_rhythm_accuracy": null,
+  "human_correction_seconds": null,
+  "synthetic_attack_controls": [
+    {
+      "id": "quarter-attacks-same-harmony",
+      "purpose": "same chord can contain repeated attacks",
+      "score": {
+        "reference_attacks": 8,
+        "detected_attacks": 28,
+        "matched": 8,
+        "misses": 0,
+        "extras": 20,
+        "f1": 0.4444444444444444,
+        "median_signed_error_seconds": -0.0005668934240363743,
+        "maximum_absolute_error_seconds": 0.003083900226757308,
+        "pairs": [
+          {
+            "reference_seconds": 0.5,
+            "detected_seconds": 0.4992290249433107,
+            "signed_error_seconds": -0.000770975056689327
+          },
+          {
+            "reference_seconds": 1.0,
+            "detected_seconds": 0.9984580498866213,
+            "signed_error_seconds": -0.001541950113378654
+          },
+          {
+            "reference_seconds": 1.5,
+            "detected_seconds": 1.497687074829932,
+            "signed_error_seconds": -0.002312925170067981
+          },
+          {
+            "reference_seconds": 2.0,
+            "detected_seconds": 1.9969160997732427,
+            "signed_error_seconds": -0.003083900226757308
+          },
+          {
+            "reference_seconds": 2.5,
+            "detected_seconds": 2.501950113378685,
+            "signed_error_seconds": 0.0019501133786850033
+          },
+          {
+            "reference_seconds": 3.0,
+            "detected_seconds": 3.0011791383219957,
+            "signed_error_seconds": 0.0011791383219956764
+          },
+          {
+            "reference_seconds": 3.5,
+            "detected_seconds": 3.500408163265306,
+            "signed_error_seconds": 0.0004081632653059053
+          },
+          {
+            "reference_seconds": 4.0,
+            "detected_seconds": 3.9996371882086166,
+            "signed_error_seconds": -0.0003628117913834217
+          }
+        ]
+      },
+      "pcm_sha256": "8cdb87b1a345af120473ee61b868ab502817247ec3e8278878cf91d171c0cdcd"
+    },
+    {
+      "id": "eighth-attacks-same-harmony",
+      "purpose": "no harmonic changes implied",
+      "score": {
+        "reference_attacks": 16,
+        "detected_attacks": 28,
+        "matched": 16,
+        "misses": 0,
+        "extras": 12,
+        "f1": 0.7272727272727273,
+        "median_signed_error_seconds": 0.0017573696145125606,
+        "maximum_absolute_error_seconds": 0.027868480725623535,
+        "pairs": [
+          {
+            "reference_seconds": 0.5,
+            "detected_seconds": 0.4992290249433107,
+            "signed_error_seconds": -0.000770975056689327
+          },
+          {
+            "reference_seconds": 0.75,
+            "detected_seconds": 0.7778684807256235,
+            "signed_error_seconds": 0.027868480725623535
+          },
+          {
+            "reference_seconds": 1.0,
+            "detected_seconds": 1.0274829931972789,
+            "signed_error_seconds": 0.02748299319727887
+          },
+          {
+            "reference_seconds": 1.25,
+            "detected_seconds": 1.2770975056689342,
+            "signed_error_seconds": 0.027097505668934208
+          },
+          {
+            "reference_seconds": 1.5,
+            "detected_seconds": 1.5267120181405895,
+            "signed_error_seconds": 0.026712018140589544
+          },
+          {
+            "reference_seconds": 1.75,
+            "detected_seconds": 1.7763265306122449,
+            "signed_error_seconds": 0.02632653061224488
+          },
+          {
+            "reference_seconds": 2.0,
+            "detected_seconds": 2.0259410430839004,
+            "signed_error_seconds": 0.02594104308390044
+          },
+          {
+            "reference_seconds": 2.25,
+            "detected_seconds": 2.2523356009070294,
+            "signed_error_seconds": 0.002335600907029445
+          },
+          {
+            "reference_seconds": 2.5,
+            "detected_seconds": 2.501950113378685,
+            "signed_error_seconds": 0.0019501133786850033
+          },
+          {
+            "reference_seconds": 2.75,
+            "detected_seconds": 2.75156462585034,
+            "signed_error_seconds": 0.0015646258503401178
+          },
+          {
+            "reference_seconds": 3.0,
+            "detected_seconds": 3.0011791383219957,
+            "signed_error_seconds": 0.0011791383219956764
+          },
+          {
+            "reference_seconds": 3.25,
+            "detected_seconds": 3.250793650793651,
+            "signed_error_seconds": 0.0007936507936507908
+          },
+          {
+            "reference_seconds": 3.5,
+            "detected_seconds": 3.500408163265306,
+            "signed_error_seconds": 0.0004081632653059053
+          },
+          {
+            "reference_seconds": 3.75,
+            "detected_seconds": 3.7500226757369615,
+            "signed_error_seconds": 2.2675736961463855e-05
+          },
+          {
+            "reference_seconds": 4.0,
+            "detected_seconds": 3.9996371882086166,
+            "signed_error_seconds": -0.0003628117913834217
+          },
+          {
+            "reference_seconds": 4.25,
+            "detected_seconds": 4.249251700680272,
+            "signed_error_seconds": -0.0007482993197278631
+          }
+        ]
+      },
+      "pcm_sha256": "b72a8b6c71c52b8c015a2b52914cd5f01bd3541fd8acd8e228b6d8b186ec93f9"
+    },
+    {
+      "id": "swung-pair-attacks",
+      "purpose": "known 2:1 attack spacing, not estimated real-guitar swing",
+      "score": {
+        "reference_attacks": 16,
+        "detected_attacks": 26,
+        "matched": 14,
+        "misses": 2,
+        "extras": 12,
+        "f1": 0.6666666666666666,
+        "median_signed_error_seconds": 0.0021995464852608837,
+        "maximum_absolute_error_seconds": 0.03020408163265298,
+        "pairs": [
+          {
+            "reference_seconds": 0.5,
+            "detected_seconds": 0.4992290249433107,
+            "signed_error_seconds": -0.000770975056689327
+          },
+          {
+            "reference_seconds": 0.8333333333333333,
+            "detected_seconds": 0.8359183673469388,
+            "signed_error_seconds": 0.002585034013605547
+          },
+          {
+            "reference_seconds": 1.0,
+            "detected_seconds": 1.0274829931972789,
+            "signed_error_seconds": 0.02748299319727887
+          },
+          {
+            "reference_seconds": 1.3333333333333333,
+            "detected_seconds": 1.3351473922902495,
+            "signed_error_seconds": 0.0018140589569162202
+          },
+          {
+            "reference_seconds": 1.5,
+            "detected_seconds": 1.5267120181405895,
+            "signed_error_seconds": 0.026712018140589544
+          },
+          {
+            "reference_seconds": 1.8333333333333333,
+            "detected_seconds": 1.8343764172335602,
+            "signed_error_seconds": 0.0010430839002268932
+          },
+          {
+            "reference_seconds": 2.3333333333333335,
+            "detected_seconds": 2.3336054421768706,
+            "signed_error_seconds": 0.00027210884353712217
+          },
+          {
+            "reference_seconds": 2.8333333333333335,
+            "detected_seconds": 2.8328344671201813,
+            "signed_error_seconds": -0.0004988662131522048
+          },
+          {
+            "reference_seconds": 3.0,
+            "detected_seconds": 3.030204081632653,
+            "signed_error_seconds": 0.03020408163265298
+          },
+          {
+            "reference_seconds": 3.3333333333333335,
+            "detected_seconds": 3.332063492063492,
+            "signed_error_seconds": -0.0012698412698415318
+          },
+          {
+            "reference_seconds": 3.5,
+            "detected_seconds": 3.5294331065759637,
+            "signed_error_seconds": 0.029433106575963652
+          },
+          {
+            "reference_seconds": 3.8333333333333335,
+            "detected_seconds": 3.8312925170068026,
+            "signed_error_seconds": -0.0020408163265308588
+          },
+          {
+            "reference_seconds": 4.0,
+            "detected_seconds": 4.028662131519274,
+            "signed_error_seconds": 0.028662131519274325
+          },
+          {
+            "reference_seconds": 4.333333333333333,
+            "detected_seconds": 4.359546485260771,
+            "signed_error_seconds": 0.026213151927438005
+          }
+        ]
+      },
+      "pcm_sha256": "759efd1ce5e4fd3113a8a0b652254b4356e4ee092a05726599b04332f93a027b"
+    },
+    {
+      "id": "skipped-eighth-attack",
+      "purpose": "missing attack does not command muting",
+      "score": {
+        "reference_attacks": 12,
+        "detected_attacks": 31,
+        "matched": 12,
+        "misses": 0,
+        "extras": 19,
+        "f1": 0.5581395348837209,
+        "median_signed_error_seconds": 0.0006009070294783481,
+        "maximum_absolute_error_seconds": 0.027868480725623535,
+        "pairs": [
+          {
+            "reference_seconds": 0.5,
+            "detected_seconds": 0.4992290249433107,
+            "signed_error_seconds": -0.000770975056689327
+          },
+          {
+            "reference_seconds": 0.75,
+            "detected_seconds": 0.7778684807256235,
+            "signed_error_seconds": 0.027868480725623535
+          },
+          {
+            "reference_seconds": 1.25,
+            "detected_seconds": 1.2480725623582767,
+            "signed_error_seconds": -0.0019274376417233174
+          },
+          {
+            "reference_seconds": 1.5,
+            "detected_seconds": 1.5267120181405895,
+            "signed_error_seconds": 0.026712018140589544
+          },
+          {
+            "reference_seconds": 1.75,
+            "detected_seconds": 1.7763265306122449,
+            "signed_error_seconds": 0.02632653061224488
+          },
+          {
+            "reference_seconds": 2.25,
+            "detected_seconds": 2.246530612244898,
+            "signed_error_seconds": -0.0034693877551021934
+          },
+          {
+            "reference_seconds": 2.5,
+            "detected_seconds": 2.501950113378685,
+            "signed_error_seconds": 0.0019501133786850033
+          },
+          {
+            "reference_seconds": 2.75,
+            "detected_seconds": 2.75156462585034,
+            "signed_error_seconds": 0.0015646258503401178
+          },
+          {
+            "reference_seconds": 3.25,
+            "detected_seconds": 3.250793650793651,
+            "signed_error_seconds": 0.0007936507936507908
+          },
+          {
+            "reference_seconds": 3.5,
+            "detected_seconds": 3.500408163265306,
+            "signed_error_seconds": 0.0004081632653059053
+          },
+          {
+            "reference_seconds": 3.75,
+            "detected_seconds": 3.7500226757369615,
+            "signed_error_seconds": 2.2675736961463855e-05
+          },
+          {
+            "reference_seconds": 4.25,
+            "detected_seconds": 4.249251700680272,
+            "signed_error_seconds": -0.0007482993197278631
+          }
+        ]
+      },
+      "pcm_sha256": "b64cf78b2cc90faa4219f6887e925df38796500160964551d96f217d46b4b8a1"
+    },
+    {
+      "id": "regular-low-noise",
+      "purpose": "bounded seeded noise",
+      "score": {
+        "reference_attacks": 8,
+        "detected_attacks": 27,
+        "matched": 8,
+        "misses": 0,
+        "extras": 19,
+        "f1": 0.45714285714285713,
+        "median_signed_error_seconds": -0.0005668934240363743,
+        "maximum_absolute_error_seconds": 0.003083900226757308,
+        "pairs": [
+          {
+            "reference_seconds": 0.5,
+            "detected_seconds": 0.4992290249433107,
+            "signed_error_seconds": -0.000770975056689327
+          },
+          {
+            "reference_seconds": 1.0,
+            "detected_seconds": 0.9984580498866213,
+            "signed_error_seconds": -0.001541950113378654
+          },
+          {
+            "reference_seconds": 1.5,
+            "detected_seconds": 1.497687074829932,
+            "signed_error_seconds": -0.002312925170067981
+          },
+          {
+            "reference_seconds": 2.0,
+            "detected_seconds": 1.9969160997732427,
+            "signed_error_seconds": -0.003083900226757308
+          },
+          {
+            "reference_seconds": 2.5,
+            "detected_seconds": 2.501950113378685,
+            "signed_error_seconds": 0.0019501133786850033
+          },
+          {
+            "reference_seconds": 3.0,
+            "detected_seconds": 3.0011791383219957,
+            "signed_error_seconds": 0.0011791383219956764
+          },
+          {
+            "reference_seconds": 3.5,
+            "detected_seconds": 3.500408163265306,
+            "signed_error_seconds": 0.0004081632653059053
+          },
+          {
+            "reference_seconds": 4.0,
+            "detected_seconds": 3.9996371882086166,
+            "signed_error_seconds": -0.0003628117913834217
+          }
+        ]
+      },
+      "pcm_sha256": "f439a79ee4e68fdd6001a588ee33cb816a46bb8a6aad9a03b97648a3c42ff0d8"
+    },
+    {
+      "id": "slow-attack-limitation",
+      "purpose": "40ms clock tolerance can fail for soft attacks; report without retuning",
+      "score": {
+        "reference_attacks": 8,
+        "detected_attacks": 28,
+        "matched": 1,
+        "misses": 7,
+        "extras": 27,
+        "f1": 0.05555555555555555,
+        "median_signed_error_seconds": 0.02748299319727887,
+        "maximum_absolute_error_seconds": 0.02748299319727887,
+        "pairs": [
+          {
+            "reference_seconds": 1.0,
+            "detected_seconds": 1.0274829931972789,
+            "signed_error_seconds": 0.02748299319727887
+          }
+        ]
+      },
+      "pcm_sha256": "b316dea0efbe4773381b2e2dedbbc5e05fa42faec8882db5109aed0cfd39e7e3"
+    }
+  ],
+  "synthetic_energy_controls": [
+    {
+      "id": "skipped-attack-continues-ringing",
+      "pcm_sha256": "2603747bebf24dd7b218871dcf833698deacebf066caaf4a7d006a8306d46a2d",
+      "reference_attack_times_seconds": [
+        0.5
+      ],
+      "reference_damp_seconds": null,
+      "detected_attack_times_seconds": [
+        0.4992290249433107,
+        0.6211337868480725,
+        0.8185034013605442,
+        0.9404081632653061,
+        1.1087528344671203,
+        1.230657596371882,
+        1.3235374149659864,
+        1.4918820861678004,
+        1.5847619047619048,
+        1.967891156462585,
+        2.29297052154195,
+        2.583219954648526,
+        2.6760997732426306
+      ],
+      "energy": {
+        "at_seconds": 1.5,
+        "before_window_seconds": [
+          1.3399999999999999,
+          1.46
+        ],
+        "after_window_seconds": [
+          1.54,
+          1.6600000000000001
+        ],
+        "before_rms": 0.11617768198711965,
+        "after_rms": 0.11457192791785711,
+        "after_over_before_rms": 0.9861784635241684,
+        "semantics": "Full-mix local energy contrast; not an identified guitar mute or harmonic change"
+      }
+    },
+    {
+      "id": "explicit-three-ms-damp",
+      "pcm_sha256": "4adb5e4c877c231c9154096180e0de0390cdedee57819824e4f5042e37f4ba56",
+      "reference_attack_times_seconds": [
+        0.5
+      ],
+      "reference_damp_seconds": 1.5,
+      "detected_attack_times_seconds": [
+        0.4992290249433107,
+        0.6211337868480725,
+        0.8185034013605442,
+        0.9404081632653061,
+        1.1087528344671203,
+        1.230657596371882,
+        1.3235374149659864,
+        1.4918820861678004
+      ],
+      "energy": {
+        "at_seconds": 1.5,
+        "before_window_seconds": [
+          1.3399999999999999,
+          1.46
+        ],
+        "after_window_seconds": [
+          1.54,
+          1.6600000000000001
+        ],
+        "before_rms": 0.11617768198711965,
+        "after_rms": 0.0,
+        "after_over_before_rms": 0.0,
+        "semantics": "Full-mix local energy contrast; not an identified guitar mute or harmonic change"
+      }
+    }
+  ],
+  "synthetic_clock_shift": {
+    "shift_seconds": 0.1,
+    "score": {
+      "reference_attacks": 8,
+      "detected_attacks": 8,
+      "matched": 0,
+      "misses": 8,
+      "extras": 8,
+      "f1": 0.0,
+      "median_signed_error_seconds": null,
+      "maximum_absolute_error_seconds": null,
+      "pairs": []
+    }
+  },
+  "detector_status": "Exploratory only: substantial extras from harmonic beating and failures on soft attacks; not suitable for automatic strumming transcription",
+  "verification": {
+    "python_discovered": 436,
+    "python_passed": 416,
+    "python_optional_skipped": 20,
+    "new_regressions": 30,
+    "javascript_passed_earlier_same_day": 124,
+    "stage1_frozen_files": 39,
+    "reviewer_public_assets": 45,
+    "learner_public_assets": 48,
+    "learner_manifest": {
+      "path": "experiments/generated/automatic-first-ten-v1/manifest.json",
+      "sha256": "556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671"
+    },
+    "raw_chart_and_audio_changes": false,
+    "learner_identity_changes": false,
+    "fresh_neural_inference": false
+  },
+  "cases": [
+    {
+      "id": "troggs-wild-thing-youtube-20261011",
+      "title": "The Troggs - Wild Thing",
+      "recording": {
+        "id": "troggs-wild-thing-youtube-20261011",
+        "title": "audio",
+        "duration_seconds": 155.3516553287982,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "riff_first": false,
+      "boundary_counts": {
+        "primary_boundaries": 103,
+        "secondary_boundaries": 79,
+        "paired_boundaries": 71,
+        "median_pair_difference_seconds": 0.06167800453514616
+      },
+      "all_windows": 57,
+      "selected_windows": 12,
+      "fixed_samples": 4,
+      "rhythm": {
+        "id": "troggs-wild-thing-youtube-20261011",
+        "name": "The Troggs - Wild Thing",
+        "recording": {
+          "id": "troggs-wild-thing-youtube-20261011",
+          "title": "The Troggs - Wild Thing",
+          "duration_seconds": 155.3516553287982,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf",
+          "provenance": "User-supplied local audio; permissions recorded separately"
+        },
+        "duration_seconds": 155.3516553287982,
+        "full_mix_attacks": 344,
+        "full_mix_attacks_per_second": 2.2143310882135885,
+        "guided_pulse_bpm": 103.359375,
+        "guided_pulse_meter_status": "Four-quarter practice convention; recording bar structure unverified",
+        "phase": {
+          "covered_attacks": 344,
+          "outside_cached_pulse_span": 0,
+          "phase_bin_edges": [
+            0.0,
+            0.08333333333333333,
+            0.16666666666666666,
+            0.25,
+            0.3333333333333333,
+            0.41666666666666663,
+            0.5,
+            0.5833333333333333,
+            0.6666666666666666,
+            0.75,
+            0.8333333333333333,
+            0.9166666666666666,
+            1.0
+          ],
+          "phase_counts": [
+            9,
+            2,
+            10,
+            3,
+            33,
+            84,
+            0,
+            0,
+            4,
+            1,
+            12,
+            186
+          ],
+          "semantics": "Full-mix attacks within cached pulse intervals; pulse phase/level is unverified; no swing, subdivision, stroke or downbeat acceptance"
+        },
+        "native_boundary_summary": {
+          "btc": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.0774603174603179,
+            "within_40ms": 32,
+            "within_150ms": 92,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          },
+          "crema": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.07546485260770908,
+            "within_40ms": 16,
+            "within_150ms": 76,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          }
+        },
+        "harmonic_hold_windows": 6
+      },
+      "pitch_followup": null,
+      "accepted_arrangement": false
+    },
+    {
+      "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+      "title": "Bob Dylan - Knockin' On Heaven's Door",
+      "recording": {
+        "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+        "title": "audio",
+        "duration_seconds": 149.89496598639457,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "riff_first": false,
+      "boundary_counts": {
+        "primary_boundaries": 73,
+        "secondary_boundaries": 64,
+        "paired_boundaries": 59,
+        "median_pair_difference_seconds": 0.061315192743762736
+      },
+      "all_windows": 21,
+      "selected_windows": 12,
+      "fixed_samples": 4,
+      "rhythm": {
+        "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+        "name": "Bob Dylan - Knockin' On Heaven's Door",
+        "recording": {
+          "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+          "title": "Bob Dylan - Knockin' On Heaven's Door",
+          "duration_seconds": 149.89496598639457,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f",
+          "provenance": "User-supplied local audio; permissions recorded separately"
+        },
+        "duration_seconds": 149.89496598639457,
+        "full_mix_attacks": 353,
+        "full_mix_attacks_per_second": 2.3549823549914315,
+        "guided_pulse_bpm": 69.83741554054055,
+        "guided_pulse_meter_status": "Four-quarter practice convention; recording bar structure unverified",
+        "phase": {
+          "covered_attacks": 353,
+          "outside_cached_pulse_span": 0,
+          "phase_bin_edges": [
+            0.0,
+            0.08333333333333333,
+            0.16666666666666666,
+            0.25,
+            0.3333333333333333,
+            0.41666666666666663,
+            0.5,
+            0.5833333333333333,
+            0.6666666666666666,
+            0.75,
+            0.8333333333333333,
+            0.9166666666666666,
+            1.0
+          ],
+          "phase_counts": [
+            19,
+            5,
+            42,
+            14,
+            7,
+            55,
+            18,
+            3,
+            55,
+            12,
+            0,
+            123
+          ],
+          "semantics": "Full-mix attacks within cached pulse intervals; pulse phase/level is unverified; no swing, subdivision, stroke or downbeat acceptance"
+        },
+        "native_boundary_summary": {
+          "btc": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.06077097505669826,
+            "within_40ms": 28,
+            "within_150ms": 63,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          },
+          "crema": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.0638548752834538,
+            "within_40ms": 13,
+            "within_150ms": 58,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          }
+        },
+        "harmonic_hold_windows": 0
+      },
+      "pitch_followup": null,
+      "accepted_arrangement": false
+    },
+    {
+      "id": "van-morrison-brown-eyed-girl-youtube-20261011",
+      "title": "Van Morrison - Brown Eyed Girl",
+      "recording": {
+        "id": "van-morrison-brown-eyed-girl-youtube-20261011",
+        "title": "audio",
+        "duration_seconds": 186.55927437641722,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "riff_first": false,
+      "boundary_counts": {
+        "primary_boundaries": 124,
+        "secondary_boundaries": 105,
+        "paired_boundaries": 93,
+        "median_pair_difference_seconds": 0.03174603174602453
+      },
+      "all_windows": 50,
+      "selected_windows": 12,
+      "fixed_samples": 4,
+      "rhythm": {
+        "id": "van-morrison-brown-eyed-girl-youtube-20261011",
+        "name": "Van Morrison - Brown Eyed Girl",
+        "recording": {
+          "id": "van-morrison-brown-eyed-girl-youtube-20261011",
+          "title": "Van Morrison - Brown Eyed Girl",
+          "duration_seconds": 186.55927437641722,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf",
+          "provenance": "User-supplied local audio; permissions recorded separately"
+        },
+        "duration_seconds": 186.55927437641722,
+        "full_mix_attacks": 704,
+        "full_mix_attacks_per_second": 3.7735995830448616,
+        "guided_pulse_bpm": 151.99908088235293,
+        "guided_pulse_meter_status": "Four-quarter practice convention; recording bar structure unverified",
+        "phase": {
+          "covered_attacks": 703,
+          "outside_cached_pulse_span": 1,
+          "phase_bin_edges": [
+            0.0,
+            0.08333333333333333,
+            0.16666666666666666,
+            0.25,
+            0.3333333333333333,
+            0.41666666666666663,
+            0.5,
+            0.5833333333333333,
+            0.6666666666666666,
+            0.75,
+            0.8333333333333333,
+            0.9166666666666666,
+            1.0
+          ],
+          "phase_counts": [
+            11,
+            3,
+            4,
+            6,
+            94,
+            168,
+            47,
+            6,
+            1,
+            2,
+            232,
+            129
+          ],
+          "semantics": "Full-mix attacks within cached pulse intervals; pulse phase/level is unverified; no swing, subdivision, stroke or downbeat acceptance"
+        },
+        "native_boundary_summary": {
+          "btc": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.05995464852607579,
+            "within_40ms": 37,
+            "within_150ms": 109,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          },
+          "crema": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.0638548752834538,
+            "within_40ms": 26,
+            "within_150ms": 95,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          }
+        },
+        "harmonic_hold_windows": 2
+      },
+      "pitch_followup": {
+        "id": "van-morrison-brown-eyed-girl-youtube-20261011",
+        "recording": {
+          "id": "van-morrison-brown-eyed-girl-youtube-20261011",
+          "title": "Van Morrison - Brown Eyed Girl",
+          "duration_seconds": 186.55927437641722,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf",
+          "provenance": "User-supplied local audio; permissions recorded separately"
+        },
+        "case_report_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/van-morrison-brown-eyed-girl-youtube-20261011/report.json",
+        "case_report_sha256": "024b9b557ec59cb34870fd826d7a8e29fd9e088c724538a594c026768c859f3c",
+        "nnls_evidence_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/van-morrison-brown-eyed-girl-youtube-20261011/nnls-evidence.json",
+        "nnls_evidence_sha256": "c1d7c8d567d0b6c8a48381ac3df83cd6e437a039cd4e391714a744d08c2ea720",
+        "analysis_runtime_seconds": 1.1162289576604962,
+        "finding": "G/C/D/Em expected-zero palette ranks first globally, in all four fixed samples, and in every active 20-second window for both methods. No inferred correction. Final 180\u2013186.559s has no active evidence at the fixed RMS threshold and is unscored.",
+        "unresolved": "Exact muted/skipped contacts, ties, intro/lead versus accompaniment, pulse/downbeat phase and teacher tempo140 versus existing ~152 estimate still require recording-specific rhythm evidence.",
+        "expected_sounding_shift_semitones": 0,
+        "methods": {
+          "spectral": {
+            "best_shifts_semitones": [
+              0
+            ],
+            "expected_shift_cosine": 0.6689826987085786,
+            "best_minus_expected_score": 0.0,
+            "best_minus_next_distinct_score": 0.0436616499239072
+          },
+          "nnls": {
+            "best_shifts_semitones": [
+              0
+            ],
+            "expected_shift_cosine": 0.7844988297568074,
+            "best_minus_expected_score": 0.0,
+            "best_minus_next_distinct_score": 0.0543593482824164
+          }
+        },
+        "native_family_membership_not_accuracy": {
+          "btc": 0.9775077144436979,
+          "crema": 1.0
+        }
+      },
+      "accepted_arrangement": false
+    },
+    {
+      "id": "beatles-love-me-do-youtube-20261011",
+      "title": "The Beatles - Love Me Do",
+      "recording": {
+        "id": "beatles-love-me-do-youtube-20261011",
+        "title": "audio",
+        "duration_seconds": 141.69832199546485,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "riff_first": false,
+      "boundary_counts": {
+        "primary_boundaries": 73,
+        "secondary_boundaries": 55,
+        "paired_boundaries": 51,
+        "median_pair_difference_seconds": 0.061315192743762736
+      },
+      "all_windows": 39,
+      "selected_windows": 12,
+      "fixed_samples": 4,
+      "rhythm": {
+        "id": "beatles-love-me-do-youtube-20261011",
+        "name": "The Beatles - Love Me Do",
+        "recording": {
+          "id": "beatles-love-me-do-youtube-20261011",
+          "title": "The Beatles - Love Me Do",
+          "duration_seconds": 141.69832199546485,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea",
+          "provenance": "User-supplied local audio; permissions recorded separately"
+        },
+        "duration_seconds": 141.69832199546485,
+        "full_mix_attacks": 278,
+        "full_mix_attacks_per_second": 1.9619145525865689,
+        "guided_pulse_bpm": 143.5546875,
+        "guided_pulse_meter_status": "Four-quarter practice convention; recording bar structure unverified",
+        "phase": {
+          "covered_attacks": 278,
+          "outside_cached_pulse_span": 0,
+          "phase_bin_edges": [
+            0.0,
+            0.08333333333333333,
+            0.16666666666666666,
+            0.25,
+            0.3333333333333333,
+            0.41666666666666663,
+            0.5,
+            0.5833333333333333,
+            0.6666666666666666,
+            0.75,
+            0.8333333333333333,
+            0.9166666666666666,
+            1.0
+          ],
+          "phase_counts": [
+            12,
+            2,
+            0,
+            0,
+            0,
+            1,
+            10,
+            28,
+            2,
+            0,
+            100,
+            123
+          ],
+          "semantics": "Full-mix attacks within cached pulse intervals; pulse phase/level is unverified; no swing, subdivision, stroke or downbeat acceptance"
+        },
+        "native_boundary_summary": {
+          "btc": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.09142857142856542,
+            "within_40ms": 26,
+            "within_150ms": 47,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          },
+          "crema": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.15092970521541815,
+            "within_40ms": 9,
+            "within_150ms": 27,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          }
+        },
+        "harmonic_hold_windows": 10
+      },
+      "pitch_followup": null,
+      "accepted_arrangement": false
+    },
+    {
+      "id": "beatles-twist-and-shout-youtube-20261011",
+      "title": "The Beatles - Twist And Shout",
+      "recording": {
+        "id": "beatles-twist-and-shout-youtube-20261011",
+        "title": "audio",
+        "duration_seconds": 155.23555555555555,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "riff_first": false,
+      "boundary_counts": {
+        "primary_boundaries": 112,
+        "secondary_boundaries": 101,
+        "paired_boundaries": 93,
+        "median_pair_difference_seconds": 0.03138321995464821
+      },
+      "all_windows": 35,
+      "selected_windows": 12,
+      "fixed_samples": 4,
+      "rhythm": {
+        "id": "beatles-twist-and-shout-youtube-20261011",
+        "name": "The Beatles - Twist And Shout",
+        "recording": {
+          "id": "beatles-twist-and-shout-youtube-20261011",
+          "title": "The Beatles - Twist And Shout",
+          "duration_seconds": 155.23555555555555,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c",
+          "provenance": "User-supplied local audio; permissions recorded separately"
+        },
+        "duration_seconds": 155.23555555555555,
+        "full_mix_attacks": 487,
+        "full_mix_attacks_per_second": 3.1371678882272103,
+        "guided_pulse_bpm": 123.046875,
+        "guided_pulse_meter_status": "Four-quarter practice convention; recording bar structure unverified",
+        "phase": {
+          "covered_attacks": 486,
+          "outside_cached_pulse_span": 1,
+          "phase_bin_edges": [
+            0.0,
+            0.08333333333333333,
+            0.16666666666666666,
+            0.25,
+            0.3333333333333333,
+            0.41666666666666663,
+            0.5,
+            0.5833333333333333,
+            0.6666666666666666,
+            0.75,
+            0.8333333333333333,
+            0.9166666666666666,
+            1.0
+          ],
+          "phase_counts": [
+            7,
+            6,
+            4,
+            5,
+            85,
+            101,
+            15,
+            7,
+            6,
+            2,
+            126,
+            122
+          ],
+          "semantics": "Full-mix attacks within cached pulse intervals; pulse phase/level is unverified; no swing, subdivision, stroke or downbeat acceptance"
+        },
+        "native_boundary_summary": {
+          "btc": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.07183673469388108,
+            "within_40ms": 32,
+            "within_150ms": 99,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          },
+          "crema": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.0638548752834538,
+            "within_40ms": 23,
+            "within_150ms": 89,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          }
+        },
+        "harmonic_hold_windows": 5
+      },
+      "pitch_followup": null,
+      "accepted_arrangement": false
+    },
+    {
+      "id": "white-stripes-seven-nation-army-youtube-20261011",
+      "title": "The White Stripes - Seven Nation Army",
+      "recording": {
+        "id": "white-stripes-seven-nation-army-youtube-20261011",
+        "title": "audio",
+        "duration_seconds": 232.1168253968254,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "394c791d799d7ff7ece36c1b93a434c1f600afe0265f5dfe1d6ad328626a6854",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "riff_first": true,
+      "boundary_counts": {
+        "primary_boundaries": 197,
+        "secondary_boundaries": 127,
+        "paired_boundaries": 69,
+        "median_pair_difference_seconds": 0.06167800453514616
+      },
+      "all_windows": 197,
+      "selected_windows": 12,
+      "fixed_samples": 4,
+      "rhythm": {
+        "id": "white-stripes-seven-nation-army-youtube-20261011",
+        "name": "The White Stripes - Seven Nation Army",
+        "recording": {
+          "id": "white-stripes-seven-nation-army-youtube-20261011",
+          "title": "The White Stripes - Seven Nation Army",
+          "duration_seconds": 232.1168253968254,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "394c791d799d7ff7ece36c1b93a434c1f600afe0265f5dfe1d6ad328626a6854",
+          "provenance": "User-supplied local audio; permissions recorded separately"
+        },
+        "duration_seconds": 232.1168253968254,
+        "full_mix_attacks": 550,
+        "full_mix_attacks_per_second": 2.3694964768698847,
+        "guided_pulse_bpm": 123.046875,
+        "guided_pulse_meter_status": "Four-quarter practice convention; recording bar structure unverified",
+        "phase": {
+          "covered_attacks": 535,
+          "outside_cached_pulse_span": 15,
+          "phase_bin_edges": [
+            0.0,
+            0.08333333333333333,
+            0.16666666666666666,
+            0.25,
+            0.3333333333333333,
+            0.41666666666666663,
+            0.5,
+            0.5833333333333333,
+            0.6666666666666666,
+            0.75,
+            0.8333333333333333,
+            0.9166666666666666,
+            1.0
+          ],
+          "phase_counts": [
+            3,
+            9,
+            3,
+            12,
+            49,
+            37,
+            9,
+            15,
+            19,
+            0,
+            49,
+            330
+          ],
+          "semantics": "Full-mix attacks within cached pulse intervals; pulse phase/level is unverified; no swing, subdivision, stroke or downbeat acceptance"
+        },
+        "native_boundary_summary": {
+          "btc": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.05061224489795535,
+            "within_40ms": 86,
+            "within_150ms": 155,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          },
+          "crema": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.05804988662131905,
+            "within_40ms": 46,
+            "within_150ms": 107,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          }
+        },
+        "harmonic_hold_windows": 4
+      },
+      "pitch_followup": {
+        "id": "white-stripes-seven-nation-army-youtube-20261011",
+        "recording": {
+          "id": "white-stripes-seven-nation-army-youtube-20261011",
+          "title": "The White Stripes - Seven Nation Army",
+          "duration_seconds": 232.1168253968254,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "394c791d799d7ff7ece36c1b93a434c1f600afe0265f5dfe1d6ad328626a6854",
+          "provenance": "User-supplied local audio; permissions recorded separately"
+        },
+        "case_report_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/white-stripes-seven-nation-army-youtube-20261011/report.json",
+        "case_report_sha256": "ca1a8c6a6682f3486bd2fb69ddbeef1ff72ca2bd3b532175a8a72084b906235d",
+        "nnls_evidence_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/white-stripes-seven-nation-army-youtube-20261011/nnls-evidence.json",
+        "nnls_evidence_sha256": "ede5c692de2190ef5b7b223754894580c564c181c05f812fb348a0af1f27f433",
+        "analysis_runtime_seconds": 1.2730466667562723,
+        "finding": "No harmonic palette imposed. NNLS full-mix activity led by E/B/C, while simple spectral ranks E/C#/F. The disagreement illustrates harmonic/noise sensitivity rather than establishing the riff melody or a tuning choice. Native E/Em and B/Bm labels retained.",
+        "unresolved": "Single-note onsets, muted articulation, power/slide variation and original Open A versus standard adaptation remain separate tasks; no key/quality/setup recognition is claimed.",
+        "methods": {
+          "spectral": {
+            "top_pitch_class_activity": [
+              {
+                "pitch_class": "E",
+                "mean_l2_chroma": 0.4072734283091896
+              },
+              {
+                "pitch_class": "C#",
+                "mean_l2_chroma": 0.2890590714299547
+              },
+              {
+                "pitch_class": "F",
+                "mean_l2_chroma": 0.21777632333230265
+              }
+            ]
+          },
+          "nnls": {
+            "top_pitch_class_activity": [
+              {
+                "pitch_class": "E",
+                "mean_l2_chroma": 0.500896413182503
+              },
+              {
+                "pitch_class": "B",
+                "mean_l2_chroma": 0.3374606202970919
+              },
+              {
+                "pitch_class": "C",
+                "mean_l2_chroma": 0.2553971787673109
+              }
+            ]
+          }
+        }
+      },
+      "accepted_arrangement": false
+    },
+    {
+      "id": "nirvana-come-as-you-are-youtube-20261011",
+      "title": "Nirvana - Come As You Are",
+      "recording": {
+        "id": "nirvana-come-as-you-are-youtube-20261011",
+        "title": "audio",
+        "duration_seconds": 218.92789115646258,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "riff_first": true,
+      "boundary_counts": {
+        "primary_boundaries": 122,
+        "secondary_boundaries": 106,
+        "paired_boundaries": 70,
+        "median_pair_difference_seconds": 0.061496598639450895
+      },
+      "all_windows": 93,
+      "selected_windows": 12,
+      "fixed_samples": 4,
+      "rhythm": {
+        "id": "nirvana-come-as-you-are-youtube-20261011",
+        "name": "Nirvana - Come As You Are",
+        "recording": {
+          "id": "nirvana-come-as-you-are-youtube-20261011",
+          "title": "Nirvana - Come As You Are",
+          "duration_seconds": 218.92789115646258,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7",
+          "provenance": "User-supplied local audio; permissions recorded separately"
+        },
+        "duration_seconds": 218.92789115646258,
+        "full_mix_attacks": 681,
+        "full_mix_attacks_per_second": 3.110613254449637,
+        "guided_pulse_bpm": 123.046875,
+        "guided_pulse_meter_status": "Four-quarter practice convention; recording bar structure unverified",
+        "phase": {
+          "covered_attacks": 679,
+          "outside_cached_pulse_span": 2,
+          "phase_bin_edges": [
+            0.0,
+            0.08333333333333333,
+            0.16666666666666666,
+            0.25,
+            0.3333333333333333,
+            0.41666666666666663,
+            0.5,
+            0.5833333333333333,
+            0.6666666666666666,
+            0.75,
+            0.8333333333333333,
+            0.9166666666666666,
+            1.0
+          ],
+          "phase_counts": [
+            5,
+            7,
+            2,
+            1,
+            82,
+            170,
+            3,
+            16,
+            17,
+            0,
+            130,
+            246
+          ],
+          "semantics": "Full-mix attacks within cached pulse intervals; pulse phase/level is unverified; no swing, subdivision, stroke or downbeat acceptance"
+        },
+        "native_boundary_summary": {
+          "btc": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.05814058956916668,
+            "within_40ms": 41,
+            "within_150ms": 109,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          },
+          "crema": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.0638548752834538,
+            "within_40ms": 32,
+            "within_150ms": 101,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          }
+        },
+        "harmonic_hold_windows": 1
+      },
+      "pitch_followup": {
+        "id": "nirvana-come-as-you-are-youtube-20261011",
+        "recording": {
+          "id": "nirvana-come-as-you-are-youtube-20261011",
+          "title": "Nirvana - Come As You Are",
+          "duration_seconds": 218.92789115646258,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7",
+          "provenance": "User-supplied local audio; permissions recorded separately"
+        },
+        "case_report_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/nirvana-come-as-you-are-youtube-20261011/report.json",
+        "case_report_sha256": "19f32a6ffafbc1a35532a0f48ba5b10df855df88407e3719fd8823dc58bec403",
+        "nnls_evidence_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/nirvana-come-as-you-are-youtube-20261011/nnls-evidence.json",
+        "nnls_evidence_sha256": "42082e68054d589f9ab5066832bc664c476db7da17b0344eda4b7633203aa94c",
+        "analysis_runtime_seconds": 1.5277567924931645,
+        "finding": "No harmonic palette imposed. NNLS activity led by D/E/G, spectral by E/D/G. Descriptive pitch classes cannot establish D-standard physically. Native Em/D/G/etc retained. Teacher D-standard mapping remains shape root=sounding root+2, opposite to Wonderwall capo2 direction.",
+        "unresolved": "Validate riff note sequence/onsets and power/sus4 sections on selected studio audio; do not replace studio setup with common live E-flat setup or infer grips directly from sounding roots.",
+        "methods": {
+          "spectral": {
+            "top_pitch_class_activity": [
+              {
+                "pitch_class": "E",
+                "mean_l2_chroma": 0.37461791626533464
+              },
+              {
+                "pitch_class": "D",
+                "mean_l2_chroma": 0.3318853223022151
+              },
+              {
+                "pitch_class": "G",
+                "mean_l2_chroma": 0.26165012415380107
+              }
+            ]
+          },
+          "nnls": {
+            "top_pitch_class_activity": [
+              {
+                "pitch_class": "D",
+                "mean_l2_chroma": 0.39545396545143585
+              },
+              {
+                "pitch_class": "E",
+                "mean_l2_chroma": 0.3839902115701305
+              },
+              {
+                "pitch_class": "G",
+                "mean_l2_chroma": 0.33182352550941924
+              }
+            ]
+          }
+        }
+      },
+      "accepted_arrangement": false
+    },
+    {
+      "id": "radiohead-creep-youtube-20261010",
+      "title": "Radiohead - Creep",
+      "recording": {
+        "id": "radiohead-creep-youtube-20261010",
+        "title": "audio",
+        "duration_seconds": 236.63455782312926,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "riff_first": false,
+      "boundary_counts": {
+        "primary_boundaries": 89,
+        "secondary_boundaries": 48,
+        "paired_boundaries": 23,
+        "median_pair_difference_seconds": 0.03174603174602453
+      },
+      "all_windows": 97,
+      "selected_windows": 12,
+      "fixed_samples": 4,
+      "rhythm": {
+        "id": "radiohead-creep-youtube-20261010",
+        "name": "Radiohead - Creep",
+        "recording": {
+          "id": "radiohead-creep-youtube-20261010",
+          "title": "Radiohead - Creep",
+          "duration_seconds": 236.63455782312926,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10",
+          "provenance": "User-supplied local audio; permissions recorded separately"
+        },
+        "duration_seconds": 236.63455782312926,
+        "full_mix_attacks": 568,
+        "full_mix_attacks_per_second": 2.4003256549896967,
+        "guided_pulse_bpm": 92.28515625,
+        "guided_pulse_meter_status": "Four-quarter practice convention; recording bar structure unverified",
+        "phase": {
+          "covered_attacks": 564,
+          "outside_cached_pulse_span": 4,
+          "phase_bin_edges": [
+            0.0,
+            0.08333333333333333,
+            0.16666666666666666,
+            0.25,
+            0.3333333333333333,
+            0.41666666666666663,
+            0.5,
+            0.5833333333333333,
+            0.6666666666666666,
+            0.75,
+            0.8333333333333333,
+            0.9166666666666666,
+            1.0
+          ],
+          "phase_counts": [
+            6,
+            5,
+            14,
+            13,
+            19,
+            145,
+            10,
+            9,
+            46,
+            8,
+            5,
+            284
+          ],
+          "semantics": "Full-mix attacks within cached pulse intervals; pulse phase/level is unverified; no swing, subdivision, stroke or downbeat acceptance"
+        },
+        "native_boundary_summary": {
+          "btc": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.09977324263039122,
+            "within_40ms": 19,
+            "within_150ms": 63,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          },
+          "crema": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.08707482993196969,
+            "within_40ms": 15,
+            "within_150ms": 36,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          }
+        },
+        "harmonic_hold_windows": 55
+      },
+      "pitch_followup": {
+        "id": "radiohead-creep-youtube-20261010",
+        "recording": {
+          "id": "radiohead-creep-youtube-20261010",
+          "title": "Radiohead - Creep",
+          "duration_seconds": 236.63455782312926,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10",
+          "provenance": "User-supplied local audio; permissions recorded separately"
+        },
+        "case_report_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/radiohead-creep-youtube-20261010/report.json",
+        "case_report_sha256": "1b914d12657016b35e248a4af8e4b2e174117ddcd6291033b495f008ff9bd7f9",
+        "nnls_evidence_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/radiohead-creep-youtube-20261010/nnls-evidence.json",
+        "nnls_evidence_sha256": "e5e64059870a87bf7c09f02b88259363225ba2b15ebf5d58707357dc93bfa2eb",
+        "analysis_runtime_seconds": 1.5420155422762036,
+        "finding": "G/B/C/Cm expected-zero palette ranks first globally in both methods. NNLS all fixed samples/windows favour0; spectral sample198.139\u2013204.139s favours+1 by0.00838 and tail220\u2013236.635s favours+5 by0.00199. Do not relabel the recording based on these local mixed-content scores. Native Bm alternatives remain unresolved rather than globally changed toB.",
+        "unresolved": "B-major/C-minor contrast, variable verse arpeggios and final chorus extent/attack/dynamics require local checks; source vocabulary membership is not accuracy.",
+        "expected_sounding_shift_semitones": 0,
+        "methods": {
+          "spectral": {
+            "best_shifts_semitones": [
+              0
+            ],
+            "expected_shift_cosine": 0.6406182671981525,
+            "best_minus_expected_score": 0.0,
+            "best_minus_next_distinct_score": 0.07171106544576777
+          },
+          "nnls": {
+            "best_shifts_semitones": [
+              0
+            ],
+            "expected_shift_cosine": 0.8132038034081001,
+            "best_minus_expected_score": 0.0,
+            "best_minus_next_distinct_score": 0.13596492411336336
+          }
+        },
+        "native_family_membership_not_accuracy": {
+          "btc": 0.8654230148737674,
+          "crema": 0.9401952807160294
+        }
+      },
+      "accepted_arrangement": false
+    },
+    {
+      "id": "animals-house-rising-sun-official-20261011",
+      "title": "The Animals - The House Of The Rising Sun",
+      "recording": {
+        "id": "animals-house-rising-sun-official-20261011",
+        "title": "audio",
+        "duration_seconds": 269.91891156462583,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "riff_first": false,
+      "boundary_counts": {
+        "primary_boundaries": 176,
+        "secondary_boundaries": 161,
+        "paired_boundaries": 141,
+        "median_pair_difference_seconds": 0.06058956916098168
+      },
+      "all_windows": 63,
+      "selected_windows": 12,
+      "fixed_samples": 4,
+      "rhythm": {
+        "id": "animals-house-rising-sun-official-20261011",
+        "name": "The Animals - The House Of The Rising Sun",
+        "recording": {
+          "id": "animals-house-rising-sun-official-20261011",
+          "title": "The Animals - The House Of The Rising Sun",
+          "duration_seconds": 269.91891156462583,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708",
+          "provenance": "User-supplied local audio; permissions recorded separately"
+        },
+        "duration_seconds": 269.91891156462583,
+        "full_mix_attacks": 841,
+        "full_mix_attacks_per_second": 3.1157505605109925,
+        "guided_pulse_bpm": 78.30255681818181,
+        "guided_pulse_meter_status": "Source 6/8; two dotted-quarter pulse convention is a project hypothesis",
+        "phase": {
+          "covered_attacks": 832,
+          "outside_cached_pulse_span": 9,
+          "phase_bin_edges": [
+            0.0,
+            0.08333333333333333,
+            0.16666666666666666,
+            0.25,
+            0.3333333333333333,
+            0.41666666666666663,
+            0.5,
+            0.5833333333333333,
+            0.6666666666666666,
+            0.75,
+            0.8333333333333333,
+            0.9166666666666666,
+            1.0
+          ],
+          "phase_counts": [
+            4,
+            6,
+            3,
+            242,
+            8,
+            25,
+            28,
+            208,
+            9,
+            7,
+            4,
+            288
+          ],
+          "semantics": "Full-mix attacks within cached pulse intervals; pulse phase/level is unverified; no swing, subdivision, stroke or downbeat acceptance"
+        },
+        "native_boundary_summary": {
+          "btc": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.06140589569161392,
+            "within_40ms": 59,
+            "within_150ms": 142,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          },
+          "crema": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.07546485260770908,
+            "within_40ms": 39,
+            "within_150ms": 131,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          }
+        },
+        "harmonic_hold_windows": 1
+      },
+      "pitch_followup": {
+        "id": "animals-house-rising-sun-official-20261011",
+        "recording": {
+          "id": "animals-house-rising-sun-official-20261011",
+          "title": "The Animals - The House Of The Rising Sun",
+          "duration_seconds": 269.91891156462583,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708",
+          "provenance": "User-supplied local audio; permissions recorded separately"
+        },
+        "case_report_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/animals-house-rising-sun-official-20261011/report.json",
+        "case_report_sha256": "9ae5ed92519047ba401f38e4d3c298007b867cb42477231c517f106b48ecacec",
+        "nnls_evidence_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/animals-house-rising-sun-official-20261011/nnls-evidence.json",
+        "nnls_evidence_sha256": "3bc4d72e421ccd08aec21d86218b245df0a2a4d5ca3400b0cf523b84ce0c658b",
+        "analysis_runtime_seconds": 1.4738527908921242,
+        "finding": "Am/C/D/F/E/Dm expected-zero palette ranks first globally, at all four fixed samples and every20swindow in both methods. Preserves selected269.919s label-distributed recording instead of legacy248.546s tribute. Native major/minor alternatives retained.",
+        "unresolved": "Physical6/8 phase/two-pulse bar length, rake order, later dynamics and within-bar Am/Dm outro changes remain unaccepted; no corpus-CD reference transfer from duration alone.",
+        "expected_sounding_shift_semitones": 0,
+        "methods": {
+          "spectral": {
+            "best_shifts_semitones": [
+              0
+            ],
+            "expected_shift_cosine": 0.7114129044961952,
+            "best_minus_expected_score": 0.0,
+            "best_minus_next_distinct_score": 0.07318614449160865
+          },
+          "nnls": {
+            "best_shifts_semitones": [
+              0
+            ],
+            "expected_shift_cosine": 0.8959115190622724,
+            "best_minus_expected_score": 0.0,
+            "best_minus_next_distinct_score": 0.11720650463417026
+          }
+        },
+        "native_family_membership_not_accuracy": {
+          "btc": 0.9962853220906678,
+          "crema": 0.9683037269244167
+        }
+      },
+      "accepted_arrangement": false
+    },
+    {
+      "id": "oasis-wonderwall-youtube-20261010",
+      "title": "Oasis - Wonderwall",
+      "recording": {
+        "id": "oasis-wonderwall-youtube-20261010",
+        "title": "audio",
+        "duration_seconds": 277.78031746031746,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "riff_first": false,
+      "boundary_counts": {
+        "primary_boundaries": 177,
+        "secondary_boundaries": 143,
+        "paired_boundaries": 126,
+        "median_pair_difference_seconds": 0.09142857142856542
+      },
+      "all_windows": 93,
+      "selected_windows": 12,
+      "fixed_samples": 4,
+      "rhythm": {
+        "id": "oasis-wonderwall-youtube-20261010",
+        "name": "Oasis - Wonderwall",
+        "recording": {
+          "id": "oasis-wonderwall-youtube-20261010",
+          "title": "Oasis - Wonderwall",
+          "duration_seconds": 277.78031746031746,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462",
+          "provenance": "User-supplied local audio; permissions recorded separately"
+        },
+        "duration_seconds": 277.78031746031746,
+        "full_mix_attacks": 946,
+        "full_mix_attacks_per_second": 3.405568863370392,
+        "guided_pulse_bpm": 86.1328125,
+        "guided_pulse_meter_status": "Sources describe 4/4 and 2/4; local meter transitions unverified",
+        "phase": {
+          "covered_attacks": 944,
+          "outside_cached_pulse_span": 2,
+          "phase_bin_edges": [
+            0.0,
+            0.08333333333333333,
+            0.16666666666666666,
+            0.25,
+            0.3333333333333333,
+            0.41666666666666663,
+            0.5,
+            0.5833333333333333,
+            0.6666666666666666,
+            0.75,
+            0.8333333333333333,
+            0.9166666666666666,
+            1.0
+          ],
+          "phase_counts": [
+            6,
+            8,
+            138,
+            10,
+            38,
+            205,
+            5,
+            26,
+            189,
+            21,
+            7,
+            291
+          ],
+          "semantics": "Full-mix attacks within cached pulse intervals; pulse phase/level is unverified; no swing, subdivision, stroke or downbeat acceptance"
+        },
+        "native_boundary_summary": {
+          "btc": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.064761904761923,
+            "within_40ms": 61,
+            "within_150ms": 155,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          },
+          "crema": {
+            "median_nearest_full_mix_attack_distance_seconds": 0.0522448979591843,
+            "within_40ms": 48,
+            "within_150ms": 130,
+            "semantics": "Descriptive distances to full-mix attacks; no reference timing accuracy or confidence"
+          }
+        },
+        "harmonic_hold_windows": 7
+      },
+      "pitch_followup": {
+        "id": "oasis-wonderwall-youtube-20261010",
+        "recording": {
+          "id": "oasis-wonderwall-youtube-20261010",
+          "title": "Oasis - Wonderwall",
+          "duration_seconds": 277.78031746031746,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462",
+          "provenance": "User-supplied local audio; permissions recorded separately"
+        },
+        "case_report_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/oasis-wonderwall-youtube-20261010/report.json",
+        "case_report_sha256": "ff7393e075f3109a7383891ffadc5c5f68596c3b042b3567dc32672a24bf0d97",
+        "nnls_evidence_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/oasis-wonderwall-youtube-20261010/nnls-evidence.json",
+        "nnls_evidence_sha256": "51fb4487284b07abdf76e918e440180c162204101dd8a5d59858f2eb5a6fe676",
+        "analysis_runtime_seconds": 1.7319540418684483,
+        "finding": "All12relative shifts scored against intact capo2shape paletteEm7/G/Dsus4/A7sus4/Cadd9. Expected+2 ranks first globally/bothmethods and all8fixedsamples. Sounding proposalF#m7/A/Esus4/B7sus4/Dadd9 is explicit; simple E/B-major detector labels remain distinct from sus4. NNLS260\u2013277.780s prefers+11 over+2 by0.01460 with9.584sactive evidence; original charts unchanged.",
+        "unresolved": "Shared-finger voicing, section-specific syncopation, muted versus omitted contacts, local meter and exact change times still need checking. Primary teacher text does not establish 4/4-to-2/4 changes.",
+        "expected_sounding_shift_semitones": 2,
+        "methods": {
+          "spectral": {
+            "best_shifts_semitones": [
+              2
+            ],
+            "expected_shift_cosine": 0.7431457958693699,
+            "best_minus_expected_score": 0.0,
+            "best_minus_next_distinct_score": 0.06392549096567168
+          },
+          "nnls": {
+            "best_shifts_semitones": [
+              2
+            ],
+            "expected_shift_cosine": 0.8709088295782124,
+            "best_minus_expected_score": 0.0,
+            "best_minus_next_distinct_score": 0.11327384737379109
+          }
+        },
+        "native_family_membership_not_accuracy": {
+          "btc": 0.7914201097697385,
+          "crema": 0.8841554559043348
+        }
+      },
+      "accepted_arrangement": false
+    }
+  ],
+  "limits": [
+    "Attack clocks tested on procedural PCM, not independent real-recording guitar annotations.",
+    "Full-mix transients and RMS can be drums, voice, bass, guitar or overlapping parts.",
+    "Nearest attack is not harmonic evidence; repeated attacks do not require chord changes.",
+    "Energy continuation and damp controls differ; real mix cannot uniquely identify guitar mute.",
+    "Pulse phases are relative to unverified cached metrical hypotheses; no bar, swing or stroke acceptance.",
+    "No chord/pulse times refined, no source-separated inference, no lessons promoted.",
+    "Cosine compatibility and model palette membership are not calibrated confidence or accuracy.",
+    "Teacher shape-to-sounding mappings remain proposals, not physical capo/tuning/voicing recognition.",
+    "All twelve relative shifts remain visible; the expected shift never relabels native charts.",
+    "No triad palette or shift winner is imposed on riff tasks; descriptive full-mix chroma cannot recover note sequences or articulation.",
+    "No physical chord-change timing, section extent, stroke direction, muting or whole-song strumming is accepted.",
+    "NNLS global tuning compensation prevents any concert-pitch or cents claim."
+  ]
+}
