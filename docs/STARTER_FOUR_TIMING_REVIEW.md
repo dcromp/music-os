@@ -2,6 +2,8 @@
 
 Updated 16 October 2026. **Stage 2 now has a bounded operator-review queue and harmonic contrast candidates for the four starter recordings. No physical timing, complete section map or arrangement is accepted.** The pass reuses exact cached BTC/CREMA charts and NNLS evidence. It performs no extraction, neural inference, timestamp refinement or automatic correction. Original audio remains the default; the 39 Stage 1 frozen pins remain unchanged.
 
+**Ticket 3 follow-up:** the [bounded recording assessment](STARTER_FOUR_RECORDING_ASSESSMENT.md) now accounts for every selected/fixed sample and names the unresolved per-song claims. It verifies input/replay integrity but performs no audition; ticket 3 remains open and the reviewed-pack gate remains blocked pending a capable review or matched reference.
+
 ## What the queue measures
 
 Contiguous equivalent core labels are merged; silence, unknowns, unsupported labels and gaps remain distinct. Ordered one-to-one matching pairs the same directed core transition within 0.5 seconds, maximizing pair count before minimizing total time difference. Unpaired transitions and paired differences above 0.15 seconds create replay windows with 1.5-second padding. The unchanged priority order selects at most 12 windows per recording; BTC boundaries near its 10-second chunk seams are annotated for inspection.
