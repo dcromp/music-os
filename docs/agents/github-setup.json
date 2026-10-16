@@ -1,0 +1,102 @@
+{
+  "schema_version": "music-os-github-ticket-setup-1.0",
+  "repository": "dcromp/music-os",
+  "published_at_utc": "2026-10-16T15:35:29.698464+00:00",
+  "tickets": [
+    {
+      "draft_id": "M01",
+      "number": 2,
+      "database_id": 5886867380,
+      "title": "Finalize the ten-recording timing, rhythm and pitch checkpoint",
+      "url": "https://github.com/dcromp/music-os/issues/2",
+      "triage_label": "ready-for-agent",
+      "blocked_by_draft_ids": [],
+      "initial_state": "closed"
+    },
+    {
+      "draft_id": "M02",
+      "number": 3,
+      "database_id": 5886867938,
+      "title": "Check the first four recordings' audible changes and rhythm contrasts",
+      "url": "https://github.com/dcromp/music-os/issues/3",
+      "triage_label": "needs-triage",
+      "blocked_by_draft_ids": [
+        "M01"
+      ],
+      "initial_state": "open"
+    },
+    {
+      "draft_id": "M03",
+      "number": 4,
+      "database_id": 5886868593,
+      "title": "Review accompaniment for Brown Eyed Girl, Creep and House of the Rising Sun",
+      "url": "https://github.com/dcromp/music-os/issues/4",
+      "triage_label": "needs-triage",
+      "blocked_by_draft_ids": [
+        "M01"
+      ],
+      "initial_state": "open"
+    },
+    {
+      "draft_id": "M04",
+      "number": 5,
+      "database_id": 5886869096,
+      "title": "Review Wonderwall's capo-2 shapes, changes and section rhythms",
+      "url": "https://github.com/dcromp/music-os/issues/5",
+      "triage_label": "needs-triage",
+      "blocked_by_draft_ids": [
+        "M01"
+      ],
+      "initial_state": "open"
+    },
+    {
+      "draft_id": "M05",
+      "number": 6,
+      "database_id": 5886869545,
+      "title": "Prepare separate riff arrangements for Seven Nation Army and Come As You Are",
+      "url": "https://github.com/dcromp/music-os/issues/6",
+      "triage_label": "needs-triage",
+      "blocked_by_draft_ids": [
+        "M01"
+      ],
+      "initial_state": "open"
+    },
+    {
+      "draft_id": "M06",
+      "number": 7,
+      "database_id": 5886870305,
+      "title": "Publish a small reviewed practice pack with traceable arrangement status",
+      "url": "https://github.com/dcromp/music-os/issues/7",
+      "triage_label": "ready-for-agent",
+      "blocked_by_draft_ids": [
+        "M02"
+      ],
+      "initial_state": "open"
+    },
+    {
+      "draft_id": "M07",
+      "number": 8,
+      "database_id": 5886870798,
+      "title": "Run ordinary guitar practice and measure followability",
+      "url": "https://github.com/dcromp/music-os/issues/8",
+      "triage_label": "ready-for-human",
+      "blocked_by_draft_ids": [
+        "M06"
+      ],
+      "initial_state": "open"
+    },
+    {
+      "draft_id": "M08",
+      "number": 9,
+      "database_id": 5886871407,
+      "title": "Specify one permitted end-to-end launch-content route and its cost gaps",
+      "url": "https://github.com/dcromp/music-os/issues/9",
+      "triage_label": "ready-for-agent",
+      "blocked_by_draft_ids": [],
+      "initial_state": "open"
+    }
+  ],
+  "native_dependencies": true,
+  "native_edge_count": 6,
+  "semantics": "Setup-time identity and dependency snapshot. GitHub Issues is authoritative for live state and progress."
+}

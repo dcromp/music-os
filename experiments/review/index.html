@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Music OS · play along</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Music OS · local experiment</p>
+    <h1>Your song, ready to play</h1>
+    <p class="lead">Press play and follow the automatic chord draft. Listen or pick up your guitar. If something sounds wrong, tap the button below — its time is captured for you.</p>
+    <div id="status" role="status">Loading your songs…</div>
+    <section id="learning-path" aria-labelledby="learning-heading" hidden>
+      <h2 id="learning-heading">Suggested practice path</h2>
+      <p id="learning-order-note" class="note">Provisional order; choose any song.</p>
+      <h3 id="learning-title" class="learning-title"></h3>
+      <p id="learning-focus"></p><p id="learning-prerequisites" class="small"></p>
+      <p id="learning-setup" class="small"></p><p id="learning-guide-note" class="note" hidden></p>
+      <div id="learning-step-controls">
+        <div class="controls"><button id="start-path-drill" disabled>Use starting drill</button><button id="next-path-song" disabled>Try next song</button></div>
+        <label class="practice-check"><input id="practised-step" type="checkbox" disabled> Practised this step</label>
+      </div>
+      <p id="learning-progress" class="small" role="status"></p>
+      <details class="learning-sources"><summary>Teaching sources</summary><div id="learning-sources"></div></details>
+    </section>
+    <section aria-labelledby="listen-heading">
+      <h2 id="listen-heading">Play along</h2>
+      <label for="case">Song</label>
+      <select id="case" disabled></select>
+      <p class="note">This is an automatic draft. Some chords and changes may need correction.</p>
+      <p id="practice" class="small" hidden></p>
+      <div id="chord-view-choice" class="controls" hidden><label for="chord-view">Chord display</label><select id="chord-view"><option value="capo-shapes">Capo shapes</option><option value="sounding-pitches">Sounding pitches</option></select></div>
+      <div class="controls"><label for="quality-mode">Chord detail</label><select id="quality-mode" disabled><option value="full-chords">Full chords</option><option value="core-chords">Core chords</option></select></div>
+      <p id="quality-info" class="note" hidden>Core chords leave out some added notes, such as Em7 → Em and Cadd9 → C. Suspended chords stay suspended: Dsus4 stays Dsus4. This can help you start playing, but may change the sound.</p>
+      <div class="controls"><label for="duration-mode">Chord lengths</label><select id="duration-mode" disabled><option value="estimated">Estimated beats / bars</option><option value="seconds">Seconds</option></select></div>
+      <p id="rhythm-note" class="small" hidden></p>
+      <audio id="audio" controls preload="metadata"></audio>
+      <p id="position" class="position">0:00</p>
+      <div class="chord-strip" aria-label="Automatic chord draft">
+        <div class="now-card"><span class="chord-caption">Now</span><strong id="play-current">Loading…</strong><span id="full-chord" class="small" hidden></span><p id="current-hold" class="small"></p><div id="hold-progress" class="hold-progress" role="progressbar" aria-label="Progress through current timing span" aria-valuemin="0" aria-valuemax="100" hidden><span id="hold-progress-fill"></span></div><span id="next-change" class="small"></span></div>
+        <div class="upcoming-card"><span class="chord-caption">Coming up</span><div id="upcoming" class="upcoming"></div></div>
+      </div>
+      <div class="timing-view"><p id="timing-range" class="small"></p><div id="timing-track" class="timing-track" role="img" aria-label="Chord timing"><div id="timing-blocks"></div><div id="timing-playhead" class="timing-playhead"><span>Now</span></div></div></div>
+      <div class="controls"><button id="restart" disabled>Restart</button><button id="back" disabled>Back 2 seconds</button></div>
+      <p id="point-notice" class="note" hidden></p>
+      <div id="strumming" class="strum-panel" hidden>
+        <h3>Suggested strumming</h3><p class="note">Practice suggestion; recorded parts may differ.</p>
+        <label for="strum-pattern">Pattern</label><select id="strum-pattern" disabled></select>
+        <p id="strum-meter" class="small"></p><div id="strum-grid" class="strum-grid" aria-label="Suggested strum counts and strokes"></div>
+        <p class="small">↓ D: downstroke · ↑ U: upstroke · —: skip a stroke and keep your hand moving.</p>
+        <p id="strum-description" class="note"></p><p id="strum-note" class="small"></p>
+      </div>
+    </section>
+    <section aria-labelledby="feedback-heading">
+      <h2 id="feedback-heading">Only tell us when something feels wrong</h2>
+      <p>You do not need to name chords or enter times. A tap saves this moment on this computer.</p>
+      <button id="problem" class="primary" disabled>Something feels wrong</button>
+      <div id="feedback-detail" hidden>
+        <p id="captured" class="captured"></p>
+        <label for="reason">Optional reason</label>
+        <select id="reason"><option value="not-sure">Not sure</option><option value="wrong-chord">Wrong chord</option><option value="late-change">Change is late</option><option value="too-many-changes">Too many changes</option></select>
+        <label for="feedback-note">Optional note</label><input id="feedback-note" type="text" maxlength="1000" placeholder="Anything you noticed">
+      </div>
+      <p id="feedback-summary" class="note">No issues saved for this song yet.</p>
+      <div id="feedback-list"></div>
+      <div class="controls"><button id="save-feedback" disabled>Download feedback</button><button id="copy-feedback" disabled>Copy feedback JSON</button></div>
+      <textarea id="feedback-export" rows="8" readonly hidden aria-label="Feedback JSON to copy"></textarea>
+    </section>
+    <details id="points-details">
+      <summary>Optional: replay places the algorithms disagree</summary>
+      <p class="note">These are automatically suggested checks. Agreement and disagreement do not tell us which chart is correct. You can ignore this list and simply play.</p>
+      <div id="review-points"></div>
+    </details>
+    <details id="advanced">
+      <summary>Advanced: source information, other charts and manual annotations</summary>
+      <p id="origin" class="small"></p>
+      <div class="controls"><label for="seek">Go to seconds</label><input id="seek" type="number" min="0" step="0.05" value="0"><button id="go" disabled>Go</button></div>
+      <h2>Other automatic charts</h2>
+      <p class="note">Charts are shown automatically for play along. Any manually entered annotations are recorded as model-exposed and are not independent reference labels.</p>
+      <button id="reveal" disabled>Load other charts</button>
+      <div id="comparison" hidden><label for="candidate">Candidate</label><select id="candidate"></select><p id="current" class="current"></p><div class="table-wrap"><table><thead><tr><th>Start (s)</th><th>End (s)</th><th>Chord</th><th>Replay</th></tr></thead><tbody id="candidate-events"></tbody></table></div></div>
+      <h2>Optional manual annotation editor</h2>
+      <p class="note">These entries stay separate from automatic chords and issue reports. They remain manual drafts until independently checked.</p>
+      <button id="mark" disabled>Mark change now</button>
+      <div class="table-wrap"><table><thead><tr><th>Time (s)</th><th>Chord</th><th>Timing ± (s)</th><th>Confidence</th><th>Replay</th><th>Remove</th></tr></thead><tbody id="marks"></tbody></table></div>
+      <label for="notes">Manual annotation notes</label><textarea id="notes" rows="2"></textarea>
+      <p id="exposure" class="note"></p>
+      <div class="controls"><button id="save" disabled>Download manual annotations</button><button id="show" disabled>Show annotation JSON</button></div>
+      <textarea id="export" rows="12" readonly hidden aria-label="Annotation JSON to copy"></textarea>
+    </details>
+  </main>
+</body>
+</html>

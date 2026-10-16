@@ -1,0 +1,200 @@
+{
+  "schema_version": "playalong-rhythm-results-1.0",
+  "checked_date": "2026-10-12",
+  "status": "Deployed and browser verified on Mac localhost8070",
+  "gold": false,
+  "chord_boundaries_modified": false,
+  "audio_or_pack_identity_modified": false,
+  "implementation_sha256": "b18efd3d3c6eaeec7bfb847ae30b4cc661850b209ddf4f6919200051d88e60de",
+  "config_sha256": "ae9159b391b25ebe2b481efd8ef4e3595afe4e5c38a211586560e0718877e71c",
+  "rhythm_sha256": "09c5c68dc1dc44f8380871744c59d00043e1c6ea42650f3911353f84a78962f7",
+  "practice_sha256": "0de69b0756570a7083d9796ddba181d70b80444965eacf382531909c0666c4ea",
+  "player_manifest_sha256": "556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671",
+  "rhythm_runtime_seconds": 5.492886041291058,
+  "verification": {
+    "python_distinct_passed": 239,
+    "standard_passed": 223,
+    "pinned_evaluation_passed": 16,
+    "javascript_helper_checks_passed": 47,
+    "isolated_browser_compound_meter": true,
+    "isolated_browser_wonderwall_beats_only": true,
+    "isolated_browser_seconds_choice": true,
+    "isolated_browser_core_view": true,
+    "isolated_browser_feedback_capture_reload": true,
+    "isolated_browser_proportional_widths": true,
+    "normal_player_test_feedback_added": false,
+    "mac_all_public_assets_matching_bytes": 47,
+    "mac_sampled_private_paths_404": 3,
+    "mac_all_ten_guides_ready": true,
+    "mac_strumming_pattern_selection": true,
+    "mac_playback_pause_hold_progress": true,
+    "original_local_servers_restored": [
+      8067,
+      8068
+    ],
+    "source_pack_identity_unchanged": true,
+    "screenshot_sha256": "80fdf6684a78753c7d8ee425e9bf96c0dcc7e345938e8f0353f5cf17d92ac836"
+  },
+  "cases": [
+    {
+      "recording_id": "troggs-wild-thing-youtube-20261011",
+      "audio_sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf",
+      "pulse_bpm": 103.359375,
+      "pulse_count": 260,
+      "covered_pulse_span_seconds": [
+        0.23219954648526078,
+        151.74240362811793
+      ],
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "practice_patterns": [
+        "steady-down",
+        "down-up"
+      ]
+    },
+    {
+      "recording_id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+      "audio_sha256": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f",
+      "pulse_bpm": 69.83741554054055,
+      "pulse_count": 170,
+      "covered_pulse_span_seconds": [
+        0.5572789115646258,
+        146.19283446712018
+      ],
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "practice_patterns": [
+        "steady-down",
+        "down-up"
+      ]
+    },
+    {
+      "recording_id": "van-morrison-brown-eyed-girl-youtube-20261011",
+      "audio_sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf",
+      "pulse_bpm": 151.99908088235293,
+      "pulse_count": 458,
+      "covered_pulse_span_seconds": [
+        0.2786394557823129,
+        181.23174603174604
+      ],
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "practice_patterns": [
+        "steady-down",
+        "down-up"
+      ]
+    },
+    {
+      "recording_id": "beatles-love-me-do-youtube-20261011",
+      "audio_sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea",
+      "pulse_bpm": 143.5546875,
+      "pulse_count": 339,
+      "covered_pulse_span_seconds": [
+        0.046439909297052155,
+        137.4853514739229
+      ],
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "practice_patterns": [
+        "steady-down",
+        "down-up"
+      ]
+    },
+    {
+      "recording_id": "beatles-twist-and-shout-youtube-20261011",
+      "audio_sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c",
+      "pulse_bpm": 123.046875,
+      "pulse_count": 308,
+      "covered_pulse_span_seconds": [
+        0.44117913832199546,
+        147.77179138321995
+      ],
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "practice_patterns": [
+        "steady-down",
+        "down-up"
+      ]
+    },
+    {
+      "recording_id": "white-stripes-seven-nation-army-youtube-20261011",
+      "audio_sha256": "394c791d799d7ff7ece36c1b93a434c1f600afe0265f5dfe1d6ad328626a6854",
+      "pulse_bpm": 123.046875,
+      "pulse_count": 448,
+      "covered_pulse_span_seconds": [
+        1.18421768707483,
+        220.84498866213153
+      ],
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "practice_patterns": [
+        "steady-down",
+        "down-up"
+      ]
+    },
+    {
+      "recording_id": "nirvana-come-as-you-are-youtube-20261011",
+      "audio_sha256": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7",
+      "pulse_bpm": 123.046875,
+      "pulse_count": 418,
+      "covered_pulse_span_seconds": [
+        0.2089795918367347,
+        206.77369614512472
+      ],
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "practice_patterns": [
+        "steady-down",
+        "down-up"
+      ]
+    },
+    {
+      "recording_id": "radiohead-creep-youtube-20261010",
+      "audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10",
+      "pulse_bpm": 92.28515625,
+      "pulse_count": 344,
+      "covered_pulse_span_seconds": [
+        0.18575963718820862,
+        222.4239455782313
+      ],
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "practice_patterns": [
+        "steady-down",
+        "down-up"
+      ]
+    },
+    {
+      "recording_id": "animals-house-rising-sun-official-20261011",
+      "audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708",
+      "pulse_bpm": 78.30255681818181,
+      "pulse_count": 342,
+      "covered_pulse_span_seconds": [
+        0.626938775510204,
+        261.4334693877551
+      ],
+      "beats_per_bar": 2,
+      "meter_label": "6/8 · 2 dotted-quarter beats per bar",
+      "practice_patterns": [
+        "six-anchor",
+        "six-motion"
+      ]
+    },
+    {
+      "recording_id": "oasis-wonderwall-youtube-20261010",
+      "audio_sha256": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462",
+      "pulse_bpm": 86.1328125,
+      "pulse_count": 401,
+      "covered_pulse_span_seconds": [
+        0.7662585034013606,
+        276.8979591836735
+      ],
+      "beats_per_bar": null,
+      "meter_label": "Beat count; meter varies",
+      "practice_patterns": [
+        "steady-down",
+        "syncopated"
+      ]
+    }
+  ]
+}

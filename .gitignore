@@ -21,3 +21,24 @@ expo-env.d.ts
 
 # Project plan folder
 project_plan/
+
+# Local Mac analysis environment and generated audio/results
+.venv-analysis/
+.venv-btc/
+.venv-crema/
+.venv-chordmini/
+.venv-pilot/
+.venv-youtube/
+.venv-beatthis/
+.venv-demucs/
+experiments/candidate-assets/
+experiments/generated/
+experiments/local-audio/
+experiments/results/
+__pycache__/
+
+.runtime/
+
+.migration-backup/
+
+experiments/local-research-notes/

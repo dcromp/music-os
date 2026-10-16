@@ -1,0 +1,39 @@
+{
+  "schema_version": "untimed-chart-1.0",
+  "start_policy": "first",
+  "recording": {
+    "id": "radiohead-creep-youtube-20261010",
+    "title": "Radiohead - Creep / candidate simplified cycle",
+    "audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10"
+  },
+  "sequence": [
+    "G",
+    "B",
+    "C",
+    "Cm"
+  ],
+  "mode": "cyclic",
+  "metadata": {
+    "key": "G major",
+    "capo": 0,
+    "label_convention": "sounding pitches",
+    "video_id": "XFkzRNyygfk",
+    "scope": "Full-recording cyclic draft; simplified harmony, not a reviewed arrangement",
+    "source_references": [
+      {
+        "author": "Andy Guitar",
+        "url": "https://www.andyguitar.co.uk/videos/radiohead-creep"
+      },
+      {
+        "author": "Tom Fontana / TheGuitarLesson",
+        "url": "https://www.theguitarlesson.com/guitar-lessons/creep-guitar-lesson-radiohead/"
+      },
+      {
+        "author": "Carl Brown / GuitarLessons365",
+        "url": "https://guitarlessons365.com/creep-guitar-lesson-radiohead/"
+      }
+    ],
+    "source_consensus": "Separate authored presentations agree on the four-label basis; source independence is not proven",
+    "review_status": "Candidate hypothesis; exact recording, embellishments, sections and alignment need review"
+  }
+}

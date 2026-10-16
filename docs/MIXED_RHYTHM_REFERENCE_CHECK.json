@@ -1,0 +1,500 @@
+{
+  "schema_version": "mixed-rhythm-reference-check-1.0",
+  "date": "2026-10-12",
+  "status": "completed_external_controlled_pulse_diagnostic",
+  "scope": "External controlled challenge: two mixed clips and one performed-piano clip; not a full-pop/rock-song acceptance benchmark",
+  "source": {
+    "dataset": "ARTBeaT Dataset",
+    "author": "Rico Rosenbusch",
+    "year": 2024,
+    "primary_url": "https://audiolabs-erlangen.de/resources/MIR/2024-ARTBeaT",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "source_readme_sha256": "abf086c36a14344b1615e810fdf49a22cf81bdf5541f082befde92015971b00d",
+    "source_license_sha256": "db3c3c727ddccaccb8d0c635c76a679235b8cd304662ce42cc9d27893e71a456",
+    "archive_url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/ARTBeaT_Dataset.zip",
+    "archive_size_bytes": 57496054,
+    "complete_archive_downloaded": false,
+    "selected_compressed_audio_bytes": 10567418,
+    "selection_sha256": "2eba1883286bc15b2a3768b67833b012e9302d235a009231a1ca30099041e722",
+    "central_directory_sha256": "b6be469bb240988104251e28ecfae72ec8636ccda23ecac14faedd1ae24a0a6e"
+  },
+  "frozen_policy": {
+    "extractor_sha256": "b18efd3d3c6eaeec7bfb847ae30b4cc661850b209ddf4f6919200051d88e60de",
+    "evaluator_sha256": "eb213daf06d4b18ccc8bbecb0c76628520b4db1aa90fae8ed550b9d2ea65a1bd",
+    "preparation_helper_sha256": "a4574c97ec38295f396b45ee0f286d6c7c1ac5b7cceac293cdd2dad6844aeaa3",
+    "condition": "default-120",
+    "start_bpm": 120,
+    "source_tempo_guidance": false,
+    "reason_no_guided_condition": "No independently supplied scalar BPM for these three frozen source clips. Deriving a prior from their reference pulse times would leak evaluation targets.",
+    "offset_fitting": false,
+    "time_stretching": false,
+    "audio_trimming": false,
+    "chord_boundary_snapping": false,
+    "beats_per_bar": null
+  },
+  "reference_semantics": "Source-provided beat ground-truth CSV events. Not the separately collected listener taps. Beat attack annotation procedure is not established by the distributed README. No beat-position or bar-number labels.",
+  "selection_rule": "Three preselected contrasting source categories (layered instruments, guitar/drums in odd meter, performed variable-tempo piano); no candidate audition or model output consulted",
+  "preprocessing": {
+    "command": "ffmpeg -nostdin -v error -i SOURCE.wav -ac 1 -ar 22050 -c:a pcm_s16le OUTPUT.wav",
+    "ffmpeg_version": "ffmpeg version 8.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "duration_tolerance_seconds": 4.5351473922902495e-05
+  },
+  "references_sha256": "b719c6ef118778f5a8f9f54ae9bfcb7cc76516fdbf05d0c129648eb7ee220aea",
+  "predictions_sha256": "3e1f528b8360af7b5061e75817d588e722371987dedea29dca03ea2c9ea63451",
+  "runtime_seconds": 2.7814309587702155,
+  "aggregate": {
+    "recordings": 3,
+    "duration_seconds": 64.71741496598639,
+    "whole_recording": {
+      "f1_70ms": {
+        "matched_pulses": 92,
+        "missed_reference_pulses": 29,
+        "extra_estimated_pulses": 28,
+        "micro_f_measure": 0.7634854771784232,
+        "macro_f_measure": 0.7749624393608147
+      },
+      "f1_150ms": {
+        "matched_pulses": 98,
+        "missed_reference_pulses": 23,
+        "extra_estimated_pulses": 22,
+        "micro_f_measure": 0.8132780082987552,
+        "macro_f_measure": 0.8256033635576813
+      }
+    },
+    "standard_after_5s_macro": {
+      "measured_recordings": 3,
+      "metrics": {
+        "f_measure_70ms": 0.7971747550694919,
+        "cemgil_sigma_40ms": 0.5183510542347963,
+        "cemgil_any_metrical_level": 0.5183510542347963,
+        "cmlc": 0.698440065681445,
+        "cmlt": 0.7651067323481117,
+        "amlc": 0.698440065681445,
+        "amlt": 0.7651067323481117
+      }
+    },
+    "count_windows": {
+      "requested_windows": 0,
+      "supported_windows": 0,
+      "unsupported_windows": 0,
+      "absolute_beat_count_error_mean": null,
+      "absolute_beat_count_error_p90": null,
+      "absolute_equivalent_bar_length_error_mean": null
+    }
+  },
+  "by_split": {
+    "development": {
+      "recordings": 1,
+      "duration_seconds": 17.5,
+      "whole_recording": {
+        "f1_70ms": {
+          "matched_pulses": 39,
+          "missed_reference_pulses": 3,
+          "extra_estimated_pulses": 0,
+          "micro_f_measure": 0.9629629629629629,
+          "macro_f_measure": 0.9629629629629629
+        },
+        "f1_150ms": {
+          "matched_pulses": 39,
+          "missed_reference_pulses": 3,
+          "extra_estimated_pulses": 0,
+          "micro_f_measure": 0.9629629629629629,
+          "macro_f_measure": 0.9629629629629629
+        }
+      },
+      "standard_after_5s_macro": {
+        "measured_recordings": 1,
+        "metrics": {
+          "f_measure_70ms": 0.9473684210526316,
+          "cemgil_sigma_40ms": 0.6411279903890243,
+          "cemgil_any_metrical_level": 0.6411279903890243,
+          "cmlc": 0.9310344827586207,
+          "cmlt": 0.9310344827586207,
+          "amlc": 0.9310344827586207,
+          "amlt": 0.9310344827586207
+        }
+      },
+      "count_windows": {
+        "requested_windows": 0,
+        "supported_windows": 0,
+        "unsupported_windows": 0,
+        "absolute_beat_count_error_mean": null,
+        "absolute_beat_count_error_p90": null,
+        "absolute_equivalent_bar_length_error_mean": null
+      }
+    },
+    "holdout": {
+      "recordings": 2,
+      "duration_seconds": 47.21741496598639,
+      "whole_recording": {
+        "f1_70ms": {
+          "matched_pulses": 53,
+          "missed_reference_pulses": 26,
+          "extra_estimated_pulses": 28,
+          "micro_f_measure": 0.6625,
+          "macro_f_measure": 0.6809621775597405
+        },
+        "f1_150ms": {
+          "matched_pulses": 59,
+          "missed_reference_pulses": 20,
+          "extra_estimated_pulses": 22,
+          "micro_f_measure": 0.7375,
+          "macro_f_measure": 0.7569235638550403
+        }
+      },
+      "standard_after_5s_macro": {
+        "measured_recordings": 2,
+        "metrics": {
+          "f_measure_70ms": 0.7220779220779221,
+          "cemgil_sigma_40ms": 0.45696258615768237,
+          "cemgil_any_metrical_level": 0.45696258615768237,
+          "cmlc": 0.5821428571428572,
+          "cmlt": 0.6821428571428572,
+          "amlc": 0.5821428571428572,
+          "amlt": 0.6821428571428572
+        }
+      },
+      "count_windows": {
+        "requested_windows": 0,
+        "supported_windows": 0,
+        "unsupported_windows": 0,
+        "absolute_beat_count_error_mean": null,
+        "absolute_beat_count_error_p90": null,
+        "absolute_equivalent_bar_length_error_mean": null
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "02_artbeat_basic_arp1",
+      "recording": {
+        "id": "02_artbeat_basic_arp1",
+        "title": "02_ARTBeaT_Basic_arp1",
+        "sample_rate_hz": 22050,
+        "duration_seconds": 17.5,
+        "audio_sha256": "88fca43c5428652014fe079a518d5cff335416ab8c8808d68c3bb46fdc36c717"
+      },
+      "split": "development",
+      "source_pins": {
+        "id": "02_artbeat_basic_arp1",
+        "source_audio_sha256": "65c4daf2d97aa6e4550b15b352e5b876644e399dedd2341a9f09e9f352139c5c",
+        "source_annotation_sha256": "15252eadcd3fea9de7d1cc62b3382c1086b59a193ff17aed9188971b8649d0e4",
+        "source_format": {
+          "sample_rate_hz": 44100,
+          "channels": 2,
+          "sample_width_bytes": 2,
+          "duration_seconds": 17.5
+        },
+        "audio_entry": {
+          "path": "ARTBeaT_Dataset/Audio/02_ARTBeaT_Basic_arp1.wav",
+          "method": 8,
+          "crc32": 1817367852,
+          "compressed_size": 2776554,
+          "size": 3087736,
+          "offset": 25347843
+        },
+        "reference_entry": {
+          "path": "ARTBeaT_Dataset/Annotations/gt_csv/02_ARTBeaT_Basic_arp1_gt.csv",
+          "method": 8,
+          "crc32": 3173522704,
+          "compressed_size": 251,
+          "size": 729,
+          "offset": 57468118
+        },
+        "analysis_audio_sha256": "88fca43c5428652014fe079a518d5cff335416ab8c8808d68c3bb46fdc36c717",
+        "preprocessing": "ffmpeg PCM16 mono 22050 Hz; no time trim or stretch"
+      },
+      "pulse_bpm": 143.5546875,
+      "reference_pulses": 42,
+      "estimated_pulses": 39,
+      "coverage": {
+        "first_reference_pulse_seconds": 0.0,
+        "last_reference_pulse_seconds": 17.08334700000001,
+        "first_estimated_pulse_seconds": 0.46439909297052157,
+        "last_estimated_pulse_seconds": 16.27718820861678,
+        "reference_pulses_inside_estimated_coverage": 38,
+        "reference_pulses_outside_estimated_coverage": 4
+      },
+      "whole_recording": {
+        "f1_70ms": {
+          "tolerance_seconds": 0.07,
+          "matched_pulses": 39,
+          "missed_reference_pulses": 3,
+          "extra_estimated_pulses": 0,
+          "precision": 1.0,
+          "recall": 0.9285714285714286,
+          "f_measure": 0.9629629629629629,
+          "matched_error_median_seconds": 0.03618114285713858,
+          "matched_error_p90_seconds": 0.05057489705215428,
+          "matched_error_max_seconds": 0.055524546485257176
+        },
+        "f1_150ms": {
+          "tolerance_seconds": 0.15,
+          "matched_pulses": 39,
+          "missed_reference_pulses": 3,
+          "extra_estimated_pulses": 0,
+          "precision": 1.0,
+          "recall": 0.9285714285714286,
+          "f_measure": 0.9629629629629629,
+          "matched_error_median_seconds": 0.03618114285713858,
+          "matched_error_p90_seconds": 0.05057489705215428,
+          "matched_error_max_seconds": 0.055524546485257176
+        }
+      },
+      "standard_after_5s": {
+        "minimum_beat_time_seconds": 5.0,
+        "reference_pulses": 29,
+        "estimated_pulses": 28,
+        "library": "mir_eval",
+        "library_version": "0.8.2",
+        "status": "measured",
+        "metrics": {
+          "f_measure_70ms": 0.9473684210526316,
+          "cemgil_sigma_40ms": 0.6411279903890243,
+          "cemgil_any_metrical_level": 0.6411279903890243,
+          "cmlc": 0.9310344827586207,
+          "cmlt": 0.9310344827586207,
+          "amlc": 0.9310344827586207,
+          "amlt": 0.9310344827586207
+        }
+      },
+      "all_reference_nearest_error": {
+        "median": 0.03745365079364804,
+        "p90": 0.054063792970521614,
+        "max": 0.8061587913832291,
+        "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+      }
+    },
+    {
+      "id": "17_artbeat_odd_doom7",
+      "recording": {
+        "id": "17_artbeat_odd_doom7",
+        "title": "17_ARTBeaT_Odd_doom7",
+        "sample_rate_hz": 22050,
+        "duration_seconds": 23.967392290249432,
+        "audio_sha256": "c65fef20fd93a84b791316b275cd7d894edec386e7ae7f3b51c33332cf19096e"
+      },
+      "split": "holdout",
+      "source_pins": {
+        "id": "17_artbeat_odd_doom7",
+        "source_audio_sha256": "2387921ce964ee0ecbd8433f241a6091e3da65f4f6c63d6bb762992af233f001",
+        "source_annotation_sha256": "dee2b3277a520be9b5f995a42d9314cbd4a8970d85a949f93ae89dab40c6ccda",
+        "source_format": {
+          "sample_rate_hz": 44100,
+          "channels": 2,
+          "sample_width_bytes": 2,
+          "duration_seconds": 23.967392290249432
+        },
+        "audio_entry": {
+          "path": "ARTBeaT_Dataset/Audio/17_ARTBeaT_Odd_doom7.wav",
+          "method": 8,
+          "crc32": 1641710927,
+          "compressed_size": 4020013,
+          "size": 4228584,
+          "offset": 12335861
+        },
+        "reference_entry": {
+          "path": "ARTBeaT_Dataset/Annotations/gt_csv/17_ARTBeaT_Odd_doom7_gt.csv",
+          "method": 8,
+          "crc32": 1863163291,
+          "compressed_size": 301,
+          "size": 674,
+          "offset": 57473223
+        },
+        "analysis_audio_sha256": "c65fef20fd93a84b791316b275cd7d894edec386e7ae7f3b51c33332cf19096e",
+        "preprocessing": "ffmpeg PCM16 mono 22050 Hz; no time trim or stretch"
+      },
+      "pulse_bpm": 92.28515625,
+      "reference_pulses": 35,
+      "estimated_pulses": 36,
+      "coverage": {
+        "first_reference_pulse_seconds": 0.9782609999999998,
+        "last_reference_pulse_seconds": 23.146062868749997,
+        "first_estimated_pulse_seconds": 0.06965986394557823,
+        "last_estimated_pulse_seconds": 22.38403628117914,
+        "reference_pulses_inside_estimated_coverage": 33,
+        "reference_pulses_outside_estimated_coverage": 2
+      },
+      "whole_recording": {
+        "f1_70ms": {
+          "tolerance_seconds": 0.07,
+          "matched_pulses": 30,
+          "missed_reference_pulses": 5,
+          "extra_estimated_pulses": 6,
+          "precision": 0.8333333333333334,
+          "recall": 0.8571428571428571,
+          "f_measure": 0.8450704225352113,
+          "matched_error_median_seconds": 0.03835485967970742,
+          "matched_error_p90_seconds": 0.05099310426162269,
+          "matched_error_max_seconds": 0.05938213859127117
+        },
+        "f1_150ms": {
+          "tolerance_seconds": 0.15,
+          "matched_pulses": 33,
+          "missed_reference_pulses": 2,
+          "extra_estimated_pulses": 3,
+          "precision": 0.9166666666666666,
+          "recall": 0.9428571428571428,
+          "f_measure": 0.9295774647887324,
+          "matched_error_median_seconds": 0.040628898455217666,
+          "matched_error_p90_seconds": 0.05825856046485285,
+          "matched_error_max_seconds": 0.10985258757085958
+        }
+      },
+      "standard_after_5s": {
+        "minimum_beat_time_seconds": 5.0,
+        "reference_pulses": 28,
+        "estimated_pulses": 27,
+        "library": "mir_eval",
+        "library_version": "0.8.2",
+        "status": "measured",
+        "metrics": {
+          "f_measure_70ms": 0.8727272727272727,
+          "cemgil_sigma_40ms": 0.5422385054276753,
+          "cemgil_any_metrical_level": 0.5422385054276753,
+          "cmlc": 0.9642857142857143,
+          "cmlt": 0.9642857142857143,
+          "amlc": 0.9642857142857143,
+          "amlt": 0.9642857142857143
+        }
+      },
+      "all_reference_nearest_error": {
+        "median": 0.040811089725057315,
+        "p90": 0.08548436673752953,
+        "max": 0.7620265875708583,
+        "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+      }
+    },
+    {
+      "id": "18_artbeat_tempoc_piano",
+      "recording": {
+        "id": "18_artbeat_tempoc_piano",
+        "title": "18_ARTBeaT_TempoC_piano",
+        "sample_rate_hz": 22050,
+        "duration_seconds": 23.25002267573696,
+        "audio_sha256": "4591b750dd131a6fa2166acf19c6cc370fcf1a1f9dc7ef5fd9303e45871c78bf"
+      },
+      "split": "holdout",
+      "source_pins": {
+        "id": "18_artbeat_tempoc_piano",
+        "source_audio_sha256": "073483f2b15984e19876f2735bad7ee318257ddc49cb54dae9a0409083a955b4",
+        "source_annotation_sha256": "93b27aed090fa7bb0c09860b9f640689938c0b9de2a1e4d1975d4fdbb0544f2c",
+        "source_format": {
+          "sample_rate_hz": 44100,
+          "channels": 2,
+          "sample_width_bytes": 2,
+          "duration_seconds": 23.25
+        },
+        "audio_entry": {
+          "path": "ARTBeaT_Dataset/Audio/18_ARTBeaT_TempoC_piano.wav",
+          "method": 8,
+          "crc32": 2500858987,
+          "compressed_size": 3770851,
+          "size": 4102036,
+          "offset": 51406067
+        },
+        "reference_entry": {
+          "path": "ARTBeaT_Dataset/Annotations/gt_csv/18_ARTBeaT_TempoC_piano_gt.csv",
+          "method": 8,
+          "crc32": 1607444027,
+          "compressed_size": 385,
+          "size": 856,
+          "offset": 57470175
+        },
+        "analysis_audio_sha256": "4591b750dd131a6fa2166acf19c6cc370fcf1a1f9dc7ef5fd9303e45871c78bf",
+        "preprocessing": "ffmpeg PCM16 mono 22050 Hz; no time trim or stretch"
+      },
+      "pulse_bpm": 123.046875,
+      "reference_pulses": 44,
+      "estimated_pulses": 45,
+      "coverage": {
+        "first_reference_pulse_seconds": 0.011270485416666667,
+        "last_reference_pulse_seconds": 22.931339464583328,
+        "first_estimated_pulse_seconds": 0.3947392290249433,
+        "last_estimated_pulse_seconds": 22.175056689342405,
+        "reference_pulses_inside_estimated_coverage": 41,
+        "reference_pulses_outside_estimated_coverage": 3
+      },
+      "whole_recording": {
+        "f1_70ms": {
+          "tolerance_seconds": 0.07,
+          "matched_pulses": 23,
+          "missed_reference_pulses": 21,
+          "extra_estimated_pulses": 22,
+          "precision": 0.5111111111111111,
+          "recall": 0.5227272727272727,
+          "f_measure": 0.5168539325842697,
+          "matched_error_median_seconds": 0.036227578734411736,
+          "matched_error_p90_seconds": 0.04870455025368479,
+          "matched_error_max_seconds": 0.057868776183388704
+        },
+        "f1_150ms": {
+          "tolerance_seconds": 0.15,
+          "matched_pulses": 26,
+          "missed_reference_pulses": 18,
+          "extra_estimated_pulses": 19,
+          "precision": 0.5777777777777777,
+          "recall": 0.5909090909090909,
+          "f_measure": 0.5842696629213483,
+          "matched_error_median_seconds": 0.03889137353316663,
+          "matched_error_p90_seconds": 0.08112898886763364,
+          "matched_error_max_seconds": 0.14699976237954004
+        }
+      },
+      "standard_after_5s": {
+        "minimum_beat_time_seconds": 5.0,
+        "reference_pulses": 35,
+        "estimated_pulses": 35,
+        "library": "mir_eval",
+        "library_version": "0.8.2",
+        "status": "measured",
+        "metrics": {
+          "f_measure_70ms": 0.5714285714285714,
+          "cemgil_sigma_40ms": 0.3716866668876895,
+          "cemgil_any_metrical_level": 0.3716866668876895,
+          "cmlc": 0.2,
+          "cmlt": 0.4,
+          "amlc": 0.2,
+          "amlt": 0.4
+        }
+      },
+      "all_reference_nearest_error": {
+        "median": 0.05674763432539631,
+        "p90": 0.2405538159141147,
+        "max": 0.7562827752409227,
+        "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+      }
+    }
+  ],
+  "limitations": [
+    "A three-clip external challenge is too small for population-level application acceptance.",
+    "Two clips are mixed instruments; one is performed solo piano. These are not famous songs or whole rock/pop arrangements.",
+    "CSV ground-truth events are independent source labels; the README does not establish manually marked physical attack semantics.",
+    "No bar-position labels; no half/one/two-bar count score, downbeat score or bar-phase score is manufactured.",
+    "No recognizer, source-separation, chart sequence or strumming-pattern accuracy is measured here.",
+    "Holdout outputs are now exposed; do not reuse these same cases as fresh validation after tuning.",
+    "Any allowed-metrical-level metric may reward alternate levels/phases; quarter-beat/bar correctness is not established."
+  ],
+  "decision": "Keep pulse/bar presentation approximate. Add a tempo-adaptive candidate to the algorithm comparison before claiming dependable variable-tempo play-along.",
+  "reproduction": {
+    "prepare_command": ".venv-analysis/bin/python experiments/candidate-assets/mixed-rhythm-20261012/prepare_artbeat.py",
+    "extract_command": ".venv-crema/bin/python experiments/analysis/rhythm_grid.py --manifest experiments/generated/mixed-rhythm-reference-v1/manifest.json --config experiments/generated/mixed-rhythm-reference-v1/default-120-config.json --output experiments/generated/mixed-rhythm-reference-v1/default-120-predictions.json",
+    "score_command": ".venv-pilot/bin/python experiments/analysis/rhythm_reference_eval.py --references experiments/generated/mixed-rhythm-reference-v1/references.json --predictions experiments/generated/mixed-rhythm-reference-v1/default-120-predictions.json --output experiments/generated/mixed-rhythm-reference-v1/default-120-report.json --condition default-120",
+    "reproduction_note": "Use compatible pinned extraction and scoring environments. Output commands refuse existing output files; preserve existing evidence and use fresh filenames for a rerun."
+  },
+  "alternative_acquisition_attempts": [
+    {
+      "dataset": "SWD v2.1",
+      "primary_url": "https://zenodo.org/records/10839767",
+      "attempt": "Public official ZIP suffix range, max 65536 bytes,25-second timeout",
+      "result": "TimeoutError: The read operation timed out; no audio acquired",
+      "reference_limitation": "Measure anchors are not direct beat attack labels; no score assigned."
+    },
+    {
+      "dataset": "Ballroom",
+      "primary_url": "https://github.com/CPJKU/BallroomAnnotations",
+      "result": "Official human-corrected pulse/bar annotations available, but listed original audio is a 1.5 GB gzip archive; no full archive acquired for this small check."
+    }
+  ]
+}

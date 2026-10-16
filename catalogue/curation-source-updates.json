@@ -1,0 +1,37 @@
+{
+  "schema_version": "curation-source-updates-1.0",
+  "checked_date": "2026-10-14",
+  "context_sha256": "5a7855d9c837e6086a511a896872476fed8dea76da6d6e289438729380d211ae",
+  "scope": "Correct a source-attribution claim; no recording timing, chord or meter validation",
+  "sources": [
+    {
+      "title": "Carl Brown: Wonderwall",
+      "url": "https://guitarlessons365.com/wonderwall-guitar-lesson-oasis/",
+      "scope": "Inspected public lesson text; standard tuning/capo2 and differing verse/pre-chorus/chorus demands"
+    },
+    {
+      "title": "Greg Shute: Wonderwall",
+      "url": "https://www.gregshuteguitar.co.uk/_files/ugd/4079b4_0a1b39a89c1a4776a5c8f553f259cb08.pdf",
+      "scope": "Inspected teacher PDF text; shape vocabulary and section differences, no selected-upload timing identity"
+    }
+  ],
+  "cases": [
+    {
+      "recording": {
+        "id": "oasis-wonderwall-youtube-20261010",
+        "title": "Oasis - Wonderwall",
+        "duration_seconds": 277.78031746031746,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462"
+      },
+      "correction_needs": [
+        "Keep capo-2 shape labels distinct from sounding F#-minor vocabulary",
+        "Preserve shared-finger richer grips as an option; main-chord simplification does not reproduce suspended/add-note voicings",
+        "Check local pulse and meter on the exact audio; the inspected teacher text does not establish specific 4/4-to-2/4 changes. Keep bar estimates disabled until verified.",
+        "Review verse/pre-chorus/chorus patterns separately; do not call current D—DU—UDU the recorded whole-song pattern"
+      ],
+      "review_role": "Capo, shared-finger shapes and section-rhythm representative; local meter unverified",
+      "note": "The earlier source-supported 4/4-to-2/4 wording is not established by the inspected Carl Brown or Greg Shute text. Their arrangement descriptions support capo-2 setup and section variation; exact recording meter remains unverified."
+    }
+  ]
+}

@@ -1,0 +1,526 @@
+{
+  "schema_version": "real-alignment-diagnostics-1.0",
+  "date": "2026-10-10",
+  "status": "unaccepted development drafts; no timing gold or accuracy score",
+  "parameters": "All decoder/feature/mismatch settings frozen defaults; no per-recording parameter tuning",
+  "runs": [
+    {
+      "file": "experiments/generated/real-alignment-v2/creep-full-nnls-cyclic.json",
+      "recording": {
+        "id": "radiohead-creep-youtube-20261010",
+        "title": "Radiohead - Creep / candidate simplified cycle",
+        "audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10",
+        "duration_seconds": 236.63455782312926,
+        "sample_rate_hz": 22050,
+        "provenance": "Local audio; acquisition/permission tracked separately from this aligner"
+      },
+      "input_chart_sha256": "02d8a965cf01fdf9243ab1911491dbe86e6257e8a19715eb979f0b3155a8e516",
+      "backend": "nnls-chroma",
+      "mode": "cyclic",
+      "event_count": 194,
+      "alignment_runtime_seconds": 0.44607504177838564,
+      "feature_extraction_runtime_seconds": 0.9047577921301126,
+      "diagnostics": {
+        "acoustic_fit_status": "needs_review",
+        "always_requires_human_review": true,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 9223,
+        "silent_frame_fraction": 0.026082365364308344,
+        "active_mismatch_fraction": 0.08457118074379269,
+        "conflicting_proposed_event_indices": [
+          4,
+          11,
+          13,
+          20,
+          22,
+          23,
+          30,
+          31,
+          33,
+          53,
+          63
+        ],
+        "unvisited_sequence_indices": [],
+        "path_transitions": 68,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "cycle_wraps_observed": 17,
+        "viterbi_objective": 7426.590775373833
+      },
+      "unknown_seconds": 19.491156462584982,
+      "silence_seconds": 6.164126984126992
+    },
+    {
+      "file": "experiments/generated/real-alignment-v2/creep-full-spectral-cyclic.json",
+      "recording": {
+        "id": "radiohead-creep-youtube-20261010",
+        "title": "Radiohead - Creep / candidate simplified cycle",
+        "audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10",
+        "duration_seconds": 236.63455782312926,
+        "sample_rate_hz": 22050,
+        "provenance": "Local audio; acquisition/permission tracked separately from this aligner"
+      },
+      "input_chart_sha256": "02d8a965cf01fdf9243ab1911491dbe86e6257e8a19715eb979f0b3155a8e516",
+      "backend": "spectral",
+      "mode": "cyclic",
+      "event_count": 827,
+      "alignment_runtime_seconds": 0.42915220791473985,
+      "feature_extraction_runtime_seconds": null,
+      "diagnostics": {
+        "acoustic_fit_status": "needs_review",
+        "always_requires_human_review": true,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 9223,
+        "silent_frame_fraction": 0.026082365364308344,
+        "active_mismatch_fraction": 0.19754960425024395,
+        "conflicting_proposed_event_indices": [
+          4,
+          8,
+          12,
+          14,
+          15,
+          18,
+          19,
+          25,
+          32,
+          34,
+          46,
+          47,
+          53,
+          54,
+          55,
+          61,
+          65,
+          66,
+          73,
+          82,
+          84,
+          85,
+          86,
+          89,
+          90,
+          91,
+          94,
+          106,
+          111,
+          113,
+          117,
+          118,
+          120,
+          124
+        ],
+        "unvisited_sequence_indices": [],
+        "path_transitions": 124,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "cycle_wraps_observed": 31,
+        "viterbi_objective": 5675.972162019645
+      },
+      "unknown_seconds": 45.52934240362787,
+      "silence_seconds": 6.164126984126992
+    },
+    {
+      "file": "experiments/generated/real-alignment-v2/creep-listening-00-20-nnls-cyclic.json",
+      "recording": {
+        "id": "creep-listening-00-20",
+        "title": "Creep / bounded listening-window hypothesis",
+        "audio_sha256": "eed98c153e766509d226196d8a57abb35ba04668e6a4e456f0aaaef36b47572e",
+        "duration_seconds": 20.0,
+        "sample_rate_hz": 22050,
+        "provenance": "Local audio; acquisition/permission tracked separately from this aligner"
+      },
+      "input_chart_sha256": "23585e74981b7cf3237e33825b081e896e2427d3a55aadcdaa282eaee3bea39c",
+      "backend": "nnls-chroma",
+      "mode": "cyclic",
+      "event_count": 24,
+      "alignment_runtime_seconds": 0.040631833020597696,
+      "feature_extraction_runtime_seconds": 0.1073776250705123,
+      "diagnostics": {
+        "acoustic_fit_status": "needs_review",
+        "always_requires_human_review": true,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 797,
+        "silent_frame_fraction": 0.004993757802746567,
+        "active_mismatch_fraction": 0.08531994981179424,
+        "conflicting_proposed_event_indices": [
+          4
+        ],
+        "unvisited_sequence_indices": [],
+        "path_transitions": 6,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "cycle_wraps_observed": 1,
+        "viterbi_objective": 621.8597354426219
+      },
+      "unknown_seconds": 1.6992290249433117,
+      "silence_seconds": 0.09995464852607709
+    },
+    {
+      "file": "experiments/generated/real-alignment-v2/creep-listening-00-20-nnls-sections.json",
+      "recording": {
+        "id": "creep-listening-00-20",
+        "title": "Creep / bounded listening-window hypothesis",
+        "audio_sha256": "eed98c153e766509d226196d8a57abb35ba04668e6a4e456f0aaaef36b47572e",
+        "duration_seconds": 20.0,
+        "sample_rate_hz": 22050,
+        "provenance": "Local audio; acquisition/permission tracked separately from this aligner"
+      },
+      "input_chart_sha256": "46117747f5b314c2739c701f7a3022f41e233e513f92d5ec8d1335df89cad2a0",
+      "backend": "nnls-chroma",
+      "mode": "finite",
+      "event_count": 23,
+      "alignment_runtime_seconds": 0.03966608410701156,
+      "feature_extraction_runtime_seconds": 0.1073776250705123,
+      "diagnostics": {
+        "acoustic_fit_status": "needs_review",
+        "always_requires_human_review": true,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 797,
+        "silent_frame_fraction": 0.004993757802746567,
+        "active_mismatch_fraction": 0.10163111668757842,
+        "conflicting_proposed_event_indices": [],
+        "unvisited_sequence_indices": [],
+        "path_transitions": 3,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "cycle_wraps_observed": 0,
+        "viterbi_objective": 617.191314437037
+      },
+      "unknown_seconds": 2.0240816326530626,
+      "silence_seconds": 0.09995464852607709,
+      "proposed_sections": [
+        {
+          "section_id": "intro",
+          "section_name": "Candidate intro pass",
+          "order_index": 0,
+          "repeat_index": 0,
+          "start_seconds": 0.0,
+          "end_seconds": 20.0,
+          "status": "proposed; requires listening review"
+        }
+      ]
+    },
+    {
+      "file": "experiments/generated/real-alignment-v2/creep-listening-00-20-spectral-cyclic.json",
+      "recording": {
+        "id": "creep-listening-00-20",
+        "title": "Creep / bounded listening-window hypothesis",
+        "audio_sha256": "eed98c153e766509d226196d8a57abb35ba04668e6a4e456f0aaaef36b47572e",
+        "duration_seconds": 20.0,
+        "sample_rate_hz": 22050,
+        "provenance": "Local audio; acquisition/permission tracked separately from this aligner"
+      },
+      "input_chart_sha256": "23585e74981b7cf3237e33825b081e896e2427d3a55aadcdaa282eaee3bea39c",
+      "backend": "spectral",
+      "mode": "cyclic",
+      "event_count": 91,
+      "alignment_runtime_seconds": 0.036052499897778034,
+      "feature_extraction_runtime_seconds": null,
+      "diagnostics": {
+        "acoustic_fit_status": "needs_review",
+        "always_requires_human_review": true,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 797,
+        "silent_frame_fraction": 0.004993757802746567,
+        "active_mismatch_fraction": 0.18444165621079048,
+        "conflicting_proposed_event_indices": [
+          4,
+          8,
+          12,
+          14
+        ],
+        "unvisited_sequence_indices": [],
+        "path_transitions": 14,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "cycle_wraps_observed": 3,
+        "viterbi_objective": 479.18900087575514
+      },
+      "unknown_seconds": 3.6574149659863924,
+      "silence_seconds": 0.09995464852607709
+    },
+    {
+      "file": "experiments/generated/real-alignment-v2/creep-listening-00-20-spectral-sections.json",
+      "recording": {
+        "id": "creep-listening-00-20",
+        "title": "Creep / bounded listening-window hypothesis",
+        "audio_sha256": "eed98c153e766509d226196d8a57abb35ba04668e6a4e456f0aaaef36b47572e",
+        "duration_seconds": 20.0,
+        "sample_rate_hz": 22050,
+        "provenance": "Local audio; acquisition/permission tracked separately from this aligner"
+      },
+      "input_chart_sha256": "46117747f5b314c2739c701f7a3022f41e233e513f92d5ec8d1335df89cad2a0",
+      "backend": "spectral",
+      "mode": "finite",
+      "event_count": 79,
+      "alignment_runtime_seconds": 0.03920650016516447,
+      "feature_extraction_runtime_seconds": null,
+      "diagnostics": {
+        "acoustic_fit_status": "needs_review",
+        "always_requires_human_review": true,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 797,
+        "silent_frame_fraction": 0.004993757802746567,
+        "active_mismatch_fraction": 0.22835633626097868,
+        "conflicting_proposed_event_indices": [],
+        "unvisited_sequence_indices": [
+          3
+        ],
+        "path_transitions": 2,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "cycle_wraps_observed": 0,
+        "viterbi_objective": 462.62212945966206
+      },
+      "unknown_seconds": 4.532018140589569,
+      "silence_seconds": 0.09995464852607709,
+      "proposed_sections": [
+        {
+          "section_id": "intro",
+          "section_name": "Candidate intro pass",
+          "order_index": 0,
+          "repeat_index": 0,
+          "start_seconds": 0.0,
+          "end_seconds": 20.0,
+          "status": "proposed; requires listening review"
+        }
+      ]
+    },
+    {
+      "file": "experiments/generated/real-alignment-v2/house-listening-00-20-nnls-sections.json",
+      "recording": {
+        "id": "house-listening-00-20",
+        "title": "House of the Rising Sun / bounded listening-window hypothesis",
+        "audio_sha256": "943f3488d5c201c424e73f9145f0b64f5f6976abf11c4328a247a1e54ef82aa6",
+        "duration_seconds": 20.0,
+        "sample_rate_hz": 22050,
+        "provenance": "Local audio; acquisition/permission tracked separately from this aligner"
+      },
+      "input_chart_sha256": "c5e096575bd923c3f1a410137c2f563837500cbbe25f9531faecfc050b03103b",
+      "backend": "nnls-chroma",
+      "mode": "finite",
+      "event_count": 25,
+      "alignment_runtime_seconds": 0.04022299963980913,
+      "feature_extraction_runtime_seconds": 0.09064308321103454,
+      "diagnostics": {
+        "acoustic_fit_status": "needs_review",
+        "always_requires_human_review": true,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 798,
+        "silent_frame_fraction": 0.003745318352059925,
+        "active_mismatch_fraction": 0.16416040100250626,
+        "conflicting_proposed_event_indices": [
+          11
+        ],
+        "unvisited_sequence_indices": [],
+        "path_transitions": 11,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "cycle_wraps_observed": 0,
+        "viterbi_objective": 623.7749177026593
+      },
+      "unknown_seconds": 3.2575963718820886,
+      "silence_seconds": 0.07496598639455783,
+      "proposed_sections": [
+        {
+          "section_id": "intro",
+          "section_name": "Candidate instrumental intro",
+          "order_index": 0,
+          "repeat_index": 0,
+          "start_seconds": 0.0,
+          "end_seconds": 9.920498866213151,
+          "status": "proposed; requires listening review"
+        },
+        {
+          "section_id": "verse-prefix",
+          "section_name": "Candidate first verse prefix",
+          "order_index": 1,
+          "repeat_index": 0,
+          "start_seconds": 9.920498866213151,
+          "end_seconds": 20.0,
+          "status": "proposed; requires listening review"
+        }
+      ]
+    },
+    {
+      "file": "experiments/generated/real-alignment-v2/house-listening-00-20-spectral-sections.json",
+      "recording": {
+        "id": "house-listening-00-20",
+        "title": "House of the Rising Sun / bounded listening-window hypothesis",
+        "audio_sha256": "943f3488d5c201c424e73f9145f0b64f5f6976abf11c4328a247a1e54ef82aa6",
+        "duration_seconds": 20.0,
+        "sample_rate_hz": 22050,
+        "provenance": "Local audio; acquisition/permission tracked separately from this aligner"
+      },
+      "input_chart_sha256": "c5e096575bd923c3f1a410137c2f563837500cbbe25f9531faecfc050b03103b",
+      "backend": "spectral",
+      "mode": "finite",
+      "event_count": 36,
+      "alignment_runtime_seconds": 0.040915667079389095,
+      "feature_extraction_runtime_seconds": null,
+      "diagnostics": {
+        "acoustic_fit_status": "needs_review",
+        "always_requires_human_review": true,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 798,
+        "silent_frame_fraction": 0.003745318352059925,
+        "active_mismatch_fraction": 0.10401002506265664,
+        "conflicting_proposed_event_indices": [],
+        "unvisited_sequence_indices": [],
+        "path_transitions": 11,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "cycle_wraps_observed": 0,
+        "viterbi_objective": 479.2049750900479
+      },
+      "unknown_seconds": 2.0740589569160974,
+      "silence_seconds": 0.07496598639455783,
+      "proposed_sections": [
+        {
+          "section_id": "intro",
+          "section_name": "Candidate instrumental intro",
+          "order_index": 0,
+          "repeat_index": 0,
+          "start_seconds": 0.0,
+          "end_seconds": 10.020453514739229,
+          "status": "proposed; requires listening review"
+        },
+        {
+          "section_id": "verse-prefix",
+          "section_name": "Candidate first verse prefix",
+          "order_index": 1,
+          "repeat_index": 0,
+          "start_seconds": 10.020453514739229,
+          "end_seconds": 20.0,
+          "status": "proposed; requires listening review"
+        }
+      ]
+    },
+    {
+      "file": "experiments/generated/real-alignment-v2/wonderwall-listening-00-20-nnls-sections.json",
+      "recording": {
+        "id": "wonderwall-listening-00-20",
+        "title": "Wonderwall / bounded listening-window hypothesis",
+        "audio_sha256": "2469ecd73dc56013c4d99c5682e7586c29ddf4593c2aea634e770211c11e02d6",
+        "duration_seconds": 20.0,
+        "sample_rate_hz": 22050,
+        "provenance": "Local audio; acquisition/permission tracked separately from this aligner"
+      },
+      "input_chart_sha256": "99183b4af6cc18650fee55a0e4ca3a958b69e27bf36c413b66fba0612783a6ae",
+      "backend": "nnls-chroma",
+      "mode": "finite",
+      "event_count": 25,
+      "alignment_runtime_seconds": 0.047074375208467245,
+      "feature_extraction_runtime_seconds": 0.08197233267128468,
+      "diagnostics": {
+        "acoustic_fit_status": "needs_review",
+        "always_requires_human_review": true,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 264,
+        "silent_frame_fraction": 0.6704119850187266,
+        "active_mismatch_fraction": 0.14015151515151514,
+        "conflicting_proposed_event_indices": [
+          3
+        ],
+        "unvisited_sequence_indices": [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "path_transitions": 7,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "cycle_wraps_observed": 0,
+        "viterbi_objective": 208.79446620316202
+      },
+      "unknown_seconds": 0.924580498866213,
+      "silence_seconds": 13.41891156462585,
+      "proposed_sections": [
+        {
+          "section_id": "intro-loop",
+          "section_name": "Candidate intro loop",
+          "order_index": 0,
+          "repeat_index": 0,
+          "start_seconds": 0.0,
+          "end_seconds": 15.46798185941043,
+          "status": "proposed; requires listening review"
+        },
+        {
+          "section_id": "intro-loop",
+          "section_name": "Candidate intro loop",
+          "order_index": 0,
+          "repeat_index": 1,
+          "start_seconds": 15.46798185941043,
+          "end_seconds": 20.0,
+          "status": "proposed; requires listening review"
+        }
+      ]
+    },
+    {
+      "file": "experiments/generated/real-alignment-v2/wonderwall-listening-00-20-spectral-sections.json",
+      "recording": {
+        "id": "wonderwall-listening-00-20",
+        "title": "Wonderwall / bounded listening-window hypothesis",
+        "audio_sha256": "2469ecd73dc56013c4d99c5682e7586c29ddf4593c2aea634e770211c11e02d6",
+        "duration_seconds": 20.0,
+        "sample_rate_hz": 22050,
+        "provenance": "Local audio; acquisition/permission tracked separately from this aligner"
+      },
+      "input_chart_sha256": "99183b4af6cc18650fee55a0e4ca3a958b69e27bf36c413b66fba0612783a6ae",
+      "backend": "spectral",
+      "mode": "finite",
+      "event_count": 31,
+      "alignment_runtime_seconds": 0.03384370869025588,
+      "feature_extraction_runtime_seconds": null,
+      "diagnostics": {
+        "acoustic_fit_status": "needs_review",
+        "always_requires_human_review": true,
+        "score_is_calibrated_confidence": false,
+        "active_frames": 264,
+        "silent_frame_fraction": 0.6704119850187266,
+        "active_mismatch_fraction": 0.03787878787878788,
+        "conflicting_proposed_event_indices": [],
+        "unvisited_sequence_indices": [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "path_transitions": 7,
+        "acoustically_indistinguishable_sequence_position_pairs": [],
+        "cycle_wraps_observed": 0,
+        "viterbi_objective": 187.40964874292436
+      },
+      "unknown_seconds": 0.24988662131519312,
+      "silence_seconds": 13.41891156462585,
+      "proposed_sections": [
+        {
+          "section_id": "intro-loop",
+          "section_name": "Candidate intro loop",
+          "order_index": 0,
+          "repeat_index": 0,
+          "start_seconds": 0.0,
+          "end_seconds": 15.742857142857142,
+          "status": "proposed; requires listening review"
+        },
+        {
+          "section_id": "intro-loop",
+          "section_name": "Candidate intro loop",
+          "order_index": 0,
+          "repeat_index": 1,
+          "start_seconds": 15.742857142857142,
+          "end_seconds": 20.0,
+          "status": "proposed; requires listening review"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "No independently checked timings or chord labels for these imported versions.",
+    "Finite prefixes limit repeats by construction; smaller event counts or acoustic conflict are not accuracy scores.",
+    "Native NNLS has93ms hop and743ms support; interpolation to25ms adds no timing information.",
+    "Short windows are arbitrary source0\u201320seconds, not verified section boundaries.",
+    "All windows are development material, not holdout validation.",
+    "Wrong prefixes may force paths; end_policy any allows unvisited expected positions, which remain reported."
+  ]
+}

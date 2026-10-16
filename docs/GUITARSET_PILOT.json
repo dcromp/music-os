@@ -1,0 +1,4373 @@
+{
+  "pilot_version": "1.0",
+  "dataset": {
+    "pilot_version": "1.0",
+    "selection": "Six preselected performances, all six performers and five styles; known-error files excluded; selection preceded inference",
+    "cases": [
+      {
+        "id": "guitarset-00-ss3-84-bb-comp",
+        "original_id": "00_SS3-84-Bb_comp",
+        "audio": "cases/guitarset-00-ss3-84-bb-comp/audio.wav",
+        "reference": "cases/guitarset-00-ss3-84-bb-comp/intended.json",
+        "performed_reference": "cases/guitarset-00-ss3-84-bb-comp/performed.json",
+        "intended_reference_sha256": "01e19e538a73d8c14cdff03e9507466408e8cb907219888446e89e44f1770960",
+        "performed_reference_sha256": "74588a39b2f40dc70e2468849960ee6a2c6d12904425b598b4a20edcf463821f",
+        "source": {
+          "original_id": "00_SS3-84-Bb_comp",
+          "source_audio_sha256": "ece4c3e67d8ab31ca6665ef8cd143a61aedeeb6145e45fa4b74120630024039b",
+          "source_jams_sha256": "b410e8d7d6ed3040f3674b709c5144267f540a84fab47edc28365891832dcdb5",
+          "prepared_audio_sha256": "0d1e9f6f605a49782eeccbb4ad0021a72087d0f9a5f7cb45db867a862c5393cc",
+          "prepared_duration_seconds": 45.70761904761905,
+          "source_audio": "experiments/candidate-assets/guitarset/audio/00_SS3-84-Bb_comp_mic.wav",
+          "source_jams": "experiments/candidate-assets/guitarset/annotations/00_SS3-84-Bb_comp.jams",
+          "preparation": "FFmpeg mono 22050Hz PCM16; no trimming, padding, gain changes or offset guessing",
+          "ffmpeg_version": "ffmpeg version 8.1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "source_jams_file_metadata": {
+            "title": "00_SS3-84-Bb_comp",
+            "artist": "",
+            "release": "",
+            "duration": 45.70760000000001,
+            "identifiers": {},
+            "jams_version": "0.3.1"
+          },
+          "dataset_doi": "10.5281/zenodo.3371780",
+          "dataset_version": "1.1.0",
+          "dataset_license": "CC BY 4.0"
+        }
+      },
+      {
+        "id": "guitarset-01-rock1-90-csharp-comp",
+        "original_id": "01_Rock1-90-C#_comp",
+        "audio": "cases/guitarset-01-rock1-90-csharp-comp/audio.wav",
+        "reference": "cases/guitarset-01-rock1-90-csharp-comp/intended.json",
+        "performed_reference": "cases/guitarset-01-rock1-90-csharp-comp/performed.json",
+        "intended_reference_sha256": "413e1c991a2d933267be85c47e68c711a863216e6dd5a7adc64e6fcd64a962a2",
+        "performed_reference_sha256": "dd0372a48c7faab06753e24c3870091536d3260a71ef9fab30a54279c8a16362",
+        "source": {
+          "original_id": "01_Rock1-90-C#_comp",
+          "source_audio_sha256": "2dc712e3457bcde208ae59bf8fab8d7f0d7335368271dd211856a13323b50bee",
+          "source_jams_sha256": "75a1055d5c9b9a1a59af0296660ce23b1556d72114bbb52717a9564a07a23c96",
+          "prepared_audio_sha256": "a9449020afa7ce9f45d94acb413c5e857f370c069bc60821d8e8e137c249cb37",
+          "prepared_duration_seconds": 32.0,
+          "source_audio": "experiments/candidate-assets/guitarset/audio/01_Rock1-90-C#_comp_mic.wav",
+          "source_jams": "experiments/candidate-assets/guitarset/annotations/01_Rock1-90-C#_comp.jams",
+          "preparation": "FFmpeg mono 22050Hz PCM16; no trimming, padding, gain changes or offset guessing",
+          "ffmpeg_version": "ffmpeg version 8.1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "source_jams_file_metadata": {
+            "title": "01_Rock1-90-C#_comp",
+            "artist": "",
+            "release": "",
+            "duration": 31.999999999999993,
+            "identifiers": {},
+            "jams_version": "0.3.1"
+          },
+          "dataset_doi": "10.5281/zenodo.3371780",
+          "dataset_version": "1.1.0",
+          "dataset_license": "CC BY 4.0"
+        }
+      },
+      {
+        "id": "guitarset-02-funk1-97-c-comp",
+        "original_id": "02_Funk1-97-C_comp",
+        "audio": "cases/guitarset-02-funk1-97-c-comp/audio.wav",
+        "reference": "cases/guitarset-02-funk1-97-c-comp/intended.json",
+        "performed_reference": "cases/guitarset-02-funk1-97-c-comp/performed.json",
+        "intended_reference_sha256": "4815c8edff2155f606382d9dd5d8da833f132fc9763702ae8fca0d05b31e0eb8",
+        "performed_reference_sha256": "fb83d9df6c5218901ac52e266033b281b2db92a8122b5e8d1924bfb4c0dff284",
+        "source": {
+          "original_id": "02_Funk1-97-C_comp",
+          "source_audio_sha256": "297b0e0cda8e9e7018801b6adba68f19cfeccd5df48377285a204411648a4f81",
+          "source_jams_sha256": "292c8330635f53e35587e796c76ea47358647474471dfaeb8869167ff34a2549",
+          "prepared_audio_sha256": "52f2e0b1042bc51e3ca3c28160f2d5f4184f6386521c2a191b16c116fdd9141e",
+          "prepared_duration_seconds": 29.688390022675737,
+          "source_audio": "experiments/candidate-assets/guitarset/audio/02_Funk1-97-C_comp_mic.wav",
+          "source_jams": "experiments/candidate-assets/guitarset/annotations/02_Funk1-97-C_comp.jams",
+          "preparation": "FFmpeg mono 22050Hz PCM16; no trimming, padding, gain changes or offset guessing",
+          "ffmpeg_version": "ffmpeg version 8.1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "source_jams_file_metadata": {
+            "title": "02_Funk1-97-C_comp",
+            "artist": "",
+            "release": "",
+            "duration": 29.6884,
+            "identifiers": {},
+            "jams_version": "0.3.1"
+          },
+          "dataset_doi": "10.5281/zenodo.3371780",
+          "dataset_version": "1.1.0",
+          "dataset_license": "CC BY 4.0"
+        }
+      },
+      {
+        "id": "guitarset-03-bn1-129-eb-comp",
+        "original_id": "03_BN1-129-Eb_comp",
+        "audio": "cases/guitarset-03-bn1-129-eb-comp/audio.wav",
+        "reference": "cases/guitarset-03-bn1-129-eb-comp/intended.json",
+        "performed_reference": "cases/guitarset-03-bn1-129-eb-comp/performed.json",
+        "intended_reference_sha256": "19f6a51bd2b322c71602b6c5ff4a7dc7a3c94b41fc163200dfc22d019a3a5f01",
+        "performed_reference_sha256": "db6a70b1adc82af571845e9a93d0b82dc43e3400b52c8a56a369811a363d0569",
+        "source": {
+          "original_id": "03_BN1-129-Eb_comp",
+          "source_audio_sha256": "8fef5aa0807d145e57c5a4befdc729cf3f185cfcc41c64fee7ead7cb1876b629",
+          "source_jams_sha256": "f41001c65b9b3b62187ed3aace924d01773ec41afe8aceab878af72e0009ece0",
+          "prepared_audio_sha256": "51f6bf50ddc33597163de3b4d4e39e9da9b4efb5dc2fce25224765e9a5b021ce",
+          "prepared_duration_seconds": 22.32439909297052,
+          "source_audio": "experiments/candidate-assets/guitarset/audio/03_BN1-129-Eb_comp_mic.wav",
+          "source_jams": "experiments/candidate-assets/guitarset/annotations/03_BN1-129-Eb_comp.jams",
+          "preparation": "FFmpeg mono 22050Hz PCM16; no trimming, padding, gain changes or offset guessing",
+          "ffmpeg_version": "ffmpeg version 8.1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "source_jams_file_metadata": {
+            "title": "03_BN1-129-Eb_comp",
+            "artist": "",
+            "release": "",
+            "duration": 22.32439999999997,
+            "identifiers": {},
+            "jams_version": "0.3.1"
+          },
+          "dataset_doi": "10.5281/zenodo.3371780",
+          "dataset_version": "1.1.0",
+          "dataset_license": "CC BY 4.0"
+        }
+      },
+      {
+        "id": "guitarset-04-rock2-142-d-comp",
+        "original_id": "04_Rock2-142-D_comp",
+        "audio": "cases/guitarset-04-rock2-142-d-comp/audio.wav",
+        "reference": "cases/guitarset-04-rock2-142-d-comp/intended.json",
+        "performed_reference": "cases/guitarset-04-rock2-142-d-comp/performed.json",
+        "intended_reference_sha256": "23549e67f77ddd3e047167fda974a0307b9ddf6deebbc73df346a18f9b59477b",
+        "performed_reference_sha256": "8026a78a36f10bd145591bd163a7fd05bbf21e4f2ed77f78d9bba7212cede54d",
+        "source": {
+          "original_id": "04_Rock2-142-D_comp",
+          "source_audio_sha256": "77589eeda2dfd7a8e8652b9b0c8a002529d911786e4be29c7bafda31fa32ba99",
+          "source_jams_sha256": "aaab63931089e7910af048ab49e10f99c2302b83cdfc78d077e74d5c228625ce",
+          "prepared_audio_sha256": "c7a08ba03e61f520d77107b66188849306f79f754b991c55ea9452a8f0c0039a",
+          "prepared_duration_seconds": 27.041632653061225,
+          "source_audio": "experiments/candidate-assets/guitarset/audio/04_Rock2-142-D_comp_mic.wav",
+          "source_jams": "experiments/candidate-assets/guitarset/annotations/04_Rock2-142-D_comp.jams",
+          "preparation": "FFmpeg mono 22050Hz PCM16; no trimming, padding, gain changes or offset guessing",
+          "ffmpeg_version": "ffmpeg version 8.1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "source_jams_file_metadata": {
+            "title": "04_Rock2-142-D_comp",
+            "artist": "",
+            "release": "",
+            "duration": 27.041600000000003,
+            "identifiers": {},
+            "jams_version": "0.3.1"
+          },
+          "dataset_doi": "10.5281/zenodo.3371780",
+          "dataset_version": "1.1.0",
+          "dataset_license": "CC BY 4.0"
+        }
+      },
+      {
+        "id": "guitarset-05-jazz3-150-c-comp",
+        "original_id": "05_Jazz3-150-C_comp",
+        "audio": "cases/guitarset-05-jazz3-150-c-comp/audio.wav",
+        "reference": "cases/guitarset-05-jazz3-150-c-comp/intended.json",
+        "performed_reference": "cases/guitarset-05-jazz3-150-c-comp/performed.json",
+        "intended_reference_sha256": "22b1a2b585240d01e8132ea01d8789f919a5d4ed4717e21908cec9f7b03e39c7",
+        "performed_reference_sha256": "31bf1fe4fa57659b3446f1467e0985da2185efacbb32d88babea3c0f0bf9a8ae",
+        "source": {
+          "original_id": "05_Jazz3-150-C_comp",
+          "source_audio_sha256": "665e9a0968ec0d81e8cab504d39a4ffbf4249099cf87700c122607be000f508c",
+          "source_jams_sha256": "8b914d6bd9b6400791307188689fec33c81ab77b628933d118ce7d899975fb08",
+          "prepared_audio_sha256": "dd4c1c04f42d9fdec17ef96c181a0129dd0af6d644397c535294ee1f77fae39b",
+          "prepared_duration_seconds": 25.6,
+          "source_audio": "experiments/candidate-assets/guitarset/audio/05_Jazz3-150-C_comp_mic.wav",
+          "source_jams": "experiments/candidate-assets/guitarset/annotations/05_Jazz3-150-C_comp.jams",
+          "preparation": "FFmpeg mono 22050Hz PCM16; no trimming, padding, gain changes or offset guessing",
+          "ffmpeg_version": "ffmpeg version 8.1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "source_jams_file_metadata": {
+            "title": "05_Jazz3-150-C_comp",
+            "artist": "",
+            "release": "",
+            "duration": 25.600000000000023,
+            "identifiers": {},
+            "jams_version": "0.3.1"
+          },
+          "dataset_doi": "10.5281/zenodo.3371780",
+          "dataset_version": "1.1.0",
+          "dataset_license": "CC BY 4.0"
+        }
+      }
+    ],
+    "source": {
+      "record_url": "https://zenodo.org/records/3371780",
+      "audio_url": "https://zenodo.org/api/records/3371780/files/audio_mono-mic.zip/content",
+      "annotation_url": "https://zenodo.org/api/records/3371780/files/annotation.zip/content",
+      "annotation_md5": "b39b78e63d3446f2e54ddb7a54df9b10",
+      "annotation_sha256": "8daa02e6417ccca1685feb44b135e95928ad7037e5032ecb326b5791856fda99",
+      "audio_archive_declared_md5": "275966d6610ac34999b58426beb119c3",
+      "audio_verification": "Selected entries only: ZIP CRC32 and SHA256. Full audio archive not downloaded/hash-verified."
+    }
+  },
+  "candidate_requests": [
+    "baseline",
+    "btc",
+    "crema",
+    "chordmini",
+    "chordino"
+  ],
+  "reused_predictions": true,
+  "environment": {
+    "python": "3.11.13 (main, Sep  2 2025, 14:10:56) [Clang 20.1.4 ]",
+    "numpy": "1.26.4",
+    "mir_eval": "0.8.2"
+  },
+  "batch_runs": {},
+  "candidate_batch_summaries": {
+    "btc": {
+      "algorithm": "BTC-ISMIR19",
+      "runtime_seconds": 3.684817458037287,
+      "cases": [
+        {
+          "id": "guitarset-00-ss3-84-bb-comp",
+          "status": "ok",
+          "runtime_seconds": 3.12147408304736
+        },
+        {
+          "id": "guitarset-01-rock1-90-csharp-comp",
+          "status": "ok",
+          "runtime_seconds": 0.1341731660068035
+        },
+        {
+          "id": "guitarset-02-funk1-97-c-comp",
+          "status": "ok",
+          "runtime_seconds": 0.1070699580013752
+        },
+        {
+          "id": "guitarset-03-bn1-129-eb-comp",
+          "status": "ok",
+          "runtime_seconds": 0.10408674972131848
+        },
+        {
+          "id": "guitarset-04-rock2-142-d-comp",
+          "status": "ok",
+          "runtime_seconds": 0.10991137521341443
+        },
+        {
+          "id": "guitarset-05-jazz3-150-c-comp",
+          "status": "ok",
+          "runtime_seconds": 0.10390312504023314
+        }
+      ],
+      "failed_cases": 0
+    },
+    "crema": {
+      "algorithm": "crema-pretrained",
+      "total_cases": 6,
+      "successful_cases": 6,
+      "failures": [],
+      "model_load_seconds": 5.005338500253856,
+      "wall_seconds": 11.739388999994844
+    },
+    "chordmini": {
+      "cases": 6,
+      "failures": [],
+      "model_setup_seconds": 3.7040877919644117,
+      "batch_wall_seconds": 1.0614010421559215
+    },
+    "chordino": {
+      "cases": 6,
+      "failures": [],
+      "batch_wall_seconds": 1.1876515420153737,
+      "build": {
+        "schema_version": "1.0",
+        "candidate": "chordino",
+        "architecture": "arm64",
+        "minimum_macos": "11.0",
+        "plugin": {
+          "source_url": "https://github.com/c4dm/nnls-chroma",
+          "revision": "4c5f214a75cb354f8d8c933e161377c5b4d83713",
+          "vamp_plugin_version": 5,
+          "license": "GPL-2.0-or-later",
+          "dictionary": "upstream built-in; no external chord.dict"
+        },
+        "vamp_sdk": {
+          "source_url": "https://github.com/vamp-plugins/vamp-plugin-sdk",
+          "revision": "44c2487763eb248a933e9eff9169cfadee375009",
+          "version": "2.10",
+          "license": "COPYING: MIT-style permission notice plus name-promotion restriction; embedded KissFFT BSD-3-Clause"
+        },
+        "boost": {
+          "source_url": "https://archives.boost.io/release/1.87.0/source/boost_1_87_0.tar.gz",
+          "version": "1.87.0",
+          "archive_sha256": "f55c340aa49763b1925ccf02b2e83f35fdcf634c9d5164a2acb87540173c741d",
+          "license": "BSL-1.0",
+          "usage": "header-only plugin dependency"
+        },
+        "binaries": {
+          "chordino-host": {
+            "sha256": "43239048c70e7fd44eba32dca1eafeb861ef259e47bee44b20e91075ba08ad1c"
+          },
+          "nnls-chroma.dylib": {
+            "sha256": "1931ae144335ce192742509184b657d8cd7815f139b23f7d43df63d08acb5896"
+          }
+        },
+        "host_source": {
+          "filename": "chordino-host.cpp",
+          "sha256": "affa0e19645f7ccaacfa926c4d04c2a6e67c5ab7c0aa85f07fcdb3efc8d2ca0c"
+        },
+        "compiler": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+        "build_commands": [
+          {
+            "cwd": "vamp-plugin-sdk",
+            "argv": [
+              "cmake",
+              "-S",
+              ".",
+              "-B",
+              "build",
+              "-DCMAKE_BUILD_TYPE=Release",
+              "-DCMAKE_OSX_DEPLOYMENT_TARGET=11.0",
+              "-DCMAKE_OSX_ARCHITECTURES=arm64",
+              "-DVAMPSDK_ENABLE_INSTALL=OFF"
+            ]
+          },
+          {
+            "cwd": "vamp-plugin-sdk",
+            "argv": [
+              "cmake",
+              "--build",
+              "build",
+              "--parallel",
+              "4"
+            ]
+          },
+          {
+            "cwd": "nnls-chroma",
+            "argv": [
+              "make",
+              "-f",
+              "Makefile.osx",
+              "-B",
+              "-j4",
+              "CXX=clang++",
+              "CC=clang",
+              "VAMP_SDK_DIR=../vamp-plugin-sdk",
+              "BOOST_ROOT=../boost_1_87_0",
+              "ARCHFLAGS=-mmacosx-version-min=11.0 -arch arm64",
+              "OPTFLAGS=-O3",
+              "LDFLAGS=-mmacosx-version-min=11.0 -arch arm64 -dynamiclib -install_name nnls-chroma.dylib ../vamp-plugin-sdk/build/libvamp-sdk.a -exported_symbols_list vamp-plugin.list -framework Accelerate"
+            ]
+          },
+          {
+            "cwd": ".",
+            "argv": [
+              "clang++",
+              "-std=c++11",
+              "-O3",
+              "-arch",
+              "arm64",
+              "-mmacosx-version-min=11.0",
+              "-I",
+              "experiments/candidate-assets/vamp-plugin-sdk",
+              "experiments/analysis/candidates/chordino-host.cpp",
+              "experiments/candidate-assets/vamp-plugin-sdk/build/libvamp-hostsdk.a",
+              "-o",
+              "experiments/candidate-assets/chordino-native/chordino-host"
+            ]
+          }
+        ],
+        "host_semantics": {
+          "input": "RIFF PCM16 mono WAV; 8000-192000 Hz; 512 MiB maximum",
+          "output": "# JSON metadata header, then seconds TAB native_label",
+          "timestamp_method": "ShiftData",
+          "window": "Hann",
+          "block_size": 16384,
+          "hop_size": 2048,
+          "final_N_is_termination_marker": true
+        }
+      }
+    }
+  },
+  "preserved_attempts": [
+    {
+      "path": "attempts/attempt-1-chordmini-batch.log",
+      "sha256": "a6be94bec07b938d0ce469cdc242081fd373e79131fcba0a8b07700e60ce26d9"
+    },
+    {
+      "path": "attempts/attempt-1-report.json",
+      "sha256": "8017ac443d3bcc0c19ab2e8ffa24c79e60fcfb3b93b1655c1f87fbabf48cc382"
+    }
+  ],
+  "runtime_attempt_failures": [
+    {
+      "candidate": "chordmini",
+      "returncode": -6,
+      "stage": "before inference: OpenMP startup",
+      "diagnostic": "OMP: Error #179: Function Can't open SHM failed:\nOMP: System error #0: Undefined error: 0\n",
+      "accuracy_score": null,
+      "archived_report": "attempts/attempt-1-report.json"
+    }
+  ],
+  "summary": [
+    {
+      "candidate": "baseline",
+      "reference_kind": "intended",
+      "successful_cases": 6,
+      "failed_cases": 0,
+      "root": 0.5892261017237278,
+      "root_reference_coverage": 0.9999997164942879,
+      "root_eligible_seconds": 182.36198911564625,
+      "majmin": 0.5430673174594929,
+      "majmin_reference_coverage": 0.9814636128456924,
+      "majmin_eligible_seconds": 178.98170742550542,
+      "root_chord_only": 0.5892261017237278,
+      "root_chord_only_reference_coverage": 0.9999997164942879,
+      "root_chord_only_eligible_seconds": 182.36198911564625,
+      "majmin_chord_only": 0.5430673174594929,
+      "majmin_chord_only_reference_coverage": 0.9814636128456924,
+      "majmin_chord_only_eligible_seconds": 178.98170742550542,
+      "inference_seconds": 0.1701481230556965,
+      "estimated_no_chord_seconds_on_reference_chords": 14.681814058956894
+    },
+    {
+      "candidate": "btc",
+      "reference_kind": "intended",
+      "successful_cases": 6,
+      "failed_cases": 0,
+      "root": 0.8379395046038971,
+      "root_reference_coverage": 0.9999997164942879,
+      "root_eligible_seconds": 182.36198911564625,
+      "majmin": 0.840179865337707,
+      "majmin_reference_coverage": 0.9814636128456924,
+      "majmin_eligible_seconds": 178.98170742550542,
+      "root_chord_only": 0.8379395046038971,
+      "root_chord_only_reference_coverage": 0.9999997164942879,
+      "root_chord_only_eligible_seconds": 182.36198911564625,
+      "majmin_chord_only": 0.840179865337707,
+      "majmin_chord_only_reference_coverage": 0.9814636128456924,
+      "majmin_chord_only_eligible_seconds": 178.98170742550542,
+      "inference_seconds": 3.680618457030505,
+      "estimated_no_chord_seconds_on_reference_chords": 17.306485260770977
+    },
+    {
+      "candidate": "crema",
+      "reference_kind": "intended",
+      "successful_cases": 6,
+      "failed_cases": 0,
+      "root": 0.9443378567652921,
+      "root_reference_coverage": 0.9999997164942879,
+      "root_eligible_seconds": 182.36198911564625,
+      "majmin": 0.9386804947437624,
+      "majmin_reference_coverage": 0.9814636128456924,
+      "majmin_eligible_seconds": 178.98170742550542,
+      "root_chord_only": 0.9443378567652921,
+      "root_chord_only_reference_coverage": 0.9999997164942879,
+      "root_chord_only_eligible_seconds": 182.36198911564625,
+      "majmin_chord_only": 0.9386804947437624,
+      "majmin_chord_only_reference_coverage": 0.9814636128456924,
+      "majmin_chord_only_eligible_seconds": 178.98170742550542,
+      "inference_seconds": 6.731949541252106,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0
+    },
+    {
+      "candidate": "chordmini",
+      "reference_kind": "intended",
+      "successful_cases": 6,
+      "failed_cases": 0,
+      "root": 0.7939743846536577,
+      "root_reference_coverage": 0.9999997164942879,
+      "root_eligible_seconds": 182.36198911564625,
+      "majmin": 0.7952575048147423,
+      "majmin_reference_coverage": 0.9814636128456924,
+      "majmin_eligible_seconds": 178.98170742550542,
+      "root_chord_only": 0.7939743846536577,
+      "root_chord_only_reference_coverage": 0.9999997164942879,
+      "root_chord_only_eligible_seconds": 182.36198911564625,
+      "majmin_chord_only": 0.7952575048147423,
+      "majmin_chord_only_reference_coverage": 0.9814636128456924,
+      "majmin_chord_only_eligible_seconds": 178.98170742550542,
+      "inference_seconds": 1.0342090833000839,
+      "estimated_no_chord_seconds_on_reference_chords": 6.00244897959184
+    },
+    {
+      "candidate": "chordino",
+      "reference_kind": "intended",
+      "successful_cases": 6,
+      "failed_cases": 0,
+      "root": 0.887171418393616,
+      "root_reference_coverage": 0.9999997164942879,
+      "root_eligible_seconds": 182.36198911564625,
+      "majmin": 0.8267362234495805,
+      "majmin_reference_coverage": 0.9814636128456924,
+      "majmin_eligible_seconds": 178.98170742550542,
+      "root_chord_only": 0.887171418393616,
+      "root_chord_only_reference_coverage": 0.9999997164942879,
+      "root_chord_only_eligible_seconds": 182.36198911564625,
+      "majmin_chord_only": 0.8267362234495805,
+      "majmin_chord_only_reference_coverage": 0.9814636128456924,
+      "majmin_chord_only_eligible_seconds": 178.98170742550542,
+      "inference_seconds": 1.1838647914119065,
+      "estimated_no_chord_seconds_on_reference_chords": 0.557278914
+    },
+    {
+      "candidate": "baseline",
+      "reference_kind": "performed",
+      "successful_cases": 6,
+      "failed_cases": 0,
+      "root": 0.5892261017237278,
+      "root_reference_coverage": 0.9999997164942879,
+      "root_eligible_seconds": 182.36198911564625,
+      "majmin": 0.5895894389650835,
+      "majmin_reference_coverage": 0.7838891774082872,
+      "majmin_eligible_seconds": 142.95163016600668,
+      "root_chord_only": 0.5892261017237278,
+      "root_chord_only_reference_coverage": 0.9999997164942879,
+      "root_chord_only_eligible_seconds": 182.36198911564625,
+      "majmin_chord_only": 0.5895894389650835,
+      "majmin_chord_only_reference_coverage": 0.7838891774082872,
+      "majmin_chord_only_eligible_seconds": 142.95163016600668,
+      "inference_seconds": 0.1701481230556965,
+      "estimated_no_chord_seconds_on_reference_chords": 14.681814058956894
+    },
+    {
+      "candidate": "btc",
+      "reference_kind": "performed",
+      "successful_cases": 6,
+      "failed_cases": 0,
+      "root": 0.8379395046038971,
+      "root_reference_coverage": 0.9999997164942879,
+      "root_eligible_seconds": 182.36198911564625,
+      "majmin": 0.8838603502898381,
+      "majmin_reference_coverage": 0.7838891774082872,
+      "majmin_eligible_seconds": 142.95163016600668,
+      "root_chord_only": 0.8379395046038971,
+      "root_chord_only_reference_coverage": 0.9999997164942879,
+      "root_chord_only_eligible_seconds": 182.36198911564625,
+      "majmin_chord_only": 0.8838603502898381,
+      "majmin_chord_only_reference_coverage": 0.7838891774082872,
+      "majmin_chord_only_eligible_seconds": 142.95163016600668,
+      "inference_seconds": 3.680618457030505,
+      "estimated_no_chord_seconds_on_reference_chords": 17.306485260770977
+    },
+    {
+      "candidate": "crema",
+      "reference_kind": "performed",
+      "successful_cases": 6,
+      "failed_cases": 0,
+      "root": 0.9443378567652921,
+      "root_reference_coverage": 0.9999997164942879,
+      "root_eligible_seconds": 182.36198911564625,
+      "majmin": 0.9265114757531889,
+      "majmin_reference_coverage": 0.7838891774082872,
+      "majmin_eligible_seconds": 142.95163016600668,
+      "root_chord_only": 0.9443378567652921,
+      "root_chord_only_reference_coverage": 0.9999997164942879,
+      "root_chord_only_eligible_seconds": 182.36198911564625,
+      "majmin_chord_only": 0.9265114757531889,
+      "majmin_chord_only_reference_coverage": 0.7838891774082872,
+      "majmin_chord_only_eligible_seconds": 142.95163016600668,
+      "inference_seconds": 6.731949541252106,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0
+    },
+    {
+      "candidate": "chordmini",
+      "reference_kind": "performed",
+      "successful_cases": 6,
+      "failed_cases": 0,
+      "root": 0.7939743846536577,
+      "root_reference_coverage": 0.9999997164942879,
+      "root_eligible_seconds": 182.36198911564625,
+      "majmin": 0.8121200091680614,
+      "majmin_reference_coverage": 0.7838891774082872,
+      "majmin_eligible_seconds": 142.95163016600668,
+      "root_chord_only": 0.7939743846536577,
+      "root_chord_only_reference_coverage": 0.9999997164942879,
+      "root_chord_only_eligible_seconds": 182.36198911564625,
+      "majmin_chord_only": 0.8121200091680614,
+      "majmin_chord_only_reference_coverage": 0.7838891774082872,
+      "majmin_chord_only_eligible_seconds": 142.95163016600668,
+      "inference_seconds": 1.0342090833000839,
+      "estimated_no_chord_seconds_on_reference_chords": 6.00244897959184
+    },
+    {
+      "candidate": "chordino",
+      "reference_kind": "performed",
+      "successful_cases": 6,
+      "failed_cases": 0,
+      "root": 0.887171418393616,
+      "root_reference_coverage": 0.9999997164942879,
+      "root_eligible_seconds": 182.36198911564625,
+      "majmin": 0.8848032544625115,
+      "majmin_reference_coverage": 0.7838891774082872,
+      "majmin_eligible_seconds": 142.95163016600668,
+      "root_chord_only": 0.887171418393616,
+      "root_chord_only_reference_coverage": 0.9999997164942879,
+      "root_chord_only_eligible_seconds": 182.36198911564625,
+      "majmin_chord_only": 0.8848032544625115,
+      "majmin_chord_only_reference_coverage": 0.7838891774082872,
+      "majmin_chord_only_eligible_seconds": 142.95163016600668,
+      "inference_seconds": 1.1838647914119065,
+      "estimated_no_chord_seconds_on_reference_chords": 0.557278914
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "guitarset-00-ss3-84-bb-comp",
+      "original_id": "00_SS3-84-Bb_comp",
+      "candidate": "baseline",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 45.70761904761905,
+      "reference_chord_seconds": 45.70760000000001,
+      "reference_chord_coverage": 0.9999995832725609,
+      "root": 0.6541432875034164,
+      "root_eligible_seconds": 45.70760000000001,
+      "root_reference_coverage": 0.9999995832725609,
+      "root_chord_only": 0.6541432875034164,
+      "root_chord_only_eligible_seconds": 45.70760000000001,
+      "root_chord_only_reference_coverage": 0.9999995832725609,
+      "majmin": 0.5835903104003566,
+      "majmin_eligible_seconds": 45.70760000000001,
+      "majmin_reference_coverage": 0.9999995832725609,
+      "majmin_chord_only": 0.5835903104003566,
+      "majmin_chord_only_eligible_seconds": 45.70760000000001,
+      "majmin_chord_only_reference_coverage": 0.9999995832725609,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 2.348934240362801,
+      "predicted_events": 287,
+      "analysis_runtime_seconds": 0.045612792018800974,
+      "prediction_label_conversion": [
+        [
+          "A",
+          "A:maj"
+        ],
+        [
+          "A#",
+          "A#:maj"
+        ],
+        [
+          "A#m",
+          "A#:min"
+        ],
+        [
+          "Am",
+          "A:min"
+        ],
+        [
+          "Bm",
+          "B:min"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "C#",
+          "C#:maj"
+        ],
+        [
+          "C#m",
+          "C#:min"
+        ],
+        [
+          "Cm",
+          "C:min"
+        ],
+        [
+          "D",
+          "D:maj"
+        ],
+        [
+          "D#",
+          "D#:maj"
+        ],
+        [
+          "D#m",
+          "D#:min"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "E",
+          "E:maj"
+        ],
+        [
+          "Em",
+          "E:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "F#m",
+          "F#:min"
+        ],
+        [
+          "Fm",
+          "F:min"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "G#",
+          "G#:maj"
+        ],
+        [
+          "G#m",
+          "G#:min"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "09a4daa7c8322014e6852e40203969d13b092c4ae60e05e6f9186fd285298c83"
+    },
+    {
+      "case_id": "guitarset-00-ss3-84-bb-comp",
+      "original_id": "00_SS3-84-Bb_comp",
+      "candidate": "baseline",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 45.70761904761905,
+      "reference_chord_seconds": 45.70760000000001,
+      "reference_chord_coverage": 0.9999995832725609,
+      "root": 0.6541432875034164,
+      "root_eligible_seconds": 45.70760000000001,
+      "root_reference_coverage": 0.9999995832725609,
+      "root_chord_only": 0.6541432875034164,
+      "root_chord_only_eligible_seconds": 45.70760000000001,
+      "root_chord_only_reference_coverage": 0.9999995832725609,
+      "majmin": 0.535480099678864,
+      "majmin_eligible_seconds": 45.70760000000001,
+      "majmin_reference_coverage": 0.9999995832725609,
+      "majmin_chord_only": 0.535480099678864,
+      "majmin_chord_only_eligible_seconds": 45.70760000000001,
+      "majmin_chord_only_reference_coverage": 0.9999995832725609,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 2.348934240362801,
+      "predicted_events": 287,
+      "analysis_runtime_seconds": 0.045612792018800974,
+      "prediction_label_conversion": [
+        [
+          "A",
+          "A:maj"
+        ],
+        [
+          "A#",
+          "A#:maj"
+        ],
+        [
+          "A#m",
+          "A#:min"
+        ],
+        [
+          "Am",
+          "A:min"
+        ],
+        [
+          "Bm",
+          "B:min"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "C#",
+          "C#:maj"
+        ],
+        [
+          "C#m",
+          "C#:min"
+        ],
+        [
+          "Cm",
+          "C:min"
+        ],
+        [
+          "D",
+          "D:maj"
+        ],
+        [
+          "D#",
+          "D#:maj"
+        ],
+        [
+          "D#m",
+          "D#:min"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "E",
+          "E:maj"
+        ],
+        [
+          "Em",
+          "E:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "F#m",
+          "F#:min"
+        ],
+        [
+          "Fm",
+          "F:min"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "G#",
+          "G#:maj"
+        ],
+        [
+          "G#m",
+          "G#:min"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "09a4daa7c8322014e6852e40203969d13b092c4ae60e05e6f9186fd285298c83"
+    },
+    {
+      "case_id": "guitarset-01-rock1-90-csharp-comp",
+      "original_id": "01_Rock1-90-C#_comp",
+      "candidate": "baseline",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 32.0,
+      "reference_chord_seconds": 31.999999999999996,
+      "reference_chord_coverage": 0.9999999999999999,
+      "root": 0.9085133219954648,
+      "root_eligible_seconds": 31.999999999999996,
+      "root_reference_coverage": 0.9999999999999999,
+      "root_chord_only": 0.9085133219954648,
+      "root_chord_only_eligible_seconds": 31.999999999999996,
+      "root_chord_only_reference_coverage": 0.9999999999999999,
+      "majmin": 0.8655683106575961,
+      "majmin_eligible_seconds": 31.999999999999996,
+      "majmin_reference_coverage": 0.9999999999999999,
+      "majmin_chord_only": 0.8655683106575961,
+      "majmin_chord_only_eligible_seconds": 31.999999999999996,
+      "majmin_chord_only_reference_coverage": 0.9999999999999999,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.4248072562358245,
+      "predicted_events": 107,
+      "analysis_runtime_seconds": 0.03020850010216236,
+      "prediction_label_conversion": [
+        [
+          "A",
+          "A:maj"
+        ],
+        [
+          "Am",
+          "A:min"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "C#",
+          "C#:maj"
+        ],
+        [
+          "C#m",
+          "C#:min"
+        ],
+        [
+          "Cm",
+          "C:min"
+        ],
+        [
+          "D#",
+          "D#:maj"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "Em",
+          "E:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "F#",
+          "F#:maj"
+        ],
+        [
+          "F#m",
+          "F#:min"
+        ],
+        [
+          "Fm",
+          "F:min"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "G#",
+          "G#:maj"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "58debac12ee86a001d4d040f74dea2b0d37958858b1bcdb211912f09247bc64c"
+    },
+    {
+      "case_id": "guitarset-01-rock1-90-csharp-comp",
+      "original_id": "01_Rock1-90-C#_comp",
+      "candidate": "baseline",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 32.0,
+      "reference_chord_seconds": 31.999999999999996,
+      "reference_chord_coverage": 0.9999999999999999,
+      "root": 0.9085133219954648,
+      "root_eligible_seconds": 31.999999999999996,
+      "root_reference_coverage": 0.9999999999999999,
+      "root_chord_only": 0.9085133219954648,
+      "root_chord_only_eligible_seconds": 31.999999999999996,
+      "root_chord_only_reference_coverage": 0.9999999999999999,
+      "majmin": 0.8655683106575961,
+      "majmin_eligible_seconds": 31.999999999999996,
+      "majmin_reference_coverage": 0.9999999999999999,
+      "majmin_chord_only": 0.8655683106575961,
+      "majmin_chord_only_eligible_seconds": 31.999999999999996,
+      "majmin_chord_only_reference_coverage": 0.9999999999999999,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.4248072562358245,
+      "predicted_events": 107,
+      "analysis_runtime_seconds": 0.03020850010216236,
+      "prediction_label_conversion": [
+        [
+          "A",
+          "A:maj"
+        ],
+        [
+          "Am",
+          "A:min"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "C#",
+          "C#:maj"
+        ],
+        [
+          "C#m",
+          "C#:min"
+        ],
+        [
+          "Cm",
+          "C:min"
+        ],
+        [
+          "D#",
+          "D#:maj"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "Em",
+          "E:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "F#",
+          "F#:maj"
+        ],
+        [
+          "F#m",
+          "F#:min"
+        ],
+        [
+          "Fm",
+          "F:min"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "G#",
+          "G#:maj"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "58debac12ee86a001d4d040f74dea2b0d37958858b1bcdb211912f09247bc64c"
+    },
+    {
+      "case_id": "guitarset-02-funk1-97-c-comp",
+      "original_id": "02_Funk1-97-C_comp",
+      "candidate": "baseline",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 29.688390022675737,
+      "reference_chord_seconds": 29.68839002267574,
+      "reference_chord_coverage": 1.0000000000000002,
+      "root": 0.35426079772295044,
+      "root_eligible_seconds": 29.68839002267574,
+      "root_reference_coverage": 1.0000000000000002,
+      "root_chord_only": 0.35426079772295044,
+      "root_chord_only_eligible_seconds": 29.68839002267574,
+      "root_chord_only_reference_coverage": 1.0000000000000002,
+      "majmin": 0.3264847596922493,
+      "majmin_eligible_seconds": 29.68839002267574,
+      "majmin_reference_coverage": 1.0000000000000002,
+      "majmin_chord_only": 0.3264847596922493,
+      "majmin_chord_only_eligible_seconds": 29.68839002267574,
+      "majmin_chord_only_reference_coverage": 1.0000000000000002,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 3.27537414965986,
+      "predicted_events": 351,
+      "analysis_runtime_seconds": 0.026715165935456753,
+      "prediction_label_conversion": [
+        [
+          "A",
+          "A:maj"
+        ],
+        [
+          "A#",
+          "A#:maj"
+        ],
+        [
+          "Am",
+          "A:min"
+        ],
+        [
+          "Bm",
+          "B:min"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "C#",
+          "C#:maj"
+        ],
+        [
+          "Cm",
+          "C:min"
+        ],
+        [
+          "D",
+          "D:maj"
+        ],
+        [
+          "D#",
+          "D#:maj"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "E",
+          "E:maj"
+        ],
+        [
+          "Em",
+          "E:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "F#",
+          "F#:maj"
+        ],
+        [
+          "F#m",
+          "F#:min"
+        ],
+        [
+          "Fm",
+          "F:min"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "1c6a8713d33344f2ceb751a43c6ddd0d9de550b7e9b2f79e6fedeb66c99f54dd"
+    },
+    {
+      "case_id": "guitarset-02-funk1-97-c-comp",
+      "original_id": "02_Funk1-97-C_comp",
+      "candidate": "baseline",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 29.688390022675737,
+      "reference_chord_seconds": 29.68839002267574,
+      "reference_chord_coverage": 1.0000000000000002,
+      "root": 0.35426079772295044,
+      "root_eligible_seconds": 29.68839002267574,
+      "root_reference_coverage": 1.0000000000000002,
+      "root_chord_only": 0.35426079772295044,
+      "root_chord_only_eligible_seconds": 29.68839002267574,
+      "root_chord_only_reference_coverage": 1.0000000000000002,
+      "majmin": 0.14644397203325893,
+      "majmin_eligible_seconds": 4.948453608247423,
+      "majmin_reference_coverage": 0.16667975610896504,
+      "majmin_chord_only": 0.14644397203325893,
+      "majmin_chord_only_eligible_seconds": 4.948453608247423,
+      "majmin_chord_only_reference_coverage": 0.16667975610896504,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 3.27537414965986,
+      "predicted_events": 351,
+      "analysis_runtime_seconds": 0.026715165935456753,
+      "prediction_label_conversion": [
+        [
+          "A",
+          "A:maj"
+        ],
+        [
+          "A#",
+          "A#:maj"
+        ],
+        [
+          "Am",
+          "A:min"
+        ],
+        [
+          "Bm",
+          "B:min"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "C#",
+          "C#:maj"
+        ],
+        [
+          "Cm",
+          "C:min"
+        ],
+        [
+          "D",
+          "D:maj"
+        ],
+        [
+          "D#",
+          "D#:maj"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "E",
+          "E:maj"
+        ],
+        [
+          "Em",
+          "E:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "F#",
+          "F#:maj"
+        ],
+        [
+          "F#m",
+          "F#:min"
+        ],
+        [
+          "Fm",
+          "F:min"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "1c6a8713d33344f2ceb751a43c6ddd0d9de550b7e9b2f79e6fedeb66c99f54dd"
+    },
+    {
+      "case_id": "guitarset-03-bn1-129-eb-comp",
+      "original_id": "03_BN1-129-Eb_comp",
+      "candidate": "baseline",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 22.32439909297052,
+      "reference_chord_seconds": 22.32439909297052,
+      "reference_chord_coverage": 1.0,
+      "root": 0.5548480245954065,
+      "root_eligible_seconds": 22.32439909297052,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.5548480245954065,
+      "root_chord_only_eligible_seconds": 22.32439909297052,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.5123129867185426,
+      "majmin_eligible_seconds": 22.32439909297052,
+      "majmin_reference_coverage": 1.0,
+      "majmin_chord_only": 0.5123129867185426,
+      "majmin_chord_only_eligible_seconds": 22.32439909297052,
+      "majmin_chord_only_reference_coverage": 1.0,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.7496598639455747,
+      "predicted_events": 228,
+      "analysis_runtime_seconds": 0.02213066630065441,
+      "prediction_label_conversion": [
+        [
+          "A",
+          "A:maj"
+        ],
+        [
+          "A#",
+          "A#:maj"
+        ],
+        [
+          "Am",
+          "A:min"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "C#",
+          "C#:maj"
+        ],
+        [
+          "C#m",
+          "C#:min"
+        ],
+        [
+          "Cm",
+          "C:min"
+        ],
+        [
+          "D",
+          "D:maj"
+        ],
+        [
+          "D#",
+          "D#:maj"
+        ],
+        [
+          "D#m",
+          "D#:min"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "E",
+          "E:maj"
+        ],
+        [
+          "Em",
+          "E:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "F#m",
+          "F#:min"
+        ],
+        [
+          "Fm",
+          "F:min"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "G#",
+          "G#:maj"
+        ],
+        [
+          "G#m",
+          "G#:min"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "0a612b831b444d3db6b66149d6f59171c8f94ea89d68208efc4ade3bbd92dfbf"
+    },
+    {
+      "case_id": "guitarset-03-bn1-129-eb-comp",
+      "original_id": "03_BN1-129-Eb_comp",
+      "candidate": "baseline",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 22.32439909297052,
+      "reference_chord_seconds": 22.32439909297052,
+      "reference_chord_coverage": 1.0,
+      "root": 0.5548480245954065,
+      "root_eligible_seconds": 22.32439909297052,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.5548480245954065,
+      "root_chord_only_eligible_seconds": 22.32439909297052,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.5123129867185426,
+      "majmin_eligible_seconds": 22.32439909297052,
+      "majmin_reference_coverage": 1.0,
+      "majmin_chord_only": 0.5123129867185426,
+      "majmin_chord_only_eligible_seconds": 22.32439909297052,
+      "majmin_chord_only_reference_coverage": 1.0,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.7496598639455747,
+      "predicted_events": 228,
+      "analysis_runtime_seconds": 0.02213066630065441,
+      "prediction_label_conversion": [
+        [
+          "A",
+          "A:maj"
+        ],
+        [
+          "A#",
+          "A#:maj"
+        ],
+        [
+          "Am",
+          "A:min"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "C#",
+          "C#:maj"
+        ],
+        [
+          "C#m",
+          "C#:min"
+        ],
+        [
+          "Cm",
+          "C:min"
+        ],
+        [
+          "D",
+          "D:maj"
+        ],
+        [
+          "D#",
+          "D#:maj"
+        ],
+        [
+          "D#m",
+          "D#:min"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "E",
+          "E:maj"
+        ],
+        [
+          "Em",
+          "E:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "F#m",
+          "F#:min"
+        ],
+        [
+          "Fm",
+          "F:min"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "G#",
+          "G#:maj"
+        ],
+        [
+          "G#m",
+          "G#:min"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "0a612b831b444d3db6b66149d6f59171c8f94ea89d68208efc4ade3bbd92dfbf"
+    },
+    {
+      "case_id": "guitarset-04-rock2-142-d-comp",
+      "original_id": "04_Rock2-142-D_comp",
+      "candidate": "baseline",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 27.041632653061225,
+      "reference_chord_seconds": 27.041600000000003,
+      "reference_chord_coverage": 0.9999987924892835,
+      "root": 0.7131170985536156,
+      "root_eligible_seconds": 27.041600000000003,
+      "root_reference_coverage": 0.9999987924892835,
+      "root_chord_only": 0.7131170985536156,
+      "root_chord_only_eligible_seconds": 27.041600000000003,
+      "root_chord_only_reference_coverage": 0.9999987924892835,
+      "majmin": 0.668963106293416,
+      "majmin_eligible_seconds": 23.661318309859162,
+      "majmin_reference_coverage": 0.8749959225254323,
+      "majmin_chord_only": 0.668963106293416,
+      "majmin_chord_only_eligible_seconds": 23.661318309859162,
+      "majmin_chord_only_reference_coverage": 0.8749959225254323,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.17492063492063537,
+      "predicted_events": 147,
+      "analysis_runtime_seconds": 0.02673195768147707,
+      "prediction_label_conversion": [
+        [
+          "A",
+          "A:maj"
+        ],
+        [
+          "A#",
+          "A#:maj"
+        ],
+        [
+          "Am",
+          "A:min"
+        ],
+        [
+          "B",
+          "B:maj"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "C#m",
+          "C#:min"
+        ],
+        [
+          "D",
+          "D:maj"
+        ],
+        [
+          "D#m",
+          "D#:min"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "E",
+          "E:maj"
+        ],
+        [
+          "Em",
+          "E:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "F#m",
+          "F#:min"
+        ],
+        [
+          "Fm",
+          "F:min"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "G#m",
+          "G#:min"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "ec18b145d83b625ca5d8a41f1139b78c56f4af49ecb678d67b2ceefcda3853c0"
+    },
+    {
+      "case_id": "guitarset-04-rock2-142-d-comp",
+      "original_id": "04_Rock2-142-D_comp",
+      "candidate": "baseline",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 27.041632653061225,
+      "reference_chord_seconds": 27.041600000000003,
+      "reference_chord_coverage": 0.9999987924892835,
+      "root": 0.7131170985536156,
+      "root_eligible_seconds": 27.041600000000003,
+      "root_reference_coverage": 0.9999987924892835,
+      "root_chord_only": 0.7131170985536156,
+      "root_chord_only_eligible_seconds": 27.041600000000003,
+      "root_chord_only_reference_coverage": 0.9999987924892835,
+      "majmin": 0.7101872924827803,
+      "majmin_eligible_seconds": 21.971177464788738,
+      "majmin_reference_coverage": 0.8124944875435067,
+      "majmin_chord_only": 0.7101872924827803,
+      "majmin_chord_only_eligible_seconds": 21.971177464788738,
+      "majmin_chord_only_reference_coverage": 0.8124944875435067,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.17492063492063537,
+      "predicted_events": 147,
+      "analysis_runtime_seconds": 0.02673195768147707,
+      "prediction_label_conversion": [
+        [
+          "A",
+          "A:maj"
+        ],
+        [
+          "A#",
+          "A#:maj"
+        ],
+        [
+          "Am",
+          "A:min"
+        ],
+        [
+          "B",
+          "B:maj"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "C#m",
+          "C#:min"
+        ],
+        [
+          "D",
+          "D:maj"
+        ],
+        [
+          "D#m",
+          "D#:min"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "E",
+          "E:maj"
+        ],
+        [
+          "Em",
+          "E:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "F#m",
+          "F#:min"
+        ],
+        [
+          "Fm",
+          "F:min"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "G#m",
+          "G#:min"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "ec18b145d83b625ca5d8a41f1139b78c56f4af49ecb678d67b2ceefcda3853c0"
+    },
+    {
+      "case_id": "guitarset-05-jazz3-150-c-comp",
+      "original_id": "05_Jazz3-150-C_comp",
+      "candidate": "baseline",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 25.6,
+      "reference_chord_seconds": 25.6,
+      "reference_chord_coverage": 1.0,
+      "root": 0.24581207482993203,
+      "root_eligible_seconds": 25.6,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.24581207482993203,
+      "root_chord_only_eligible_seconds": 25.6,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.22921804138322002,
+      "majmin_eligible_seconds": 25.6,
+      "majmin_reference_coverage": 1.0,
+      "majmin_chord_only": 0.22921804138322002,
+      "majmin_chord_only_eligible_seconds": 25.6,
+      "majmin_chord_only_reference_coverage": 1.0,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 7.708117913832198,
+      "predicted_events": 270,
+      "analysis_runtime_seconds": 0.01874904101714492,
+      "prediction_label_conversion": [
+        [
+          "A",
+          "A:maj"
+        ],
+        [
+          "A#",
+          "A#:maj"
+        ],
+        [
+          "Am",
+          "A:min"
+        ],
+        [
+          "Bm",
+          "B:min"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "D",
+          "D:maj"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "E",
+          "E:maj"
+        ],
+        [
+          "Em",
+          "E:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "F#m",
+          "F#:min"
+        ],
+        [
+          "Fm",
+          "F:min"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "G#m",
+          "G#:min"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "f445c6768e5d6d7b1360b1083155f314dc2e8f912a6fd470f217ea56f9c300d5"
+    },
+    {
+      "case_id": "guitarset-05-jazz3-150-c-comp",
+      "original_id": "05_Jazz3-150-C_comp",
+      "candidate": "baseline",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 25.6,
+      "reference_chord_seconds": 25.6,
+      "reference_chord_coverage": 1.0,
+      "root": 0.24581207482993203,
+      "root_eligible_seconds": 25.6,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.24581207482993203,
+      "root_chord_only_eligible_seconds": 25.6,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.27147959183673476,
+      "majmin_eligible_seconds": 16.0,
+      "majmin_reference_coverage": 0.625,
+      "majmin_chord_only": 0.27147959183673476,
+      "majmin_chord_only_eligible_seconds": 16.0,
+      "majmin_chord_only_reference_coverage": 0.625,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 7.708117913832198,
+      "predicted_events": 270,
+      "analysis_runtime_seconds": 0.01874904101714492,
+      "prediction_label_conversion": [
+        [
+          "A",
+          "A:maj"
+        ],
+        [
+          "A#",
+          "A#:maj"
+        ],
+        [
+          "Am",
+          "A:min"
+        ],
+        [
+          "Bm",
+          "B:min"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "D",
+          "D:maj"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "E",
+          "E:maj"
+        ],
+        [
+          "Em",
+          "E:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "F#m",
+          "F#:min"
+        ],
+        [
+          "Fm",
+          "F:min"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "G#m",
+          "G#:min"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "f445c6768e5d6d7b1360b1083155f314dc2e8f912a6fd470f217ea56f9c300d5"
+    },
+    {
+      "case_id": "guitarset-00-ss3-84-bb-comp",
+      "original_id": "00_SS3-84-Bb_comp",
+      "candidate": "btc",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 45.70761904761905,
+      "reference_chord_seconds": 45.70760000000001,
+      "reference_chord_coverage": 0.9999995832725609,
+      "root": 0.9565571385450042,
+      "root_eligible_seconds": 45.70760000000001,
+      "root_reference_coverage": 0.9999995832725609,
+      "root_chord_only": 0.9565571385450042,
+      "root_chord_only_eligible_seconds": 45.70760000000001,
+      "root_chord_only_reference_coverage": 0.9999995832725609,
+      "majmin": 0.9565571385450042,
+      "majmin_eligible_seconds": 45.70760000000001,
+      "majmin_reference_coverage": 0.9999995832725609,
+      "majmin_chord_only": 0.9565571385450042,
+      "majmin_chord_only_eligible_seconds": 45.70760000000001,
+      "majmin_chord_only_reference_coverage": 0.9999995832725609,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 16,
+      "analysis_runtime_seconds": 3.12147408304736,
+      "prediction_label_conversion": [
+        [
+          "A#",
+          "A#:maj"
+        ],
+        [
+          "D#",
+          "D#:maj"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ]
+      ],
+      "prediction_sha256": "07a22c2c0c5b28e3117d824b89c8883aa6583e9eb7b25edd6289517ab54c18b0"
+    },
+    {
+      "case_id": "guitarset-00-ss3-84-bb-comp",
+      "original_id": "00_SS3-84-Bb_comp",
+      "candidate": "btc",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 45.70761904761905,
+      "reference_chord_seconds": 45.70760000000001,
+      "reference_chord_coverage": 0.9999995832725609,
+      "root": 0.9565571385450042,
+      "root_eligible_seconds": 45.70760000000001,
+      "root_reference_coverage": 0.9999995832725609,
+      "root_chord_only": 0.9565571385450042,
+      "root_chord_only_eligible_seconds": 45.70760000000001,
+      "root_chord_only_reference_coverage": 0.9999995832725609,
+      "majmin": 0.8940479965829922,
+      "majmin_eligible_seconds": 45.70760000000001,
+      "majmin_reference_coverage": 0.9999995832725609,
+      "majmin_chord_only": 0.8940479965829922,
+      "majmin_chord_only_eligible_seconds": 45.70760000000001,
+      "majmin_chord_only_reference_coverage": 0.9999995832725609,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 16,
+      "analysis_runtime_seconds": 3.12147408304736,
+      "prediction_label_conversion": [
+        [
+          "A#",
+          "A#:maj"
+        ],
+        [
+          "D#",
+          "D#:maj"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ]
+      ],
+      "prediction_sha256": "07a22c2c0c5b28e3117d824b89c8883aa6583e9eb7b25edd6289517ab54c18b0"
+    },
+    {
+      "case_id": "guitarset-01-rock1-90-csharp-comp",
+      "original_id": "01_Rock1-90-C#_comp",
+      "candidate": "btc",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 32.0,
+      "reference_chord_seconds": 31.999999999999993,
+      "reference_chord_coverage": 0.9999999999999998,
+      "root": 0.98265306122449,
+      "root_eligible_seconds": 31.999999999999993,
+      "root_reference_coverage": 0.9999999999999998,
+      "root_chord_only": 0.98265306122449,
+      "root_chord_only_eligible_seconds": 31.999999999999993,
+      "root_chord_only_reference_coverage": 0.9999999999999998,
+      "majmin": 0.98265306122449,
+      "majmin_eligible_seconds": 31.999999999999993,
+      "majmin_reference_coverage": 0.9999999999999998,
+      "majmin_chord_only": 0.98265306122449,
+      "majmin_chord_only_eligible_seconds": 31.999999999999993,
+      "majmin_chord_only_reference_coverage": 0.9999999999999998,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 6,
+      "analysis_runtime_seconds": 0.1341731660068035,
+      "prediction_label_conversion": [
+        [
+          "C#",
+          "C#:maj"
+        ],
+        [
+          "F#",
+          "F#:maj"
+        ],
+        [
+          "G#",
+          "G#:maj"
+        ]
+      ],
+      "prediction_sha256": "ea9701a67691a62ed23aae2e069c8d7936864a1b747df39f78fcffdb3604f3b7"
+    },
+    {
+      "case_id": "guitarset-01-rock1-90-csharp-comp",
+      "original_id": "01_Rock1-90-C#_comp",
+      "candidate": "btc",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 32.0,
+      "reference_chord_seconds": 31.999999999999993,
+      "reference_chord_coverage": 0.9999999999999998,
+      "root": 0.98265306122449,
+      "root_eligible_seconds": 31.999999999999993,
+      "root_reference_coverage": 0.9999999999999998,
+      "root_chord_only": 0.98265306122449,
+      "root_chord_only_eligible_seconds": 31.999999999999993,
+      "root_chord_only_reference_coverage": 0.9999999999999998,
+      "majmin": 0.98265306122449,
+      "majmin_eligible_seconds": 31.999999999999993,
+      "majmin_reference_coverage": 0.9999999999999998,
+      "majmin_chord_only": 0.98265306122449,
+      "majmin_chord_only_eligible_seconds": 31.999999999999993,
+      "majmin_chord_only_reference_coverage": 0.9999999999999998,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 6,
+      "analysis_runtime_seconds": 0.1341731660068035,
+      "prediction_label_conversion": [
+        [
+          "C#",
+          "C#:maj"
+        ],
+        [
+          "F#",
+          "F#:maj"
+        ],
+        [
+          "G#",
+          "G#:maj"
+        ]
+      ],
+      "prediction_sha256": "ea9701a67691a62ed23aae2e069c8d7936864a1b747df39f78fcffdb3604f3b7"
+    },
+    {
+      "case_id": "guitarset-02-funk1-97-c-comp",
+      "original_id": "02_Funk1-97-C_comp",
+      "candidate": "btc",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 29.688390022675737,
+      "reference_chord_seconds": 29.688390022675737,
+      "reference_chord_coverage": 1.0,
+      "root": 0.4244485028452331,
+      "root_eligible_seconds": 29.688390022675737,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.4244485028452331,
+      "root_chord_only_eligible_seconds": 29.688390022675737,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.4244485028452331,
+      "majmin_eligible_seconds": 29.688390022675737,
+      "majmin_reference_coverage": 1.0,
+      "majmin_chord_only": 0.4244485028452331,
+      "majmin_chord_only_eligible_seconds": 29.688390022675737,
+      "majmin_chord_only_reference_coverage": 1.0,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 16.93496598639456,
+      "predicted_events": 13,
+      "analysis_runtime_seconds": 0.1070699580013752,
+      "prediction_label_conversion": [
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "01a68de43dc92735dc5d9507ac180a1c21bd3e52acd4461f3774dd43deed937a"
+    },
+    {
+      "case_id": "guitarset-02-funk1-97-c-comp",
+      "original_id": "02_Funk1-97-C_comp",
+      "candidate": "btc",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 29.688390022675737,
+      "reference_chord_seconds": 29.688390022675737,
+      "reference_chord_coverage": 1.0,
+      "root": 0.4244485028452331,
+      "root_eligible_seconds": 29.688390022675737,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.4244485028452331,
+      "root_chord_only_eligible_seconds": 29.688390022675737,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.0,
+      "majmin_eligible_seconds": 4.948453608247423,
+      "majmin_reference_coverage": 0.16667975610896504,
+      "majmin_chord_only": 0.0,
+      "majmin_chord_only_eligible_seconds": 4.948453608247423,
+      "majmin_chord_only_reference_coverage": 0.16667975610896504,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 16.93496598639456,
+      "predicted_events": 13,
+      "analysis_runtime_seconds": 0.1070699580013752,
+      "prediction_label_conversion": [
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "01a68de43dc92735dc5d9507ac180a1c21bd3e52acd4461f3774dd43deed937a"
+    },
+    {
+      "case_id": "guitarset-03-bn1-129-eb-comp",
+      "original_id": "03_BN1-129-Eb_comp",
+      "candidate": "btc",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 22.32439909297052,
+      "reference_chord_seconds": 22.32439909297052,
+      "reference_chord_coverage": 1.0,
+      "root": 0.9688849735475882,
+      "root_eligible_seconds": 22.32439909297052,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.9688849735475882,
+      "root_chord_only_eligible_seconds": 22.32439909297052,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.9688849735475882,
+      "majmin_eligible_seconds": 22.32439909297052,
+      "majmin_reference_coverage": 1.0,
+      "majmin_chord_only": 0.9688849735475882,
+      "majmin_chord_only_eligible_seconds": 22.32439909297052,
+      "majmin_chord_only_reference_coverage": 1.0,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 6,
+      "analysis_runtime_seconds": 0.10408674972131848,
+      "prediction_label_conversion": [
+        [
+          "A#",
+          "A#:maj"
+        ],
+        [
+          "D#",
+          "D#:maj"
+        ],
+        [
+          "G#",
+          "G#:maj"
+        ]
+      ],
+      "prediction_sha256": "29b24d2de431b76c945891ca4fc2821c065de08891b9fe7cb183be667f57900e"
+    },
+    {
+      "case_id": "guitarset-03-bn1-129-eb-comp",
+      "original_id": "03_BN1-129-Eb_comp",
+      "candidate": "btc",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 22.32439909297052,
+      "reference_chord_seconds": 22.32439909297052,
+      "reference_chord_coverage": 1.0,
+      "root": 0.9688849735475882,
+      "root_eligible_seconds": 22.32439909297052,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.9688849735475882,
+      "root_chord_only_eligible_seconds": 22.32439909297052,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.9688849735475882,
+      "majmin_eligible_seconds": 22.32439909297052,
+      "majmin_reference_coverage": 1.0,
+      "majmin_chord_only": 0.9688849735475882,
+      "majmin_chord_only_eligible_seconds": 22.32439909297052,
+      "majmin_chord_only_reference_coverage": 1.0,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 6,
+      "analysis_runtime_seconds": 0.10408674972131848,
+      "prediction_label_conversion": [
+        [
+          "A#",
+          "A#:maj"
+        ],
+        [
+          "D#",
+          "D#:maj"
+        ],
+        [
+          "G#",
+          "G#:maj"
+        ]
+      ],
+      "prediction_sha256": "29b24d2de431b76c945891ca4fc2821c065de08891b9fe7cb183be667f57900e"
+    },
+    {
+      "case_id": "guitarset-04-rock2-142-d-comp",
+      "original_id": "04_Rock2-142-D_comp",
+      "candidate": "btc",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 27.041632653061225,
+      "reference_chord_seconds": 27.041600000000003,
+      "reference_chord_coverage": 0.9999987924892835,
+      "root": 0.8935689509699809,
+      "root_eligible_seconds": 27.041600000000003,
+      "root_reference_coverage": 0.9999987924892835,
+      "root_chord_only": 0.8935689509699809,
+      "root_chord_only_eligible_seconds": 27.041600000000003,
+      "root_chord_only_reference_coverage": 0.9999987924892835,
+      "majmin": 0.9184630325531221,
+      "majmin_eligible_seconds": 23.661318309859162,
+      "majmin_reference_coverage": 0.8749959225254323,
+      "majmin_chord_only": 0.9184630325531221,
+      "majmin_chord_only_eligible_seconds": 23.661318309859162,
+      "majmin_chord_only_reference_coverage": 0.8749959225254323,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 15,
+      "analysis_runtime_seconds": 0.10991137521341443,
+      "prediction_label_conversion": [
+        [
+          "A",
+          "A:maj"
+        ],
+        [
+          "A#",
+          "A#:maj"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "E",
+          "E:maj"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ]
+      ],
+      "prediction_sha256": "6c06c3ecc0f338b34f8727775ec9d5bd5ff0fff455c069c9bff76b2f63eb8d0f"
+    },
+    {
+      "case_id": "guitarset-04-rock2-142-d-comp",
+      "original_id": "04_Rock2-142-D_comp",
+      "candidate": "btc",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 27.041632653061225,
+      "reference_chord_seconds": 27.041600000000003,
+      "reference_chord_coverage": 0.9999987924892835,
+      "root": 0.8935689509699809,
+      "root_eligible_seconds": 27.041600000000003,
+      "root_reference_coverage": 0.9999987924892835,
+      "root_chord_only": 0.8935689509699809,
+      "root_chord_only_eligible_seconds": 27.041600000000003,
+      "root_chord_only_reference_coverage": 0.9999987924892835,
+      "majmin": 0.9253278563124702,
+      "majmin_eligible_seconds": 21.971177464788738,
+      "majmin_reference_coverage": 0.8124944875435067,
+      "majmin_chord_only": 0.9253278563124702,
+      "majmin_chord_only_eligible_seconds": 21.971177464788738,
+      "majmin_chord_only_reference_coverage": 0.8124944875435067,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 15,
+      "analysis_runtime_seconds": 0.10991137521341443,
+      "prediction_label_conversion": [
+        [
+          "A",
+          "A:maj"
+        ],
+        [
+          "A#",
+          "A#:maj"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "E",
+          "E:maj"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ]
+      ],
+      "prediction_sha256": "6c06c3ecc0f338b34f8727775ec9d5bd5ff0fff455c069c9bff76b2f63eb8d0f"
+    },
+    {
+      "case_id": "guitarset-05-jazz3-150-c-comp",
+      "original_id": "05_Jazz3-150-C_comp",
+      "candidate": "btc",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 25.6,
+      "reference_chord_seconds": 25.6,
+      "reference_chord_coverage": 1.0,
+      "root": 0.7518353174603176,
+      "root_eligible_seconds": 25.6,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.7518353174603176,
+      "root_chord_only_eligible_seconds": 25.6,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.7518353174603176,
+      "majmin_eligible_seconds": 25.6,
+      "majmin_reference_coverage": 1.0,
+      "majmin_chord_only": 0.7518353174603176,
+      "majmin_chord_only_eligible_seconds": 25.6,
+      "majmin_chord_only_reference_coverage": 1.0,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.37151927437641774,
+      "predicted_events": 21,
+      "analysis_runtime_seconds": 0.10390312504023314,
+      "prediction_label_conversion": [
+        [
+          "Am",
+          "A:min"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "Em",
+          "E:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "e3647fe2806adc4227504e26e0b50a2398070e42280ff208772ec9308bb4fbb5"
+    },
+    {
+      "case_id": "guitarset-05-jazz3-150-c-comp",
+      "original_id": "05_Jazz3-150-C_comp",
+      "candidate": "btc",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 25.6,
+      "reference_chord_seconds": 25.6,
+      "reference_chord_coverage": 1.0,
+      "root": 0.7518353174603176,
+      "root_eligible_seconds": 25.6,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.7518353174603176,
+      "root_chord_only_eligible_seconds": 25.6,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.7549546485260774,
+      "majmin_eligible_seconds": 16.0,
+      "majmin_reference_coverage": 0.625,
+      "majmin_chord_only": 0.7549546485260774,
+      "majmin_chord_only_eligible_seconds": 16.0,
+      "majmin_chord_only_reference_coverage": 0.625,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.37151927437641774,
+      "predicted_events": 21,
+      "analysis_runtime_seconds": 0.10390312504023314,
+      "prediction_label_conversion": [
+        [
+          "Am",
+          "A:min"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "Em",
+          "E:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "e3647fe2806adc4227504e26e0b50a2398070e42280ff208772ec9308bb4fbb5"
+    },
+    {
+      "case_id": "guitarset-00-ss3-84-bb-comp",
+      "original_id": "00_SS3-84-Bb_comp",
+      "candidate": "crema",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 45.70761904761905,
+      "reference_chord_seconds": 45.70760000000002,
+      "reference_chord_coverage": 0.999999583272561,
+      "root": 0.9777586519647545,
+      "root_eligible_seconds": 45.70760000000002,
+      "root_reference_coverage": 0.999999583272561,
+      "root_chord_only": 0.9777586519647545,
+      "root_chord_only_eligible_seconds": 45.70760000000002,
+      "root_chord_only_reference_coverage": 0.999999583272561,
+      "majmin": 0.9777586519647545,
+      "majmin_eligible_seconds": 45.70760000000002,
+      "majmin_reference_coverage": 0.999999583272561,
+      "majmin_chord_only": 0.9777586519647545,
+      "majmin_chord_only_eligible_seconds": 45.70760000000002,
+      "majmin_chord_only_reference_coverage": 0.999999583272561,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 16,
+      "analysis_runtime_seconds": 2.125324874650687,
+      "prediction_label_conversion": [
+        [
+          "A#:maj",
+          "A#:maj"
+        ],
+        [
+          "D#:maj",
+          "D#:maj"
+        ],
+        [
+          "D:min",
+          "D:min"
+        ],
+        [
+          "F:maj",
+          "F:maj"
+        ],
+        [
+          "F:maj/3",
+          "F:maj/3"
+        ],
+        [
+          "G:min",
+          "G:min"
+        ]
+      ],
+      "prediction_sha256": "00fdac896e2c1f2836f69e519ec2ea57f0ec8a259db7bd04a579d762a6e4086b"
+    },
+    {
+      "case_id": "guitarset-00-ss3-84-bb-comp",
+      "original_id": "00_SS3-84-Bb_comp",
+      "candidate": "crema",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 45.70761904761905,
+      "reference_chord_seconds": 45.70760000000002,
+      "reference_chord_coverage": 0.999999583272561,
+      "root": 0.9777586519647545,
+      "root_eligible_seconds": 45.70760000000002,
+      "root_reference_coverage": 0.999999583272561,
+      "root_chord_only": 0.9777586519647545,
+      "root_chord_only_eligible_seconds": 45.70760000000002,
+      "root_chord_only_reference_coverage": 0.999999583272561,
+      "majmin": 0.9152495100027426,
+      "majmin_eligible_seconds": 45.70760000000002,
+      "majmin_reference_coverage": 0.999999583272561,
+      "majmin_chord_only": 0.9152495100027426,
+      "majmin_chord_only_eligible_seconds": 45.70760000000002,
+      "majmin_chord_only_reference_coverage": 0.999999583272561,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 16,
+      "analysis_runtime_seconds": 2.125324874650687,
+      "prediction_label_conversion": [
+        [
+          "A#:maj",
+          "A#:maj"
+        ],
+        [
+          "D#:maj",
+          "D#:maj"
+        ],
+        [
+          "D:min",
+          "D:min"
+        ],
+        [
+          "F:maj",
+          "F:maj"
+        ],
+        [
+          "F:maj/3",
+          "F:maj/3"
+        ],
+        [
+          "G:min",
+          "G:min"
+        ]
+      ],
+      "prediction_sha256": "00fdac896e2c1f2836f69e519ec2ea57f0ec8a259db7bd04a579d762a6e4086b"
+    },
+    {
+      "case_id": "guitarset-01-rock1-90-csharp-comp",
+      "original_id": "01_Rock1-90-C#_comp",
+      "candidate": "crema",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 32.0,
+      "reference_chord_seconds": 31.999999999999993,
+      "reference_chord_coverage": 0.9999999999999998,
+      "root": 0.9846031746031748,
+      "root_eligible_seconds": 31.999999999999993,
+      "root_reference_coverage": 0.9999999999999998,
+      "root_chord_only": 0.9846031746031748,
+      "root_chord_only_eligible_seconds": 31.999999999999993,
+      "root_chord_only_reference_coverage": 0.9999999999999998,
+      "majmin": 0.9846031746031748,
+      "majmin_eligible_seconds": 31.999999999999993,
+      "majmin_reference_coverage": 0.9999999999999998,
+      "majmin_chord_only": 0.9846031746031748,
+      "majmin_chord_only_eligible_seconds": 31.999999999999993,
+      "majmin_chord_only_reference_coverage": 0.9999999999999998,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 6,
+      "analysis_runtime_seconds": 1.3159810001961887,
+      "prediction_label_conversion": [
+        [
+          "C#:maj",
+          "C#:maj"
+        ],
+        [
+          "F#:maj",
+          "F#:maj"
+        ],
+        [
+          "G#:maj",
+          "G#:maj"
+        ]
+      ],
+      "prediction_sha256": "680d159252c750a97e23b19e9dd14ed3ba9d38250a9b808596a9a355fcc36ed7"
+    },
+    {
+      "case_id": "guitarset-01-rock1-90-csharp-comp",
+      "original_id": "01_Rock1-90-C#_comp",
+      "candidate": "crema",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 32.0,
+      "reference_chord_seconds": 31.999999999999993,
+      "reference_chord_coverage": 0.9999999999999998,
+      "root": 0.9846031746031748,
+      "root_eligible_seconds": 31.999999999999993,
+      "root_reference_coverage": 0.9999999999999998,
+      "root_chord_only": 0.9846031746031748,
+      "root_chord_only_eligible_seconds": 31.999999999999993,
+      "root_chord_only_reference_coverage": 0.9999999999999998,
+      "majmin": 0.9846031746031748,
+      "majmin_eligible_seconds": 31.999999999999993,
+      "majmin_reference_coverage": 0.9999999999999998,
+      "majmin_chord_only": 0.9846031746031748,
+      "majmin_chord_only_eligible_seconds": 31.999999999999993,
+      "majmin_chord_only_reference_coverage": 0.9999999999999998,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 6,
+      "analysis_runtime_seconds": 1.3159810001961887,
+      "prediction_label_conversion": [
+        [
+          "C#:maj",
+          "C#:maj"
+        ],
+        [
+          "F#:maj",
+          "F#:maj"
+        ],
+        [
+          "G#:maj",
+          "G#:maj"
+        ]
+      ],
+      "prediction_sha256": "680d159252c750a97e23b19e9dd14ed3ba9d38250a9b808596a9a355fcc36ed7"
+    },
+    {
+      "case_id": "guitarset-02-funk1-97-c-comp",
+      "original_id": "02_Funk1-97-C_comp",
+      "candidate": "crema",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 29.688390022675737,
+      "reference_chord_seconds": 29.688390022675737,
+      "reference_chord_coverage": 1.0,
+      "root": 0.9795665485383213,
+      "root_eligible_seconds": 29.688390022675737,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.9795665485383213,
+      "root_chord_only_eligible_seconds": 29.688390022675737,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.9795665485383213,
+      "majmin_eligible_seconds": 29.688390022675737,
+      "majmin_reference_coverage": 1.0,
+      "majmin_chord_only": 0.9795665485383213,
+      "majmin_chord_only_eligible_seconds": 29.688390022675737,
+      "majmin_chord_only_reference_coverage": 1.0,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 6,
+      "analysis_runtime_seconds": 0.8856597081758082,
+      "prediction_label_conversion": [
+        [
+          "C:maj",
+          "C:maj"
+        ],
+        [
+          "F:maj",
+          "F:maj"
+        ],
+        [
+          "G:maj",
+          "G:maj"
+        ]
+      ],
+      "prediction_sha256": "129d2ddd010b60cc35b7af99b24c2d8f5d65520d1437dadb754a52a2a0a8beb4"
+    },
+    {
+      "case_id": "guitarset-02-funk1-97-c-comp",
+      "original_id": "02_Funk1-97-C_comp",
+      "candidate": "crema",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 29.688390022675737,
+      "reference_chord_seconds": 29.688390022675737,
+      "reference_chord_coverage": 1.0,
+      "root": 0.9795665485383213,
+      "root_eligible_seconds": 29.688390022675737,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.9795665485383213,
+      "root_chord_only_eligible_seconds": 29.688390022675737,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.9791262282690849,
+      "majmin_eligible_seconds": 4.948453608247423,
+      "majmin_reference_coverage": 0.16667975610896504,
+      "majmin_chord_only": 0.9791262282690849,
+      "majmin_chord_only_eligible_seconds": 4.948453608247423,
+      "majmin_chord_only_reference_coverage": 0.16667975610896504,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 6,
+      "analysis_runtime_seconds": 0.8856597081758082,
+      "prediction_label_conversion": [
+        [
+          "C:maj",
+          "C:maj"
+        ],
+        [
+          "F:maj",
+          "F:maj"
+        ],
+        [
+          "G:maj",
+          "G:maj"
+        ]
+      ],
+      "prediction_sha256": "129d2ddd010b60cc35b7af99b24c2d8f5d65520d1437dadb754a52a2a0a8beb4"
+    },
+    {
+      "case_id": "guitarset-03-bn1-129-eb-comp",
+      "original_id": "03_BN1-129-Eb_comp",
+      "candidate": "crema",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 22.32439909297052,
+      "reference_chord_seconds": 22.32439909297052,
+      "reference_chord_coverage": 1.0,
+      "root": 0.9786035532210487,
+      "root_eligible_seconds": 22.32439909297052,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.9786035532210487,
+      "root_chord_only_eligible_seconds": 22.32439909297052,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.9786035532210487,
+      "majmin_eligible_seconds": 22.32439909297052,
+      "majmin_reference_coverage": 1.0,
+      "majmin_chord_only": 0.9786035532210487,
+      "majmin_chord_only_eligible_seconds": 22.32439909297052,
+      "majmin_chord_only_reference_coverage": 1.0,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 6,
+      "analysis_runtime_seconds": 0.757127792108804,
+      "prediction_label_conversion": [
+        [
+          "A#:7",
+          "A#:7"
+        ],
+        [
+          "D#:maj7",
+          "D#:maj7"
+        ],
+        [
+          "G#:maj7",
+          "G#:maj7"
+        ]
+      ],
+      "prediction_sha256": "b35c4949607141f9d90e1dd1e5f304290fc35dd354a6adbf25c9901d68740fb9"
+    },
+    {
+      "case_id": "guitarset-03-bn1-129-eb-comp",
+      "original_id": "03_BN1-129-Eb_comp",
+      "candidate": "crema",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 22.32439909297052,
+      "reference_chord_seconds": 22.32439909297052,
+      "reference_chord_coverage": 1.0,
+      "root": 0.9786035532210487,
+      "root_eligible_seconds": 22.32439909297052,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.9786035532210487,
+      "root_chord_only_eligible_seconds": 22.32439909297052,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.9786035532210487,
+      "majmin_eligible_seconds": 22.32439909297052,
+      "majmin_reference_coverage": 1.0,
+      "majmin_chord_only": 0.9786035532210487,
+      "majmin_chord_only_eligible_seconds": 22.32439909297052,
+      "majmin_chord_only_reference_coverage": 1.0,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 6,
+      "analysis_runtime_seconds": 0.757127792108804,
+      "prediction_label_conversion": [
+        [
+          "A#:7",
+          "A#:7"
+        ],
+        [
+          "D#:maj7",
+          "D#:maj7"
+        ],
+        [
+          "G#:maj7",
+          "G#:maj7"
+        ]
+      ],
+      "prediction_sha256": "b35c4949607141f9d90e1dd1e5f304290fc35dd354a6adbf25c9901d68740fb9"
+    },
+    {
+      "case_id": "guitarset-04-rock2-142-d-comp",
+      "original_id": "04_Rock2-142-D_comp",
+      "candidate": "crema",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 27.041632653061225,
+      "reference_chord_seconds": 27.041600000000003,
+      "reference_chord_coverage": 0.9999987924892835,
+      "root": 0.9197251953241175,
+      "root_eligible_seconds": 27.041600000000003,
+      "root_reference_coverage": 0.9999987924892835,
+      "root_chord_only": 0.9197251953241175,
+      "root_chord_only_eligible_seconds": 27.041600000000003,
+      "root_chord_only_reference_coverage": 0.9999987924892835,
+      "majmin": 0.8734149251775791,
+      "majmin_eligible_seconds": 23.66131830985916,
+      "majmin_reference_coverage": 0.8749959225254322,
+      "majmin_chord_only": 0.8734149251775791,
+      "majmin_chord_only_eligible_seconds": 23.66131830985916,
+      "majmin_chord_only_reference_coverage": 0.8749959225254322,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 14,
+      "analysis_runtime_seconds": 0.8378816661424935,
+      "prediction_label_conversion": [
+        [
+          "A#:maj",
+          "A#:maj"
+        ],
+        [
+          "A:7",
+          "A:7"
+        ],
+        [
+          "C:maj",
+          "C:maj"
+        ],
+        [
+          "D:min",
+          "D:min"
+        ],
+        [
+          "E:hdim7",
+          "E:hdim7"
+        ],
+        [
+          "F:maj",
+          "F:maj"
+        ],
+        [
+          "G:maj",
+          "G:maj"
+        ],
+        [
+          "G:min",
+          "G:min"
+        ]
+      ],
+      "prediction_sha256": "73469462ec41d33aec2c4cb155676dbb6b29105e4e5606db4891433293f799f4"
+    },
+    {
+      "case_id": "guitarset-04-rock2-142-d-comp",
+      "original_id": "04_Rock2-142-D_comp",
+      "candidate": "crema",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 27.041632653061225,
+      "reference_chord_seconds": 27.041600000000003,
+      "reference_chord_coverage": 0.9999987924892835,
+      "root": 0.9197251953241175,
+      "root_eligible_seconds": 27.041600000000003,
+      "root_reference_coverage": 0.9999987924892835,
+      "root_chord_only": 0.9197251953241175,
+      "root_chord_only_eligible_seconds": 27.041600000000003,
+      "root_chord_only_reference_coverage": 0.9999987924892835,
+      "majmin": 0.9406026870580025,
+      "majmin_eligible_seconds": 21.971177464788738,
+      "majmin_reference_coverage": 0.8124944875435067,
+      "majmin_chord_only": 0.9406026870580025,
+      "majmin_chord_only_eligible_seconds": 21.971177464788738,
+      "majmin_chord_only_reference_coverage": 0.8124944875435067,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 14,
+      "analysis_runtime_seconds": 0.8378816661424935,
+      "prediction_label_conversion": [
+        [
+          "A#:maj",
+          "A#:maj"
+        ],
+        [
+          "A:7",
+          "A:7"
+        ],
+        [
+          "C:maj",
+          "C:maj"
+        ],
+        [
+          "D:min",
+          "D:min"
+        ],
+        [
+          "E:hdim7",
+          "E:hdim7"
+        ],
+        [
+          "F:maj",
+          "F:maj"
+        ],
+        [
+          "G:maj",
+          "G:maj"
+        ],
+        [
+          "G:min",
+          "G:min"
+        ]
+      ],
+      "prediction_sha256": "73469462ec41d33aec2c4cb155676dbb6b29105e4e5606db4891433293f799f4"
+    },
+    {
+      "case_id": "guitarset-05-jazz3-150-c-comp",
+      "original_id": "05_Jazz3-150-C_comp",
+      "candidate": "crema",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 25.6,
+      "reference_chord_seconds": 25.6,
+      "reference_chord_coverage": 1.0,
+      "root": 0.7895975056689344,
+      "root_eligible_seconds": 25.6,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.7895975056689344,
+      "root_chord_only_eligible_seconds": 25.6,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.7895975056689344,
+      "majmin_eligible_seconds": 25.6,
+      "majmin_reference_coverage": 1.0,
+      "majmin_chord_only": 0.7895975056689344,
+      "majmin_chord_only_eligible_seconds": 25.6,
+      "majmin_chord_only_reference_coverage": 1.0,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 16,
+      "analysis_runtime_seconds": 0.8099744999781251,
+      "prediction_label_conversion": [
+        [
+          "A:min",
+          "A:min"
+        ],
+        [
+          "A:min7",
+          "A:min7"
+        ],
+        [
+          "C:maj7",
+          "C:maj7"
+        ],
+        [
+          "C:maj7/3",
+          "C:maj7/3"
+        ],
+        [
+          "E:min",
+          "E:min"
+        ],
+        [
+          "E:min7",
+          "E:min7"
+        ],
+        [
+          "F:maj",
+          "F:maj"
+        ],
+        [
+          "F:maj/3",
+          "F:maj/3"
+        ],
+        [
+          "G:7",
+          "G:7"
+        ]
+      ],
+      "prediction_sha256": "9ff0f95cbff7bee7d314d96e5e25bec059bbf9511ba6e91ef8760c9744cf3046"
+    },
+    {
+      "case_id": "guitarset-05-jazz3-150-c-comp",
+      "original_id": "05_Jazz3-150-C_comp",
+      "candidate": "crema",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 25.6,
+      "reference_chord_seconds": 25.6,
+      "reference_chord_coverage": 1.0,
+      "root": 0.7895975056689344,
+      "root_eligible_seconds": 25.6,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.7895975056689344,
+      "root_chord_only_eligible_seconds": 25.6,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.7341950113378688,
+      "majmin_eligible_seconds": 16.0,
+      "majmin_reference_coverage": 0.625,
+      "majmin_chord_only": 0.7341950113378688,
+      "majmin_chord_only_eligible_seconds": 16.0,
+      "majmin_chord_only_reference_coverage": 0.625,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 16,
+      "analysis_runtime_seconds": 0.8099744999781251,
+      "prediction_label_conversion": [
+        [
+          "A:min",
+          "A:min"
+        ],
+        [
+          "A:min7",
+          "A:min7"
+        ],
+        [
+          "C:maj7",
+          "C:maj7"
+        ],
+        [
+          "C:maj7/3",
+          "C:maj7/3"
+        ],
+        [
+          "E:min",
+          "E:min"
+        ],
+        [
+          "E:min7",
+          "E:min7"
+        ],
+        [
+          "F:maj",
+          "F:maj"
+        ],
+        [
+          "F:maj/3",
+          "F:maj/3"
+        ],
+        [
+          "G:7",
+          "G:7"
+        ]
+      ],
+      "prediction_sha256": "9ff0f95cbff7bee7d314d96e5e25bec059bbf9511ba6e91ef8760c9744cf3046"
+    },
+    {
+      "case_id": "guitarset-00-ss3-84-bb-comp",
+      "original_id": "00_SS3-84-Bb_comp",
+      "candidate": "chordmini",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 45.70761904761905,
+      "reference_chord_seconds": 45.70760000000001,
+      "reference_chord_coverage": 0.9999995832725609,
+      "root": 0.8439930570004593,
+      "root_eligible_seconds": 45.70760000000001,
+      "root_reference_coverage": 0.9999995832725609,
+      "root_chord_only": 0.8439930570004593,
+      "root_chord_only_eligible_seconds": 45.70760000000001,
+      "root_chord_only_reference_coverage": 0.9999995832725609,
+      "majmin": 0.8439930570004593,
+      "majmin_eligible_seconds": 45.70760000000001,
+      "majmin_reference_coverage": 0.9999995832725609,
+      "majmin_chord_only": 0.8439930570004593,
+      "majmin_chord_only_eligible_seconds": 45.70760000000001,
+      "majmin_chord_only_reference_coverage": 0.9999995832725609,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.09287981859410621,
+      "predicted_events": 69,
+      "analysis_runtime_seconds": 0.8642490422353148,
+      "prediction_label_conversion": [
+        [
+          "Bb",
+          "Bb:maj"
+        ],
+        [
+          "D:min",
+          "D:min"
+        ],
+        [
+          "Eb",
+          "Eb:maj"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "G:min",
+          "G:min"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "7668013ea84c7134e8f72e55a59f789726f2f6ef5f273cdb9c680037accafdfe"
+    },
+    {
+      "case_id": "guitarset-00-ss3-84-bb-comp",
+      "original_id": "00_SS3-84-Bb_comp",
+      "candidate": "chordmini",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 45.70761904761905,
+      "reference_chord_seconds": 45.70760000000001,
+      "reference_chord_coverage": 0.9999995832725609,
+      "root": 0.8439930570004593,
+      "root_eligible_seconds": 45.70760000000001,
+      "root_reference_coverage": 0.9999995832725609,
+      "root_chord_only": 0.8439930570004593,
+      "root_chord_only_eligible_seconds": 45.70760000000001,
+      "root_chord_only_reference_coverage": 0.9999995832725609,
+      "majmin": 0.7814839150384474,
+      "majmin_eligible_seconds": 45.70760000000001,
+      "majmin_reference_coverage": 0.9999995832725609,
+      "majmin_chord_only": 0.7814839150384474,
+      "majmin_chord_only_eligible_seconds": 45.70760000000001,
+      "majmin_chord_only_reference_coverage": 0.9999995832725609,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.09287981859410621,
+      "predicted_events": 69,
+      "analysis_runtime_seconds": 0.8642490422353148,
+      "prediction_label_conversion": [
+        [
+          "Bb",
+          "Bb:maj"
+        ],
+        [
+          "D:min",
+          "D:min"
+        ],
+        [
+          "Eb",
+          "Eb:maj"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "G:min",
+          "G:min"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "7668013ea84c7134e8f72e55a59f789726f2f6ef5f273cdb9c680037accafdfe"
+    },
+    {
+      "case_id": "guitarset-01-rock1-90-csharp-comp",
+      "original_id": "01_Rock1-90-C#_comp",
+      "candidate": "chordmini",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 32.0,
+      "reference_chord_seconds": 31.999999999999993,
+      "reference_chord_coverage": 0.9999999999999998,
+      "root": 0.9591609977324262,
+      "root_eligible_seconds": 31.999999999999993,
+      "root_reference_coverage": 0.9999999999999998,
+      "root_chord_only": 0.9591609977324262,
+      "root_chord_only_eligible_seconds": 31.999999999999993,
+      "root_chord_only_reference_coverage": 0.9999999999999998,
+      "majmin": 0.9591609977324262,
+      "majmin_eligible_seconds": 31.999999999999993,
+      "majmin_reference_coverage": 0.9999999999999998,
+      "majmin_chord_only": 0.9591609977324262,
+      "majmin_chord_only_eligible_seconds": 31.999999999999993,
+      "majmin_chord_only_reference_coverage": 0.9999999999999998,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 13,
+      "analysis_runtime_seconds": 0.03701479081064463,
+      "prediction_label_conversion": [
+        [
+          "Ab",
+          "Ab:maj"
+        ],
+        [
+          "Db",
+          "Db:maj"
+        ],
+        [
+          "Gb",
+          "Gb:maj"
+        ]
+      ],
+      "prediction_sha256": "adea6c98d2f20f1e1cad9d1738eeaff8c69748a639622d6332b41952d5cc3d99"
+    },
+    {
+      "case_id": "guitarset-01-rock1-90-csharp-comp",
+      "original_id": "01_Rock1-90-C#_comp",
+      "candidate": "chordmini",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 32.0,
+      "reference_chord_seconds": 31.999999999999993,
+      "reference_chord_coverage": 0.9999999999999998,
+      "root": 0.9591609977324262,
+      "root_eligible_seconds": 31.999999999999993,
+      "root_reference_coverage": 0.9999999999999998,
+      "root_chord_only": 0.9591609977324262,
+      "root_chord_only_eligible_seconds": 31.999999999999993,
+      "root_chord_only_reference_coverage": 0.9999999999999998,
+      "majmin": 0.9591609977324262,
+      "majmin_eligible_seconds": 31.999999999999993,
+      "majmin_reference_coverage": 0.9999999999999998,
+      "majmin_chord_only": 0.9591609977324262,
+      "majmin_chord_only_eligible_seconds": 31.999999999999993,
+      "majmin_chord_only_reference_coverage": 0.9999999999999998,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.0,
+      "predicted_events": 13,
+      "analysis_runtime_seconds": 0.03701479081064463,
+      "prediction_label_conversion": [
+        [
+          "Ab",
+          "Ab:maj"
+        ],
+        [
+          "Db",
+          "Db:maj"
+        ],
+        [
+          "Gb",
+          "Gb:maj"
+        ]
+      ],
+      "prediction_sha256": "adea6c98d2f20f1e1cad9d1738eeaff8c69748a639622d6332b41952d5cc3d99"
+    },
+    {
+      "case_id": "guitarset-02-funk1-97-c-comp",
+      "original_id": "02_Funk1-97-C_comp",
+      "candidate": "chordmini",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 29.688390022675737,
+      "reference_chord_seconds": 29.688390022675737,
+      "reference_chord_coverage": 1.0,
+      "root": 0.7722178610870694,
+      "root_eligible_seconds": 29.688390022675737,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.7722178610870694,
+      "root_chord_only_eligible_seconds": 29.688390022675737,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.7722178610870694,
+      "majmin_eligible_seconds": 29.688390022675737,
+      "majmin_reference_coverage": 1.0,
+      "majmin_chord_only": 0.7722178610870694,
+      "majmin_chord_only_eligible_seconds": 29.688390022675737,
+      "majmin_chord_only_reference_coverage": 1.0,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 2.3817233560090703,
+      "predicted_events": 61,
+      "analysis_runtime_seconds": 0.034448625054210424,
+      "prediction_label_conversion": [
+        [
+          "Bb",
+          "Bb:maj"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "4d0d57c4e02f0a3c7e5ba3b2101f159c311c661375df0489194d28bea3072bdb"
+    },
+    {
+      "case_id": "guitarset-02-funk1-97-c-comp",
+      "original_id": "02_Funk1-97-C_comp",
+      "candidate": "chordmini",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 29.688390022675737,
+      "reference_chord_seconds": 29.688390022675737,
+      "reference_chord_coverage": 1.0,
+      "root": 0.7722178610870694,
+      "root_eligible_seconds": 29.688390022675737,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.7722178610870694,
+      "root_chord_only_eligible_seconds": 29.688390022675737,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.9624610733182165,
+      "majmin_eligible_seconds": 4.948453608247423,
+      "majmin_reference_coverage": 0.16667975610896504,
+      "majmin_chord_only": 0.9624610733182165,
+      "majmin_chord_only_eligible_seconds": 4.948453608247423,
+      "majmin_chord_only_reference_coverage": 0.16667975610896504,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 2.3817233560090703,
+      "predicted_events": 61,
+      "analysis_runtime_seconds": 0.034448625054210424,
+      "prediction_label_conversion": [
+        [
+          "Bb",
+          "Bb:maj"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "4d0d57c4e02f0a3c7e5ba3b2101f159c311c661375df0489194d28bea3072bdb"
+    },
+    {
+      "case_id": "guitarset-03-bn1-129-eb-comp",
+      "original_id": "03_BN1-129-Eb_comp",
+      "candidate": "chordmini",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 22.32439909297052,
+      "reference_chord_seconds": 22.32439909297052,
+      "reference_chord_coverage": 1.0,
+      "root": 0.8564610777054094,
+      "root_eligible_seconds": 22.32439909297052,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.8564610777054094,
+      "root_chord_only_eligible_seconds": 22.32439909297052,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.8564610777054094,
+      "majmin_eligible_seconds": 22.32439909297052,
+      "majmin_reference_coverage": 1.0,
+      "majmin_chord_only": 0.8564610777054094,
+      "majmin_chord_only_eligible_seconds": 22.32439909297052,
+      "majmin_chord_only_reference_coverage": 1.0,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.49764172335600243,
+      "predicted_events": 70,
+      "analysis_runtime_seconds": 0.035851874854415655,
+      "prediction_label_conversion": [
+        [
+          "Ab:maj7",
+          "Ab:maj7"
+        ],
+        [
+          "Bb:7",
+          "Bb:7"
+        ],
+        [
+          "Eb",
+          "Eb:maj"
+        ],
+        [
+          "Eb:maj7",
+          "Eb:maj7"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "cdf0d8744e72258319d9fdf5157c90493560aeeffaf5af1ebc22eee62bd6b725"
+    },
+    {
+      "case_id": "guitarset-03-bn1-129-eb-comp",
+      "original_id": "03_BN1-129-Eb_comp",
+      "candidate": "chordmini",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 22.32439909297052,
+      "reference_chord_seconds": 22.32439909297052,
+      "reference_chord_coverage": 1.0,
+      "root": 0.8564610777054094,
+      "root_eligible_seconds": 22.32439909297052,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.8564610777054094,
+      "root_chord_only_eligible_seconds": 22.32439909297052,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.8564610777054094,
+      "majmin_eligible_seconds": 22.32439909297052,
+      "majmin_reference_coverage": 1.0,
+      "majmin_chord_only": 0.8564610777054094,
+      "majmin_chord_only_eligible_seconds": 22.32439909297052,
+      "majmin_chord_only_reference_coverage": 1.0,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.49764172335600243,
+      "predicted_events": 70,
+      "analysis_runtime_seconds": 0.035851874854415655,
+      "prediction_label_conversion": [
+        [
+          "Ab:maj7",
+          "Ab:maj7"
+        ],
+        [
+          "Bb:7",
+          "Bb:7"
+        ],
+        [
+          "Eb",
+          "Eb:maj"
+        ],
+        [
+          "Eb:maj7",
+          "Eb:maj7"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "cdf0d8744e72258319d9fdf5157c90493560aeeffaf5af1ebc22eee62bd6b725"
+    },
+    {
+      "case_id": "guitarset-04-rock2-142-d-comp",
+      "original_id": "04_Rock2-142-D_comp",
+      "candidate": "chordmini",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 27.041632653061225,
+      "reference_chord_seconds": 27.041600000000003,
+      "reference_chord_coverage": 0.9999987924892835,
+      "root": 0.7760943621897166,
+      "root_eligible_seconds": 27.041600000000003,
+      "root_reference_coverage": 0.9999987924892835,
+      "root_chord_only": 0.7760943621897166,
+      "root_chord_only_eligible_seconds": 27.041600000000003,
+      "root_chord_only_reference_coverage": 0.9999987924892835,
+      "majmin": 0.7832459300986936,
+      "majmin_eligible_seconds": 23.66131830985916,
+      "majmin_reference_coverage": 0.8749959225254322,
+      "majmin_chord_only": 0.7832459300986936,
+      "majmin_chord_only_eligible_seconds": 23.66131830985916,
+      "majmin_chord_only_reference_coverage": 0.8749959225254322,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.18575963718820887,
+      "predicted_events": 29,
+      "analysis_runtime_seconds": 0.030188375152647495,
+      "prediction_label_conversion": [
+        [
+          "A:7",
+          "A:7"
+        ],
+        [
+          "Bb",
+          "Bb:maj"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "D:min",
+          "D:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "G:min",
+          "G:min"
+        ],
+        [
+          "G:min6",
+          "G:min6"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "03dfc1bc0f34478517d945f7d48a5e099612b60dd6ae281b07c4eff64c668ef7"
+    },
+    {
+      "case_id": "guitarset-04-rock2-142-d-comp",
+      "original_id": "04_Rock2-142-D_comp",
+      "candidate": "chordmini",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 27.041632653061225,
+      "reference_chord_seconds": 27.041600000000003,
+      "reference_chord_coverage": 0.9999987924892835,
+      "root": 0.7760943621897166,
+      "root_eligible_seconds": 27.041600000000003,
+      "root_reference_coverage": 0.9999987924892835,
+      "root_chord_only": 0.7760943621897166,
+      "root_chord_only_eligible_seconds": 27.041600000000003,
+      "root_chord_only_reference_coverage": 0.9999987924892835,
+      "majmin": 0.8434974091246358,
+      "majmin_eligible_seconds": 21.971177464788738,
+      "majmin_reference_coverage": 0.8124944875435067,
+      "majmin_chord_only": 0.8434974091246358,
+      "majmin_chord_only_eligible_seconds": 21.971177464788738,
+      "majmin_chord_only_reference_coverage": 0.8124944875435067,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.18575963718820887,
+      "predicted_events": 29,
+      "analysis_runtime_seconds": 0.030188375152647495,
+      "prediction_label_conversion": [
+        [
+          "A:7",
+          "A:7"
+        ],
+        [
+          "Bb",
+          "Bb:maj"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "D:min",
+          "D:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "G:min",
+          "G:min"
+        ],
+        [
+          "G:min6",
+          "G:min6"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "03dfc1bc0f34478517d945f7d48a5e099612b60dd6ae281b07c4eff64c668ef7"
+    },
+    {
+      "case_id": "guitarset-05-jazz3-150-c-comp",
+      "original_id": "05_Jazz3-150-C_comp",
+      "candidate": "chordmini",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 25.6,
+      "reference_chord_seconds": 25.599999999999998,
+      "reference_chord_coverage": 0.9999999999999999,
+      "root": 0.4878117913832198,
+      "root_eligible_seconds": 25.599999999999998,
+      "root_reference_coverage": 0.9999999999999999,
+      "root_chord_only": 0.4878117913832198,
+      "root_chord_only_eligible_seconds": 25.599999999999998,
+      "root_chord_only_reference_coverage": 0.9999999999999999,
+      "majmin": 0.4878117913832198,
+      "majmin_eligible_seconds": 25.599999999999998,
+      "majmin_reference_coverage": 0.9999999999999999,
+      "majmin_chord_only": 0.4878117913832198,
+      "majmin_chord_only_eligible_seconds": 25.599999999999998,
+      "majmin_chord_only_reference_coverage": 0.9999999999999999,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 2.844444444444452,
+      "predicted_events": 77,
+      "analysis_runtime_seconds": 0.03245637519285083,
+      "prediction_label_conversion": [
+        [
+          "A:min7",
+          "A:min7"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "C:maj7",
+          "C:maj7"
+        ],
+        [
+          "E:min",
+          "E:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "F:maj7",
+          "F:maj7"
+        ],
+        [
+          "G:7",
+          "G:7"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "e0a493387a636f84357c6d64e9dbcfbc0a5c6382f1ffcdcf9d5efc93cf3a52aa"
+    },
+    {
+      "case_id": "guitarset-05-jazz3-150-c-comp",
+      "original_id": "05_Jazz3-150-C_comp",
+      "candidate": "chordmini",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 25.6,
+      "reference_chord_seconds": 25.599999999999998,
+      "reference_chord_coverage": 0.9999999999999999,
+      "root": 0.4878117913832198,
+      "root_eligible_seconds": 25.599999999999998,
+      "root_reference_coverage": 0.9999999999999999,
+      "root_chord_only": 0.4878117913832198,
+      "root_chord_only_eligible_seconds": 25.599999999999998,
+      "root_chord_only_reference_coverage": 0.9999999999999999,
+      "majmin": 0.4541043083900228,
+      "majmin_eligible_seconds": 16.0,
+      "majmin_reference_coverage": 0.625,
+      "majmin_chord_only": 0.4541043083900228,
+      "majmin_chord_only_eligible_seconds": 16.0,
+      "majmin_chord_only_reference_coverage": 0.625,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 2.844444444444452,
+      "predicted_events": 77,
+      "analysis_runtime_seconds": 0.03245637519285083,
+      "prediction_label_conversion": [
+        [
+          "A:min7",
+          "A:min7"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "C:maj7",
+          "C:maj7"
+        ],
+        [
+          "E:min",
+          "E:min"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "F:maj7",
+          "F:maj7"
+        ],
+        [
+          "G:7",
+          "G:7"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "e0a493387a636f84357c6d64e9dbcfbc0a5c6382f1ffcdcf9d5efc93cf3a52aa"
+    },
+    {
+      "case_id": "guitarset-00-ss3-84-bb-comp",
+      "original_id": "00_SS3-84-Bb_comp",
+      "candidate": "chordino",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 45.70761904761905,
+      "reference_chord_seconds": 45.70760000000001,
+      "reference_chord_coverage": 0.9999995832725609,
+      "root": 0.9215361436735123,
+      "root_eligible_seconds": 45.70760000000001,
+      "root_reference_coverage": 0.9999995832725609,
+      "root_chord_only": 0.9215361436735123,
+      "root_chord_only_eligible_seconds": 45.70760000000001,
+      "root_chord_only_reference_coverage": 0.9999995832725609,
+      "majmin": 0.8666709767866052,
+      "majmin_eligible_seconds": 45.70760000000001,
+      "majmin_reference_coverage": 0.9999995832725609,
+      "majmin_chord_only": 0.8666709767866052,
+      "majmin_chord_only_eligible_seconds": 45.70760000000001,
+      "majmin_chord_only_reference_coverage": 0.9999995832725609,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.092879819,
+      "predicted_events": 19,
+      "analysis_runtime_seconds": 0.5100536248646677,
+      "prediction_label_conversion": [
+        [
+          "Bb",
+          "Bb:maj"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "E",
+          "E:maj"
+        ],
+        [
+          "Eb",
+          "Eb:maj"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "F#",
+          "F#:maj"
+        ],
+        [
+          "Fm",
+          "F:min"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "9d4491b052b510e321e3fa2bfd8ac9d14f0faaf958d3107437a382dcffd747ef"
+    },
+    {
+      "case_id": "guitarset-00-ss3-84-bb-comp",
+      "original_id": "00_SS3-84-Bb_comp",
+      "candidate": "chordino",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 45.70761904761905,
+      "reference_chord_seconds": 45.70760000000001,
+      "reference_chord_coverage": 0.9999995832725609,
+      "root": 0.9215361436735123,
+      "root_eligible_seconds": 45.70760000000001,
+      "root_reference_coverage": 0.9999995832725609,
+      "root_chord_only": 0.9215361436735123,
+      "root_chord_only_eligible_seconds": 45.70760000000001,
+      "root_chord_only_reference_coverage": 0.9999995832725609,
+      "majmin": 0.8041618348245931,
+      "majmin_eligible_seconds": 45.70760000000001,
+      "majmin_reference_coverage": 0.9999995832725609,
+      "majmin_chord_only": 0.8041618348245931,
+      "majmin_chord_only_eligible_seconds": 45.70760000000001,
+      "majmin_chord_only_reference_coverage": 0.9999995832725609,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.092879819,
+      "predicted_events": 19,
+      "analysis_runtime_seconds": 0.5100536248646677,
+      "prediction_label_conversion": [
+        [
+          "Bb",
+          "Bb:maj"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "E",
+          "E:maj"
+        ],
+        [
+          "Eb",
+          "Eb:maj"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "F#",
+          "F#:maj"
+        ],
+        [
+          "Fm",
+          "F:min"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "9d4491b052b510e321e3fa2bfd8ac9d14f0faaf958d3107437a382dcffd747ef"
+    },
+    {
+      "case_id": "guitarset-01-rock1-90-csharp-comp",
+      "original_id": "01_Rock1-90-C#_comp",
+      "candidate": "chordino",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 32.0,
+      "reference_chord_seconds": 31.999999999999993,
+      "reference_chord_coverage": 0.9999999999999998,
+      "root": 0.9787981859479168,
+      "root_eligible_seconds": 31.999999999999993,
+      "root_reference_coverage": 0.9999999999999998,
+      "root_chord_only": 0.9787981859479168,
+      "root_chord_only_eligible_seconds": 31.999999999999993,
+      "root_chord_only_reference_coverage": 0.9999999999999998,
+      "majmin": 0.9787981859479168,
+      "majmin_eligible_seconds": 31.999999999999993,
+      "majmin_reference_coverage": 0.9999999999999998,
+      "majmin_chord_only": 0.9787981859479168,
+      "majmin_chord_only_eligible_seconds": 31.999999999999993,
+      "majmin_chord_only_reference_coverage": 0.9999999999999998,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.092879819,
+      "predicted_events": 7,
+      "analysis_runtime_seconds": 0.14650779170915484,
+      "prediction_label_conversion": [
+        [
+          "Ab",
+          "Ab:maj"
+        ],
+        [
+          "C#",
+          "C#:maj"
+        ],
+        [
+          "F#",
+          "F#:maj"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "1df8257befbd66cdcafcf4fc15e61c217889d5d972fd9aa3ddc908bddd23fcbe"
+    },
+    {
+      "case_id": "guitarset-01-rock1-90-csharp-comp",
+      "original_id": "01_Rock1-90-C#_comp",
+      "candidate": "chordino",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 32.0,
+      "reference_chord_seconds": 31.999999999999993,
+      "reference_chord_coverage": 0.9999999999999998,
+      "root": 0.9787981859479168,
+      "root_eligible_seconds": 31.999999999999993,
+      "root_reference_coverage": 0.9999999999999998,
+      "root_chord_only": 0.9787981859479168,
+      "root_chord_only_eligible_seconds": 31.999999999999993,
+      "root_chord_only_reference_coverage": 0.9999999999999998,
+      "majmin": 0.9787981859479168,
+      "majmin_eligible_seconds": 31.999999999999993,
+      "majmin_reference_coverage": 0.9999999999999998,
+      "majmin_chord_only": 0.9787981859479168,
+      "majmin_chord_only_eligible_seconds": 31.999999999999993,
+      "majmin_chord_only_reference_coverage": 0.9999999999999998,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.092879819,
+      "predicted_events": 7,
+      "analysis_runtime_seconds": 0.14650779170915484,
+      "prediction_label_conversion": [
+        [
+          "Ab",
+          "Ab:maj"
+        ],
+        [
+          "C#",
+          "C#:maj"
+        ],
+        [
+          "F#",
+          "F#:maj"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "1df8257befbd66cdcafcf4fc15e61c217889d5d972fd9aa3ddc908bddd23fcbe"
+    },
+    {
+      "case_id": "guitarset-02-funk1-97-c-comp",
+      "original_id": "02_Funk1-97-C_comp",
+      "candidate": "chordino",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 29.688390022675737,
+      "reference_chord_seconds": 29.688390022675737,
+      "reference_chord_coverage": 1.0,
+      "root": 0.8697972045363161,
+      "root_eligible_seconds": 29.688390022675737,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.8697972045363161,
+      "root_chord_only_eligible_seconds": 29.688390022675737,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.6366405726392337,
+      "majmin_eligible_seconds": 29.688390022675737,
+      "majmin_reference_coverage": 1.0,
+      "majmin_chord_only": 0.6366405726392337,
+      "majmin_chord_only_eligible_seconds": 29.688390022675737,
+      "majmin_chord_only_reference_coverage": 1.0,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.092879819,
+      "predicted_events": 8,
+      "analysis_runtime_seconds": 0.1574631668627262,
+      "prediction_label_conversion": [
+        [
+          "Bb6",
+          "Bb:maj6"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "C7",
+          "C:7"
+        ],
+        [
+          "Fm",
+          "F:min"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "295a1c83a0807688fad6c6f1a92f4cfc3f5282486894a7801fda1bca4ea9f38a"
+    },
+    {
+      "case_id": "guitarset-02-funk1-97-c-comp",
+      "original_id": "02_Funk1-97-C_comp",
+      "candidate": "chordino",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 29.688390022675737,
+      "reference_chord_seconds": 29.688390022675737,
+      "reference_chord_coverage": 1.0,
+      "root": 0.8697972045363161,
+      "root_eligible_seconds": 29.688390022675737,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.8697972045363161,
+      "root_chord_only_eligible_seconds": 29.688390022675737,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.9572426303249999,
+      "majmin_eligible_seconds": 4.948453608247423,
+      "majmin_reference_coverage": 0.16667975610896504,
+      "majmin_chord_only": 0.9572426303249999,
+      "majmin_chord_only_eligible_seconds": 4.948453608247423,
+      "majmin_chord_only_reference_coverage": 0.16667975610896504,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.092879819,
+      "predicted_events": 8,
+      "analysis_runtime_seconds": 0.1574631668627262,
+      "prediction_label_conversion": [
+        [
+          "Bb6",
+          "Bb:maj6"
+        ],
+        [
+          "C",
+          "C:maj"
+        ],
+        [
+          "C7",
+          "C:7"
+        ],
+        [
+          "Fm",
+          "F:min"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "295a1c83a0807688fad6c6f1a92f4cfc3f5282486894a7801fda1bca4ea9f38a"
+    },
+    {
+      "case_id": "guitarset-03-bn1-129-eb-comp",
+      "original_id": "03_BN1-129-Eb_comp",
+      "candidate": "chordino",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 22.32439909297052,
+      "reference_chord_seconds": 22.32439909297052,
+      "reference_chord_coverage": 1.0,
+      "root": 0.9578012422013088,
+      "root_eligible_seconds": 22.32439909297052,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.9578012422013088,
+      "root_chord_only_eligible_seconds": 22.32439909297052,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.9578012422013088,
+      "majmin_eligible_seconds": 22.32439909297052,
+      "majmin_reference_coverage": 1.0,
+      "majmin_chord_only": 0.9578012422013088,
+      "majmin_chord_only_eligible_seconds": 22.32439909297052,
+      "majmin_chord_only_reference_coverage": 1.0,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.092879819,
+      "predicted_events": 7,
+      "analysis_runtime_seconds": 0.10754404123872519,
+      "prediction_label_conversion": [
+        [
+          "Abmaj7",
+          "Ab:maj7"
+        ],
+        [
+          "Bb7",
+          "Bb:7"
+        ],
+        [
+          "Ebmaj7",
+          "Eb:maj7"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "ba02fbaae36a8c4a11aae9a26b8a64d37e6f343278dc686251e1195b7b086a97"
+    },
+    {
+      "case_id": "guitarset-03-bn1-129-eb-comp",
+      "original_id": "03_BN1-129-Eb_comp",
+      "candidate": "chordino",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 22.32439909297052,
+      "reference_chord_seconds": 22.32439909297052,
+      "reference_chord_coverage": 1.0,
+      "root": 0.9578012422013088,
+      "root_eligible_seconds": 22.32439909297052,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.9578012422013088,
+      "root_chord_only_eligible_seconds": 22.32439909297052,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.9578012422013088,
+      "majmin_eligible_seconds": 22.32439909297052,
+      "majmin_reference_coverage": 1.0,
+      "majmin_chord_only": 0.9578012422013088,
+      "majmin_chord_only_eligible_seconds": 22.32439909297052,
+      "majmin_chord_only_reference_coverage": 1.0,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.092879819,
+      "predicted_events": 7,
+      "analysis_runtime_seconds": 0.10754404123872519,
+      "prediction_label_conversion": [
+        [
+          "Abmaj7",
+          "Ab:maj7"
+        ],
+        [
+          "Bb7",
+          "Bb:7"
+        ],
+        [
+          "Ebmaj7",
+          "Eb:maj7"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "ba02fbaae36a8c4a11aae9a26b8a64d37e6f343278dc686251e1195b7b086a97"
+    },
+    {
+      "case_id": "guitarset-04-rock2-142-d-comp",
+      "original_id": "04_Rock2-142-D_comp",
+      "candidate": "chordino",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 27.041632653061225,
+      "reference_chord_seconds": 27.041600000000003,
+      "reference_chord_coverage": 0.9999987924892835,
+      "root": 0.855719113379094,
+      "root_eligible_seconds": 27.041600000000003,
+      "root_reference_coverage": 0.9999987924892835,
+      "root_chord_only": 0.855719113379094,
+      "root_chord_only_eligible_seconds": 27.041600000000003,
+      "root_chord_only_reference_coverage": 0.9999987924892835,
+      "majmin": 0.7988325823891801,
+      "majmin_eligible_seconds": 23.661318309859162,
+      "majmin_reference_coverage": 0.8749959225254323,
+      "majmin_chord_only": 0.7988325823891801,
+      "majmin_chord_only_eligible_seconds": 23.661318309859162,
+      "majmin_chord_only_reference_coverage": 0.8749959225254323,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.092879819,
+      "predicted_events": 15,
+      "analysis_runtime_seconds": 0.13337720790877938,
+      "prediction_label_conversion": [
+        [
+          "A7",
+          "A:7"
+        ],
+        [
+          "Bb",
+          "Bb:maj"
+        ],
+        [
+          "C/G",
+          "C:maj/5"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "Em7b5",
+          "E:hdim7"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "1884321209dfaf67e7752987af909bc66eb44d86b7897f02c48c38fde2e1682a"
+    },
+    {
+      "case_id": "guitarset-04-rock2-142-d-comp",
+      "original_id": "04_Rock2-142-D_comp",
+      "candidate": "chordino",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 27.041632653061225,
+      "reference_chord_seconds": 27.041600000000003,
+      "reference_chord_coverage": 0.9999987924892835,
+      "root": 0.855719113379094,
+      "root_eligible_seconds": 27.041600000000003,
+      "root_reference_coverage": 0.9999987924892835,
+      "root_chord_only": 0.855719113379094,
+      "root_chord_only_eligible_seconds": 27.041600000000003,
+      "root_chord_only_reference_coverage": 0.9999987924892835,
+      "majmin": 0.860283070331066,
+      "majmin_eligible_seconds": 21.971177464788738,
+      "majmin_reference_coverage": 0.8124944875435067,
+      "majmin_chord_only": 0.860283070331066,
+      "majmin_chord_only_eligible_seconds": 21.971177464788738,
+      "majmin_chord_only_reference_coverage": 0.8124944875435067,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.092879819,
+      "predicted_events": 15,
+      "analysis_runtime_seconds": 0.13337720790877938,
+      "prediction_label_conversion": [
+        [
+          "A7",
+          "A:7"
+        ],
+        [
+          "Bb",
+          "Bb:maj"
+        ],
+        [
+          "C/G",
+          "C:maj/5"
+        ],
+        [
+          "Dm",
+          "D:min"
+        ],
+        [
+          "Em7b5",
+          "E:hdim7"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "G",
+          "G:maj"
+        ],
+        [
+          "Gm",
+          "G:min"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "1884321209dfaf67e7752987af909bc66eb44d86b7897f02c48c38fde2e1682a"
+    },
+    {
+      "case_id": "guitarset-05-jazz3-150-c-comp",
+      "original_id": "05_Jazz3-150-C_comp",
+      "candidate": "chordino",
+      "reference_kind": "intended",
+      "status": "ok",
+      "duration_seconds": 25.6,
+      "reference_chord_seconds": 25.6,
+      "reference_chord_coverage": 1.0,
+      "root": 0.7030612244531251,
+      "root_eligible_seconds": 25.6,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.7030612244531251,
+      "root_chord_only_eligible_seconds": 25.6,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.6973072562109376,
+      "majmin_eligible_seconds": 25.6,
+      "majmin_reference_coverage": 1.0,
+      "majmin_chord_only": 0.6973072562109376,
+      "majmin_chord_only_eligible_seconds": 25.6,
+      "majmin_chord_only_reference_coverage": 1.0,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.092879819,
+      "predicted_events": 16,
+      "analysis_runtime_seconds": 0.1289189588278532,
+      "prediction_label_conversion": [
+        [
+          "Am7",
+          "A:min7"
+        ],
+        [
+          "Cmaj7",
+          "C:maj7"
+        ],
+        [
+          "Dm6",
+          "D:min6"
+        ],
+        [
+          "Em",
+          "E:min"
+        ],
+        [
+          "Em7",
+          "E:min7"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "Fdim",
+          "F:dim"
+        ],
+        [
+          "Fmaj7",
+          "F:maj7"
+        ],
+        [
+          "G7",
+          "G:7"
+        ],
+        [
+          "G7/B",
+          "G:7/3"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "206221b17e8ff49f562b148091850a7e889011b6936b58c8cf5bd040d28bdadd"
+    },
+    {
+      "case_id": "guitarset-05-jazz3-150-c-comp",
+      "original_id": "05_Jazz3-150-C_comp",
+      "candidate": "chordino",
+      "reference_kind": "performed",
+      "status": "ok",
+      "duration_seconds": 25.6,
+      "reference_chord_seconds": 25.6,
+      "reference_chord_coverage": 1.0,
+      "root": 0.7030612244531251,
+      "root_eligible_seconds": 25.6,
+      "root_reference_coverage": 1.0,
+      "root_chord_only": 0.7030612244531251,
+      "root_chord_only_eligible_seconds": 25.6,
+      "root_chord_only_reference_coverage": 1.0,
+      "majmin": 0.8365986394375002,
+      "majmin_eligible_seconds": 16.0,
+      "majmin_reference_coverage": 0.625,
+      "majmin_chord_only": 0.8365986394375002,
+      "majmin_chord_only_eligible_seconds": 16.0,
+      "majmin_chord_only_reference_coverage": 0.625,
+      "estimated_unknown_seconds": 0.0,
+      "estimated_no_chord_seconds_on_reference_chords": 0.092879819,
+      "predicted_events": 16,
+      "analysis_runtime_seconds": 0.1289189588278532,
+      "prediction_label_conversion": [
+        [
+          "Am7",
+          "A:min7"
+        ],
+        [
+          "Cmaj7",
+          "C:maj7"
+        ],
+        [
+          "Dm6",
+          "D:min6"
+        ],
+        [
+          "Em",
+          "E:min"
+        ],
+        [
+          "Em7",
+          "E:min7"
+        ],
+        [
+          "F",
+          "F:maj"
+        ],
+        [
+          "Fdim",
+          "F:dim"
+        ],
+        [
+          "Fmaj7",
+          "F:maj7"
+        ],
+        [
+          "G7",
+          "G:7"
+        ],
+        [
+          "G7/B",
+          "G:7/3"
+        ],
+        [
+          "N",
+          "N"
+        ]
+      ],
+      "prediction_sha256": "206221b17e8ff49f562b148091850a7e889011b6936b58c8cf5bd040d28bdadd"
+    }
+  ],
+  "limitations": "Six preselected microphone acoustic-guitar comping performances; raw model diagnostic, not app accuracy or independent-training-overlap proof. Lead-sheet-derived roots/boundaries. No boundary metric, source separation, key hints, tuning or founder ratings."
+}

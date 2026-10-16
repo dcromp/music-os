@@ -1,0 +1,28 @@
+name: Work request
+description: Propose one verifiable improvement to music-os.
+labels: [needs-triage, enhancement]
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Outcome
+      description: What should a player or reviewer be able to do when this is finished?
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Describe observable results and relevant checks. Keep musical observations distinct from independent verification.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context and dependencies
+      description: Link relevant issues or evidence; describe any genuine blockers.
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope limits
+      description: Optional constraints, setup assumptions or deferred work.

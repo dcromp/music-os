@@ -1,0 +1,88 @@
+:root { color-scheme: light; font: 16px/1.5 system-ui, -apple-system, sans-serif; color: #19312e; background: #eef4f1; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { max-width: 980px; padding: 32px 24px 64px; margin: auto; }
+h1 { font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -.04em; line-height: 1.1; margin: 8px 0 18px; }
+h2 { margin-top: 0; font-size: 1.25rem; }
+.eyebrow { text-transform: uppercase; letter-spacing: .1em; font-size: .75rem; font-weight: 700; color: #436d62; }
+.lead { max-width: 790px; font-size: 1.1rem; }
+section { background: white; padding: 24px; margin: 24px 0; border: 1px solid #c9dad3; border-radius: 12px; }
+.note { color: #51665f; font-size: .9rem; }
+.small { font-size: .8rem; overflow-wrap: anywhere; color: #51665f; }
+#status { font-size: .9rem; padding: 12px 16px; background: #e2ebe7; border-radius: 8px; }
+label { font-size: .9rem; }
+input, select, textarea, button { font: inherit; border: 1px solid #adbfb7; padding: 7px 10px; border-radius: 5px; color: #19312e; background: white; }
+select { max-width: 100%; }
+textarea { width: 100%; display: block; margin-top: 8px; }
+textarea[hidden] { display: none; }
+button { cursor: pointer; background: #edf5f0; }
+button:hover { background: #dcece3; }
+button:disabled { opacity: .45; cursor: default; }
+input[type=number] { width: 95px; }
+audio { width: 100%; display: block; }
+.position { font-size: 1.2rem; font-variant-numeric: tabular-nums; }
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0; }
+.table-wrap { overflow-x: auto; margin: 14px 0; max-height: 390px; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; text-align: left; font-size: .85rem; }
+th, td { padding: 7px; border-bottom: 1px solid #e1e9e5; white-space: nowrap; }
+td input[type=text] { width: 110px; }
+.current { font-size: 2rem; color: #285d49; font-weight: 700; }
+tr.active { background: #e3f2e8; }
+@media (max-width: 600px) { main { padding: 24px 12px; } section { padding: 16px; } }
+[hidden] { display: none !important; }
+.chord-strip { display: grid; grid-template-columns: minmax(160px, 1fr) 2fr; gap: 20px; margin: 20px 0; }
+.now-card, .upcoming-card { padding: 18px; border-radius: 10px; background: #eef6f1; }
+.chord-caption { display: block; color: #526e62; font-size: .85rem; margin-bottom: 8px; }
+#play-current { display: block; font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; color: #22543e; }
+#next-change { display: block; min-height: 20px; margin-top: 10px; }
+#full-chord { display: block; margin-top: 6px; }
+#current-hold { margin: 10px 0 6px; }
+.hold-progress { height: 8px; overflow: hidden; border-radius: 4px; background: #d2e3d9; }
+#hold-progress-fill { display: block; height: 100%; background: #347458; }
+.timing-view { margin: 24px 0 16px; }
+#timing-range { margin-bottom: 22px; }
+.timing-track { height: 50px; position: relative; background: #f7faf8; border: 1px solid #c9dad3; border-radius: 5px; }
+.timing-block { position: absolute; top: 0; bottom: 0; padding: 14px 0; text-indent: 5px; background: #dceee2; border: 0; box-shadow: inset -1px 0 white; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: .85rem; font-weight: 600; }
+.timing-gap { color: #73807a; background: transparent; font-weight: 400; }
+.timing-unclear { background: #f3e8c9; color: #765d28; }
+.timing-silence { background: #e5eae7; color: #566a60; }
+.timing-playhead { position: absolute; top: -5px; bottom: -5px; width: 2px; background: #22543e; pointer-events: none; }
+.timing-playhead span { position: absolute; left: -12px; top: -19px; font-size: .75rem; font-weight: 600; background: white; padding: 0 2px; }
+.strum-panel { border-top: 1px solid #d6e3dc; padding-top: 16px; margin-top: 20px; }
+.strum-panel h3 { margin: 0; font-size: 1.05rem; }
+.strum-grid { display: grid; gap: 4px; margin: 12px 0; max-width: 650px; }
+.strum-box { background: #eef6f1; border: 1px solid #d1e1d7; text-align: center; padding: 8px 2px; border-radius: 5px; }
+.strum-count { display: block; color: #526e62; font-size: .8rem; }
+.strum-box strong { display: block; white-space: nowrap; font-size: 1rem; }
+.strum-rest strong { color: #8c9892; }
+.upcoming { display: flex; gap: 18px; flex-wrap: wrap; }
+.upcoming-chord { min-width: 72px; display: flex; flex-direction: column; }
+.upcoming-chord strong { font-size: 1.7rem; }
+.upcoming-chord span { font-size: .85rem; color: #526e62; font-variant-numeric: tabular-nums; }
+button.primary { background: #245d43; color: white; padding: 12px 18px; font-weight: 600; }
+button.primary:hover { background: #194c35; }
+#feedback-detail { border-left: 3px solid #bad3c5; padding: 4px 0 12px 16px; margin-top: 16px; }
+#feedback-detail label { margin-left: 10px; }
+#feedback-note { max-width: 100%; width: 300px; }
+.feedback-row, .point-row { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid #e1e9e5; }
+.feedback-row span, .point-row span { flex: 1; overflow-wrap: anywhere; }
+.feedback-row button, .point-row button { flex-shrink: 0; font-size: .85rem; }
+.captured { font-size: .95rem; }
+#point-notice { border-left: 3px solid #bc9650; padding-left: 12px; }
+details { background: white; padding: 20px 24px; margin: 20px 0; border: 1px solid #c9dad3; border-radius: 12px; }
+summary { cursor: pointer; font-weight: 600; }
+details[open] summary { margin-bottom: 18px; }
+#origin { white-space: pre-wrap; }
+#advanced h2 { margin-top: 28px; }
+@media (max-width: 600px) { .chord-strip { grid-template-columns: 1fr; gap: 12px; } .feedback-row { flex-wrap: wrap; } .feedback-row span { flex-basis: 100%; } details { padding: 16px; } #feedback-detail label { display: block; margin: 10px 0 4px; } }
+
+.learning-title { font-size: 1rem; margin: 0; }
+#learning-focus { margin: 8px 0; }
+#learning-path .small { margin: 8px 0; }
+.practice-check { display: inline-flex; align-items: center; gap: 7px; }
+.practice-check input { width: auto; margin: 0; }
+.learning-sources { border: 0; padding: 0; margin: 12px 0 0; }
+.learning-sources summary { font-size: .8rem; font-weight: 500; }
+.learning-sources[open] summary { margin-bottom: 8px; }
+#learning-sources { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: .8rem; }
+#learning-sources a { color: #285d49; }

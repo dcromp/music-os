@@ -1,0 +1,45 @@
+{
+  "schema_version": "catalogue-starter-palette-spec-1.0",
+  "scope": "Four starter rhythm songs; uncalibrated pitch-class compatibility, not acceptance",
+  "pack_manifest_sha256": "64d67f29f6ff1ce91aeae6309e7102c2c2629e5c0fdcd061035de2a2e22f3fb5",
+  "case_ids": [
+    "troggs-wild-thing-youtube-20261011",
+    "beatles-love-me-do-youtube-20261011",
+    "bob-dylan-knockin-heavens-door-youtube-20261011",
+    "beatles-twist-and-shout-youtube-20261011"
+  ],
+  "review_sha256": {
+    "troggs-wild-thing-youtube-20261011": "5bd9033994ef3ed0c9e3ecc9342f3e5483b68145634515926cf6cc29689fa91c",
+    "beatles-love-me-do-youtube-20261011": "4c78d2384d87b9442a76143707ddc4a336453c4a12e9c0f0d51d6070bcccc50d",
+    "bob-dylan-knockin-heavens-door-youtube-20261011": "e0b6c81da35a05fb088183a138969b89a537e66b38e050fdd47d1eeefd810c37",
+    "beatles-twist-and-shout-youtube-20261011": "b571630752c74442bd5f63f6f04ce71cac1b784cc832ac8744dfce6715c0b96c"
+  },
+  "policy": {
+    "shifts_semitones": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "spectral_hop_seconds": 0.05,
+    "spectral_window_seconds": 0.18,
+    "window_seconds": 20.0,
+    "tie_tolerance": 1e-12,
+    "max_outside_examples_per_model": 8,
+    "template": "equal pitch-class weights, L2-normalized; slash bass omitted",
+    "score": "duration-weighted nearest source-palette cosine on non-silent, nonzero frames",
+    "frame_duration": "cells split at adjacent feature-center midpoints, bounded to audio",
+    "acceptance_threshold": null,
+    "automatic_corrections": false,
+    "tuning_cents_estimation": false,
+    "physical_capo_recognition": false
+  }
+}

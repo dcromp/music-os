@@ -1,0 +1,295 @@
+{
+  "schema_version": "playalong-learning-1.0",
+  "path_id": "first-ten-rhythm",
+  "revision": "1",
+  "title": "Suggested practice path",
+  "status": "provisional-practice-path",
+  "checked_date": "2026-10-13",
+  "semantics": "Project practice suggestions in a provisional order. Practised is an optional self-report, not mastery, recording-specific arrangement approval, or a chord/timing accuracy label. Riff guides are separate from the rhythm path.",
+  "inputs": [
+    {
+      "path": "catalogue/first-ten-review.json",
+      "sha256": "d1bbcd7618e0aeaf4af954c6b2bc7307d1ea4b3378af55ed172e53c0b18d7bda"
+    },
+    {
+      "path": "docs/FIRST_TEN_ARRANGEMENT_CHECK.json",
+      "sha256": "5a7855d9c837e6086a511a896872476fed8dea76da6d6e289438729380d211ae"
+    },
+    {
+      "path": "experiments/review/practice.json",
+      "sha256": "0de69b0756570a7083d9796ddba181d70b80444965eacf382531909c0666c4ea"
+    }
+  ],
+  "steps": [
+    {
+      "id": "wild-thing",
+      "order": 1,
+      "title": "Wild Thing",
+      "recording": {
+        "id": "troggs-wild-thing-youtube-20261011",
+        "title": "The Troggs - Wild Thing",
+        "duration_seconds": 155.3516553287982,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf"
+      },
+      "status": "practice-suggestion",
+      "skill_focus": "Keep open-chord changes steady; add the contrasting figure later.",
+      "prerequisites": "A/D/E changes",
+      "setup_note": "Standard-tuning open-chord practice proposal. Capo and exact recording pitch remain unchecked.",
+      "practice_pattern_id": "steady-down",
+      "sources": [
+        {
+          "id": "wild-andy",
+          "title": "Andy Guitar: Wild Thing",
+          "url": "https://www.andyguitar.co.uk/videos/electric-guitar-day-7-wild-thing"
+        }
+      ]
+    },
+    {
+      "id": "love-me-do",
+      "order": 2,
+      "title": "Love Me Do",
+      "recording": {
+        "id": "beatles-love-me-do-youtube-20261011",
+        "title": "The Beatles - Love Me Do",
+        "duration_seconds": 141.69832199546485,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea"
+      },
+      "status": "practice-suggestion",
+      "skill_focus": "Keep G/C/D changes steady; deliberate mutes and swing are later tasks.",
+      "prerequisites": "G/C/D changes and muting",
+      "setup_note": "Standard-tuning open-chord practice proposal. Capo and exact recording pitch remain unchecked. A skipped stroke is different from muting.",
+      "practice_pattern_id": "steady-down",
+      "sources": [
+        {
+          "id": "love-andy",
+          "title": "Andy Guitar: Love Me Do",
+          "url": "https://www.andyguitar.co.uk/videos/beatles-guitar-day-01-love-me-do"
+        }
+      ]
+    },
+    {
+      "id": "knockin-on-heaven-s-door",
+      "order": 3,
+      "title": "Knockin' On Heaven's Door",
+      "recording": {
+        "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+        "title": "Bob Dylan - Knockin' On Heaven's Door",
+        "duration_seconds": 149.89496598639457,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f"
+      },
+      "status": "practice-suggestion",
+      "skill_focus": "Add Am to steady changes; leave flowing subdivisions and picking for later.",
+      "prerequisites": "Add Am and steady changes",
+      "setup_note": "The teacher uses standard tuning. Capo and exact recording pitch remain unchecked.",
+      "practice_pattern_id": "steady-down",
+      "sources": [
+        {
+          "id": "dylan-jon",
+          "title": "Jon MacLennan: Knockin' On Heaven's Door",
+          "url": "https://www.jonmaclennan.com/blog/knockin-on-heaven%27s-door-chords"
+        }
+      ]
+    },
+    {
+      "id": "brown-eyed-girl",
+      "order": 4,
+      "title": "Brown Eyed Girl",
+      "recording": {
+        "id": "van-morrison-brown-eyed-girl-youtube-20261011",
+        "title": "Van Morrison - Brown Eyed Girl",
+        "duration_seconds": 186.55927437641722,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf"
+      },
+      "status": "practice-suggestion",
+      "skill_focus": "Maintain down/up movement through chord changes; try skipped contacts later.",
+      "prerequisites": "Four open shapes and down/up movement",
+      "setup_note": "Standard tuning is supported by a separate teaching arrangement; capo and exact recording pitch remain unchecked.",
+      "practice_pattern_id": "steady-down",
+      "sources": [
+        {
+          "id": "brown-andy",
+          "title": "Andy Guitar: Brown Eyed Girl",
+          "url": "https://www.andyguitar.co.uk/videos/brown-eyed-girl-by-van-morrison"
+        },
+        {
+          "id": "brown-pattern-andy",
+          "title": "Andy Guitar: down/up strumming with a tie",
+          "url": "https://www.andyguitar.co.uk/videos/lesson-2-down-and-up-strumming-with-a-tie"
+        },
+        {
+          "id": "brown-stanley",
+          "title": "David Stanley Guitar: Brown Eyed Girl easy arrangement",
+          "url": "https://davidstanleyguitar.com.au/wp-content/uploads/2025/07/brown-eyed-girl-easy.pdf.pdf"
+        }
+      ]
+    },
+    {
+      "id": "twist-and-shout",
+      "order": 5,
+      "title": "Twist And Shout",
+      "recording": {
+        "id": "beatles-twist-and-shout-youtube-20261011",
+        "title": "The Beatles - Twist And Shout",
+        "duration_seconds": 155.23555555555555,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c"
+      },
+      "status": "practice-suggestion",
+      "skill_focus": "Keep D/G/A changes moving at a quicker feel; the all-down build-up is later work.",
+      "prerequisites": "D/G/A changes at a quicker feel",
+      "setup_note": "Standard-shape practice proposal. Capo and exact recording pitch remain unchecked; the starting drill is not the recorded build-up.",
+      "practice_pattern_id": "steady-down",
+      "sources": [
+        {
+          "id": "twist-andy",
+          "title": "Andy Guitar: Twist And Shout",
+          "url": "https://www.andyguitar.co.uk/videos/beatles-guitar-day-02-twist-and-shout"
+        }
+      ]
+    },
+    {
+      "id": "the-house-of-the-rising-sun",
+      "order": 6,
+      "title": "The House Of The Rising Sun",
+      "recording": {
+        "id": "animals-house-rising-sun-official-20261011",
+        "title": "The Animals - The House Of The Rising Sun",
+        "duration_seconds": 269.91891156462583,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708"
+      },
+      "status": "practice-suggestion",
+      "skill_focus": "Count six eighth notes, grouped 3 + 3; start with gentle strums on 1 and 4.",
+      "prerequisites": "Small F and 6/8 subdivision",
+      "setup_note": "Teacher setup: no capo. Small F is an entry option; the recorded guitar uses arpeggios. Exact recording pitch remains unchecked.",
+      "practice_pattern_id": "six-anchor",
+      "sources": [
+        {
+          "id": "house-jon",
+          "title": "Jon MacLennan: House Of The Rising Sun",
+          "url": "https://www.jonmaclennan.com/blog/house-of-the-rising-sun-guitar-lesson"
+        },
+        {
+          "id": "house-carl",
+          "title": "Carl Brown: House Of The Rising Sun",
+          "url": "https://guitarlessons365.com/how-to-play-the-house-of-the-rising-sun-the-animals/"
+        },
+        {
+          "id": "house-richter",
+          "title": "Jonathan Richter: House Of The Rising Sun",
+          "url": "https://richterguitar.com/house-of-the-rising-sun-the-animals/"
+        }
+      ]
+    },
+    {
+      "id": "wonderwall",
+      "order": 7,
+      "title": "Wonderwall",
+      "recording": {
+        "id": "oasis-wonderwall-youtube-20261010",
+        "title": "Oasis - Wonderwall",
+        "duration_seconds": 277.78031746031746,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462"
+      },
+      "status": "practice-suggestion",
+      "skill_focus": "Practise shared-finger shapes and steady motion before adding syncopation.",
+      "prerequisites": "Capo setup, shared-finger shapes and syncopation",
+      "setup_note": "Teacher setup: standard tuning, capo 2, shared-finger Em7/G/Dsus4/A7sus4/Cadd9 shapes. The automatic chart may not show these voicings; exact recording pitch remains unchecked.",
+      "practice_pattern_id": "steady-down",
+      "sources": [
+        {
+          "id": "wonder-carl",
+          "title": "Carl Brown: Wonderwall",
+          "url": "https://guitarlessons365.com/wonderwall-guitar-lesson-oasis/"
+        },
+        {
+          "id": "wonder-shute",
+          "title": "Greg Shute Guitar: Wonderwall chart",
+          "url": "https://www.gregshuteguitar.co.uk/_files/ugd/4079b4_0a1b39a89c1a4776a5c8f553f259cb08.pdf"
+        }
+      ]
+    },
+    {
+      "id": "creep",
+      "order": 8,
+      "title": "Creep",
+      "recording": {
+        "id": "radiohead-creep-youtube-20261010",
+        "title": "Radiohead - Creep",
+        "duration_seconds": 236.63455782312926,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10"
+      },
+      "status": "practice-suggestion",
+      "skill_focus": "Practise reliable barre shapes and the change from C major to C minor.",
+      "prerequisites": "Reliable full barre shapes",
+      "setup_note": "Barre-grip practice proposal: G/B/C/Cm. Preserve B major and C minor. Capo and exact recording pitch remain unchecked; verse picking is a later task.",
+      "practice_pattern_id": "steady-down",
+      "sources": [
+        {
+          "id": "creep-andy",
+          "title": "Andy Guitar: Creep",
+          "url": "https://www.andyguitar.co.uk/videos/radiohead-creep"
+        },
+        {
+          "id": "creep-carl",
+          "title": "Carl Brown: Creep",
+          "url": "https://guitarlessons365.com/creep-guitar-lesson-radiohead/"
+        }
+      ]
+    }
+  ],
+  "guides": [
+    {
+      "id": "seven-nation-army",
+      "title": "Seven Nation Army",
+      "recording": {
+        "id": "white-stripes-seven-nation-army-youtube-20261011",
+        "title": "The White Stripes - Seven Nation Army",
+        "duration_seconds": 232.1168253968254,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "394c791d799d7ff7ece36c1b93a434c1f600afe0265f5dfe1d6ad328626a6854"
+      },
+      "status": "riff-guide",
+      "skill_focus": "Single-note timing and muting; fuller power-shape practice comes later.",
+      "prerequisites": "One-string riff timing and muting",
+      "setup_note": "The original setup uses Open A; the linked beginner lesson offers a standard-tuning adaptation. These are separate arrangements.",
+      "note": "The chord display and strumming arrows do not teach the riff. Use the linked teaching guide for its notes and fingering. Exact recording pitch remains unchecked.",
+      "sources": [
+        {
+          "id": "seven-andy",
+          "title": "Andy Guitar: Seven Nation Army",
+          "url": "https://www.andyguitar.co.uk/videos/electric-guitar-song-1-seven-nation-army-by-the-white-stripes"
+        }
+      ]
+    },
+    {
+      "id": "come-as-you-are",
+      "title": "Come As You Are",
+      "recording": {
+        "id": "nirvana-come-as-you-are-youtube-20261011",
+        "title": "Nirvana - Come As You Are",
+        "duration_seconds": 218.92789115646258,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7"
+      },
+      "status": "riff-guide",
+      "skill_focus": "Repeated riff timing and articulation; chord rhythm sections come later.",
+      "prerequisites": "Repeated riff and original-tuning setup",
+      "setup_note": "The studio lesson uses D standard (DGCFAD). Common live E-flat standard is a different setup; current chord labels show sounding pitches.",
+      "note": "The chord display and strumming arrows do not teach the riff. Use the linked teaching guide for its notes and fingering. Exact recording pitch remains unchecked.",
+      "sources": [
+        {
+          "id": "come-carl",
+          "title": "Carl Brown: Come As You Are",
+          "url": "https://guitarlessons365.com/come-as-you-are-guitar-lesson-nirvana/"
+        }
+      ]
+    }
+  ]
+}

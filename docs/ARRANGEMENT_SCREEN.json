@@ -1,0 +1,1880 @@
+{
+  "schema_version": "arrangement-screen-1.0",
+  "created_at_utc": "2026-10-11T12:26:27.112214+00:00",
+  "completed_comparisons": 25,
+  "requested_comparisons": 25,
+  "rows": [
+    {
+      "dataset": "previously-exposed-synthetic-sections",
+      "case_id": "fresh-section_repeat-slow_arpeggio",
+      "control": "correct",
+      "source_kind": "guarded-global-argmax",
+      "output": "section/fresh-section_repeat-slow_arpeggio/correct.json",
+      "output_sha256": "088404745684dded7b13654d8676a273ed3dcacaaecfa89b9ea30c0815addbe8",
+      "input_sha256": "f1ef9da1eff44698c8494c6e4867d85f2be182393cbdbf80ff769c3700506f0d",
+      "chart_sha256": "f272a51fd785e498010231e8ab175171c8df9f9eb70a5cc22e4c56d3e8a69251",
+      "mechanical_failure": false,
+      "mechanical_flags": [],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 19,
+        "normalized_edit_distance": 0.6785714285714286,
+        "observed_run_count": 28,
+        "chart_run_count": 9,
+        "operations": {
+          "match": 9,
+          "substitution": 0,
+          "observed_insertion": 19,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 9.695600907029476,
+        "observed_seconds": 18.99138321995465,
+        "matched_fraction_of_observed_harmonic_seconds": 0.5105263157894735,
+        "matched_fraction_of_measurable_chart_runs": 1.0
+      },
+      "stable": {
+        "edit_distance": 9,
+        "normalized_edit_distance": 0.5625,
+        "observed_run_count": 16,
+        "chart_run_count": 9,
+        "operations": {
+          "match": 7,
+          "substitution": 2,
+          "observed_insertion": 7,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 9.445714285714281,
+        "observed_seconds": 18.01682539682539,
+        "matched_fraction_of_observed_harmonic_seconds": 0.5242718446601942,
+        "matched_fraction_of_measurable_chart_runs": 0.7777777777777778
+      },
+      "coverage": {
+        "harmonic_seconds": 18.99138321995465,
+        "no_chord_seconds": 19.67160997732426,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 18.01682539682539,
+        "discarded_short_run_seconds": 0.9745578231292598,
+        "harmonic_fraction_of_audio": 0.4912031286106234,
+        "stable_fraction_of_audio": 0.4659966522740254
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [],
+        "original_position_count": 9,
+        "measurable_core_run_count": 9
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "previously-exposed-synthetic-sections",
+      "case_id": "fresh-section_repeat-slow_arpeggio",
+      "control": "wrong_section_order",
+      "source_kind": "guarded-global-argmax",
+      "output": "section/fresh-section_repeat-slow_arpeggio/wrong_section_order.json",
+      "output_sha256": "8841a23ea346d58154aebc3616b10bc12853df3197149ff68073e450547e266d",
+      "input_sha256": "804a0bd40a1bba9754e6413db0551a4608a178114c518c8d930378bc6925c591",
+      "chart_sha256": "128a1f21867a8ced7ddf55f5de8261afeea200048d4c3c940ab90cc5e0f7ec7c",
+      "mechanical_failure": true,
+      "mechanical_flags": [
+        "partial_constrained_path",
+        "unvisited_chart_positions",
+        "positions_without_active_evidence"
+      ],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 21,
+        "normalized_edit_distance": 0.75,
+        "observed_run_count": 28,
+        "chart_run_count": 9,
+        "operations": {
+          "match": 7,
+          "substitution": 2,
+          "observed_insertion": 19,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 6.0472562358276685,
+        "observed_seconds": 18.99138321995465,
+        "matched_fraction_of_observed_harmonic_seconds": 0.31842105263157916,
+        "matched_fraction_of_measurable_chart_runs": 0.7777777777777778
+      },
+      "stable": {
+        "edit_distance": 12,
+        "normalized_edit_distance": 0.75,
+        "observed_run_count": 16,
+        "chart_run_count": 9,
+        "operations": {
+          "match": 4,
+          "substitution": 5,
+          "observed_insertion": 7,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 4.323038548752835,
+        "observed_seconds": 18.01682539682539,
+        "matched_fraction_of_observed_harmonic_seconds": 0.23994452149791967,
+        "matched_fraction_of_measurable_chart_runs": 0.4444444444444444
+      },
+      "coverage": {
+        "harmonic_seconds": 18.99138321995465,
+        "no_chord_seconds": 19.67160997732426,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 18.01682539682539,
+        "discarded_short_run_seconds": 0.9745578231292598,
+        "harmonic_fraction_of_audio": 0.4912031286106234,
+        "stable_fraction_of_audio": 0.4659966522740254
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [],
+        "original_position_count": 9,
+        "measurable_core_run_count": 9
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "previously-exposed-synthetic-sections",
+      "case_id": "fresh-section_repeat-slow_arpeggio",
+      "control": "missing_repeat",
+      "source_kind": "guarded-global-argmax",
+      "output": "section/fresh-section_repeat-slow_arpeggio/missing_repeat.json",
+      "output_sha256": "e66bee582ab29471a8276fa0e43a8414bc1a45e8f782ebdfa7066f8076c1c791",
+      "input_sha256": "686d1ff267073f9f48417d35279c413b82c65fe47d1ff00881adf1f613c8af04",
+      "chart_sha256": "a9069994f76232ab440cbeb61922650589537e4b4126cc72a38bbf590a4b8686",
+      "mechanical_failure": true,
+      "mechanical_flags": [
+        "partial_constrained_path"
+      ],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 22,
+        "normalized_edit_distance": 0.7857142857142857,
+        "observed_run_count": 28,
+        "chart_run_count": 6,
+        "operations": {
+          "match": 6,
+          "substitution": 0,
+          "observed_insertion": 22,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 8.171292517006798,
+        "observed_seconds": 18.99138321995465,
+        "matched_fraction_of_observed_harmonic_seconds": 0.43026315789473657,
+        "matched_fraction_of_measurable_chart_runs": 1.0
+      },
+      "stable": {
+        "edit_distance": 11,
+        "normalized_edit_distance": 0.6875,
+        "observed_run_count": 16,
+        "chart_run_count": 6,
+        "operations": {
+          "match": 5,
+          "substitution": 1,
+          "observed_insertion": 10,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 8.046349206349202,
+        "observed_seconds": 18.01682539682539,
+        "matched_fraction_of_observed_harmonic_seconds": 0.4466019417475728,
+        "matched_fraction_of_measurable_chart_runs": 0.8333333333333334
+      },
+      "coverage": {
+        "harmonic_seconds": 18.99138321995465,
+        "no_chord_seconds": 19.67160997732426,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 18.01682539682539,
+        "discarded_short_run_seconds": 0.9745578231292598,
+        "harmonic_fraction_of_audio": 0.4912031286106234,
+        "stable_fraction_of_audio": 0.4659966522740254
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [],
+        "original_position_count": 6,
+        "measurable_core_run_count": 6
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "previously-exposed-synthetic-sections",
+      "case_id": "fresh-section_repeat-slow_arpeggio",
+      "control": "extra_repeat",
+      "source_kind": "guarded-global-argmax",
+      "output": "section/fresh-section_repeat-slow_arpeggio/extra_repeat.json",
+      "output_sha256": "7451934beb12b976122365bc7a5ced2201f58c6420a9d28832bd7597efe01a0b",
+      "input_sha256": "c11349b88329183b21c289bc069cb49f7e996455cc30f214de26a14b93ccf8ee",
+      "chart_sha256": "12f58878ff7b785eec3759694a4cded8c25134ea347593166d6379f6b8b219c3",
+      "mechanical_failure": true,
+      "mechanical_flags": [
+        "partial_constrained_path",
+        "unvisited_chart_positions",
+        "positions_without_active_evidence"
+      ],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 18,
+        "normalized_edit_distance": 0.6428571428571429,
+        "observed_run_count": 28,
+        "chart_run_count": 12,
+        "operations": {
+          "match": 11,
+          "substitution": 0,
+          "observed_insertion": 17,
+          "chart_deletion": 1
+        },
+        "matched_observed_seconds": 12.64426303854875,
+        "observed_seconds": 18.99138321995465,
+        "matched_fraction_of_observed_harmonic_seconds": 0.6657894736842104,
+        "matched_fraction_of_measurable_chart_runs": 0.9166666666666666
+      },
+      "stable": {
+        "edit_distance": 8,
+        "normalized_edit_distance": 0.5,
+        "observed_run_count": 16,
+        "chart_run_count": 12,
+        "operations": {
+          "match": 9,
+          "substitution": 2,
+          "observed_insertion": 5,
+          "chart_deletion": 1
+        },
+        "matched_observed_seconds": 12.394376417233556,
+        "observed_seconds": 18.01682539682539,
+        "matched_fraction_of_observed_harmonic_seconds": 0.6879334257975035,
+        "matched_fraction_of_measurable_chart_runs": 0.75
+      },
+      "coverage": {
+        "harmonic_seconds": 18.99138321995465,
+        "no_chord_seconds": 19.67160997732426,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 18.01682539682539,
+        "discarded_short_run_seconds": 0.9745578231292598,
+        "harmonic_fraction_of_audio": 0.4912031286106234,
+        "stable_fraction_of_audio": 0.4659966522740254
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [],
+        "original_position_count": 12,
+        "measurable_core_run_count": 12
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "previously-exposed-synthetic-sections",
+      "case_id": "fresh-section_repeat-soft_strum",
+      "control": "correct",
+      "source_kind": "guarded-global-argmax",
+      "output": "section/fresh-section_repeat-soft_strum/correct.json",
+      "output_sha256": "a2778d8d0d7532acdbd5f79e945c6e7f4f9938658e647a622f65f6e2f4dccfc0",
+      "input_sha256": "dd6f95c659096cffe34064a727cf2de4869b80eca5c0508a2ca643fd4ba48b80",
+      "chart_sha256": "26864758e473d585746481b854b97dee96bfeea6c3c8d8f57724e8cc32794c74",
+      "mechanical_failure": false,
+      "mechanical_flags": [],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 10,
+        "normalized_edit_distance": 0.5263157894736842,
+        "observed_run_count": 19,
+        "chart_run_count": 9,
+        "operations": {
+          "match": 9,
+          "substitution": 0,
+          "observed_insertion": 10,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 11.269886621315194,
+        "observed_seconds": 19.666077097505674,
+        "matched_fraction_of_observed_harmonic_seconds": 0.5730622617534942,
+        "matched_fraction_of_measurable_chart_runs": 1.0
+      },
+      "stable": {
+        "edit_distance": 2,
+        "normalized_edit_distance": 0.2,
+        "observed_run_count": 10,
+        "chart_run_count": 9,
+        "operations": {
+          "match": 8,
+          "substitution": 1,
+          "observed_insertion": 1,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 15.218095238095238,
+        "observed_seconds": 19.06634920634921,
+        "matched_fraction_of_observed_harmonic_seconds": 0.7981651376146788,
+        "matched_fraction_of_measurable_chart_runs": 0.8888888888888888
+      },
+      "coverage": {
+        "harmonic_seconds": 19.666077097505674,
+        "no_chord_seconds": 17.33587301587301,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 19.06634920634921,
+        "discarded_short_run_seconds": 0.5997278911564656,
+        "harmonic_fraction_of_audio": 0.5314875847690814,
+        "stable_fraction_of_audio": 0.5152795771014093
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [],
+        "original_position_count": 9,
+        "measurable_core_run_count": 9
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "previously-exposed-synthetic-sections",
+      "case_id": "fresh-section_repeat-soft_strum",
+      "control": "wrong_section_order",
+      "source_kind": "guarded-global-argmax",
+      "output": "section/fresh-section_repeat-soft_strum/wrong_section_order.json",
+      "output_sha256": "2c3197c53c73568222c79e27073508fdee5f53ba96606b4d81a9a677a3be5ffb",
+      "input_sha256": "d587c22bcd8ab42c5f89aaec48510108294cb629b0c730881e844e29fbe4d78c",
+      "chart_sha256": "5d72738339f1c30c4331ce219568e958a5110921ea42103a4405aec0ffc843b9",
+      "mechanical_failure": true,
+      "mechanical_flags": [
+        "partial_constrained_path",
+        "unvisited_chart_positions",
+        "positions_without_active_evidence"
+      ],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 13,
+        "normalized_edit_distance": 0.6842105263157895,
+        "observed_run_count": 19,
+        "chart_run_count": 9,
+        "operations": {
+          "match": 6,
+          "substitution": 3,
+          "observed_insertion": 10,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 2.1990022675736984,
+        "observed_seconds": 19.666077097505674,
+        "matched_fraction_of_observed_harmonic_seconds": 0.11181702668360873,
+        "matched_fraction_of_measurable_chart_runs": 0.6666666666666666
+      },
+      "stable": {
+        "edit_distance": 8,
+        "normalized_edit_distance": 0.8,
+        "observed_run_count": 10,
+        "chart_run_count": 9,
+        "operations": {
+          "match": 2,
+          "substitution": 7,
+          "observed_insertion": 1,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 3.598367346938776,
+        "observed_seconds": 19.06634920634921,
+        "matched_fraction_of_observed_harmonic_seconds": 0.18872870249017037,
+        "matched_fraction_of_measurable_chart_runs": 0.2222222222222222
+      },
+      "coverage": {
+        "harmonic_seconds": 19.666077097505674,
+        "no_chord_seconds": 17.33587301587301,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 19.06634920634921,
+        "discarded_short_run_seconds": 0.5997278911564656,
+        "harmonic_fraction_of_audio": 0.5314875847690814,
+        "stable_fraction_of_audio": 0.5152795771014093
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [],
+        "original_position_count": 9,
+        "measurable_core_run_count": 9
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "previously-exposed-synthetic-sections",
+      "case_id": "fresh-section_repeat-soft_strum",
+      "control": "missing_repeat",
+      "source_kind": "guarded-global-argmax",
+      "output": "section/fresh-section_repeat-soft_strum/missing_repeat.json",
+      "output_sha256": "47906fa2ac70b32aa44cdfa7c79b76dfeb23e527bd66b0e741303268f78afdd4",
+      "input_sha256": "b7d83f2c548e84072ee4c63498d704020d215955382be33306537fc5606f19ef",
+      "chart_sha256": "7d82f9c06a3eb9d4ce00fc29f4b60a4871ec0760bf045759500b65eb12795ebc",
+      "mechanical_failure": true,
+      "mechanical_flags": [
+        "partial_constrained_path"
+      ],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 13,
+        "normalized_edit_distance": 0.6842105263157895,
+        "observed_run_count": 19,
+        "chart_run_count": 6,
+        "operations": {
+          "match": 6,
+          "substitution": 0,
+          "observed_insertion": 13,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 9.195827664399093,
+        "observed_seconds": 19.666077097505674,
+        "matched_fraction_of_observed_harmonic_seconds": 0.4675984752223633,
+        "matched_fraction_of_measurable_chart_runs": 1.0
+      },
+      "stable": {
+        "edit_distance": 4,
+        "normalized_edit_distance": 0.4,
+        "observed_run_count": 10,
+        "chart_run_count": 6,
+        "operations": {
+          "match": 6,
+          "substitution": 0,
+          "observed_insertion": 4,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 11.06997732426304,
+        "observed_seconds": 19.06634920634921,
+        "matched_fraction_of_observed_harmonic_seconds": 0.580602883355177,
+        "matched_fraction_of_measurable_chart_runs": 1.0
+      },
+      "coverage": {
+        "harmonic_seconds": 19.666077097505674,
+        "no_chord_seconds": 17.33587301587301,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 19.06634920634921,
+        "discarded_short_run_seconds": 0.5997278911564656,
+        "harmonic_fraction_of_audio": 0.5314875847690814,
+        "stable_fraction_of_audio": 0.5152795771014093
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [],
+        "original_position_count": 6,
+        "measurable_core_run_count": 6
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "previously-exposed-synthetic-sections",
+      "case_id": "fresh-section_repeat-soft_strum",
+      "control": "extra_repeat",
+      "source_kind": "guarded-global-argmax",
+      "output": "section/fresh-section_repeat-soft_strum/extra_repeat.json",
+      "output_sha256": "180a3feb6f84e697ccbd10725c9d78834146f52b712c1128e0ac083b358d7416",
+      "input_sha256": "27a613cf0d59fa703263dbd3c4ba6f46a4f47c841e3736afd2e4955458a5f213",
+      "chart_sha256": "5bd4f77151a617ea01c2ec351612d29efbafe02ab5865fd3ed51d64de6e3ed16",
+      "mechanical_failure": true,
+      "mechanical_flags": [
+        "partial_constrained_path",
+        "unvisited_chart_positions",
+        "positions_without_active_evidence"
+      ],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 9,
+        "normalized_edit_distance": 0.47368421052631576,
+        "observed_run_count": 19,
+        "chart_run_count": 12,
+        "operations": {
+          "match": 11,
+          "substitution": 0,
+          "observed_insertion": 8,
+          "chart_deletion": 1
+        },
+        "matched_observed_seconds": 13.743764172335602,
+        "observed_seconds": 19.666077097505674,
+        "matched_fraction_of_observed_harmonic_seconds": 0.6988564167725538,
+        "matched_fraction_of_measurable_chart_runs": 0.9166666666666666
+      },
+      "stable": {
+        "edit_distance": 5,
+        "normalized_edit_distance": 0.4166666666666667,
+        "observed_run_count": 10,
+        "chart_run_count": 12,
+        "operations": {
+          "match": 8,
+          "substitution": 1,
+          "observed_insertion": 1,
+          "chart_deletion": 3
+        },
+        "matched_observed_seconds": 15.218095238095238,
+        "observed_seconds": 19.06634920634921,
+        "matched_fraction_of_observed_harmonic_seconds": 0.7981651376146788,
+        "matched_fraction_of_measurable_chart_runs": 0.6666666666666666
+      },
+      "coverage": {
+        "harmonic_seconds": 19.666077097505674,
+        "no_chord_seconds": 17.33587301587301,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 19.06634920634921,
+        "discarded_short_run_seconds": 0.5997278911564656,
+        "harmonic_fraction_of_audio": 0.5314875847690814,
+        "stable_fraction_of_audio": 0.5152795771014093
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [],
+        "original_position_count": 12,
+        "measurable_core_run_count": 12
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "previously-exposed-synthetic-sections",
+      "case_id": "fresh-section_repeat-short_decay",
+      "control": "correct",
+      "source_kind": "guarded-global-argmax",
+      "output": "section/fresh-section_repeat-short_decay/correct.json",
+      "output_sha256": "c0c91c619c132ce07b9cc1926ecaa56ccc1c567fb6b32e1ee954953e3098d8ef",
+      "input_sha256": "0a277f488e45d30888c449f0247ecfe7d583f2e384481805b145d99003aef90a",
+      "chart_sha256": "5ebe5b35dfad160e4de3241c4f47d0029e1c2250cdf2a75db1390fe408a38131",
+      "mechanical_failure": false,
+      "mechanical_flags": [],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 18,
+        "normalized_edit_distance": 0.6666666666666666,
+        "observed_run_count": 27,
+        "chart_run_count": 9,
+        "operations": {
+          "match": 9,
+          "substitution": 0,
+          "observed_insertion": 18,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 16.19265306122449,
+        "observed_seconds": 20.390748299319725,
+        "matched_fraction_of_observed_harmonic_seconds": 0.7941176470588237,
+        "matched_fraction_of_measurable_chart_runs": 1.0
+      },
+      "stable": {
+        "edit_distance": 5,
+        "normalized_edit_distance": 0.35714285714285715,
+        "observed_run_count": 14,
+        "chart_run_count": 9,
+        "operations": {
+          "match": 9,
+          "substitution": 0,
+          "observed_insertion": 5,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 16.51750566893424,
+        "observed_seconds": 19.11632653061225,
+        "matched_fraction_of_observed_harmonic_seconds": 0.8640522875816993,
+        "matched_fraction_of_measurable_chart_runs": 1.0
+      },
+      "coverage": {
+        "harmonic_seconds": 20.390748299319725,
+        "no_chord_seconds": 13.750294784580502,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 19.11632653061225,
+        "discarded_short_run_seconds": 1.2744217687074766,
+        "harmonic_fraction_of_audio": 0.5972503022010864,
+        "stable_fraction_of_audio": 0.5599221583135188
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [],
+        "original_position_count": 9,
+        "measurable_core_run_count": 9
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "previously-exposed-synthetic-sections",
+      "case_id": "fresh-section_repeat-short_decay",
+      "control": "wrong_section_order",
+      "source_kind": "guarded-global-argmax",
+      "output": "section/fresh-section_repeat-short_decay/wrong_section_order.json",
+      "output_sha256": "2d542e8b3876fc71f112543bcb8524accb855bc2464f7a04ba31b8db834cbeda",
+      "input_sha256": "c1742b075ea96c5d292c538c66ca496f22c816df95c14f9c05f2a518e76965af",
+      "chart_sha256": "6d0564cc255c8bd637ca7bd155d804d20608d41694db121e73509ec6e3175a83",
+      "mechanical_failure": true,
+      "mechanical_flags": [
+        "partial_constrained_path",
+        "unvisited_chart_positions",
+        "positions_without_active_evidence"
+      ],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 23,
+        "normalized_edit_distance": 0.8518518518518519,
+        "observed_run_count": 27,
+        "chart_run_count": 9,
+        "operations": {
+          "match": 4,
+          "substitution": 5,
+          "observed_insertion": 18,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 2.7737414965986353,
+        "observed_seconds": 20.390748299319725,
+        "matched_fraction_of_observed_harmonic_seconds": 0.1360294117647057,
+        "matched_fraction_of_measurable_chart_runs": 0.4444444444444444
+      },
+      "stable": {
+        "edit_distance": 11,
+        "normalized_edit_distance": 0.7857142857142857,
+        "observed_run_count": 14,
+        "chart_run_count": 9,
+        "operations": {
+          "match": 4,
+          "substitution": 4,
+          "observed_insertion": 6,
+          "chart_deletion": 1
+        },
+        "matched_observed_seconds": 6.971836734693877,
+        "observed_seconds": 19.11632653061225,
+        "matched_fraction_of_observed_harmonic_seconds": 0.3647058823529411,
+        "matched_fraction_of_measurable_chart_runs": 0.4444444444444444
+      },
+      "coverage": {
+        "harmonic_seconds": 20.390748299319725,
+        "no_chord_seconds": 13.750294784580502,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 19.11632653061225,
+        "discarded_short_run_seconds": 1.2744217687074766,
+        "harmonic_fraction_of_audio": 0.5972503022010864,
+        "stable_fraction_of_audio": 0.5599221583135188
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [],
+        "original_position_count": 9,
+        "measurable_core_run_count": 9
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "previously-exposed-synthetic-sections",
+      "case_id": "fresh-section_repeat-short_decay",
+      "control": "missing_repeat",
+      "source_kind": "guarded-global-argmax",
+      "output": "section/fresh-section_repeat-short_decay/missing_repeat.json",
+      "output_sha256": "923177d36f31764045c9adb5e6dfcce5c7a9bffd528538c82de520098e494577",
+      "input_sha256": "3cf35b5d369738a3338930933b58c203f6c3c5b8947df370ae23ce0874c8b0c3",
+      "chart_sha256": "488c1eaaaa5b41c3b9c19c8cda97d6c0159baf5e709afab7924c693e779645bf",
+      "mechanical_failure": true,
+      "mechanical_flags": [
+        "partial_constrained_path"
+      ],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 21,
+        "normalized_edit_distance": 0.7777777777777778,
+        "observed_run_count": 27,
+        "chart_run_count": 6,
+        "operations": {
+          "match": 6,
+          "substitution": 0,
+          "observed_insertion": 21,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 8.62108843537415,
+        "observed_seconds": 20.390748299319725,
+        "matched_fraction_of_observed_harmonic_seconds": 0.4227941176470589,
+        "matched_fraction_of_measurable_chart_runs": 1.0
+      },
+      "stable": {
+        "edit_distance": 8,
+        "normalized_edit_distance": 0.5714285714285714,
+        "observed_run_count": 14,
+        "chart_run_count": 6,
+        "operations": {
+          "match": 6,
+          "substitution": 0,
+          "observed_insertion": 8,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 8.9459410430839,
+        "observed_seconds": 19.11632653061225,
+        "matched_fraction_of_observed_harmonic_seconds": 0.4679738562091503,
+        "matched_fraction_of_measurable_chart_runs": 1.0
+      },
+      "coverage": {
+        "harmonic_seconds": 20.390748299319725,
+        "no_chord_seconds": 13.750294784580502,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 19.11632653061225,
+        "discarded_short_run_seconds": 1.2744217687074766,
+        "harmonic_fraction_of_audio": 0.5972503022010864,
+        "stable_fraction_of_audio": 0.5599221583135188
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [],
+        "original_position_count": 6,
+        "measurable_core_run_count": 6
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "previously-exposed-synthetic-sections",
+      "case_id": "fresh-section_repeat-short_decay",
+      "control": "extra_repeat",
+      "source_kind": "guarded-global-argmax",
+      "output": "section/fresh-section_repeat-short_decay/extra_repeat.json",
+      "output_sha256": "0453ed62851638ba7d79247151f9dde11db73c408ba79a9c70ce4b43d15d3311",
+      "input_sha256": "2ba4c7175ab912804078b83940b883d964e098267c1a998e02937947cf6ad1df",
+      "chart_sha256": "bfe542ca2cc70dc26407319b73b4f9b1133d8c90de7faf715232c3b8ba7b8c91",
+      "mechanical_failure": true,
+      "mechanical_flags": [
+        "partial_constrained_path",
+        "unvisited_chart_positions",
+        "positions_without_active_evidence"
+      ],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 18,
+        "normalized_edit_distance": 0.6666666666666666,
+        "observed_run_count": 27,
+        "chart_run_count": 12,
+        "operations": {
+          "match": 9,
+          "substitution": 3,
+          "observed_insertion": 15,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 13.868707482993196,
+        "observed_seconds": 20.390748299319725,
+        "matched_fraction_of_observed_harmonic_seconds": 0.6801470588235294,
+        "matched_fraction_of_measurable_chart_runs": 0.75
+      },
+      "stable": {
+        "edit_distance": 6,
+        "normalized_edit_distance": 0.42857142857142855,
+        "observed_run_count": 14,
+        "chart_run_count": 12,
+        "operations": {
+          "match": 8,
+          "substitution": 4,
+          "observed_insertion": 2,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 14.093605442176871,
+        "observed_seconds": 19.11632653061225,
+        "matched_fraction_of_observed_harmonic_seconds": 0.7372549019607842,
+        "matched_fraction_of_measurable_chart_runs": 0.6666666666666666
+      },
+      "coverage": {
+        "harmonic_seconds": 20.390748299319725,
+        "no_chord_seconds": 13.750294784580502,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 19.11632653061225,
+        "discarded_short_run_seconds": 1.2744217687074766,
+        "harmonic_fraction_of_audio": 0.5972503022010864,
+        "stable_fraction_of_audio": 0.5599221583135188
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [],
+        "original_position_count": 12,
+        "measurable_core_run_count": 12
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "previously-exposed-synthetic-sections",
+      "case_id": "fresh-section_repeat-bass_melody",
+      "control": "correct",
+      "source_kind": "guarded-global-argmax",
+      "output": "section/fresh-section_repeat-bass_melody/correct.json",
+      "output_sha256": "bc0bc6764a6c0594600763e6fab9fe8a606ddce2743d0f69ef55817f4912470b",
+      "input_sha256": "79529a5af39ee8769f516eecbd42427f0918851d95b8282da7cc100c51537ae4",
+      "chart_sha256": "35f652d6ea53327d57d696db4d3a238a42915f2f1df6c740c9a38a009e8ff8c5",
+      "mechanical_failure": false,
+      "mechanical_flags": [],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 9,
+        "normalized_edit_distance": 0.5,
+        "observed_run_count": 18,
+        "chart_run_count": 9,
+        "operations": {
+          "match": 9,
+          "substitution": 0,
+          "observed_insertion": 9,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 16.867346938775512,
+        "observed_seconds": 21.015464852607707,
+        "matched_fraction_of_observed_harmonic_seconds": 0.8026159334126043,
+        "matched_fraction_of_measurable_chart_runs": 1.0
+      },
+      "stable": {
+        "edit_distance": 2,
+        "normalized_edit_distance": 0.18181818181818182,
+        "observed_run_count": 11,
+        "chart_run_count": 9,
+        "operations": {
+          "match": 9,
+          "substitution": 0,
+          "observed_insertion": 2,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 19.49115646258503,
+        "observed_seconds": 20.565668934240364,
+        "matched_fraction_of_observed_harmonic_seconds": 0.94775212636695,
+        "matched_fraction_of_measurable_chart_runs": 1.0
+      },
+      "coverage": {
+        "harmonic_seconds": 21.015464852607707,
+        "no_chord_seconds": 18.764535147392294,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 20.565668934240364,
+        "discarded_short_run_seconds": 0.449795918367343,
+        "harmonic_fraction_of_audio": 0.5282922285723405,
+        "stable_fraction_of_audio": 0.5169851416350016
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [],
+        "original_position_count": 9,
+        "measurable_core_run_count": 9
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "previously-exposed-synthetic-sections",
+      "case_id": "fresh-section_repeat-bass_melody",
+      "control": "wrong_section_order",
+      "source_kind": "guarded-global-argmax",
+      "output": "section/fresh-section_repeat-bass_melody/wrong_section_order.json",
+      "output_sha256": "5a5964f004afac239584f81f313d582b6e016d8dcffee79f3d7fe613365c6511",
+      "input_sha256": "accda064fca224758242d23226133af8e967313877a88d236b8d1c7b593b3cfa",
+      "chart_sha256": "46280c2991162c5ed46c0a97f3da071863d33f550c2c31a9587004dfcae4d956",
+      "mechanical_failure": true,
+      "mechanical_flags": [
+        "partial_constrained_path",
+        "unvisited_chart_positions",
+        "positions_without_active_evidence"
+      ],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 13,
+        "normalized_edit_distance": 0.7222222222222222,
+        "observed_run_count": 18,
+        "chart_run_count": 9,
+        "operations": {
+          "match": 5,
+          "substitution": 4,
+          "observed_insertion": 9,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 9.845532879818592,
+        "observed_seconds": 21.015464852607707,
+        "matched_fraction_of_observed_harmonic_seconds": 0.4684898929845422,
+        "matched_fraction_of_measurable_chart_runs": 0.5555555555555556
+      },
+      "stable": {
+        "edit_distance": 7,
+        "normalized_edit_distance": 0.6363636363636364,
+        "observed_run_count": 11,
+        "chart_run_count": 9,
+        "operations": {
+          "match": 4,
+          "substitution": 5,
+          "observed_insertion": 2,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 6.721950113378683,
+        "observed_seconds": 20.565668934240364,
+        "matched_fraction_of_observed_harmonic_seconds": 0.32685297691373016,
+        "matched_fraction_of_measurable_chart_runs": 0.4444444444444444
+      },
+      "coverage": {
+        "harmonic_seconds": 21.015464852607707,
+        "no_chord_seconds": 18.764535147392294,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 20.565668934240364,
+        "discarded_short_run_seconds": 0.449795918367343,
+        "harmonic_fraction_of_audio": 0.5282922285723405,
+        "stable_fraction_of_audio": 0.5169851416350016
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [],
+        "original_position_count": 9,
+        "measurable_core_run_count": 9
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "previously-exposed-synthetic-sections",
+      "case_id": "fresh-section_repeat-bass_melody",
+      "control": "missing_repeat",
+      "source_kind": "guarded-global-argmax",
+      "output": "section/fresh-section_repeat-bass_melody/missing_repeat.json",
+      "output_sha256": "8b2563c4dc7f8d135854629da73cb872dc2c0cc2f15f899468a8c34bb60f57db",
+      "input_sha256": "788f2899e627ca63c857aab094ec77cb9ddc5f7a716d7af15f095f8acd11a43f",
+      "chart_sha256": "bab2791a25b10dde6e7c940fce8f0fa00a76a1d091a2335dc572428fc16e2032",
+      "mechanical_failure": true,
+      "mechanical_flags": [
+        "partial_constrained_path"
+      ],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 12,
+        "normalized_edit_distance": 0.6666666666666666,
+        "observed_run_count": 18,
+        "chart_run_count": 6,
+        "operations": {
+          "match": 6,
+          "substitution": 0,
+          "observed_insertion": 12,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 11.619727891156465,
+        "observed_seconds": 21.015464852607707,
+        "matched_fraction_of_observed_harmonic_seconds": 0.5529131985731275,
+        "matched_fraction_of_measurable_chart_runs": 1.0
+      },
+      "stable": {
+        "edit_distance": 5,
+        "normalized_edit_distance": 0.45454545454545453,
+        "observed_run_count": 11,
+        "chart_run_count": 6,
+        "operations": {
+          "match": 6,
+          "substitution": 0,
+          "observed_insertion": 5,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 14.243537414965985,
+        "observed_seconds": 20.565668934240364,
+        "matched_fraction_of_observed_harmonic_seconds": 0.6925880923450789,
+        "matched_fraction_of_measurable_chart_runs": 1.0
+      },
+      "coverage": {
+        "harmonic_seconds": 21.015464852607707,
+        "no_chord_seconds": 18.764535147392294,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 20.565668934240364,
+        "discarded_short_run_seconds": 0.449795918367343,
+        "harmonic_fraction_of_audio": 0.5282922285723405,
+        "stable_fraction_of_audio": 0.5169851416350016
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [],
+        "original_position_count": 6,
+        "measurable_core_run_count": 6
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "previously-exposed-synthetic-sections",
+      "case_id": "fresh-section_repeat-bass_melody",
+      "control": "extra_repeat",
+      "source_kind": "guarded-global-argmax",
+      "output": "section/fresh-section_repeat-bass_melody/extra_repeat.json",
+      "output_sha256": "6245109a6f66ec9edbe67787d3bfc558512beca9030239923285fb7bb46bf05e",
+      "input_sha256": "6e4889877b1f110c1f8343370c3194c903a7fad1f9f7b4b7aa9cad1fb651c83f",
+      "chart_sha256": "9b5eb00b17019b27cd9cec5ba228811f780a91a7b00279f74fd4232770af67ab",
+      "mechanical_failure": true,
+      "mechanical_flags": [
+        "partial_constrained_path",
+        "unvisited_chart_positions",
+        "positions_without_active_evidence"
+      ],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 9,
+        "normalized_edit_distance": 0.5,
+        "observed_run_count": 18,
+        "chart_run_count": 12,
+        "operations": {
+          "match": 9,
+          "substitution": 3,
+          "observed_insertion": 6,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 16.867346938775512,
+        "observed_seconds": 21.015464852607707,
+        "matched_fraction_of_observed_harmonic_seconds": 0.8026159334126043,
+        "matched_fraction_of_measurable_chart_runs": 0.75
+      },
+      "stable": {
+        "edit_distance": 3,
+        "normalized_edit_distance": 0.25,
+        "observed_run_count": 11,
+        "chart_run_count": 12,
+        "operations": {
+          "match": 10,
+          "substitution": 0,
+          "observed_insertion": 1,
+          "chart_deletion": 2
+        },
+        "matched_observed_seconds": 20.265804988662133,
+        "observed_seconds": 20.565668934240364,
+        "matched_fraction_of_observed_harmonic_seconds": 0.9854191980558931,
+        "matched_fraction_of_measurable_chart_runs": 0.8333333333333334
+      },
+      "coverage": {
+        "harmonic_seconds": 21.015464852607707,
+        "no_chord_seconds": 18.764535147392294,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 20.565668934240364,
+        "discarded_short_run_seconds": 0.449795918367343,
+        "harmonic_fraction_of_audio": 0.5282922285723405,
+        "stable_fraction_of_audio": 0.5169851416350016
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [],
+        "original_position_count": 12,
+        "measurable_core_run_count": 12
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "wonderwall-no-gold",
+      "case_id": "oasis-wonderwall-youtube-20261010",
+      "control": "guided",
+      "source_kind": "global-argmax",
+      "output": "wonderwall/guided-global-argmax.json",
+      "output_sha256": "08f78aaa4c85ae8ded0e53f6b831815134c6801ab9590ea8886b2ed71265e5f2",
+      "chart_sha256": "002054d85d182279118ac6673352f5221c0f4a873590f58bf0a30351437d2a3b",
+      "input_sha256": "15efee3c169f0bc42bad552e0633d95e59bdc6ba1d5ff585c8bb1bb4453b86f9",
+      "mechanical_failure": false,
+      "mechanical_flags": [],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 652,
+        "normalized_edit_distance": 0.8049382716049382,
+        "observed_run_count": 810,
+        "chart_run_count": 164,
+        "operations": {
+          "match": 158,
+          "substitution": 6,
+          "observed_insertion": 646,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 66.76970521541949,
+        "observed_seconds": 250.01156462585035,
+        "matched_fraction_of_observed_harmonic_seconds": 0.26706646676661666,
+        "matched_fraction_of_measurable_chart_runs": 0.9634146341463414
+      },
+      "stable": {
+        "edit_distance": 332,
+        "normalized_edit_distance": 0.7124463519313304,
+        "observed_run_count": 466,
+        "chart_run_count": 164,
+        "operations": {
+          "match": 134,
+          "substitution": 30,
+          "observed_insertion": 302,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 81.81287981859413,
+        "observed_seconds": 222.64897959183682,
+        "matched_fraction_of_observed_harmonic_seconds": 0.36745230078563407,
+        "matched_fraction_of_measurable_chart_runs": 0.8170731707317073
+      },
+      "coverage": {
+        "harmonic_seconds": 250.01156462585035,
+        "no_chord_seconds": 27.76875283446712,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 222.64897959183682,
+        "discarded_short_run_seconds": 27.362585034013534,
+        "harmonic_fraction_of_audio": 0.9000334037762268,
+        "stable_fraction_of_audio": 0.8015289982654855
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [
+          56,
+          75,
+          100
+        ],
+        "original_position_count": 167,
+        "measurable_core_run_count": 164
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "wonderwall-no-gold",
+      "case_id": "oasis-wonderwall-youtube-20261010",
+      "control": "guided",
+      "source_kind": "crema",
+      "output": "wonderwall/guided-crema.json",
+      "output_sha256": "acde807270ff0e81c55793dd410b272bab85c3c159ffed3ca79041f5b590c2a0",
+      "chart_sha256": "002054d85d182279118ac6673352f5221c0f4a873590f58bf0a30351437d2a3b",
+      "input_sha256": "1d696977fe56f91126f3e838903939a6670a335d7079fc297b45e6573a3c3e83",
+      "mechanical_failure": false,
+      "mechanical_flags": [],
+      "mechanical_check_available": false,
+      "raw": {
+        "edit_distance": 47,
+        "normalized_edit_distance": 0.2865853658536585,
+        "observed_run_count": 142,
+        "chart_run_count": 164,
+        "operations": {
+          "match": 118,
+          "substitution": 23,
+          "observed_insertion": 1,
+          "chart_deletion": 23
+        },
+        "matched_observed_seconds": 204.89287981859408,
+        "observed_seconds": 248.5463945578231,
+        "matched_fraction_of_observed_harmonic_seconds": 0.8243647234678625,
+        "matched_fraction_of_measurable_chart_runs": 0.7195121951219512
+      },
+      "stable": {
+        "edit_distance": 47,
+        "normalized_edit_distance": 0.2865853658536585,
+        "observed_run_count": 142,
+        "chart_run_count": 164,
+        "operations": {
+          "match": 118,
+          "substitution": 23,
+          "observed_insertion": 1,
+          "chart_deletion": 23
+        },
+        "matched_observed_seconds": 204.89287981859408,
+        "observed_seconds": 248.5463945578231,
+        "matched_fraction_of_observed_harmonic_seconds": 0.8243647234678625,
+        "matched_fraction_of_measurable_chart_runs": 0.7195121951219512
+      },
+      "coverage": {
+        "harmonic_seconds": 248.5463945578231,
+        "no_chord_seconds": 29.23392290249436,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 248.5463945578231,
+        "discarded_short_run_seconds": 0.0,
+        "harmonic_fraction_of_audio": 0.894758839755914,
+        "stable_fraction_of_audio": 0.894758839755914
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [
+          56,
+          75,
+          100
+        ],
+        "original_position_count": 167,
+        "measurable_core_run_count": 164
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "wonderwall-no-gold",
+      "case_id": "oasis-wonderwall-youtube-20261010",
+      "control": "guided",
+      "source_kind": "chordino",
+      "output": "wonderwall/guided-chordino.json",
+      "output_sha256": "2da353ce33e0ac88001c1da0cb4d814cb59d7f3714d2eeec7ef611c9241b2e33",
+      "chart_sha256": "002054d85d182279118ac6673352f5221c0f4a873590f58bf0a30351437d2a3b",
+      "input_sha256": "bcaec761a32f62eae070962e47e4b7cdc33394d84d8e707eb7756be48ad7ecba",
+      "mechanical_failure": false,
+      "mechanical_flags": [],
+      "mechanical_check_available": false,
+      "raw": {
+        "edit_distance": 107,
+        "normalized_edit_distance": 0.6524390243902439,
+        "observed_run_count": 90,
+        "chart_run_count": 164,
+        "operations": {
+          "match": 57,
+          "substitution": 33,
+          "observed_insertion": 0,
+          "chart_deletion": 74
+        },
+        "matched_observed_seconds": 185.20235827599993,
+        "observed_seconds": 254.490702948,
+        "matched_fraction_of_observed_harmonic_seconds": 0.7277372262744005,
+        "matched_fraction_of_measurable_chart_runs": 0.3475609756097561
+      },
+      "stable": {
+        "edit_distance": 107,
+        "normalized_edit_distance": 0.6524390243902439,
+        "observed_run_count": 90,
+        "chart_run_count": 164,
+        "operations": {
+          "match": 57,
+          "substitution": 33,
+          "observed_insertion": 0,
+          "chart_deletion": 74
+        },
+        "matched_observed_seconds": 185.20235827599993,
+        "observed_seconds": 254.490702948,
+        "matched_fraction_of_observed_harmonic_seconds": 0.7277372262744005,
+        "matched_fraction_of_measurable_chart_runs": 0.3475609756097561
+      },
+      "coverage": {
+        "harmonic_seconds": 254.490702948,
+        "no_chord_seconds": 23.289614512317442,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 254.490702948,
+        "discarded_short_run_seconds": 0.0,
+        "harmonic_fraction_of_audio": 0.9161581543096748,
+        "stable_fraction_of_audio": 0.9161581543096748
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [
+          56,
+          75,
+          100
+        ],
+        "original_position_count": 167,
+        "measurable_core_run_count": 164
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "wonderwall-no-gold",
+      "case_id": "oasis-wonderwall-youtube-20261010",
+      "control": "reversed-order",
+      "source_kind": "global-argmax",
+      "output": "wonderwall/reversed-order-global-argmax.json",
+      "output_sha256": "4b546827bde96e3af171b53d806136821bdca8a862bc58c2211fdd0e2bafeb8e",
+      "chart_sha256": "2cbe4610e3e48b3a84205b65d2fb349f8ab4f9fca56027b491c2ec4b03143974",
+      "input_sha256": "4cc67a34982116379ab43bbc50555f679745b85339171c57ddc786a311e2c4f6",
+      "mechanical_failure": true,
+      "mechanical_flags": [
+        "partial_constrained_path",
+        "unvisited_chart_positions",
+        "positions_without_active_evidence"
+      ],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 680,
+        "normalized_edit_distance": 0.8395061728395061,
+        "observed_run_count": 810,
+        "chart_run_count": 165,
+        "operations": {
+          "match": 130,
+          "substitution": 35,
+          "observed_insertion": 645,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 47.753333333333224,
+        "observed_seconds": 250.01156462585035,
+        "matched_fraction_of_observed_harmonic_seconds": 0.191004497751124,
+        "matched_fraction_of_measurable_chart_runs": 0.7878787878787878
+      },
+      "stable": {
+        "edit_distance": 359,
+        "normalized_edit_distance": 0.7703862660944206,
+        "observed_run_count": 466,
+        "chart_run_count": 165,
+        "operations": {
+          "match": 107,
+          "substitution": 58,
+          "observed_insertion": 301,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 60.4225850340136,
+        "observed_seconds": 222.64897959183682,
+        "matched_fraction_of_observed_harmonic_seconds": 0.2713804713804713,
+        "matched_fraction_of_measurable_chart_runs": 0.6484848484848484
+      },
+      "coverage": {
+        "harmonic_seconds": 250.01156462585035,
+        "no_chord_seconds": 27.76875283446712,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 222.64897959183682,
+        "discarded_short_run_seconds": 27.362585034013534,
+        "harmonic_fraction_of_audio": 0.9000334037762268,
+        "stable_fraction_of_audio": 0.8015289982654855
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [
+          73,
+          117
+        ],
+        "original_position_count": 167,
+        "measurable_core_run_count": 165
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "wonderwall-no-gold",
+      "case_id": "oasis-wonderwall-youtube-20261010",
+      "control": "reversed-order",
+      "source_kind": "crema",
+      "output": "wonderwall/reversed-order-crema.json",
+      "output_sha256": "2477c83a7b95e3c943316dad0f19fd5a9ee53d523a8f13ff6ddb4c245a01152f",
+      "chart_sha256": "2cbe4610e3e48b3a84205b65d2fb349f8ab4f9fca56027b491c2ec4b03143974",
+      "input_sha256": "1d696977fe56f91126f3e838903939a6670a335d7079fc297b45e6573a3c3e83",
+      "mechanical_failure": false,
+      "mechanical_flags": [],
+      "mechanical_check_available": false,
+      "raw": {
+        "edit_distance": 75,
+        "normalized_edit_distance": 0.45454545454545453,
+        "observed_run_count": 142,
+        "chart_run_count": 165,
+        "operations": {
+          "match": 91,
+          "substitution": 50,
+          "observed_insertion": 1,
+          "chart_deletion": 24
+        },
+        "matched_observed_seconds": 169.7843083900227,
+        "observed_seconds": 248.5463945578231,
+        "matched_fraction_of_observed_harmonic_seconds": 0.6831091180866967,
+        "matched_fraction_of_measurable_chart_runs": 0.5515151515151515
+      },
+      "stable": {
+        "edit_distance": 75,
+        "normalized_edit_distance": 0.45454545454545453,
+        "observed_run_count": 142,
+        "chart_run_count": 165,
+        "operations": {
+          "match": 91,
+          "substitution": 50,
+          "observed_insertion": 1,
+          "chart_deletion": 24
+        },
+        "matched_observed_seconds": 169.7843083900227,
+        "observed_seconds": 248.5463945578231,
+        "matched_fraction_of_observed_harmonic_seconds": 0.6831091180866967,
+        "matched_fraction_of_measurable_chart_runs": 0.5515151515151515
+      },
+      "coverage": {
+        "harmonic_seconds": 248.5463945578231,
+        "no_chord_seconds": 29.23392290249436,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 248.5463945578231,
+        "discarded_short_run_seconds": 0.0,
+        "harmonic_fraction_of_audio": 0.894758839755914,
+        "stable_fraction_of_audio": 0.894758839755914
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [
+          73,
+          117
+        ],
+        "original_position_count": 167,
+        "measurable_core_run_count": 165
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "wonderwall-no-gold",
+      "case_id": "oasis-wonderwall-youtube-20261010",
+      "control": "reversed-order",
+      "source_kind": "chordino",
+      "output": "wonderwall/reversed-order-chordino.json",
+      "output_sha256": "28b8cc0e12ce00098b2799fe329c49f8b3a2f532252100a38ccea39b42ea77f4",
+      "chart_sha256": "2cbe4610e3e48b3a84205b65d2fb349f8ab4f9fca56027b491c2ec4b03143974",
+      "input_sha256": "bcaec761a32f62eae070962e47e4b7cdc33394d84d8e707eb7756be48ad7ecba",
+      "mechanical_failure": false,
+      "mechanical_flags": [],
+      "mechanical_check_available": false,
+      "raw": {
+        "edit_distance": 115,
+        "normalized_edit_distance": 0.696969696969697,
+        "observed_run_count": 90,
+        "chart_run_count": 165,
+        "operations": {
+          "match": 50,
+          "substitution": 40,
+          "observed_insertion": 0,
+          "chart_deletion": 75
+        },
+        "matched_observed_seconds": 167.55519274399995,
+        "observed_seconds": 254.490702948,
+        "matched_fraction_of_observed_harmonic_seconds": 0.6583941605844692,
+        "matched_fraction_of_measurable_chart_runs": 0.30303030303030304
+      },
+      "stable": {
+        "edit_distance": 115,
+        "normalized_edit_distance": 0.696969696969697,
+        "observed_run_count": 90,
+        "chart_run_count": 165,
+        "operations": {
+          "match": 50,
+          "substitution": 40,
+          "observed_insertion": 0,
+          "chart_deletion": 75
+        },
+        "matched_observed_seconds": 167.55519274399995,
+        "observed_seconds": 254.490702948,
+        "matched_fraction_of_observed_harmonic_seconds": 0.6583941605844692,
+        "matched_fraction_of_measurable_chart_runs": 0.30303030303030304
+      },
+      "coverage": {
+        "harmonic_seconds": 254.490702948,
+        "no_chord_seconds": 23.289614512317442,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 254.490702948,
+        "discarded_short_run_seconds": 0.0,
+        "harmonic_fraction_of_audio": 0.9161581543096748,
+        "stable_fraction_of_audio": 0.9161581543096748
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [
+          73,
+          117
+        ],
+        "original_position_count": 167,
+        "measurable_core_run_count": 165
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "wonderwall-no-gold",
+      "case_id": "oasis-wonderwall-youtube-20261010",
+      "control": "simplified-quality",
+      "source_kind": "global-argmax",
+      "output": "wonderwall/simplified-quality-global-argmax.json",
+      "output_sha256": "92c34844c8adc7b35741446fb5ef1b8f80e235dcda9a250e3c55f43ce87046cb",
+      "chart_sha256": "c1a525dcbf58746c1b8fe0d76af546cde7666e6d010c93c0283c70116ef59ff5",
+      "input_sha256": "a074e84f6ed9287ba3173d77fe2b0d2070d23c0dac6ddaab2558f14044a366ae",
+      "mechanical_failure": true,
+      "mechanical_flags": [
+        "partial_constrained_path",
+        "unvisited_chart_positions",
+        "positions_without_active_evidence"
+      ],
+      "mechanical_check_available": true,
+      "raw": {
+        "edit_distance": 671,
+        "normalized_edit_distance": 0.828395061728395,
+        "observed_run_count": 810,
+        "chart_run_count": 164,
+        "operations": {
+          "match": 139,
+          "substitution": 25,
+          "observed_insertion": 646,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 60.29764172335608,
+        "observed_seconds": 250.01156462585035,
+        "matched_fraction_of_observed_harmonic_seconds": 0.24117941029485285,
+        "matched_fraction_of_measurable_chart_runs": 0.8475609756097561
+      },
+      "stable": {
+        "edit_distance": 339,
+        "normalized_edit_distance": 0.7274678111587983,
+        "observed_run_count": 466,
+        "chart_run_count": 164,
+        "operations": {
+          "match": 127,
+          "substitution": 37,
+          "observed_insertion": 302,
+          "chart_deletion": 0
+        },
+        "matched_observed_seconds": 80.16362811791385,
+        "observed_seconds": 222.64897959183682,
+        "matched_fraction_of_observed_harmonic_seconds": 0.36004489337822665,
+        "matched_fraction_of_measurable_chart_runs": 0.774390243902439
+      },
+      "coverage": {
+        "harmonic_seconds": 250.01156462585035,
+        "no_chord_seconds": 27.76875283446712,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 222.64897959183682,
+        "discarded_short_run_seconds": 27.362585034013534,
+        "harmonic_fraction_of_audio": 0.9000334037762268,
+        "stable_fraction_of_audio": 0.8015289982654855
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [
+          56,
+          75,
+          100
+        ],
+        "original_position_count": 167,
+        "measurable_core_run_count": 164
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "wonderwall-no-gold",
+      "case_id": "oasis-wonderwall-youtube-20261010",
+      "control": "simplified-quality",
+      "source_kind": "crema",
+      "output": "wonderwall/simplified-quality-crema.json",
+      "output_sha256": "a315198a0d39211d109109032f23b38be62a1d09c1e998cb8fa0fb5572068458",
+      "chart_sha256": "c1a525dcbf58746c1b8fe0d76af546cde7666e6d010c93c0283c70116ef59ff5",
+      "input_sha256": "1d696977fe56f91126f3e838903939a6670a335d7079fc297b45e6573a3c3e83",
+      "mechanical_failure": false,
+      "mechanical_flags": [],
+      "mechanical_check_available": false,
+      "raw": {
+        "edit_distance": 28,
+        "normalized_edit_distance": 0.17073170731707318,
+        "observed_run_count": 142,
+        "chart_run_count": 164,
+        "operations": {
+          "match": 137,
+          "substitution": 4,
+          "observed_insertion": 1,
+          "chart_deletion": 23
+        },
+        "matched_observed_seconds": 231.0849886621315,
+        "observed_seconds": 248.5463945578231,
+        "matched_fraction_of_observed_harmonic_seconds": 0.9297458893871451,
+        "matched_fraction_of_measurable_chart_runs": 0.8353658536585366
+      },
+      "stable": {
+        "edit_distance": 28,
+        "normalized_edit_distance": 0.17073170731707318,
+        "observed_run_count": 142,
+        "chart_run_count": 164,
+        "operations": {
+          "match": 137,
+          "substitution": 4,
+          "observed_insertion": 1,
+          "chart_deletion": 23
+        },
+        "matched_observed_seconds": 231.0849886621315,
+        "observed_seconds": 248.5463945578231,
+        "matched_fraction_of_observed_harmonic_seconds": 0.9297458893871451,
+        "matched_fraction_of_measurable_chart_runs": 0.8353658536585366
+      },
+      "coverage": {
+        "harmonic_seconds": 248.5463945578231,
+        "no_chord_seconds": 29.23392290249436,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 248.5463945578231,
+        "discarded_short_run_seconds": 0.0,
+        "harmonic_fraction_of_audio": 0.894758839755914,
+        "stable_fraction_of_audio": 0.894758839755914
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [
+          56,
+          75,
+          100
+        ],
+        "original_position_count": 167,
+        "measurable_core_run_count": 164
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    },
+    {
+      "dataset": "wonderwall-no-gold",
+      "case_id": "oasis-wonderwall-youtube-20261010",
+      "control": "simplified-quality",
+      "source_kind": "chordino",
+      "output": "wonderwall/simplified-quality-chordino.json",
+      "output_sha256": "3edfb1c9eddecf0802055b9786275c2a39dfad908bdd649ede935e7c892827c4",
+      "chart_sha256": "c1a525dcbf58746c1b8fe0d76af546cde7666e6d010c93c0283c70116ef59ff5",
+      "input_sha256": "bcaec761a32f62eae070962e47e4b7cdc33394d84d8e707eb7756be48ad7ecba",
+      "mechanical_failure": false,
+      "mechanical_flags": [],
+      "mechanical_check_available": false,
+      "raw": {
+        "edit_distance": 91,
+        "normalized_edit_distance": 0.5548780487804879,
+        "observed_run_count": 90,
+        "chart_run_count": 164,
+        "operations": {
+          "match": 73,
+          "substitution": 17,
+          "observed_insertion": 0,
+          "chart_deletion": 74
+        },
+        "matched_observed_seconds": 216.31709750599995,
+        "observed_seconds": 254.490702948,
+        "matched_fraction_of_observed_harmonic_seconds": 0.8500000000007857,
+        "matched_fraction_of_measurable_chart_runs": 0.4451219512195122
+      },
+      "stable": {
+        "edit_distance": 91,
+        "normalized_edit_distance": 0.5548780487804879,
+        "observed_run_count": 90,
+        "chart_run_count": 164,
+        "operations": {
+          "match": 73,
+          "substitution": 17,
+          "observed_insertion": 0,
+          "chart_deletion": 74
+        },
+        "matched_observed_seconds": 216.31709750599995,
+        "observed_seconds": 254.490702948,
+        "matched_fraction_of_observed_harmonic_seconds": 0.8500000000007857,
+        "matched_fraction_of_measurable_chart_runs": 0.4451219512195122
+      },
+      "coverage": {
+        "harmonic_seconds": 254.490702948,
+        "no_chord_seconds": 23.289614512317442,
+        "unknown_seconds": 0.0,
+        "unsupported_seconds": 0.0,
+        "uncovered_seconds": 0.0,
+        "stable_harmonic_seconds": 254.490702948,
+        "discarded_short_run_seconds": 0.0,
+        "harmonic_fraction_of_audio": 0.9161581543096748,
+        "stable_fraction_of_audio": 0.9161581543096748
+      },
+      "chart_coverage": {
+        "ignored_nonharmonic_or_unsupported_positions": [],
+        "indistinguishable_repeated_core_positions": [
+          56,
+          75,
+          100
+        ],
+        "original_position_count": 167,
+        "measurable_core_run_count": 164
+      },
+      "accepted_for_playback": false,
+      "accuracy_measured": false
+    }
+  ],
+  "synthetic_rankings": [
+    {
+      "case_id": "fresh-section_repeat-bass_melody",
+      "view": "raw",
+      "correct_edit_distance": 9,
+      "alternative_edit_distances": {
+        "wrong_section_order": 13,
+        "missing_repeat": 12,
+        "extra_repeat": 9
+      },
+      "correct_strictly_lowest": false,
+      "wrong_controls_with_lower_distance": [],
+      "wrong_controls_with_equal_distance": [
+        "extra_repeat"
+      ]
+    },
+    {
+      "case_id": "fresh-section_repeat-bass_melody",
+      "view": "stable",
+      "correct_edit_distance": 2,
+      "alternative_edit_distances": {
+        "wrong_section_order": 7,
+        "missing_repeat": 5,
+        "extra_repeat": 3
+      },
+      "correct_strictly_lowest": true,
+      "wrong_controls_with_lower_distance": [],
+      "wrong_controls_with_equal_distance": []
+    },
+    {
+      "case_id": "fresh-section_repeat-short_decay",
+      "view": "raw",
+      "correct_edit_distance": 18,
+      "alternative_edit_distances": {
+        "wrong_section_order": 23,
+        "missing_repeat": 21,
+        "extra_repeat": 18
+      },
+      "correct_strictly_lowest": false,
+      "wrong_controls_with_lower_distance": [],
+      "wrong_controls_with_equal_distance": [
+        "extra_repeat"
+      ]
+    },
+    {
+      "case_id": "fresh-section_repeat-short_decay",
+      "view": "stable",
+      "correct_edit_distance": 5,
+      "alternative_edit_distances": {
+        "wrong_section_order": 11,
+        "missing_repeat": 8,
+        "extra_repeat": 6
+      },
+      "correct_strictly_lowest": true,
+      "wrong_controls_with_lower_distance": [],
+      "wrong_controls_with_equal_distance": []
+    },
+    {
+      "case_id": "fresh-section_repeat-slow_arpeggio",
+      "view": "raw",
+      "correct_edit_distance": 19,
+      "alternative_edit_distances": {
+        "wrong_section_order": 21,
+        "missing_repeat": 22,
+        "extra_repeat": 18
+      },
+      "correct_strictly_lowest": false,
+      "wrong_controls_with_lower_distance": [
+        "extra_repeat"
+      ],
+      "wrong_controls_with_equal_distance": []
+    },
+    {
+      "case_id": "fresh-section_repeat-slow_arpeggio",
+      "view": "stable",
+      "correct_edit_distance": 9,
+      "alternative_edit_distances": {
+        "wrong_section_order": 12,
+        "missing_repeat": 11,
+        "extra_repeat": 8
+      },
+      "correct_strictly_lowest": false,
+      "wrong_controls_with_lower_distance": [
+        "extra_repeat"
+      ],
+      "wrong_controls_with_equal_distance": []
+    },
+    {
+      "case_id": "fresh-section_repeat-soft_strum",
+      "view": "raw",
+      "correct_edit_distance": 10,
+      "alternative_edit_distances": {
+        "wrong_section_order": 13,
+        "missing_repeat": 13,
+        "extra_repeat": 9
+      },
+      "correct_strictly_lowest": false,
+      "wrong_controls_with_lower_distance": [
+        "extra_repeat"
+      ],
+      "wrong_controls_with_equal_distance": []
+    },
+    {
+      "case_id": "fresh-section_repeat-soft_strum",
+      "view": "stable",
+      "correct_edit_distance": 2,
+      "alternative_edit_distances": {
+        "wrong_section_order": 8,
+        "missing_repeat": 4,
+        "extra_repeat": 5
+      },
+      "correct_strictly_lowest": true,
+      "wrong_controls_with_lower_distance": [],
+      "wrong_controls_with_equal_distance": []
+    }
+  ],
+  "global_argmax_identical_across_controls": true,
+  "parameters": {
+    "stable_run_seconds": 0.15,
+    "core_reductions": {
+      "7": "",
+      "maj7": "",
+      "add9": "",
+      "m7": "m",
+      "7sus4": "sus4"
+    },
+    "acceptance_score_threshold": null,
+    "parameters_fitted_on_this_screen": false
+  },
+  "input_hashes": {
+    "/private/tmp/music-os-plan-20261010/experiments/analysis/arrangement_screen.py": "413704344b4bc7edb6008f305c86bc7456ab6900109bc13329857f6a04392169",
+    "/private/tmp/music-os-plan-20261010/experiments/analysis/arrangement_diagnostic.py": "081354664693f1fa218cc8fe08c7b48fd08a550a24a8f129f56da17b585addb2",
+    "/private/tmp/music-os-plan-20261010/experiments/analysis/core_chord_screen.py": "b5ffb671c437d28da7bbd4cec305e989d5b323ad5615931d477641ac5b2c2577",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/report.json": "6bbb03b358443e264121fe099a12e609be8a704d4cf603d566bf4f0516e294b6",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/wonderwall-guarded-verified-20261011/summary.json": "76e1e87db2fb60338d7cd8247c508d7f44dea12ed2497959b1cd6b9fee6efeff",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-slow_arpeggio/correct-nnls-chroma-balanced.json": "f1ef9da1eff44698c8494c6e4867d85f2be182393cbdbf80ff769c3700506f0d",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-slow_arpeggio/correct-untimed.json": "f272a51fd785e498010231e8ab175171c8df9f9eb70a5cc22e4c56d3e8a69251",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-slow_arpeggio/wrong_section_order-nnls-chroma-balanced.json": "804a0bd40a1bba9754e6413db0551a4608a178114c518c8d930378bc6925c591",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-slow_arpeggio/wrong_section_order-untimed.json": "128a1f21867a8ced7ddf55f5de8261afeea200048d4c3c940ab90cc5e0f7ec7c",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-slow_arpeggio/missing_repeat-nnls-chroma-balanced.json": "686d1ff267073f9f48417d35279c413b82c65fe47d1ff00881adf1f613c8af04",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-slow_arpeggio/missing_repeat-untimed.json": "a9069994f76232ab440cbeb61922650589537e4b4126cc72a38bbf590a4b8686",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-slow_arpeggio/extra_repeat-nnls-chroma-balanced.json": "c11349b88329183b21c289bc069cb49f7e996455cc30f214de26a14b93ccf8ee",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-slow_arpeggio/extra_repeat-untimed.json": "12f58878ff7b785eec3759694a4cded8c25134ea347593166d6379f6b8b219c3",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-soft_strum/correct-nnls-chroma-balanced.json": "dd6f95c659096cffe34064a727cf2de4869b80eca5c0508a2ca643fd4ba48b80",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-soft_strum/correct-untimed.json": "26864758e473d585746481b854b97dee96bfeea6c3c8d8f57724e8cc32794c74",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-soft_strum/wrong_section_order-nnls-chroma-balanced.json": "d587c22bcd8ab42c5f89aaec48510108294cb629b0c730881e844e29fbe4d78c",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-soft_strum/wrong_section_order-untimed.json": "5d72738339f1c30c4331ce219568e958a5110921ea42103a4405aec0ffc843b9",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-soft_strum/missing_repeat-nnls-chroma-balanced.json": "b7d83f2c548e84072ee4c63498d704020d215955382be33306537fc5606f19ef",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-soft_strum/missing_repeat-untimed.json": "7d82f9c06a3eb9d4ce00fc29f4b60a4871ec0760bf045759500b65eb12795ebc",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-soft_strum/extra_repeat-nnls-chroma-balanced.json": "27a613cf0d59fa703263dbd3c4ba6f46a4f47c841e3736afd2e4955458a5f213",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-soft_strum/extra_repeat-untimed.json": "5bd4f77151a617ea01c2ec351612d29efbafe02ab5865fd3ed51d64de6e3ed16",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-short_decay/correct-nnls-chroma-balanced.json": "0a277f488e45d30888c449f0247ecfe7d583f2e384481805b145d99003aef90a",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-short_decay/correct-untimed.json": "5ebe5b35dfad160e4de3241c4f47d0029e1c2250cdf2a75db1390fe408a38131",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-short_decay/wrong_section_order-nnls-chroma-balanced.json": "c1742b075ea96c5d292c538c66ca496f22c816df95c14f9c05f2a518e76965af",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-short_decay/wrong_section_order-untimed.json": "6d0564cc255c8bd637ca7bd155d804d20608d41694db121e73509ec6e3175a83",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-short_decay/missing_repeat-nnls-chroma-balanced.json": "3cf35b5d369738a3338930933b58c203f6c3c5b8947df370ae23ce0874c8b0c3",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-short_decay/missing_repeat-untimed.json": "488c1eaaaa5b41c3b9c19c8cda97d6c0159baf5e709afab7924c693e779645bf",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-short_decay/extra_repeat-nnls-chroma-balanced.json": "2ba4c7175ab912804078b83940b883d964e098267c1a998e02937947cf6ad1df",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-short_decay/extra_repeat-untimed.json": "bfe542ca2cc70dc26407319b73b4f9b1133d8c90de7faf715232c3b8ba7b8c91",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-bass_melody/correct-nnls-chroma-balanced.json": "79529a5af39ee8769f516eecbd42427f0918851d95b8282da7cc100c51537ae4",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-bass_melody/correct-untimed.json": "35f652d6ea53327d57d696db4d3a238a42915f2f1df6c740c9a38a009e8ff8c5",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-bass_melody/wrong_section_order-nnls-chroma-balanced.json": "accda064fca224758242d23226133af8e967313877a88d236b8d1c7b593b3cfa",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-bass_melody/wrong_section_order-untimed.json": "46280c2991162c5ed46c0a97f3da071863d33f550c2c31a9587004dfcae4d956",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-bass_melody/missing_repeat-nnls-chroma-balanced.json": "788f2899e627ca63c857aab094ec77cb9ddc5f7a716d7af15f095f8acd11a43f",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-bass_melody/missing_repeat-untimed.json": "bab2791a25b10dde6e7c940fce8f0fa00a76a1d091a2335dc572428fc16e2032",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-bass_melody/extra_repeat-nnls-chroma-balanced.json": "6e4889877b1f110c1f8343370c3194c903a7fad1f9f7b4b7aa9cad1fb651c83f",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/acceptance-validation-screen-v1/cases/fresh-validation/fresh-section_repeat-bass_melody/extra_repeat-untimed.json": "9b5eb00b17019b27cd9cec5ba228811f780a91a7b00279f74fd4232770af67ab",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/youtube-pilot/cases/oasis-wonderwall-youtube-20261010/crema.json": "1d696977fe56f91126f3e838903939a6670a335d7079fc297b45e6573a3c3e83",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/youtube-pilot/cases/oasis-wonderwall-youtube-20261010/chordino.json": "bcaec761a32f62eae070962e47e4b7cdc33394d84d8e707eb7756be48ad7ecba",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/wonderwall-guarded-verified-20261011/guided-nnls.json": "15efee3c169f0bc42bad552e0633d95e59bdc6ba1d5ff585c8bb1bb4453b86f9",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/wonderwall-guarded-verified-20261011/guided-input.json": "002054d85d182279118ac6673352f5221c0f4a873590f58bf0a30351437d2a3b",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/wonderwall-guarded-verified-20261011/reversed-order-nnls.json": "4cc67a34982116379ab43bbc50555f679745b85339171c57ddc786a311e2c4f6",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/wonderwall-guarded-verified-20261011/reversed-order-input.json": "2cbe4610e3e48b3a84205b65d2fb349f8ab4f9fca56027b491c2ec4b03143974",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/wonderwall-guarded-verified-20261011/simplified-quality-nnls.json": "a074e84f6ed9287ba3173d77fe2b0d2070d23c0dac6ddaab2558f14044a366ae",
+    "/private/tmp/music-os-plan-20261010/experiments/generated/wonderwall-guarded-verified-20261011/simplified-quality-input.json": "c1a525dcbf58746c1b8fe0d76af546cde7666e6d010c93c0283c70116ef59ff5"
+  },
+  "new_inference": false,
+  "retrospective_diagnostic": true,
+  "timing_reference_consumed": false,
+  "production_accuracy_established": false,
+  "accepted_for_playback": false,
+  "limitations": [
+    "Four procedural section recordings and Wonderwall were already exposed; this is a diagnostic, not fresh validation.",
+    "Global argmax is independent of supplied chart order but uses the same chroma/templates; CREMA/Chordino are additional imperfect evidence, not gold.",
+    "Unit-cost edit distance favors fewer edits, not verified arrangements; a wrong control can rank best. No threshold or filter is fitted here.",
+    "Stable view discards runs below the declared 150ms without relabeling, bridging gaps or merging across discarded runs; real fast changes may be lost.",
+    "Silence, unknown and unsupported intervals are excluded from harmonic comparison with duration coverage retained; confidence and correctness cannot follow from agreement.",
+    "Bass and removed extensions are not verified; adjacent identical core positions cannot supply a repeat count.",
+    "Mechanical failures make the constrained path incomplete. Mechanical success never approves playback.",
+    "The full Wonderwall chart is a teacher-based, version-unverified section/count hypothesis with no timing reference."
+  ]
+}
