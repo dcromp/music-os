@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Current project status and deployment
+    url: https://github.com/dcromp/music-os/blob/codex/mac-analysis-phase0/README.md
+    about: Check the current Mac setup and known limitations.

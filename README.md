@@ -8,7 +8,9 @@ The initial Mac algorithm selection is complete: BTC for new basic-harmony draft
 
 Updated 16 October 2026. Status and deployment information belong in this README as work progresses. The full roadmap is in [plan.md](plan.md); source findings and existing-app checks are in [docs/REUSE_AUDIT.md](docs/REUSE_AUDIT.md).
 
-**Latest checkpoint:** the all-ten automated timing/rhythm pass and remaining-six setup/pitch follow-up are complete. Ten developer drafts preserve notes and 19 provisional replay/search windows; physical musical acceptance remains open. [Per-song findings and reproduction commands](docs/CATALOGUE_TIMING_RHYTHM_CHECK.md). Matt Pocock's engineering skills are installed locally; GitHub Issues workflow configuration and the initial ticket breakdown are awaiting the one-time setup choices.
+**Latest checkpoint:** the all-ten automated timing/rhythm pass and remaining-six setup/pitch follow-up are complete. Ten developer drafts preserve notes and 19 provisional replay/search windows; physical musical acceptance remains open. [Per-song findings and reproduction commands](docs/CATALOGUE_TIMING_RHYTHM_CHECK.md). The approved GitHub Issues workflow is configured with Matt Pocock's 27 repository-local skills; the [eight-ticket index](docs/agents/tickets.md) links the remaining work and completed checkpoint.
+
+**Ticket board:** [All tickets](https://github.com/dcromp/music-os/issues?q=is%3Aissue) · [Ready for an agent](https://github.com/dcromp/music-os/issues?q=is%3Aissue+is%3Aopen+label%3Aready-for-agent+no%3Aassignee+-is%3Ablocked) · [Needs triage](https://github.com/dcromp/music-os/issues?q=is%3Aissue+is%3Aopen+label%3Aneeds-triage) · [Blocked](https://github.com/dcromp/music-os/issues?q=is%3Aissue+is%3Aopen+is%3Ablocked) · [Done](https://github.com/dcromp/music-os/issues?q=is%3Aissue+is%3Aclosed). GitHub is the source of truth for ticket state; this README keeps the status and deployment overview. [Workflow conventions](docs/agents/issue-tracker.md).
 
 | Mac experiment step | Status | Remaining ETA / evidence |
 |---|---|---|
@@ -216,6 +218,8 @@ npm start
 This is the old app startup path, not the Mac experiment setup above. Expo SDK 51 / React Native 0.74.5 need a compatibility check before current device deployment. Do not run `npm run reset-project`: it moves the existing app out of its routes.
 
 ## Next
+
+Work now follows the [GitHub ticket board](https://github.com/dcromp/music-os/issues). [#2](https://github.com/dcromp/music-os/issues/2) records the completed diagnostic checkpoint. Recording reviews are [#3–#6](docs/agents/tickets.md), the reviewed practice pack is [#7](https://github.com/dcromp/music-os/issues/7), optional guitar feedback is [#8](https://github.com/dcromp/music-os/issues/8), and the parallel content-route design is [#9](https://github.com/dcromp/music-os/issues/9). Check native blockers before claiming a ticket. The new work-request and bug forms activate on GitHub after [PR #1](https://github.com/dcromp/music-os/pull/1) reaches the default branch; the live tickets, labels and dependencies are already available.
 
 **Roadmap stage 1 is complete.** [Algorithm selection](docs/ALGORITHM_SELECTION.md) records the fixed offline workflow, alternatives and limits. Ten fresh BTC runs succeeded on the exact cached first-ten inputs: 2,024.1 seconds of audio in 36.1 seconds of batch processing with existing caches. A separate BTC/CREMA pack is prepared for research; the current ports 8070/8068 retain their existing charts and browser-local practice/feedback identities. The repeatable verifier checks model/settings/evidence pins and native byte preservation. [Completion evidence](docs/ALGORITHM_SELECTION_RESULTS.json).
 

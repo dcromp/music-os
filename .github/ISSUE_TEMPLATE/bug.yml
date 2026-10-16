@@ -1,0 +1,26 @@
+name: Bug report
+description: Report a software or play-along problem.
+labels: [needs-triage, bug]
+body:
+  - type: textarea
+    id: behavior
+    attributes:
+      label: What happened?
+      description: Describe the problem and what you expected.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: How to reproduce
+      description: Give steps, browser/device and the affected page or song where known.
+  - type: input
+    id: recording
+    attributes:
+      label: Recording or playback time (optional)
+      description: A title or approximate moment is enough; no chord transcription is required.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Additional evidence (optional)
+      description: Link a permitted example or describe an issue tap. Keep private feedback, recordings and copyrighted charts out of public issues.
