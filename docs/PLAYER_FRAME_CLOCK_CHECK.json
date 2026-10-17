@@ -4,7 +4,7 @@
   "issue": "https://github.com/dcromp/music-os/issues/15",
   "trigger": {
     "quote": "the D chord on wild thing seems a little late",
-    "exact_occurrence": "not supplied; clarification requested",
+    "exact_occurrence": "Opening D, around 4 seconds; supplied in follow-up to the pre-fix clarification question",
     "recording_id": "troggs-wild-thing-youtube-20261011"
   },
   "change": "Display refresh follows actual audio.currentTime on animation frames while playing. Native cues and all timing metadata unchanged.",
@@ -79,5 +79,27 @@
     "This fixes measured rendering latency, not independently verified musical boundary timing.",
     "Other detector onset differences vary locally; no blanket D or chart offset applied.",
     "No new inference, source retuning, lyric/chord search or full arrangement acceptance."
-  ]
+  ],
+  "opening_D_followup": {
+    "date": "2026-10-17",
+    "quote": "Opening D, around 4 seconds",
+    "relation_to_browser_check": "The occurrence is the same native first D used in the existing before/after browser comparison.",
+    "new_post_fix_audition_report": false,
+    "cached_detector_comparison": {
+      "primary_path": "experiments/generated/automatic-first-ten-v1/cases/troggs-wild-thing-youtube-20261011/primary.json",
+      "primary_sha256": "13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81",
+      "primary_D_start_seconds": 4.08671201814059,
+      "secondary_path": "experiments/generated/automatic-first-ten-v1/cases/troggs-wild-thing-youtube-20261011/chordino.json",
+      "secondary_sha256": "f8045c178233cfe6a02e5e5831357df0c3e18752ac79400f50518663185c9a46",
+      "secondary_D6_start_seconds": 3.9938322,
+      "difference_ms": 92.87981814058988,
+      "nnls_evidence_path": "experiments/generated/catalogue-starter-four-pitch-v3-20261014/troggs-wild-thing-youtube-20261011/nnls-evidence.json",
+      "nnls_evidence_sha256": "d68ea1f07a5c3b3eed384bc598814e9a54b8ead78b63d9e72f06f57ddc156e70",
+      "nnls_window_seconds": 0.7430385487528345,
+      "nnls_hop_seconds": 0.09287981859410431,
+      "nnls_timestamp_semantics": "analysis window center"
+    },
+    "decision": "Retain the native 4.086712-second D boundary. The earlier secondary estimate and centered analysis window do not independently establish a physical chord-change time.",
+    "limit": "The existing measured rendering fix applies to this occurrence; audible musical timing and post-fix founder acceptance remain unverified."
+  }
 }
