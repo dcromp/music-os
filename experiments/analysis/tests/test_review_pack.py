@@ -156,6 +156,10 @@ class ReviewPackTests(unittest.TestCase):
             with patch.object(review, "STATIC", static):
                 files = review.public_files(pack)
                 files["/cases/review-case/primary.json"] = primary
+                for name in ("rhythm.json", "practice.json", "learning.json"):
+                    guide = static / name
+                    guide.write_text('{"fixture": true}\n')
+                    files["/" + name] = guide
                 server = ThreadingHTTPServer(("127.0.0.1", 0), partial(review.ReviewHandler, files=files))
                 thread = threading.Thread(target=server.serve_forever, daemon=True)
                 thread.start()
@@ -184,7 +188,7 @@ class ReviewPackTests(unittest.TestCase):
             self.assertEqual(headers["X-Music-OS-Chart-SHA256"], hashlib.sha256(body).hexdigest())
             self.assertEqual(headers["Content-Type"], "application/json")
             self.assertEqual(int(headers["Content-Length"]), len(body))
-            self.assertEqual(headers["Cache-Control"], "no-cache")
+            self.assertEqual(headers["Cache-Control"], "no-store")
             self.assertIn("default-src 'self'", headers["Content-Security-Policy"])
             self.assertEqual(headers["X-Content-Type-Options"], "nosniff")
             status, head_headers, head_body = self.request(port, "HEAD", "/cases/review-case/primary.json")
@@ -192,6 +196,38 @@ class ReviewPackTests(unittest.TestCase):
             self.assertEqual(head_body, b"")
             self.assertEqual(head_headers["X-Music-OS-Chart-SHA256"], headers["X-Music-OS-Chart-SHA256"])
             self.assertEqual(head_headers["Content-Length"], headers["Content-Length"])
+            self.assertEqual(head_headers["Cache-Control"], "no-store")
+
+    def test_mutable_player_files_replace_legacy_cache_despite_future_validators(self):
+        with self.primary_server() as (pack, primary, port):
+            paths = {"/": review.STATIC / "index.html", "/index.html": review.STATIC / "index.html",
+                     "/app.js": review.STATIC / "app.js", "/style.css": review.STATIC / "style.css",
+                     "/manifest.json": pack / "manifest.json",
+                     "/cases/review-case/candidate-a.json": primary.parent / "candidate-a.json",
+                     "/cases/review-case/primary.json": primary}
+            paths.update({"/" + name: review.STATIC / name for name in ("rhythm.json", "practice.json", "learning.json")})
+            validators = {"If-Modified-Since": "Thu, 31 Dec 2099 23:59:59 GMT", "If-None-Match": '"old-player"'}
+            for route, path in paths.items():
+                with self.subTest(route=route):
+                    original_mtime = path.stat().st_mtime
+                    path.write_bytes(path.read_bytes() + b"\n")
+                    os.utime(path, (original_mtime, original_mtime))
+                    expected = path.read_bytes()
+                    status, headers, body = self.request(port, "GET", route, validators)
+                    self.assertEqual(status, 200)
+                    self.assertEqual(body, expected)
+                    self.assertEqual(headers["Cache-Control"], "no-store")
+                    self.assertEqual(int(headers["Content-Length"]), len(body))
+                    self.assertNotIn("Last-Modified", headers)
+                    if path == primary:
+                        self.assertEqual(headers["X-Music-OS-Chart-SHA256"], hashlib.sha256(body).hexdigest())
+                    else:
+                        self.assertNotIn("X-Music-OS-Chart-SHA256", headers)
+                    head_status, head_headers, head_body = self.request(port, "HEAD", route, validators)
+                    self.assertEqual(head_status, 200)
+                    self.assertEqual(head_body, b"")
+                    for name in ("Content-Type", "Content-Length", "Cache-Control"):
+                        self.assertEqual(head_headers[name], headers[name])
 
     def test_primary_chart_hash_and_body_share_one_read_when_file_changes(self):
         with self.primary_server() as (_, primary, port):

@@ -1,0 +1,197 @@
+{
+  "schema_version": "player-cache-followup-1.0",
+  "date": "2026-10-17",
+  "issue": "https://github.com/dcromp/music-os/issues/12",
+  "trigger": "Founder confirmed existing player still showed E at Wild Thing25s; fresh live8070 page already showed A.",
+  "change": "Safely allowlisted HTML/JS/CSS/JSON bypass old conditional validators and return200 with Cache-Control:no-store. Existing open JavaScript still requires a reload or fresh tab.",
+  "preserved": "Native audio/chart bytes, exact correction gates, pack ID, feedback/progress keys, private-route policy and audio range handling.",
+  "python_tests": {
+    "discovered": 441,
+    "passed": 421,
+    "optional_skips": 20
+  },
+  "javascript_player_checks_rechecked": 74,
+  "focused_http_and_curation_checks": 28,
+  "workflow": {
+    "policy": "experiments/fixtures/selected-workflow-player-v2.json",
+    "verified_pins": 39,
+    "selected_cases": 10
+  },
+  "unchanged_cached_artifacts": 41,
+  "live_mutable_routes_checked": [
+    {
+      "route": "/",
+      "sha256": "3fe37baab2a19634cb433139f36de52df17633740ea47ab25e53d0f2e60ba6f8"
+    },
+    {
+      "route": "/index.html",
+      "sha256": "3fe37baab2a19634cb433139f36de52df17633740ea47ab25e53d0f2e60ba6f8"
+    },
+    {
+      "route": "/app.js",
+      "sha256": "1eb7f17d34483dda9c39c9376a06b8935f16102f7ed7182608fd7daa75c92729"
+    },
+    {
+      "route": "/style.css",
+      "sha256": "fb543c6dbe304b47a91df3151d0c22b85e032dee4c791f5f4a3f025564ccd6f7"
+    },
+    {
+      "route": "/manifest.json",
+      "sha256": "556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671"
+    },
+    {
+      "route": "/rhythm.json",
+      "sha256": "09c5c68dc1dc44f8380871744c59d00043e1c6ea42650f3911353f84a78962f7"
+    },
+    {
+      "route": "/practice.json",
+      "sha256": "18500b64d5a91570dd212ca6786793bd9a2d50444c92cced0a13629c51b16b06"
+    },
+    {
+      "route": "/learning.json",
+      "sha256": "72ab91db9a027669d660a2258165518214f61004a87a9d33919c496f75e23a87"
+    },
+    {
+      "route": "/cases/troggs-wild-thing-youtube-20261011/primary.json",
+      "sha256": "13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81"
+    },
+    {
+      "route": "/cases/troggs-wild-thing-youtube-20261011/evidence.json",
+      "sha256": "7eee3ae7ea7b659f175880308759ae35726529b7f7bc6b1a0fbe487248ac68dc"
+    },
+    {
+      "route": "/cases/troggs-wild-thing-youtube-20261011/chordino.json",
+      "sha256": "f8045c178233cfe6a02e5e5831357df0c3e18752ac79400f50518663185c9a46"
+    },
+    {
+      "route": "/cases/bob-dylan-knockin-heavens-door-youtube-20261011/primary.json",
+      "sha256": "022405eadb0d332a34ca66b74989e72cc5e597e57417c1a289178e0a7a084082"
+    },
+    {
+      "route": "/cases/bob-dylan-knockin-heavens-door-youtube-20261011/evidence.json",
+      "sha256": "2b54140c107aaedfa72bdede2765a27550997c951a21b13b30c1490bb4f5afc8"
+    },
+    {
+      "route": "/cases/bob-dylan-knockin-heavens-door-youtube-20261011/chordino.json",
+      "sha256": "d3e838dac71c2a824814268290936ccd053a0f975f0af17ced49de882defcc2d"
+    },
+    {
+      "route": "/cases/van-morrison-brown-eyed-girl-youtube-20261011/primary.json",
+      "sha256": "1bc1f1c9467a8bea0aab8e8ae9ea4ccbd3f71ce47c52a1376f591528bcb1170d"
+    },
+    {
+      "route": "/cases/van-morrison-brown-eyed-girl-youtube-20261011/evidence.json",
+      "sha256": "269568e1c5670680ffcd38908228ea976c5c42487245ef9b59f195510f64203d"
+    },
+    {
+      "route": "/cases/van-morrison-brown-eyed-girl-youtube-20261011/chordino.json",
+      "sha256": "a9b647dd9e4c5af426d4672d95210fb64ceeba636c624b9d022292860d3e8ee1"
+    },
+    {
+      "route": "/cases/beatles-love-me-do-youtube-20261011/primary.json",
+      "sha256": "a12394c6654f761febee240b95d60c45b7c55e33a6fb287225d181976e6531c4"
+    },
+    {
+      "route": "/cases/beatles-love-me-do-youtube-20261011/evidence.json",
+      "sha256": "5e03e3c77965e46c72a4138e0c42ec5acf5e17cdce40e65f9d7edaf1d072a4ca"
+    },
+    {
+      "route": "/cases/beatles-love-me-do-youtube-20261011/chordino.json",
+      "sha256": "a20662914898b0507ca37cc8510e73e3d41d9207077bc798ff150c49ede4af8e"
+    },
+    {
+      "route": "/cases/beatles-twist-and-shout-youtube-20261011/primary.json",
+      "sha256": "09f64db9a6563e2256c528576bd9776b13c84128ce3b982810b8dfbe6145bb59"
+    },
+    {
+      "route": "/cases/beatles-twist-and-shout-youtube-20261011/evidence.json",
+      "sha256": "e886b06c671149bb1d1c72beea36f5f84b8aa16b62a7dd490608f889a79dd9f6"
+    },
+    {
+      "route": "/cases/beatles-twist-and-shout-youtube-20261011/chordino.json",
+      "sha256": "fb968ff8ce30627a37712348de39f520f46c7395b2b7085dad0212a3e8b6e5d6"
+    },
+    {
+      "route": "/cases/white-stripes-seven-nation-army-youtube-20261011/primary.json",
+      "sha256": "b7deadf0f4f816c2da6c91e1f8c807ceebc543c6b106e728d1e54bbedf2f0f9b"
+    },
+    {
+      "route": "/cases/white-stripes-seven-nation-army-youtube-20261011/evidence.json",
+      "sha256": "d278e9297643d484866631caee3a771ba21166a079cf87abf06318233f0d77df"
+    },
+    {
+      "route": "/cases/white-stripes-seven-nation-army-youtube-20261011/chordino.json",
+      "sha256": "b5561d083c417ea4eeef425534a59f76c9e27e144afa4e5640181fee1eb9906f"
+    },
+    {
+      "route": "/cases/nirvana-come-as-you-are-youtube-20261011/primary.json",
+      "sha256": "86371063c859a1b412d39a8ef4a87436863690d181838600946ce207f960bee1"
+    },
+    {
+      "route": "/cases/nirvana-come-as-you-are-youtube-20261011/evidence.json",
+      "sha256": "44310bcc63ba9465677aca753de2ceb9bc647dbb4e624943da7595c0e7bf72de"
+    },
+    {
+      "route": "/cases/nirvana-come-as-you-are-youtube-20261011/chordino.json",
+      "sha256": "7e775151d29d1a829d336bb701c04981205a48970974257db4d2368d86e024a1"
+    },
+    {
+      "route": "/cases/radiohead-creep-youtube-20261010/primary.json",
+      "sha256": "9ab5ce1f02b7ba127554937009f1747112e7fc3df583ddcd3b8abcfa9cdc191c"
+    },
+    {
+      "route": "/cases/radiohead-creep-youtube-20261010/evidence.json",
+      "sha256": "b506b76f2d3b5ed06e00866c8b8a158d5510856d0513564ffb820ed47561bcd1"
+    },
+    {
+      "route": "/cases/radiohead-creep-youtube-20261010/chordino.json",
+      "sha256": "e2af0e0f30f235cbd0c90f4afd009678312013c4c75b365049159d39770cf474"
+    },
+    {
+      "route": "/cases/animals-house-rising-sun-official-20261011/primary.json",
+      "sha256": "71eb918cc9ef3662d5c6d75b49814f700b89a2fc15b73c1ce92d9bdb18dd6037"
+    },
+    {
+      "route": "/cases/animals-house-rising-sun-official-20261011/evidence.json",
+      "sha256": "617433094dc7b62c9bffa4192537c63cc4a97db6816925d95b73befaa53d9a09"
+    },
+    {
+      "route": "/cases/animals-house-rising-sun-official-20261011/chordino.json",
+      "sha256": "519748e12a7612c4965339f13d09e733192f2dba9e8de1209ef685a8086e1c13"
+    },
+    {
+      "route": "/cases/oasis-wonderwall-youtube-20261010/primary.json",
+      "sha256": "1d696977fe56f91126f3e838903939a6670a335d7079fc297b45e6573a3c3e83"
+    },
+    {
+      "route": "/cases/oasis-wonderwall-youtube-20261010/evidence.json",
+      "sha256": "5c167ef27d0a04f94a618147f504711eacf1aa82f802ef6db646e0c9ca07bb78"
+    },
+    {
+      "route": "/cases/oasis-wonderwall-youtube-20261010/chordino.json",
+      "sha256": "bcaec761a32f62eae070962e47e4b7cdc33394d84d8e707eb7756be48ad7ecba"
+    }
+  ],
+  "http_checks": [
+    "All38mutable routes returncurrent200/no-store despitefuture If-Modified-Since.",
+    "WAVRange bytes0-7 returns206/exactbytes.",
+    "Repository/private/query routes remain404."
+  ],
+  "browser": {
+    "url": "http://127.0.0.1:8070/",
+    "visible_marker": "Music OS \u00b7 local experiment \u00b7 17 Oct update",
+    "song": "The Troggs - Wild Thing",
+    "playback_seconds": 25,
+    "now": "A",
+    "note": "Reported correction: A near0:25. Cue timing is still estimated.",
+    "feedback_or_progress_edits": false,
+    "fresh_tab_left_open": true
+  },
+  "proof": {
+    "path": "experiments/generated/player-proof-20261017/wild-live-cache-followup.jpg",
+    "sha256": "cfb72e197e3bcecc302eb979f60a080a6b4b7cfe8d1f5b768fcb45e3dae1baf4",
+    "git_ignored": true
+  },
+  "auditory_review": false,
+  "additional_chord_or_timing_corrections": false
+}

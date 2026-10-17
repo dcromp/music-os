@@ -275,21 +275,25 @@ class ReviewHandler(lab.BenchHandler):
     def send_head(self):
         path = Path(self.translate_path(self.path))
         mapped = self.public_files.get(unquote(urlsplit(self.path).path))
-        if path.name != "primary.json" or path != mapped:
+        if path != mapped or path.suffix.lower() not in {".html", ".js", ".css", ".json"}:
             return super().send_head()
-        # Hash the response bytes, not a separately reopened chart. The client
-        # can verify its optional overlay even without browser WebCrypto.
+        # Local player code and guidance change without changing their URLs.
+        # Always replace legacy cached responses, even if an old tab sends a
+        # future If-Modified-Since. Audio retains its separate range handling.
         try:
             body = path.read_bytes()
         except OSError:
-            self.send_error(404, "Chart file not found")
+            self.send_error(404, "Local player file not found")
             return None
         self._remaining_bytes = None
         self.send_response(200)
-        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Type", self.guess_type(str(path)))
         self.send_header("Content-Length", str(len(body)))
-        self.send_header("X-Music-OS-Chart-SHA256", hashlib.sha256(body).hexdigest())
-        self.send_header("Cache-Control", "no-cache")
+        # Bind the optional correction identity to these exact response bytes,
+        # including in browsers without WebCrypto; do not hash a reopened file.
+        if path.name == "primary.json":
+            self.send_header("X-Music-OS-Chart-SHA256", hashlib.sha256(body).hexdigest())
+        self.send_header("Cache-Control", "no-store")
         self.end_headers()
         return io.BytesIO(body)
 

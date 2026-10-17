@@ -50,7 +50,7 @@ The server's `X-Music-OS-Chart-SHA256` response header binds a digest to the exa
 chart bytes it serves. Browsers with WebCrypto compute the digest directly;
 embedded browsers without it use this local-server header. Without a valid
 digest the correction is not applied and original playback remains available.
-Pack/chart/teaching JSON requests bypass stale browser caches when a localhost port is reused. Advanced source details show the effective chart digest, analysis and pack ID. This local provenance check does not prove musical accuracy.
+Pack/chart/teaching JSON requests bypass stale browser caches when a localhost port is reused. The subsequent [cache follow-up](PLAYER_CACHE_FOLLOWUP.json) also serves allowlisted HTML, scripts, styles and JSON as current `200`/`no-store` responses, replacing legacy conditional caches. A page already open still needs one reload or a fresh tab; **17 Oct update** identifies the current HTML. Advanced source details show the effective chart digest, analysis and pack ID. This local provenance check does not prove musical accuracy.
 
 Dylan's single detected Am7 is retained in the raw/full chart. The existing
 Core chords choice shows Am, just as Em7 can show Em; no additional label or
