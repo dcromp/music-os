@@ -45,7 +45,7 @@ Detailed negative results remain in [beat comparisons](BEAT_THIS_COMPARISON.md),
 
 ## Implementation and reproducibility
 
-The versioned [selection record](../experiments/fixtures/selected-workflow-v1.json) pins the models, existing settings, dependency files, adapters and evidence. The existing adapters retain their frozen inference behaviour. The automatic pack builder now supports an explicit BTC primary and CREMA secondary, including separate batch-output roots, and preserves native chart/audio bytes. Default commands without model flags retain the legacy CREMA/Chordino mode.
+The original [selection record](../experiments/fixtures/selected-workflow-v1.json) preserves the 13 October model/settings, dependency, adapter and evidence pins. It remains immutable historical evidence. The [current player-guidance policy](../experiments/fixtures/selected-workflow-player-v2.json), dated 17 October, retains 37 frozen inputs and versions only the learning/practice guide pins for founder-authorized player changes. The selected models, inference settings, native chart/audio bytes and beat grid are unchanged. The existing adapters retain their frozen inference behaviour. The automatic pack builder supports an explicit BTC primary and CREMA secondary, including separate batch-output roots, and preserves native chart/audio bytes. Default commands without model flags retain the legacy CREMA/Chordino mode.
 
 From `/Users/davidcrompton/Documents/music-os`, after the model setup in [BTC_SETUP.md](BTC_SETUP.md) and [CREMA_SETUP.md](CREMA_SETUP.md), use fresh output directories:
 
@@ -64,16 +64,34 @@ From `/Users/davidcrompton/Documents/music-os`, after the model setup in [BTC_SE
 Verify the saved selected pack without inference or any accuracy claim:
 
 ```sh
-.venv-analysis/bin/python -B experiments/analysis/workflow_check.py
+.venv-analysis/bin/python -B experiments/analysis/workflow_check.py \
+  --policy experiments/fixtures/selected-workflow-player-v2.json
 ```
 
 For the replay directories above, add `--pack experiments/generated/automatic-first-ten-selected-replay --btc-root experiments/generated/selected-first-ten-btc-replay`. An optional `--output` must name an unused report file; existing inputs/reports are never overwritten.
 
 The source pack already contains the exact cached CREMA charts. For new recordings, run CREMA's batch adapter too and pass its output directory with `--secondary-root`. Neither inference adapter downloads audio or trains a model. Analysis is offline; playback uses cached outputs without model environments.
 
+The verifier defaults to the historical v1 policy when `--policy` is omitted.
+Use the explicit player-v2 policy for the current checkout: the two guide-file
+hash changes are intentional and do not reopen model selection. The old v1
+pins and their completion record should not be rewritten to match new guides.
+
 [Completion evidence](ALGORITHM_SELECTION_RESULTS.json) records the new ten-song BTC run, 39 frozen-file checks, selected-pack byte/identity checks and the retained original player identity. All 319 available Python checks and 110 JavaScript checks pass; 20 optional-dependency Python checks are skipped in the analysis environment. Live QA verifies playback, seeking and the CREMA alternative, with all 48 served assets byte-identical and four private routes returning 404. The new pack is a local research artifact, not a public deployment. Ports 8070/8068 retain the existing CREMA charts and saved practice/feedback context. Promote reviewed arrangements in the next milestone rather than silently replacing them from a benchmark ranking.
 
 ## Next acceptance gates
+
+The 17 October player update adds visible approximate bar lengths and
+hold-relative duration divisions; it does not infer verified measure starts,
+numbered bars or downbeats. Founder feedback supplies a separate provisional
+Wild Thing A display correction near 25 seconds over the native E interval at
+23.777–26.099 seconds. Its raw prediction and unverified boundaries are retained.
+The seven-step guitar-first path uses E-standard teaching setups, with Love Me
+Do still selectable; these notes do not certify the recordings' physical
+tunings. Dylan's raw Am7 remains in Full chords and appears as Am in Core.
+These are player/teaching changes, not new algorithm results or arrangement
+acceptance. See [duration/correction details](PLAYALONG_RHYTHM.md) and
+[path metadata](PLAYALONG_LEARNING_PATH.md).
 
 Stage 2 checks the exact recording, sounding harmony versus played shapes, physical change timing, sections and suggested rhythms. Record actual reviewer correction minutes per audio minute and the changes needed. Detector disagreement is a workload hint, not measured correction time or accuracy.
 

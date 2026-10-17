@@ -1,7 +1,7 @@
 "use strict";
 const assert = require("node:assert/strict");
 const { annotationExport, validateCandidate, currentEvent, exposureKey, loadExposure, recordExposure, refreshExposure, validateEvidence, clampSeek, playbackSnapshot, feedbackKey, feedbackExport, captureFeedback, loadFeedback, saveFeedback, transposePracticeLabel, practiceLabel, coreChordLabel, displayedChord, practiceTimeline,
-  currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, validatePracticeManifest, safeTeachingURL, validateLearningManifest, practiceProgressKey, practiceProgressExport, loadPracticeProgress, savePracticeProgress, nextPracticeStep, initialPracticeStep } = require("./app.js");
+  currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, durationPresentation, holdBarDivisions, correctedDisplayEvents, validatePracticeManifest, safeTeachingURL, validateLearningManifest, practiceProgressKey, practiceProgressExport, loadPracticeProgress, savePracticeProgress, nextPracticeStep, initialPracticeStep } = require("./app.js");
 let checks = 0;
 function test(name, callback) { callback(); checks++; console.log(`ok ${name}`); }
 const recording = { id: "excerpt", title: "Generated", audio_sha256: "hash", duration_seconds: 20, sample_rate_hz: 100 };
@@ -370,7 +370,7 @@ test("valid beat grids are paired to the exact recording and offer approximate f
   assert.equal(paired, rhythmCase);
   assert.deepEqual(estimatedSpan(paired, 0, 2), {beats: 4, bars: 1});
   assert.deepEqual(estimatedSpan(paired, 0, 1), {beats: 2, bars: 0.5});
-  assert.equal(durationCaption(0, 1, paired), "~0.5 bars · 1.0 s");
+  assert.equal(durationCaption(0, 1, paired), "~½ bar · 1.0 s");
   assert.equal(durationCaption(0, 4, paired), "~2 bars · 4.0 s");
 });
 test("positive short holds never round to zero bars or beats", () => {
@@ -470,33 +470,33 @@ const learningCases = arrangementFixture.cases.map(item => ({id: item.recording.
 const learningPractice = validatePracticeManifest(json("experiments/review/practice.json"), learningCases);
 const learning = validateLearningManifest(learningFixture, learningCases, learningPractice);
 const clone = value => JSON.parse(JSON.stringify(value));
-test("learning source pins, proposed order and exact audio identities match the reviewed first ten", () => {
-  const catalogue = json("catalogue/first-ten-review.json"), sources = new Map(arrangementFixture.sources.map(source => [source.id, source]));
+test("guitar-first source pins, selected order and exact audio identities match audited inputs", () => {
+  const catalogue = json("catalogue/first-ten-review.json"), sources = [...arrangementFixture.sources, ...json("catalogue/starter-four-teaching-review.json").sources];
   for (const input of learningFixture.inputs) {
     assert.equal(crypto.createHash("sha256").update(fs.readFileSync(path.join(root, input.path))).digest("hex"), input.sha256);
   }
-  assert.equal(learning.steps.length, 8); assert.equal(learning.guides.length, 2);
-  assert.deepEqual(learning.steps.map(step => step.id), ["wild-thing", "love-me-do", "knockin-on-heaven-s-door", "brown-eyed-girl", "twist-and-shout", "the-house-of-the-rising-sun", "wonderwall", "creep"]);
+  assert.equal(learning.steps.length, 7); assert.equal(learning.guides.length, 2);
+  assert.deepEqual(learning.steps.map(step => step.id), ["wild-thing", "knockin-on-heaven-s-door", "brown-eyed-girl", "twist-and-shout", "the-house-of-the-rising-sun", "wonderwall", "creep"]);
   for (const item of [...learning.steps, ...learning.guides]) {
     const proposal = catalogue.songs.find(song => song.id === item.id), paired = arrangementFixture.cases.find(song => song.song_id === item.id);
     assert.equal(item.recording.id, proposal.selected_recording.recording_id); assert.deepEqual(item.recording, paired.recording);
     if (item.status === "practice-suggestion") {
-      assert.equal(proposal.practice_placement.track, "open-chord-rhythm"); assert.equal(item.order, proposal.practice_placement.proposed_order);
+      assert.equal(proposal.practice_placement.track, "open-chord-rhythm"); assert.equal(item.order, learning.steps.indexOf(item) + 1);
       assert.equal(item.practice_pattern_id, learningPractice.get(item.recording.id).patterns[0].id);
     }
-    for (const source of item.sources) assert.deepEqual(source, {id: sources.get(source.id).id, title: sources.get(source.id).title, url: sources.get(source.id).url});
+    for (const source of item.sources) assert.ok(sources.some(known => known.id === source.id && known.title === source.title && known.url === source.url));
   }
 });
 test("learning validation leaves source metadata and practice patterns unchanged", () => {
   const before = JSON.stringify(learningFixture), practiceBefore = JSON.stringify([...learningPractice]);
   const reversed = {...learningFixture, steps: [...learningFixture.steps].reverse()};
-  assert.deepEqual(validateLearningManifest(reversed, learningCases, learningPractice).steps.map(step => step.order), [1, 2, 3, 4, 5, 6, 7, 8]);
+  assert.deepEqual(validateLearningManifest(reversed, learningCases, learningPractice).steps.map(step => step.order), [1, 2, 3, 4, 5, 6, 7]);
   assert.equal(JSON.stringify(learningFixture), before); assert.equal(JSON.stringify([...learningPractice]), practiceBefore);
 });
 test("learning paths filter unavailable recordings and preserve the source order in subset packs", () => {
-  const subset = learningCases.filter(item => [learning.steps[6].recording.id, learning.steps[7].recording.id].includes(item.recording.id));
+  const subset = learningCases.filter(item => [learning.steps[5].recording.id, learning.steps[6].recording.id].includes(item.recording.id));
   const result = validateLearningManifest(learningFixture, subset, learningPractice);
-  assert.equal(result.total_steps, 8); assert.deepEqual(result.steps.map(step => step.order), [7, 8]); assert.deepEqual(result.guides, []);
+  assert.equal(result.total_steps, 7); assert.deepEqual(result.steps.map(step => step.order), [6, 7]); assert.deepEqual(result.guides, []);
   const absent = validateLearningManifest(learningFixture, [{recording: {...learningCases[0].recording, id: "different-song"}}], learningPractice);
   assert.deepEqual(absent.steps, []); assert.deepEqual(absent.guides, []);
 });
@@ -625,6 +625,212 @@ test("initial practice choice resumes the first unpractised available step and k
   progress.set(steps[1].id, {practised: true}); assert.equal(initialPracticeStep([...steps].reverse(), progress), steps[0]);
   assert.equal(initialPracticeStep([], progress), null); assert.equal(JSON.stringify(steps), before);
   assert.equal(progress.get(steps[0].id).practised, true);
+});
+
+// Add durationPresentation, holdBarDivisions and correctedDisplayEvents to the
+// existing app.js helper import. This fragment uses the existing test()/assert.
+const displayTestRhythm = {
+  beat_times_seconds: Array.from({length: 41}, (_, index) => index * 0.5),
+  beats_per_bar: 4
+};
+
+test("visible duration captions distinguish quarter, half, full and multiple bars", () => {
+  assert.deepEqual(durationPresentation(0, 1, displayTestRhythm),
+    {compact: "~½ bar", full: "~½ bar · 1.0 s", unit: "bars"});
+  assert.equal(durationPresentation(0, 0.5, displayTestRhythm).compact, "~¼ bar");
+  assert.equal(durationPresentation(0, 2, displayTestRhythm).compact, "~1 bar");
+  assert.equal(durationPresentation(0, 3, displayTestRhythm).compact, "~1½ bars");
+  assert.equal(durationPresentation(0, 4, displayTestRhythm).compact, "~2 bars");
+});
+
+test("irregular duration estimates retain decimals instead of snapping to a half bar", () => {
+  // At this pulse rate a bar lasts two seconds: 1.2 s = 0.6 bar.
+  assert.equal(durationPresentation(0, 1.2, displayTestRhythm).compact, "~0.6 bar");
+  assert.equal(durationPresentation(0, 2.4, displayTestRhythm).compact, "~1.2 bars");
+  assert.equal(durationPresentation(0, 0.01, displayTestRhythm).compact, "<0.1 bar");
+});
+
+test("duration display respects compound pulse units, unknown meter and observed coverage", () => {
+  // Two dotted-quarter pulses make a 6/8 bar; four pulses make two bars.
+  const compound = {...displayTestRhythm, beats_per_bar: 2};
+  assert.equal(durationPresentation(0, 2, compound).compact, "~2 bars");
+  const unknownMeter = {...displayTestRhythm, beats_per_bar: null};
+  assert.deepEqual(durationPresentation(0, 1, unknownMeter),
+    {compact: "~2 beats", full: "~2 beats · 1.0 s", unit: "beats"});
+  const trimmed = {...displayTestRhythm, beat_times_seconds: [1, 2, 3]};
+  for (const [start, end] of [[0, 2], [2, 4]]) {
+    assert.deepEqual(durationPresentation(start, end, trimmed),
+      {compact: "2.0 s", full: "2.0 s", unit: "seconds"});
+  }
+  assert.deepEqual(durationPresentation(0, 2),
+    {compact: "2.0 s", full: "2.0 s", unit: "seconds"});
+});
+
+const displayTestVariableRhythm = {
+  beat_times_seconds: [0, 0.5, 1, 1.5, 2.5, 3.5, 5, 6.5, 8, 9.5, 11, 13, 15],
+  beats_per_bar: 4
+};
+const displayTestLongEvent = {start_seconds: 0.25, end_seconds: 15, label: "A"};
+
+test("hold divisions interpolate variable tempo from the original fractional-beat onset", () => {
+  // Start is pulse 0.5. Four/eight pulses later are positions 4.5/8.5,
+  // which interpolate to 3.0 s and 8.75 s in these independent timestamps.
+  const before = JSON.stringify([displayTestLongEvent, displayTestVariableRhythm]);
+  const divisions = holdBarDivisions(displayTestLongEvent, displayTestVariableRhythm, 0.25, 15);
+  assert.deepEqual(divisions.map(item => item.time_seconds), [3, 8.75]);
+  assert.ok(Math.abs(divisions[0].offset_fraction - 11 / 59) < 1e-12);
+  assert.ok(Math.abs(divisions[1].offset_fraction - 34 / 59) < 1e-12);
+  assert.equal(JSON.stringify([displayTestLongEvent, displayTestVariableRhythm]), before);
+});
+
+test("clipping a long hold preserves its onset-anchored divisions and full duration", () => {
+  const divisions = holdBarDivisions(displayTestLongEvent, displayTestVariableRhythm, 5, 12);
+  assert.equal(divisions.length, 1);
+  assert.equal(divisions[0].time_seconds, 8.75);
+  assert.ok(Math.abs(divisions[0].offset_fraction - 15 / 28) < 1e-12);
+  assert.equal(durationPresentation(displayTestLongEvent.start_seconds,
+    displayTestLongEvent.end_seconds, displayTestVariableRhythm).compact, "~2.9 bars");
+  assert.deepEqual(holdBarDivisions(displayTestLongEvent, displayTestVariableRhythm, 3, 8.75), []);
+});
+
+test("hold divisions require covered declared meter and never add an end-boundary tick", () => {
+  const event = {start_seconds: 0, end_seconds: 4, label: "A"};
+  assert.deepEqual(holdBarDivisions(event, displayTestRhythm, 0, 4),
+    [{time_seconds: 2, offset_fraction: 0.5}]);
+  assert.deepEqual(holdBarDivisions(event, {...displayTestRhythm, beats_per_bar: 2}, 0, 4),
+    [{time_seconds: 1, offset_fraction: 0.25}, {time_seconds: 2, offset_fraction: 0.5},
+      {time_seconds: 3, offset_fraction: 0.75}]);
+  assert.deepEqual(holdBarDivisions(event, {...displayTestRhythm, beats_per_bar: null}, 0, 4), []);
+  assert.deepEqual(holdBarDivisions(event, {...displayTestRhythm, beat_times_seconds: [1, 2, 3]}, 0, 4), []);
+  assert.deepEqual(holdBarDivisions(event, null, 0, 4), []);
+});
+
+const displayTestRecording = {
+  id: "display-correction-recording", title: "Correction fixture",
+  audio_sha256: "b".repeat(64), sample_rate_hz: 22050, duration_seconds: 40
+};
+const displayTestChart = {
+  schema_version: "1.0", recording: displayTestRecording, analysis: {id: "native-analysis-1"},
+  chords: [{start_seconds: 0, end_seconds: 24, label: "D"},
+    {start_seconds: 24, end_seconds: 26, label: "E"},
+    {start_seconds: 26, end_seconds: 40, label: "A"}]
+};
+const displayTestCorrection = {
+  id: "reported-A-near-25", expected_event: {start_seconds: 24, end_seconds: 26, label: "E"},
+  replacement_label: "A", reported_seconds: 25, timing_status: "native-boundaries-unverified",
+  note: "User heard A around this moment; exact change boundaries remain unchecked."
+};
+const displayTestCorrectionSet = {
+  schema_version: "reported-chord-corrections-1.0", status: "user-reported-provisional", gold: false,
+  pack_id: "display-test-pack", primary_sha256: "c".repeat(64), analysis_id: "native-analysis-1",
+  recording: displayTestRecording, corrections: [displayTestCorrection]
+};
+const cloneDisplayTest = value => JSON.parse(JSON.stringify(value));
+
+test("a reported correction changes only the paired display event without mutating detector data", () => {
+  const before = JSON.stringify([displayTestChart, displayTestCorrectionSet]);
+  const events = correctedDisplayEvents(displayTestChart, displayTestCorrectionSet, "display-test-pack", "c".repeat(64));
+  assert.deepEqual(events.map(event => [event.start_seconds, event.end_seconds, event.label]),
+    [[0, 24, "D"], [24, 26, "A"], [26, 40, "A"]]);
+  assert.equal(events[1].display_correction.id, "reported-A-near-25");
+  assert.equal(events[0].display_correction, undefined);
+  assert.equal(JSON.stringify([displayTestChart, displayTestCorrectionSet]), before);
+  assert.equal(correctedDisplayEvents(displayTestChart, null, "display-test-pack", "c".repeat(64)), displayTestChart.chords);
+  assert.equal(currentEvent(events, 25).label, "A");
+  assert.equal(currentEvent(displayTestChart.chords, 25).label, "E");
+});
+
+test("reported display corrections reject other packs, chart hashes, analyses and recording identities", () => {
+  const apply = set => correctedDisplayEvents(displayTestChart, set, "display-test-pack", "c".repeat(64));
+  for (const change of [{pack_id: "another-pack"}, {primary_sha256: "d".repeat(64)},
+    {analysis_id: "another-analysis"}, {schema_version: "other"}, {status: "reviewed"}, {gold: true}]) {
+    assert.throws(() => apply({...displayTestCorrectionSet, ...change}));
+  }
+  for (const change of [{id: "another-recording"}, {audio_sha256: "e".repeat(64)},
+    {sample_rate_hz: 44100}, {duration_seconds: 41}]) {
+    assert.throws(() => apply({...displayTestCorrectionSet,
+      recording: {...displayTestRecording, ...change}}));
+  }
+  for (const hash of [null, "", "c".repeat(63), "C".repeat(64)]) {
+    assert.throws(() => correctedDisplayEvents(displayTestChart, displayTestCorrectionSet, "display-test-pack", hash));
+  }
+});
+
+test("corrections require exact half-open native spans and reject duplicate or unmatched replacements", () => {
+  const apply = correction => correctedDisplayEvents(displayTestChart,
+    {...displayTestCorrectionSet, corrections: [correction]}, "display-test-pack", "c".repeat(64));
+  for (const expected of [{start_seconds: 24.01, end_seconds: 26, label: "E"},
+    {start_seconds: 24, end_seconds: 26.01, label: "E"}, {start_seconds: 24, end_seconds: 26, label: "D"}]) {
+    assert.throws(() => apply({...displayTestCorrection, expected_event: expected}));
+  }
+  for (const change of [{reported_seconds: 23.99}, {reported_seconds: 26}, {reported_seconds: NaN},
+    {timing_status: "verified"}, {replacement_label: ""}, {id: ""}, {note: ""}]) {
+    assert.throws(() => apply({...displayTestCorrection, ...change}));
+  }
+  assert.equal(currentEvent(apply({...displayTestCorrection, reported_seconds: 24}), 24).label, "A");
+  assert.throws(() => correctedDisplayEvents(displayTestChart,
+    {...displayTestCorrectionSet, corrections: [displayTestCorrection, {...displayTestCorrection, id: "duplicate-event"}]},
+    "display-test-pack", "c".repeat(64)));
+});
+
+test("corrected feedback persists raw E, displayed A and provisional provenance across reload", () => {
+  const fixtureCase = {id: displayTestRecording.id, recording: displayTestRecording,
+    origin: {source_offset_seconds: 10}};
+  const before = JSON.stringify([displayTestChart, displayTestCorrectionSet]);
+  const report = captureFeedback(fixtureCase, 25.2, displayTestChart, "corrected-tap", "now",
+    {correction: displayTestCorrection});
+  assert.equal(report.raw_sounding_chord, "E");
+  assert.equal(report.displayed_chord, "A");
+  assert.equal(report.candidate_analysis_id, "native-analysis-1");
+  assert.equal(report.playback_seconds, 25.2);
+  assert.equal(report.source_seconds, 35.2);
+  assert.equal(report.display_correction_id, "reported-A-near-25");
+  assert.equal(report.display_correction_status, "user-reported-provisional");
+  assert.equal(report.display_correction_reported_seconds, 25);
+  const values = new Map(), storage = {
+    getItem: key => values.get(key) ?? null, setItem: (key, value) => values.set(key, value)
+  };
+  const key = feedbackKey("display-test-pack", fixtureCase);
+  assert.equal(saveFeedback(storage, key, fixtureCase, "display-test-pack", [report]), "saved-on-this-browser");
+  assert.deepEqual(loadFeedback(storage, key, fixtureCase, "display-test-pack").feedback, [report]);
+  const exported = JSON.parse(values.get(key));
+  assert.equal(exported.gold, false);
+  const malformed = cloneDisplayTest(exported);
+  delete malformed.feedback[0].display_correction_status;
+  storage.setItem(key, JSON.stringify(malformed));
+  assert.equal(loadFeedback(storage, key, fixtureCase, "display-test-pack").persistence, "unavailable");
+  assert.throws(() => captureFeedback(fixtureCase, 26, displayTestChart, "out-of-event", "now",
+    {correction: displayTestCorrection}));
+  assert.equal(JSON.stringify([displayTestChart, displayTestCorrectionSet]), before);
+});
+
+test("guitar-first membership changes preserve existing progress and omit Love Me Do from next suggestions", () => {
+  const values = new Map(), storage = {getItem: key => values.get(key) ?? null, setItem: (key, value) => values.set(key, value)};
+  const dylan = learning.steps.find(step => step.id === "knockin-on-heaven-s-door");
+  assert.equal(learning.path_id, "first-ten-rhythm"); assert.equal(learning.revision, "1");
+  assert.equal(dylan.order, 2);
+  const oldDylan = {...dylan, order: 3};
+  savePracticeProgress(storage, learning, "automatic-first-ten-v1", oldDylan, true);
+  assert.equal(loadPracticeProgress(storage, learning, "automatic-first-ten-v1", dylan).practised, true);
+  const loveRecording = arrangementFixture.cases.find(item => item.song_id === "love-me-do").recording;
+  const oldLove = {id: "love-me-do", order: 2, recording: loveRecording};
+  savePracticeProgress(storage, learning, "automatic-first-ten-v1", oldLove, true);
+  const loveKey = practiceProgressKey(learning, "automatic-first-ten-v1", oldLove), saved = values.get(loveKey);
+  const progress = new Map([[learning.steps[0].id, {practised: true}]]);
+  assert.equal(initialPracticeStep(learning.steps, progress).id, dylan.id);
+  assert.equal(nextPracticeStep(learning.steps, progress, "wild-thing").id, dylan.id);
+  assert.equal(learning.steps.some(step => step.id === "love-me-do"), false);
+  assert.equal(values.get(loveKey), saved);
+  assert.equal(loadPracticeProgress(storage, learning, "automatic-first-ten-v1", oldLove).practised, true);
+  assert.equal(learningCases.some(item => item.recording.id === loveRecording.id), true);
+});
+test("reported correction requires explicit analysis and pack identity even when both inputs omit them", () => {
+  const primary = {...chart, analysis: {}, chords: [{start_seconds: 0, end_seconds: 5, label: "E"}]};
+  const set = {schema_version: "reported-chord-corrections-1.0", status: "user-reported-provisional", gold: false,
+    primary_sha256: "a".repeat(64), recording, corrections: [{id: "reported-a", expected_event: primary.chords[0],
+      replacement_label: "A", reported_seconds: 2, timing_status: "native-boundaries-unverified", note: "Reported A"}]};
+  assert.throws(() => correctedDisplayEvents(primary, set, undefined, "a".repeat(64)));
+  assert.throws(() => correctedDisplayEvents(primary, {...set, pack_id: "pack"}, "pack", "a".repeat(64)));
 });
 
 console.log(`${checks} review helper checks passed`);

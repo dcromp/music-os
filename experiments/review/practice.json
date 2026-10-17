@@ -57,7 +57,37 @@
         }
       ],
       "status": "practice-suggestion",
-      "note": "A starting rhythm exercise. The recording may use a different pattern or picking."
+      "note": "A starting rhythm exercise. The recording may use a different pattern or picking.",
+      "display_corrections": {
+        "schema_version": "reported-chord-corrections-1.0",
+        "pack_id": "automatic-first-ten-v1",
+        "recording": {
+          "id": "troggs-wild-thing-youtube-20261011",
+          "title": "The Troggs - Wild Thing",
+          "duration_seconds": 155.3516553287982,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf"
+        },
+        "primary_sha256": "13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81",
+        "analysis_id": "troggs-wild-thing-youtube-20261011-crema",
+        "status": "user-reported-provisional",
+        "gold": false,
+        "corrections": [
+          {
+            "id": "wild-thing-a-near-25s-20261017",
+            "expected_event": {
+              "start_seconds": 23.777233560090703,
+              "end_seconds": 26.09922902494331,
+              "label": "E"
+            },
+            "replacement_label": "A",
+            "reported_seconds": 25,
+            "timing_status": "native-boundaries-unverified",
+            "source": "Founder play-along feedback in chat, 17 October 2026",
+            "note": "Founder reports A around 25 seconds. The containing native E cue is provisionally relabelled for display; the report did not establish its full extent or physical change boundaries."
+          }
+        ]
+      }
     },
     {
       "recording": {
@@ -482,11 +512,11 @@
           ],
           "strokes": [
             "D",
-            "—",
-            "—",
+            "\u2014",
+            "\u2014",
             "D",
-            "—",
-            "—"
+            "\u2014",
+            "\u2014"
           ],
           "description": "Count six eighth notes. Strum gently on 1 and 4, then let the chord ring."
         },
@@ -558,10 +588,10 @@
           ],
           "strokes": [
             "D",
-            "—",
+            "\u2014",
             "D",
             "U",
-            "—",
+            "\u2014",
             "U",
             "D",
             "U"

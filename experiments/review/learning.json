@@ -2,10 +2,10 @@
   "schema_version": "playalong-learning-1.0",
   "path_id": "first-ten-rhythm",
   "revision": "1",
-  "title": "Suggested practice path",
+  "title": "Guitar-first practice path",
   "status": "provisional-practice-path",
-  "checked_date": "2026-10-13",
-  "semantics": "Project practice suggestions in a provisional order. Practised is an optional self-report, not mastery, recording-specific arrangement approval, or a chord/timing accuracy label. Riff guides are separate from the rhythm path.",
+  "checked_date": "2026-10-17",
+  "semantics": "Project practice suggestions in a provisional order. Practised is an optional self-report, not mastery, recording-specific arrangement approval, or a chord/timing accuracy label. Riff guides are separate from the rhythm path. Selection/order updated after founder feedback; progress-compatible path revision and retained step identities stay unchanged. Standard-tuning teaching setups are not independently verified recording tunings.",
   "inputs": [
     {
       "path": "catalogue/first-ten-review.json",
@@ -17,7 +17,15 @@
     },
     {
       "path": "experiments/review/practice.json",
-      "sha256": "0de69b0756570a7083d9796ddba181d70b80444965eacf382531909c0666c4ea"
+      "sha256": "18500b64d5a91570dd212ca6786793bd9a2d50444c92cced0a13629c51b16b06"
+    },
+    {
+      "path": "catalogue/starter-four-teaching-review.json",
+      "sha256": "564b33066eec4f9e1258a6d0168671fb9f27f470c3cd2e396b6124876f6f25ce"
+    },
+    {
+      "path": "catalogue/founder-playalong-feedback-20261017.json",
+      "sha256": "49ce768c0f01f56f4c4a045596cf1489e7001c751dd8051691ca8ad8724a64cb"
     }
   ],
   "steps": [
@@ -35,43 +43,24 @@
       "status": "practice-suggestion",
       "skill_focus": "Keep open-chord changes steady; add the contrasting figure later.",
       "prerequisites": "A/D/E changes",
-      "setup_note": "Standard-tuning open-chord practice proposal. Capo and exact recording pitch remain unchecked.",
+      "setup_note": "Teacher setup: E standard (EADGBE). The exact recording's physical tuning/capo remains unchecked.",
       "practice_pattern_id": "steady-down",
       "sources": [
         {
           "id": "wild-andy",
           "title": "Andy Guitar: Wild Thing",
           "url": "https://www.andyguitar.co.uk/videos/electric-guitar-day-7-wild-thing"
-        }
-      ]
-    },
-    {
-      "id": "love-me-do",
-      "order": 2,
-      "title": "Love Me Do",
-      "recording": {
-        "id": "beatles-love-me-do-youtube-20261011",
-        "title": "The Beatles - Love Me Do",
-        "duration_seconds": 141.69832199546485,
-        "sample_rate_hz": 22050,
-        "audio_sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea"
-      },
-      "status": "practice-suggestion",
-      "skill_focus": "Keep G/C/D changes steady; deliberate mutes and swing are later tasks.",
-      "prerequisites": "G/C/D changes and muting",
-      "setup_note": "Standard-tuning open-chord practice proposal. Capo and exact recording pitch remain unchecked. A skipped stroke is different from muting.",
-      "practice_pattern_id": "steady-down",
-      "sources": [
+        },
         {
-          "id": "love-andy",
-          "title": "Andy Guitar: Love Me Do",
-          "url": "https://www.andyguitar.co.uk/videos/beatles-guitar-day-01-love-me-do"
+          "id": "wild-carl",
+          "title": "Carl Brown: Wild Thing",
+          "url": "https://guitarlessons365.com/wild-thing-guitar-lesson-the-troggs/"
         }
       ]
     },
     {
       "id": "knockin-on-heaven-s-door",
-      "order": 3,
+      "order": 2,
       "title": "Knockin' On Heaven's Door",
       "recording": {
         "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
@@ -95,7 +84,7 @@
     },
     {
       "id": "brown-eyed-girl",
-      "order": 4,
+      "order": 3,
       "title": "Brown Eyed Girl",
       "recording": {
         "id": "van-morrison-brown-eyed-girl-youtube-20261011",
@@ -129,7 +118,7 @@
     },
     {
       "id": "twist-and-shout",
-      "order": 5,
+      "order": 4,
       "title": "Twist And Shout",
       "recording": {
         "id": "beatles-twist-and-shout-youtube-20261011",
@@ -141,19 +130,24 @@
       "status": "practice-suggestion",
       "skill_focus": "Keep D/G/A changes moving at a quicker feel; the all-down build-up is later work.",
       "prerequisites": "D/G/A changes at a quicker feel",
-      "setup_note": "Standard-shape practice proposal. Capo and exact recording pitch remain unchecked; the starting drill is not the recorded build-up.",
+      "setup_note": "Teacher setup: E standard (EADGBE). The exact recording's physical tuning/capo remains unchecked.",
       "practice_pattern_id": "steady-down",
       "sources": [
         {
           "id": "twist-andy",
           "title": "Andy Guitar: Twist And Shout",
           "url": "https://www.andyguitar.co.uk/videos/beatles-guitar-day-02-twist-and-shout"
+        },
+        {
+          "id": "twist-jon",
+          "title": "Jon MacLennan: Twist And Shout",
+          "url": "https://www.jonmaclennan.com/blog/twist-and-shout-chords"
         }
       ]
     },
     {
       "id": "the-house-of-the-rising-sun",
-      "order": 6,
+      "order": 5,
       "title": "The House Of The Rising Sun",
       "recording": {
         "id": "animals-house-rising-sun-official-20261011",
@@ -187,7 +181,7 @@
     },
     {
       "id": "wonderwall",
-      "order": 7,
+      "order": 6,
       "title": "Wonderwall",
       "recording": {
         "id": "oasis-wonderwall-youtube-20261010",
@@ -216,7 +210,7 @@
     },
     {
       "id": "creep",
-      "order": 8,
+      "order": 7,
       "title": "Creep",
       "recording": {
         "id": "radiohead-creep-youtube-20261010",
@@ -291,5 +285,11 @@
         }
       ]
     }
-  ]
+  ],
+  "selection_update": {
+    "id": "guitar-focus-20261017",
+    "removed_recommendation": "love-me-do",
+    "reason": "Founder prefers guitar-led E-standard practice over harmonica-heavy material.",
+    "progress_compatibility": "Same path/revision/retained step IDs/audio; removed-step browser data is not deleted."
+  }
 }
