@@ -833,4 +833,86 @@ test("reported correction requires explicit analysis and pack identity even when
   assert.throws(() => correctedDisplayEvents(primary, {...set, pack_id: "pack"}, "pack", "a".repeat(64)));
 });
 
+
+const splitChart = {...displayTestChart, chords: [
+  {start_seconds: 0, end_seconds: 6, label: "F"},
+  {start_seconds: 6, end_seconds: 11, label: "Am"},
+  {start_seconds: 11, end_seconds: 13, label: "Em"},
+  {start_seconds: 13, end_seconds: 40, label: "Am"}
+]};
+const splitCorrection = {id: "intro-e-near-8", expected_event: splitChart.chords[1],
+  replacement_label: "E", replacement_span: {start_seconds: 8, end_seconds: 9.5}, reported_seconds: 8,
+  time_basis: "founder-approximate-point",
+  timing_status: "secondary-boundaries-unverified", note: "Reported E; secondary timing remains provisional."};
+const splitSet = {...displayTestCorrectionSet, corrections: [splitCorrection]};
+
+test("a bounded intro correction restores a missing change while preserving both adjacent Am spans", () => {
+  const before = JSON.stringify([splitChart, splitSet]);
+  const events = correctedDisplayEvents(splitChart, splitSet, "display-test-pack", "c".repeat(64));
+  assert.deepEqual(events.map(e => [e.start_seconds, e.end_seconds, e.label]),
+    [[0, 6, "F"], [6, 8, "Am"], [8, 9.5, "E"], [9.5, 11, "Am"], [11, 13, "Em"], [13, 40, "Am"]]);
+  for (const [seconds, label] of [[7.99, "Am"], [8, "E"], [9.499, "E"], [9.5, "Am"], [11, "Em"]]) {
+    assert.equal(currentEvent(events, seconds).label, label);
+  }
+  assert.equal(JSON.stringify([splitChart, splitSet]), before);
+});
+test("split corrections reject out-of-parent, malformed, empty and unsupported timing proposals", () => {
+  const apply = change => correctedDisplayEvents(splitChart, {...splitSet, corrections: [{...splitCorrection, ...change}]}, "display-test-pack", "c".repeat(64));
+  for (const span of [null, {}, {start_seconds: 5, end_seconds: 9}, {start_seconds: 8, end_seconds: 12},
+    {start_seconds: 8, end_seconds: 8}, {start_seconds: 9, end_seconds: 8}, {start_seconds: NaN, end_seconds: 9}]) {
+    assert.throws(() => apply({replacement_span: span}));
+  }
+  for (const change of [{reported_seconds: 7.99}, {reported_seconds: 9.5},
+    {timing_status: "native-boundaries-unverified"}, {time_basis: "exact-human-boundaries"}]) assert.throws(() => apply(change));
+});
+test("split feedback preserves raw Am, displayed E and the provisional displayed interval", () => {
+  const review = {id: displayTestRecording.id, recording: displayTestRecording};
+  const report = captureFeedback(review, 8.2, splitChart, "split-tap", "now", {correction: splitCorrection});
+  assert.equal(report.raw_sounding_chord, "Am"); assert.equal(report.displayed_chord, "E");
+  assert.deepEqual(report.display_correction_span, {start_seconds: 8, end_seconds: 9.5});
+  for (const seconds of [7.9, 9.5, 11]) assert.throws(() => captureFeedback(review, seconds, splitChart, "wrong-span", "now", {correction: splitCorrection}));
+  const values = new Map(), storage = {getItem: k => values.get(k) ?? null, setItem: (k, v) => values.set(k, v)};
+  const key = feedbackKey("display-test-pack", review);
+  saveFeedback(storage, key, review, "display-test-pack", [report]);
+  assert.deepEqual(loadFeedback(storage, key, review, "display-test-pack").feedback, [report]);
+  const invalid = {...report, display_correction_span: {start_seconds: 8.3, end_seconds: 9.5}};
+  assert.throws(() => saveFeedback(storage, key, review, "display-test-pack", [invalid]));
+});
+test("contextual intro feedback distinguishes a representative point from a reported timestamp", () => {
+  const correction = {id: "intro-second-e", expected_event: splitChart.chords[2], replacement_label: "E", reported_seconds: 12,
+    timing_status: "native-boundaries-unverified", time_basis: "representative-native-cue-point-not-user-timestamp",
+    note: "The supplied intro order contains E here; 12 seconds is a representative point, not the user's timestamp."};
+  const review = {id: displayTestRecording.id, recording: displayTestRecording};
+  const report = captureFeedback(review, 12.2, splitChart, "context-tap", "now", {correction});
+  assert.equal(report.raw_sounding_chord, "Em"); assert.equal(report.displayed_chord, "E");
+  assert.equal(report.display_correction_time_basis, "representative-native-cue-point-not-user-timestamp");
+  const values = new Map(), storage = {getItem: k => values.get(k) ?? null, setItem: (k, v) => values.set(k, v)};
+  const key = feedbackKey("display-test-pack", review);
+  saveFeedback(storage, key, review, "display-test-pack", [report]);
+  assert.deepEqual(loadFeedback(storage, key, review, "display-test-pack").feedback, [report]);
+  const legacy = {...report}; delete legacy.display_correction_span; delete legacy.display_correction_time_basis;
+  saveFeedback(storage, key, review, "display-test-pack", [legacy]);
+  assert.deepEqual(loadFeedback(storage, key, review, "display-test-pack").feedback, [legacy]);
+  assert.throws(() => saveFeedback(storage, key, review, "display-test-pack", [{...report, display_correction_time_basis: "verified"}]));
+});
+
+test("every shipped correction applies to its declared native cues and exact paired identity", () => {
+  for (const item of json("experiments/review/practice.json").cases) {
+    const set = item.display_corrections;
+    if (!set) continue;
+    const declared = {schema_version: "1.0", recording: item.recording, analysis: {id: set.analysis_id},
+      chords: set.corrections.map(c => c.expected_event).sort((a, b) => a.start_seconds - b.start_seconds)};
+    validateCandidate(declared, item.recording);
+    const display = correctedDisplayEvents(declared, set, set.pack_id, set.primary_sha256);
+    for (const correction of set.corrections) {
+      const current = currentEvent(display, correction.reported_seconds);
+      assert.equal(current.label, correction.replacement_label);
+      const report = captureFeedback({id: item.recording.id, recording: item.recording}, correction.reported_seconds,
+        declared, correction.id, "now", {correction: current.display_correction});
+      assert.equal(report.displayed_chord, correction.replacement_label);
+      assert.equal(report.raw_sounding_chord, correction.expected_event.label);
+    }
+  }
+});
+
 console.log(`${checks} review helper checks passed`);

@@ -83,6 +83,17 @@ function validateCandidate(chart, recording) {
 function currentEvent(events, seconds) {
   return events.find(event => event.start_seconds <= seconds && seconds < event.end_seconds) || null;
 }
+const CORRECTION_TIME_BASES = ["founder-approximate-point", "representative-native-cue-point-not-user-timestamp"];
+function validCorrectionForEvent(item, event) {
+  const hasSpan = item?.replacement_span !== undefined, span = hasSpan ? item.replacement_span : event;
+  return event && span && boundedText(item?.id, 100) && boundedText(item.replacement_label, 40) && boundedText(item.note, 1000) &&
+    item.expected_event?.start_seconds === event.start_seconds && item.expected_event?.end_seconds === event.end_seconds &&
+    item.expected_event?.label === event.label && validNumber(span.start_seconds) && validNumber(span.end_seconds) &&
+    span.start_seconds >= event.start_seconds && span.end_seconds <= event.end_seconds && span.end_seconds > span.start_seconds &&
+    validNumber(item.reported_seconds) && item.reported_seconds >= span.start_seconds && item.reported_seconds < span.end_seconds &&
+    item.timing_status === (hasSpan ? "secondary-boundaries-unverified" : "native-boundaries-unverified") &&
+    (item.time_basis === undefined || CORRECTION_TIME_BASES.includes(item.time_basis));
+}
 function correctedDisplayEvents(chart, correctionSet, packId, primarySha256) {
   if (!correctionSet) return chart.chords;
   const fail = () => { throw new Error("Reported correction does not match this draft. Original chords are shown."); };
@@ -97,14 +108,19 @@ function correctedDisplayEvents(chart, correctionSet, packId, primarySha256) {
     const expected = item?.expected_event;
     const index = chart.chords.findIndex(event => expected && event.start_seconds === expected.start_seconds &&
       event.end_seconds === expected.end_seconds && event.label === expected.label);
-    if (!boundedText(item?.id, 100) || ids.has(item.id) || index < 0 || replacements.has(index) ||
-        !boundedText(item.replacement_label, 40) || !validNumber(item.reported_seconds) ||
-        item.reported_seconds < expected.start_seconds || item.reported_seconds >= expected.end_seconds ||
-        item.timing_status !== "native-boundaries-unverified" || !boundedText(item.note, 1000)) fail();
+    if (ids.has(item?.id) || index < 0 || replacements.has(index) || !validCorrectionForEvent(item, chart.chords[index])) fail();
     ids.add(item.id); replacements.set(index, item);
   }
-  return chart.chords.map((event, index) => replacements.has(index)
-    ? {...event, label: replacements.get(index).replacement_label, display_correction: replacements.get(index)} : {...event});
+  return chart.chords.flatMap((event, index) => {
+    const item = replacements.get(index);
+    if (!item) return [{...event}];
+    const span = item.replacement_span || event, parts = [];
+    if (span.start_seconds > event.start_seconds) parts.push({...event, end_seconds: span.start_seconds});
+    parts.push({...event, start_seconds: span.start_seconds, end_seconds: span.end_seconds,
+      label: item.replacement_label, display_correction: item});
+    if (span.end_seconds < event.end_seconds) parts.push({...event, start_seconds: span.end_seconds});
+    return parts;
+  });
 }
 const FEEDBACK_REASONS = ["not-sure", "wrong-chord", "late-change", "too-many-changes"];
 function pairedRecording(candidate, recording) {
@@ -432,29 +448,38 @@ function captureFeedback(reviewCase, seconds, chart, id, createdAt, practice = {
   if (!["sounding-pitches", "capo-shapes"].includes(view) || !Number.isInteger(capo) || capo < 0 || capo > 12) throw new Error("Invalid practice display.");
   if (!QUALITY_MODES.includes(qualityMode)) throw new Error("Invalid chord quality display.");
   const correction = practice.correction || null;
-  if (correction && (!event || !boundedText(correction.id, 100) || !boundedText(correction.replacement_label, 40) ||
-      correction.timing_status !== "native-boundaries-unverified" ||
-      !validNumber(correction.reported_seconds) || correction.reported_seconds < event.start_seconds || correction.reported_seconds >= event.end_seconds ||
-      correction.expected_event?.start_seconds !== event.start_seconds || correction.expected_event?.end_seconds !== event.end_seconds ||
-      correction.expected_event?.label !== event.label)) throw new Error("Display correction does not match the captured chord.");
+  const span = correction?.replacement_span || event;
+  if (correction && (!validCorrectionForEvent(correction, event) || seconds < span.start_seconds || seconds >= span.end_seconds)) {
+    throw new Error("Display correction does not match the captured chord.");
+  }
   return { id, playback_seconds: seconds,
     source_seconds: seconds + (reviewCase.origin?.source_offset_seconds || 0),
     candidate_analysis_id: chart.analysis?.id || null, raw_sounding_chord: event?.label || null,
     displayed_chord: event ? displayedChord(correction?.replacement_label || event.label, view, capo, qualityMode) : null,
     ...(correction ? {display_correction_id: correction.id, display_correction_status: "user-reported-provisional",
-      display_correction_reported_seconds: correction.reported_seconds} : {}),
+      display_correction_reported_seconds: correction.reported_seconds,
+      display_correction_span: {start_seconds: span.start_seconds, end_seconds: span.end_seconds},
+      ...(correction.time_basis ? {display_correction_time_basis: correction.time_basis} : {})} : {}),
     practice_view: view, practice_capo: capo, quality_mode: qualityMode,
     reason: "not-sure", note: "", created_at: createdAt };
 }
 function validFeedback(item, recording) {
-  const corrected = item && [item.display_correction_id, item.display_correction_status, item.display_correction_reported_seconds].some(value => value !== undefined);
+  const corrected = item && [item.display_correction_id, item.display_correction_status, item.display_correction_reported_seconds,
+    item.display_correction_span, item.display_correction_time_basis].some(value => value !== undefined);
+  const span = item?.display_correction_span;
+  const validSpan = span === undefined || (span && validNumber(span.start_seconds) && validNumber(span.end_seconds) && span.start_seconds >= 0 &&
+    span.end_seconds <= recording.duration_seconds && span.end_seconds > span.start_seconds &&
+    item.playback_seconds >= span.start_seconds && item.playback_seconds < span.end_seconds &&
+    item.display_correction_reported_seconds >= span.start_seconds && item.display_correction_reported_seconds < span.end_seconds);
   return item && typeof item.id === "string" && item.id && validNumber(item.playback_seconds) &&
     item.playback_seconds >= 0 && item.playback_seconds <= recording.duration_seconds &&
     validNumber(item.source_seconds) && FEEDBACK_REASONS.includes(item.reason) &&
     typeof item.note === "string" && item.note.length <= 1000 && typeof item.created_at === "string" &&
     (item.quality_mode === undefined || QUALITY_MODES.includes(item.quality_mode)) &&
     (!corrected || (boundedText(item.display_correction_id, 100) && item.display_correction_status === "user-reported-provisional" &&
-      validNumber(item.display_correction_reported_seconds) && item.display_correction_reported_seconds >= 0 && item.display_correction_reported_seconds < recording.duration_seconds));
+      validNumber(item.display_correction_reported_seconds) && item.display_correction_reported_seconds >= 0 &&
+      item.display_correction_reported_seconds < recording.duration_seconds && validSpan &&
+      (item.display_correction_time_basis === undefined || CORRECTION_TIME_BASES.includes(item.display_correction_time_basis))));
 }
 function loadFeedback(storage, key, reviewCase, packId) {
   try {
@@ -745,7 +770,9 @@ if (typeof document !== "undefined") {
       el("full-chord").textContent = fullLabel ? `Full chord: ${fullLabel}` : "";
       el("correction-note").hidden = !state.correctionWarning && !correction;
       el("correction-note").textContent = state.correctionWarning || (correction
-        ? `Reported correction: ${correction.replacement_label} near ${timeLabel(correction.reported_seconds)}. Cue timing is still estimated.` : "");
+        ? correction.time_basis === "representative-native-cue-point-not-user-timestamp"
+          ? `Reported intro correction: ${correction.replacement_label}. Cue timing is still estimated.`
+          : `Reported correction: ${correction.replacement_label} near ${timeLabel(correction.reported_seconds)}. Cue timing is still estimated.` : "");
       el("hold-progress").hidden = !hold;
       el("current-hold").replaceChildren();
       if (hold) {

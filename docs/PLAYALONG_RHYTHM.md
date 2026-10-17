@@ -56,6 +56,14 @@ Dylan's single detected Am7 is retained in the raw/full chart. The existing
 Core chords choice shows Am, just as Em7 can show Em; no additional label or
 boundary change is made for that observation.
 
+## House intro correction and source lookup
+
+The founder confirmed **E major**. [Jon MacLennan](https://www.jonmaclennan.com/blog/house-of-the-rising-sun-guitar-lesson) and [Jonathan Richter](https://richterguitar.com/house-of-the-rising-sun-the-animals/) both teach Am–C–D–F / Am–E–Am–E. Their order supports the label choice, not exact recording boundaries. The long native Am at 6.409–11.146 seconds now has a separate provisional E span at 7.988–9.474 seconds from the paired secondary detector, preserving Am on both sides. The following Em cue displays E with its native bounds. Its 12-second metadata point is explicitly representative, not an additional founder timestamp; the UI says “Reported intro correction” without attributing that time to the user.
+
+Split overlays must stay inside an exactly matched native parent cue. Feedback retains raw Am/Em, displayed E, the proposed display interval and time provenance. Old feedback remains readable. The [proposal record](../catalogue/house-intro-feedback-20261017.json) and [verification](HOUSE_INTRO_FEEDBACK_UPDATE.json) preserve the source and timing limits. No full-song chart is promoted.
+
+Online source research currently runs through the agent and saved catalogue records; automatic web search/consensus is not an implemented app or preparation feature. The source-to-player gap is explicit in the README.
+
 ## Beat and meter evidence
 
 The producer uses the existing librosa environment, with onset strength and
@@ -133,8 +141,8 @@ to belong to the same recording.
 
 The original 12 October implementation passed 47 JavaScript helper checks and 239 distinct Python checks (223 in the standard environment plus 16 in the pinned evaluation environment). Its isolated browser QA verified estimated/seconds views, Core merging, 6/8 and syncopation choices, proportional strip widths, and feedback capture/persistence on a separate origin. The deployed port-8070 player verified all ten guides, pattern selection, playback/pause and advancing hold progress. All 47 public assets matched the Mac checkout; three sampled private paths returned 404. Those deployment and count results are historical; current service status is in the README.
 
-**17 October player verification:** 136 JavaScript checks (74 player, 48 bench, 14 curation) pass; 440 Python tests are discovered, with 420 passed and 20 optional-dependency skips. The explicit player-v2 audit verifies 39 pins and ten selected cases. Browser QA verifies the A cue at 25 s, Dylan Core Am/full Am7 at 47 s, seconds fallback, all ten song choices, Love Me Do outside the path, and feedback persistence/removal on an isolated origin. Default and narrow-screen geometry checks confirm proportional horizontal blocks, readable ordinary short-hold numbers and local horizontal scrolling without page overflow. Tiny clipped edge blocks retain complete tooltip/accessibility descriptions. [Verification record](PLAYALONG_FEEDBACK_UPDATE.json). Current guide
-metadata is pinned by `experiments/fixtures/selected-workflow-player-v2.json`;
+**Earlier 17 October player verification:** 136 JavaScript checks (74 player, 48 bench, 14 curation) pass; 440 Python tests are discovered, with 420 passed and 20 optional-dependency skips. The explicit player-v2 audit verifies 39 pins and ten selected cases. Browser QA verifies the A cue at 25 s, Dylan Core Am/full Am7 at 47 s, seconds fallback, all ten song choices, Love Me Do outside the path, and feedback persistence/removal on an isolated origin. Default and narrow-screen geometry checks confirm proportional horizontal blocks, readable ordinary short-hold numbers and local horizontal scrolling without page overflow. Tiny clipped edge blocks retain complete tooltip/accessibility descriptions. [Verification record](PLAYALONG_FEEDBACK_UPDATE.json). Current guide
+metadata is pinned by `experiments/fixtures/selected-workflow-player-v3.json`;
 37 earlier frozen inputs stay unchanged and only two guide pins are versioned.
 The saved beat grid, raw charts/audio and playback/storage identities remain
 unchanged. Next evaluate

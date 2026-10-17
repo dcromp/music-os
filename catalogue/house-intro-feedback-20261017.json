@@ -1,0 +1,127 @@
+{
+  "schema_version": "founder-house-intro-feedback-1.0",
+  "reported_date": "2026-10-17",
+  "pack_id": "automatic-first-ten-v1",
+  "recording": {
+    "id": "animals-house-rising-sun-official-20261011",
+    "title": "The Animals - The House Of The Rising Sun",
+    "duration_seconds": 269.91891156462583,
+    "sample_rate_hz": 22050,
+    "audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708"
+  },
+  "primary_sha256": "71eb918cc9ef3662d5c6d75b49814f700b89a2fc15b73c1ce92d9bdb18dd6037",
+  "analysis_id": "animals-house-rising-sun-official-20261011-crema",
+  "secondary_chart": {
+    "sha256": "519748e12a7612c4965339f13d09e733192f2dba9e8de1209ef685a8086e1c13",
+    "analysis_id": "chordino-nnls-hmm-v1"
+  },
+  "candidate_exposure": "model-exposed",
+  "gold": false,
+  "initial_report_excerpt": "around 8 seconds it should be Em, it goes Am, Em, Am, Em in the intro",
+  "clarification": {
+    "quality": "E major",
+    "source": "Founder clarification in chat"
+  },
+  "screenshot_transcription": {
+    "section": "Intro",
+    "rows": [
+      [
+        "Am",
+        "C",
+        "D",
+        "F"
+      ],
+      [
+        "Am",
+        "E",
+        "Am",
+        "E"
+      ]
+    ],
+    "limit": "Screenshot chord order only; no recording identity or verified timestamps supplied."
+  },
+  "source_recheck": {
+    "checked_date": "2026-10-17",
+    "status": "primary-teacher-pages-rechecked",
+    "existing_source_record": {
+      "path": "catalogue/remaining-six-teaching-review.json",
+      "sha256": "134eda4099bd1ba85d217098809935b7d9c656121038461bf2ad6ea81e05bbc3"
+    },
+    "sources": [
+      {
+        "id": "house-jon",
+        "title": "Jon MacLennan: The ULTIMATE House of the Rising Sun Guitar Lesson",
+        "url": "https://www.jonmaclennan.com/blog/house-of-the-rising-sun-guitar-lesson",
+        "observations": [
+          "The intro lesson gives Am, C, D, F followed by Am, E, Am, E.",
+          "It describes an eight-bar intro with one chord per bar and a 6/8 practice count.",
+          "The E instruction uses an ordinary E-major open shape rather than Em."
+        ]
+      },
+      {
+        "id": "house-richter",
+        "title": "Jonathan Richter: House of the Rising Sun by The Animals",
+        "url": "https://richterguitar.com/house-of-the-rising-sun-the-animals/",
+        "observations": [
+          "The intro chart gives Am, C, D, F followed by Am, E, Am, E.",
+          "The teacher setup has no capo and uses E major, with E7 described as an optional organ-inspired addition.",
+          "The picking discussion describes 6/8, separately from a simple strumming option."
+        ]
+      }
+    ],
+    "interpretation": "Two primary teacher pages corroborate the founder-confirmed E-major intro order. Their order and bar counts are teaching evidence, not a timestamped reference for this cached recording.",
+    "cached_recording_correspondence_verified": false,
+    "physical_change_boundaries_verified": false
+  },
+  "proposals": [
+    {
+      "id": "house-intro-e-near-8s-20261017",
+      "expected_event": {
+        "start_seconds": 6.408707482993197,
+        "end_seconds": 11.145578231292516,
+        "label": "Am"
+      },
+      "replacement_span": {
+        "start_seconds": 7.987664399,
+        "end_seconds": 9.473741497
+      },
+      "replacement_label": "E",
+      "reported_seconds": 8,
+      "time_basis": "founder-approximate-point",
+      "timing_status": "secondary-boundaries-unverified",
+      "source": "Founder play-along report and E-major clarification in chat, 17 October 2026",
+      "note": "Founder identifies E major around 8 seconds and confirms the intro order Am\u2013E\u2013Am\u2013E. The paired Chordino E cue supplies provisional split boundaries inside the native CREMA Am hold; neither physical boundary was independently verified. Retain Am before and after this proposed E span.",
+      "timing_evidence": {
+        "chart_sha256": "519748e12a7612c4965339f13d09e733192f2dba9e8de1209ef685a8086e1c13",
+        "analysis_id": "chordino-nnls-hmm-v1",
+        "native_event": {
+          "start_seconds": 7.987664399,
+          "end_seconds": 9.473741497,
+          "label": "E"
+        },
+        "status": "detector-candidate-not-independent-timing-gold"
+      }
+    },
+    {
+      "id": "house-intro-second-e-quality-20261017",
+      "expected_event": {
+        "start_seconds": 11.145578231292516,
+        "end_seconds": 12.538775510204081,
+        "label": "Em"
+      },
+      "replacement_label": "E",
+      "reported_seconds": 12,
+      "time_basis": "representative-native-cue-point-not-user-timestamp",
+      "timing_status": "native-boundaries-unverified",
+      "source": "Founder-confirmed intro order and E-major clarification in chat, 17 October 2026",
+      "note": "Founder confirms Am\u2013E\u2013Am\u2013E in the intro and clarifies E major rather than Em. Apply E to the second native E-root cue, retaining its CREMA bounds. Twelve seconds is only a representative point in this native cue for the display schema; the founder did not report a second exact timestamp. This contextual label proposal is not an independently verified transcription."
+    }
+  ],
+  "limits": [
+    "Founder feedback supplies chord identity/order, not independently measured change boundaries.",
+    "The first E span uses a paired secondary detector as a provisional boundary candidate; it is not timing gold.",
+    "The second E label retains native CREMA bounds. Its display point at twelve seconds is representative, not an additional user timestamp.",
+    "Raw charts/audio, model settings, learning identities and browser practice/feedback storage remain unchanged.",
+    "No complete recording, arrangement, performed guitar grip or rhythm is accepted by these proposals."
+  ]
+}

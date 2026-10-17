@@ -76,15 +76,16 @@ history and their storage identities are unchanged.
 
 [learning.json](../experiments/review/learning.json) is tracked teaching
 metadata, separate from generated playback manifests and detector outputs.
-Its five input pins are:
+Its six input pins are:
 
 | Input | SHA-256 |
 |---|---|
 | `catalogue/first-ten-review.json` | `d1bbcd7618e0aeaf4af954c6b2bc7307d1ea4b3378af55ed172e53c0b18d7bda` |
 | `docs/FIRST_TEN_ARRANGEMENT_CHECK.json` | `5a7855d9c837e6086a511a896872476fed8dea76da6d6e289438729380d211ae` |
-| `experiments/review/practice.json` | `18500b64d5a91570dd212ca6786793bd9a2d50444c92cced0a13629c51b16b06` |
+| `experiments/review/practice.json` | `670fd5181a42fce211ebe51e26ad6ff089685ad76c0df1cde8a4abc693c59b20` |
 | `catalogue/starter-four-teaching-review.json` | `564b33066eec4f9e1258a6d0168671fb9f27f470c3cd2e396b6124876f6f25ce` |
 | `catalogue/founder-playalong-feedback-20261017.json` | `49ce768c0f01f56f4c4a045596cf1489e7001c751dd8051691ca8ad8724a64cb` |
+| `catalogue/house-intro-feedback-20261017.json` | `79f90956da77efed781c075199b75f813cce189e95b3e99f9646762c36f4f27d` |
 
 Every learning entry contains the exact recording ID, prepared-audio SHA-256,
 sample rate and duration from the arrangement snapshot. Each rhythm step refers
@@ -117,8 +118,10 @@ storage isolation and failure, next-song behavior and unchanged charts/feedback.
 
 That deployment passed browser verification for initial path, drill selection/visibility, next song, persisted resume, reversal, separate riff guidance, playback, seeking and Core chords. Progress and an explicitly synthetic issue report survived independently in the isolated port-8071 QA pack; no synthetic progress/issues were added to normal players. The original port-8068 player retained its two exact matching path recordings. All 48 served assets matched canonical bytes; private-route samples returned 404. Ten audio files and twenty detector charts remained byte-identical to preparation inputs. The standard Python suite ran 324 checks with 20 dependency skips; those dependency-specific checks also passed in their pinned environments. [Historical verification pins](PLAYALONG_LEARNING_PATH_RESULTS.json) and a local screenshot in `experiments/generated/player-proof-20261013/practice-path.jpg` preserve that evidence.
 
-**17 October player verification:** 136 JavaScript checks (74 player, 48 bench, 14 curation) pass; 440 Python tests are discovered, with 420 passed and 20 optional-dependency skips. The explicit player-v2 audit verifies 39 pins and ten selected cases. Browser QA verifies the A cue at 25 s, Dylan Core Am/full Am7 at 47 s, seconds fallback, all ten song choices, Love Me Do outside the path, and feedback persistence/removal on an isolated origin. Default and narrow-screen geometry checks confirm proportional horizontal blocks, readable ordinary short-hold numbers and local horizontal scrolling without page overflow. Tiny clipped edge blocks retain complete tooltip/accessibility descriptions. [Verification record](PLAYALONG_FEEDBACK_UPDATE.json). The current
-guide pins are in `experiments/fixtures/selected-workflow-player-v2.json`; the
+**Earlier 17 October player verification:** 136 JavaScript checks (74 player, 48 bench, 14 curation) pass; 440 Python tests are discovered, with 420 passed and 20 optional-dependency skips. The explicit player-v2 audit verifies 39 pins and ten selected cases. Browser QA verifies the A cue at 25 s, Dylan Core Am/full Am7 at 47 s, seconds fallback, all ten song choices, Love Me Do outside the path, and feedback persistence/removal on an isolated origin. Default and narrow-screen geometry checks confirm proportional horizontal blocks, readable ordinary short-hold numbers and local horizontal scrolling without page overflow. Tiny clipped edge blocks retain complete tooltip/accessibility descriptions. [Verification record](PLAYALONG_FEEDBACK_UPDATE.json). The current
+guide pins are in `experiments/fixtures/selected-workflow-player-v3.json`; the
 immutable v1 policy and earlier result files remain historical. These
 focused helper results do not establish beginner learning outcomes or full-mix
 chord accuracy.
+
+The House intro follow-up changes only paired display corrections and teaching-source pins. It keeps all seven step IDs, path revision and existing practice records unchanged. [Current checks](HOUSE_INTRO_FEEDBACK_UPDATE.json) include 79 player helpers, preserving the prior v1/v2 policies as historical evidence.

@@ -543,7 +543,66 @@
         }
       ],
       "status": "practice-suggestion",
-      "note": "6/8 practice suggestion: these six counts are eighth notes; one bar has two dotted-quarter beats. The recorded guitar uses arpeggios."
+      "note": "6/8 practice suggestion: these six counts are eighth notes; one bar has two dotted-quarter beats. The recorded guitar uses arpeggios.",
+      "display_corrections": {
+        "schema_version": "reported-chord-corrections-1.0",
+        "pack_id": "automatic-first-ten-v1",
+        "recording": {
+          "id": "animals-house-rising-sun-official-20261011",
+          "title": "The Animals - The House Of The Rising Sun",
+          "duration_seconds": 269.91891156462583,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708"
+        },
+        "primary_sha256": "71eb918cc9ef3662d5c6d75b49814f700b89a2fc15b73c1ce92d9bdb18dd6037",
+        "analysis_id": "animals-house-rising-sun-official-20261011-crema",
+        "status": "user-reported-provisional",
+        "gold": false,
+        "corrections": [
+          {
+            "id": "house-intro-e-near-8s-20261017",
+            "expected_event": {
+              "start_seconds": 6.408707482993197,
+              "end_seconds": 11.145578231292516,
+              "label": "Am"
+            },
+            "replacement_span": {
+              "start_seconds": 7.987664399,
+              "end_seconds": 9.473741497
+            },
+            "replacement_label": "E",
+            "reported_seconds": 8,
+            "time_basis": "founder-approximate-point",
+            "timing_status": "secondary-boundaries-unverified",
+            "source": "Founder play-along report and E-major clarification in chat, 17 October 2026",
+            "note": "Founder identifies E major around 8 seconds and confirms the intro order Am\u2013E\u2013Am\u2013E. The paired Chordino E cue supplies provisional split boundaries inside the native CREMA Am hold; neither physical boundary was independently verified. Retain Am before and after this proposed E span.",
+            "timing_evidence": {
+              "chart_sha256": "519748e12a7612c4965339f13d09e733192f2dba9e8de1209ef685a8086e1c13",
+              "analysis_id": "chordino-nnls-hmm-v1",
+              "native_event": {
+                "start_seconds": 7.987664399,
+                "end_seconds": 9.473741497,
+                "label": "E"
+              },
+              "status": "detector-candidate-not-independent-timing-gold"
+            }
+          },
+          {
+            "id": "house-intro-second-e-quality-20261017",
+            "expected_event": {
+              "start_seconds": 11.145578231292516,
+              "end_seconds": 12.538775510204081,
+              "label": "Em"
+            },
+            "replacement_label": "E",
+            "reported_seconds": 12,
+            "time_basis": "representative-native-cue-point-not-user-timestamp",
+            "timing_status": "native-boundaries-unverified",
+            "source": "Founder-confirmed intro order and E-major clarification in chat, 17 October 2026",
+            "note": "Founder confirms Am\u2013E\u2013Am\u2013E in the intro and clarifies E major rather than Em. Apply E to the second native E-root cue, retaining its CREMA bounds. Twelve seconds is only a representative point in this native cue for the display schema; the founder did not report a second exact timestamp. This contextual label proposal is not an independently verified transcription."
+          }
+        ]
+      }
     },
     {
       "recording": {

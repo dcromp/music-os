@@ -17,7 +17,7 @@
     },
     {
       "path": "experiments/review/practice.json",
-      "sha256": "18500b64d5a91570dd212ca6786793bd9a2d50444c92cced0a13629c51b16b06"
+      "sha256": "670fd5181a42fce211ebe51e26ad6ff089685ad76c0df1cde8a4abc693c59b20"
     },
     {
       "path": "catalogue/starter-four-teaching-review.json",
@@ -26,6 +26,10 @@
     {
       "path": "catalogue/founder-playalong-feedback-20261017.json",
       "sha256": "49ce768c0f01f56f4c4a045596cf1489e7001c751dd8051691ca8ad8724a64cb"
+    },
+    {
+      "path": "catalogue/house-intro-feedback-20261017.json",
+      "sha256": "79f90956da77efed781c075199b75f813cce189e95b3e99f9646762c36f4f27d"
     }
   ],
   "steps": [
