@@ -1,6 +1,6 @@
 "use strict";
 const assert = require("node:assert/strict");
-const { annotationExport, validateCandidate, currentEvent, exposureKey, loadExposure, recordExposure, refreshExposure, validateEvidence, clampSeek, playbackSnapshot, feedbackKey, feedbackExport, captureFeedback, loadFeedback, saveFeedback, transposePracticeLabel, practiceLabel, coreChordLabel, displayedChord, practiceTimeline,
+const { annotationExport, validateCandidate, currentEvent, exposureKey, loadExposure, recordExposure, refreshExposure, validateEvidence, clampSeek, playbackSnapshot, createPlaybackFrameLoop, feedbackKey, feedbackExport, captureFeedback, loadFeedback, saveFeedback, transposePracticeLabel, practiceLabel, coreChordLabel, displayedChord, practiceTimeline,
   currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, durationPresentation, holdBarDivisions, correctedDisplayEvents, validatePracticeManifest, safeTeachingURL, validateLearningManifest, practiceProgressKey, practiceProgressExport, loadPracticeProgress, savePracticeProgress, nextPracticeStep, initialPracticeStep } = require("./app.js");
 let checks = 0;
 function test(name, callback) { callback(); checks++; console.log(`ok ${name}`); }
@@ -99,6 +99,75 @@ test("current and upcoming chords recalculate after forward and backward seeks",
   assert.equal(playbackSnapshot(events, 5).current.label, "B");
   assert.equal(playbackSnapshot(events, 20).current, null);
   assert.deepEqual(playbackSnapshot(events, 20).upcoming, []);
+});
+function frameFixture(renderOverride) {
+  const audio = {currentTime: 4.07, paused: false, ended: false}, queue = new Map(), callbacks = new Map(), drawn = [], errors = [];
+  let nextId = 0;
+  const events = [{start_seconds: 2.414875283446712, end_seconds: 4.08671201814059, label: "A"},
+    {start_seconds: 4.08671201814059, end_seconds: 4.829750566893424, label: "D"},
+    {start_seconds: 4.829750566893424, end_seconds: 7.337505668934241, label: "E"}];
+  const draw = () => drawn.push(playbackSnapshot(events, audio.currentTime).current?.label || null);
+  const loop = createPlaybackFrameLoop({
+    requestFrame: callback => { const id = ++nextId; queue.set(id, callback); callbacks.set(id, callback); return id; },
+    cancelFrame: id => queue.delete(id), isPlaying: () => !audio.paused && !audio.ended,
+    render: () => renderOverride ? renderOverride(draw) : draw(), onError: error => errors.push(error)
+  });
+  const frame = () => {
+    assert.equal(queue.size, 1, "one refresh must be pending");
+    const [id, callback] = queue.entries().next().value; queue.delete(id); callback();
+  };
+  return {audio, loop, queue, callbacks, drawn, errors, frame};
+}
+test("a frame refresh crosses the native D boundary without waiting for timeupdate", () => {
+  const fixture = frameFixture(); fixture.loop.start(); fixture.frame();
+  assert.deepEqual(fixture.drawn, ["A"]);
+  fixture.audio.currentTime = 4.09; fixture.frame();
+  assert.deepEqual(fixture.drawn, ["A", "D"]);
+  fixture.audio.currentTime = 4.83; fixture.frame();
+  assert.deepEqual(fixture.drawn, ["A", "D", "E"]);
+  assert.equal(fixture.audio.currentTime, 4.83);
+  fixture.loop.stop();
+});
+test("duplicate play and playing starts keep a single pending frame", () => {
+  const fixture = frameFixture();
+  fixture.loop.start(); fixture.loop.start(); fixture.loop.start();
+  assert.equal(fixture.queue.size, 1); fixture.frame();
+  assert.deepEqual(fixture.drawn, ["A"]); assert.equal(fixture.queue.size, 1);
+  fixture.loop.start(); assert.equal(fixture.queue.size, 1); fixture.loop.stop();
+});
+test("pause and end cancel queued work while a resumed seek uses the actual audio clock", () => {
+  const fixture = frameFixture(); fixture.loop.start();
+  const cancelled = fixture.callbacks.values().next().value;
+  fixture.audio.paused = true; fixture.loop.stop(); assert.equal(fixture.queue.size, 0);
+  fixture.audio.currentTime = 5; cancelled(); assert.deepEqual(fixture.drawn, []);
+  fixture.audio.currentTime = 4.1; fixture.audio.paused = false; fixture.loop.start();
+  cancelled(); assert.equal(fixture.queue.size, 1); assert.deepEqual(fixture.drawn, []);
+  fixture.frame(); assert.deepEqual(fixture.drawn, ["D"]);
+  const afterResume = Array.from(fixture.callbacks.values()).at(-1);
+  fixture.audio.ended = true; fixture.loop.stop(); afterResume();
+  assert.equal(fixture.queue.size, 0); assert.deepEqual(fixture.drawn, ["D"]);
+  fixture.audio.ended = false; fixture.audio.currentTime = 3; fixture.loop.start(); fixture.frame();
+  assert.deepEqual(fixture.drawn, ["D", "A"]); fixture.loop.stop();
+});
+test("a stopped media clock ends refreshing even if its pause event was missed", () => {
+  const fixture = frameFixture(); fixture.loop.start(); fixture.audio.paused = true; fixture.frame();
+  assert.deepEqual(fixture.drawn, []); assert.equal(fixture.queue.size, 0);
+});
+test("a failed renderer stops the frame loop without an uncaught error and can recover", () => {
+  let broken = true;
+  const fixture = frameFixture(draw => { if (broken) throw new Error("render failed"); draw(); });
+  fixture.loop.start(); assert.doesNotThrow(fixture.frame);
+  assert.equal(fixture.errors.length, 1); assert.equal(fixture.queue.size, 0); assert.deepEqual(fixture.drawn, []);
+  broken = false; fixture.audio.currentTime = 5; fixture.loop.start(); fixture.frame();
+  assert.deepEqual(fixture.drawn, ["E"]); fixture.loop.stop();
+});
+test("missing animation-frame support leaves media-event rendering available", () => {
+  let rendered = 0;
+  for (const options of [{}, {requestFrame() { throw new Error("must require cancellation too"); }}]) {
+    const loop = createPlaybackFrameLoop({...options, isPlaying: () => true, render: () => { rendered++; }});
+    assert.doesNotThrow(() => { loop.start(); loop.start(); loop.stop(); });
+  }
+  assert.equal(rendered, 0);
 });
 const evidence = { schema_version: "automatic-draft-evidence-1.0", recording, review_points: [
   { start_seconds: 4, end_seconds: 10, reason: "Chord roots differ", priority_kind: "root_disagreement" }

@@ -147,6 +147,37 @@ function playbackSnapshot(events, seconds, count = 3) {
   return { current: currentEvent(events, seconds),
     upcoming: events.filter(event => event.start_seconds > seconds).slice(0, count) };
 }
+function createPlaybackFrameLoop({requestFrame, cancelFrame, isPlaying, render, onError = () => {}}) {
+  // Media timeupdate events can be sparse. Refresh from the actual audio clock
+  // on visible browser frames; never estimate elapsed time or move chart cues.
+  const supported = typeof requestFrame === "function" && typeof cancelFrame === "function";
+  let active = false, pending = null;
+  function report(error) { try { onError(error); } catch (_) { /* Keep playback events available. */ } }
+  function stop() {
+    active = false;
+    const frame = pending; pending = null;
+    if (frame) { try { cancelFrame(frame.id); } catch (error) { report(error); } }
+  }
+  function schedule() {
+    if (!active || pending) return;
+    try {
+      if (!isPlaying()) { stop(); return; }
+      const frame = {id: null}; pending = frame;
+      frame.id = requestFrame(() => {
+        // A cancelled callback can still arrive after a pause/song change.
+        // Its identity must not clear or replace a resumed loop's work.
+        if (!active || pending !== frame) return;
+        pending = null;
+        try {
+          if (!isPlaying()) { stop(); return; }
+          render();
+        } catch (error) { stop(); report(error); return; }
+        schedule();
+      });
+    } catch (error) { stop(); report(error); }
+  }
+  return {start() { if (supported) { active = true; schedule(); } }, stop};
+}
 function transposePracticeLabel(label, capo) {
   if (!Number.isInteger(capo) || capo < 0 || capo > 12) throw new Error("Use a capo fret from 0 to 12.");
   if (typeof label !== "string" || !capo || label === "N" || label === "X") return label;
@@ -503,7 +534,7 @@ function timeLabel(seconds) {
 }
 if (typeof module !== "undefined" && module.exports) {
   module.exports = { annotationExport, validateCandidate, currentEvent, exposureKey, loadExposure, recordExposure,
-    refreshExposure, pairedRecording, validateEvidence, clampSeek, playbackSnapshot, feedbackKey, feedbackExport,
+    refreshExposure, pairedRecording, validateEvidence, clampSeek, playbackSnapshot, createPlaybackFrameLoop, feedbackKey, feedbackExport,
     captureFeedback, loadFeedback, saveFeedback, timeLabel, transposePracticeLabel, practiceLabel, coreChordLabel, displayedChord, practiceTimeline,
     currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, durationPresentation, holdBarDivisions, correctedDisplayEvents, validatePracticeManifest, safeTeachingURL, validateLearningManifest, practiceProgressKey, practiceProgressExport, loadPracticeProgress, savePracticeProgress, nextPracticeStep, initialPracticeStep };
 }
@@ -515,6 +546,13 @@ if (typeof document !== "undefined") {
   const progressById = new Map();
   const storage = { getItem: key => window.localStorage.getItem(key), setItem: (key, value) => window.localStorage.setItem(key, value) };
   const status = text => { el("status").textContent = text; };
+  const playbackFrames = createPlaybackFrameLoop({
+    requestFrame: typeof window.requestAnimationFrame === "function" ? window.requestAnimationFrame.bind(window) : null,
+    cancelFrame: typeof window.cancelAnimationFrame === "function" ? window.cancelAnimationFrame.bind(window) : null,
+    isPlaying: () => !audio.paused && !audio.ended && !audio.error,
+    render: updateClock,
+    onError: () => status("Chord display refresh paused. Playback event updates remain available.")
+  });
   const safeURL = value => {
     const url = new URL(value, window.location.href);
     if (url.origin !== window.location.origin || url.search || url.hash) throw new Error("Only local pack files are allowed.");
@@ -706,6 +744,7 @@ if (typeof document !== "undefined") {
     readyControls();
   }
   async function selectCase(index) {
+    playbackFrames.stop();
     const token = ++generation; selected = cases[index];
     if (!states.has(selected.id)) {
       const key = exposureKey(packId, selected), saved = loadFeedback(storage, feedbackKey(packId, selected), selected, packId);
@@ -934,6 +973,8 @@ if (typeof document !== "undefined") {
     state.audioReady = true; readyControls(); updateClock();
   });
   for (const event of ["timeupdate", "seeked", "loadeddata", "ended"]) audio.addEventListener(event, updateClock);
+  for (const event of ["play", "playing"]) audio.addEventListener(event, playbackFrames.start);
+  for (const event of ["pause", "ended", "error"]) audio.addEventListener(event, playbackFrames.stop);
   audio.addEventListener("error", () => { if (state) state.audioReady = false; controls(false); status("Local audio could not load. Check the local server and song files."); });
   (async () => {
     const manifest = await getJSON("/manifest.json");

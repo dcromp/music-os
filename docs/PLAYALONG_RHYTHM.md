@@ -14,6 +14,8 @@ remain distinct. Progress stops at the current chord's end even when the next
 label starts later. Current and upcoming holds use the selected Full/Core and
 capo display; raw source chords, timings and feedback identities are preserved.
 
+During playback, an animation-frame loop now refreshes these cues from `audio.currentTime`, retaining media-event updates for seeks and browsers without frame support. Pause/end/error/song changes stop the loop; duplicate play/playing events cannot start parallel loops. This removes the extra wait for rate-limited `timeupdate` events described by the [HTML media standard](https://html.spec.whatwg.org/multipage/media.html#time-marches-on). It neither predicts elapsed time nor moves chart boundaries. The [live frame-clock check](PLAYER_FRAME_CLOCK_CHECK.json) compares the sampled first-D response before and after; it does not verify the recording’s physical guitar change.
+
 The 17 October update makes the duration visible inside each scrolling chord,
 using compact numbers such as **~½**, **~1** and **~2** under the estimated-bars legend. The Now and Coming up cards retain the full units. Irregular
 estimates retain decimals instead of snapping to half bars. Longer holds have
