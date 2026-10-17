@@ -1,0 +1,105 @@
+{
+  "schema_version": "frame-clock-verification-1.0",
+  "date": "2026-10-17",
+  "issue": "https://github.com/dcromp/music-os/issues/15",
+  "trigger": {
+    "quote": "the D chord on wild thing seems a little late",
+    "exact_occurrence": "Opening D, around 4 seconds; supplied in follow-up to the pre-fix clarification question",
+    "recording_id": "troggs-wild-thing-youtube-20261011"
+  },
+  "change": "Display refresh follows actual audio.currentTime on animation frames while playing. Native cues and all timing metadata unchanged.",
+  "standard_source": "https://html.spec.whatwg.org/multipage/media.html#time-marches-on",
+  "native_first_D_span": {
+    "start_seconds": 4.08671201814059,
+    "end_seconds": 4.829750566893424
+  },
+  "browser_comparison": {
+    "before": {
+      "sample_count": 200,
+      "samples_inside_D": 181,
+      "stale_A_samples": 47,
+      "first_sample_seconds": 4.04,
+      "last_sample_seconds": 4.688173,
+      "last_stale_sample_seconds": 4.245744,
+      "last_stale_sample_after_boundary_ms": 159.03198185941037,
+      "first_correct_D_sample_seconds": 4.251084,
+      "samples_path": "experiments/generated/player-proof-20261017/browser-before-frame-samples.json",
+      "samples_sha256": "530f01287fbc74bf57712a8f0f6db01799dfd710dfa1ecaf8c1020a63cc7fce8"
+    },
+    "after": {
+      "sample_count": 200,
+      "samples_inside_D": 172,
+      "stale_A_samples": 1,
+      "first_sample_seconds": 4.04,
+      "last_sample_seconds": 4.863324,
+      "last_stale_sample_seconds": 4.088864,
+      "last_stale_sample_after_boundary_ms": 2.1519818594102347,
+      "first_correct_D_sample_seconds": 4.094141,
+      "samples_path": "experiments/generated/player-proof-20261017/browser-after-frame-samples.json",
+      "samples_sha256": "13a0e99e9c46d5daf7c69c4df02d9d70bfc1e945817c6829ce372e245823c6a1"
+    }
+  },
+  "comparison_limit": "One visible-browser pass per version with 200 read-only DOM samples; last-stale sample timing is an observation, not a guaranteed latency bound or musical-attack accuracy.",
+  "browser_behaviour": {
+    "actual_playback_boundary_checked": true,
+    "pause_and_forward_backward_seek_checked": true,
+    "forward_seek_4_1": "D",
+    "backward_seek_3_9": "A",
+    "wild_25": "A",
+    "house_8": "E",
+    "console_errors": [],
+    "normal_player_feedback_or_progress_edits": false,
+    "normal_player_reloaded": true,
+    "normal_player_paused_position_restored_seconds": 16.65078,
+    "temporary_8071_stopped": true
+  },
+  "tests": {
+    "javascript": {
+      "player": 85,
+      "bench": 48,
+      "curation": 14,
+      "passed": 147
+    },
+    "python": "No Python source change or full-suite rerun in this display-only pass; preceding 441-test checkpoint has 421 passed / 20 optional skips."
+  },
+  "integrity": {
+    "cached_artifacts_unchanged": 41,
+    "public_learner_routes_match_disk": 48,
+    "current_policy": "experiments/fixtures/selected-workflow-player-v3.json",
+    "verified_frozen_pins": 39,
+    "selected_cases": 10,
+    "guide_policy_or_storage_key_changes": false
+  },
+  "proof": {
+    "path": "experiments/generated/player-proof-20261017/wild-d-frame-refresh.jpg",
+    "sha256": "6c1490e2ded34ef27b4eff13449bf1b86cafd1e43c51c072e8bf652c370271c4",
+    "git_ignored": true
+  },
+  "limits": [
+    "This fixes measured rendering latency, not independently verified musical boundary timing.",
+    "Other detector onset differences vary locally; no blanket D or chart offset applied.",
+    "No new inference, source retuning, lyric/chord search or full arrangement acceptance."
+  ],
+  "opening_D_followup": {
+    "date": "2026-10-17",
+    "quote": "Opening D, around 4 seconds",
+    "relation_to_browser_check": "The occurrence is the same native first D used in the existing before/after browser comparison.",
+    "new_post_fix_audition_report": false,
+    "cached_detector_comparison": {
+      "primary_path": "experiments/generated/automatic-first-ten-v1/cases/troggs-wild-thing-youtube-20261011/primary.json",
+      "primary_sha256": "13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81",
+      "primary_D_start_seconds": 4.08671201814059,
+      "secondary_path": "experiments/generated/automatic-first-ten-v1/cases/troggs-wild-thing-youtube-20261011/chordino.json",
+      "secondary_sha256": "f8045c178233cfe6a02e5e5831357df0c3e18752ac79400f50518663185c9a46",
+      "secondary_D6_start_seconds": 3.9938322,
+      "difference_ms": 92.87981814058988,
+      "nnls_evidence_path": "experiments/generated/catalogue-starter-four-pitch-v3-20261014/troggs-wild-thing-youtube-20261011/nnls-evidence.json",
+      "nnls_evidence_sha256": "d68ea1f07a5c3b3eed384bc598814e9a54b8ead78b63d9e72f06f57ddc156e70",
+      "nnls_window_seconds": 0.7430385487528345,
+      "nnls_hop_seconds": 0.09287981859410431,
+      "nnls_timestamp_semantics": "analysis window center"
+    },
+    "decision": "Retain the native 4.086712-second D boundary. The earlier secondary estimate and centered analysis window do not independently establish a physical chord-change time.",
+    "limit": "The existing measured rendering fix applies to this occurrence; audible musical timing and post-fix founder acceptance remain unverified."
+  }
+}

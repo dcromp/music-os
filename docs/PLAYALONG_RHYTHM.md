@@ -1,6 +1,7 @@
 # Chord duration and suggested strumming
 
-Deployed and browser verified, 12 October 2026. This continuation addresses two founder
+Initially deployed and browser verified, 12 October 2026; player guidance updated
+17 October. The original continuation addressed two founder
 observations: the equally sized upcoming cards did not show how long to hold a
 chord, and the player supplied no suggested strumming rhythm.
 
@@ -11,12 +12,59 @@ A proportional near-future strip gives longer chords more width, with a Now
 marker following the prepared audio clock. Blank gaps, No chord and Unclear
 remain distinct. Progress stops at the current chord's end even when the next
 label starts later. Current and upcoming holds use the selected Full/Core and
-capo display; raw source chords, timings and feedback stay unchanged.
+capo display; raw source chords, timings and feedback identities are preserved.
+
+During playback, an animation-frame loop now refreshes these cues from `audio.currentTime`, retaining media-event updates for seeks and browsers without frame support. Pause/end/error/song changes stop the loop; duplicate play/playing events cannot start parallel loops. This removes the extra wait for rate-limited `timeupdate` events described by the [HTML media standard](https://html.spec.whatwg.org/multipage/media.html#time-marches-on). It neither predicts elapsed time nor moves chart boundaries. The [live frame-clock check](PLAYER_FRAME_CLOCK_CHECK.json) compares the sampled first-D response before and after; it does not verify the recording’s physical guitar change.
+
+The 17 October update makes the duration visible inside each scrolling chord,
+using compact numbers such as **~½**, **~1** and **~2** under the estimated-bars legend. The Now and Coming up cards retain the full units. Irregular
+estimates retain decimals instead of snapping to half bars. Longer holds have
+internal divisions one estimated bar-length apart, measured from that chord's
+original onset using the local variable-tempo pulse timestamps. These are
+hold-relative duration marks, not the recording's measure starts. Clipping the
+scrolling window does not reset that origin or shorten the total duration
+caption; continuation arrows identify a hold that extends beyond the view.
+The track has a 960-pixel minimum width. Narrow screens can scroll it horizontally; very short clipped edge fragments retain full tooltip and accessible descriptions. The Now and
+Coming up cards also keep prominent readable lengths.
 
 Seconds remain available. Paired automatic beat estimates can add approximate
 beat/bar duration labels only within their observed coverage. Bar counts need an
 explicit pulse-per-bar convention. These are lengths, not verified bar numbers
 or downbeats, and chord boundaries are not snapped to the grid.
+
+## Reported display corrections
+
+Founder play-along feedback on 17 October identifies **A near 25 seconds in
+Wild Thing**, where the native CREMA chart says E. A separate provisional
+display correction covers the containing native span,
+23.777233560090703–26.09922902494331 seconds. The report does not verify the
+entire span or its physical change boundaries. The raw E event and its original
+timing remain unchanged; an on-screen note identifies the reported correction.
+This is not a promoted verified arrangement or independent timing reference.
+
+The overlay requires the exact playback pack, recording/audio identity, primary
+chart SHA-256, analysis ID and native event boundaries/label. A mismatch leaves
+the original chart visible. Feedback records both raw E and displayed A, plus
+the correction ID, provisional status and reported time. The existing browser
+feedback key and practice identity remain unchanged.
+
+The server's `X-Music-OS-Chart-SHA256` response header binds a digest to the exact
+chart bytes it serves. Browsers with WebCrypto compute the digest directly;
+embedded browsers without it use this local-server header. Without a valid
+digest the correction is not applied and original playback remains available.
+Pack/chart/teaching JSON requests bypass stale browser caches when a localhost port is reused. The subsequent [cache follow-up](PLAYER_CACHE_FOLLOWUP.json) also serves allowlisted HTML, scripts, styles and JSON as current `200`/`no-store` responses, replacing legacy conditional caches. A page already open still needs one reload or a fresh tab; **17 Oct update** identifies the current HTML. Advanced source details show the effective chart digest, analysis and pack ID. This local provenance check does not prove musical accuracy.
+
+Dylan's single detected Am7 is retained in the raw/full chart. The existing
+Core chords choice shows Am, just as Em7 can show Em; no additional label or
+boundary change is made for that observation.
+
+## House intro correction and source lookup
+
+The founder confirmed **E major**. [Jon MacLennan](https://www.jonmaclennan.com/blog/house-of-the-rising-sun-guitar-lesson) and [Jonathan Richter](https://richterguitar.com/house-of-the-rising-sun-the-animals/) both teach Am–C–D–F / Am–E–Am–E. Their order supports the label choice, not exact recording boundaries. The long native Am at 6.409–11.146 seconds now has a separate provisional E span at 7.988–9.474 seconds from the paired secondary detector, preserving Am on both sides. The following Em cue displays E with its native bounds. Its 12-second metadata point is explicitly representative, not an additional founder timestamp; the UI says “Reported intro correction” without attributing that time to the user.
+
+Split overlays must stay inside an exactly matched native parent cue. Feedback retains raw Am/Em, displayed E, the proposed display interval and time provenance. Old feedback remains readable. The [proposal record](../catalogue/house-intro-feedback-20261017.json) and [verification](HOUSE_INTRO_FEEDBACK_UPDATE.json) preserve the source and timing limits. No full-song chart is promoted.
+
+Online source research currently runs through the agent and saved catalogue records; automatic web search/consensus is not an implemented app or preparation feature. The source-to-player gap is explicit in the README.
 
 ## Beat and meter evidence
 
@@ -93,7 +141,13 @@ to belong to the same recording.
 
 ## Status and next checks
 
-Implementation passes 47 JavaScript helper checks and 239 distinct Python checks (223 in the standard environment plus 16 in the pinned evaluation environment). Isolated browser QA verifies estimated/seconds views, Core merging, 6/8 and syncopation choices, proportional strip widths, and feedback capture/persistence on a separate origin. The deployed port-8070 player verifies all ten guides, pattern selection, playback/pause and advancing hold progress. All 47 public assets match the Mac checkout; three sampled private paths return 404, and ports 8067/8068 are restored. The pack identity is unchanged, with no test issues added to the normal players. Next evaluate
+The original 12 October implementation passed 47 JavaScript helper checks and 239 distinct Python checks (223 in the standard environment plus 16 in the pinned evaluation environment). Its isolated browser QA verified estimated/seconds views, Core merging, 6/8 and syncopation choices, proportional strip widths, and feedback capture/persistence on a separate origin. The deployed port-8070 player verified all ten guides, pattern selection, playback/pause and advancing hold progress. All 47 public assets matched the Mac checkout; three sampled private paths returned 404. Those deployment and count results are historical; current service status is in the README.
+
+**Earlier 17 October player verification:** 136 JavaScript checks (74 player, 48 bench, 14 curation) pass; 440 Python tests are discovered, with 420 passed and 20 optional-dependency skips. The explicit player-v2 audit verifies 39 pins and ten selected cases. Browser QA verifies the A cue at 25 s, Dylan Core Am/full Am7 at 47 s, seconds fallback, all ten song choices, Love Me Do outside the path, and feedback persistence/removal on an isolated origin. Default and narrow-screen geometry checks confirm proportional horizontal blocks, readable ordinary short-hold numbers and local horizontal scrolling without page overflow. Tiny clipped edge blocks retain complete tooltip/accessibility descriptions. [Verification record](PLAYALONG_FEEDBACK_UPDATE.json). Current guide
+metadata is pinned by `experiments/fixtures/selected-workflow-player-v3.json`;
+37 earlier frozen inputs stay unchanged and only two guide pins are versioned.
+The saved beat grid, raw charts/audio and playback/storage identities remain
+unchanged. Next evaluate
 beat-level/count usefulness against independently checked real excerpts, verify
 recording-compatible strumming by section, and measure followability during
 normal guitar practice. The broader reference milestone remains 1.5–2.5 focused

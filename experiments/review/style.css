@@ -36,13 +36,24 @@ tr.active { background: #e3f2e8; }
 #play-current { display: block; font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; color: #22543e; }
 #next-change { display: block; min-height: 20px; margin-top: 10px; }
 #full-chord { display: block; margin-top: 6px; }
+#correction-note { margin: 8px 0 0; }
 #current-hold { margin: 10px 0 6px; }
+.hold-duration { display: block; color: #22543e; font-size: 1.1rem; font-weight: 700; }
 .hold-progress { height: 8px; overflow: hidden; border-radius: 4px; background: #d2e3d9; }
 #hold-progress-fill { display: block; height: 100%; background: #347458; }
 .timing-view { margin: 24px 0 16px; }
-#timing-range { margin-bottom: 22px; }
-.timing-track { height: 50px; position: relative; background: #f7faf8; border: 1px solid #c9dad3; border-radius: 5px; }
-.timing-block { position: absolute; top: 0; bottom: 0; padding: 14px 0; text-indent: 5px; background: #dceee2; border: 0; box-shadow: inset -1px 0 white; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: .85rem; font-weight: 600; }
+#timing-range { margin-bottom: 0; }
+.timing-viewport { max-width: 100%; overflow-x: auto; padding: 24px 0 8px; }
+.timing-viewport:focus-visible { outline: 2px solid #347458; outline-offset: 3px; border-radius: 5px; }
+.timing-track { min-width: 960px; height: 76px; position: relative; background: #f7faf8; border: 1px solid #c9dad3; border-radius: 5px; }
+.timing-block { position: absolute; top: 0; bottom: 0; padding: 8px 0 22px; background: #dceee2; border: 0; box-shadow: inset -1px 0 white; overflow: hidden; font-size: .85rem; font-weight: 600; }
+.timing-label, .timing-duration { position: relative; display: block; max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; text-indent: 5px; }
+.timing-label { font-size: 1.05rem; line-height: 1.2; }
+.timing-duration { margin-top: 4px; font-size: .8rem; font-weight: 700; }
+.timing-unit { position: absolute; top: 55px; bottom: 0; border-left: 1px solid #7a9d88; pointer-events: none; }
+.timing-continues-left::before, .timing-continues-right::after { position: absolute; bottom: 2px; color: #22543e; font-size: .65rem; line-height: 1; }
+.timing-continues-left::before { content: "◀"; left: 2px; }
+.timing-continues-right::after { content: "▶"; right: 2px; }
 .timing-gap { color: #73807a; background: transparent; font-weight: 400; }
 .timing-unclear { background: #f3e8c9; color: #765d28; }
 .timing-silence { background: #e5eae7; color: #566a60; }
@@ -59,6 +70,7 @@ tr.active { background: #e3f2e8; }
 .upcoming-chord { min-width: 72px; display: flex; flex-direction: column; }
 .upcoming-chord strong { font-size: 1.7rem; }
 .upcoming-chord span { font-size: .85rem; color: #526e62; font-variant-numeric: tabular-nums; }
+.upcoming-chord .upcoming-duration { color: #22543e; font-size: 1rem; font-weight: 700; }
 button.primary { background: #245d43; color: white; padding: 12px 18px; font-weight: 600; }
 button.primary:hover { background: #194c35; }
 #feedback-detail { border-left: 3px solid #bad3c5; padding: 4px 0 12px 16px; margin-top: 16px; }

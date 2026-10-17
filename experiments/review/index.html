@@ -9,7 +9,7 @@
 </head>
 <body>
   <main>
-    <p class="eyebrow">Music OS · local experiment</p>
+    <p class="eyebrow">Music OS · local experiment · 17 Oct update</p>
     <h1>Your song, ready to play</h1>
     <p class="lead">Press play and follow the automatic chord draft. Listen or pick up your guitar. If something sounds wrong, tap the button below — its time is captured for you.</p>
     <div id="status" role="status">Loading your songs…</div>
@@ -34,16 +34,16 @@
       <p id="practice" class="small" hidden></p>
       <div id="chord-view-choice" class="controls" hidden><label for="chord-view">Chord display</label><select id="chord-view"><option value="capo-shapes">Capo shapes</option><option value="sounding-pitches">Sounding pitches</option></select></div>
       <div class="controls"><label for="quality-mode">Chord detail</label><select id="quality-mode" disabled><option value="full-chords">Full chords</option><option value="core-chords">Core chords</option></select></div>
-      <p id="quality-info" class="note" hidden>Core chords leave out some added notes, such as Em7 → Em and Cadd9 → C. Suspended chords stay suspended: Dsus4 stays Dsus4. This can help you start playing, but may change the sound.</p>
+      <p id="quality-info" class="note" hidden>Core chords leave out some added notes, such as Em7 → Em, Am7 → Am and Cadd9 → C. Suspended chords stay suspended: Dsus4 stays Dsus4. This can help you start playing, but may change the sound.</p>
       <div class="controls"><label for="duration-mode">Chord lengths</label><select id="duration-mode" disabled><option value="estimated">Estimated beats / bars</option><option value="seconds">Seconds</option></select></div>
       <p id="rhythm-note" class="small" hidden></p>
       <audio id="audio" controls preload="metadata"></audio>
       <p id="position" class="position">0:00</p>
       <div class="chord-strip" aria-label="Automatic chord draft">
-        <div class="now-card"><span class="chord-caption">Now</span><strong id="play-current">Loading…</strong><span id="full-chord" class="small" hidden></span><p id="current-hold" class="small"></p><div id="hold-progress" class="hold-progress" role="progressbar" aria-label="Progress through current timing span" aria-valuemin="0" aria-valuemax="100" hidden><span id="hold-progress-fill"></span></div><span id="next-change" class="small"></span></div>
+        <div class="now-card"><span class="chord-caption">Now</span><strong id="play-current">Loading…</strong><span id="full-chord" class="small" hidden></span><p id="correction-note" class="small" hidden></p><p id="current-hold" class="small"></p><div id="hold-progress" class="hold-progress" role="progressbar" aria-label="Progress through current timing span" aria-valuemin="0" aria-valuemax="100" hidden><span id="hold-progress-fill"></span></div><span id="next-change" class="small"></span></div>
         <div class="upcoming-card"><span class="chord-caption">Coming up</span><div id="upcoming" class="upcoming"></div></div>
       </div>
-      <div class="timing-view"><p id="timing-range" class="small"></p><div id="timing-track" class="timing-track" role="img" aria-label="Chord timing"><div id="timing-blocks"></div><div id="timing-playhead" class="timing-playhead"><span>Now</span></div></div></div>
+      <div class="timing-view"><p id="timing-range" class="small"></p><div class="timing-viewport" tabindex="0" role="region" aria-label="Scrolling chord lengths"><div id="timing-track" class="timing-track" role="img" aria-label="Chord timing"><div id="timing-blocks"></div><div id="timing-playhead" class="timing-playhead"><span>Now</span></div></div></div></div>
       <div class="controls"><button id="restart" disabled>Restart</button><button id="back" disabled>Back 2 seconds</button></div>
       <p id="point-notice" class="note" hidden></p>
       <div id="strumming" class="strum-panel" hidden>

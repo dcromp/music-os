@@ -83,6 +83,45 @@ function validateCandidate(chart, recording) {
 function currentEvent(events, seconds) {
   return events.find(event => event.start_seconds <= seconds && seconds < event.end_seconds) || null;
 }
+const CORRECTION_TIME_BASES = ["founder-approximate-point", "representative-native-cue-point-not-user-timestamp"];
+function validCorrectionForEvent(item, event) {
+  const hasSpan = item?.replacement_span !== undefined, span = hasSpan ? item.replacement_span : event;
+  return event && span && boundedText(item?.id, 100) && boundedText(item.replacement_label, 40) && boundedText(item.note, 1000) &&
+    item.expected_event?.start_seconds === event.start_seconds && item.expected_event?.end_seconds === event.end_seconds &&
+    item.expected_event?.label === event.label && validNumber(span.start_seconds) && validNumber(span.end_seconds) &&
+    span.start_seconds >= event.start_seconds && span.end_seconds <= event.end_seconds && span.end_seconds > span.start_seconds &&
+    validNumber(item.reported_seconds) && item.reported_seconds >= span.start_seconds && item.reported_seconds < span.end_seconds &&
+    item.timing_status === (hasSpan ? "secondary-boundaries-unverified" : "native-boundaries-unverified") &&
+    (item.time_basis === undefined || CORRECTION_TIME_BASES.includes(item.time_basis));
+}
+function correctedDisplayEvents(chart, correctionSet, packId, primarySha256) {
+  if (!correctionSet) return chart.chords;
+  const fail = () => { throw new Error("Reported correction does not match this draft. Original chords are shown."); };
+  if (correctionSet.schema_version !== "reported-chord-corrections-1.0" || correctionSet.status !== "user-reported-provisional" ||
+      correctionSet.gold !== false || !boundedText(packId, 100) || correctionSet.pack_id !== packId ||
+      typeof primarySha256 !== "string" || !/^[a-f0-9]{64}$/.test(primarySha256) ||
+      correctionSet.primary_sha256 !== primarySha256 || !boundedText(correctionSet.analysis_id, 200) || correctionSet.analysis_id !== chart.analysis?.id ||
+      !pairedRecording(correctionSet.recording, chart.recording) ||
+      !Array.isArray(correctionSet.corrections) || !correctionSet.corrections.length || correctionSet.corrections.length > 64) fail();
+  const replacements = new Map(), ids = new Set();
+  for (const item of correctionSet.corrections) {
+    const expected = item?.expected_event;
+    const index = chart.chords.findIndex(event => expected && event.start_seconds === expected.start_seconds &&
+      event.end_seconds === expected.end_seconds && event.label === expected.label);
+    if (ids.has(item?.id) || index < 0 || replacements.has(index) || !validCorrectionForEvent(item, chart.chords[index])) fail();
+    ids.add(item.id); replacements.set(index, item);
+  }
+  return chart.chords.flatMap((event, index) => {
+    const item = replacements.get(index);
+    if (!item) return [{...event}];
+    const span = item.replacement_span || event, parts = [];
+    if (span.start_seconds > event.start_seconds) parts.push({...event, end_seconds: span.start_seconds});
+    parts.push({...event, start_seconds: span.start_seconds, end_seconds: span.end_seconds,
+      label: item.replacement_label, display_correction: item});
+    if (span.end_seconds < event.end_seconds) parts.push({...event, start_seconds: span.end_seconds});
+    return parts;
+  });
+}
 const FEEDBACK_REASONS = ["not-sure", "wrong-chord", "late-change", "too-many-changes"];
 function pairedRecording(candidate, recording) {
   return candidate && candidate.id === recording.id && candidate.audio_sha256 === recording.audio_sha256 &&
@@ -107,6 +146,37 @@ function clampSeek(seconds, duration) {
 function playbackSnapshot(events, seconds, count = 3) {
   return { current: currentEvent(events, seconds),
     upcoming: events.filter(event => event.start_seconds > seconds).slice(0, count) };
+}
+function createPlaybackFrameLoop({requestFrame, cancelFrame, isPlaying, render, onError = () => {}}) {
+  // Media timeupdate events can be sparse. Refresh from the actual audio clock
+  // on visible browser frames; never estimate elapsed time or move chart cues.
+  const supported = typeof requestFrame === "function" && typeof cancelFrame === "function";
+  let active = false, pending = null;
+  function report(error) { try { onError(error); } catch (_) { /* Keep playback events available. */ } }
+  function stop() {
+    active = false;
+    const frame = pending; pending = null;
+    if (frame) { try { cancelFrame(frame.id); } catch (error) { report(error); } }
+  }
+  function schedule() {
+    if (!active || pending) return;
+    try {
+      if (!isPlaying()) { stop(); return; }
+      const frame = {id: null}; pending = frame;
+      frame.id = requestFrame(() => {
+        // A cancelled callback can still arrive after a pause/song change.
+        // Its identity must not clear or replace a resumed loop's work.
+        if (!active || pending !== frame) return;
+        pending = null;
+        try {
+          if (!isPlaying()) { stop(); return; }
+          render();
+        } catch (error) { stop(); report(error); return; }
+        schedule();
+      });
+    } catch (error) { stop(); report(error); }
+  }
+  return {start() { if (supported) { active = true; schedule(); } }, stop};
 }
 function transposePracticeLabel(label, capo) {
   if (!Number.isInteger(capo) || capo < 0 || capo > 12) throw new Error("Use a capo fret from 0 to 12.");
@@ -181,6 +251,8 @@ function timingWindow(events, seconds, duration, horizon = 16, history = 4) {
   function add(first, last, event = null) {
     blocks.push({ start_seconds: first, end_seconds: last, event,
       kind: !event ? "gap" : event.label === "X" ? "unclear" : event.label === "N" ? "silence" : "chord",
+      continues_before: Boolean(event && event.start_seconds < first),
+      continues_after: Boolean(event && event.end_seconds > last),
       offset_fraction: (first - start) / span, width_fraction: (last - first) / span });
   }
   let cursor = start;
@@ -246,18 +318,35 @@ function estimatedSpan(rhythm, start, end) {
   const beats = last - first;
   return { beats, bars: rhythm.beats_per_bar === null ? null : beats / rhythm.beats_per_bar };
 }
-function durationCaption(start, end, rhythm = null) {
+function durationPresentation(start, end, rhythm = null) {
   const duration = end - start, seconds = duration > 0 && duration < 0.05 ? "<0.1 s" : `${duration.toFixed(1)} s`, estimate = estimatedSpan(rhythm, start, end);
-  if (!estimate) return seconds;
-  const rounded = value => value > 0 && value < 0.05 ? "<0.1" : value.toFixed(1).replace(/\.0$/, "");
-  if (estimate.bars !== null) {
-    if (estimate.bars < 0.05) return `<0.1 bar · ${seconds}`;
-    const count = rounded(estimate.bars);
-    return `~${count} ${count === "1" ? "bar" : "bars"} · ${seconds}`;
+  if (!estimate) return {compact: seconds, full: seconds, unit: "seconds"};
+  const value = estimate.bars === null ? estimate.beats : estimate.bars;
+  const unit = estimate.bars === null ? "beat" : "bar";
+  let compact;
+  if (value < 0.05) compact = `<0.1 ${unit}`;
+  else {
+    // Fractions describe exact quarter-bar durations only; arbitrary estimates
+    // retain their decimal value rather than being snapped to half bars.
+    const quarters = Math.round(value * 4), exactQuarter = unit === "bar" && Math.abs(value * 4 - quarters) < 0.000001;
+    const count = exactQuarter ? `${Math.floor(quarters / 4) || ""}${["", "¼", "½", "¾"][quarters % 4]}`
+      : value.toFixed(1).replace(/\.0$/, "");
+    compact = `~${count} ${value <= 1 || count === "1" ? unit : unit + "s"}`;
   }
-  if (estimate.beats < 0.05) return `<0.1 beat · ${seconds}`;
-  const count = rounded(estimate.beats);
-  return `~${count} ${count === "1" ? "beat" : "beats"} · ${seconds}`;
+  return {compact, full: `${compact} · ${seconds}`, unit: unit + "s"};
+}
+function durationCaption(start, end, rhythm = null) { return durationPresentation(start, end, rhythm).full; }
+function holdBarDivisions(event, rhythm, visibleStart, visibleEnd) {
+  if (!event || !rhythm || ![2, 4].includes(rhythm.beats_per_bar) || !estimatedSpan(rhythm, event.start_seconds, event.end_seconds)) return [];
+  const beats = rhythm.beat_times_seconds, first = beatPosition(beats, event.start_seconds), last = beatPosition(beats, event.end_seconds);
+  const start = Math.max(visibleStart, event.start_seconds), end = Math.min(visibleEnd, event.end_seconds);
+  if (end <= start) return [];
+  const result = [];
+  for (let position = first + rhythm.beats_per_bar; position < last - 0.000001; position += rhythm.beats_per_bar) {
+    const index = Math.floor(position), time = beats[index] + (position - index) * (beats[index + 1] - beats[index]);
+    if (time > start && time < end) result.push({time_seconds: time, offset_fraction: (time - start) / (end - start)});
+  }
+  return result;
 }
 function validatePracticeManifest(payload, reviewCases) {
   const { cases, expected } = pairedMetadataCases(payload, "playalong-practice-1.0", reviewCases), result = new Map();
@@ -376,7 +465,7 @@ function feedbackKey(packId, reviewCase) {
 function feedbackExport(reviewCase, packId, feedback) {
   return { schema_version: "playalong-feedback-1.0", review_pack_id: packId, recording: reviewCase.recording,
     origin: reviewCase.origin || null, candidate_exposure: "model-exposed", gold: false,
-    semantics: "Playback issue reports, not chord labels or verified change times. Times are captured at the tap and include listener reaction delay. raw_sounding_chord is the detector label; displayed_chord follows the recorded practice view, capo and quality_mode. Missing quality_mode in older reports means full-chords.",
+    semantics: "Playback issue reports, not chord labels or verified change times. Times are captured at the tap and include listener reaction delay. raw_sounding_chord is the detector label; displayed_chord follows any identified provisional display correction, practice view, capo and quality_mode. Missing quality_mode in older reports means full-chords.",
     feedback: feedback.map(item => ({ ...item })) };
 }
 function captureFeedback(reviewCase, seconds, chart, id, createdAt, practice = {}) {
@@ -389,19 +478,39 @@ function captureFeedback(reviewCase, seconds, chart, id, createdAt, practice = {
   const qualityMode = practice.qualityMode ?? "full-chords";
   if (!["sounding-pitches", "capo-shapes"].includes(view) || !Number.isInteger(capo) || capo < 0 || capo > 12) throw new Error("Invalid practice display.");
   if (!QUALITY_MODES.includes(qualityMode)) throw new Error("Invalid chord quality display.");
+  const correction = practice.correction || null;
+  const span = correction?.replacement_span || event;
+  if (correction && (!validCorrectionForEvent(correction, event) || seconds < span.start_seconds || seconds >= span.end_seconds)) {
+    throw new Error("Display correction does not match the captured chord.");
+  }
   return { id, playback_seconds: seconds,
     source_seconds: seconds + (reviewCase.origin?.source_offset_seconds || 0),
     candidate_analysis_id: chart.analysis?.id || null, raw_sounding_chord: event?.label || null,
-    displayed_chord: event ? displayedChord(event.label, view, capo, qualityMode) : null,
+    displayed_chord: event ? displayedChord(correction?.replacement_label || event.label, view, capo, qualityMode) : null,
+    ...(correction ? {display_correction_id: correction.id, display_correction_status: "user-reported-provisional",
+      display_correction_reported_seconds: correction.reported_seconds,
+      display_correction_span: {start_seconds: span.start_seconds, end_seconds: span.end_seconds},
+      ...(correction.time_basis ? {display_correction_time_basis: correction.time_basis} : {})} : {}),
     practice_view: view, practice_capo: capo, quality_mode: qualityMode,
     reason: "not-sure", note: "", created_at: createdAt };
 }
 function validFeedback(item, recording) {
+  const corrected = item && [item.display_correction_id, item.display_correction_status, item.display_correction_reported_seconds,
+    item.display_correction_span, item.display_correction_time_basis].some(value => value !== undefined);
+  const span = item?.display_correction_span;
+  const validSpan = span === undefined || (span && validNumber(span.start_seconds) && validNumber(span.end_seconds) && span.start_seconds >= 0 &&
+    span.end_seconds <= recording.duration_seconds && span.end_seconds > span.start_seconds &&
+    item.playback_seconds >= span.start_seconds && item.playback_seconds < span.end_seconds &&
+    item.display_correction_reported_seconds >= span.start_seconds && item.display_correction_reported_seconds < span.end_seconds);
   return item && typeof item.id === "string" && item.id && validNumber(item.playback_seconds) &&
     item.playback_seconds >= 0 && item.playback_seconds <= recording.duration_seconds &&
     validNumber(item.source_seconds) && FEEDBACK_REASONS.includes(item.reason) &&
     typeof item.note === "string" && item.note.length <= 1000 && typeof item.created_at === "string" &&
-    (item.quality_mode === undefined || QUALITY_MODES.includes(item.quality_mode));
+    (item.quality_mode === undefined || QUALITY_MODES.includes(item.quality_mode)) &&
+    (!corrected || (boundedText(item.display_correction_id, 100) && item.display_correction_status === "user-reported-provisional" &&
+      validNumber(item.display_correction_reported_seconds) && item.display_correction_reported_seconds >= 0 &&
+      item.display_correction_reported_seconds < recording.duration_seconds && validSpan &&
+      (item.display_correction_time_basis === undefined || CORRECTION_TIME_BASES.includes(item.display_correction_time_basis))));
 }
 function loadFeedback(storage, key, reviewCase, packId) {
   try {
@@ -425,9 +534,9 @@ function timeLabel(seconds) {
 }
 if (typeof module !== "undefined" && module.exports) {
   module.exports = { annotationExport, validateCandidate, currentEvent, exposureKey, loadExposure, recordExposure,
-    refreshExposure, pairedRecording, validateEvidence, clampSeek, playbackSnapshot, feedbackKey, feedbackExport,
+    refreshExposure, pairedRecording, validateEvidence, clampSeek, playbackSnapshot, createPlaybackFrameLoop, feedbackKey, feedbackExport,
     captureFeedback, loadFeedback, saveFeedback, timeLabel, transposePracticeLabel, practiceLabel, coreChordLabel, displayedChord, practiceTimeline,
-    currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, validatePracticeManifest, safeTeachingURL, validateLearningManifest, practiceProgressKey, practiceProgressExport, loadPracticeProgress, savePracticeProgress, nextPracticeStep, initialPracticeStep };
+    currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, durationPresentation, holdBarDivisions, correctedDisplayEvents, validatePracticeManifest, safeTeachingURL, validateLearningManifest, practiceProgressKey, practiceProgressExport, loadPracticeProgress, savePracticeProgress, nextPracticeStep, initialPracticeStep };
 }
 
 if (typeof document !== "undefined") {
@@ -437,15 +546,44 @@ if (typeof document !== "undefined") {
   const progressById = new Map();
   const storage = { getItem: key => window.localStorage.getItem(key), setItem: (key, value) => window.localStorage.setItem(key, value) };
   const status = text => { el("status").textContent = text; };
+  const playbackFrames = createPlaybackFrameLoop({
+    requestFrame: typeof window.requestAnimationFrame === "function" ? window.requestAnimationFrame.bind(window) : null,
+    cancelFrame: typeof window.cancelAnimationFrame === "function" ? window.cancelAnimationFrame.bind(window) : null,
+    isPlaying: () => !audio.paused && !audio.ended && !audio.error,
+    render: updateClock,
+    onError: () => status("Chord display refresh paused. Playback event updates remain available.")
+  });
   const safeURL = value => {
     const url = new URL(value, window.location.href);
     if (url.origin !== window.location.origin || url.search || url.hash) throw new Error("Only local pack files are allowed.");
     return url.href;
   };
   async function getJSON(url) {
-    const response = await fetch(safeURL(url));
+    // Packs and optional teaching metadata can change when a local server restarts.
+    const response = await fetch(safeURL(url), {cache: "no-store"});
     if (!response.ok) throw new Error(`Local song file unavailable (${response.status}).`);
     return response.json();
+  }
+  async function getPrimary(url, recording) {
+    // Refresh legacy cached responses that predate the exact-byte digest header.
+    const response = await fetch(safeURL(url), {cache: "no-store"});
+    if (!response.ok) throw new Error(`Local song file unavailable (${response.status}).`);
+    const bytes = await response.arrayBuffer();
+    const chart = validateCandidate(JSON.parse(new TextDecoder().decode(bytes)), recording);
+    // The local server binds this digest to the exact response bytes. Some
+    // embedded browsers omit WebCrypto; native digest verification wins when available.
+    let hash = response.headers?.get("X-Music-OS-Chart-SHA256") || null;
+    if (!/^[a-f0-9]{64}$/.test(hash || "")) hash = null;
+    try { if (globalThis.crypto?.subtle) hash = Array.from(new Uint8Array(await globalThis.crypto.subtle.digest("SHA-256", bytes)),
+      value => value.toString(16).padStart(2, "0")).join(""); } catch (_) { /* Original playback remains available without a verified correction hash. */ }
+    return {chart, hash};
+  }
+  function refreshDisplayCorrections(target) {
+    target.displayEvents = target.primary?.chords || [];
+    target.correctionWarning = "";
+    if (!target.primary) return;
+    try { target.displayEvents = correctedDisplayEvents(target.primary, target.strumming?.display_corrections, packId, target.primaryHash); }
+    catch (error) { target.correctionWarning = target.primaryHash ? error.message : "Chart identity check is unavailable. Original chords are shown."; }
   }
 
   function learningStep() { return learningPath?.steps.find(step => pairedRecording(step.recording, selected?.recording)) || null; }
@@ -606,11 +744,13 @@ if (typeof document !== "undefined") {
     readyControls();
   }
   async function selectCase(index) {
+    playbackFrames.stop();
     const token = ++generation; selected = cases[index];
     if (!states.has(selected.id)) {
       const key = exposureKey(packId, selected), saved = loadFeedback(storage, feedbackKey(packId, selected), selected, packId);
       states.set(selected.id, { marks: [], notes: "", ...loadExposure(storage, key), exposureKey: key, packId,
         ...saved, feedbackKey: feedbackKey(packId, selected), primary: null, evidence: null, candidates: null,
+        primaryHash: null, displayEvents: [], correctionWarning: "",
         audioReady: false, practiceView: selected.practice?.capo ? "capo-shapes" : "sounding-pitches",
         qualityMode: "full-chords", durationMode: "estimated", strumPatternId: null, started: performance.now() });
     }
@@ -621,21 +761,27 @@ if (typeof document !== "undefined") {
     el("comparison").hidden = true; el("candidate-events").replaceChildren(); el("candidate").replaceChildren();
     el("play-current").textContent = "Loading…"; el("upcoming").replaceChildren(); el("next-change").textContent = "";
     el("full-chord").hidden = true;
+    el("correction-note").hidden = true;
     el("current-hold").textContent = ""; el("hold-progress").hidden = true; el("timing-blocks").replaceChildren(); el("timing-range").textContent = "";
     el("feedback-detail").hidden = true; state.activeFeedback = null;
     el("notes").value = state.notes; el("export").hidden = true; el("feedback-export").hidden = true;
     el("point-notice").hidden = true;
     practiceInfo(); durationInfo(); renderStrumming(); renderLearning();
-    el("origin").textContent = JSON.stringify({ recording: selected.recording, origin: selected.origin || null,
-      source: selected.source || selected.source_references || null, practice: selected.practice || null, summary: selected.summary || null }, null, 2);
+    const sourceInfo = { recording: selected.recording, origin: selected.origin || null,
+      source: selected.source || selected.source_references || null, practice: selected.practice || null, summary: selected.summary || null };
+    el("origin").textContent = JSON.stringify(sourceInfo, null, 2);
     renderMarks(); renderFeedback(); renderPoints();
     audio.src = safeURL(selected.audio_url); audio.load();
     status("Preparing the automatic chord draft…");
     target.exposed = true; target.exposureHistory = recordExposure(storage, target.exposureKey); exposure();
     try {
-      const primary = target.primary || validateCandidate(await getJSON(selected.primary_url || selected.candidates[0].url), reviewCase.recording);
+      const loaded = target.primary ? {chart: target.primary, hash: target.primaryHash}
+        : await getPrimary(reviewCase.primary_url || reviewCase.candidates[0].url, reviewCase.recording);
       if (token !== generation) return;
-      target.primary = primary; readyControls(); updateClock(); status("Ready. Press play and follow the chords. Feedback saves automatically when you tap.");
+      target.primary = loaded.chart; target.primaryHash = loaded.hash; refreshDisplayCorrections(target);
+      sourceInfo.primary_chart = {sha256: target.primaryHash, analysis_id: target.primary.analysis?.id, pack_id: packId};
+      el("origin").textContent = JSON.stringify(sourceInfo, null, 2);
+      readyControls(); updateClock(); status("Ready. Press play and follow the chords. Feedback saves automatically when you tap.");
       if (reviewCase.evidence_url && !target.evidence) {
         try {
           const evidence = validateEvidence(await getJSON(reviewCase.evidence_url), reviewCase.recording);
@@ -650,18 +796,31 @@ if (typeof document !== "undefined") {
     if (!selected) return;
     el("position").textContent = `${timeLabel(audio.currentTime)} / ${timeLabel(selected.recording.duration_seconds)}`;
     if (state?.primary) {
-      const timeline = practiceTimeline(state.primary.chords, state.practiceView, selected.practice?.capo || 0, state.qualityMode);
+      const displayEvents = state.displayEvents || state.primary.chords;
+      const timeline = practiceTimeline(displayEvents, state.practiceView, selected.practice?.capo || 0, state.qualityMode);
       const snapshot = playbackSnapshot(timeline, audio.currentTime);
       const hold = currentHold(timeline, audio.currentTime);
       const rhythm = state.durationMode === "estimated" ? state.rhythm : null;
       const display = label => label === "N" ? "No chord" : label === "X" ? "Unclear" : label;
       el("play-current").textContent = snapshot.current ? display(snapshot.current.label) : "—";
-      const rawCurrent = currentEvent(state.primary.chords, audio.currentTime);
-      const fullLabel = rawCurrent ? displayedChord(rawCurrent.label, state.practiceView, selected.practice?.capo || 0) : null;
+      const displayCurrent = currentEvent(displayEvents, audio.currentTime), correction = displayCurrent?.display_correction;
+      const fullLabel = displayCurrent ? displayedChord(displayCurrent.label, state.practiceView, selected.practice?.capo || 0) : null;
       el("full-chord").hidden = !snapshot.current || fullLabel === display(snapshot.current.label);
       el("full-chord").textContent = fullLabel ? `Full chord: ${fullLabel}` : "";
+      el("correction-note").hidden = !state.correctionWarning && !correction;
+      el("correction-note").textContent = state.correctionWarning || (correction
+        ? correction.time_basis === "representative-native-cue-point-not-user-timestamp"
+          ? `Reported intro correction: ${correction.replacement_label}. Cue timing is still estimated.`
+          : `Reported correction: ${correction.replacement_label} near ${timeLabel(correction.reported_seconds)}. Cue timing is still estimated.` : "");
       el("hold-progress").hidden = !hold;
-      el("current-hold").textContent = hold ? `${hold.event.label === "N" || hold.event.label === "X" ? "Span" : "Hold"}: ${durationCaption(hold.event.start_seconds, hold.event.end_seconds, rhythm)} · ${hold.remaining_seconds.toFixed(1)} s left` : "No charted chord at this moment.";
+      el("current-hold").replaceChildren();
+      if (hold) {
+        const length = document.createElement("strong"); length.className = "hold-duration";
+        length.textContent = durationPresentation(hold.event.start_seconds, hold.event.end_seconds, rhythm).compact;
+        length.title = durationCaption(hold.event.start_seconds, hold.event.end_seconds, rhythm);
+        el("current-hold").append(hold.event.label === "N" || hold.event.label === "X" ? "Span: " : "Hold: ", length,
+          ` · ${hold.remaining_seconds.toFixed(1)} s left`);
+      } else el("current-hold").textContent = "No charted chord at this moment.";
       if (hold) {
         el("hold-progress-fill").style.width = `${hold.progress_fraction * 100}%`;
         el("hold-progress").setAttribute("aria-valuenow", String(Math.round(hold.progress_fraction * 100)));
@@ -674,22 +833,38 @@ if (typeof document !== "undefined") {
         const chord = document.createElement("strong"); chord.textContent = display(event.label);
         chord.title = `Full chord: ${display(event.full_label)}`;
         const time = document.createElement("span"); time.textContent = timeLabel(event.start_seconds);
-        const length = document.createElement("span"); length.textContent = durationCaption(event.start_seconds, event.end_seconds, rhythm);
+        const length = document.createElement("span"); length.className = "upcoming-duration";
+        length.textContent = durationPresentation(event.start_seconds, event.end_seconds, rhythm).compact;
+        length.title = durationCaption(event.start_seconds, event.end_seconds, rhythm);
         node.append(chord, time, length); el("upcoming").append(node);
       }
       const window = timingWindow(timeline, audio.currentTime, selected.recording.duration_seconds);
-      el("timing-range").textContent = `${timeLabel(window.start_seconds)}–${timeLabel(window.end_seconds)} · widths show time`;
+      const units = rhythm ? rhythm.beats_per_bar === null ? "Estimated beat lengths" : "Estimated bars per chord" : "Lengths in seconds";
+      el("timing-range").textContent = `${timeLabel(window.start_seconds)}–${timeLabel(window.end_seconds)} · ${units}. Scroll to see more.`;
       el("timing-blocks").replaceChildren();
+      const timingDescriptions = [];
       for (const block of window.blocks) {
         const node = document.createElement("div"); node.className = `timing-block timing-${block.kind}`;
+        node.classList.toggle("timing-continues-left", block.continues_before);
+        node.classList.toggle("timing-continues-right", block.continues_after);
         node.style.left = `${block.offset_fraction * 100}%`; node.style.width = `${block.width_fraction * 100}%`;
         const label = block.event ? display(block.event.label) : "No chart";
-        node.textContent = label;
-        node.title = `${label} · ${block.event ? durationCaption(block.event.start_seconds, block.event.end_seconds, rhythm) : `${(block.end_seconds - block.start_seconds).toFixed(1)} s`}`;
+        const duration = durationPresentation(block.event?.start_seconds ?? block.start_seconds, block.event?.end_seconds ?? block.end_seconds, block.event ? rhythm : null);
+        const name = document.createElement("strong"); name.className = "timing-label"; name.textContent = label;
+        const length = document.createElement("span"); length.className = "timing-duration";
+        // The strip legend states bars/beats; keep short holds readable in proportional blocks.
+        length.textContent = duration.compact.replace(/ bars?$/, "").replace(/ beats?$/, "");
+        node.title = `${label} · ${duration.full}${block.continues_before || block.continues_after ? " · total hold continues beyond view" : ""}`;
+        node.append(name, length);
+        for (const division of holdBarDivisions(block.event, rhythm, block.start_seconds, block.end_seconds)) {
+          const tick = document.createElement("span"); tick.className = "timing-unit"; tick.style.left = `${division.offset_fraction * 100}%`;
+          tick.setAttribute("aria-hidden", "true"); node.append(tick);
+        }
+        timingDescriptions.push(node.title);
         el("timing-blocks").append(node);
       }
       el("timing-playhead").style.left = `${window.playhead_fraction * 100}%`;
-      el("timing-track").setAttribute("aria-label", `Chord timing from ${timeLabel(window.start_seconds)} to ${timeLabel(window.end_seconds)}. Current time ${timeLabel(window.now_seconds)}. Blank sections have no chart.`);
+      el("timing-track").setAttribute("aria-label", `Chord timing from ${timeLabel(window.start_seconds)} to ${timeLabel(window.end_seconds)}. Current time ${timeLabel(window.now_seconds)}. ${units}; divisions measure from each chord start. ${timingDescriptions.join("; ")}.`);
       const point = (state.evidence?.review_points || []).find(item => item.start_seconds <= audio.currentTime && audio.currentTime < item.end_seconds);
       el("point-notice").hidden = !point || !el("points-details").open;
       if (point) el("point-notice").textContent = "The algorithms disagree around here. This is only a suggested check — play on or flag it if it sounds wrong.";
@@ -748,7 +923,8 @@ if (typeof document !== "undefined") {
   el("problem").addEventListener("click", () => {
     try {
       const item = captureFeedback(selected, audio.currentTime, state.primary, `${Date.now()}-${++feedbackCounter}`, new Date().toISOString(),
-        {view: state.practiceView, capo: selected.practice?.capo || 0, qualityMode: state.qualityMode});
+        {view: state.practiceView, capo: selected.practice?.capo || 0, qualityMode: state.qualityMode,
+          correction: currentEvent(state.displayEvents || state.primary.chords, audio.currentTime)?.display_correction});
       state.feedback.push(item); state.activeFeedback = item.id; persist(); renderFeedback();
       el("feedback-detail").hidden = false; el("captured").textContent = `Captured at ${timeLabel(item.playback_seconds)}. You can keep playing.`;
       el("reason").value = "not-sure"; el("feedback-note").value = "";
@@ -797,6 +973,8 @@ if (typeof document !== "undefined") {
     state.audioReady = true; readyControls(); updateClock();
   });
   for (const event of ["timeupdate", "seeked", "loadeddata", "ended"]) audio.addEventListener(event, updateClock);
+  for (const event of ["play", "playing"]) audio.addEventListener(event, playbackFrames.start);
+  for (const event of ["pause", "ended", "error"]) audio.addEventListener(event, playbackFrames.stop);
   audio.addEventListener("error", () => { if (state) state.audioReady = false; controls(false); status("Local audio could not load. Check the local server and song files."); });
   (async () => {
     const manifest = await getJSON("/manifest.json");
@@ -823,7 +1001,7 @@ if (typeof document !== "undefined") {
       (async () => {
         try { practiceById = validatePracticeManifest(await getJSON("/practice.json"), cases); }
         catch (_) { practiceById = new Map(); }
-        if (state) { state.strumming = practiceById.get(selected.recording.id) || null; renderStrumming(); }
+        if (state) { state.strumming = practiceById.get(selected.recording.id) || null; refreshDisplayCorrections(state); renderStrumming(); updateClock(); }
       })()
     ]);
     try {
