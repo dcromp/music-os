@@ -14,7 +14,7 @@ Updated 17 October 2026. Status and deployment information belong in this README
 
 **House intro update, 17 October:** the founder confirmed E major and supplied Am–C–D–F / Am–E–Am–E. Two teaching sources agree. The player now inserts a provisional E at 7.988–9.474 seconds inside the long native Am hold, retaining Am on both sides, and displays E over the later native Em cue at 11.146–12.539 seconds. The first boundaries come from the paired secondary detector; neither interval is independently timed. Raw charts, the Wild Thing A correction and all storage identities remain intact. [Source/proposal record](catalogue/house-intro-feedback-20261017.json), [verification](docs/HOUSE_INTRO_FEEDBACK_UPDATE.json).
 
-**Online chord search status:** teaching-source research and experimental supplied-chart alignment exist, but automatic search/consensus is **not integrated into player preparation**. The House references had already been saved without correcting the player. This follow-up uses their confirmed intro order in a separate display overlay; it does not implement a general web-search service. Connecting source discovery, version/capo checks and ordered charts to catalogue preparation remains the next integration task.
+**Online chord checks, 17 October:** automatic catalogue preparation now searches primary teaching pages, extracts chord facts, normalizes capo/tuning and flags source-coverage, quality and short intro-order conflicts. The player has a separate **Online chord checks** panel with source status, assumed setups and replay buttons; native charts remain unchanged. Keyless search is best effort: blocked requests and insufficient source coverage remain visible, and saved source URLs supply a fallback. [Commands and limits](docs/ONLINE_CHORD_CHECKS.md), [verification](docs/ONLINE_CHORD_CHECK_RESULTS.json), [ticket #16](https://github.com/dcromp/music-os/issues/16).
 
 **Wild Thing cache follow-up, 17 October:** an existing page still showed E at 25 seconds although a fresh live player showed A. Allowlisted HTML/scripts/styles/JSON now return current bytes with `Cache-Control: no-store`, including old conditional requests; audio range requests retain their existing behavior. The player has a visible **17 Oct update** marker. Existing open pages need one reload or a fresh tab. A fresh port-8070 tab was opened at 25 seconds and shows A. [Follow-up evidence](docs/PLAYER_CACHE_FOLLOWUP.json).
 
@@ -101,7 +101,7 @@ The founder's beginner focus now has an optional **Core chords** display. Em7 be
 
 The experiment bench is a local browser tool, independent of the Expo app. Requirements: Python 3.12 and a browser; FFmpeg is needed only to convert other local recordings.
 
-The canonical working checkout is `/Users/davidcrompton/Documents/music-os`, on branch `codex/mac-analysis-phase0`, tracking `origin/codex/mac-analysis-phase0` at `https://github.com/dcromp/music-os.git`. All further work runs from this folder. The [workspace move](docs/WORKSPACE_MOVE.md) records transferred assets, runtime repairs and verification. From the repository root:
+The canonical working checkout is `/Users/davidcrompton/Documents/music-os`, on branch `codex/online-chord-checks`, tracking `origin/codex/online-chord-checks` at `https://github.com/dcromp/music-os.git`. All further work runs from this folder. The [workspace move](docs/WORKSPACE_MOVE.md) records transferred assets, runtime repairs and verification. From the repository root:
 
 ```sh
 cd /Users/davidcrompton/Documents/music-os

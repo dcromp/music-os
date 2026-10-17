@@ -1,7 +1,7 @@
 # Curated catalogue: chart-assisted alignment
 
 
-**Integration status, 17 October:** source discovery is agent research with saved catalogue references; no automatic Google/search-provider/consensus stage is wired into player preparation. Experimental alignment consumes declared references. The [House intro follow-up](../catalogue/house-intro-feedback-20261017.json) now uses a founder-confirmed, two-source chord order in a bounded display correction; its secondary-derived split remains a timing proposal. This makes one source-backed correction usable, not a general search feature or accepted full-song alignment.
+**Integration status, 17 October:** [online chord checks](ONLINE_CHORD_CHECKS.md) now run keyless discovery, bounded primary-page extraction and cached source comparisons for the existing catalogue, with a separate source-linked replay panel in the Mac player. Unknown setups and blocked sources abstain; short intro-order disagreements produce native search windows, not physical timestamps. The [House follow-up](../catalogue/house-intro-feedback-20261017.json) remains a separately authored provisional display correction. General full-song reference alignment and arrangement acceptance remain open.
 ## Product direction
 
 For a curated few hundred rock/pop songs, obtain and review the likely harmony once, align it to a specific recording, and reuse the approved arrangement for every practice session. The next experiment prioritises this route. Existing chord detectors become evidence for chart verification, alignment and disagreement review; their raw recognition results remain useful controls.

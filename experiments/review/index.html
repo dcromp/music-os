@@ -69,6 +69,15 @@
       <div class="controls"><button id="save-feedback" disabled>Download feedback</button><button id="copy-feedback" disabled>Copy feedback JSON</button></div>
       <textarea id="feedback-export" rows="8" readonly hidden aria-label="Feedback JSON to copy"></textarea>
     </section>
+    <details id="online-check-details">
+      <summary>Online chord checks</summary>
+      <p class="note">Teaching sources can reveal possible chord errors. These warnings compare the original automatic chart; they do not change your chords. Replay windows use native chart times, not verified musical change times.</p>
+      <p id="online-check-summary" class="small">Loading optional online chord checks…</p>
+      <p id="online-check-search" class="small"></p>
+      <div id="online-check-sources"></div>
+      <div id="online-check-findings"></div>
+      <p id="online-check-limits" class="small"></p>
+    </details>
     <details id="points-details">
       <summary>Optional: replay places the algorithms disagree</summary>
       <p class="note">These are automatically suggested checks. Agreement and disagreement do not tell us which chart is correct. You can ignore this list and simply play.</p>

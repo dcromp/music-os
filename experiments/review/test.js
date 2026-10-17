@@ -1,7 +1,7 @@
 "use strict";
 const assert = require("node:assert/strict");
 const { annotationExport, validateCandidate, currentEvent, exposureKey, loadExposure, recordExposure, refreshExposure, validateEvidence, clampSeek, playbackSnapshot, createPlaybackFrameLoop, feedbackKey, feedbackExport, captureFeedback, loadFeedback, saveFeedback, transposePracticeLabel, practiceLabel, coreChordLabel, displayedChord, practiceTimeline,
-  currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, durationPresentation, holdBarDivisions, correctedDisplayEvents, validatePracticeManifest, safeTeachingURL, validateLearningManifest, practiceProgressKey, practiceProgressExport, loadPracticeProgress, savePracticeProgress, nextPracticeStep, initialPracticeStep } = require("./app.js");
+  currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, durationPresentation, holdBarDivisions, correctedDisplayEvents, validatePracticeManifest, safeTeachingURL, validateOnlineChecksManifest, pairedOnlineChecks, validateLearningManifest, practiceProgressKey, practiceProgressExport, loadPracticeProgress, savePracticeProgress, nextPracticeStep, initialPracticeStep } = require("./app.js");
 let checks = 0;
 function test(name, callback) { callback(); checks++; console.log(`ok ${name}`); }
 const recording = { id: "excerpt", title: "Generated", audio_sha256: "hash", duration_seconds: 20, sample_rate_hz: 100 };
@@ -981,6 +981,84 @@ test("every shipped correction applies to its declared native cues and exact pai
       assert.equal(report.displayed_chord, correction.replacement_label);
       assert.equal(report.raw_sounding_chord, correction.expected_event.label);
     }
+  }
+});
+
+const onlineRecording = {...recording, audio_sha256: "d".repeat(64)};
+const onlineChart = {...chart, recording: onlineRecording, analysis: {id: "native-model-analysis"},
+  chords: chart.chords.map(event => ({...event, label: event.label === "G" ? "Gm" : event.label}))};
+const onlineEntry = {recording: onlineRecording, primary_sha256: "e".repeat(64), analysis_id: onlineChart.analysis.id,
+  status: "source-checks", sources: [
+    {id: "teacher-one", title: "Teacher one", url: "https://teacher-one.example/lesson", status: "extracted", sounding_chords: ["C", "G"]},
+    {id: "teacher-two", title: "Teacher two", url: "https://teacher-two.example/lesson", status: "extracted", sounding_chords: ["C", "G"]}
+  ], findings: [{id: "palette-1", kind: "outside-source-palette", start_seconds: 6, end_seconds: 8,
+    native_label: "Gm", source_ids: ["teacher-one", "teacher-two"], reason: "Two comparable teaching sources use G major."}],
+  summary: {independent_source_groups: 2, flagged_spans: 1}, limits: ["Source agreement is not independently timed musical truth."]};
+const onlinePayload = {schema_version: "online-chord-checks-1.0", pack_id: "online-pack", created_at_utc: "2026-10-17T12:00:00Z", cases: [onlineEntry]};
+const onlineCases = [{id: onlineRecording.id, recording: onlineRecording}];
+test("online checks bind a separate warning queue to pack, audio and exact native chart without edits", () => {
+  const before = JSON.stringify({onlinePayload, onlineChart});
+  const report = validateOnlineChecksManifest(onlinePayload, "online-pack", onlineCases);
+  assert.equal(report.cases.get(onlineRecording.id), onlineEntry);
+  assert.equal(report.created_at_utc, onlinePayload.created_at_utc);
+  assert.equal(pairedOnlineChecks(onlineEntry, onlineChart, "e".repeat(64)), onlineEntry);
+  assert.equal(JSON.stringify({onlinePayload, onlineChart}), before);
+  assert.equal(currentEvent(onlineChart.chords, 7).label, "Gm");
+});
+test("online metadata rejects stale packs, audio identities, unknown and duplicate cases", () => {
+  for (const change of [{schema_version: "other"}, {pack_id: "other"}, {created_at_utc: "yesterday"},
+    {created_at_utc: "2026-10-17T12:00:00"}, {cases: []}, {cases: [onlineEntry, onlineEntry]}]) {
+    assert.throws(() => validateOnlineChecksManifest({...onlinePayload, ...change}, "online-pack", onlineCases));
+  }
+  for (const change of [{id: "other"}, {audio_sha256: "f".repeat(64)}, {sample_rate_hz: 200}, {duration_seconds: 21}]) {
+    const entry = {...onlineEntry, recording: {...onlineRecording, ...change}};
+    assert.throws(() => validateOnlineChecksManifest({...onlinePayload, cases: [entry]}, "online-pack", onlineCases));
+  }
+  for (const change of [{analysis_id: "other"}, {primary_sha256: "f".repeat(64)}, {recording: {...onlineRecording, audio_sha256: "f".repeat(64)}}]) {
+    assert.throws(() => pairedOnlineChecks({...onlineEntry, ...change}, onlineChart, "e".repeat(64)));
+  }
+  for (const hash of [null, "missing", "f".repeat(64)]) assert.throws(() => pairedOnlineChecks(onlineEntry, onlineChart, hash));
+});
+test("online warning spans must be finite, bounded and linked to known teaching sources", () => {
+  const finding = onlineEntry.findings[0];
+  for (const change of [{start_seconds: NaN}, {end_seconds: Infinity}, {start_seconds: -1}, {end_seconds: 21},
+    {start_seconds: 8}, {end_seconds: 5}, {native_label: ""}, {reason: "x".repeat(1001)}, {id: "../../bad"},
+    {kind: "verified-correction"}, {source_ids: []}, {source_ids: ["unknown"]}, {source_ids: ["teacher-one", "teacher-one"]}]) {
+    assert.throws(() => validateOnlineChecksManifest({...onlinePayload, cases: [{...onlineEntry, findings: [{...finding, ...change}]}]}, "online-pack", onlineCases));
+  }
+  assert.throws(() => validateOnlineChecksManifest({...onlinePayload, cases: [{...onlineEntry, findings: [finding, finding]}]}, "online-pack", onlineCases));
+});
+test("online source links, labels, status and summary data remain bounded", () => {
+  const source = onlineEntry.sources[0];
+  for (const change of [{url: "javascript:alert(1)"}, {url: "http://teacher.example/"}, {url: "https://localhost/"},
+    {url: "https://127.0.0.1/"}, {url: "https://teacher.example:8443/"}, {url: "https://user:password@teacher.example/"},
+    {id: "bad/route"}, {title: ""}, {status: "x".repeat(101)}, {comparison_status: "x".repeat(101)}, {sounding_chords: ["x".repeat(101)]},
+    {sounding_chords: Array(65).fill("C")}]) {
+    assert.throws(() => validateOnlineChecksManifest({...onlinePayload, cases: [{...onlineEntry, sources: [{...source, ...change}, onlineEntry.sources[1]]}]}, "online-pack", onlineCases));
+  }
+  for (const summary of [{independent_source_groups: -1, flagged_spans: 1}, {independent_source_groups: 3, flagged_spans: 1},
+    {independent_source_groups: 2, flagged_spans: 0}, {independent_source_groups: true, flagged_spans: 1}]) {
+    assert.throws(() => validateOnlineChecksManifest({...onlinePayload, cases: [{...onlineEntry, summary}]}, "online-pack", onlineCases));
+  }
+  assert.throws(() => validateOnlineChecksManifest({...onlinePayload, cases: [{...onlineEntry, limits: ["x".repeat(1001)]}]}, "online-pack", onlineCases));
+});
+test("insufficient online sources and riff cases have explicit coverage without invented findings", () => {
+  for (const status of ["insufficient-sources", "not-harmony-task"]) {
+    const entry = {...clone(onlineEntry), status, sources: [], findings: [], summary: {independent_source_groups: 0, flagged_spans: 0}};
+    assert.equal(validateOnlineChecksManifest({...onlinePayload, cases: [entry]}, "online-pack", onlineCases).cases.get(onlineRecording.id).status, status);
+    assert.throws(() => validateOnlineChecksManifest({...onlinePayload, cases: [{...onlineEntry, status}]}, "online-pack", onlineCases));
+  }
+  const empty = {...onlineEntry, findings: [], summary: {...onlineEntry.summary, flagged_spans: 0}};
+  assert.deepEqual(validateOnlineChecksManifest({...onlinePayload, cases: [empty]}, "online-pack", onlineCases).cases.get(onlineRecording.id).findings, []);
+});
+test("online search discovery reports cache, failure and setup assumptions without hiding coverage", () => {
+  const search = {provider: "web-provider", status: "request-failed", cache_hit: false, retrieved_at_utc: null,
+    notes: ["Saved teaching pages were still checked; discovery did not return a usable result."]};
+  const entry = {...onlineEntry, search, sources: onlineEntry.sources.map(source => ({...source, comparison_status: "teaching-hypothesis"}))};
+  assert.equal(validateOnlineChecksManifest({...onlinePayload, cases: [entry]}, "online-pack", onlineCases).cases.get(onlineRecording.id).search, search);
+  for (const change of [{provider: ""}, {status: "x".repeat(101)}, {cache_hit: "yes"}, {retrieved_at_utc: "yesterday"},
+    {retrieved_at_utc: "2026-10-17T12:00:00"}, {notes: ["x".repeat(1001)]}, {notes: Array(17).fill("note")}]) {
+    assert.throws(() => validateOnlineChecksManifest({...onlinePayload, cases: [{...entry, search: {...search, ...change}}]}, "online-pack", onlineCases));
   }
 });
 
