@@ -8,9 +8,11 @@ evidence, never a vote, reference annotation, or calibrated confidence score.
 from __future__ import annotations
 
 import argparse
+from datetime import datetime
 from functools import partial
 from http.server import ThreadingHTTPServer
 import hashlib
+import io
 import json
 import math
 from pathlib import Path
@@ -18,6 +20,7 @@ import re
 import shutil
 import tempfile
 import wave
+from urllib.parse import unquote, urlsplit
 
 import lab
 import review_pack
@@ -29,6 +32,8 @@ DEFAULT_OUTPUT = ROOT / "experiments" / "generated" / "automatic-playalong"
 SCHEMA = "automatic-drafts-1.0"
 EVIDENCE_SCHEMA = "automatic-draft-evidence-1.0"
 VERSION = "0.2.0"
+ONLINE_SCHEMA = "online-chord-checks-1.0"
+MAX_ONLINE_BYTES = 1048576
 MODELS = {
     "btc": {"filename": "btc.json", "name": "BTC", "algorithm": "BTC-ISMIR19"},
     "crema": {"filename": "crema.json", "name": "CREMA", "algorithm": "crema-pretrained"},
@@ -365,7 +370,124 @@ def build(manifest_path: Path, output: Path = DEFAULT_OUTPUT, source_root: Path 
     return result
 
 
-def public_files(pack: Path) -> dict[str, Path]:
+def online_checks_path(path: Path, pack: Path) -> Path:
+    """Only an explicitly selected regular project file can be public metadata."""
+    path = path.absolute()
+    root = ROOT.resolve()
+    # macOS may spell the project through /var rather than /private/var. Resolve
+    # that shared root, while retaining every path component below it so an
+    # in-project symlink cannot disappear before the regular-file guard runs.
+    if path.is_relative_to(ROOT.absolute()):
+        path = root / path.relative_to(ROOT.absolute())
+    if not path.is_relative_to(root) or not review_pack.safe_public_file(path, root, pack):
+        raise ValueError("Online checks must be a regular project-local file, without private aliases")
+    if path.stat().st_size > MAX_ONLINE_BYTES:
+        raise ValueError("Online checks exceed the metadata size limit")
+    return path
+
+
+def validate_online_checks(value: dict, manifest: dict, pack: Path) -> dict:
+    """Bind review hints to exact native charts; this never promotes corrections."""
+    def text(value, limit):
+        return isinstance(value, str) and bool(value.strip()) and len(value) <= limit
+
+    def number(value):
+        return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+    def safe_url(value):
+        if not text(value, 2048) or re.search(r"[\s\\\x00-\x1f\x7f]", value):
+            return False
+        parsed = urlsplit(value)
+        return (parsed.scheme == "https" and parsed.hostname and "." in parsed.hostname
+                and not re.match(r"[\d\[]", parsed.hostname) and not parsed.hostname.endswith(".localhost")
+                and not parsed.username and not parsed.password and not parsed.port)
+
+    if (not isinstance(value, dict) or value.get("schema_version") != ONLINE_SCHEMA
+            or value.get("pack_id") != manifest.get("pack_id")
+            or not text(value.get("created_at_utc"), 64)
+            or not isinstance(value.get("cases"), list) or not 1 <= len(value["cases"]) <= 64):
+        raise ValueError("Online checks do not identify this play-along pack")
+    try:
+        if datetime.fromisoformat(value["created_at_utc"].replace("Z", "+00:00")).tzinfo is None:
+            raise ValueError()
+    except ValueError as error:
+        raise ValueError("Online checks need a timezone-aware retrieval date") from error
+    expected = {case["recording"]["id"]: case for case in manifest["cases"]}
+    seen = set()
+    for item in value["cases"]:
+        recording = item.get("recording") if isinstance(item, dict) else None
+        identifier = recording.get("id") if isinstance(recording, dict) else None
+        if not isinstance(identifier, str) or identifier in seen or identifier not in expected:
+            raise ValueError("Online checks contain a duplicate or unknown recording")
+        seen.add(identifier)
+        case = expected[identifier]
+        if any(recording.get(key) != case["recording"].get(key)
+               for key in ("id", "audio_sha256", "sample_rate_hz", "duration_seconds")):
+            raise ValueError("Online checks belong to different exact audio")
+        primary_path = pack / "cases" / case["id"] / "primary.json"
+        primary = json.loads(primary_path.read_text(encoding="utf-8"))
+        if (item.get("primary_sha256") != digest(primary_path)
+                or not re.fullmatch(r"[a-f0-9]{64}", item.get("primary_sha256", ""))
+                or not text(item.get("analysis_id"), 200) or item["analysis_id"] != primary.get("analysis", {}).get("id")):
+            raise ValueError("Online checks belong to a different native chart")
+        if (not isinstance(item.get("status"), str) or item["status"] not in {"source-checks", "insufficient-sources", "not-harmony-task"}
+                or not isinstance(item.get("sources"), list) or len(item["sources"]) > 32
+                or not isinstance(item.get("findings"), list) or len(item["findings"]) > 512
+                or not isinstance(item.get("limits"), list) or len(item["limits"]) > 16
+                or any(not text(limit, 1000) for limit in item["limits"])):
+            raise ValueError("Invalid bounded online-check metadata")
+        source_ids = set()
+        search = item.get("search")
+        if search is not None:
+            if (not isinstance(search, dict) or not text(search.get("provider"), 100)
+                    or not text(search.get("status"), 100) or not isinstance(search.get("cache_hit"), bool)
+                    or not isinstance(search.get("notes"), list) or len(search["notes"]) > 16
+                    or any(not text(note, 1000) for note in search["notes"])):
+                raise ValueError("Invalid online-search retrieval status")
+            retrieved = search.get("retrieved_at_utc")
+            if retrieved is not None:
+                try:
+                    if not text(retrieved, 64) or datetime.fromisoformat(retrieved.replace("Z", "+00:00")).tzinfo is None:
+                        raise ValueError()
+                except ValueError as error:
+                    raise ValueError("Invalid online-search retrieval date") from error
+        for source in item["sources"]:
+            if (not isinstance(source, dict) or not review_pack.safe_id(source.get("id"))
+                    or source["id"] in source_ids or not text(source.get("title"), 300)
+                    or not safe_url(source.get("url")) or not text(source.get("status"), 100)
+                    or ("comparison_status" in source and not text(source["comparison_status"], 100))
+                    or not isinstance(source.get("sounding_chords"), list) or len(source["sounding_chords"]) > 64
+                    or any(not text(label, 100) for label in source["sounding_chords"])):
+                raise ValueError("Invalid online teaching source")
+            source_ids.add(source["id"])
+        finding_ids = set()
+        for finding in item["findings"]:
+            if (not isinstance(finding, dict) or not review_pack.safe_id(finding.get("id"))
+                    or finding["id"] in finding_ids
+                    or not isinstance(finding.get("kind"), str)
+                    or finding["kind"] not in {"outside-source-palette", "quality-conflict", "source-order-conflict"}
+                    or not number(finding.get("start_seconds")) or not number(finding.get("end_seconds"))
+                    or not 0 <= finding["start_seconds"] < finding["end_seconds"] <= recording["duration_seconds"]
+                    or not text(finding.get("native_label"), 100) or not text(finding.get("reason"), 1000)
+                    or not isinstance(finding.get("source_ids"), list) or not 1 <= len(finding["source_ids"]) <= 32
+                    or any(not isinstance(source_id, str) or source_id not in source_ids for source_id in finding["source_ids"])
+                    or len(finding["source_ids"]) != len(set(finding["source_ids"]))):
+                raise ValueError("Invalid bounded source-check finding")
+            finding_ids.add(finding["id"])
+        summary = item.get("summary")
+        if (not isinstance(summary, dict) or isinstance(summary.get("independent_source_groups"), bool)
+                or not isinstance(summary.get("independent_source_groups"), int)
+                or not 0 <= summary["independent_source_groups"] <= len(source_ids)
+                or not isinstance(summary.get("flagged_spans"), int)
+                or summary.get("flagged_spans") != len(item["findings"])
+                or isinstance(summary.get("flagged_spans"), bool)):
+            raise ValueError("Online-check summary does not match its evidence")
+        if item["status"] != "source-checks" and item["findings"]:
+            raise ValueError("Unavailable source checks cannot contain findings")
+    return value
+
+
+def public_files(pack: Path, online_checks: Path | None = None) -> dict[str, Path]:
     pack = pack.resolve()
     manifest = json.loads((pack / "manifest.json").read_text(encoding="utf-8"))
     if (manifest.get("schema_version") != SCHEMA or not isinstance(manifest.get("cases"), list)
@@ -412,14 +534,67 @@ def public_files(pack: Path) -> dict[str, Path]:
         root = STATIC.resolve() if path.is_relative_to(STATIC) else pack
         if not review_pack.safe_public_file(path, root, pack):
             raise ValueError("Public assets must be regular files inside their fixed root")
+    if online_checks is not None:
+        path = online_checks_path(online_checks, pack)
+        validate_online_checks(json.loads(path.read_text(encoding="utf-8")), manifest, pack)
+        files["/online-chords.json"] = path
     return files
 
 
-def serve(pack: Path, port: int = 8068) -> None:
+class AutomaticDraftHandler(review_pack.ReviewHandler):
+    """A single optional metadata route may live outside the immutable pack."""
+    def translate_path(self, path):
+        url = urlsplit(path)
+        if unquote(url.path) != "/online-chords.json":
+            return super().translate_path(path)
+        candidate = self.public_files.get("/online-chords.json")
+        if candidate is None or url.path != "/online-chords.json" or url.query or url.fragment:
+            return str(STATIC / "__not_found__")
+        try:
+            return str(online_checks_path(candidate, self.pack_root))
+        except (ValueError, OSError):
+            return str(STATIC / "__not_found__")
+
+    def send_head(self):
+        if unquote(urlsplit(self.path).path) != "/online-chords.json":
+            return super().send_head()
+        mapped = self.public_files.get("/online-chords.json")
+        if mapped is None or Path(self.translate_path(self.path)) != mapped:
+            self.send_error(404, "Online checks are unavailable")
+            return None
+        try:
+            # Validate the actual response bytes, so replacing the optional file
+            # cannot publish an unvalidated/private body between two reads.
+            body = mapped.read_bytes()
+            if len(body) > MAX_ONLINE_BYTES:
+                raise ValueError("Online metadata exceeds size limit")
+            manifest = json.loads((self.pack_root / "manifest.json").read_text(encoding="utf-8"))
+            validate_online_checks(json.loads(body), manifest, self.pack_root)
+        except (ValueError, KeyError, OSError, TypeError):
+            self.send_error(404, "Online checks are unavailable or stale")
+            return None
+        self._remaining_bytes = None
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
+        return io.BytesIO(body)
+
+
+def serve(pack: Path, port: int = 8068, online_checks: Path | None = None) -> None:
     # Both interfaces use the same reviewed static directory and guarded handler.
     if STATIC != review_pack.STATIC:
         raise ValueError("Automatic player static root differs from guarded handler root")
-    server = ThreadingHTTPServer(("127.0.0.1", port), partial(review_pack.ReviewHandler, files=public_files(pack)))
+    # The native pack must pass its normal preflight. Optional online research
+    # cannot prevent guitar practice when its report is absent or out of date.
+    files = public_files(pack)
+    if online_checks is not None:
+        try:
+            files = public_files(pack, online_checks)
+        except (ValueError, OSError, KeyError, TypeError) as error:
+            print(f"Online chord checks unavailable: {error}. Starting playback with the original chord pack.", flush=True)
+    server = ThreadingHTTPServer(("127.0.0.1", port), partial(AutomaticDraftHandler, files=files))
     print(f"Automatic play-along: http://127.0.0.1:{port}/ — full drafts ready; optional corrections only", flush=True)
     try:
         server.serve_forever()
@@ -443,6 +618,7 @@ def main() -> None:
     server = sub.add_parser("serve")
     server.add_argument("--pack", type=Path, default=DEFAULT_OUTPUT)
     server.add_argument("--port", type=int, default=8068)
+    server.add_argument("--online-checks", type=Path, help="Optional project-local source-check report; native pack stays unchanged")
     args = parser.parse_args()
     try:
         if args.command == "build":
@@ -457,7 +633,7 @@ def main() -> None:
                            secondary_root=args.secondary_root)
             print(json.dumps({"pack": str(args.output.resolve()), "cases": len(result["cases"]), "status": result["status"]}))
         else:
-            serve(args.pack, args.port)
+            serve(args.pack, args.port, args.online_checks)
     except (ValueError, KeyError, OSError, json.JSONDecodeError, wave.Error) as error:
         parser.exit(2, f"Automatic drafts failed: {error}\n")
 

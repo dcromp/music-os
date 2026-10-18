@@ -1,13 +1,17 @@
 """Automatic drafts preserve predictions, pair exact audio, and flag heuristics."""
 
 import copy
+from functools import partial
+from http.client import HTTPConnection
+from http.server import ThreadingHTTPServer
 import json
 import os
 from pathlib import Path
 import sys
 import tempfile
+import threading
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 import wave
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -15,6 +19,25 @@ import automatic_drafts as drafts
 
 
 class AutomaticDraftTests(unittest.TestCase):
+    def online_fixture(self, root, output, built):
+        case = built["cases"][0]
+        primary = json.loads((output / "cases" / case["id"] / "primary.json").read_text())
+        value = {"schema_version": "online-chord-checks-1.0", "pack_id": built["pack_id"],
+                 "created_at_utc": "2026-10-17T12:00:00Z", "cases": [{
+                     "recording": case["recording"], "primary_sha256": case["artifacts"]["primary_sha256"],
+                     "analysis_id": primary["analysis"]["id"], "status": "source-checks",
+                     "sources": [{"id": "teacher-one", "title": "Teacher one", "url": "https://teacher.example/lesson",
+                                  "status": "extracted", "sounding_chords": ["C", "Am", "G"]}],
+                     "findings": [{"id": "conflict-1", "kind": "quality-conflict", "start_seconds": 0,
+                                   "end_seconds": 4, "native_label": "C7/E", "source_ids": ["teacher-one"],
+                                   "reason": "Teaching source and native quality differ."}],
+                     "summary": {"independent_source_groups": 1, "flagged_spans": 1},
+                     "limits": ["No source timestamps; native intervals are provisional replay windows."]}]}
+        path = root / "online" / "report.json"
+        path.parent.mkdir()
+        drafts.write_json(path, value)
+        return path, value
+
     def fixture(self, root):
         case = root / "pilot" / "cases" / "test-song"
         case.mkdir(parents=True)
@@ -386,6 +409,184 @@ class AutomaticDraftTests(unittest.TestCase):
                         drafts.public_files(output)
                     path.unlink()
                     path.write_text('{"fixture": true}')
+
+    def test_online_checks_add_only_an_explicit_fixed_route_outside_the_native_pack(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            _, _, manifest = self.fixture(root)
+            output = root / "output"
+            built = drafts.build(manifest, output, root)
+            report, _ = self.online_fixture(root, output, built)
+            before = {path: path.read_bytes() for path in output.rglob("*") if path.is_file()}
+            static = self.static_fixture(root)
+            with patch.object(drafts, "ROOT", root), patch.object(drafts, "STATIC", static), patch.object(drafts.review_pack, "STATIC", static):
+                self.assertNotIn("/online-chords.json", drafts.public_files(output))
+                files = drafts.public_files(output, report)
+                self.assertEqual(files["/online-chords.json"], report.resolve())
+                self.assertNotIn("/online/report.json", files)
+                handler = drafts.AutomaticDraftHandler.__new__(drafts.AutomaticDraftHandler)
+                handler.public_files = files
+                self.assertEqual(handler.translate_path("/online-chords.json"), str(report.resolve()))
+                for url in ("/online-chords.json?path=secret", "/%6fnline-chords.json", "/online-chords.json#secret", "/../online/report.json"):
+                    self.assertEqual(handler.translate_path(url), str(static / "__not_found__"))
+            self.assertEqual({path: path.read_bytes() for path in before}, before)
+
+    def test_online_checks_reject_external_symlink_and_private_alias_paths(self):
+        with tempfile.TemporaryDirectory() as directory, tempfile.TemporaryDirectory() as external:
+            root = Path(directory)
+            _, _, manifest = self.fixture(root)
+            output = root / "output"
+            built = drafts.build(manifest, output, root)
+            report, _ = self.online_fixture(root, output, built)
+            outside = Path(external) / "report.json"
+            outside.write_bytes(report.read_bytes())
+            alias = root / "alias.json"
+            alias.symlink_to(report)
+            private_alias = root / "private-alias.json"
+            os.link(output / "build-spec.json", private_alias)
+            static = self.static_fixture(root)
+            with patch.object(drafts, "ROOT", root), patch.object(drafts, "STATIC", static), patch.object(drafts.review_pack, "STATIC", static):
+                for path in (outside, alias, private_alias):
+                    with self.subTest(path=path), self.assertRaises(ValueError):
+                        drafts.public_files(output, path)
+                parent_alias = root / "linked-folder"
+                parent_alias.symlink_to(report.parent, target_is_directory=True)
+                with self.assertRaises(ValueError):
+                    drafts.public_files(output, parent_alias / "report.json")
+
+    def test_online_checks_reject_stale_pack_audio_chart_and_unbounded_findings(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            _, _, manifest = self.fixture(root)
+            output = root / "output"
+            built = drafts.build(manifest, output, root)
+            report, value = self.online_fixture(root, output, built)
+            static = self.static_fixture(root)
+            def changed(path, replacement):
+                clone = copy.deepcopy(value)
+                cursor = clone
+                for key in path[:-1]:
+                    cursor = cursor[key]
+                cursor[path[-1]] = replacement
+                return clone
+            bad_values = [changed(("schema_version",), "other"), changed(("pack_id",), "other"),
+                          changed(("created_at_utc",), "2026-10-17T12:00:00"),
+                          changed(("cases", 0, "recording", "audio_sha256"), "f" * 64),
+                          changed(("cases", 0, "recording", "sample_rate_hz"), 200),
+                          changed(("cases", 0, "recording", "duration_seconds"), 11),
+                          changed(("cases", 0, "primary_sha256"), "f" * 64),
+                          changed(("cases", 0, "analysis_id"), "other"),
+                          changed(("cases", 0, "findings", 0, "start_seconds"), -1),
+                          changed(("cases", 0, "findings", 0, "end_seconds"), 11),
+                          changed(("cases", 0, "findings", 0, "source_ids"), ["unknown"]),
+                          changed(("cases", 0, "findings", 0, "kind"), []),
+                          changed(("cases", 0, "sources", 0, "url"), "https://127.0.0.1/"),
+                          changed(("cases", 0, "sources", 0, "url"), "https://user:password@teacher.example/"),
+                          changed(("cases", 0, "sources", 0, "sounding_chords"), ["C"] * 65),
+                          changed(("cases", 0, "sources", 0, "comparison_status"), "x" * 101),
+                          changed(("cases", 0, "search"), {"provider": "web", "status": "failed", "cache_hit": "yes", "notes": []}),
+                          changed(("cases", 0, "search"), {"provider": "web", "status": "failed", "cache_hit": False,
+                                                            "retrieved_at_utc": "yesterday", "notes": []}),
+                          changed(("cases", 0, "summary", "flagged_spans"), 0),
+                          changed(("cases", 0, "status"), "insufficient-sources"),
+                          changed(("cases",), [value["cases"][0], value["cases"][0]])]
+            with patch.object(drafts, "ROOT", root), patch.object(drafts, "STATIC", static), patch.object(drafts.review_pack, "STATIC", static):
+                for index, bad in enumerate(bad_values):
+                    drafts.write_json(report, bad)
+                    with self.subTest(case=index), self.assertRaises(ValueError):
+                        drafts.public_files(output, report)
+                drafts.write_json(report, value)
+                primary = output / "cases/test-song/primary.json"
+                primary.write_text(primary.read_text() + "\n")
+                with self.assertRaisesRegex(ValueError, "native chart"):
+                    drafts.public_files(output, report)
+
+    def test_online_http_response_is_fresh_validated_and_does_not_publish_a_replaced_private_body(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            _, _, manifest = self.fixture(root)
+            output = root / "output"
+            built = drafts.build(manifest, output, root)
+            report, value = self.online_fixture(root, output, built)
+            static = self.static_fixture(root)
+            with patch.object(drafts, "ROOT", root), patch.object(drafts, "STATIC", static), patch.object(drafts.review_pack, "STATIC", static):
+                files = drafts.public_files(output, report)
+                server = ThreadingHTTPServer(("127.0.0.1", 0), partial(drafts.AutomaticDraftHandler, files=files))
+                thread = threading.Thread(target=server.serve_forever, daemon=True)
+                thread.start()
+                try:
+                    connection = HTTPConnection("127.0.0.1", server.server_port, timeout=3)
+                    connection.request("GET", "/online-chords.json", headers={"If-Modified-Since": "Wed, 21 Oct 2099 07:28:00 GMT"})
+                    response = connection.getresponse()
+                    self.assertEqual(response.status, 200)
+                    self.assertEqual(response.getheader("Cache-Control"), "no-store")
+                    self.assertEqual(json.loads(response.read()), value)
+                    report.write_text('{"private_secret":"must not be published"}')
+                    connection.request("GET", "/online-chords.json")
+                    response = connection.getresponse()
+                    self.assertEqual(response.status, 404)
+                    self.assertNotIn(b"must not be published", response.read())
+                    report.unlink()
+                    report.symlink_to(output / "build-spec.json")
+                    connection.request("GET", "/online-chords.json")
+                    response = connection.getresponse()
+                    self.assertEqual(response.status, 404)
+                    response.read()
+                    connection.request("GET", "/cases/test-song/primary.json")
+                    response = connection.getresponse()
+                    self.assertEqual(response.status, 200)
+                    self.assertEqual(json.loads(response.read())["recording"]["id"], "test-song")
+                    connection.close()
+                finally:
+                    server.shutdown()
+                    server.server_close()
+                    thread.join(timeout=3)
+
+    def test_serve_keeps_playback_available_when_optional_online_report_is_missing_malformed_or_stale(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            _, _, manifest = self.fixture(root)
+            output = root / "output"
+            built = drafts.build(manifest, output, root)
+            report, value = self.online_fixture(root, output, built)
+            static = self.static_fixture(root)
+            with patch.object(drafts, "ROOT", root), patch.object(drafts, "STATIC", static), patch.object(drafts.review_pack, "STATIC", static):
+                for state in ("missing", "malformed", "stale"):
+                    if state == "missing":
+                        report.unlink()
+                    elif state == "malformed":
+                        report.write_text("not valid JSON")
+                    else:
+                        stale = copy.deepcopy(value)
+                        stale["cases"][0]["primary_sha256"] = "f" * 64
+                        drafts.write_json(report, stale)
+                    server = Mock()
+                    server.serve_forever.side_effect = KeyboardInterrupt
+                    with self.subTest(state=state), patch.object(drafts, "ThreadingHTTPServer", return_value=server) as factory, patch("builtins.print") as notice:
+                        drafts.serve(output, 8070, report)
+                        mapping = factory.call_args.args[1].keywords["files"]
+                        self.assertNotIn("/online-chords.json", mapping)
+                        self.assertEqual(mapping["/cases/test-song/primary.json"], output.resolve() / "cases/test-song/primary.json")
+                        self.assertIn("/cases/test-song/audio.wav", mapping)
+                        self.assertTrue(any("Online chord checks unavailable" in call.args[0] for call in notice.call_args_list))
+                        server.serve_forever.assert_called_once_with()
+                        server.server_close.assert_called_once_with()
+
+    def test_serve_still_rejects_an_invalid_native_pack_before_optional_report_fallback(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            _, _, manifest = self.fixture(root)
+            output = root / "output"
+            built = drafts.build(manifest, output, root)
+            report, _ = self.online_fixture(root, output, built)
+            static = self.static_fixture(root)
+            native_manifest = json.loads((output / "manifest.json").read_text())
+            native_manifest["schema_version"] = "invalid-native-pack"
+            drafts.write_json(output / "manifest.json", native_manifest)
+            with patch.object(drafts, "ROOT", root), patch.object(drafts, "STATIC", static), patch.object(drafts.review_pack, "STATIC", static), patch.object(drafts, "ThreadingHTTPServer") as factory:
+                with self.assertRaisesRegex(ValueError, "automatic play-along manifest"):
+                    drafts.serve(output, 8070, report)
+                factory.assert_not_called()
 
 
 if __name__ == "__main__":

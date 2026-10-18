@@ -1,0 +1,224 @@
+{
+  "schema_version": "online-chord-targets-1.0",
+  "status": "Query identities and source seeds; no saved chord answers or timing targets",
+  "source_seed_inputs": [
+    "catalogue/starter-four-teaching-review.json",
+    "catalogue/remaining-six-teaching-review.json"
+  ],
+  "cases": [
+    {
+      "recording_id": "troggs-wild-thing-youtube-20261011",
+      "title": "Wild Thing",
+      "artist": "The Troggs",
+      "harmony_task": true,
+      "seeds": [
+        {
+          "url": "https://www.andyguitar.co.uk/videos/electric-guitar-day-7-wild-thing",
+          "comparison_setup": {
+            "capo": 0,
+            "tuning_shift_semitones": 0
+          },
+          "setup_status": "Catalogue teaching hypothesis for missing source fields only; explicit source setup takes precedence. Exact recording setup is unverified."
+        },
+        {
+          "url": "https://guitarlessons365.com/wild-thing-guitar-lesson-the-troggs/",
+          "comparison_setup": {
+            "capo": 0,
+            "tuning_shift_semitones": 0
+          },
+          "setup_status": "Catalogue teaching hypothesis for missing source fields only; explicit source setup takes precedence. Exact recording setup is unverified."
+        },
+        {
+          "url": "https://www.laurenbateman.com/wild-thing-chord-chart/",
+          "comparison_setup": {
+            "capo": 0,
+            "tuning_shift_semitones": 0
+          },
+          "setup_status": "Catalogue teaching hypothesis for missing source fields only; explicit source setup takes precedence. Exact recording setup is unverified."
+        }
+      ]
+    },
+    {
+      "recording_id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+      "title": "Knockin' On Heaven's Door",
+      "artist": "Bob Dylan",
+      "harmony_task": true,
+      "seeds": [
+        {
+          "url": "https://www.jonmaclennan.com/blog/knockin-on-heaven%27s-door-chords",
+          "comparison_setup": {
+            "capo": 0,
+            "tuning_shift_semitones": 0
+          },
+          "setup_status": "Catalogue teaching hypothesis for missing source fields only; explicit source setup takes precedence. Exact recording setup is unverified."
+        },
+        {
+          "url": "https://songnotes.net/lessons/88/",
+          "comparison_setup": {
+            "capo": 0,
+            "tuning_shift_semitones": 0
+          },
+          "setup_status": "Catalogue teaching hypothesis for missing source fields only; explicit source setup takes precedence. Exact recording setup is unverified."
+        },
+        {
+          "url": "https://goodguitarist.com/youtube-post/knockin-on-heavens-door-fingerstyle-bob-dylan-guitar-tutorial/",
+          "comparison_setup": {
+            "capo": 0,
+            "tuning_shift_semitones": 0
+          },
+          "setup_status": "Catalogue teaching hypothesis for missing source fields only; explicit source setup takes precedence. Exact recording setup is unverified."
+        }
+      ]
+    },
+    {
+      "recording_id": "van-morrison-brown-eyed-girl-youtube-20261011",
+      "title": "Brown Eyed Girl",
+      "artist": "Van Morrison",
+      "harmony_task": true,
+      "seeds": [
+        {
+          "url": "https://www.andyguitar.co.uk/videos/brown-eyed-girl-by-van-morrison",
+          "comparison_setup": {
+            "capo": 0,
+            "tuning_shift_semitones": 0
+          },
+          "setup_status": "Catalogue teaching hypothesis for missing source fields only; explicit source setup takes precedence. Exact recording setup is unverified."
+        }
+      ]
+    },
+    {
+      "recording_id": "beatles-love-me-do-youtube-20261011",
+      "title": "Love Me Do",
+      "artist": "The Beatles",
+      "harmony_task": true,
+      "seeds": [
+        {
+          "url": "https://www.andyguitar.co.uk/videos/beatles-guitar-day-01-love-me-do",
+          "comparison_setup": {
+            "capo": 0,
+            "tuning_shift_semitones": 0
+          },
+          "setup_status": "Catalogue teaching hypothesis for missing source fields only; explicit source setup takes precedence. Exact recording setup is unverified."
+        },
+        {
+          "url": "https://www.simpleguitar.com/blog/howtoplaylovemedo",
+          "comparison_setup": {
+            "capo": 0,
+            "tuning_shift_semitones": 0
+          },
+          "setup_status": "Catalogue teaching hypothesis for missing source fields only; explicit source setup takes precedence. Exact recording setup is unverified."
+        },
+        {
+          "url": "https://www.justinguitar.com/songs/the-beatles-love-me-do-chords-tabs-guitar-lesson-bs-108",
+          "comparison_setup": {
+            "capo": 0,
+            "tuning_shift_semitones": 0
+          },
+          "setup_status": "Catalogue teaching hypothesis for missing source fields only; explicit source setup takes precedence. Exact recording setup is unverified."
+        }
+      ]
+    },
+    {
+      "recording_id": "beatles-twist-and-shout-youtube-20261011",
+      "title": "Twist And Shout",
+      "artist": "The Beatles",
+      "harmony_task": true,
+      "seeds": [
+        {
+          "url": "https://www.andyguitar.co.uk/videos/beatles-guitar-day-02-twist-and-shout",
+          "comparison_setup": {
+            "capo": 0,
+            "tuning_shift_semitones": 0
+          },
+          "setup_status": "Catalogue teaching hypothesis for missing source fields only; explicit source setup takes precedence. Exact recording setup is unverified."
+        },
+        {
+          "url": "https://www.jonmaclennan.com/blog/twist-and-shout-chords",
+          "comparison_setup": {
+            "capo": 0,
+            "tuning_shift_semitones": 0
+          },
+          "setup_status": "Catalogue teaching hypothesis for missing source fields only; explicit source setup takes precedence. Exact recording setup is unverified."
+        }
+      ]
+    },
+    {
+      "recording_id": "white-stripes-seven-nation-army-youtube-20261011",
+      "title": "Seven Nation Army",
+      "artist": "The White Stripes",
+      "harmony_task": false,
+      "seeds": []
+    },
+    {
+      "recording_id": "nirvana-come-as-you-are-youtube-20261011",
+      "title": "Come As You Are",
+      "artist": "Nirvana",
+      "harmony_task": false,
+      "seeds": []
+    },
+    {
+      "recording_id": "radiohead-creep-youtube-20261010",
+      "title": "Creep",
+      "artist": "Radiohead",
+      "harmony_task": true,
+      "seeds": [
+        {
+          "url": "https://www.andyguitar.co.uk/videos/radiohead-creep",
+          "comparison_setup": {
+            "capo": 0,
+            "tuning_shift_semitones": 0
+          },
+          "setup_status": "Catalogue teaching hypothesis for missing source fields only; explicit source setup takes precedence. Exact recording setup is unverified."
+        },
+        {
+          "url": "https://guitarlessons365.com/creep-guitar-lesson-radiohead/",
+          "comparison_setup": {
+            "capo": 0,
+            "tuning_shift_semitones": 0
+          },
+          "setup_status": "Catalogue teaching hypothesis for missing source fields only; explicit source setup takes precedence. Exact recording setup is unverified."
+        }
+      ]
+    },
+    {
+      "recording_id": "animals-house-rising-sun-official-20261011",
+      "title": "The House Of The Rising Sun",
+      "artist": "The Animals",
+      "harmony_task": true,
+      "seeds": [
+        {
+          "url": "https://www.jonmaclennan.com/blog/house-of-the-rising-sun-guitar-lesson",
+          "comparison_setup": {
+            "capo": 0,
+            "tuning_shift_semitones": 0
+          },
+          "setup_status": "Catalogue teaching hypothesis for missing source fields only; explicit source setup takes precedence. Exact recording setup is unverified."
+        },
+        {
+          "url": "https://richterguitar.com/house-of-the-rising-sun-the-animals/",
+          "comparison_setup": {
+            "capo": 0,
+            "tuning_shift_semitones": 0
+          },
+          "setup_status": "Catalogue teaching hypothesis for missing source fields only; explicit source setup takes precedence. Exact recording setup is unverified."
+        }
+      ]
+    },
+    {
+      "recording_id": "oasis-wonderwall-youtube-20261010",
+      "title": "Wonderwall",
+      "artist": "Oasis",
+      "harmony_task": true,
+      "seeds": [
+        {
+          "url": "https://guitarlessons365.com/wonderwall-guitar-lesson-oasis/",
+          "comparison_setup": {
+            "capo": 2,
+            "tuning_shift_semitones": 0
+          },
+          "setup_status": "Catalogue teaching hypothesis for missing source fields only; explicit source setup takes precedence. Exact recording setup is unverified."
+        }
+      ]
+    }
+  ]
+}

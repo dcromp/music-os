@@ -377,6 +377,68 @@ function safeTeachingURL(value) {
   }
   return url.href;
 }
+function validateOnlineChecksManifest(payload, packId, reviewCases) {
+  const safeId = value => boundedText(value, 80) && /^[a-z0-9_-]+$/.test(value);
+  if (!payload || payload.schema_version !== "online-chord-checks-1.0" || payload.pack_id !== packId ||
+      !boundedText(payload.created_at_utc, 64) || !Number.isFinite(Date.parse(payload.created_at_utc)) ||
+      !/(?:Z|[+-]\d{2}:\d{2})$/.test(payload.created_at_utc) ||
+      !Array.isArray(payload.cases) || !payload.cases.length || payload.cases.length > 64) {
+    throw new Error("Online chord checks are unavailable or belong to another song pack.");
+  }
+  const expected = new Map(reviewCases.map(item => [item.recording.id, item.recording])), cases = new Map();
+  for (const item of payload.cases) {
+    const id = item?.recording?.id;
+    if (!safeId(id) || cases.has(id) || !expected.has(id) || !pairedRecording(item.recording, expected.get(id)) ||
+        !/^[a-f0-9]{64}$/.test(item.primary_sha256 || "") || !boundedText(item.analysis_id, 200) ||
+        !["source-checks", "insufficient-sources", "not-harmony-task"].includes(item.status) ||
+        !Array.isArray(item.sources) || item.sources.length > 32 || !Array.isArray(item.findings) || item.findings.length > 512 ||
+        !Array.isArray(item.limits) || item.limits.length > 16 || !item.limits.every(value => boundedText(value, 1000))) {
+      throw new Error("Online chord checks do not match the selected recording.");
+    }
+    const sourceIds = new Set();
+    if (item.search !== undefined && item.search !== null) {
+      const search = item.search;
+      if (!search || !boundedText(search.provider, 100) || !boundedText(search.status, 100) || typeof search.cache_hit !== "boolean" ||
+          (search.retrieved_at_utc != null && (!boundedText(search.retrieved_at_utc, 64) ||
+            !Number.isFinite(Date.parse(search.retrieved_at_utc)) || !/(?:Z|[+-]\d{2}:\d{2})$/.test(search.retrieved_at_utc))) ||
+          !Array.isArray(search.notes) || search.notes.length > 16 || !search.notes.every(note => boundedText(note, 1000))) {
+        throw new Error("Invalid online-search retrieval status.");
+      }
+    }
+    for (const source of item.sources) {
+      if (!source || !safeId(source.id) || sourceIds.has(source.id) || !boundedText(source.title, 300) ||
+          !boundedText(source.status, 100) || !Array.isArray(source.sounding_chords) || source.sounding_chords.length > 64 ||
+          !source.sounding_chords.every(label => boundedText(label, 100)) ||
+          (source.comparison_status !== undefined && !boundedText(source.comparison_status, 100))) throw new Error("Invalid online teaching source.");
+      safeTeachingURL(source.url); sourceIds.add(source.id);
+    }
+    const findingIds = new Set();
+    for (const finding of item.findings) {
+      if (!finding || !safeId(finding.id) || findingIds.has(finding.id) ||
+          !["outside-source-palette", "quality-conflict", "source-order-conflict"].includes(finding.kind) ||
+          !validNumber(finding.start_seconds) || !validNumber(finding.end_seconds) ||
+          finding.start_seconds < 0 || finding.start_seconds >= finding.end_seconds || finding.end_seconds > item.recording.duration_seconds ||
+          !boundedText(finding.native_label, 100) || !boundedText(finding.reason, 1000) ||
+          !Array.isArray(finding.source_ids) || !finding.source_ids.length || finding.source_ids.length > 32 ||
+          finding.source_ids.some(id => !sourceIds.has(id)) || new Set(finding.source_ids).size !== finding.source_ids.length) {
+        throw new Error("Invalid source-check replay window.");
+      }
+      findingIds.add(finding.id);
+    }
+    if (!item.summary || !Number.isInteger(item.summary.independent_source_groups) || item.summary.independent_source_groups < 0 ||
+        item.summary.independent_source_groups > sourceIds.size || item.summary.flagged_spans !== item.findings.length ||
+        (item.status !== "source-checks" && item.findings.length)) throw new Error("Invalid source-check coverage summary.");
+    cases.set(id, item);
+  }
+  return {cases, created_at_utc: payload.created_at_utc};
+}
+function pairedOnlineChecks(item, chart, primarySha256) {
+  if (!item || !chart || !pairedRecording(item.recording, chart.recording) ||
+      !/^[a-f0-9]{64}$/.test(primarySha256 || "") || item.primary_sha256 !== primarySha256 || item.analysis_id !== chart.analysis?.id) {
+    throw new Error("Online chord checks are stale for this audio or native chart. Run source checks again.");
+  }
+  return item;
+}
 function validateLearningManifest(payload, reviewCases, practiceById) {
   const safeId = value => boundedText(value, 64) && /^[a-z0-9][a-z0-9.-]*$/.test(value);
   if (!payload || payload.schema_version !== "playalong-learning-1.0" ||
@@ -536,13 +598,14 @@ if (typeof module !== "undefined" && module.exports) {
   module.exports = { annotationExport, validateCandidate, currentEvent, exposureKey, loadExposure, recordExposure,
     refreshExposure, pairedRecording, validateEvidence, clampSeek, playbackSnapshot, createPlaybackFrameLoop, feedbackKey, feedbackExport,
     captureFeedback, loadFeedback, saveFeedback, timeLabel, transposePracticeLabel, practiceLabel, coreChordLabel, displayedChord, practiceTimeline,
-    currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, durationPresentation, holdBarDivisions, correctedDisplayEvents, validatePracticeManifest, safeTeachingURL, validateLearningManifest, practiceProgressKey, practiceProgressExport, loadPracticeProgress, savePracticeProgress, nextPracticeStep, initialPracticeStep };
+    currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, durationPresentation, holdBarDivisions, correctedDisplayEvents, validatePracticeManifest, safeTeachingURL, validateOnlineChecksManifest, pairedOnlineChecks, validateLearningManifest, practiceProgressKey, practiceProgressExport, loadPracticeProgress, savePracticeProgress, nextPracticeStep, initialPracticeStep };
 }
 
 if (typeof document !== "undefined") {
   const el = id => document.getElementById(id), audio = el("audio"), states = new Map();
   let cases = [], selected = null, state = null, generation = 0, packId = "", feedbackCounter = 0;
   let rhythmById = new Map(), practiceById = new Map(), learningPath = null;
+  let onlineReport = null, onlineStatus = "loading";
   const progressById = new Map();
   const storage = { getItem: key => window.localStorage.getItem(key), setItem: (key, value) => window.localStorage.setItem(key, value) };
   const status = text => { el("status").textContent = text; };
@@ -697,6 +760,49 @@ if (typeof document !== "undefined") {
       row.append(text, button("Replay this spot", () => replay(point.start_seconds - 2))); el("review-points").append(row);
     }
   }
+  function renderOnlineChecks() {
+    const summary = el("online-check-summary"), sources = el("online-check-sources"), findings = el("online-check-findings");
+    sources.replaceChildren(); findings.replaceChildren(); el("online-check-limits").textContent = ""; el("online-check-search").textContent = "";
+    if (onlineStatus === "loading") { summary.textContent = "Loading optional online chord checks…"; return; }
+    if (!onlineReport) { summary.textContent = onlineStatus; return; }
+    const entry = onlineReport.cases.get(selected?.recording.id);
+    if (!entry) { summary.textContent = "Online chord checks have not been prepared for this recording."; return; }
+    if (!state?.primary) { summary.textContent = "Waiting for this recording’s chord identity…"; return; }
+    let checked;
+    try { checked = pairedOnlineChecks(entry, state.primary, state.primaryHash); }
+    catch (error) { summary.textContent = error.message; return; }
+    const groups = checked.summary.independent_source_groups, count = checked.findings.length;
+    const coverage = `${groups} distinct source ${groups === 1 ? "group" : "groups"} · ${checked.sources.length} ${checked.sources.length === 1 ? "page" : "pages"} checked · ${onlineReport.created_at_utc.slice(0, 10)}`;
+    summary.textContent = checked.status === "not-harmony-task" ? `Riff or setup lesson; chord-palette checks do not apply. ${coverage}.`
+      : checked.status === "insufficient-sources" ? `Insufficient comparable sources; no chord assessment made. ${coverage}.`
+      : `${count} potential ${count === 1 ? "conflict" : "conflicts"} flagged. ${coverage}. No flags does not establish that a chart is correct.`;
+    if (checked.search) {
+      const search = checked.search;
+      el("online-check-search").textContent = `Search: ${search.provider} · ${search.status.replaceAll("-", " ")} · ${search.cache_hit ? "cached result" : "not cached"}${search.retrieved_at_utc ? ` · ${search.retrieved_at_utc.slice(0, 10)}` : ""}. ${search.notes.join(" ")}`;
+    }
+    for (const source of checked.sources) {
+      const row = document.createElement("p"), link = document.createElement("a");
+      link.href = safeTeachingURL(source.url); link.textContent = source.title; link.target = "_blank"; link.rel = "noopener noreferrer";
+      const setup = source.comparison_status === "source-setup" ? "source setup" : source.comparison_status === "teaching-hypothesis" ? "setup assumed"
+        : source.comparison_status === "unknown-setup" ? "setup unknown" : source.comparison_status === "excluded-source" ? "excluded source"
+        : source.comparison_status ? source.comparison_status.replaceAll("-", " ") : "setup not specified";
+      row.append(link, ` · ${source.status.replaceAll("-", " ")} · ${setup}${source.sounding_chords.length ? ` · sounding chords: ${source.sounding_chords.join(", ")}` : ""}`);
+      sources.append(row);
+    }
+    for (const finding of checked.findings) {
+      const row = document.createElement("div"); row.className = "point-row";
+      const text = document.createElement("span");
+      text.textContent = `${finding.start_seconds.toFixed(2)}–${finding.end_seconds.toFixed(2)} s · native ${finding.native_label} · ${finding.reason}`;
+      const references = document.createElement("span");
+      for (const id of finding.source_ids) {
+        const source = checked.sources.find(item => item.id === id), link = document.createElement("a");
+        link.href = safeTeachingURL(source.url); link.textContent = source.title; link.target = "_blank"; link.rel = "noopener noreferrer";
+        references.append(" ", link);
+      }
+      row.append(text, button("Replay this spot", () => replay(finding.start_seconds - 1)), references); findings.append(row);
+    }
+    el("online-check-limits").textContent = checked.limits.join(" ");
+  }
   function practiceInfo() {
     const capo = selected.practice?.capo || 0;
     el("practice").hidden = !selected.practice;
@@ -770,7 +876,7 @@ if (typeof document !== "undefined") {
     const sourceInfo = { recording: selected.recording, origin: selected.origin || null,
       source: selected.source || selected.source_references || null, practice: selected.practice || null, summary: selected.summary || null };
     el("origin").textContent = JSON.stringify(sourceInfo, null, 2);
-    renderMarks(); renderFeedback(); renderPoints();
+    renderMarks(); renderFeedback(); renderPoints(); renderOnlineChecks();
     audio.src = safeURL(selected.audio_url); audio.load();
     status("Preparing the automatic chord draft…");
     target.exposed = true; target.exposureHistory = recordExposure(storage, target.exposureKey); exposure();
@@ -779,6 +885,7 @@ if (typeof document !== "undefined") {
         : await getPrimary(reviewCase.primary_url || reviewCase.candidates[0].url, reviewCase.recording);
       if (token !== generation) return;
       target.primary = loaded.chart; target.primaryHash = loaded.hash; refreshDisplayCorrections(target);
+      renderOnlineChecks();
       sourceInfo.primary_chart = {sha256: target.primaryHash, analysis_id: target.primary.analysis?.id, pack_id: packId};
       el("origin").textContent = JSON.stringify(sourceInfo, null, 2);
       readyControls(); updateClock(); status("Ready. Press play and follow the chords. Feedback saves automatically when you tap.");
@@ -1002,6 +1109,18 @@ if (typeof document !== "undefined") {
         try { practiceById = validatePracticeManifest(await getJSON("/practice.json"), cases); }
         catch (_) { practiceById = new Map(); }
         if (state) { state.strumming = practiceById.get(selected.recording.id) || null; refreshDisplayCorrections(state); renderStrumming(); updateClock(); }
+      })(),
+      (async () => {
+        try {
+          onlineReport = validateOnlineChecksManifest(await getJSON("/online-chords.json"), packId, cases);
+          onlineStatus = "ready";
+        } catch (error) {
+          onlineReport = null;
+          onlineStatus = `Online chord checks unavailable. ${error.message}`;
+        }
+        // This renders only current state; a song change during the optional
+        // request cannot attach a previous recording’s findings to the new one.
+        if (state) renderOnlineChecks();
       })()
     ]);
     try {
