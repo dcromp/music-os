@@ -1,0 +1,526 @@
+{
+  "schema_version": "accompaniment-quality-spec-1.0",
+  "scope": "Ticket 4 bounded retrospective local evidence; native and fixed windows remain unverified, with no classification thresholds or chart changes",
+  "cases": [
+    {
+      "recording_id": "animals-house-rising-sun-official-20261011",
+      "audio": "experiments/generated/automatic-first-ten-v1/cases/animals-house-rising-sun-official-20261011/audio.wav",
+      "primary": "experiments/generated/automatic-first-ten-v1/cases/animals-house-rising-sun-official-20261011/primary.json",
+      "btc": "experiments/generated/automatic-first-ten-selected-v1/cases/animals-house-rising-sun-official-20261011/primary.json",
+      "chordino": "experiments/generated/automatic-first-ten-v1/cases/animals-house-rising-sun-official-20261011/chordino.json",
+      "nnls": "experiments/generated/catalogue-remaining-six-pitch-20261016/animals-house-rising-sun-official-20261011/nnls-evidence.json",
+      "regions": [
+        {
+          "id": "intro_native_long_Am",
+          "start_seconds": 6.408707482993197,
+          "end_seconds": 11.145578231292516,
+          "candidates": [
+            "E",
+            "Em",
+            "E7",
+            "Am",
+            "Dm"
+          ]
+        },
+        {
+          "id": "existing_intro_E_overlay",
+          "start_seconds": 7.987664399,
+          "end_seconds": 9.473741497,
+          "candidates": [
+            "E",
+            "Em",
+            "E7",
+            "Am",
+            "Dm"
+          ]
+        },
+        {
+          "id": "Em_native_7",
+          "start_seconds": 11.145578231292516,
+          "end_seconds": 12.538775510204081,
+          "candidates": [
+            "E",
+            "Em",
+            "E7",
+            "Am",
+            "Dm"
+          ]
+        },
+        {
+          "id": "Em_native_56",
+          "start_seconds": 90.09342403628118,
+          "end_seconds": 93.06557823129252,
+          "candidates": [
+            "E",
+            "Em",
+            "E7",
+            "Am",
+            "Dm"
+          ]
+        },
+        {
+          "id": "Em_native_77",
+          "start_seconds": 123.62303854875283,
+          "end_seconds": 126.50231292517007,
+          "candidates": [
+            "E",
+            "Em",
+            "E7",
+            "Am",
+            "Dm"
+          ]
+        },
+        {
+          "id": "Em_native_131",
+          "start_seconds": 210.37278911564627,
+          "end_seconds": 211.58022675736962,
+          "candidates": [
+            "E",
+            "Em",
+            "E7",
+            "Am",
+            "Dm"
+          ]
+        },
+        {
+          "id": "outro_native_Am_244.645",
+          "start_seconds": 244.64544217687074,
+          "end_seconds": 246.22439909297051,
+          "candidates": [
+            "Am",
+            "Dm",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "id": "outro_native_Dm_246.224",
+          "start_seconds": 246.22439909297051,
+          "end_seconds": 247.8962358276644,
+          "candidates": [
+            "Am",
+            "Dm",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "id": "outro_native_Am_247.896",
+          "start_seconds": 247.8962358276644,
+          "end_seconds": 249.47519274376418,
+          "candidates": [
+            "Am",
+            "Dm",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "id": "outro_native_Dm_249.475",
+          "start_seconds": 249.47519274376418,
+          "end_seconds": 250.96126984126985,
+          "candidates": [
+            "Am",
+            "Dm",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "id": "outro_native_Am_250.961",
+          "start_seconds": 250.96126984126985,
+          "end_seconds": 252.63310657596372,
+          "candidates": [
+            "Am",
+            "Dm",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "id": "outro_native_Dm_252.633",
+          "start_seconds": 252.63310657596372,
+          "end_seconds": 254.2120634920635,
+          "candidates": [
+            "Am",
+            "Dm",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "id": "outro_native_Am_254.212",
+          "start_seconds": 254.2120634920635,
+          "end_seconds": 255.88390022675736,
+          "candidates": [
+            "Am",
+            "Dm",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "id": "outro_native_Dm_255.884",
+          "start_seconds": 255.88390022675736,
+          "end_seconds": 257.64861678004536,
+          "candidates": [
+            "Am",
+            "Dm",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "id": "outro_native_Am_257.649",
+          "start_seconds": 257.64861678004536,
+          "end_seconds": 259.41333333333336,
+          "candidates": [
+            "Am",
+            "Dm",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "id": "outro_native_Dm_259.413",
+          "start_seconds": 259.41333333333336,
+          "end_seconds": 261.2709297052154,
+          "candidates": [
+            "Am",
+            "Dm",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "id": "outro_native_Am7_261.271",
+          "start_seconds": 261.2709297052154,
+          "end_seconds": 267.2152380952381,
+          "candidates": [
+            "Am",
+            "Dm",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "id": "sample-1",
+          "start_seconds": 23.991891156462586,
+          "end_seconds": 29.991891156462586,
+          "candidates": [
+            "Am",
+            "C",
+            "D",
+            "F",
+            "E",
+            "Dm"
+          ]
+        },
+        {
+          "id": "sample-2",
+          "start_seconds": 91.47161904761903,
+          "end_seconds": 97.47161904761903,
+          "candidates": [
+            "Am",
+            "C",
+            "D",
+            "F",
+            "E",
+            "Dm"
+          ]
+        },
+        {
+          "id": "sample-3",
+          "start_seconds": 158.9513469387755,
+          "end_seconds": 164.9513469387755,
+          "candidates": [
+            "Am",
+            "C",
+            "D",
+            "F",
+            "E",
+            "Dm"
+          ]
+        },
+        {
+          "id": "sample-4",
+          "start_seconds": 226.43107482993196,
+          "end_seconds": 232.43107482993196,
+          "candidates": [
+            "Am",
+            "C",
+            "D",
+            "F",
+            "E",
+            "Dm"
+          ]
+        }
+      ]
+    },
+    {
+      "recording_id": "van-morrison-brown-eyed-girl-youtube-20261011",
+      "audio": "experiments/generated/automatic-first-ten-v1/cases/van-morrison-brown-eyed-girl-youtube-20261011/audio.wav",
+      "primary": "experiments/generated/automatic-first-ten-v1/cases/van-morrison-brown-eyed-girl-youtube-20261011/primary.json",
+      "btc": "experiments/generated/automatic-first-ten-selected-v1/cases/van-morrison-brown-eyed-girl-youtube-20261011/primary.json",
+      "chordino": "experiments/generated/automatic-first-ten-v1/cases/van-morrison-brown-eyed-girl-youtube-20261011/chordino.json",
+      "nnls": "experiments/generated/catalogue-remaining-six-pitch-20261016/van-morrison-brown-eyed-girl-youtube-20261011/nnls-evidence.json",
+      "regions": [
+        {
+          "id": "van-morrison-brown-eyed-girl-youtube-20261011-Em-longest-1",
+          "start_seconds": 148.42195011337867,
+          "end_seconds": 150.09378684807257,
+          "candidates": [
+            "Em",
+            "E",
+            "G"
+          ]
+        },
+        {
+          "id": "van-morrison-brown-eyed-girl-youtube-20261011-Em-longest-2",
+          "start_seconds": 82.57015873015872,
+          "end_seconds": 84.24199546485261,
+          "candidates": [
+            "Em",
+            "E",
+            "G"
+          ]
+        },
+        {
+          "id": "van-morrison-brown-eyed-girl-youtube-20261011-Em-longest-3",
+          "start_seconds": 44.210793650793654,
+          "end_seconds": 45.789750566893424,
+          "candidates": [
+            "Em",
+            "E",
+            "G"
+          ]
+        },
+        {
+          "id": "sample-1",
+          "start_seconds": 15.655927437641722,
+          "end_seconds": 21.655927437641722,
+          "candidates": [
+            "G",
+            "C",
+            "D",
+            "Em"
+          ]
+        },
+        {
+          "id": "sample-2",
+          "start_seconds": 62.29574603174602,
+          "end_seconds": 68.29574603174602,
+          "candidates": [
+            "G",
+            "C",
+            "D",
+            "Em"
+          ]
+        },
+        {
+          "id": "sample-3",
+          "start_seconds": 108.93556462585033,
+          "end_seconds": 114.93556462585033,
+          "candidates": [
+            "G",
+            "C",
+            "D",
+            "Em"
+          ]
+        },
+        {
+          "id": "sample-4",
+          "start_seconds": 155.57538321995463,
+          "end_seconds": 161.57538321995463,
+          "candidates": [
+            "G",
+            "C",
+            "D",
+            "Em"
+          ]
+        }
+      ]
+    },
+    {
+      "recording_id": "radiohead-creep-youtube-20261010",
+      "audio": "experiments/generated/automatic-first-ten-v1/cases/radiohead-creep-youtube-20261010/audio.wav",
+      "primary": "experiments/generated/automatic-first-ten-v1/cases/radiohead-creep-youtube-20261010/primary.json",
+      "btc": "experiments/generated/automatic-first-ten-selected-v1/cases/radiohead-creep-youtube-20261010/primary.json",
+      "chordino": "experiments/generated/automatic-first-ten-v1/cases/radiohead-creep-youtube-20261010/chordino.json",
+      "nnls": "experiments/generated/catalogue-remaining-six-pitch-20261016/radiohead-creep-youtube-20261010/nnls-evidence.json",
+      "regions": [
+        {
+          "id": "radiohead-creep-youtube-20261010-B-longest-1",
+          "start_seconds": 129.75310657596373,
+          "end_seconds": 135.04725623582766,
+          "candidates": [
+            "B",
+            "Bm"
+          ]
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-B-longest-2",
+          "start_seconds": 45.97551020408163,
+          "end_seconds": 51.17678004535147,
+          "candidates": [
+            "B",
+            "Bm"
+          ]
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-B-longest-3",
+          "start_seconds": 66.87346938775511,
+          "end_seconds": 72.07473922902494,
+          "candidates": [
+            "B",
+            "Bm"
+          ]
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-Cm-longest-1",
+          "start_seconds": 35.66585034013605,
+          "end_seconds": 40.68136054421769,
+          "candidates": [
+            "Cm",
+            "C"
+          ]
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-Cm-longest-2",
+          "start_seconds": 15.139410430839002,
+          "end_seconds": 20.154920634920636,
+          "candidates": [
+            "Cm",
+            "C"
+          ]
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-Cm-longest-3",
+          "start_seconds": 119.16480725623583,
+          "end_seconds": 123.53015873015873,
+          "candidates": [
+            "Cm",
+            "C"
+          ]
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-Bm-longest-1",
+          "start_seconds": 87.67854875283447,
+          "end_seconds": 92.87981859410431,
+          "candidates": [
+            "B",
+            "Bm"
+          ]
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-Bm-longest-2",
+          "start_seconds": 171.27038548752836,
+          "end_seconds": 172.756462585034,
+          "candidates": [
+            "B",
+            "Bm"
+          ]
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-Bm7-longest-1",
+          "start_seconds": 172.756462585034,
+          "end_seconds": 176.3787755102041,
+          "candidates": [
+            "Bm7",
+            "B7",
+            "B",
+            "Bm"
+          ]
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-C-longest-1",
+          "start_seconds": 51.17678004535147,
+          "end_seconds": 60.18612244897959,
+          "candidates": [
+            "Cm",
+            "C"
+          ]
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-C-longest-2",
+          "start_seconds": 197.09097505668933,
+          "end_seconds": 205.63591836734693,
+          "candidates": [
+            "Cm",
+            "C"
+          ]
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-C-longest-3",
+          "start_seconds": 92.87981859410431,
+          "end_seconds": 99.38140589569161,
+          "candidates": [
+            "Cm",
+            "C"
+          ]
+        },
+        {
+          "id": "sample-1",
+          "start_seconds": 20.663455782312926,
+          "end_seconds": 26.663455782312926,
+          "candidates": [
+            "G",
+            "B",
+            "C",
+            "Cm"
+          ]
+        },
+        {
+          "id": "sample-2",
+          "start_seconds": 79.82209523809523,
+          "end_seconds": 85.82209523809523,
+          "candidates": [
+            "G",
+            "B",
+            "C",
+            "Cm"
+          ]
+        },
+        {
+          "id": "sample-3",
+          "start_seconds": 138.98073469387754,
+          "end_seconds": 144.98073469387754,
+          "candidates": [
+            "G",
+            "B",
+            "C",
+            "Cm"
+          ]
+        },
+        {
+          "id": "sample-4",
+          "start_seconds": 198.13937414965986,
+          "end_seconds": 204.13937414965986,
+          "candidates": [
+            "G",
+            "B",
+            "C",
+            "Cm"
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": {
+    "experiments/generated/automatic-first-ten-v1/cases/animals-house-rising-sun-official-20261011/audio.wav": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708",
+    "experiments/generated/automatic-first-ten-v1/cases/animals-house-rising-sun-official-20261011/primary.json": "71eb918cc9ef3662d5c6d75b49814f700b89a2fc15b73c1ce92d9bdb18dd6037",
+    "experiments/generated/automatic-first-ten-selected-v1/cases/animals-house-rising-sun-official-20261011/primary.json": "7ee27e5ecc662a1bd838663fdb89cc1e18736d8cf60b4f7cf059d6a6208edd31",
+    "experiments/generated/automatic-first-ten-v1/cases/animals-house-rising-sun-official-20261011/chordino.json": "519748e12a7612c4965339f13d09e733192f2dba9e8de1209ef685a8086e1c13",
+    "experiments/generated/catalogue-remaining-six-pitch-20261016/animals-house-rising-sun-official-20261011/nnls-evidence.json": "3bc4d72e421ccd08aec21d86218b245df0a2a4d5ca3400b0cf523b84ce0c658b",
+    "experiments/generated/automatic-first-ten-v1/cases/van-morrison-brown-eyed-girl-youtube-20261011/audio.wav": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf",
+    "experiments/generated/automatic-first-ten-v1/cases/van-morrison-brown-eyed-girl-youtube-20261011/primary.json": "1bc1f1c9467a8bea0aab8e8ae9ea4ccbd3f71ce47c52a1376f591528bcb1170d",
+    "experiments/generated/automatic-first-ten-selected-v1/cases/van-morrison-brown-eyed-girl-youtube-20261011/primary.json": "3047f46334a44dfeb0ae5fe0ae235ab33afea06d435db40c221a3e72def6d47b",
+    "experiments/generated/automatic-first-ten-v1/cases/van-morrison-brown-eyed-girl-youtube-20261011/chordino.json": "a9b647dd9e4c5af426d4672d95210fb64ceeba636c624b9d022292860d3e8ee1",
+    "experiments/generated/catalogue-remaining-six-pitch-20261016/van-morrison-brown-eyed-girl-youtube-20261011/nnls-evidence.json": "c1d7c8d567d0b6c8a48381ac3df83cd6e437a039cd4e391714a744d08c2ea720",
+    "experiments/generated/automatic-first-ten-v1/cases/radiohead-creep-youtube-20261010/audio.wav": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10",
+    "experiments/generated/automatic-first-ten-v1/cases/radiohead-creep-youtube-20261010/primary.json": "9ab5ce1f02b7ba127554937009f1747112e7fc3df583ddcd3b8abcfa9cdc191c",
+    "experiments/generated/automatic-first-ten-selected-v1/cases/radiohead-creep-youtube-20261010/primary.json": "31ab2f236db594ee83f3223ac168601435ba0ce83e7aea3f1a54d207ca9f2ec2",
+    "experiments/generated/automatic-first-ten-v1/cases/radiohead-creep-youtube-20261010/chordino.json": "e2af0e0f30f235cbd0c90f4afd009678312013c4c75b365049159d39770cf474",
+    "experiments/generated/catalogue-remaining-six-pitch-20261016/radiohead-creep-youtube-20261010/nnls-evidence.json": "e5e64059870a87bf7c09f02b88259363225ba2b15ebf5d58707357dc93bfa2eb"
+  }
+}

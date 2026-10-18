@@ -1,0 +1,121 @@
+{
+  "schema_version": "ticket4-teaching-source-recheck-1.0",
+  "checked_date": "2026-10-18",
+  "scope": "Bounded primary-teacher prose and one teacher-hosted setup PDF recheck for ticket 4",
+  "gold": false,
+  "accepted_arrangements": false,
+  "audio_audition_performed": false,
+  "physical_boundaries_verified": false,
+  "cases": [
+    {
+      "recording_id": "animals-house-rising-sun-official-20261011",
+      "title": "The House Of The Rising Sun",
+      "sources": [
+        {
+          "url": "https://www.jonmaclennan.com/blog/house-of-the-rising-sun-guitar-lesson",
+          "version": "The Animals arrangement discussed in primary teacher prose; separate Chet Atkins/Mark Knopfler fingerstyle example",
+          "observations": [
+            "Uses 6/8 and six eighth-note counts with anchors on 1 and 4, rather than establishing three quarter-note beats.",
+            "Gives an eight-change intro ending Am, E, Am, E, explicitly E major, and offers small F.",
+            "Describes the Animals part as flat-picked with a dragging/raking motion; fingerstyle is a different optional approach.",
+            "Identifies an Am/Dm outro at about four minutes in the teacher discussion. This is not a timestamp verified against the selected cached recording.",
+            "The separate fingerstyle example changes to 4/4; it cannot establish the original recording's meter or stroke pattern."
+          ]
+        },
+        {
+          "url": "https://richterguitar.com/house-of-the-rising-sun-the-animals/",
+          "version": "Teacher adaptation associated with The Animals, optional fingerstyle and organ-inspired E7",
+          "observations": [
+            "Explicit no capo; Am/C/D/F/E/Dm vocabulary, with E7 offered as an optional organ-inspired flourish.",
+            "The intro order agrees with Jon, including E major rather than E minor.",
+            "Discusses a 6/8 arpeggio and permits simpler strumming; its fingerstyle tab is an adaptation, not independent proof of the recorded guitar technique."
+          ]
+        }
+      ],
+      "supported_practice_proposal": "Keep 6/8 with six eighth notes grouped 3+3 and two dotted-quarter pulses; start with gentle anchors on 1 and 4. Small F is an easier choice. Introduce root-led picking/raking separately; optional fingerstyle should be labelled an adaptation. Retain D major and E major in the main vocabulary and Dm as an outro task.",
+      "current_player_note": "Existing practice.json already states two dotted-quarter beats per bar and uses six eighth-note counts. Its alternating six-stroke drill is a generic exercise, not a transcription of the recorded pick/rake.",
+      "unresolved": [
+        "The four Em quality warnings plus missing intro change need local recording evidence; palette disagreement alone does not prove a particular cue is wrong.",
+        "The intro warning and Em cue near 11.146 seconds overlap existing provisional display corrections; do not double-count them as new errors.",
+        "Physical 6/8 phase, inferred two-pulse bar length, local change times, Am/Dm outro extent and contacts remain unverified.",
+        "No newly inspected source explicitly establishes EADGBE on the selected recording; project standard-tuning teaching setup remains a proposal."
+      ]
+    },
+    {
+      "recording_id": "van-morrison-brown-eyed-girl-youtube-20261011",
+      "title": "Brown Eyed Girl",
+      "sources": [
+        {
+          "url": "https://www.andyguitar.co.uk/videos/brown-eyed-girl-by-van-morrison",
+          "version": "Beginner four-chord teacher lesson; separate intro/lead task",
+          "observations": [
+            "Explicit G-major key and G/C/D/Em teaching vocabulary.",
+            "Links its rhythm lesson and keeps the intro/lead work separate. No explicit capo or tuning assertion is present in inspected prose."
+          ]
+        },
+        {
+          "url": "https://www.andyguitar.co.uk/videos/lesson-2-down-and-up-strumming-with-a-tie",
+          "version": "Generic linked eighth-note tie exercise, not a recording-specific transcription",
+          "observations": [
+            "Omits an attack on beat 3 while keeping continuous eighth-note hand movement.",
+            "A skipped attack lets the preceding sound continue; it is not instruction to damp or stop the strings."
+          ]
+        },
+        {
+          "url": "https://davidstanleyguitar.com.au/wp-content/uploads/2025/07/brown-eyed-girl-easy.pdf.pdf",
+          "version": "Teacher-hosted one-page easy adaptation; no audio/master identity match established",
+          "observations": [
+            "Explicit standard-tuning setup and printed tempo 140.",
+            "Includes Em and richer Cadd9/Dsus4 options. Neither its tempo nor its arranged contacts establish the selected upload's pulse or exact recorded guitar part."
+          ]
+        }
+      ],
+      "supported_practice_proposal": "Keep G/C/D/Em as the main accompaniment task. Progress from steady strokes to an omitted attack while keeping the strings ringing and hand moving. Leave intro/lead optional; distinguish ringing gaps from deliberate mutes.",
+      "current_player_note": "Current practice.json only offers steady/down-up generic exercises. A clear ringing-gap note or original exercise could usefully distinguish the next task without implying exact recorded contacts.",
+      "unresolved": [
+        "Selected-upload Em placement/quality, pulse/downbeat phase and physical attack/contact timing remain unaccepted.",
+        "Teacher tempo 140 versus cached approximately 152 BPM is a recording/version or tracker discrepancy, not a simple half/double pulse-level conversion. Do not replace the cached beat grid from this source number.",
+        "The online report has only one source group with an extracted chord palette; zero warnings means insufficient source coverage, not an accepted chart.",
+        "Explicit standard tuning belongs to Stanley's separate easy adaptation. Capo zero and the exact recording's physical setup remain unverified."
+      ]
+    },
+    {
+      "recording_id": "radiohead-creep-youtube-20261010",
+      "title": "Creep",
+      "sources": [
+        {
+          "url": "https://www.andyguitar.co.uk/videos/radiohead-creep",
+          "version": "Root-six barre-chord lesson with an explicitly separate acoustic sus4 variant",
+          "observations": [
+            "Explicit G major, B major, C major and C minor root-six barre shapes.",
+            "Sus4 additions are tied to the acoustic version; do not apply them automatically to the selected studio upload."
+          ]
+        },
+        {
+          "url": "https://guitarlessons365.com/creep-guitar-lesson-radiohead/",
+          "version": "Carl Brown lesson dated 24 June 2015; layered original arrangement discussion",
+          "observations": [
+            "Verse arpeggio order varies across the song; the teacher does not specify a single definitive picking pattern.",
+            "Distorted chorus parts layer together, and the ending chorus extends. Optional octave melody is a separate task.",
+            "The inspected text does not enumerate the full four-chord vocabulary; the automatic source extractor's unsupported status is appropriate rather than a second independent palette vote."
+          ]
+        }
+      ],
+      "supported_practice_proposal": "Preserve B major and C minor rather than constraining the song to a diatonic G-major palette. Start with deliberate barre changes, then flexible quieter verse picking and fuller chorus attacks. Treat octave lead and acoustic sus4 as separate options.",
+      "current_player_note": "The current generic arrows are clearly marked practice, but a brief note distinguishing variable verse arpeggio from fuller chorus rhythm would be more useful than presenting one fixed song-wide pattern.",
+      "unresolved": [
+        "Local B/Bm and C/Cm sounding quality, precise physical boundaries, variable picking contacts and final chorus extent/dynamics remain recording-specific checks.",
+        "Four chord labels do not make this a beginner open-chord song; root-six barres and B-major/C-minor contrast are substantial technique tasks.",
+        "The online report has one extracted palette. No warnings must not be reported as accepted harmony or independent source consensus.",
+        "Teacher descriptions are consistent with conventional standard-tuning shapes, but no explicit new tuning or capo sentence certifies the selected recording's setup."
+      ]
+    }
+  ],
+  "suggested_concrete_changes": [
+    "README: describe House warning triage separately from arrangement acceptance, identify already-covered intro warnings, and state that Brown/Creep zero-warning reports currently lack enough source coverage.",
+    "Player: source-backed practice notes can identify House flat-pick/rake versus optional fingerstyle, Brown ringing skipped attacks versus mutes, and Creep variable verse picking versus fuller choruses. Retain practice-suggestion status.",
+    "Review records: add explicit per-warning dispositions with exact raw/display identities. Treat teacher order as an untimed contextual reference and local acoustic/model comparisons as diagnostic evidence, never as independent physical boundary truth.",
+    "Keep source-backed notes, physical setup verification, precise change timing and ordinary guitar followability as distinct statuses; do not require a founder timestamping session to record the autonomous source review."
+  ],
+  "preservation": "No canonical files changed, no audio audition claimed, no raw charts/times/model settings changed, no source charts/tabs/lyrics/pattern arrows/repeat counts copied."
+}

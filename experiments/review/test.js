@@ -1,7 +1,7 @@
 "use strict";
 const assert = require("node:assert/strict");
 const { annotationExport, validateCandidate, currentEvent, exposureKey, loadExposure, recordExposure, refreshExposure, validateEvidence, clampSeek, playbackSnapshot, createPlaybackFrameLoop, feedbackKey, feedbackExport, captureFeedback, loadFeedback, saveFeedback, transposePracticeLabel, practiceLabel, coreChordLabel, displayedChord, practiceTimeline,
-  currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, durationPresentation, holdBarDivisions, correctedDisplayEvents, validatePracticeManifest, safeTeachingURL, validateOnlineChecksManifest, pairedOnlineChecks, validateLearningManifest, practiceProgressKey, practiceProgressExport, loadPracticeProgress, savePracticeProgress, nextPracticeStep, initialPracticeStep } = require("./app.js");
+  currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, durationPresentation, holdBarDivisions, correctedDisplayEvents, validatePracticeManifest, safeTeachingURL, validateOnlineChecksManifest, pairedOnlineChecks, onlineFindingReview, onlineReviewSummary, validateLearningManifest, practiceProgressKey, practiceProgressExport, loadPracticeProgress, savePracticeProgress, nextPracticeStep, initialPracticeStep } = require("./app.js");
 let checks = 0;
 function test(name, callback) { callback(); checks++; console.log(`ok ${name}`); }
 const recording = { id: "excerpt", title: "Generated", audio_sha256: "hash", duration_seconds: 20, sample_rate_hz: 100 };
@@ -1060,6 +1060,73 @@ test("online search discovery reports cache, failure and setup assumptions witho
     {retrieved_at_utc: "2026-10-17T12:00:00"}, {notes: ["x".repeat(1001)]}, {notes: Array(17).fill("note")}]) {
     assert.throws(() => validateOnlineChecksManifest({...onlinePayload, cases: [{...entry, search: {...search, ...change}}]}, "online-pack", onlineCases));
   }
+});
+
+
+const reviewedFinding = {...clone(onlineEntry.findings[0]),
+  review_binding: Object.fromEntries(["id", "kind", "start_seconds", "end_seconds", "native_label", "source_ids"].map(key => [key, clone(onlineEntry.findings[0][key])])),
+  review: {schema_version: "online-finding-review-1.0", status: "local-evidence-proposal", gold: false,
+    candidate_exposure: "model-exposed", actor: "agent", reviewed_at_utc: "2026-10-18T12:00:00Z",
+    note: "Local diagnostic favours G, without establishing a physical boundary.", guide_correction_ids: [],
+    proposal: {label: "G", timing_status: "native-boundaries-unverified"},
+    evidence_refs: [{path: "docs/WARNING_EVIDENCE.json", sha256: "a".repeat(64)}]}};
+test("optional local review proposal preserves native chart, warnings and correction provenance", () => {
+  const entry = {...onlineEntry, findings: [reviewedFinding]}, payload = {...onlinePayload, cases: [entry]};
+  const before = JSON.stringify({payload, onlineChart});
+  assert.equal(validateOnlineChecksManifest(payload, "online-pack", onlineCases).cases.get(onlineRecording.id).findings.length, 1);
+  assert.equal(onlineFindingReview(reviewedFinding).review.proposal.label, "G");
+  assert.equal(onlineReviewSummary([reviewedFinding]), "0 covered by provisional guide; 1 proposal; 0 inconclusive.");
+  assert.equal(currentEvent(correctedDisplayEvents(onlineChart, null, "online-pack", "e".repeat(64)), 7).label, "Gm");
+  assert.equal(captureFeedback({id: onlineRecording.id, recording: onlineRecording}, 7, onlineChart, "test-review", "now").raw_sounding_chord, "Gm");
+  assert.equal(JSON.stringify({payload, onlineChart}), before);
+});
+test("stale or malformed optional review leaves validated original warning available", () => {
+  for (const change of [{status: "independently-accepted"}, {gold: true}, {actor: "human"}, {candidate_exposure: "audio-only"},
+    {reviewed_at_utc: "yesterday"}, {reviewed_at_utc: "2026-10-18T12:00:00"}, {note: "x".repeat(1501)},
+    {proposal: {label: "G", timing_status: "verified"}}, {guide_correction_ids: ["invented"]},
+    {evidence_refs: [{path: "../private.json", sha256: "a".repeat(64)}]},
+    {evidence_refs: [{path: "docs/.private.json", sha256: "a".repeat(64)}]},
+    {evidence_refs: [{path: "docs/a.json", sha256: "bad"}]}]) {
+    const finding = {...reviewedFinding, review: {...reviewedFinding.review, ...change}};
+    const payload = {...onlinePayload, cases: [{...onlineEntry, findings: [finding]}]};
+    assert.equal(validateOnlineChecksManifest(payload, "online-pack", onlineCases).cases.get(onlineRecording.id).findings.length, 1);
+    assert.equal(onlineFindingReview(finding).review, null);
+    assert.match(onlineFindingReview(finding).error, /original warning remains/);
+  }
+  for (const change of [{start_seconds: 6.1}, {native_label: "G"}, {source_ids: ["unknown"]}, {end_seconds: Infinity}]) {
+    assert.equal(onlineFindingReview({...reviewedFinding, review_binding: {...reviewedFinding.review_binding, ...change}}).review, null);
+  }
+});
+test("covered notes require actual applied founder overlays and retain the broad replay span", () => {
+  const finding = {...reviewedFinding, review: {...reviewedFinding.review, status: "covered-by-provisional-guide",
+    guide_correction_ids: ["intro-first-e", "intro-second-e"], proposal: null}};
+  assert.equal(onlineFindingReview(finding, ["intro-first-e", "intro-second-e"]).review.status, "covered-by-provisional-guide");
+  assert.equal(onlineFindingReview(finding, ["intro-first-e"]).review, null);
+  assert.equal(finding.start_seconds, 6); assert.equal(finding.end_seconds, 8);
+  const inconclusive = {...reviewedFinding, review: {...reviewedFinding.review, status: "inconclusive", proposal: null}};
+  assert.equal(onlineReviewSummary([finding, reviewedFinding, inconclusive], ["intro-first-e", "intro-second-e"]),
+    "1 covered by provisional guide; 1 proposal; 1 inconclusive.");
+});
+test("old reports keep their warning-only behavior and reviews cannot hide invalid warning metadata", () => {
+  assert.deepEqual(onlineFindingReview(onlineEntry.findings[0]), {review: null, error: ""});
+  assert.equal(onlineReviewSummary(onlineEntry.findings), "");
+  assert.equal(onlineFindingReview({...reviewedFinding, review: undefined}).review, null);
+  assert.throws(() => validateOnlineChecksManifest({...onlinePayload, cases: [{...onlineEntry, findings: [{...reviewedFinding, end_seconds: 99}]}]}, "online-pack", onlineCases));
+});
+
+test("ticket 4 drills distinguish ringing skips, compound counts and variable picking", () => {
+  const practice = validatePracticeManifest(json("experiments/review/practice.json"), learningCases);
+  const brown = practice.get("van-morrison-brown-eyed-girl-youtube-20261011");
+  const next = brown.patterns.find(pattern => pattern.id === "down-up");
+  assert.deepEqual(next.counts, ["1", "&", "2", "&", "3", "&", "4", "&"]);
+  assert.deepEqual(next.strokes, ["D", "U", "D", "U", "—", "U", "D", "U"]);
+  assert.match(next.description, /hand moving/); assert.match(next.description, /let the previous sound ring/);
+  assert.match(next.description, /Do not damp/); assert.equal(brown.patterns[0].id, "steady-down");
+  const house = practice.get("animals-house-rising-sun-official-20261011");
+  assert.deepEqual(house.patterns[0].strokes, ["D", "—", "—", "D", "—", "—"]);
+  assert.match(house.note, /two dotted-quarter/); assert.match(house.note, /fingerstyle is an optional adaptation/);
+  const creep = practice.get("radiohead-creep-youtube-20261010");
+  assert.match(creep.note, /B major and C minor/); assert.match(creep.patterns[1].description, /do not prescribe one fixed verse arpeggio/);
 });
 
 console.log(`${checks} review helper checks passed`);
