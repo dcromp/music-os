@@ -45,7 +45,7 @@ Detailed negative results remain in [beat comparisons](BEAT_THIS_COMPARISON.md),
 
 ## Implementation and reproducibility
 
-The original [selection record](../experiments/fixtures/selected-workflow-v1.json) preserves the 13 October model/settings, dependency, adapter and evidence pins. It remains immutable historical evidence. The [current player-guidance policy](../experiments/fixtures/selected-workflow-player-v3.json), dated 17 October, retains 37 frozen inputs and versions only the learning/practice guide pins for founder-authorized player changes. The selected models, inference settings, native chart/audio bytes and beat grid are unchanged. The existing adapters retain their frozen inference behaviour. The automatic pack builder supports an explicit BTC primary and CREMA secondary, including separate batch-output roots, and preserves native chart/audio bytes. Default commands without model flags retain the legacy CREMA/Chordino mode.
+The original [selection record](../experiments/fixtures/selected-workflow-v1.json) preserves the 13 October model/settings, dependency, adapter and evidence pins. It remains immutable historical evidence. The [current player-guidance policy](../experiments/fixtures/selected-workflow-player-v4.json), completed 18 October, inherits 38 player-v3 pins and versions only `automatic_drafts.py` for optional online-source report serving. Its existing non-server function ASTs, including pack building and chart comparison, are unchanged. The preceding guide versions remain inherited. The selected models, inference settings, native chart/audio bytes and beat grid are unchanged. The existing adapters retain their frozen inference behaviour. The automatic pack builder supports an explicit BTC primary and CREMA secondary, including separate batch-output roots, and preserves native chart/audio bytes. Default commands without model flags retain the legacy CREMA/Chordino mode.
 
 From `/Users/davidcrompton/Documents/music-os`, after the model setup in [BTC_SETUP.md](BTC_SETUP.md) and [CREMA_SETUP.md](CREMA_SETUP.md), use fresh output directories:
 
@@ -65,7 +65,7 @@ Verify the saved selected pack without inference or any accuracy claim:
 
 ```sh
 .venv-analysis/bin/python -B experiments/analysis/workflow_check.py \
-  --policy experiments/fixtures/selected-workflow-player-v3.json
+  --policy experiments/fixtures/selected-workflow-player-v4.json
 ```
 
 For the replay directories above, add `--pack experiments/generated/automatic-first-ten-selected-replay --btc-root experiments/generated/selected-first-ten-btc-replay`. An optional `--output` must name an unused report file; existing inputs/reports are never overwritten.
@@ -73,12 +73,12 @@ For the replay directories above, add `--pack experiments/generated/automatic-fi
 The source pack already contains the exact cached CREMA charts. For new recordings, run CREMA's batch adapter too and pass its output directory with `--secondary-root`. Neither inference adapter downloads audio or trains a model. Analysis is offline; playback uses cached outputs without model environments.
 
 The verifier defaults to the historical v1 policy when `--policy` is omitted.
-Use the explicit player-v3 policy for the current checkout: the two guide-file
-hash changes are intentional and do not reopen model selection. The old v1
-pins and their completion record should not be rewritten to match new guides.
-The preceding player-v2 policy also remains immutable. Player-v3 versions the
-House intro correction and its learning-source pins, preserving the same 37
-other frozen inputs and all model settings/native chart bytes.
+Use the explicit player-v4 policy for the current checkout. It versions only the
+optional server integration since player-v3; all 39 pins verify. New source
+checks are separate review hints and never alter recognition, chart timing or
+model selection. Historical v1, player-v2 and player-v3 records remain immutable.
+Player-v2/v3 record the earlier authorized guide changes; their hashes should
+not be rewritten to match this feature. [Online source commands and limits](ONLINE_CHORD_CHECKS.md).
 
 [Completion evidence](ALGORITHM_SELECTION_RESULTS.json) records the new ten-song BTC run, 39 frozen-file checks, selected-pack byte/identity checks and the retained original player identity. All 319 available Python checks and 110 JavaScript checks pass; 20 optional-dependency Python checks are skipped in the analysis environment. Live QA verifies playback, seeking and the CREMA alternative, with all 48 served assets byte-identical and four private routes returning 404. The new pack is a local research artifact, not a public deployment. Ports 8070/8068 retain the existing CREMA charts and saved practice/feedback context. Promote reviewed arrangements in the next milestone rather than silently replacing them from a benchmark ranking.
 

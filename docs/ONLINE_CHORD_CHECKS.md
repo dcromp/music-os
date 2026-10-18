@@ -13,15 +13,16 @@ analysis environment and cached first-ten pack:
 
 ```sh
 .venv-analysis/bin/python -B experiments/analysis/online_chords.py \
-  --output experiments/generated/online-chord-checks-20261017
+  --output experiments/generated/online-chord-checks-next
 
 .venv-analysis/bin/python -u -B experiments/analysis/automatic_drafts.py serve \
   --pack experiments/generated/automatic-first-ten-v1 --port 8070 \
-  --online-checks experiments/generated/online-chord-checks-20261017/report.json
+  --online-checks experiments/generated/online-chord-checks-20261017-final/report.json
 ```
 
-Use an unused output directory for each run; previous reports are never
-overwritten. Stop a server with Ctrl+C before starting its replacement on the
+The running player uses the saved `online-chord-checks-20261017-final` report.
+Use an unused output directory for each new run and update the server option to
+its `report.json`; previous reports are never overwritten. Stop a server with Ctrl+C before starting its replacement on the
 same port. Reload the player once after upgrading its script. The optional
 report is served only at `/online-chords.json`; omitting the option retains
 ordinary playback. Restart this command after reboot. No public hosting or
