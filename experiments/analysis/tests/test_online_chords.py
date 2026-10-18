@@ -110,6 +110,12 @@ class OnlineChordChecks(unittest.TestCase):
             findings = online.check_case(case, chart, "b" * 64, sources)["findings"]
             self.assertFalse(any(f["kind"] == "source-order-conflict" for f in findings))
 
+    def test_repeated_source_bars_do_not_become_extra_harmonic_changes(self):
+        case, chart = self.chart(["Am", "C", "D", "F", "Am", "E"])
+        intro = ["Am", "C", "D", "F", "F", "Am", "E"]
+        sources = [self.source(name, intro, intro=intro) for name in ("one", "two")]
+        self.assertEqual(online.check_case(case, chart, "b" * 64, sources)["findings"], [])
+
     def test_riff_and_identity_mismatch_never_become_chord_findings(self):
         case, chart = self.chart(["Am"])
         sources = [self.source(name, ["A", "D", "E"]) for name in ("one", "two")]

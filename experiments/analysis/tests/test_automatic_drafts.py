@@ -11,7 +11,7 @@ import sys
 import tempfile
 import threading
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 import wave
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -541,6 +541,52 @@ class AutomaticDraftTests(unittest.TestCase):
                     server.shutdown()
                     server.server_close()
                     thread.join(timeout=3)
+
+    def test_serve_keeps_playback_available_when_optional_online_report_is_missing_malformed_or_stale(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            _, _, manifest = self.fixture(root)
+            output = root / "output"
+            built = drafts.build(manifest, output, root)
+            report, value = self.online_fixture(root, output, built)
+            static = self.static_fixture(root)
+            with patch.object(drafts, "ROOT", root), patch.object(drafts, "STATIC", static), patch.object(drafts.review_pack, "STATIC", static):
+                for state in ("missing", "malformed", "stale"):
+                    if state == "missing":
+                        report.unlink()
+                    elif state == "malformed":
+                        report.write_text("not valid JSON")
+                    else:
+                        stale = copy.deepcopy(value)
+                        stale["cases"][0]["primary_sha256"] = "f" * 64
+                        drafts.write_json(report, stale)
+                    server = Mock()
+                    server.serve_forever.side_effect = KeyboardInterrupt
+                    with self.subTest(state=state), patch.object(drafts, "ThreadingHTTPServer", return_value=server) as factory, patch("builtins.print") as notice:
+                        drafts.serve(output, 8070, report)
+                        mapping = factory.call_args.args[1].keywords["files"]
+                        self.assertNotIn("/online-chords.json", mapping)
+                        self.assertEqual(mapping["/cases/test-song/primary.json"], output.resolve() / "cases/test-song/primary.json")
+                        self.assertIn("/cases/test-song/audio.wav", mapping)
+                        self.assertTrue(any("Online chord checks unavailable" in call.args[0] for call in notice.call_args_list))
+                        server.serve_forever.assert_called_once_with()
+                        server.server_close.assert_called_once_with()
+
+    def test_serve_still_rejects_an_invalid_native_pack_before_optional_report_fallback(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            _, _, manifest = self.fixture(root)
+            output = root / "output"
+            built = drafts.build(manifest, output, root)
+            report, _ = self.online_fixture(root, output, built)
+            static = self.static_fixture(root)
+            native_manifest = json.loads((output / "manifest.json").read_text())
+            native_manifest["schema_version"] = "invalid-native-pack"
+            drafts.write_json(output / "manifest.json", native_manifest)
+            with patch.object(drafts, "ROOT", root), patch.object(drafts, "STATIC", static), patch.object(drafts.review_pack, "STATIC", static), patch.object(drafts, "ThreadingHTTPServer") as factory:
+                with self.assertRaisesRegex(ValueError, "automatic play-along manifest"):
+                    drafts.serve(output, 8070, report)
+                factory.assert_not_called()
 
 
 if __name__ == "__main__":

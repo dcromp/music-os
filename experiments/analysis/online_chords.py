@@ -117,8 +117,13 @@ def intro_findings(chart, groups):
     for index, group in enumerate(groups):
         for source in group:
             for section in source.get("normalized_sections", []):
-                sequence = tuple(core_key(label) for label in section["chords"])
-                candidates[sequence].append((index, source["id"]))
+                sequence = []
+                for label in section["chords"]:
+                    key = core_key(label)
+                    if not sequence or sequence[-1] != key:
+                        sequence.append(key)
+                if len(sequence) >= 3:
+                    candidates[tuple(sequence)].append((index, source["id"]))
     # Multiple corroborated but conflicting intros are unresolved, not a vote.
     agreed = [(sequence, entries) for sequence, entries in candidates.items()
               if len({index for index, _ in entries}) >= 2]
@@ -206,7 +211,10 @@ def prepare(pack, targets_path, output, cache, *, root=ROOT, offline=False, refr
     report = {"schema_version": SCHEMA, "pack_id": manifest["pack_id"],
               "created_at_utc": datetime.now(timezone.utc).isoformat(), "gold": False,
               "status": "source-linked review hints; no automatic corrections", "cases": [],
-              "inputs": {"pack_manifest_sha256": drafts.digest(pack / "manifest.json"), "targets_sha256": drafts.digest(targets_path)},
+              "inputs": {"pack_manifest_sha256": drafts.digest(pack / "manifest.json"), "targets_sha256": drafts.digest(targets_path),
+                         "checker_sha256": drafts.digest(Path(__file__)),
+                         "source_module_sha256": drafts.digest(Path(online_sources.__file__)),
+                         "source_parser_version": online_sources.PARSER_VERSION},
               "limits": LIMITS}
     try:
         for case in manifest["cases"]:

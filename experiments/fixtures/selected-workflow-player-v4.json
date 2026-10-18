@@ -56,7 +56,7 @@
     "docs/JAZZSAMBA_REFERENCE_RESULTS.json": "cd4fb14a47047035ac884d476b9b520e2ccba7e2b03724e172dd4398365f970a",
     "docs/NOMINAL_DOWNBEAT_CHECK.json": "c8a6f40fa710ed04d98b5dbf10d79597285946cb46803f891735b616bde9ffc8",
     "docs/SEPARATION_CHECK.json": "878561ff1143b6a9c641ca48cad918346f26ff5bdebe59b46b15531ffd80f0f8",
-    "experiments/analysis/automatic_drafts.py": "0adfe69819ca0c9bdb195bba17c41de4923edae9d601351873da7d3cea5497f3",
+    "experiments/analysis/automatic_drafts.py": "19e4587bce2e9178d4820aa524b26bc69e5159364751d22b17cc0e91aaed1445",
     "experiments/analysis/candidates/btc_adapter.py": "c84dbed07e0ce2d6eeceb0c8d565d6d2c8eb5c92f82853fbf7171957f0cdfa05",
     "experiments/analysis/candidates/chordino_adapter.py": "a0477738e7a524c1ab5432179b0af66df5e7cbf3eb82fdb206e377a39571b0e9",
     "experiments/analysis/candidates/chordmini_adapter.py": "101f2aefd037f1a52b88f2a6af935cd161efef01fd0c43464872f6aa96608ea9",

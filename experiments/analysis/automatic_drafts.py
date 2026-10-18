@@ -586,7 +586,15 @@ def serve(pack: Path, port: int = 8068, online_checks: Path | None = None) -> No
     # Both interfaces use the same reviewed static directory and guarded handler.
     if STATIC != review_pack.STATIC:
         raise ValueError("Automatic player static root differs from guarded handler root")
-    server = ThreadingHTTPServer(("127.0.0.1", port), partial(AutomaticDraftHandler, files=public_files(pack, online_checks)))
+    # The native pack must pass its normal preflight. Optional online research
+    # cannot prevent guitar practice when its report is absent or out of date.
+    files = public_files(pack)
+    if online_checks is not None:
+        try:
+            files = public_files(pack, online_checks)
+        except (ValueError, OSError, KeyError, TypeError) as error:
+            print(f"Online chord checks unavailable: {error}. Starting playback with the original chord pack.", flush=True)
+    server = ThreadingHTTPServer(("127.0.0.1", port), partial(AutomaticDraftHandler, files=files))
     print(f"Automatic play-along: http://127.0.0.1:{port}/ — full drafts ready; optional corrections only", flush=True)
     try:
         server.serve_forever()
