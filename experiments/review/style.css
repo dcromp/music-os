@@ -79,6 +79,9 @@ button.primary:hover { background: #194c35; }
 .feedback-row, .point-row { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid #e1e9e5; }
 .feedback-row span, .point-row span { flex: 1; overflow-wrap: anywhere; }
 .feedback-row button, .point-row button { flex-shrink: 0; font-size: .85rem; }
+#online-check-findings .point-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; }
+#online-check-findings .point-row > span:last-of-type, #online-check-findings .point-row > p { grid-column: 1 / -1; margin: 0; overflow-wrap: anywhere; }
+@media (max-width: 600px) { #online-check-findings .point-row { grid-template-columns: minmax(0, 1fr); } #online-check-findings .point-row > button { justify-self: start; } }
 .captured { font-size: .95rem; }
 #point-notice { border-left: 3px solid #bc9650; padding-left: 12px; }
 details { background: white; padding: 20px 24px; margin: 20px 0; border: 1px solid #c9dad3; border-radius: 12px; }

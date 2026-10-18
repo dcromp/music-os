@@ -1,0 +1,197 @@
+{
+  "schema_version": "online-warning-reviews-1.0",
+  "pack_id": "automatic-first-ten-v1",
+  "cases": [
+    {
+      "recording": {
+        "id": "animals-house-rising-sun-official-20261011",
+        "title": "The Animals - The House Of The Rising Sun",
+        "duration_seconds": 269.91891156462583,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708"
+      },
+      "primary_sha256": "71eb918cc9ef3662d5c6d75b49814f700b89a2fc15b73c1ce92d9bdb18dd6037",
+      "analysis_id": "animals-house-rising-sun-official-20261011-crema",
+      "findings": [
+        {
+          "finding_binding": {
+            "id": "online-001",
+            "kind": "source-order-conflict",
+            "start_seconds": 6.408707482993197,
+            "end_seconds": 15.696689342403628,
+            "native_label": "Em",
+            "source_ids": [
+              "source-dc2b37a085a18868858cea39",
+              "source-fd107ae7a7f8a67aa7a86e55"
+            ]
+          },
+          "review": {
+            "schema_version": "online-finding-review-1.0",
+            "status": "covered-by-provisional-guide",
+            "gold": false,
+            "candidate_exposure": "model-exposed",
+            "actor": "agent",
+            "reviewed_at_utc": "2026-10-18T15:22:56.427865+00:00",
+            "note": "Intro order is addressed by the existing provisional E inserts. The broad replay window and physical cue timings are not accepted.",
+            "guide_correction_ids": [
+              "house-intro-e-near-8s-20261017",
+              "house-intro-second-e-quality-20261017"
+            ],
+            "proposal": null,
+            "evidence_refs": [
+              {
+                "path": "catalogue/accompaniment-evidence-20261018.json",
+                "sha256": "b025e13b04047cb8c54f434d7ded6cfc33b03629b00ad08527af4f3dd0d84312"
+              },
+              {
+                "path": "catalogue/accompaniment-source-review-20261018.json",
+                "sha256": "3f4a59e010496275c3d8b98885efc446f05bfb9f2cdc78e723c529644d90fc0d"
+              }
+            ]
+          }
+        },
+        {
+          "finding_binding": {
+            "id": "online-002",
+            "kind": "quality-conflict",
+            "start_seconds": 11.145578231292516,
+            "end_seconds": 12.538775510204081,
+            "native_label": "Em",
+            "source_ids": [
+              "source-dc2b37a085a18868858cea39",
+              "source-fd107ae7a7f8a67aa7a86e55"
+            ]
+          },
+          "review": {
+            "schema_version": "online-finding-review-1.0",
+            "status": "covered-by-provisional-guide",
+            "gold": false,
+            "candidate_exposure": "model-exposed",
+            "actor": "agent",
+            "reviewed_at_utc": "2026-10-18T15:22:56.428099+00:00",
+            "note": "The native Em here already displays E under the founder-confirmed intro guide. This remains a provisional quality edit at unverified native bounds.",
+            "guide_correction_ids": [
+              "house-intro-second-e-quality-20261017"
+            ],
+            "proposal": null,
+            "evidence_refs": [
+              {
+                "path": "catalogue/accompaniment-evidence-20261018.json",
+                "sha256": "b025e13b04047cb8c54f434d7ded6cfc33b03629b00ad08527af4f3dd0d84312"
+              },
+              {
+                "path": "catalogue/accompaniment-source-review-20261018.json",
+                "sha256": "3f4a59e010496275c3d8b98885efc446f05bfb9f2cdc78e723c529644d90fc0d"
+              }
+            ]
+          }
+        },
+        {
+          "finding_binding": {
+            "id": "online-003",
+            "kind": "quality-conflict",
+            "start_seconds": 90.09342403628118,
+            "end_seconds": 93.06557823129252,
+            "native_label": "Em",
+            "source_ids": [
+              "source-dc2b37a085a18868858cea39",
+              "source-fd107ae7a7f8a67aa7a86e55"
+            ]
+          },
+          "review": {
+            "schema_version": "online-finding-review-1.0",
+            "status": "local-evidence-proposal",
+            "gold": false,
+            "candidate_exposure": "model-exposed",
+            "actor": "agent",
+            "reviewed_at_utc": "2026-10-18T15:22:56.428102+00:00",
+            "note": "Local spectral and NNLS checks favour E-family harmony over Em; E7 is also compatible. Save basic E as a practice-quality proposal. Exact voicing and physical change times remain unverified.",
+            "guide_correction_ids": [],
+            "proposal": {
+              "label": "E",
+              "timing_status": "native-boundaries-unverified"
+            },
+            "evidence_refs": [
+              {
+                "path": "catalogue/accompaniment-evidence-20261018.json",
+                "sha256": "b025e13b04047cb8c54f434d7ded6cfc33b03629b00ad08527af4f3dd0d84312"
+              },
+              {
+                "path": "catalogue/accompaniment-source-review-20261018.json",
+                "sha256": "3f4a59e010496275c3d8b98885efc446f05bfb9f2cdc78e723c529644d90fc0d"
+              }
+            ]
+          }
+        },
+        {
+          "finding_binding": {
+            "id": "online-004",
+            "kind": "quality-conflict",
+            "start_seconds": 123.62303854875283,
+            "end_seconds": 126.50231292517007,
+            "native_label": "Em",
+            "source_ids": [
+              "source-dc2b37a085a18868858cea39",
+              "source-fd107ae7a7f8a67aa7a86e55"
+            ]
+          },
+          "review": {
+            "schema_version": "online-finding-review-1.0",
+            "status": "inconclusive",
+            "gold": false,
+            "candidate_exposure": "model-exposed",
+            "actor": "agent",
+            "reviewed_at_utc": "2026-10-18T15:22:56.428104+00:00",
+            "note": "Evidence conflicts: NNLS favours E, while the shorter spectral window favours Em. Retain the native cue pending an independent recording check.",
+            "guide_correction_ids": [],
+            "proposal": null,
+            "evidence_refs": [
+              {
+                "path": "catalogue/accompaniment-evidence-20261018.json",
+                "sha256": "b025e13b04047cb8c54f434d7ded6cfc33b03629b00ad08527af4f3dd0d84312"
+              },
+              {
+                "path": "catalogue/accompaniment-source-review-20261018.json",
+                "sha256": "3f4a59e010496275c3d8b98885efc446f05bfb9f2cdc78e723c529644d90fc0d"
+              }
+            ]
+          }
+        },
+        {
+          "finding_binding": {
+            "id": "online-005",
+            "kind": "quality-conflict",
+            "start_seconds": 210.37278911564627,
+            "end_seconds": 211.58022675736962,
+            "native_label": "Em",
+            "source_ids": [
+              "source-dc2b37a085a18868858cea39",
+              "source-fd107ae7a7f8a67aa7a86e55"
+            ]
+          },
+          "review": {
+            "schema_version": "online-finding-review-1.0",
+            "status": "inconclusive",
+            "gold": false,
+            "candidate_exposure": "model-exposed",
+            "actor": "agent",
+            "reviewed_at_utc": "2026-10-18T15:22:56.428106+00:00",
+            "note": "This is not a blanket Em-to-E candidate: NNLS favours Am, with E/Em close, while spectral evidence is nearly tied. Review the local harmony before changing the cue.",
+            "guide_correction_ids": [],
+            "proposal": null,
+            "evidence_refs": [
+              {
+                "path": "catalogue/accompaniment-evidence-20261018.json",
+                "sha256": "b025e13b04047cb8c54f434d7ded6cfc33b03629b00ad08527af4f3dd0d84312"
+              },
+              {
+                "path": "catalogue/accompaniment-source-review-20261018.json",
+                "sha256": "3f4a59e010496275c3d8b98885efc446f05bfb9f2cdc78e723c529644d90fc0d"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -4,7 +4,7 @@
   "revision": "1",
   "title": "Guitar-first practice path",
   "status": "provisional-practice-path",
-  "checked_date": "2026-10-17",
+  "checked_date": "2026-10-18",
   "semantics": "Project practice suggestions in a provisional order. Practised is an optional self-report, not mastery, recording-specific arrangement approval, or a chord/timing accuracy label. Riff guides are separate from the rhythm path. Selection/order updated after founder feedback; progress-compatible path revision and retained step identities stay unchanged. Standard-tuning teaching setups are not independently verified recording tunings.",
   "inputs": [
     {
@@ -17,7 +17,7 @@
     },
     {
       "path": "experiments/review/practice.json",
-      "sha256": "670fd5181a42fce211ebe51e26ad6ff089685ad76c0df1cde8a4abc693c59b20"
+      "sha256": "da5c40283594ac871243b0e56e651b887b5fbcddcb9285e61acf95839e64f181"
     },
     {
       "path": "catalogue/starter-four-teaching-review.json",
@@ -30,6 +30,10 @@
     {
       "path": "catalogue/house-intro-feedback-20261017.json",
       "sha256": "79f90956da77efed781c075199b75f813cce189e95b3e99f9646762c36f4f27d"
+    },
+    {
+      "path": "catalogue/accompaniment-source-review-20261018.json",
+      "sha256": "3f4a59e010496275c3d8b98885efc446f05bfb9f2cdc78e723c529644d90fc0d"
     }
   ],
   "steps": [

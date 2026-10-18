@@ -176,7 +176,7 @@
         },
         {
           "id": "down-up",
-          "name": "Next: down and up",
+          "name": "Next: let count 3 ring",
           "counts": [
             "1",
             "&",
@@ -192,16 +192,16 @@
             "U",
             "D",
             "U",
-            "D",
+            "—",
             "U",
             "D",
             "U"
           ],
-          "description": "Add an upstroke between counts. Begin slowly; keep moving through chord changes."
+          "description": "Keep your hand moving down/up. Miss the strings on the downstroke of count 3 and let the previous sound ring; return with the upstroke on &. Do not damp the strings. This is a suggested exercise, not a transcription."
         }
       ],
       "status": "practice-suggestion",
-      "note": "A starting rhythm exercise. The recording may use a different pattern or picking."
+      "note": "A ringing-gap practice option: skip the contact on 3 while the hand keeps moving in eighth notes. Let the previous sound continue; skipping a contact is different from damping the strings. The selected recording's exact contacts are still unchecked."
     },
     {
       "recording": {
@@ -461,7 +461,7 @@
         },
         {
           "id": "down-up",
-          "name": "Next: down and up",
+          "name": "Next: fuller down/up strums",
           "counts": [
             "1",
             "&",
@@ -482,11 +482,11 @@
             "D",
             "U"
           ],
-          "description": "Add an upstroke between counts. Begin slowly; keep moving through chord changes."
+          "description": "Keep the down/up motion steady and try fuller strums for a louder practice contrast. The recorded picking varies; these arrows do not prescribe one fixed verse arpeggio."
         }
       ],
       "status": "practice-suggestion",
-      "note": "Start with a steady chord exercise. The recorded verse also uses arpeggios; these arrows are a practice suggestion."
+      "note": "Preserve B major and C minor. Start with light steady chord strokes, then try fuller strums. Recorded verse picking varies and louder sections use layered parts; these drills do not transcribe their notes or exact section changes."
     },
     {
       "recording": {
@@ -512,11 +512,11 @@
           ],
           "strokes": [
             "D",
-            "\u2014",
-            "\u2014",
+            "—",
+            "—",
             "D",
-            "\u2014",
-            "\u2014"
+            "—",
+            "—"
           ],
           "description": "Count six eighth notes. Strum gently on 1 and 4, then let the chord ring."
         },
@@ -543,7 +543,7 @@
         }
       ],
       "status": "practice-suggestion",
-      "note": "6/8 practice suggestion: these six counts are eighth notes; one bar has two dotted-quarter beats. The recorded guitar uses arpeggios.",
+      "note": "6/8 practice: six eighth notes grouped 3+3, with two dotted-quarter beats per bar. Begin with gentle strums on 1 and 4. Root-led picking/raking is a later exercise; fingerstyle is an optional adaptation. Exact recorded contacts remain unchecked.",
       "display_corrections": {
         "schema_version": "reported-chord-corrections-1.0",
         "pack_id": "automatic-first-ten-v1",
@@ -575,7 +575,7 @@
             "time_basis": "founder-approximate-point",
             "timing_status": "secondary-boundaries-unverified",
             "source": "Founder play-along report and E-major clarification in chat, 17 October 2026",
-            "note": "Founder identifies E major around 8 seconds and confirms the intro order Am\u2013E\u2013Am\u2013E. The paired Chordino E cue supplies provisional split boundaries inside the native CREMA Am hold; neither physical boundary was independently verified. Retain Am before and after this proposed E span.",
+            "note": "Founder identifies E major around 8 seconds and confirms the intro order Am–E–Am–E. The paired Chordino E cue supplies provisional split boundaries inside the native CREMA Am hold; neither physical boundary was independently verified. Retain Am before and after this proposed E span.",
             "timing_evidence": {
               "chart_sha256": "519748e12a7612c4965339f13d09e733192f2dba9e8de1209ef685a8086e1c13",
               "analysis_id": "chordino-nnls-hmm-v1",
@@ -599,7 +599,7 @@
             "time_basis": "representative-native-cue-point-not-user-timestamp",
             "timing_status": "native-boundaries-unverified",
             "source": "Founder-confirmed intro order and E-major clarification in chat, 17 October 2026",
-            "note": "Founder confirms Am\u2013E\u2013Am\u2013E in the intro and clarifies E major rather than Em. Apply E to the second native E-root cue, retaining its CREMA bounds. Twelve seconds is only a representative point in this native cue for the display schema; the founder did not report a second exact timestamp. This contextual label proposal is not an independently verified transcription."
+            "note": "Founder confirms Am–E–Am–E in the intro and clarifies E major rather than Em. Apply E to the second native E-root cue, retaining its CREMA bounds. Twelve seconds is only a representative point in this native cue for the display schema; the founder did not report a second exact timestamp. This contextual label proposal is not an independently verified transcription."
           }
         ]
       }
@@ -647,10 +647,10 @@
           ],
           "strokes": [
             "D",
-            "\u2014",
+            "—",
             "D",
             "U",
-            "\u2014",
+            "—",
             "U",
             "D",
             "U"

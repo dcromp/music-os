@@ -439,6 +439,48 @@ function pairedOnlineChecks(item, chart, primarySha256) {
   }
   return item;
 }
+const ONLINE_REVIEW_STATUSES = ["covered-by-provisional-guide", "local-evidence-proposal", "inconclusive"];
+function onlineFindingReview(finding, appliedCorrectionIds = null) {
+  if (finding.review === undefined && finding.review_binding === undefined) return {review: null, error: ""};
+  const fail = () => ({review: null, error: "Review note is invalid or stale; the original warning remains for review."});
+  const review = finding.review, binding = finding.review_binding;
+  const keys = ["schema_version", "status", "gold", "candidate_exposure", "actor", "reviewed_at_utc", "note", "guide_correction_ids", "proposal", "evidence_refs"];
+  if (!review || typeof review !== "object" || Object.keys(review).length !== keys.length || keys.some(key => !Object.hasOwn(review, key)) ||
+      review.schema_version !== "online-finding-review-1.0" || !ONLINE_REVIEW_STATUSES.includes(review.status) || review.gold !== false ||
+      review.candidate_exposure !== "model-exposed" || review.actor !== "agent" || !boundedText(review.note, 1500) ||
+      !boundedText(review.reviewed_at_utc, 64) || !Number.isFinite(Date.parse(review.reviewed_at_utc)) ||
+      !/(?:Z|[+-]\d{2}:\d{2})$/.test(review.reviewed_at_utc)) return fail();
+  const bindingKeys = ["id", "kind", "start_seconds", "end_seconds", "native_label", "source_ids"];
+  if (!binding || Object.keys(binding).length !== bindingKeys.length || bindingKeys.some(key => !Object.hasOwn(binding, key)) ||
+      bindingKeys.filter(key => key !== "source_ids").some(key => binding[key] !== finding[key]) ||
+      !Array.isArray(binding.source_ids) || binding.source_ids.length !== finding.source_ids.length ||
+      new Set(binding.source_ids).size !== binding.source_ids.length || binding.source_ids.some(id => !finding.source_ids.includes(id))) return fail();
+  const guides = review.guide_correction_ids;
+  if (!Array.isArray(guides) || guides.length > 16 || guides.some(id => !boundedText(id, 100)) ||
+      new Set(guides).size !== guides.length || Boolean(guides.length) !== (review.status === "covered-by-provisional-guide") ||
+      (appliedCorrectionIds !== null && guides.some(id => !appliedCorrectionIds.includes(id)))) return fail();
+  if (review.status === "local-evidence-proposal") {
+    const proposal = review.proposal;
+    if (!proposal || Object.keys(proposal).length !== 2 || !boundedText(proposal.label, 40) ||
+        !/^[A-G][#b]?[A-Za-z0-9#b():,./+*\-]*$/.test(proposal.label) || proposal.timing_status !== "native-boundaries-unverified") return fail();
+  } else if (review.proposal !== null) return fail();
+  const refs = review.evidence_refs;
+  if (!Array.isArray(refs) || !refs.length || refs.length > 16 || new Set(refs.map(ref => ref?.path)).size !== refs.length || refs.some(ref =>
+      !ref || Object.keys(ref).length !== 2 || !boundedText(ref.path, 300) || !/^[a-f0-9]{64}$/.test(ref.sha256 || "") ||
+      !/^(?:docs|catalogue)\//.test(ref.path) || !/\.(?:json|md)$/.test(ref.path) || /[\\\u0000-\u001f\u007f]/.test(ref.path) ||
+      ref.path.split("/").some(part => !part || part === "." || part === ".." || part.startsWith(".")))) return fail();
+  return {review, error: ""};
+}
+function onlineReviewSummary(findings, appliedCorrectionIds = null) {
+  const counts = {"covered-by-provisional-guide": 0, "local-evidence-proposal": 0, inconclusive: 0};
+  let annotated = false, invalid = 0;
+  for (const finding of findings) {
+    const {review, error} = onlineFindingReview(finding, appliedCorrectionIds);
+    if (review) { counts[review.status]++; annotated = true; }
+    if (error) { invalid++; annotated = true; }
+  }
+  return annotated ? `${counts["covered-by-provisional-guide"]} covered by provisional guide; ${counts["local-evidence-proposal"]} ${counts["local-evidence-proposal"] === 1 ? "proposal" : "proposals"}; ${counts.inconclusive} inconclusive${invalid ? `; ${invalid} invalid review ${invalid === 1 ? "note" : "notes"}` : ""}.` : "";
+}
 function validateLearningManifest(payload, reviewCases, practiceById) {
   const safeId = value => boundedText(value, 64) && /^[a-z0-9][a-z0-9.-]*$/.test(value);
   if (!payload || payload.schema_version !== "playalong-learning-1.0" ||
@@ -598,7 +640,7 @@ if (typeof module !== "undefined" && module.exports) {
   module.exports = { annotationExport, validateCandidate, currentEvent, exposureKey, loadExposure, recordExposure,
     refreshExposure, pairedRecording, validateEvidence, clampSeek, playbackSnapshot, createPlaybackFrameLoop, feedbackKey, feedbackExport,
     captureFeedback, loadFeedback, saveFeedback, timeLabel, transposePracticeLabel, practiceLabel, coreChordLabel, displayedChord, practiceTimeline,
-    currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, durationPresentation, holdBarDivisions, correctedDisplayEvents, validatePracticeManifest, safeTeachingURL, validateOnlineChecksManifest, pairedOnlineChecks, validateLearningManifest, practiceProgressKey, practiceProgressExport, loadPracticeProgress, savePracticeProgress, nextPracticeStep, initialPracticeStep };
+    currentHold, timingWindow, validateRhythmManifest, beatPosition, estimatedSpan, durationCaption, durationPresentation, holdBarDivisions, correctedDisplayEvents, validatePracticeManifest, safeTeachingURL, validateOnlineChecksManifest, pairedOnlineChecks, onlineFindingReview, onlineReviewSummary, validateLearningManifest, practiceProgressKey, practiceProgressExport, loadPracticeProgress, savePracticeProgress, nextPracticeStep, initialPracticeStep };
 }
 
 if (typeof document !== "undefined") {
@@ -776,6 +818,9 @@ if (typeof document !== "undefined") {
     summary.textContent = checked.status === "not-harmony-task" ? `Riff or setup lesson; chord-palette checks do not apply. ${coverage}.`
       : checked.status === "insufficient-sources" ? `Insufficient comparable sources; no chord assessment made. ${coverage}.`
       : `${count} potential ${count === 1 ? "conflict" : "conflicts"} flagged. ${coverage}. No flags does not establish that a chart is correct.`;
+    const appliedCorrectionIds = (state.displayEvents || []).map(event => event.display_correction?.id).filter(Boolean);
+    const reviewSummary = onlineReviewSummary(checked.findings, appliedCorrectionIds);
+    if (reviewSummary) summary.textContent += ` ${reviewSummary}`;
     if (checked.search) {
       const search = checked.search;
       el("online-check-search").textContent = `Search: ${search.provider} · ${search.status.replaceAll("-", " ")} · ${search.cache_hit ? "cached result" : "not cached"}${search.retrieved_at_utc ? ` · ${search.retrieved_at_utc.slice(0, 10)}` : ""}. ${search.notes.join(" ")}`;
@@ -799,7 +844,18 @@ if (typeof document !== "undefined") {
         link.href = safeTeachingURL(source.url); link.textContent = source.title; link.target = "_blank"; link.rel = "noopener noreferrer";
         references.append(" ", link);
       }
-      row.append(text, button("Replay this spot", () => replay(finding.start_seconds - 1)), references); findings.append(row);
+      row.append(text, button("Replay this spot", () => replay(finding.start_seconds - 1)), references);
+      const reviewed = onlineFindingReview(finding, appliedCorrectionIds);
+      if (reviewed.review || reviewed.error) {
+        const note = document.createElement("p");
+        const review = reviewed.review;
+        const label = review?.status === "covered-by-provisional-guide" ? "Covered by provisional guide; timing unverified"
+          : review?.status === "local-evidence-proposal" ? `Suggested ${review.proposal.label} (provisional); saved for review, current cue unchanged`
+          : "Inconclusive; current cue unchanged";
+        note.textContent = reviewed.error || `${label}. ${review.note}`;
+        row.append(note);
+      }
+      findings.append(row);
     }
     el("online-check-limits").textContent = checked.limits.join(" ");
   }
@@ -1108,7 +1164,7 @@ if (typeof document !== "undefined") {
       (async () => {
         try { practiceById = validatePracticeManifest(await getJSON("/practice.json"), cases); }
         catch (_) { practiceById = new Map(); }
-        if (state) { state.strumming = practiceById.get(selected.recording.id) || null; refreshDisplayCorrections(state); renderStrumming(); updateClock(); }
+        if (state) { state.strumming = practiceById.get(selected.recording.id) || null; refreshDisplayCorrections(state); renderStrumming(); renderOnlineChecks(); updateClock(); }
       })(),
       (async () => {
         try {
