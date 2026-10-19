@@ -6,7 +6,9 @@ The initial Mac algorithm selection is complete: BTC for new basic-harmony draft
 
 ## Current status
 
-Updated 18 October 2026. Status and deployment information belong in this README as work progresses. The full roadmap is in [plan.md](plan.md); source findings and existing-app checks are in [docs/REUSE_AUDIT.md](docs/REUSE_AUDIT.md).
+Updated 19 October 2026. Status and deployment information belong in this README as work progresses. The full roadmap is in [plan.md](plan.md); source findings and existing-app checks are in [docs/REUSE_AUDIT.md](docs/REUSE_AUDIT.md).
+
+**Curated YouTube pilot planning, 19 October:** the founder confirmed Wayfinder's destination: an implementable specification for a small curated rock/pop YouTube play-along pilot, with synchronised chords, clear chord lengths, suggested strumming and a learning path. The existing Mac experiments supply evidence. The founder also confirmed a free private pilot, beginning with himself and then a small group, with roughly 10–20 well-prepared songs. The GitHub decision map is being prepared; eventual low-price paid viability will be investigated alongside usefulness. [Shared vocabulary](GLOSSARY.md) distinguishes songs, exact recordings, arrangements and practice patterns. This planning pass changes no running player, media, model settings or saved practice data.
 
 **Live chord display timing, 17 October:** the founder reported a late D in Wild Thing. An isolated live check reproduced A remaining visible after the first saved D boundary: the last stale sample was about 159 ms after that boundary. Playback now refreshes from the actual audio clock on animation frames; the repeated pass had one stale sample about 2 ms after the boundary, followed by D at the next observed frame. This is a sampled display-lag comparison, not a latency guarantee or musical boundary validation. The founder subsequently identified the opening D around 4 seconds, the same cue used in that test; this is clarification of the earlier report, not a new post-fix audition. The saved D boundary remains 4.087 seconds: the earlier secondary estimate is not an independently verified musical onset. Native timings and every teaching guide remain unchanged. The normal player was refreshed with its paused position restored. [Verification and limits](docs/PLAYER_FRAME_CLOCK_CHECK.json).
 
@@ -103,7 +105,7 @@ The founder's beginner focus now has an optional **Core chords** display. Em7 be
 
 The experiment bench is a local browser tool, independent of the Expo app. Requirements: Python 3.12 and a browser; FFmpeg is needed only to convert other local recordings.
 
-The canonical working checkout is `/Users/davidcrompton/Documents/music-os`, on branch `codex/house-source-warning-review`, tracking `origin/codex/house-source-warning-review` at `https://github.com/dcromp/music-os.git`. All further work runs from this folder. The [workspace move](docs/WORKSPACE_MOVE.md) records transferred assets, runtime repairs and verification. From the repository root:
+The canonical working checkout is `/Users/davidcrompton/Documents/music-os`, on branch `codex/curated-youtube-pilot-map`, tracking `origin/codex/curated-youtube-pilot-map` at `https://github.com/dcromp/music-os.git`. All further work runs from this folder. The [workspace move](docs/WORKSPACE_MOVE.md) records transferred assets, runtime repairs and verification. From the repository root:
 
 ```sh
 cd /Users/davidcrompton/Documents/music-os

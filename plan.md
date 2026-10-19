@@ -1,8 +1,10 @@
 # Guitar learning app → Band in your pocket
 
-Project plan · Updated 18 October 2026 · Working title
+Project plan · Updated 19 October 2026 · Working title
 
 **Execution:** [GitHub Issues](https://github.com/dcromp/music-os/issues) is now the ticket board. The [initial eight-ticket index](docs/agents/tickets.md) links the completed checkpoint and remaining work with native dependencies. `AGENTS.md` and `docs/agents/` configure the approved Matt Pocock skills workflow; this plan remains the high-level roadmap, and README remains the status/deployment overview.
+
+**Wayfinder pilot scope, 19 October:** the agreed planning destination is an implementable specification for a curated YouTube rock/pop guitar play-along pilot: synchronised chords, readable chord lengths, suggested strumming and a learning path. Begin free and private with the founder, then a small group; target roughly 10–20 well-prepared songs before expansion. The existing Mac experiments supply evidence. Remaining source, playback, arrangement-quality, progression and cost decisions are being charted as GitHub decision tickets; the earlier original-exercise proposal remains a fallback rather than a replacement for this popular-song goal. Building the application follows the specification.
 
 **House/source integration follow-up on 17 October:** the founder-confirmed E-major intro and two teaching sources now inform a provisional player correction: insert E near eight seconds inside a long native Am hold, then show E over the later Em cue, retaining raw predictions. Timing proposals are not verified boundaries. [Source/proposals](catalogue/house-intro-feedback-20261017.json), [verification](docs/HOUSE_INTRO_FEEDBACK_UPDATE.json). The subsequent [online chord checks](docs/ONLINE_CHORD_CHECKS.md) connect automatic discovery/extraction and cached source comparisons to a separate player replay panel. Search blocks, missing source coverage and setup hypotheses are explicit; these checks do not establish musical timing or accept full arrangements. Player-v4 records the additive source-report server change; the current player-v5 policy versions only the later ticket-4 practice/learning guide edits. Preceding policies remain historical.
 
