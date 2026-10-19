@@ -14,7 +14,7 @@ YouTube permits showing videos through its embedded player; that permission does
 
 The developer policies allow selling a compliant API client, prohibit charging for embedded viewing, and restrict downloading/caching YouTube audiovisual content without prior written approval. They prohibit separating audio/video, blocking ads or player functionality, and hidden background playback. Independently obtained data must be distinguished from YouTube data. Our proposed implication: offer our arrangements, practice patterns and learning path beside the visible official player; review the actual subscription boundary before charging. Normal product login can be allowed, so a private invitation is not automatically prohibited. The client also needs the required terms/privacy disclosures. [Policies III.A, III.E.1/4, III.F.3, III.G, III.I](https://developers.google.com/youtube/terms/developer-policies)
 
-The IFrame API provides playback state, elapsed seconds, seeking and available playback rates. Seeking can land at a preceding keyframe; exact musical loops are not guaranteed. Errors identify missing/private videos, disabled embedding and missing client identification (153). These are technical integration/availability requirements, not an analysis-audio interface. [IFrame API](https://developers.google.com/youtube/iframe_api_reference)
+Official IFrame playback controls and time are documented; the interface supplies no analysis audio. [IFrame API](https://developers.google.com/youtube/iframe_api_reference)
 
 ## Candidate input and teaching routes
 
