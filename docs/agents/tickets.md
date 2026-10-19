@@ -4,6 +4,8 @@ Published 16 October 2026 after approval of the eight-ticket breakdown. This
 is an identity/dependency index; [GitHub Issues](https://github.com/dcromp/music-os/issues)
 holds current state, assignees, acceptance evidence and comments.
 
+Product planning is tracked separately in [Find the route to a curated YouTube guitar play-along pilot](https://github.com/dcromp/music-os/issues/19). Its native child issues are decisions with `wayfinder:` labels; the implementation tickets below retain their existing scope and triage roles.
+
 | Ticket | Outcome | Prerequisite |
 |---|---|---|
 | [#2](https://github.com/dcromp/music-os/issues/2) | Finalize the ten-recording timing, rhythm and pitch checkpoint | None |
