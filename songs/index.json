@@ -1,0 +1,429 @@
+{
+  "schema": "strumalong-catalogue-1",
+  "groups": [
+    {
+      "id": "path",
+      "title": "Suggested practice path",
+      "note": "Provisional order; choose any song."
+    },
+    {
+      "id": "more",
+      "title": "More rock & pop",
+      "note": "New automatic charts, not yet reviewed."
+    },
+    {
+      "id": "riff",
+      "title": "Riff songs",
+      "note": "No strumming guide; the chord display does not teach the riff."
+    },
+    {
+      "id": "outside",
+      "title": "Also available",
+      "note": ""
+    }
+  ],
+  "songs": [
+    {
+      "id": "troggs-wild-thing-youtube-20261011",
+      "title": "Wild Thing",
+      "artist": "The Troggs",
+      "group": "path",
+      "order": 1,
+      "video_id": "bLJkrOYHNw8",
+      "duration_seconds": 155.35,
+      "bpm": 103,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "A",
+        "E",
+        "D"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+      "title": "Knockin' on Heaven's Door",
+      "artist": "Bob Dylan",
+      "group": "path",
+      "order": 2,
+      "video_id": "z4R5crZylQ0",
+      "duration_seconds": 149.89,
+      "bpm": 70,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "G",
+        "D",
+        "Am",
+        "C"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "van-morrison-brown-eyed-girl-youtube-20261011",
+      "title": "Brown Eyed Girl",
+      "artist": "Van Morrison",
+      "group": "path",
+      "order": 3,
+      "video_id": "nEQmbFWnQeE",
+      "duration_seconds": 186.56,
+      "bpm": 152,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "G",
+        "D",
+        "C",
+        "Em"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "beatles-twist-and-shout-youtube-20261011",
+      "title": "Twist and Shout",
+      "artist": "The Beatles",
+      "group": "path",
+      "order": 4,
+      "video_id": "2RicaUqd9Hg",
+      "duration_seconds": 155.24,
+      "bpm": 123,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "A",
+        "D",
+        "G"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "animals-house-rising-sun-official-20261011",
+      "title": "The House of the Rising Sun",
+      "artist": "The Animals",
+      "group": "path",
+      "order": 5,
+      "video_id": "VixdIglCZXk",
+      "duration_seconds": 269.92,
+      "bpm": 78,
+      "meter_label": "6/8 · 2 dotted-quarter beats per bar",
+      "capo": 0,
+      "core_shapes": [
+        "Am",
+        "E",
+        "C",
+        "F",
+        "D",
+        "Dm"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "oasis-wonderwall-youtube-20261010",
+      "title": "Wonderwall",
+      "artist": "Oasis",
+      "group": "path",
+      "order": 6,
+      "video_id": "bx1Bh8ZvH84",
+      "duration_seconds": 277.78,
+      "bpm": 86,
+      "meter_label": "Beat count; meter varies",
+      "capo": 2,
+      "core_shapes": [
+        "Em",
+        "G",
+        "C",
+        "D",
+        "A"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "radiohead-creep-youtube-20261010",
+      "title": "Creep",
+      "artist": "Radiohead",
+      "group": "path",
+      "order": 7,
+      "video_id": "XFkzRNyygfk",
+      "duration_seconds": 236.63,
+      "bpm": 92,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "C",
+        "G",
+        "B",
+        "Cm",
+        "Bm"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "cranberries-zombie-youtube-20261024",
+      "title": "Zombie",
+      "artist": "The Cranberries",
+      "group": "more",
+      "order": 1,
+      "video_id": "yGxHDmHoqXc",
+      "duration_seconds": 306.44,
+      "bpm": 83,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "Em",
+        "G",
+        "C",
+        "D"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "green-day-good-riddance-youtube-20261024",
+      "title": "Good Riddance (Time of Your Life)",
+      "artist": "Green Day",
+      "group": "more",
+      "order": 2,
+      "video_id": "zwEyuzaNUTA",
+      "duration_seconds": 153.47,
+      "bpm": 96,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "G",
+        "D",
+        "C",
+        "Em"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "oasis-dont-look-back-in-anger-youtube-20261024",
+      "title": "Don't Look Back in Anger",
+      "artist": "Oasis",
+      "group": "more",
+      "order": 3,
+      "video_id": "oplra1FJxWI",
+      "duration_seconds": 289.56,
+      "bpm": 81,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "C",
+        "G",
+        "F",
+        "Am",
+        "Em"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "ccr-have-you-ever-seen-the-rain-youtube-20261024",
+      "title": "Have You Ever Seen the Rain",
+      "artist": "Creedence Clearwater Revival",
+      "group": "more",
+      "order": 4,
+      "video_id": "JKES3yfnD9U",
+      "duration_seconds": 160.17,
+      "bpm": 117,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "C",
+        "G",
+        "F",
+        "Am"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "ccr-bad-moon-rising-youtube-20261024",
+      "title": "Bad Moon Rising",
+      "artist": "Creedence Clearwater Revival",
+      "group": "more",
+      "order": 5,
+      "video_id": "tKJwvQfraY8",
+      "duration_seconds": 139.52,
+      "bpm": 89,
+      "meter_label": "2/2 · 2 half-note beats per bar",
+      "capo": 0,
+      "core_shapes": [
+        "D",
+        "G",
+        "A"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "tom-petty-free-fallin-youtube-20261024",
+      "title": "Free Fallin'",
+      "artist": "Tom Petty",
+      "group": "more",
+      "order": 6,
+      "video_id": "1lWJXDG2i0A",
+      "duration_seconds": 254.72,
+      "bpm": 83,
+      "meter_label": "4/4 assumed",
+      "capo": 3,
+      "core_shapes": [
+        "D",
+        "G",
+        "A"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "weezer-island-in-the-sun-youtube-20261024",
+      "title": "Island in the Sun",
+      "artist": "Weezer",
+      "group": "more",
+      "order": 7,
+      "video_id": "erG5rgNYSdk",
+      "duration_seconds": 200.23,
+      "bpm": 112,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "D",
+        "G",
+        "Em",
+        "Am"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "john-denver-country-roads-youtube-20261024",
+      "title": "Take Me Home, Country Roads",
+      "artist": "John Denver",
+      "group": "more",
+      "order": 8,
+      "video_id": "FpFms2tHRCA",
+      "duration_seconds": 189.86,
+      "bpm": 83,
+      "meter_label": "4/4 assumed",
+      "capo": 2,
+      "core_shapes": [
+        "G",
+        "D",
+        "C",
+        "Em"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "lynyrd-skynyrd-sweet-home-alabama-youtube-20261024",
+      "title": "Sweet Home Alabama",
+      "artist": "Lynyrd Skynyrd",
+      "group": "more",
+      "order": 9,
+      "video_id": "-35W_FWCT9Q",
+      "duration_seconds": 284.03,
+      "bpm": 99,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "G",
+        "C",
+        "D"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "vance-joy-riptide-youtube-20261024",
+      "title": "Riptide",
+      "artist": "Vance Joy",
+      "group": "more",
+      "order": 10,
+      "video_id": "TL_oroU9eN8",
+      "duration_seconds": 204.3,
+      "bpm": 103,
+      "meter_label": "4/4 assumed",
+      "capo": 1,
+      "core_shapes": [
+        "C",
+        "Am",
+        "G",
+        "F"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "white-stripes-seven-nation-army-youtube-20261011",
+      "title": "Seven Nation Army",
+      "artist": "The White Stripes",
+      "group": "riff",
+      "order": 1,
+      "video_id": "D_QLxj8jCF0",
+      "duration_seconds": 232.12,
+      "bpm": 123,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "Em",
+        "C",
+        "E",
+        "B",
+        "A",
+        "G"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "nirvana-come-as-you-are-youtube-20261011",
+      "title": "Come as You Are",
+      "artist": "Nirvana",
+      "group": "riff",
+      "order": 2,
+      "video_id": "f1IdyrhOrGs",
+      "duration_seconds": 218.93,
+      "bpm": 123,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "Em",
+        "D",
+        "G",
+        "C",
+        "Am"
+      ],
+      "playable_embed": false,
+      "embed_note": "Catalogue upload is age-restricted; using the official video with unchecked timing."
+    },
+    {
+      "id": "beatles-love-me-do-youtube-20261011",
+      "title": "Love Me Do",
+      "artist": "The Beatles",
+      "group": "outside",
+      "order": 1,
+      "video_id": "0pGOFX1D_jg",
+      "duration_seconds": 141.7,
+      "bpm": 144,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "C",
+        "G",
+        "D"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    }
+  ]
+}
