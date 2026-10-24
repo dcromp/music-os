@@ -1,0 +1,117 @@
+{
+  "schema_version": "playalong-rhythm-config-1.0",
+  "status": "Curated pulse and meter hypotheses for the Strum Along additions, informed by published arrangement tempo markings; not exact-upload timing gold. Prepared before the recordings were analysed, so ranges may need revision after the first grid check.",
+  "recordings": {
+    "cranberries-zombie-youtube-20261024": {
+      "start_bpm": 86,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 72,
+      "tempo_max_bpm": 100,
+      "source_url": "https://www.musicnotes.com/sheetmusic/the-cranberries/zombie/MN0150458",
+      "pulse_prior_status": "Source-informed range around a published arrangement marking (quarter = 86); audio chooses tempo within it; not timing gold"
+    },
+    "green-day-good-riddance-youtube-20261024": {
+      "start_bpm": 90,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 76,
+      "tempo_max_bpm": 105,
+      "source_url": "https://appsnemo.com/chord/good-riddance-time-of-your-life-green-day",
+      "pulse_prior_status": "Sources disagree (90 BPM chord-site listing; a guitar/vocal arrangement marks quarter = 172, i.e. 86 at half time); range covers the slower reading; metrical level unverified",
+      "additional_source_url": "https://www.musicnotes.com/sheetmusic/green-day/good-riddance-time-of-your-life/MN0047011"
+    },
+    "oasis-dont-look-back-in-anger-youtube-20261024": {
+      "start_bpm": 84,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 72,
+      "tempo_max_bpm": 98,
+      "source_url": "https://api.musicnotes.com/sheetmusic/oasis/dont-look-back-in-anger/MN0143432",
+      "pulse_prior_status": "Source-informed range; audio chooses tempo within it; not timing gold"
+    },
+    "ccr-have-you-ever-seen-the-rain-youtube-20261024": {
+      "start_bpm": 120,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 100,
+      "tempo_max_bpm": 135,
+      "source_url": "https://www.musicnotes.com/sheetmusic/creedence-clearwater-revival/have-you-ever-seen-the-rain/MN0268278",
+      "pulse_prior_status": "Source-informed range; audio chooses tempo within it; not timing gold"
+    },
+    "ccr-bad-moon-rising-youtube-20261024": {
+      "start_bpm": 90,
+      "beats_per_bar": 2,
+      "meter_label": "2/2 · 2 half-note beats per bar",
+      "meter_status": "Source 2/2 (cut time); two half-note pulse convention is a project hypothesis (quarter-note reading would be about 180/min)",
+      "pulse_unit": "half note (proposed)",
+      "tempo_min_bpm": 75,
+      "tempo_max_bpm": 105,
+      "source_url": "https://api.musicnotes.com/sheetmusic/creedence-clearwater-revival/bad-moon-rising/MN0107302",
+      "pulse_prior_status": "Source-informed half-note range (arrangement marking half = 90); audio chooses tempo within it; metrical level unverified"
+    },
+    "tom-petty-free-fallin-youtube-20261024": {
+      "start_bpm": 84,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 72,
+      "tempo_max_bpm": 98,
+      "source_url": "https://www.musicnotes.com/sheetmusic/tom-petty/free-fallin/MN0046438",
+      "pulse_prior_status": "Source-informed range; audio chooses tempo within it; not timing gold"
+    },
+    "weezer-island-in-the-sun-youtube-20261024": {
+      "start_bpm": 116,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 100,
+      "tempo_max_bpm": 130,
+      "source_url": "https://www.musicnotes.com/sheetmusic/weezer/island-in-the-sun/MN0156208",
+      "pulse_prior_status": "Source-informed range; audio chooses tempo within it; not timing gold"
+    },
+    "john-denver-country-roads-youtube-20261024": {
+      "start_bpm": 84,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 70,
+      "tempo_max_bpm": 100,
+      "source_url": "https://www.musicnotes.com/sheetmusic/john-denver/take-me-home-country-roads/MN0042930_U5",
+      "pulse_prior_status": "Weak source: the fetched arrangement is marked half = 96 in 2/2, which may not describe the recording; a wide quarter-note range is declared and audio chooses within it; metrical level unverified"
+    },
+    "lynyrd-skynyrd-sweet-home-alabama-youtube-20261024": {
+      "start_bpm": 105,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 88,
+      "tempo_max_bpm": 115,
+      "source_url": "https://www.musicnotes.com/sheetmusic/lynyrd-skynyrd/sweet-home-alabama/MN0044823",
+      "pulse_prior_status": "Source-informed range; audio chooses tempo within it; not timing gold"
+    },
+    "vance-joy-riptide-youtube-20261024": {
+      "start_bpm": 97,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 88,
+      "tempo_max_bpm": 112,
+      "source_url": "https://www.musicnotes.com/sheetmusic/vance-joy/riptide/MN0143768",
+      "pulse_prior_status": "Source-informed range; audio chooses tempo within it; not timing gold"
+    }
+  }
+}
