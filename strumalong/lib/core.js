@@ -128,13 +128,76 @@
     const rhythm = (song && song.rhythm) || {};
     const bpb = Number.isInteger(rhythm.beats_per_bar) && rhythm.beats_per_bar > 0 ? rhythm.beats_per_bar : 4;
     const phaseKnown = Number.isInteger(rhythm.bar_phase);
-    return {
+    const info = {
       bpb,
       phase: phaseKnown ? mod(rhythm.bar_phase, bpb) : 0,
       confident: rhythm.bar_phase_confident === true && phaseKnown,
       bpm: validNumber(rhythm.bpm) && rhythm.bpm > 0 ? rhythm.bpm : null,
       beats: song && Array.isArray(song.beats) ? song.beats : [],
     };
+    info.anchors = anchorMap(song, info);
+    return info;
+  }
+
+  // ---- Bar anchors (docs/STRUMALONG_APP.md, "Bar model").
+  // The exporter writes a compact per-chord anchor: `b` = bar phase (beat residue mod beats_per_bar that starts a
+  // bar while this chord is held) and `a: 1` when that anchor is approximate. Every grid beat takes the anchor of
+  // the chord whose dots own it (round(startBeat) .. round(endBeat) - 1, the same rounding as the dots), so the drawn
+  // bar lines and the strum count read one per-beat anchor and can never disagree. Beats no chord owns take the
+  // nearest owned beat's anchor (earlier first). A song without `b` fields keeps the single song-wide
+  // rhythm.bar_phase (approximate unless rhythm.bar_phase_confident), exactly as before.
+  const anchorCache = typeof WeakMap === "function" ? new WeakMap() : null;
+  function anchorMap(song, info) {
+    const chords = song && Array.isArray(song.chords) ? song.chords : [];
+    const cached = anchorCache && song && typeof song === "object" ? anchorCache.get(song) : null;
+    if (cached && cached.beats === info.beats && cached.chords === chords && cached.bpb === info.bpb &&
+      cached.phase0 === info.phase && cached.confident === info.confident) return cached;
+    const n = info.beats.length;
+    const map = { beats: info.beats, chords, bpb: info.bpb, phase0: info.phase, confident: info.confident,
+      phase: null, approx: null, anchored: false };
+    if (n >= 2) {
+      const phase = new Array(n + 2).fill(-1), approx = new Array(n + 2).fill(false); // slot = beat index + 1 (beats -1..n)
+      for (const chord of chords) {
+        if (!chord || !Number.isInteger(chord.b) || !validNumber(chord.s) || !validNumber(chord.e)) continue;
+        const sb = gridPosition(info.beats, chord.s), eb = gridPosition(info.beats, chord.e);
+        if (sb === null || eb === null || !(eb > sb)) continue;
+        const lo = Math.max(-1, Math.round(sb)), hi = Math.min(n + 1, Math.round(eb));
+        for (let beat = lo; beat < hi; beat++) { phase[beat + 1] = mod(chord.b, info.bpb); approx[beat + 1] = chord.a === 1; map.anchored = true; }
+      }
+      if (map.anchored) {
+        let last = -1, lastApprox = false;
+        for (let i = 0; i < phase.length; i++) {
+          if (phase[i] >= 0) { last = phase[i]; lastApprox = approx[i]; } else if (last >= 0) { phase[i] = last; approx[i] = lastApprox; }
+        }
+        for (let i = phase.length - 1; i >= 0; i--) {
+          if (phase[i] >= 0) { last = phase[i]; lastApprox = approx[i]; } else { phase[i] = last; approx[i] = lastApprox; }
+        }
+        map.phase = phase; map.approx = approx;
+      }
+    }
+    if (anchorCache && song && typeof song === "object") anchorCache.set(song, map);
+    return map;
+  }
+  function slotOf(map, beat) { return Math.max(0, Math.min(map.phase.length - 1, beat + 1)); }
+  function phaseAtBeat(info, beat) {
+    const map = info.anchors;
+    return map && map.anchored && Number.isInteger(beat) ? map.phase[slotOf(map, beat)] : info.phase;
+  }
+  function approxAtBeat(info, beat) {
+    const map = info.anchors;
+    return map && map.anchored && Number.isInteger(beat) ? map.approx[slotOf(map, beat)] : !info.confident;
+  }
+  function isBarBeat(info, beat) { return mod(beat - phaseAtBeat(info, beat), info.bpb) === 0; }
+
+  // The anchor in force at grid beat `beat` (an integer index; -1 and beats.length are the one-beat extensions).
+  // bar: the strum count reads 1 on this beat (a drawn bar line, or a hold that starts a bar).
+  function barAnchorAt(song, beat) {
+    const info = rhythmInfo(song);
+    const b = Number.isInteger(beat) ? beat : Math.floor(Number(beat));
+    if (!Number.isInteger(b)) return null;
+    const phase = phaseAtBeat(info, b), offset = mod(b - phase, info.bpb);
+    return { phase, approx: approxAtBeat(info, b), bar: offset === 0, half: info.bpb % 2 === 0 && offset === info.bpb / 2,
+      anchored: Boolean(info.anchors && info.anchors.anchored) };
   }
 
   const QUICK_BEATS = 0.75;
@@ -149,7 +212,7 @@
       full: event.full, sounding: event.sounding, c: event.c ? 1 : 0, s: event.s, e: event.e,
       seconds: event.e - event.s, remaining: isNow ? Math.max(0, event.e - t) : event.e - event.s,
       startBeat: null, endBeat: null, spanBeats: null, beats: null, active: -1,
-      dots: [], dotOffset: 0, barBefore: [], more: 0, quick: false, barStart: null,
+      dots: [], dotOffset: 0, barBefore: [], more: 0, quick: false, barStart: null, approx: null,
     };
     const sb = gridPosition(info.beats, event.s), eb = gridPosition(info.beats, event.e);
     if (sb === null || eb === null || eb <= sb) {
@@ -159,14 +222,17 @@
       return part;
     }
     const span = eb - sb, base = Math.round(sb);
-    const quick = span < QUICK_BEATS;
     // Dots run from round(startBeat) to round(endBeat), so each grid beat belongs to exactly one hold.
-    const count = quick ? 1 : Math.max(1, Math.round(eb) - base);
+    // A hold that owns no grid beat after rounding (e.g. 0.87 beat from 30.52 to 31.39) is a quick change too.
+    const owned = Math.round(eb) - base;
+    const quick = span < QUICK_BEATS || owned < 1;
+    const count = quick ? 1 : owned;
     part.startBeat = sb; part.endBeat = eb; part.spanBeats = span; part.beats = count; part.quick = quick;
-    // One global anchor (bar_phase) for bar lines and the strum count, whether or not it is confident: the
-    // strumming hand keeps one pendulum across chord changes. Unconfident phases are labelled "approx bars".
-    const isBar = k => mod(base + k - info.phase, info.bpb) === 0;
-    part.barStart = info.confident ? isBar(0) : null;
+    // Bar lines and the strum count read the same per-beat anchor (see anchorMap). An approximate anchor
+    // still draws its lines (labelled "approx bars") but gives NEXT no solid bar-start border.
+    const isBar = k => isBarBeat(info, base + k);
+    part.approx = approxAtBeat(info, base);
+    part.barStart = part.approx ? null : isBar(0);
     if (isNow) {
       const bt = gridPosition(info.beats, t);
       part.active = bt === null ? 0 : Math.min(count - 1, Math.max(0, Math.floor(bt) - base));
@@ -193,7 +259,7 @@
   function pseudoPart(kind, display) {
     return { idx: -1, kind, label: null, display, full: null, sounding: null, c: 0, s: null, e: null,
       seconds: null, remaining: null, startBeat: null, endBeat: null, spanBeats: null, beats: null, active: -1,
-      dots: [], dotOffset: 0, barBefore: [], more: 0, quick: false, barStart: null };
+      dots: [], dotOffset: 0, barBefore: [], more: 0, quick: false, barStart: null, approx: null };
   }
 
   // Cue model for the layout A panel at cue time t (seconds on the analysed recording).
@@ -203,7 +269,8 @@
     const time = validNumber(t) ? t : 0;
     const bt = gridPosition(info.beats, time);
     const result = { t: time, beat: bt, now: null, next: null, beatsUntilChange: null, secondsUntilChange: null,
-      inBeatGrid: false, toEnd: false, approxBars: !info.confident, beatsPerBar: info.bpb };
+      inBeatGrid: false, toEnd: false, approxBars: bt === null ? !info.confident : approxAtBeat(info, Math.floor(bt)),
+      beatsPerBar: info.bpb };
     if (!events.length) { result.now = pseudoPart("empty", "—"); return result; }
     const idx = chordIndexAt(events, time);
     let nextIdx;
@@ -248,7 +315,8 @@
     if (beat === null) return null;
     const counts = Array.isArray(pattern.counts) && pattern.counts.length ? pattern.counts.length : pattern.strokes.length;
     const stepsPerBeat = counts / info.bpb;
-    const pos = mod(beat - info.phase, info.bpb);
+    // Same per-beat anchor as the drawn bar lines: the beat that owns this moment decides where count 1 is.
+    const pos = mod(beat - phaseAtBeat(info, Math.floor(beat + 1e-9)), info.bpb);
     const step = Math.floor(pos * stepsPerBeat + 1e-9);
     return Math.min(pattern.strokes.length - 1, Math.max(0, step));
   }
@@ -314,5 +382,5 @@
   }
 
   return { transposePracticeLabel, coreChordLabel, shapeLabel, displayLabel, buildTimeline, chordIndexAt, beatPosition,
-    gridPosition, cueAt, strumStep, suggestCapo, formatTime, strokeGlyph, cueTime, expectedDuration, durationMismatch };
+    gridPosition, barAnchorAt, cueAt, strumStep, suggestCapo, formatTime, strokeGlyph, cueTime, expectedDuration, durationMismatch };
 });

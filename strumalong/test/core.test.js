@@ -413,6 +413,68 @@ test("cueAt: Wonderwall-style assumed 4 beats per bar (null in data falls back t
   assert.equal(cue.now.dots.length, 8);
 });
 
+// --- per-chord bar anchors (b / a) -----------------------------------------------------------
+// song4 grid: beat i at 1 + 0.5 i s. A local phase switch and a hold-relative chord, written as the exporter does.
+function anchoredSong() {
+  const song = song4(false);
+  song.chords = [
+    { s: 1.0, e: 5.0, l: "A", b: 0 },          // beats 0..8: bar lines before beats 4 (phase 0)
+    { s: 5.0, e: 7.5, l: "D", b: 0 },          // beats 8..13: line before beat 12
+    { s: 7.5, e: 10.0, l: "E", b: 1 },         // beats 13..18: local phase 1 (a slip): it starts a bar; line before 17
+    { s: 10.0, e: 11.5, l: "G", b: 2, a: 1 },  // beats 18..21: hold-relative (approx): starts a bar at 18
+    { s: 11.5, e: 14.5, l: "C", b: 1, a: 1 },  // beats 21..27: hold-relative: starts a bar at 21, line before 25
+  ];
+  return song;
+}
+test("anchors: bar lines follow each chord's b; NEXT bar start only for confident anchors", () => {
+  const song = anchoredSong(), tl = tlFor(song);
+  let cue = core.cueAt(tl, song, 1.0);
+  assert.deepEqual(cue.now.barBefore, [4]);
+  assert.equal(cue.now.barStart, true, "phase-0 anchor, not approx: solid bar start");
+  assert.equal(cue.approxBars, false);
+  cue = core.cueAt(tl, song, 5.0);
+  assert.deepEqual(cue.now.barBefore, [4], "D: beats 8..12, bar line before beat 12");
+  assert.equal(cue.next.label, "E");
+  assert.equal(cue.next.barStart, true, "E starts a bar under its own (local) phase 1");
+  cue = core.cueAt(tl, song, 7.5);
+  assert.deepEqual(cue.now.barBefore, [4], "E: beats 13..17, line before beat 17");
+  assert.equal(cue.next.barStart, null, "G is hold-relative (approx): no solid border");
+  cue = core.cueAt(tl, song, 10.0);
+  assert.equal(cue.approxBars, true, "approx bars while a hold-relative anchor is in force");
+  cue = core.cueAt(tl, song, 11.6);
+  assert.deepEqual(cue.now.barBefore, [4], "C: beats 21..27, line before beat 25");
+  assert.equal(cue.now.approx, true);
+});
+test("anchors: the strum count restarts at 1 where each anchor starts a bar", () => {
+  const song = anchoredSong(), steady = song.strumming.patterns[0];
+  const at = beat => core.strumStep(song, steady, 1 + 0.5 * beat + 0.01);
+  assert.deepEqual([0, 3, 4, 8, 11, 12].map(at), [0, 3, 0, 0, 3, 0], "phase 0");
+  assert.deepEqual([13, 14, 16, 17].map(at), [0, 1, 3, 0], "local phase 1 from beat 13");
+  assert.deepEqual([18, 19, 20].map(at), [0, 1, 2], "hold-relative G starts a bar at 18");
+  assert.deepEqual([21, 24, 25, 26].map(at), [0, 3, 0, 1], "hold-relative C restarts at 21 (G's bar had 3 beats)");
+  const down = song.strumming.patterns[1];
+  assert.equal(core.strumStep(song, down, 1 + 0.5 * 13.6), 1, "eighth steps also count from the anchor");
+});
+test("anchors: barAnchorAt reports phase, bar and approx per beat; unowned beats take the nearest owned anchor", () => {
+  const song = anchoredSong();
+  assert.deepEqual(core.barAnchorAt(song, 4), { phase: 0, approx: false, bar: true, half: false, anchored: true });
+  assert.deepEqual(core.barAnchorAt(song, 15), { phase: 1, approx: false, bar: false, half: true, anchored: true });
+  assert.equal(core.barAnchorAt(song, 18).approx, true);
+  assert.equal(core.barAnchorAt(song, 35).phase, 1, "after the chart: the last owned anchor carries forward");
+  assert.equal(core.barAnchorAt(song, -1).phase, 0, "before the chart: the first owned anchor carries back");
+  assert.equal(core.barAnchorAt(song, 2.7).phase, 0, "a fractional beat uses its floor");
+  const plain = song4(true);
+  assert.deepEqual(core.barAnchorAt(plain, 6), { phase: 0, approx: false, bar: false, half: true, anchored: false }, "no b fields: song-wide phase");
+  assert.equal(core.barAnchorAt(song4(false), 6).approx, true);
+});
+test("anchors: replacing the chord array refreshes the cached anchor map", () => {
+  const song = anchoredSong(), steady = song.strumming.patterns[0];
+  assert.equal(core.strumStep(song, steady, 1 + 0.5 * 13 + 0.01), 0);
+  song.chords = song.chords.map(c => ({ ...c, b: 0, a: undefined }));
+  assert.equal(core.strumStep(song, steady, 1 + 0.5 * 13 + 0.01), 1, "phase 0 everywhere now");
+  assert.equal(core.cueAt(tlFor(song), song, 10.2).approxBars, false);
+});
+
 // --- strumStep -------------------------------------------------------------------------------
 test("strumStep: 4/4 patterns follow the beat grid", () => {
   const song = song4(true), [steady, downUp] = song.strumming.patterns;
@@ -580,7 +642,12 @@ test("property: every drawn bar line is where the strum count reads 1 (built son
     const beats = song.beats, bpb = song.rhythm.beats_per_bar;
     const counter = { counts: Array.from({ length: bpb }, (_, i) => String(i + 1)), strokes: Array(bpb).fill("D") };
     const tl = core.buildTimeline(song);
-    kinds.add(song.rhythm.bar_phase_confident);
+    for (let b = 0; b + 1 < beats.length; b++) {
+      const anchor = core.barAnchorAt(song, b);
+      kinds.add(anchor.approx);
+      // Both ways: count 1 exactly on the beats the anchor calls bar starts.
+      assert.equal(core.strumStep(song, counter, beats[b] + 0.01) === 0, anchor.bar, `${f}: beat ${b} count-1 / bar-start mismatch`);
+    }
     for (let t = beats[0]; t <= beats[beats.length - 1]; t += 0.37) {
       const cue = core.cueAt(tl, song, t);
       for (const part of [cue.now, cue.next]) {
@@ -595,7 +662,7 @@ test("property: every drawn bar line is where the strum count reads 1 (built son
     }
   }
   assert.ok(lines > 1000, `checked ${lines} bar lines`);
-  assert.equal(kinds.size, 2, "built songs include both confident and approx bar phases");
+  assert.equal(kinds.size, 2, "built songs include both confident and approx bar anchors");
 });
 test("property: contiguous in-grid holds hand over beats exactly (built songs, default timeline)", () => {
   const songs = builtSongs();

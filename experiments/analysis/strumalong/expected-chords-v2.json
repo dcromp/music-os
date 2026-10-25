@@ -1,0 +1,227 @@
+{
+  "bob-marley-three-little-birds-youtube-20261025": {
+    "sounding": [
+      "A",
+      "D",
+      "E"
+    ],
+    "confidence": "high (A major per Musicnotes and SongBPM; off-beat guitar chops)"
+  },
+  "america-a-horse-with-no-name-youtube-20261025": {
+    "sounding": [
+      "Em",
+      "D"
+    ],
+    "confidence": "medium: Em alternating with D6add9/F# (F# A D A B E); an estimator may label the second chord D, D/F#, Bm or F#m"
+  },
+  "neil-diamond-sweet-caroline-youtube-20261025": {
+    "sounding": [
+      "B",
+      "E",
+      "F#"
+    ],
+    "confidence": "high for B E F# (SongBPM: B major; capo-2 shapes A D E); a brief G#m / C#m walkdown is expected under 4%"
+  },
+  "james-sit-down-youtube-20261025": {
+    "sounding": [
+      "E",
+      "A",
+      "B"
+    ],
+    "confidence": "medium-high: E major per SongBPM and the Musicnotes tab (one key estimate says A); capo-7 shapes A D E, or capo-2 shapes D G A"
+  },
+  "coldplay-yellow-youtube-20261025": {
+    "sounding": [
+      "B",
+      "F#",
+      "E",
+      "G#m"
+    ],
+    "confidence": "high (B major per Musicnotes, SongBPM and Wikipedia; capo-4 shapes G D C Em)"
+  },
+  "4-non-blondes-whats-up-youtube-20261025": {
+    "sounding": [
+      "A",
+      "Bm",
+      "D"
+    ],
+    "confidence": "high (A major published key; capo-2 shapes G Am C)"
+  },
+  "deep-blue-something-breakfast-at-tiffanys-youtube-20261025": {
+    "sounding": [
+      "D",
+      "G",
+      "A"
+    ],
+    "confidence": "medium-high: D major per SongBPM; brief Am and sus colours"
+  },
+  "george-ezra-budapest-youtube-20261025": {
+    "sounding": [
+      "F",
+      "A#",
+      "C"
+    ],
+    "confidence": "medium-high: F major per Musicnotes and Wikipedia; capo-3 shapes D G A (F, Bb, C)"
+  },
+  "verve-lucky-man-youtube-20261025": {
+    "sounding": [
+      "G",
+      "D",
+      "A",
+      "Em"
+    ],
+    "confidence": "medium: key given as D major (Musicnotes, SongBPM) or G major (chord sites); the same four chords either way; A is mostly Asus4"
+  },
+  "neil-young-heart-of-gold-youtube-20261025": {
+    "sounding": [
+      "Em",
+      "C",
+      "D",
+      "G"
+    ],
+    "confidence": "high (E minor per Musicnotes and SongBPM; Em7 shape counts as Em)"
+  },
+  "eagles-take-it-easy-youtube-20261025": {
+    "sounding": [
+      "G",
+      "C",
+      "D",
+      "Em",
+      "Am"
+    ],
+    "confidence": "medium: G major per Musicnotes and SongBPM; Em and Am are brief"
+  },
+  "stealers-wheel-stuck-in-the-middle-with-you-youtube-20261025": {
+    "sounding": [
+      "D",
+      "G",
+      "A",
+      "C",
+      "Am"
+    ],
+    "confidence": "medium: key of D per a lesson page; Musicnotes publishes C major and SongBPM estimates G major; D G A is the core, C and Am brief"
+  },
+  "jason-mraz-im-yours-youtube-20261025": {
+    "sounding": [
+      "B",
+      "F#",
+      "G#m",
+      "E"
+    ],
+    "confidence": "high (B major per Wikipedia and the Musicnotes B-major edition; capo-4 shapes G D Em C)"
+  },
+  "green-day-boulevard-of-broken-dreams-youtube-20261025": {
+    "sounding": [
+      "Fm",
+      "G#",
+      "D#",
+      "A#",
+      "C#",
+      "C"
+    ],
+    "confidence": "medium-high: F minor per Musicnotes; capo-1 shapes Em G D A C B7 sound as Fm, Ab, Eb, Bb, Db and C7; Db and C are shorter"
+  },
+  "beatles-i-want-to-hold-your-hand-youtube-20261025": {
+    "sounding": [
+      "G",
+      "D",
+      "Em",
+      "B",
+      "C",
+      "Dm",
+      "Am"
+    ],
+    "confidence": "medium: G major per Musicnotes, SongBPM and Wikipedia; B is B7; Dm and Am are in the bridge"
+  },
+  "eagle-eye-cherry-save-tonight-youtube-20261025": {
+    "sounding": [
+      "Am",
+      "F",
+      "C",
+      "G"
+    ],
+    "confidence": "high (A minor per Musicnotes; SongBPM estimates the relative C major)"
+  },
+  "tom-petty-learning-to-fly-youtube-20261025": {
+    "sounding": [
+      "F",
+      "C",
+      "Am",
+      "G"
+    ],
+    "confidence": "high (C major per Musicnotes and SongBPM)"
+  },
+  "lumineers-ho-hey-youtube-20261025": {
+    "sounding": [
+      "C",
+      "F",
+      "Am",
+      "G"
+    ],
+    "confidence": "high (C major per Musicnotes, SongBPM and Wikipedia)"
+  },
+  "cat-stevens-wild-world-youtube-20261025": {
+    "sounding": [
+      "Am",
+      "D",
+      "G",
+      "C",
+      "F",
+      "Dm",
+      "E"
+    ],
+    "confidence": "medium: A minor per Musicnotes (SongBPM estimates the relative C major); maj7 colours reduce to the plain triad; Dm versus Bm7b5 uncertain"
+  },
+  "beatles-help-youtube-20261025": {
+    "sounding": [
+      "A",
+      "C#m",
+      "F#m",
+      "D",
+      "G",
+      "Bm",
+      "E"
+    ],
+    "confidence": "medium-high: A major per Musicnotes (SongBPM estimates the relative F#m); C#m, F#m and Bm are the barre shapes"
+  },
+  "proclaimers-im-gonna-be-500-miles-youtube-20261025": {
+    "sounding": [
+      "E",
+      "A",
+      "B",
+      "C#m",
+      "F#m"
+    ],
+    "confidence": "medium: E major per the research notes and a leadsheet edition; the piano/vocal edition is published a semitone lower in Eb, so verify the recording's pitch"
+  },
+  "natalie-imbruglia-torn-youtube-20261025": {
+    "sounding": [
+      "F",
+      "Am",
+      "Dm",
+      "A#",
+      "C"
+    ],
+    "confidence": "medium-high: F major per Musicnotes and SongBPM; Bb is the barre; capo-5 shapes would be C Em Am F"
+  },
+  "queen-crazy-little-thing-called-love-youtube-20261025": {
+    "sounding": [
+      "D",
+      "G",
+      "C",
+      "A",
+      "E",
+      "A#"
+    ],
+    "confidence": "medium: D major per Musicnotes; A is usually A7; Bb turnaround before each chorus; E is brief (SongBPM estimates C major)"
+  },
+  "old-crow-medicine-show-wagon-wheel-youtube-20261025": {
+    "sounding": [
+      "A",
+      "E",
+      "F#m",
+      "D"
+    ],
+    "confidence": "medium (lead: A major four-chord loop, capo-2 G/D/Em/C teaching shapes)"
+  }
+}

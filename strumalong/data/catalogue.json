@@ -1,0 +1,83 @@
+{
+  "schema": "strumalong-catalogue-config-1",
+  "note": "The single place that says which recordings Strum Along ships. strumalong/tools/build-songs.js reads it; paths are relative to the repo root. Founder direction (25 Oct 2026): strumming songs only, ordered by difficulty level. Quick-change line is 40 changes a minute (25 Oct 2026; one chord per bar at 120 BPM is 30 a minute, which is not a quick-change pace).",
+  "packs": [
+    {
+      "id": "automatic-first-ten-v1",
+      "kind": "prepared",
+      "dir": "experiments/generated/automatic-first-ten-v1",
+      "rhythm": "experiments/review/rhythm.json",
+      "practice": "experiments/review/practice.json",
+      "learning": "experiments/review/learning.json",
+      "required": true,
+      "note": "The ten prepared recordings. Every input here is frozen and read only."
+    },
+    {
+      "id": "strumalong-additions-v1",
+      "kind": "additions",
+      "dir": "experiments/generated/strumalong-additions-v1",
+      "rhythm": "experiments/generated/strumalong-additions-v1/rhythm.json",
+      "metadata": "strumalong/data/additions.json",
+      "required": false,
+      "note": "Rock/pop additions imported 24 Oct 2026 (gitignored pack)."
+    },
+    {
+      "id": "strumalong-additions-v2",
+      "kind": "additions",
+      "dir": "experiments/generated/strumalong-additions-v2",
+      "rhythm": "experiments/generated/strumalong-additions-v2/rhythm.json",
+      "metadata": "strumalong/data/additions-v2.json",
+      "required": false,
+      "note": "Strumming-first additions imported 25 Oct 2026 from docs/STRUMALONG_SONG_RESEARCH.md (gitignored pack; rebuild with experiments/analysis/strumalong/additions_pipeline.py and the v2 fixtures)."
+    }
+  ],
+  "exclude": [
+    {
+      "recording_id": "radiohead-creep-youtube-20261010",
+      "title": "Creep",
+      "reason": "Needs barre chords (B, Cm) and the verse is picked, not strummed."
+    },
+    {
+      "recording_id": "animals-house-rising-sun-official-20261011",
+      "title": "The House of the Rising Sun",
+      "reason": "Arpeggiated picking, not strumming."
+    },
+    {
+      "recording_id": "white-stripes-seven-nation-army-youtube-20261011",
+      "title": "Seven Nation Army",
+      "reason": "Riff song; no strummed chord part."
+    },
+    {
+      "recording_id": "nirvana-come-as-you-are-youtube-20261011",
+      "title": "Come as You Are",
+      "reason": "Riff song; no strummed chord part."
+    },
+    {
+      "recording_id": "beatles-love-me-do-youtube-20261011",
+      "title": "Love Me Do",
+      "reason": "Harmonica-led; not a guitar song."
+    },
+    {
+      "recording_id": "green-day-good-riddance-youtube-20261024",
+      "title": "Good Riddance (Time of Your Life)",
+      "reason": "The recorded guitar is picked, not strummed."
+    },
+    {
+      "recording_id": "lynyrd-skynyrd-sweet-home-alabama-youtube-20261024",
+      "title": "Sweet Home Alabama",
+      "reason": "Picked riff, not strumming."
+    },
+    {
+      "recording_id": "america-a-horse-with-no-name-youtube-20261025",
+      "title": "A Horse with No Name",
+      "reason": "The automatic chart cannot tell its two chords apart (Em and the D6add9/F# grip share notes), so it shows Em for up to 46 beats while the song alternates every bar. Needs a hand-checked chart before it can return."
+    }
+  ],
+  "level_overrides": [
+    {
+      "recording_id": "oasis-wonderwall-youtube-20261010",
+      "level": 3,
+      "reason": "Syncopated strum (the founder's 'trickiest song') and capo-2 sus/add9 shapes; its change rate alone would compute Level 2."
+    }
+  ]
+}

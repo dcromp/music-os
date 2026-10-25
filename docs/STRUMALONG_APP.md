@@ -7,13 +7,19 @@ Founder choices made in chat on 24 October 2026:
 - **Delivery:** GitHub Pages. The static app is public but unlisted. It is deployed from a dedicated `gh-pages` branch built from `strumalong/` only, so deployment stays separate from source pushes.
 - **Songs:** the 10 prepared recordings plus new rock/pop additions imported now. Additions use the existing yt-dlp importer and frozen CREMA and rhythm-grid tools. Their charts are automatic and unreviewed.
 
+Founder feedback on 25 October 2026, after using the first build:
+
+- **Strumming songs only.** "There should be enough pop and rock songs to not worry about finger patterns." Picked, arpeggiated and riff songs leave the app (see "Catalogue config" for the list and reasons).
+- **Progressive difficulty.** Songs needing barre chords (Creep's B and Cm) should come later. The library is now grouped into five levels (see "Difficulty levels").
+- **Bar lines landed mid-chord** (Good Riddance). The single song-wide bar phase is replaced by chord-anchored bars (see "Bar model").
+
 ## Non-negotiable constraints (from the repo and tickets)
 
 - Never alter frozen inputs. These are `experiments/review/{rhythm,practice,learning}.json`, everything under `experiments/generated/*` for existing packs, and `automatic_drafts.py`, `rhythm_grid.py` and the other files pinned by `experiments/fixtures/selected-workflow-player-v5.json`. Read them and copy what you need. New outputs go in new files or directories.
 - All charts are **provisional automatic drafts** (#22: nothing is accepted). The UI says so without nagging: one badge per song plus a details line.
 - Strum patterns are **practice suggestions** (glossary). Never call them "recorded strumming" or a transcription.
 - Beats come from an **estimated** grid. Bars are **approximate**: downbeats are not verified.
-- Riff songs (Seven Nation Army, Come As You Are) get no strum drill. Show the riff note instead.
+- The catalogue holds **strumming songs** only. Riff, picked and arpeggiated songs are excluded in `strumalong/data/catalogue.json` with a reason, not deleted from the packs. The app no longer has a riff mode.
 - YouTube rules:
   - Keep the official visible player and put nothing over it.
   - The player must be at least 200×200 CSS px.
@@ -35,8 +41,10 @@ strumalong/                 # deployable root (published to gh-pages as-is)
   lib/shapes.js             # chord grip table + SVG renderer (UMD: window.StrumShapes + module.exports)
   songs/index.json          # catalogue summary (generated)
   songs/<id>.json           # one per recording (generated)
-  data/additions.json       # authored metadata for new songs: capo, setup notes, practice patterns
-  tools/build-songs.js      # node exporter: repo packs -> songs/*.json (not deployed logic, harmless if published)
+  data/catalogue.json       # which recordings ship: packs to read, exclusions with reasons, level overrides
+  data/additions.json       # authored metadata for the v1 additions: capo, setup notes, practice patterns
+  data/additions-v2.json    # (future) the same for the v2 additions pack; skipped while missing
+  tools/build-songs.js      # node exporter: catalogue.json + packs -> songs/*.json (not deployed logic, harmless if published)
   test/*.test.js            # node:assert tests; run: node strumalong/test/run.js
   manifest.webmanifest, icons/, .nojekyll
 ```
@@ -48,22 +56,24 @@ Plain static files with no bundler and no npm install. Scripts are classic `<scr
 ### `songs/index.json`
 
 ```json
-{ "schema": "strumalong-catalogue-1",
-  "groups": [ {"id":"path","title":"Suggested practice path","note":"Provisional order; choose any song."},
-              {"id":"more","title":"More rock & pop","note":"New automatic charts, not yet reviewed."},
-              {"id":"riff","title":"Riff songs","note":"No strumming guide; the chord display does not teach the riff."},
-              {"id":"outside","title":"Also available","note":""} ],
+{ "schema": "strumalong-catalogue-2",
+  "groups": [ {"id":"level-1","level":1,"title":"Level 1 · First chords","note":"Up to three easy shapes from A, D, E, Em and Am."},
+              {"id":"level-2","level":2,"title":"Level 2 · Open chords","note":"..."} ],
   "songs": [ { "id":"troggs-wild-thing-youtube-20261011", "title":"Wild Thing", "artist":"The Troggs",
-               "group":"path", "order":1, "video_id":"bLJkrOYHNw8", "duration_seconds":155.35,
+               "group":"level-1", "order":1, "level":1, "level_label":"First chords",
+               "video_id":"bLJkrOYHNw8", "duration_seconds":155.35,
                "bpm":103, "meter_label":"4/4 assumed", "capo":0,
-               "core_shapes":["A","D","E"], "playable_embed": true, "embed_note":"" } ] }
+               "core_shapes":["A","E","D"], "playable_embed": true, "embed_note":"" } ] }
 ```
+
+- One group per level that has songs, in level order, each with a one-line explanation. `songs` is listed level by level.
+- `order` is the position within the level: fewest `changes_per_min` first, then slower tempo, then title.
 
 ### `songs/<id>.json`
 
 ```json
-{ "schema": "strumalong-song-1",
-  "id": "...", "title": "Wild Thing", "artist": "The Troggs", "group": "path", "order": 1,
+{ "schema": "strumalong-song-2",
+  "id": "...", "title": "Wild Thing", "artist": "The Troggs", "group": "level-1", "order": 1, "level": 1,
   "recording": { "id": "...", "duration_seconds": 155.352, "audio_sha256": "..." },
   "videos": [ { "video_id": "bLJkrOYHNw8", "uploader": "The Troggs - Topic", "kind": "analysed",
                 "offset_seconds": 0, "timing_checked": true, "note": "Chart computed from this upload's audio." } ],
@@ -71,24 +81,177 @@ Plain static files with no bundler and no npm install. Scripts are classic `<scr
              "corrections": [ { "id":"...", "start":23.777, "end":26.099, "from":"E", "to":"A", "note":"Founder report; provisional" } ] },
   "capo": 0, "capo_source": "catalogue|suggested|none",
   "setup_note": "Standard tuning (EADGBE).",
+  "difficulty": { "level":1, "label":"First chords", "main_shapes":["A","E","D"], "hardest_shape":"A",
+                  "tier_reason":"A, E, D: all first-chord shapes (tier 1), 3 main shapes. ...",
+                  "changes_per_min":30.2, "median_hold_beats":2,
+                  "computed_level":3, "override_reason":"..." },
   "rhythm": { "status":"estimated", "bpm":103.4, "beats_per_bar":4, "beats_per_bar_assumed":false,
-              "meter_label":"4/4 assumed", "bar_phase":0, "bar_phase_confident":false },
+              "meter_label":"4/4 assumed", "bar_phase":0, "bar_phase_confident":false, "bar_phase_share":0.4,
+              "bar_model":"anchored-1", "bar_confident_pct":100 },
   "beats": [0.232, 0.813, ...],
-  "chords": [ { "s":0, "e":2.415, "l":"N" }, { "s":2.415, "e":4.087, "l":"A" }, { "s":23.777, "e":26.099, "l":"A", "c":1 } ],
-  "strumming": { "note":"...", "patterns":[ {"id":"steady-down","name":"Start: steady downstrokes","counts":["1","2","3","4"],"strokes":["D","D","D","D"],"description":"..."} ] },
+  "chords": [ { "s":0, "e":2.415, "l":"N", "b":0 }, { "s":2.415, "e":4.087, "l":"A", "b":0 },
+              { "s":23.777, "e":26.099, "l":"A", "c":1, "b":0 }, { "s":90.1, "e":92.2, "l":"D", "b":3, "a":1 } ],
+  "strumming": { "note":"...", "source":"authored|level-default",
+                 "patterns":[ {"id":"steady-down","name":"Start: steady downstrokes","counts":["1","2","3","4"],"strokes":["D","D","D","D"],"description":"..."} ] },
   "learning": { "skill_focus":"...", "prerequisites":"...", "sources":[{"title":"...","url":"..."}] },
-  "riff": null | { "note": "The chord display and strumming arrows do not teach the riff. ..." },
-  "provenance": { "pack":"automatic-first-ten-v1", "manifest_sha256":"...", "rhythm_sha256":"...", "practice_sha256":"...", "learning_sha256":"..." } }
+  "provenance": { "pack":"automatic-first-ten-v1", "manifest_sha256":"...", "rhythm_sha256":"...", "practice_sha256":"...",
+                  "learning_sha256":"...", "catalogue_sha256":"..." } }
 ```
 
 - Times are seconds, rounded to 3 decimals.
 - `l` is the **sounding** label after display corrections. `N` means no chord and `X` means unclear.
 - `c:1` marks a corrected event.
+- `b` and `a` are the chord's bar anchor (see "Bar model"): `b` is the bar phase while the chord is held, and `a:1` marks an approximate anchor. Chords outside the beat grid have no `b`.
 - Shape (capo) and Core labels are computed at runtime by `lib/core.js`.
 - When `beats_per_bar` is null (Wonderwall), the exporter writes 4 and `beats_per_bar_assumed: true`.
-- `bar_phase` is a heuristic chord-start residue vote, not a verified downbeat. Every native chord start that is not N or X and lies strictly inside the beat grid votes for `round(beatPosition(start)) mod beats_per_bar`, which is the beat the app draws as that hold's first dot. Ties keep the lowest residue. `bar_phase_confident` is true when there are at least 8 votes and the winning share is at least 0.7; an assumed meter is never confident. `bar_phase_share` records the share.
+- `bar_phase` is the old song-wide heuristic: a chord-start residue vote, not a verified downbeat. Every native chord start that is not N or X and lies strictly inside the beat grid votes for `round(beatPosition(start)) mod beats_per_bar`. Ties keep the lowest residue. `bar_phase_confident` is true when there are at least 8 votes and the winning share is at least 0.7; an assumed meter is never confident. `bar_phase_share` records the share. Since the bar model, these fields are only the fallback for chords without `b` and a summary.
+- `bar_confident_pct` is the share of chord beats under a confident (not approx) anchor.
+- `strumming.source` is `authored` for the prepared songs' `practice.json` patterns and for patterns in an additions metadata file, and `level-default` when the song had none (see "Difficulty levels").
 - `core_shapes` (index card chips) lists the Core shapes at the song's capo by chord seconds. Shapes under 3% of chord time are dropped, as are slash shapes under 10%. The list is longest first and holds at most 6.
-- A video entry carries `embeddable: false` only when that upload is known not to play in an embed (Come as You Are's age-restricted analysed upload). The app then starts on the first embeddable entry.
+- A video entry carries `embeddable: false` only when that upload is known not to play in an embed (`playable_embed: false` in additions metadata, which also needs an embeddable alternate). The app then starts on the first embeddable entry.
+
+## Catalogue config (`strumalong/data/catalogue.json`)
+
+The single place that says which recordings are in the app. The exporter reads nothing else to decide membership. Paths are relative to the repo root.
+
+- `packs`: read in order.
+  - `kind: "prepared"` (`automatic-first-ten-v1`): the pack `dir` plus its frozen `rhythm`, `practice` and `learning` files. `required: true`, so a missing pack stops the build.
+  - `kind: "additions"`: the pack `dir`, its `rhythm.json` and an authored `metadata` file (`strumalong-additions-1` schema). `strumalong-additions-v1` uses `data/additions.json`. `strumalong-additions-v2` (pack `experiments/generated/strumalong-additions-v2/`, metadata `strumalong/data/additions-v2.json`) is configured now and skipped with a log line until both exist. An optional pack is skipped gracefully when missing or unusable; a required one stops the build.
+- `exclude`: `{recording_id, title, reason}`. Excluded recordings are skipped before building, so they need no title or metadata.
+- `level_overrides`: `{recording_id, level, reason}`. The song keeps `difficulty.computed_level` and shows `override_reason` in Details. A recording cannot be both excluded and overridden.
+- The exporter warns about an override for a song that is not built, and about a manifest case without metadata.
+
+Dropped on 25 October 2026 (founder feedback), still in their packs:
+
+| Song | Reason |
+|---|---|
+| Radiohead – Creep | Needs barre chords (B, Cm) and the verse is picked, not strummed. |
+| The Animals – The House of the Rising Sun | Arpeggiated picking, not strumming. |
+| The White Stripes – Seven Nation Army | Riff song; no strummed chord part. |
+| Nirvana – Come as You Are | Riff song; no strummed chord part. |
+| The Beatles – Love Me Do | Harmonica-led; not a guitar song. |
+| Green Day – Good Riddance (Time of Your Life) | The recorded guitar is picked, not strummed. |
+| Lynyrd Skynyrd – Sweet Home Alabama | Picked riff, not strumming. |
+
+13 songs remain. With the riff songs gone, the exporter's riff mode, the learning-path, riff and "also available" groups, and the Come as You Are alternate-video constants were removed. Generic alternate videos (`alternates` in additions metadata) remain.
+
+## Bar model
+
+The problem: one song-wide `bar_phase` anchored every bar line and the strum count "1", even when the vote was weak. Good Riddance's chord changes fell on bar positions 0–3 at 32/21/25/15, so most bar lines landed one to three beats into a chord. The beat grid or the chart slips by a beat now and then (Wild Thing's last third), and one phase cannot follow that.
+
+**Objective**, measured per song by `barMetrics` in `tools/build-songs.js` on exactly what `lib/core.js` draws:
+
+- `on_bar_or_half`: % of chord changes (chord holds that are not N and not quick) whose first beat is a bar start or the half-bar.
+- `weird`: drawn bar lines that fall 1 beat after a change or 1 beat before the next change, inside a hold of 3+ beats.
+- `split`: short holds (2 to `beats_per_bar` beats) with a bar line inside them, such as "○○|○○" for a one-bar chord.
+- `restarts`: bar starts that come less or more than a bar after the previous one, where the strum count restarts.
+- `approx_pct`: % of chord beats under an approximate anchor.
+
+**Model** (`barAnchors`, exporter): a Viterbi pass over the chord changes of the default-view timeline (Core merges; they do not depend on the capo view). Each change takes one of the `beats_per_bar` phases or **hold-relative** (the change starts a bar, with further lines every `beats_per_bar` beats inside long holds). The costs live in `BAR_COST`:
+
+- 1 per weird line and 1 per split hold.
+- 0.5 per change off the bar and half-bar. 0.1 per change on the half-bar, or 0.5 if a hold of a bar or longer starts there.
+- 1.75 per phase switch (a local slip) and 2.5 to enter or leave hold-relative.
+- 0.8 per hold-relative restart after a hold that is not a whole number of bars, and 0.1 per hold-relative hold, so a steady phase wins whenever it draws the same bars.
+
+This gives three cases:
+
+- One run of one phase is the old **global** phase. Five songs (Zombie, Have You Ever Seen the Rain, Brown Eyed Girl, Bad Moon Rising and Free Fallin') get exactly that.
+- Several runs are **local** phases that follow a slip.
+- Hold-relative bars are the fallback where no phase fits. No current song needs them; a three-beat song on a four-beat grid does.
+
+A phase run is **confident** when it has at least 8 changes, at least 80% of them on a bar or half-bar, at least as many on the bar as on the half-bar, and the meter is not assumed. Hold-relative and unconfident runs are approx. N, X and quick holds take the anchor of the run they sit in; in a hold-relative run a quick hold takes the next hold's anchor, as a pickup.
+
+**Storage and consumption.** The exporter writes `b`/`a` on each native chord (`applyBarAnchors`). Natives inside one Core-merged hold share it, so Full view draws the same bars as Simple view. `lib/core.js` builds a per-beat anchor map: each grid beat takes the anchor of the chord whose dots own it, `round(startBeat)` to `round(endBeat) − 1`. Beats no chord owns take the nearest owned anchor, earlier first. Bar lines, NEXT's bar-start border and the strum count all read this one map, so a drawn bar line is always where the count reads 1, and the reverse holds too. A song without `b` behaves exactly as before.
+
+**Results** on 25 October 2026 (before = song-wide `bar_phase`, after = anchored):
+
+| Song | changes on bar/half % | weird | split | restarts | approx % |
+|---|---|---|---|---|---|
+| Wild Thing | 64.5 → 85.5 | 10 → 0 | 13 → 0 | 0 → 1 | 100 → 0 |
+| Zombie | 92.6 → 92.6 | 6 → 6 | 0 → 0 | 0 → 0 | 0 → 0 |
+| Take Me Home, Country Roads | 91.7 → 98.3 | 4 → 0 | 12 → 0 | 0 → 2 | 100 → 8.9 |
+| Knockin' on Heaven's Door | 95.3 → 96.9 | 2 → 1 | 2 → 1 | 0 → 0 | 100 → 1.8 |
+| Bad Moon Rising | 100 → 100 | 2 → 2 | 0 → 0 | 0 → 0 | 0 → 0 |
+| Riptide | 69.8 → 90.6 | 20 → 4 | 25 → 1 | 0 → 4 | 100 → 4.8 |
+| Free Fallin' | 58.3 → 58.3 | 12 → 12 | 0 → 0 | 0 → 0 | 100 → 100 |
+| Wonderwall | 94.4 → 95.8 | 5 → 4 | 5 → 2 | 0 → 3 | 100 → 100 |
+| Brown Eyed Girl | 98.1 → 98.1 | 2 → 2 | 0 → 0 | 0 → 0 | 0 → 0 |
+| Twist and Shout | 94 → 96 | 6 → 2 | 2 → 0 | 0 → 3 | 100 → 7.8 |
+| Island in the Sun | 96.4 → 97.6 | 1 → 0 | 3 → 1 | 0 → 2 | 100 → 4.3 |
+| Have You Ever Seen the Rain | 100 → 100 | 0 → 0 | 0 → 0 | 0 → 0 | 0 → 0 |
+| Don't Look Back in Anger | 94.3 → 95 | 4 → 3 | 2 → 1 | 0 → 1 | 100 → 0.8 |
+| *Good Riddance (dropped)* | 60.6 → 85.1 | 13 → 5 | 22 → 5 | 0 → 4 | 100 → 28.6 |
+
+Across the 13 songs, weird lines fall from 74 to 36 and split holds from 64 to 6. The remaining lines are mostly in the chart, not the bars:
+
+- **Zombie:** a chord detected one beat late after a correct bar line.
+- **Free Fallin':** D is held 4n+1 beats before G arrives on beat 2. That is the song's push, and every phase draws it the same way.
+- **Wonderwall:** 2/4 bars. It stays approx because its meter is assumed.
+
+Many songs lose the "approx bars" label because a steady phase now fits changes on the bar or the half-bar, where the old rule needed 70% on one exact residue. The exporter prints this table on every build.
+
+## Difficulty levels
+
+Lead decision, 25 October 2026. Shapes are what the player frets: Core shapes at the song's default view (capo shapes, Simple).
+
+| Tier | Shapes |
+|---|---|
+| T1 | A, D, E, Em, Am and A7, D7, E7, Am7, Em7, Asus2, Asus4, Dsus2, Dsus4, Esus4 |
+| T2 | G, C, Dm, G7, C7, B7, Cadd9, Cmaj7, Fmaj7, Dm7, G/B, D/F#, C/G |
+| T3 | F (incl. mini-F), Bm, Bm7, F#m: first barre-type shapes |
+| T4 | every other shape (B, Bb, Cm, C#m, G#m, Gm, F#, Eb, Ab, Db, Fm, dim …) |
+
+Other slash shapes take their root shape's tier, because the diagram omits the bass note.
+
+- **Main shapes** are Core shapes covering at least 4% of chord time, ignoring N, X and blips (holds under 0.75 beat).
+- **Changes per minute** counts label changes between consecutive non-blip chord holds, but not across N or X, per minute of non-blip chord time.
+- **Median hold** is in beats per non-blip chord hold.
+
+| Level | Rule (`difficultyOf`) |
+|---|---|
+| 5 · Barre chords | any T4 main shape |
+| 4 · First barre (F / Bm) | any T3 main shape, no T4 |
+| 3 · More changes | all ≤ T2 with 5+ main shapes; or an L1/L2 song with quick changes (median hold ≤ 2 beats at ≥ 120 BPM, or ≥ 40 changes/min) or an authored `needs_syncopation: true` |
+| 2 · Open chords | all ≤ T2 with ≤ 4 main shapes, or all T1 with 4+ |
+| 1 · First chords | all T1 with ≤ 3 main shapes |
+
+`tier_reason` states the main shapes, the hardest tier and the pace. A `level_overrides` entry in the catalogue config replaces the level and keeps the computed one.
+
+**Label aliases (25 Oct 2026).** An additions metadata entry may carry `label_aliases: {map: {chartLabel: displayLabel}, note}` when the automatic chart names a chord differently from the grip players use. It was built for A Horse with No Name (chart `F#m7`, `Dmaj7/F#`, `Dmaj7`, `D`, `D/F#` → the two-finger `D6add9/F#` grip `200200`, a tier-1 shape), but that song was then excluded: its chart misses most of the bar-by-bar changes. Aliased events carry `c:1`, and each alias is listed in `chart.corrections` with the span of the events it relabels. Timings never change.
+
+**Zero-beat holds.** A hold that owns no grid beat after rounding (for example 0.87 beat from 30.52 to 31.39) is shown as a quick change, so neighbouring holds still hand over beats exactly.
+
+Default practice patterns, used only for songs with no authored patterns (an additions entry without `strumming.patterns`):
+
+| Level | Start | Next |
+|---|---|---|
+| 1 | steady downstrokes | down-up eighths |
+| 2 | down-up eighths | D — D U — U D U |
+| 3 | D — D U — U D U | let count 3 ring (D U D U — U D U) |
+| 4, 5 | D — D U — U D U | anchor beats 1 and 3 (D — D U D — D U) |
+
+A meter other than 4 beats per bar gets steady downstrokes and down-up eighths at any level. Prepared songs keep their `practice.json` patterns, and the v1 additions keep their authored ones.
+
+Levels on 25 October 2026:
+
+| Level | Song (order) | Main shapes | Changes/min | Why |
+|---|---|---|---|---|
+| 1 | Wild Thing | A E D | 30.2 | Override: all T1, but 30.2/min reaches the quick line (computed L3). Kept first, as in the original learning path. |
+| 2 | Zombie | Em G C D | 18.5 | open, 4 shapes |
+| 2 | Take Me Home, Country Roads (capo 2) | G D C Em | 19.1 | open, 4 shapes |
+| 2 | Knockin' on Heaven's Door | G D Am C | 26.1 | open, 4 shapes |
+| 2 | Bad Moon Rising | D G A | 28.7 | open, 3 shapes |
+| 2 | Riptide (capo 1) | C Am G | 29.0 | open, 3 shapes (F is 3.1%, not a main shape) |
+| 3 | Free Fallin' (capo 3) | D G A | 30.7 | quick changes |
+| 3 | Wonderwall (capo 2) | Em G C D | 34.0 | quick changes |
+| 3 | Brown Eyed Girl | G D C | 34.2 | quick changes (~152 BPM) |
+| 3 | Twist and Shout | A D G | 40.2 | quick changes; median hold 2 beats at ~123 BPM |
+| 3 | Island in the Sun | D G Em Am | 51.4 | quick changes |
+| 4 | Have You Ever Seen the Rain | C G F Am | 18.2 | F (T3) |
+| 4 | Don't Look Back in Anger | C G F Am Em | 29.8 | F (T3) |
+
+Level 5 is empty now; Creep would have been Level 5 (B, Cm).
 
 ## `lib/core.js` API (pure, unit-tested)
 
@@ -104,12 +267,13 @@ Ported helpers from `experiments/review/app.js` keep their names and behaviour. 
   - **Dot count** is `round(endBeat) − round(startBeat)`, with a minimum of 1, so each grid beat belongs to exactly one hold.
   - **Short spans:** if the span is under 0.75 beat, set a `quick:true` flag and show one dot.
   - **Long spans:** cap at `2*beats_per_bar` dots and set `more:n` for the rest. The UI shows something like "+4".
-  - **Bar lines:** place one before dot k when `(round(startBeat)+k - bar_phase) mod bpb == 0` and k>0. This single `bar_phase` anchor drives both the bar lines and the strum count, so a bar line is always where the strum count reads 1. Nothing is anchored to the hold, because the strumming hand keeps one pendulum across chord changes. When `bar_phase_confident` is false, the lines still use `bar_phase`, the UI labels them "approx bars", and NEXT gets no solid bar-start border (`barStart: null`).
+  - **Bar lines:** place one before dot k when beat `B = round(startBeat)+k` is a bar start under the per-beat anchor, `(B - phase(B)) mod bpb == 0`, and k>0 (see "Bar model"). The same anchor drives the strum count, so a bar line is always where the strum count reads 1. When the anchor at the hold's first beat is approximate, the part has `approx: true`, NEXT gets no solid bar-start border (`barStart: null`), and `cue.approxBars` (from the anchor at the current beat) makes the UI show "approx bars". A song without `b` fields uses `bar_phase` everywhere, approximate unless `bar_phase_confident`.
   - **Outside the beat grid:** fall back to seconds, with `dots` empty and `seconds` set.
 - `strumStep(song, pattern, t)` returns the index into `pattern.strokes` at time t, or null outside the grid.
   - `stepsPerBeat = pattern.counts.length / bpb`
-  - `pos = ((beatFloat - bar_phase) mod bpb + bpb) mod bpb`
+  - `pos = ((beatFloat - phase(floor(beatFloat))) mod bpb + bpb) mod bpb`, with `phase` the per-beat anchor
   - `step = floor(pos*stepsPerBeat)`
+- `barAnchorAt(song, beat)` returns `{phase, approx, bar, half, anchored}` for an integer grid beat (a fractional one uses its floor). `bar` means the strum count reads 1 there. The per-beat map is cached per song object and rebuilt when `song.chords`, `song.beats` or the rhythm fields change identity or value.
 - `suggestCapo(chords)` is exported for the exporter. For each capo from 0 to 7 it scores the share of chord seconds whose core shape is one of the easy open shapes A, Am, C, D, Dm, E, Em, G. F, Bm and B7 get half credit. It returns `{capo, score, scores[]}`, preferring the lower capo on near-ties (within 0.03).
 - `cueTime(playerSeconds, offsetSeconds, nudgeMs, latencyMs, rate)` returns `player + offset + nudge/1000 − latency/1000 × rate`. Latency is wall-clock delay, so at 0.5× it covers half as much media time. The nudge and offset are media time and are not scaled. A rate that is not a positive number counts as 1.
 - `formatTime(s)` returns "m:ss".
@@ -124,11 +288,11 @@ Ported helpers from `experiments/review/app.js` keep their names and behaviour. 
 ## UI
 
 - **Library (`#/`).**
-  - Grouped song cards. Each shows the title, artist, up to 6 Core shape chips, ~BPM and a capo badge. When the analysed upload can't be embedded, the card also gets a "timing unchecked" badge (or "alternate video" if the alternate's timing was checked).
+  - Song cards grouped by level ("Level 1 · First chords" … "Level 5 · Barre chords"), each group with its one-line explanation, in the index order (easiest first within a level). Each card shows the title, artist, up to 6 Core shape chips, ~BPM and a capo badge. When the analysed upload can't be embedded, the card also gets a "timing unchecked" badge (or "alternate video" if the alternate's timing was checked).
   - A last-played song gets a resume chip.
   - The header reads "Strum Along · music-os", with the line "Provisional automatic chord charts. For personal practice."
 - **Song (`#/song/<id>`), portrait, top to bottom:**
-  1. A top bar with a back link, the title and the provisional badge.
+  1. A top bar with a back link, the title, and the capo, level ("Level 2", titled with its label) and provisional badges.
   2. The YouTube player at full width, 16:9, with nothing on top.
   3. The **cue panel**, layout A as approved in #23.
      - The NOW chord is large, with the NEXT chord immediately to its right.
@@ -144,7 +308,7 @@ Ported helpers from `experiments/review/app.js` keep their names and behaviour. 
      - "−10 s", restart, speed (`getAvailablePlaybackRates`), and "Hide cues" for interruptions.
      - A **sync nudge** (−/+ 50 ms, showing the current offset), saved per video in localStorage.
      - A **View** group: Simple (Core) or Full chords, Capo shapes or Sounding when the capo is above 0, and Diagrams on or off.
-  7. **Details** (collapsed): setup note, skill focus, sources (links), chart status, corrections, the video's uploader, and "Open on YouTube".
+  7. **Details** (collapsed): setup note, level with its reason (or the override reason), skill focus, sources (links), chart status, beats and bars (how much of the song shows approx bars), corrections, the strumming note, the video's uploader, and "Open on YouTube".
 - **Song (`#/song/<id>`), landscape at 700 px wide or more:** a two-column grid, with the player and controls on the left and cues, strum and diagrams on the right.
 - **Theme.** Use the palette of layout A and the Mac player: background `#f4f1e8`, text `#222b27`, accent `#22543e`, panels white with `#d4d8cc` borders. Add a dark mode via `prefers-color-scheme`.
 - **Sizing.** Large tap targets of at least 44 px. Respect safe areas with `viewport-fit=cover` and `env(safe-area-inset-*)`.
@@ -186,14 +350,14 @@ First picks, with fallbacks in order:
 | Song | Notes |
 |---|---|
 | The Cranberries – Zombie | |
-| Green Day – Good Riddance (Time of Your Life) | |
+| Green Day – Good Riddance (Time of Your Life) | excluded 25 Oct: picked |
 | Oasis – Don't Look Back in Anger | |
 | Creedence Clearwater Revival – Have You Ever Seen the Rain | |
 | Creedence Clearwater Revival – Bad Moon Rising | |
 | Tom Petty – Free Fallin' | capo 3 shapes |
 | Weezer – Island in the Sun | |
 | John Denver – Take Me Home, Country Roads | capo 2 shapes |
-| Lynyrd Skynyrd – Sweet Home Alabama | |
+| Lynyrd Skynyrd – Sweet Home Alabama | excluded 25 Oct: picked riff |
 | Vance Joy – Riptide | capo 1 shapes |
 | *Fallbacks:* The Beatles – Let It Be; Counting Crows – Mr. Jones; Blind Melon – No Rain; The Lumineers – Ho Hey; R.E.M. – Losing My Religion | |
 
@@ -205,9 +369,11 @@ Steps:
 4. Write a new gitignored pack at `experiments/generated/strumalong-additions-v1/` that mirrors the `automatic-first-ten-v1` manifest structure, plus its own `rhythm.json`.
 5. Authored capo, setup notes and two practice patterns per song go in `strumalong/data/additions.json`. These are suggestions and are labelled as such.
 
+A **v2 pack** follows the same steps into `experiments/generated/strumalong-additions-v2/`, with metadata in `strumalong/data/additions-v2.json` (same `strumalong-additions-1` schema). Song choice is researched in `docs/STRUMALONG_SONG_RESEARCH.md`, which is another workstream. In the metadata, `strumming.patterns` is optional: without it the song gets its level's default patterns. `needs_syncopation: true` marks a song whose strum needs syncopation, which moves an L1/L2 song to L3. `catalogue.json` already lists the pack, and the exporter builds it once its manifest, `rhythm.json` and metadata exist. Exclude any import that turns out picked or riff-based in `catalogue.json` with a reason.
+
 ## Verification
 
-- `node strumalong/test/run.js` passes.
+- `node strumalong/test/run.js` passes. Besides unit tests, it checks on the built songs that every beat's count 1 matches a bar start in both directions, and that the anchored bars never add weird or split lines over the song-wide phase. It also checks that the overall count is at least halved, and that the anchors can be rebuilt from the chart and grid.
 - `node strumalong/tools/build-songs.js --check` prints CHECK OK. `scripts/deploy-strumalong.sh` runs it after the tests and stops if `songs/` is stale.
 - The existing `node experiments/review/test.js` still reports 96 checks.
 - The frozen-pin check passes: `.venv-analysis/bin/python -B experiments/analysis/workflow_check.py --policy experiments/fixtures/selected-workflow-player-v5.json`.

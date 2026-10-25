@@ -212,7 +212,6 @@
 
   function viewFor(song) { return num(song.capo) && song.capo > 0 ? settings.view : "shapes"; }
   function patternsOf(song) {
-    if (song.riff) return [];
     const list = song.strumming && Array.isArray(song.strumming.patterns) ? song.strumming.patterns : [];
     return list.filter(p => p && typeof p.id === "string" && Array.isArray(p.strokes) && p.strokes.length);
   }
@@ -263,7 +262,7 @@
     return `<header class="topbar">
       <a class="back" href="#/" aria-label="Back to songs">‹ Songs</a>
       <div class="top-title"><h1>${esc(song.title)}</h1><p>${esc(song.artist)}</p></div>
-      <span class="top-badges">${capo ? `<span class="badge capo" id="capo-badge">Capo ${capo}</span>` : ""}<span class="badge prov" title="Automatic chord chart; not reviewed">Provisional</span></span>
+      <span class="top-badges">${capo ? `<span class="badge capo" id="capo-badge">Capo ${capo}</span>` : ""}${levelBadge(song)}<span class="badge prov" title="Automatic chord chart; not reviewed">Provisional</span></span>
     </header>
     <div class="song-grid">
       <div class="col-video">
@@ -326,6 +325,16 @@
         <details class="panel details" id="details"><summary>Details</summary><div id="details-body"></div></details>
       </div>
     </div>`;
+  }
+
+  function levelOf(song) {
+    const d = song && song.difficulty;
+    const level = d && Number.isInteger(d.level) ? d.level : Number.isInteger(song && song.level) ? song.level : null;
+    return level >= 1 && level <= 5 ? { level, label: d && typeof d.label === "string" ? d.label : "" } : null;
+  }
+  function levelBadge(song) {
+    const l = levelOf(song);
+    return l ? `<span class="badge level" title="${esc(l.label)}">Level ${l.level}</span>` : "";
   }
 
   function rebuildTimeline() {
@@ -695,14 +704,6 @@
   function renderStrumPanel() {
     const panel = $("strum-panel");
     if (!panel) return;
-    const song = S.song;
-    if (song.riff) {
-      panel.hidden = false;
-      panel.innerHTML = `<h2 class="panel-title">Riff song</h2><p>${esc(song.riff.note || "The chord display and strumming arrows do not teach the riff.")}</p>
-        <p class="muted">No strumming guide for this song.</p>`;
-      S.strumCells = [];
-      return;
-    }
     const pattern = S.patterns.find(p => p.id === S.patternId);
     if (!pattern) { panel.hidden = true; panel.innerHTML = ""; S.strumCells = []; return; }
     panel.hidden = false;
@@ -820,16 +821,27 @@
       setup += `${setup ? " " : ""}Capo ${esc(song.capo)} (${source}). Capo shapes show what your hand holds; Sounding shows the pitches heard.`;
     }
     add("Setup", setup);
+    const level = levelOf(song), difficulty = song.difficulty || {};
+    if (level) {
+      const why = difficulty.override_reason || difficulty.tier_reason || "";
+      add("Level", `<b>Level ${level.level}${level.label ? ` · ${esc(level.label)}` : ""}.</b> ${esc(why)}`);
+    }
     add("Skill focus", esc(learning.skill_focus || ""));
     add("Before this", esc(learning.prerequisites || ""));
     add("Chart", `Provisional ${esc(chart.source || "automatic draft")}; not reviewed, and chords may be wrong. Simple view reduces chords to core shapes.`);
     const bpm = num(rhythm.bpm) ? `~${Math.round(rhythm.bpm)} BPM, ` : "";
-    add("Beats", `Estimated beat grid: ${bpm}${esc(rhythm.meter_label || "meter unknown")}. Bars are approximate; downbeats are not verified.${rhythm.beats_per_bar_assumed ? ` ${esc(rhythm.beats_per_bar || 4)} beats per bar assumed.` : ""}${rhythm.bar_phase_confident ? "" : " Bar lines follow an estimated downbeat (approx bars) and may sit a beat off."}`);
+    const anchored = rhythm.bar_model === "anchored-1" && num(rhythm.bar_confident_pct);
+    const barNote = anchored
+      ? (rhythm.bar_confident_pct >= 95 ? " Bar lines follow a steady estimated downbeat fitted to the chord changes."
+        : rhythm.bar_confident_pct <= 0.5 ? " All bar lines are approx bars: the downbeat is a guess, and a bar may restart at a chord change."
+        : ` About ${esc(Math.round(100 - rhythm.bar_confident_pct))}% of the song shows approx bars: the downbeat there is a guess, and a bar may restart at a chord change.`)
+      : rhythm.bar_phase_confident ? "" : " Bar lines follow an estimated downbeat (approx bars) and may sit a beat off.";
+    add("Beats", `Estimated beat grid: ${bpm}${esc(rhythm.meter_label || "meter unknown")}. Bars are approximate; downbeats are not verified.${rhythm.beats_per_bar_assumed ? ` ${esc(rhythm.beats_per_bar || 4)} beats per bar assumed.` : ""}${barNote}`);
     const corrections = chart.corrections && Array.isArray(chart.corrections) ? chart.corrections : [];
     if (corrections.length) {
       add("Corrections", `<ul>${corrections.map(c => `<li>${Core.formatTime(c.start)}–${Core.formatTime(c.end)}: ${esc(c.from)} → ${esc(c.to)}${c.note ? ` (${esc(c.note)})` : ""}</li>`).join("")}</ul>`);
     }
-    if (song.strumming && song.strumming.note && !song.riff) add("Strumming", esc(song.strumming.note));
+    if (song.strumming && song.strumming.note) add("Strumming", esc(song.strumming.note));
     const v = S.video;
     if (v) {
       add("Video", `${esc(v.uploader || "YouTube")}${v.note ? ` · ${esc(v.note)}` : ""}${v.timing_checked === false ? " · <b>timing unchecked</b>" : ""}
