@@ -3,7 +3,7 @@
   "generated_from": {
     "catalogue": {
       "path": "strumalong/data/catalogue.json",
-      "sha256": "5cd3781b0a21e17bcec4115fe106bb6322ceb1bc119659ab2a2fd234b9a80ec6"
+      "sha256": "da053fc699c14948dd0dc0f5d76b747d1957d87a1bf7cf45147e78e6b3488d36"
     },
     "packs": [
       {
@@ -29,6 +29,14 @@
         "cases": 24,
         "manifest_sha256": "55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd",
         "rhythm_sha256": "0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459"
+      },
+      {
+        "id": "strumalong-additions-v3",
+        "dir": "experiments/generated/strumalong-additions-v3",
+        "available": true,
+        "cases": 12,
+        "manifest_sha256": "fd59661fcc37f9590bf5c2bf953b296ada72e016061c7dcc8b3b0a0391d78203",
+        "rhythm_sha256": "642ecd5ddaef059d37f9730a73a30170dc563072e1e81bfb6808d1c00937ecdc"
       }
     ],
     "files": [
@@ -39,6 +47,10 @@
       {
         "path": "experiments/analysis/strumalong/expected-chords-v2.json",
         "sha256": "a83e9cd6aabebc43a2203901be303b07233ea07d33955ec98f518324b88426e4"
+      },
+      {
+        "path": "experiments/analysis/strumalong/expected-chords-v3.json",
+        "sha256": "9b75af19baac403e9982eabd47686c1b5e71abd7d59d20d688af73609cb8c01f"
       },
       {
         "path": "experiments/analysis/strumalong/expected-chords.json",
@@ -89,19 +101,27 @@
         "sha256": "0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459"
       },
       {
+        "path": "experiments/generated/strumalong-additions-v3/manifest.json",
+        "sha256": "fd59661fcc37f9590bf5c2bf953b296ada72e016061c7dcc8b3b0a0391d78203"
+      },
+      {
+        "path": "experiments/generated/strumalong-additions-v3/rhythm.json",
+        "sha256": "642ecd5ddaef059d37f9730a73a30170dc563072e1e81bfb6808d1c00937ecdc"
+      },
+      {
         "path": "experiments/review/rhythm.json",
         "sha256": "09c5c68dc1dc44f8380871744c59d00043e1c6ea42650f3911353f84a78962f7"
       }
     ],
-    "songs_index_sha256": "af7a842ab924fd43b5c2738f83f11a31fe400161797f2e283b1c4d07e5e2226e",
-    "exported_songs": 34,
+    "songs_index_sha256": "963caca186189e6465e891fbe22fc2f5bba7d43f9e62ac228671ea9c9433f92d",
+    "exported_songs": 43,
     "instrument_tags": {
       "path": "experiments/generated/strumalong-instrument-tags.json",
-      "sha256": "f06ab6ad2c5294b26227ffa42ebaf303b090c22d1fff14bcd333d295926b71c3"
+      "sha256": "3e93ab12b72bf7645aefc6ed0a074aa2f0bb7ac126ca18e2702d31e652c4951c"
     },
     "hold_checks": {
       "path": "experiments/generated/strumalong-hold-checks.json",
-      "sha256": "0b1ec266fde363d3a1c2c1fac8dfd2d4464e03ea17ccada6d68c98a02aecc6f9"
+      "sha256": "98663c3ea454f6cf30522cd35c055ba60b105b90a965f91221db418725d09dec"
     }
   },
   "thresholds": {
@@ -184,15 +204,15 @@
     }
   },
   "summary": {
-    "recordings": 44,
-    "shipped": 34,
-    "excluded": 10,
-    "shipped_pass": 19,
-    "shipped_flag": 15,
+    "recordings": 56,
+    "shipped": 43,
+    "excluded": 13,
+    "shipped_pass": 21,
+    "shipped_flag": 22,
     "shipped_fail": 0,
     "excluded_pass": 0,
     "excluded_flag": 7,
-    "excluded_fail": 3
+    "excluded_fail": 6
   },
   "unmatched_exclusions": [],
   "songs": [
@@ -205,7 +225,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81",
-      "exported_sha256": "9e8cbbdb4173d1b52077305f92ecffdbd1f2bc78454ba738c6553295fb83cea9",
+      "exported_sha256": "6d633bc45ac01f9b3b200377154e076032303b42df5209c5b4c96d36725573bd",
       "checks": {
         "chords": {
           "status": "pass",
@@ -443,7 +463,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "022405eadb0d332a34ca66b74989e72cc5e597e57417c1a289178e0a7a084082",
-      "exported_sha256": "4b7b736f88404bf4fe7749703a6476022d78d4b76dd6b8604d61fe38d5e10787",
+      "exported_sha256": "e62f8bc505b66e7b3b292ccd0dc355b5fc67be181dc3da753a5f3675b493c5e2",
       "checks": {
         "chords": {
           "status": "pass",
@@ -650,7 +670,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "1bc1f1c9467a8bea0aab8e8ae9ea4ccbd3f71ce47c52a1376f591528bcb1170d",
-      "exported_sha256": "623adbde3844eeca70b62450c052ea4d9e3d26995f9352358828b2610713b901",
+      "exported_sha256": "19626523da2c83623098337c505141e1d5f44f5162de9169303a982b432f187c",
       "checks": {
         "chords": {
           "status": "pass",
@@ -1057,7 +1077,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "09f64db9a6563e2256c528576bd9776b13c84128ce3b982810b8dfbe6145bb59",
-      "exported_sha256": "0fde25db6155e6f3416783cae5fe2dbaae6dbd73f150fe5bcf89aa8209238c08",
+      "exported_sha256": "371a649116218d40e530a7ce548dc534dd07a2a5f3425b844a4ff707f328f5f2",
       "checks": {
         "chords": {
           "status": "pass",
@@ -2010,7 +2030,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "1d696977fe56f91126f3e838903939a6670a335d7079fc297b45e6573a3c3e83",
-      "exported_sha256": "20bb73d9841697f0d67718999151c64f3aad728a59e18bfc98c29712b5d00625",
+      "exported_sha256": "1ec3221a04d58179608ba6a209e7ce4da1e3bae096df62218c62f0152e7aafe6",
       "checks": {
         "chords": {
           "status": "pass",
@@ -2225,7 +2245,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "8e469ae20cf655d02499b27ed2ffc1dcb993631faabd535d15dba7a9a5edfec4",
-      "exported_sha256": "1f29e41e49c725cf6a140c4dd65a114de0385f267fdf1f16d3a7c2e0a6e5401c",
+      "exported_sha256": "0d9d982d6273ec3a2b4d6f050e5cd23471fb8c2dc6b06dceb434c31bc78f6116",
       "checks": {
         "chords": {
           "status": "pass",
@@ -2691,7 +2711,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "d07d2aa849e7e175eac719399412c591ac660908dc51e82301171f1ebb11377a",
-      "exported_sha256": "bcf169236e1707edc0078991f4f5d48eadb11612cde88532407dc3374f2fca6e",
+      "exported_sha256": "6a46502c5758af80648fd63c574cd241cf39989ac1b0281c7f6ca074df46c906",
       "checks": {
         "chords": {
           "status": "pass",
@@ -2983,7 +3003,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "b68b9c01e4b2e942a62c35141d48f32de51ece294edba84a38078190756d28c4",
-      "exported_sha256": "8ab6da437017b56d307a20b9fb9dcf7312a3cc3ecd27637250fb84f4164670a3",
+      "exported_sha256": "edc2bb7b4f88b4c8570c4821326ab3a85bf10425300a97f91d7a69ec25f2ad89",
       "checks": {
         "chords": {
           "status": "pass",
@@ -3208,7 +3228,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "fe8288a193a6107105e2146c04d6712670ea75b508bf437617878a63bb9c8518",
-      "exported_sha256": "41e7817295e191404659fdecf7898ebfd6dad5a0d462c6cd37640bf9120e4761",
+      "exported_sha256": "e12cf961600b3941991eef7276661351f38590588b8979d6b392127e43e656e9",
       "checks": {
         "chords": {
           "status": "pass",
@@ -3377,7 +3397,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "d30c536b8eb3dbbc24fc7706dd333a8bdee83ba3702d11701cde1caae3a43790",
-      "exported_sha256": "849770ba5e6f3e01d967feafa5eec1bf195942a3ae05fbc97ab077c35613d7db",
+      "exported_sha256": "861fd2b80c4236bf8556d4fa1af6bb368b5547ad38372fd0b158b92a79697c18",
       "checks": {
         "chords": {
           "status": "pass",
@@ -3546,7 +3566,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "e609fff29eea7b6ffdc6d054a0df80404d3adae24dd3bc85f378627772f13597",
-      "exported_sha256": "e8b66f37a885a3fac81cd294cfe16bfab3faf41cd8cd5206af210dafe1e2e779",
+      "exported_sha256": "aba80da4eeefb3a726339b564de9cf2f3efb0c6622787142a67137a4db0d463a",
       "checks": {
         "chords": {
           "status": "flag",
@@ -3735,7 +3755,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "70a20c55bb7528e8a6a7453962244fb1c8fd292be8db3af71692fb5287a595de",
-      "exported_sha256": "a7dc021f7c98bb3d5a97757491526cc12c5a8b515f25b0dc76701dd3947cbef6",
+      "exported_sha256": "f3edddbe71214425289f52f9ceb8c52e118f89498d4b8ca69d33bf3e66b077d8",
       "checks": {
         "chords": {
           "status": "pass",
@@ -4247,7 +4267,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "c885e27d9f3036067a5b492cf43118b63a8a16722b5a8b2dda25d9d4d49a98fb",
-      "exported_sha256": "9e57d2420bacef85cbe05c6bc9d0899b8758f53224de2820dee0638920d45655",
+      "exported_sha256": "05d2fe2d806512fddf4881e97fc6c5f7b829a322ae8dcf8ff129dabe3b46a70e",
       "checks": {
         "chords": {
           "status": "pass",
@@ -4677,7 +4697,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "a966d83c22b233d4aecd53defc22bafdbd461f4e2abc805ee109bea16ead81e1",
-      "exported_sha256": "a9fbdd7e68e6d8e996d92f3416ba2cffd048ae4412ff03bef39bbffbbe6fc18b",
+      "exported_sha256": "df2a4938af04c48bf38d720eec6cd1567053685f02018bbb9a679d767208b494",
       "checks": {
         "chords": {
           "status": "pass",
@@ -4868,7 +4888,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "58d8a7f9b9d6da0d54ba81d20d9233f74dd5fdbb41a88f37867c96319f4e0d66",
-      "exported_sha256": "44511cb50f2bc9545ee932f806e100eed829dd5a1d3a70ca7869695d5b3ea728",
+      "exported_sha256": "5a68074236ae83a33a9e0cf1a84dd2073fa5a0ad6d87e9d91e016dd24608d7dc",
       "checks": {
         "chords": {
           "status": "pass",
@@ -5219,9 +5239,56 @@
           "progression_basis": "expected",
           "expected_absent": [],
           "hold_evidence": {
-            "status": "mismatch",
-            "note": "made from the exported chart, checked on the pack chart",
-            "file_view_source": "exported",
+            "status": "measured",
+            "long_holds": 6,
+            "bars": 38,
+            "missed_bars": 4,
+            "missed_change_fraction": 0.105,
+            "holds": [
+              {
+                "start_seconds": 45.98,
+                "beats": 24.15,
+                "family": "E",
+                "bars": 6,
+                "missed_bars": 0
+              },
+              {
+                "start_seconds": 106.9,
+                "beats": 24.2,
+                "family": "E",
+                "bars": 6,
+                "missed_bars": 0
+              },
+              {
+                "start_seconds": 137.28,
+                "beats": 25.33,
+                "family": "E",
+                "bars": 6,
+                "missed_bars": 0
+              },
+              {
+                "start_seconds": 157.9,
+                "beats": 29.09,
+                "family": "E",
+                "bars": 7,
+                "missed_bars": 3
+              },
+              {
+                "start_seconds": 205.91,
+                "beats": 24.2,
+                "family": "E",
+                "bars": 6,
+                "missed_bars": 1
+              },
+              {
+                "start_seconds": 228.86,
+                "beats": 28,
+                "family": "E",
+                "bars": 7,
+                "missed_bars": 0
+              }
+            ],
+            "file_view_source": "pack",
             "margin": 0.1,
             "templates": "claim"
           },
@@ -5355,7 +5422,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "1ccd88181bc734bcf92749863a24eed0e881cb275d7f54093bc8c225f99cd188",
-      "exported_sha256": "d5e16deb06419fa11c4c3f6320a7d3c24ec0bfbde7da767013aec9ea6085a611",
+      "exported_sha256": "3356b568d6f140786023b37fbbdb8f6a68e2466978a2539af01b59ce6db6bbb8",
       "checks": {
         "chords": {
           "status": "pass",
@@ -5559,7 +5626,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "b4f37504487f0627679560a4173df4d14b4eeff1f27a0edf9c44d537c49d5c51",
-      "exported_sha256": "a1b6dae7d175bf3f4a3a60ff82c78957aaca785aae03ef7d5587639cb6e9029b",
+      "exported_sha256": "62e55f933f8981255d680a896bad112aa61f3f0b92019b27eff1e4a68ff09a5c",
       "checks": {
         "chords": {
           "status": "pass",
@@ -5759,7 +5826,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "df2a7a22a32782cf745b2b30035f887b3c90e3d4a8496e9c557e7fa8b83c4fa8",
-      "exported_sha256": "072f358990313be8e31776af51f0159f2bef445e9e3dff48a35acb4d5fb11cf6",
+      "exported_sha256": "7e845cdf2960d9219b0764eb142a4a35dfc99b0f8e0bdaf241eb11cb6fcca06d",
       "checks": {
         "chords": {
           "status": "pass",
@@ -5991,7 +6058,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "47e99fe5301772fb21ad30316bd7f4fae949055fc0d5a04884dd9baa00d64830",
-      "exported_sha256": "b0ce4641dabefe339a42c21a1f853706681cd98ea5a7c7945f21026ed8b0dd07",
+      "exported_sha256": "24964e6832cc02d9d9966eaa6593f71dcea957b2007539b9c430b823e9fa28c4",
       "checks": {
         "chords": {
           "status": "pass",
@@ -6275,7 +6342,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "2822729f0ac23162532d8da1b8b04293c1d4a349f7be7ac9933d9ee502e72c37",
-      "exported_sha256": "9daded40a86f2c11a541050759bf9d94699f0713c9883a8733e8065de23673b9",
+      "exported_sha256": "d8a49bfc4bf2b7dca93866ce3d8614a245f45222f2acff4a9ec1467654f6c3c0",
       "checks": {
         "chords": {
           "status": "pass",
@@ -6506,7 +6573,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "514b81f4fd52035b9ebea06828a64df80cce8702eee6ff1fcaee6812b5324f18",
-      "exported_sha256": "ae47017441a1a81b2c7b25724ccf5696d30617c29d6719ea32d43bb2b675ab2a",
+      "exported_sha256": "a2fc17cfee39896a86b239e8f0109c9118e84a30a2ce10d3800dd29c8b9efee9",
       "checks": {
         "chords": {
           "status": "pass",
@@ -6715,7 +6782,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "a8c68fa1fd05b69e5e41e7995da529d1b18b681a8ee67c628d1a665f0c779c13",
-      "exported_sha256": "6fe458d5629866adc5f9d121552b471d6b2b7ea052f0207bbe92365ee80364f7",
+      "exported_sha256": "91c78f5fb1692d36605846e96d9f01f1cc0ec6dd5ec61d2a546c10ffe922a229",
       "checks": {
         "chords": {
           "status": "pass",
@@ -6918,7 +6985,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "9f0946dd85aabcd9c3514cfce306124ad455607a51ced7d1eaddb2eb7244e1fa",
-      "exported_sha256": "8105ddda604bd430e88046279c8d992557de610bb00697e612b4469baf780fb4",
+      "exported_sha256": "e3c36faa4695aa49b7e251a7f9dfef8d2067f56003c2abcc247a7f425a5d94f7",
       "checks": {
         "chords": {
           "status": "pass",
@@ -7152,7 +7219,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "8609131feeb01a4b9aa45a8e34f891a59f6177657f4b074cc8a06a17467e9ea5",
-      "exported_sha256": "ba4abe8d04b849fe332350fa38560336679ec3409d1d3cd5b7cd29218df98189",
+      "exported_sha256": "14b0643aa43b05a202070cd46383ed9a44bc7b7d9e6ad87345b47915b1b8621a",
       "checks": {
         "chords": {
           "status": "pass",
@@ -7363,7 +7430,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "3d2e7547477fd3d3605ccf128551368dfdb842c5fa21ad33d195b5577c0b8f1a",
-      "exported_sha256": "e458c83db57028e5e7fb5a025a5d1b4e6587f2548f927c031c8c20dd2f73f758",
+      "exported_sha256": "217272e0c194bd2cdd73e94788082bd5b07196e86d2d65f444ddc15962782645",
       "checks": {
         "chords": {
           "status": "pass",
@@ -7558,7 +7625,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "fdfbe54473058032e62a5e6a5b42dde97a833e6fcdeb13ab94eccc6fb93fa216",
-      "exported_sha256": "10f18560f14c5e47bc36a9f3a317c7089707bc79db556f754e21a6fba3ec7492",
+      "exported_sha256": "e47414c64d57266ed4df90ab499247849585a9646376a322b9cc0b65efe6acb3",
       "checks": {
         "chords": {
           "status": "flag",
@@ -7763,7 +7830,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "679635fe8df12a73c6ec6160b7951baba89be6a967f1d6b5446c9264d1305caa",
-      "exported_sha256": "464b044bbc3052b17a8daf0f89d96fdfd484f89aff7b449accae12087b0b87b4",
+      "exported_sha256": "773259dc67ebf58282960e09e2519576588869b48471872128a8d3afe4320665",
       "checks": {
         "chords": {
           "status": "pass",
@@ -8038,7 +8105,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "3aa2bcb86eca1eb9ec98aba1a52c144f55e845b9e0c862f2c6e55fe197808ecb",
-      "exported_sha256": "8ce699494b9f81db79d032458aeb7d6794308db27aae1343be9330dae2bb27ce",
+      "exported_sha256": "50366985fbd7eaceb813318fc363530bf4464d30a843498a71adde48b3c62edd",
       "checks": {
         "chords": {
           "status": "pass",
@@ -8212,7 +8279,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "b67719e559284c7eaf69246dff70d2f2ebe18412c1547a14071d879411b03571",
-      "exported_sha256": "8262d4e465c2ff55bfb57061709aeeae6b6f9ceeba279f6a5af8513ec7cb9e9a",
+      "exported_sha256": "18b8c5c2493a32db10621cdb1c602d9c48c6be38bf6cbdd7431c53d082712f4b",
       "checks": {
         "chords": {
           "status": "pass",
@@ -8451,7 +8518,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "6dc513a6cf8920a4c1def41d827c8d438c01602a845f19fde86992477d63ff09",
-      "exported_sha256": "1fe1d223e5d9a7d2ddc194a6070efa862a192472e423e45118fbb2ddf912416c",
+      "exported_sha256": "9f5a7dc27ef7dda7f7200b8becf8fa729099d876edcc5171916ce8455253594a",
       "checks": {
         "chords": {
           "status": "pass",
@@ -8640,7 +8707,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "cf0c692de972294652ead5439a02fe484ea114030229a4eac1e1b8bc156bc146",
-      "exported_sha256": "b3cdb0d675fd21f67356b40f7efc6e3b910836bc299375a864ac7aff2b71801e",
+      "exported_sha256": "3b1f805d22fb15bd46480b3b82c638586e0b249c39ed9b615ce6c3b907808dea",
       "checks": {
         "chords": {
           "status": "pass",
@@ -8827,7 +8894,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "af11215c0c87523ecf11d615ec17b104d45bf5515afe431da49778e16ae87ebf",
-      "exported_sha256": "43cddb9a5e2e2b20157e53928df081ed73d07c4deb0e811551866193e04e4c02",
+      "exported_sha256": "20b0d9a063bee63ec43623b6e68fe60acd6c7a88cd0e4fbb764f6c165e347403",
       "checks": {
         "chords": {
           "status": "pass",
@@ -9033,7 +9100,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "a81abc4208122da8c7deb589d4412e96521ca80078aab2f62cf121b984055810",
-      "exported_sha256": "1a4cfc6e682071f6512dc94a6d8707a23b717a459aa52f3e305e739849c8b2a3",
+      "exported_sha256": "9910fa9c15f18b120c99c4d2ce2584a4c8c822964647ab44a38a5cc5c1930c0e",
       "checks": {
         "chords": {
           "status": "pass",
@@ -9271,7 +9338,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "a1a50b938faa250ecdbcd7b3a02fedb3ff3a53f662cbf1587c85c624db280a9a",
-      "exported_sha256": "d053d443aa0d012a13be0b89b36ea8e74dc362672bf3efbee236602d806c7b41",
+      "exported_sha256": "424d984b7d7281cf50ee85c9db98e692ab395c0c137613c38e4319bb2b755973",
       "checks": {
         "chords": {
           "status": "flag",
@@ -9480,6 +9547,2440 @@
       "notes": [],
       "not_checked": [
         "consistency (too few repeated changes)"
+      ]
+    },
+    {
+      "recording_id": "plastic-ono-band-give-peace-a-chance-youtube-20261026",
+      "title": "Give Peace a Chance",
+      "artist": "",
+      "pack": "strumalong-additions-v3",
+      "shipped": false,
+      "excluded_reason": "Automated check (26 Oct): not guitar-led (guitar 6% of the harmonic stems; YAMNet hears no guitar).",
+      "exported": false,
+      "view_source": "pack",
+      "chart_sha256": "e913dbcbc2eb317e50d9de4b7d14f68646a55203856e81c53fbfbc0ad115c8ec",
+      "exported_sha256": null,
+      "checks": {
+        "chords": {
+          "status": "pass",
+          "reasons": [],
+          "reference": "experiments/analysis/strumalong/expected-chords-v3.json",
+          "reference_confidence": "medium: JustinGuitar teaches D and A (A7) and gitaartabs lists Db and Ab, consistent with the record sitting a semitone flat of D/A; capo-4 shapes A and E sound C# and G#; no independent audio key check",
+          "expected": [
+            "C#",
+            "G#"
+          ],
+          "accepted_extra": [],
+          "cover": 1,
+          "chart_main": [
+            {
+              "family": "C#",
+              "share": 0.566
+            },
+            {
+              "family": "G#",
+              "share": 0.434
+            }
+          ],
+          "missing": [],
+          "weak": [],
+          "unexpected_main": [],
+          "unexpected_main_detail": []
+        },
+        "tempo": {
+          "status": "pass",
+          "reasons": [],
+          "pulse_bpm": 86.13,
+          "implied_bpm": 83.35,
+          "interval_cv": 0.038,
+          "range": null,
+          "note": "no rhythm config entry"
+        },
+        "plausibility": {
+          "status": "pass",
+          "reasons": [],
+          "n_share": 0.064,
+          "x_share": 0,
+          "nx_share": 0.064,
+          "long_hold_share": 0.062,
+          "long_hold_count": 1,
+          "max_hold_beats": 24.14,
+          "max_hold": {
+            "family": "C#",
+            "start_seconds": 101.33,
+            "beats": 24.14
+          },
+          "top_family": {
+            "family": "C#",
+            "share": 0.566
+          },
+          "long_hold_dominant": {
+            "family": "C#",
+            "share_of_chord_time": 0.062
+          },
+          "expected_families": 2,
+          "progression_basis": "expected",
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "measured",
+            "long_holds": 1,
+            "bars": 6,
+            "missed_bars": 3,
+            "missed_change_fraction": 0.5,
+            "holds": [
+              {
+                "start_seconds": 101.33,
+                "beats": 24.14,
+                "family": "C#",
+                "bars": 6,
+                "missed_bars": 3
+              }
+            ],
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
+        },
+        "consistency": {
+          "status": "pass",
+          "reasons": [],
+          "beats_per_bar": 4,
+          "bpb_assumed": false,
+          "source": "pack",
+          "changes": 40,
+          "positioned": 40,
+          "outside_grid": 0,
+          "repeated_groups": 2,
+          "eligible_changes": 40,
+          "coverage": 1,
+          "deviants": 0,
+          "half_bar_placements": 9,
+          "consistency": 1,
+          "shift_share": 0,
+          "shifts": [],
+          "deviant_list": [],
+          "evidence": "sufficient",
+          "unhandled_shift_share": 0
+        },
+        "embed": {
+          "status": "unknown",
+          "evidence": [],
+          "reasons": [],
+          "note": "no embed check recorded in the repo for this recording"
+        },
+        "instrument": {
+          "status": "fail",
+          "reasons": [
+            "guitar-led: The Demucs guitar stem is nearly empty (guitar 6% of the guitar + piano + other energy) and YAMNet hears no guitar (best guitar tag 0.01): not a guitar-led recording."
+          ],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.015,
+          "lead_other": {
+            "tag": "violin",
+            "score": 0.003
+          },
+          "guitar_led": {
+            "status": "fail",
+            "reasons": [
+              "The Demucs guitar stem is nearly empty (guitar 6% of the guitar + piano + other energy) and YAMNet hears no guitar (best guitar tag 0.01): not a guitar-led recording."
+            ],
+            "guitar_share_of_harmonic": 0.056,
+            "yamnet_best_guitar": 0.015,
+            "yamnet_lead_other": {
+              "tag": "violin",
+              "score": 0.003
+            }
+          },
+          "strummed": {
+            "status": "not measured",
+            "reasons": [],
+            "restrike_onbeat": 0.6457,
+            "restrike_onbeat_se": 0.0112,
+            "onbeat_attacks": 453,
+            "single_onbeat": 0.0274,
+            "version": "strum-features-1",
+            "note": "not guitar-led, so the guitar stem holds mostly bleed from other instruments"
+          }
+        }
+      },
+      "verdict": "fail",
+      "reasons": [
+        "instrument: guitar-led: The Demucs guitar stem is nearly empty (guitar 6% of the guitar + piano + other energy) and YAMNet hears no guitar (best guitar tag 0.01): not a guitar-led recording."
+      ],
+      "notes": [],
+      "not_checked": [
+        "embed (unknown)",
+        "instrument: strummed (not measured: not guitar-led, so the guitar stem holds mostly bleed from other instruments)",
+        "tempo range (default prior)"
+      ]
+    },
+    {
+      "recording_id": "billy-ray-cyrus-achy-breaky-heart-youtube-20261026",
+      "title": "Achy Breaky Heart",
+      "artist": "Billy Ray Cyrus",
+      "pack": "strumalong-additions-v3",
+      "shipped": true,
+      "exported": true,
+      "view_source": "exported",
+      "chart_sha256": "a17c07f92709a80b33665b997c97a603dcb42c1f46704e1bcc826fae34fb4021",
+      "exported_sha256": "482979771e4360fa261390d9bf6e58bdc90be373cec772d416f01a70c3d4a8c8",
+      "checks": {
+        "chords": {
+          "status": "flag",
+          "reasons": [
+            "Core expected chord missing from the chart (<1% of chord time): D.",
+            "Unexpected main chord: Am 13%."
+          ],
+          "reference": "experiments/analysis/strumalong/expected-chords-v3.json",
+          "reference_confidence": "medium: A major per Wikipedia and SongBPM (Wikipedia names A and E; a D is expected in the chorus); a mixmeister estimate says E minor",
+          "expected": [
+            "A",
+            "E",
+            "D"
+          ],
+          "accepted_extra": [],
+          "cover": 0.867,
+          "chart_main": [
+            {
+              "family": "E",
+              "share": 0.469
+            },
+            {
+              "family": "A",
+              "share": 0.398
+            },
+            {
+              "family": "Am",
+              "share": 0.133
+            }
+          ],
+          "missing": [
+            "D"
+          ],
+          "weak": [],
+          "unexpected_main": [
+            "Am"
+          ],
+          "unexpected_main_detail": [
+            {
+              "family": "Am",
+              "share": 0.133
+            }
+          ]
+        },
+        "tempo": {
+          "status": "pass",
+          "reasons": [],
+          "pulse_bpm": 123.05,
+          "implied_bpm": 122.95,
+          "interval_cv": 0.028,
+          "range": null,
+          "note": "no rhythm config entry"
+        },
+        "plausibility": {
+          "status": "flag",
+          "reasons": [
+            "20% of the recording is N or X (no chord / unclear)."
+          ],
+          "n_share": 0.2,
+          "x_share": 0,
+          "nx_share": 0.2,
+          "long_hold_share": 0.073,
+          "long_hold_count": 1,
+          "max_hold_beats": 27.26,
+          "max_hold": {
+            "family": "A",
+            "start_seconds": 17.65,
+            "beats": 27.26
+          },
+          "top_family": {
+            "family": "E",
+            "share": 0.469
+          },
+          "long_hold_dominant": {
+            "family": "A",
+            "share_of_chord_time": 0.073
+          },
+          "expected_families": 3,
+          "progression_basis": "expected",
+          "expected_absent": [
+            "D"
+          ],
+          "hold_evidence": {
+            "status": "mismatch",
+            "note": "made from the pack chart, checked on the exported chart",
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
+        },
+        "consistency": {
+          "status": "pass",
+          "reasons": [],
+          "beats_per_bar": 4,
+          "bpb_assumed": false,
+          "source": "exported",
+          "changes": 25,
+          "positioned": 25,
+          "outside_grid": 0,
+          "repeated_groups": 2,
+          "eligible_changes": 17,
+          "coverage": 0.68,
+          "deviants": 0,
+          "half_bar_placements": 1,
+          "consistency": 1,
+          "shift_share": 0,
+          "shifts": [],
+          "deviant_list": [],
+          "exporter": {
+            "bar_model": "anchored-1",
+            "bar_confident_pct": 100,
+            "anchor_phases": 1,
+            "approx_anchored_events": 0,
+            "corrected_events": 0,
+            "auto_timed_events": 0,
+            "other_chord_keys": []
+          },
+          "evidence": "sufficient",
+          "unhandled_shift_share": 0
+        },
+        "embed": {
+          "status": "unknown",
+          "evidence": [],
+          "reasons": [],
+          "note": "no embed check recorded in the repo for this recording"
+        },
+        "instrument": {
+          "status": "pass",
+          "reasons": [],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.751,
+          "lead_other": {
+            "tag": "ukulele",
+            "score": 0.002
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.995,
+            "yamnet_best_guitar": 0.751,
+            "yamnet_lead_other": {
+              "tag": "ukulele",
+              "score": 0.002
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.6895,
+            "restrike_onbeat_se": 0.0093,
+            "onbeat_attacks": 327,
+            "single_onbeat": 0.0405,
+            "version": "strum-features-1"
+          }
+        }
+      },
+      "verdict": "flag",
+      "reasons": [
+        "chords: Core expected chord missing from the chart (<1% of chord time): D.",
+        "chords: Unexpected main chord: Am 13%.",
+        "plausibility: 20% of the recording is N or X (no chord / unclear)."
+      ],
+      "notes": [],
+      "not_checked": [
+        "embed (unknown)",
+        "tempo range (default prior)"
+      ]
+    },
+    {
+      "recording_id": "everly-brothers-bye-bye-love-youtube-20261026",
+      "title": "Bye Bye Love",
+      "artist": "The Everly Brothers",
+      "pack": "strumalong-additions-v3",
+      "shipped": true,
+      "exported": true,
+      "view_source": "exported",
+      "chart_sha256": "cb51685bd337d76347439a949bbd31c3608c5aa57349b54f5ec2efed3e53d21f",
+      "exported_sha256": "e9617ab4f8534ac6758a3c7ff014bb723950fda0eb57a23fd5bcd29c27a1225d",
+      "checks": {
+        "chords": {
+          "status": "pass",
+          "reasons": [],
+          "reference": "experiments/analysis/strumalong/expected-chords-v3.json",
+          "reference_confidence": "high for A D E (SongBPM A major, Musicnotes A major; the intro uses A5 C5 D5 power-chord voicings); medium on a brief non-diatonic chord",
+          "expected": [
+            "A",
+            "D",
+            "E"
+          ],
+          "accepted_extra": [],
+          "cover": 1,
+          "chart_main": [
+            {
+              "family": "A",
+              "share": 0.601
+            },
+            {
+              "family": "D",
+              "share": 0.229
+            },
+            {
+              "family": "E",
+              "share": 0.17
+            }
+          ],
+          "missing": [],
+          "weak": [],
+          "unexpected_main": [],
+          "unexpected_main_detail": []
+        },
+        "tempo": {
+          "status": "pass",
+          "reasons": [],
+          "pulse_bpm": 83.35,
+          "implied_bpm": 83.45,
+          "interval_cv": 0.045,
+          "range": null,
+          "note": "no rhythm config entry"
+        },
+        "plausibility": {
+          "status": "pass",
+          "reasons": [],
+          "n_share": 0.019,
+          "x_share": 0,
+          "nx_share": 0.019,
+          "long_hold_share": 0,
+          "long_hold_count": 0,
+          "max_hold_beats": 22.34,
+          "max_hold": {
+            "family": "A",
+            "start_seconds": 124.65,
+            "beats": 22.34
+          },
+          "top_family": {
+            "family": "A",
+            "share": 0.601
+          },
+          "long_hold_dominant": null,
+          "expected_families": 3,
+          "progression_basis": "expected",
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
+        },
+        "consistency": {
+          "status": "pass",
+          "reasons": [],
+          "beats_per_bar": 4,
+          "bpb_assumed": false,
+          "source": "exported",
+          "changes": 54,
+          "positioned": 54,
+          "outside_grid": 0,
+          "repeated_groups": 2,
+          "eligible_changes": 38,
+          "coverage": 0.704,
+          "deviants": 1,
+          "half_bar_placements": 13,
+          "consistency": 0.974,
+          "shift_share": 0,
+          "shifts": [],
+          "deviant_list": [
+            {
+              "t": 113.78,
+              "change": "D>A",
+              "offset_beats": 0.76,
+              "from_hold_beats": 2.73,
+              "to_hold_beats": 2.37
+            }
+          ],
+          "exporter": {
+            "bar_model": "anchored-1",
+            "bar_confident_pct": 80.8,
+            "anchor_phases": 2,
+            "approx_anchored_events": 9,
+            "corrected_events": 0,
+            "auto_timed_events": 0,
+            "other_chord_keys": []
+          },
+          "evidence": "sufficient",
+          "unhandled_shift_share": 0
+        },
+        "embed": {
+          "status": "unknown",
+          "evidence": [],
+          "reasons": [],
+          "note": "no embed check recorded in the repo for this recording"
+        },
+        "instrument": {
+          "status": "pass",
+          "reasons": [],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.643,
+          "lead_other": {
+            "tag": "violin",
+            "score": 0.03
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.814,
+            "yamnet_best_guitar": 0.643,
+            "yamnet_lead_other": {
+              "tag": "violin",
+              "score": 0.03
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.6814,
+            "restrike_onbeat_se": 0.0211,
+            "onbeat_attacks": 134,
+            "single_onbeat": 0.0896,
+            "version": "strum-features-1"
+          }
+        }
+      },
+      "verdict": "pass",
+      "reasons": [],
+      "notes": [],
+      "not_checked": [
+        "embed (unknown)",
+        "tempo range (default prior)"
+      ]
+    },
+    {
+      "recording_id": "ritchie-valens-la-bamba-youtube-20261026",
+      "title": "La Bamba",
+      "artist": "Ritchie Valens",
+      "pack": "strumalong-additions-v3",
+      "shipped": true,
+      "exported": true,
+      "view_source": "exported",
+      "chart_sha256": "c8bc69446d463f18550ac300bf67db01a7621f7722943624fd24aceea2599f51",
+      "exported_sha256": "ff2e2e77ad19640694cabdcd837ba63ee6546992f5d2cd581b028ca78110cdd4",
+      "checks": {
+        "chords": {
+          "status": "pass",
+          "reasons": [],
+          "reference": "experiments/analysis/strumalong/expected-chords-v3.json",
+          "reference_confidence": "high (key C per SongBPM; chord sheets give C F G throughout, with Capo III shapes C=A, F=D, G=E)",
+          "expected": [
+            "C",
+            "F",
+            "G"
+          ],
+          "accepted_extra": [],
+          "cover": 1,
+          "chart_main": [
+            {
+              "family": "G",
+              "share": 0.485
+            },
+            {
+              "family": "C",
+              "share": 0.302
+            },
+            {
+              "family": "F",
+              "share": 0.212
+            }
+          ],
+          "missing": [],
+          "weak": [],
+          "unexpected_main": [],
+          "unexpected_main_detail": []
+        },
+        "tempo": {
+          "status": "pass",
+          "reasons": [],
+          "pulse_bpm": 152,
+          "implied_bpm": 151.9,
+          "interval_cv": 0.038,
+          "range": null,
+          "note": "no rhythm config entry"
+        },
+        "plausibility": {
+          "status": "pass",
+          "reasons": [],
+          "n_share": 0.028,
+          "x_share": 0,
+          "nx_share": 0.028,
+          "long_hold_share": 0,
+          "long_hold_count": 0,
+          "max_hold_beats": 12.53,
+          "max_hold": {
+            "family": "G",
+            "start_seconds": 82.48,
+            "beats": 12.53
+          },
+          "top_family": {
+            "family": "G",
+            "share": 0.485
+          },
+          "long_hold_dominant": null,
+          "expected_families": 3,
+          "progression_basis": "expected",
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
+        },
+        "consistency": {
+          "status": "pass",
+          "reasons": [],
+          "beats_per_bar": 4,
+          "bpb_assumed": false,
+          "source": "exported",
+          "changes": 100,
+          "positioned": 100,
+          "outside_grid": 0,
+          "repeated_groups": 4,
+          "eligible_changes": 94,
+          "coverage": 0.94,
+          "deviants": 0,
+          "half_bar_placements": 0,
+          "consistency": 1,
+          "shift_share": 0,
+          "shifts": [],
+          "deviant_list": [],
+          "exporter": {
+            "bar_model": "anchored-1",
+            "bar_confident_pct": 51,
+            "anchor_phases": 4,
+            "approx_anchored_events": 45,
+            "corrected_events": 0,
+            "auto_timed_events": 0,
+            "other_chord_keys": []
+          },
+          "evidence": "sufficient",
+          "unhandled_shift_share": 0
+        },
+        "embed": {
+          "status": "unknown",
+          "evidence": [],
+          "reasons": [],
+          "note": "no embed check recorded in the repo for this recording"
+        },
+        "instrument": {
+          "status": "flag",
+          "reasons": [
+            "strummed: On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.63 ± 0.008, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+          ],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.705,
+          "lead_other": {
+            "tag": "banjo",
+            "score": 0.034
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.99,
+            "yamnet_best_guitar": 0.705,
+            "yamnet_lead_other": {
+              "tag": "banjo",
+              "score": 0.034
+            }
+          },
+          "strummed": {
+            "status": "flag",
+            "reasons": [
+              "On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.63 ± 0.008, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+            ],
+            "restrike_onbeat": 0.6304,
+            "restrike_onbeat_se": 0.0084,
+            "onbeat_attacks": 292,
+            "single_onbeat": 0.0276,
+            "version": "strum-features-1"
+          }
+        }
+      },
+      "verdict": "flag",
+      "reasons": [
+        "instrument: strummed: On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.63 ± 0.008, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+      ],
+      "notes": [],
+      "not_checked": [
+        "embed (unknown)",
+        "tempo range (default prior)"
+      ]
+    },
+    {
+      "recording_id": "creedence-clearwater-revival-down-on-the-corner-youtube-20261026",
+      "title": "Down on the Corner",
+      "artist": "",
+      "pack": "strumalong-additions-v3",
+      "shipped": false,
+      "excluded_reason": "Automated check (26 Oct): not guitar-led (guitar 4% of the harmonic stems; YAMNet guitar tag 0.13).",
+      "exported": false,
+      "view_source": "pack",
+      "chart_sha256": "e45591247c585379559c2442411a689570c6d7067964abe41c309145402be7df",
+      "exported_sha256": null,
+      "checks": {
+        "chords": {
+          "status": "pass",
+          "reasons": [],
+          "reference": "experiments/analysis/strumalong/expected-chords-v3.json",
+          "reference_confidence": "medium-high (key C per Ultimate Guitar, E-Chords and SongBPM, chords C G F; Capo III shapes A E D; the lead-guitar fills are not strummed)",
+          "expected": [
+            "C",
+            "G",
+            "F"
+          ],
+          "accepted_extra": [],
+          "cover": 1,
+          "chart_main": [
+            {
+              "family": "C",
+              "share": 0.68
+            },
+            {
+              "family": "F",
+              "share": 0.165
+            },
+            {
+              "family": "G",
+              "share": 0.155
+            }
+          ],
+          "missing": [],
+          "weak": [],
+          "unexpected_main": [],
+          "unexpected_main_detail": []
+        },
+        "tempo": {
+          "status": "pass",
+          "reasons": [],
+          "pulse_bpm": 107.67,
+          "implied_bpm": 107.67,
+          "interval_cv": 0.035,
+          "range": null,
+          "note": "no rhythm config entry"
+        },
+        "plausibility": {
+          "status": "pass",
+          "reasons": [],
+          "n_share": 0.061,
+          "x_share": 0,
+          "nx_share": 0.061,
+          "long_hold_share": 0,
+          "long_hold_count": 0,
+          "max_hold_beats": 18.17,
+          "max_hold": {
+            "family": "C",
+            "start_seconds": 22.2,
+            "beats": 18.17
+          },
+          "top_family": {
+            "family": "C",
+            "share": 0.68
+          },
+          "long_hold_dominant": null,
+          "expected_families": 3,
+          "progression_basis": "expected",
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
+        },
+        "consistency": {
+          "status": "pass",
+          "reasons": [],
+          "beats_per_bar": 4,
+          "bpb_assumed": false,
+          "source": "pack",
+          "changes": 80,
+          "positioned": 80,
+          "outside_grid": 0,
+          "repeated_groups": 4,
+          "eligible_changes": 79,
+          "coverage": 0.988,
+          "deviants": 0,
+          "half_bar_placements": 6,
+          "consistency": 1,
+          "shift_share": 0,
+          "shifts": [],
+          "deviant_list": [],
+          "evidence": "sufficient",
+          "unhandled_shift_share": 0
+        },
+        "embed": {
+          "status": "unknown",
+          "evidence": [],
+          "reasons": [],
+          "note": "no embed check recorded in the repo for this recording"
+        },
+        "instrument": {
+          "status": "fail",
+          "reasons": [
+            "guitar-led: The Demucs guitar stem is nearly empty (guitar 4% of the guitar + piano + other energy) and YAMNet hears no guitar (best guitar tag 0.13): not a guitar-led recording."
+          ],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.129,
+          "lead_other": {
+            "tag": "synthesizer",
+            "score": 0.047
+          },
+          "guitar_led": {
+            "status": "fail",
+            "reasons": [
+              "The Demucs guitar stem is nearly empty (guitar 4% of the guitar + piano + other energy) and YAMNet hears no guitar (best guitar tag 0.13): not a guitar-led recording."
+            ],
+            "guitar_share_of_harmonic": 0.043,
+            "yamnet_best_guitar": 0.129,
+            "yamnet_lead_other": {
+              "tag": "synthesizer",
+              "score": 0.047
+            }
+          },
+          "strummed": {
+            "status": "not measured",
+            "reasons": [],
+            "restrike_onbeat": 0.7745,
+            "restrike_onbeat_se": 0.028,
+            "onbeat_attacks": 118,
+            "single_onbeat": 0.0948,
+            "version": "strum-features-1",
+            "note": "not guitar-led, so the guitar stem holds mostly bleed from other instruments"
+          }
+        }
+      },
+      "verdict": "fail",
+      "reasons": [
+        "instrument: guitar-led: The Demucs guitar stem is nearly empty (guitar 4% of the guitar + piano + other energy) and YAMNet hears no guitar (best guitar tag 0.13): not a guitar-led recording."
+      ],
+      "notes": [],
+      "not_checked": [
+        "embed (unknown)",
+        "instrument: strummed (not measured: not guitar-led, so the guitar stem holds mostly bleed from other instruments)",
+        "tempo range (default prior)"
+      ]
+    },
+    {
+      "recording_id": "buddy-holly-not-fade-away-youtube-20261026",
+      "title": "Not Fade Away",
+      "artist": "",
+      "pack": "strumalong-additions-v3",
+      "shipped": false,
+      "excluded_reason": "Automated check (26 Oct): 8 of 34 repeated chord changes sit about a beat off their repeats, and long single-chord holds; chart timing unreliable.",
+      "exported": false,
+      "view_source": "pack",
+      "chart_sha256": "5eeee957c7d349242da7913d6f39d9962526381f7e6d21b25c1cf2900a0bf39a",
+      "exported_sha256": null,
+      "checks": {
+        "chords": {
+          "status": "pass",
+          "reasons": [],
+          "reference": "experiments/analysis/strumalong/expected-chords-v3.json",
+          "reference_confidence": "medium: chord sheets (Ultimate Guitar, E-Chords) and a Fender lesson give E A D (key E); SongBPM's estimate says A major, so a grid check should confirm the sounding key",
+          "expected": [
+            "E",
+            "A",
+            "D"
+          ],
+          "accepted_extra": [],
+          "cover": 1,
+          "chart_main": [
+            {
+              "family": "E",
+              "share": 0.74
+            },
+            {
+              "family": "A",
+              "share": 0.245
+            }
+          ],
+          "missing": [],
+          "weak": [
+            "D"
+          ],
+          "unexpected_main": [],
+          "unexpected_main_detail": []
+        },
+        "tempo": {
+          "status": "pass",
+          "reasons": [],
+          "pulse_bpm": 95.7,
+          "implied_bpm": 95.7,
+          "interval_cv": 0.045,
+          "range": null,
+          "note": "no rhythm config entry"
+        },
+        "plausibility": {
+          "status": "flag",
+          "reasons": [
+            "16% of chord time sits in holds of 24+ beats (longest 32.67 beats of E)."
+          ],
+          "n_share": 0.065,
+          "x_share": 0,
+          "nx_share": 0.065,
+          "long_hold_share": 0.155,
+          "long_hold_count": 1,
+          "max_hold_beats": 32.67,
+          "max_hold": {
+            "family": "E",
+            "start_seconds": 118.98,
+            "beats": 32.67
+          },
+          "top_family": {
+            "family": "E",
+            "share": 0.74
+          },
+          "long_hold_dominant": {
+            "family": "E",
+            "share_of_chord_time": 0.155
+          },
+          "expected_families": 3,
+          "progression_basis": "expected",
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "measured",
+            "long_holds": 1,
+            "bars": 8,
+            "missed_bars": 0,
+            "missed_change_fraction": 0,
+            "holds": [
+              {
+                "start_seconds": 118.98,
+                "beats": 32.67,
+                "family": "E",
+                "bars": 8,
+                "missed_bars": 0
+              }
+            ],
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
+        },
+        "consistency": {
+          "status": "fail",
+          "reasons": [
+            "Only 77% of repeated chord changes sit where the same change usually falls (8 of 34 are about a beat off); first at 12.63s E>A (-1.37 beat), 22.57s E>A (-1.36 beat), 47.46s A>E (+1.4 beat), 57.68s A>E (+1.38 beat)."
+          ],
+          "beats_per_bar": 4,
+          "bpb_assumed": false,
+          "source": "pack",
+          "changes": 40,
+          "positioned": 40,
+          "outside_grid": 0,
+          "repeated_groups": 2,
+          "eligible_changes": 34,
+          "coverage": 0.85,
+          "deviants": 8,
+          "half_bar_placements": 4,
+          "consistency": 0.765,
+          "shift_share": 0,
+          "shifts": [],
+          "deviant_list": [
+            {
+              "t": 12.63,
+              "change": "E>A",
+              "offset_beats": -1.37,
+              "from_hold_beats": 5.45,
+              "to_hold_beats": 4.78
+            },
+            {
+              "t": 22.57,
+              "change": "E>A",
+              "offset_beats": -1.36,
+              "from_hold_beats": 8.01,
+              "to_hold_beats": 4.1
+            },
+            {
+              "t": 47.46,
+              "change": "A>E",
+              "offset_beats": 1.4,
+              "from_hold_beats": 4.05,
+              "to_hold_beats": 11.66
+            },
+            {
+              "t": 57.68,
+              "change": "A>E",
+              "offset_beats": 1.38,
+              "from_hold_beats": 4.32,
+              "to_hold_beats": 13.67
+            },
+            {
+              "t": 75.05,
+              "change": "E>A",
+              "offset_beats": -1.44,
+              "from_hold_beats": 1.35,
+              "to_hold_beats": 5.58
+            },
+            {
+              "t": 85.17,
+              "change": "E>A",
+              "offset_beats": -1.08,
+              "from_hold_beats": 1.93,
+              "to_hold_beats": 1.22
+            },
+            {
+              "t": 89.91,
+              "change": "A>E",
+              "offset_beats": 1.42,
+              "from_hold_beats": 1.19,
+              "to_hold_beats": 5.3
+            },
+            {
+              "t": 104.86,
+              "change": "E>A",
+              "offset_beats": -1.42,
+              "from_hold_beats": 9.44,
+              "to_hold_beats": 5.63
+            }
+          ],
+          "evidence": "sufficient",
+          "unhandled_shift_share": 0
+        },
+        "embed": {
+          "status": "unknown",
+          "evidence": [],
+          "reasons": [],
+          "note": "no embed check recorded in the repo for this recording"
+        },
+        "instrument": {
+          "status": "pass",
+          "reasons": [],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.695,
+          "lead_other": {
+            "tag": "organ",
+            "score": 0.061
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.893,
+            "yamnet_best_guitar": 0.695,
+            "yamnet_lead_other": {
+              "tag": "organ",
+              "score": 0.061
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.8171,
+            "restrike_onbeat_se": 0.0193,
+            "onbeat_attacks": 112,
+            "single_onbeat": 0.0268,
+            "version": "strum-features-1"
+          }
+        }
+      },
+      "verdict": "fail",
+      "reasons": [
+        "plausibility: 16% of chord time sits in holds of 24+ beats (longest 32.67 beats of E).",
+        "consistency: Only 77% of repeated chord changes sit where the same change usually falls (8 of 34 are about a beat off); first at 12.63s E>A (-1.37 beat), 22.57s E>A (-1.36 beat), 47.46s A>E (+1.4 beat), 57.68s A>E (+1.38 beat)."
+      ],
+      "notes": [],
+      "not_checked": [
+        "embed (unknown)",
+        "tempo range (default prior)"
+      ]
+    },
+    {
+      "recording_id": "bob-marley-stir-it-up-youtube-20261026",
+      "title": "Stir It Up",
+      "artist": "Bob Marley & The Wailers",
+      "pack": "strumalong-additions-v3",
+      "shipped": true,
+      "exported": true,
+      "view_source": "exported",
+      "chart_sha256": "0da36522259303edb46db283e1e22daf57b2faec8c915f45e6a91edee6f14f61",
+      "exported_sha256": "fe00f809397a009d914cee84e9423ce8620c126cb8390b6b2210cfc7f1cbd498",
+      "checks": {
+        "chords": {
+          "status": "pass",
+          "reasons": [],
+          "reference": "experiments/analysis/strumalong/expected-chords-v3.json",
+          "reference_confidence": "medium-high (A major on most chord sites and SongBPM; AZChords uses A D E only, other sheets add F#m and C#m; reggae off-beat chops)",
+          "expected": [
+            "A",
+            "D",
+            "E"
+          ],
+          "accepted_extra": [],
+          "cover": 0.991,
+          "chart_main": [
+            {
+              "family": "A",
+              "share": 0.468
+            },
+            {
+              "family": "D",
+              "share": 0.326
+            },
+            {
+              "family": "E",
+              "share": 0.197
+            }
+          ],
+          "missing": [],
+          "weak": [],
+          "unexpected_main": [],
+          "unexpected_main_detail": []
+        },
+        "tempo": {
+          "status": "pass",
+          "reasons": [],
+          "pulse_bpm": 73.83,
+          "implied_bpm": 73.8,
+          "interval_cv": 0.019,
+          "range": null,
+          "note": "no rhythm config entry"
+        },
+        "plausibility": {
+          "status": "pass",
+          "reasons": [],
+          "n_share": 0.03,
+          "x_share": 0,
+          "nx_share": 0.03,
+          "long_hold_share": 0,
+          "long_hold_count": 0,
+          "max_hold_beats": 12.6,
+          "max_hold": {
+            "family": "A",
+            "start_seconds": 167.09,
+            "beats": 12.6
+          },
+          "top_family": {
+            "family": "A",
+            "share": 0.468
+          },
+          "long_hold_dominant": null,
+          "expected_families": 3,
+          "progression_basis": "expected",
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
+        },
+        "consistency": {
+          "status": "flag",
+          "reasons": [
+            "8 of 124 repeated chord changes (6%) fall about a beat away from where the same change usually falls; first at 117.68s A>D (-0.97 beat), 160.13s D>E (+0.88 beat), 161.89s E>A (+1.07 beat), 224.21s A>D (+1.22 beat)."
+          ],
+          "beats_per_bar": 4,
+          "bpb_assumed": false,
+          "source": "exported",
+          "changes": 138,
+          "positioned": 136,
+          "outside_grid": 2,
+          "repeated_groups": 3,
+          "eligible_changes": 124,
+          "coverage": 0.912,
+          "deviants": 8,
+          "half_bar_placements": 8,
+          "consistency": 0.935,
+          "shift_share": 0,
+          "shifts": [],
+          "deviant_list": [
+            {
+              "t": 117.68,
+              "change": "A>D",
+              "offset_beats": -0.97,
+              "from_hold_beats": 3.1,
+              "to_hold_beats": 3.68
+            },
+            {
+              "t": 160.13,
+              "change": "D>E",
+              "offset_beats": 0.88,
+              "from_hold_beats": 3.43,
+              "to_hold_beats": 2.16
+            },
+            {
+              "t": 161.89,
+              "change": "E>A",
+              "offset_beats": 1.07,
+              "from_hold_beats": 2.16,
+              "to_hold_beats": 2.95
+            },
+            {
+              "t": 224.21,
+              "change": "A>D",
+              "offset_beats": 1.22,
+              "from_hold_beats": 5.17,
+              "to_hold_beats": 1.84
+            },
+            {
+              "t": 225.7,
+              "change": "D>E",
+              "offset_beats": 0.97,
+              "from_hold_beats": 1.84,
+              "to_hold_beats": 1.05
+            },
+            {
+              "t": 230.53,
+              "change": "A>D",
+              "offset_beats": 1.06,
+              "from_hold_beats": 4.95,
+              "to_hold_beats": 1.96
+            },
+            {
+              "t": 276.13,
+              "change": "A>D",
+              "offset_beats": 1.07,
+              "from_hold_beats": 5.05,
+              "to_hold_beats": 1.24
+            },
+            {
+              "t": 319.88,
+              "change": "A>D",
+              "offset_beats": -1.49,
+              "from_hold_beats": 2.5,
+              "to_hold_beats": 3.61
+            }
+          ],
+          "exporter": {
+            "bar_model": "anchored-1",
+            "bar_confident_pct": 92.4,
+            "anchor_phases": 4,
+            "approx_anchored_events": 10,
+            "corrected_events": 0,
+            "auto_timed_events": 7,
+            "other_chord_keys": []
+          },
+          "evidence": "sufficient",
+          "unhandled_shift_share": 0,
+          "auto_timing": {
+            "moves": 7,
+            "flagged_events": 7,
+            "share": 0.051,
+            "exporter_note": "7 chord changes moved by one beat to match the other repeats of the same sequence (automatic; raw chart unchanged)",
+            "raw_chart": {
+              "status": "flag",
+              "eligible_changes": 124,
+              "deviants": 10,
+              "shifts": 0,
+              "deviant_list": [
+                {
+                  "t": 51.27,
+                  "change": "E>A",
+                  "offset_beats": 0.77,
+                  "from_hold_beats": 2.77,
+                  "to_hold_beats": 3.15
+                },
+                {
+                  "t": 107.93,
+                  "change": "D>E",
+                  "offset_beats": 0.83,
+                  "from_hold_beats": 3.09,
+                  "to_hold_beats": 1.05
+                },
+                {
+                  "t": 117.68,
+                  "change": "A>D",
+                  "offset_beats": -0.97,
+                  "from_hold_beats": 3.1,
+                  "to_hold_beats": 3.68
+                },
+                {
+                  "t": 160.12,
+                  "change": "D>E",
+                  "offset_beats": 0.82,
+                  "from_hold_beats": 3.43,
+                  "to_hold_beats": 2.16
+                },
+                {
+                  "t": 161.89,
+                  "change": "E>A",
+                  "offset_beats": 1.07,
+                  "from_hold_beats": 2.16,
+                  "to_hold_beats": 2.96
+                },
+                {
+                  "t": 224.21,
+                  "change": "A>D",
+                  "offset_beats": 1.22,
+                  "from_hold_beats": 5.17,
+                  "to_hold_beats": 1.84
+                },
+                {
+                  "t": 225.7,
+                  "change": "D>E",
+                  "offset_beats": 0.92,
+                  "from_hold_beats": 1.84,
+                  "to_hold_beats": 1.05
+                },
+                {
+                  "t": 230.53,
+                  "change": "A>D",
+                  "offset_beats": 1.06,
+                  "from_hold_beats": 4.95,
+                  "to_hold_beats": 1.96
+                },
+                {
+                  "t": 276.13,
+                  "change": "A>D",
+                  "offset_beats": 1.07,
+                  "from_hold_beats": 5.05,
+                  "to_hold_beats": 1.24
+                },
+                {
+                  "t": 319.88,
+                  "change": "A>D",
+                  "offset_beats": -1.49,
+                  "from_hold_beats": 2.5,
+                  "to_hold_beats": 3.62
+                }
+              ]
+            },
+            "shipped_deviants": 8,
+            "moves_measured": 7,
+            "full_beat_moves": 2,
+            "moves_that_fix_a_mistiming": 2,
+            "moves_that_made_it_worse": 0,
+            "details": [
+              {
+                "at": 50.65,
+                "was": 51.27,
+                "change": "E>A",
+                "shift_buckets": -1,
+                "agree": "32/37",
+                "moved_beats": -0.76,
+                "raw_offset_beats": 0.77,
+                "offset_after_beats": 0
+              },
+              {
+                "at": 55.461,
+                "was": 55.728,
+                "change": "D>E",
+                "shift_buckets": -1,
+                "agree": "24/34",
+                "moved_beats": -0.33,
+                "raw_offset_beats": 0.25,
+                "offset_after_beats": -0.08
+              },
+              {
+                "at": 107.195,
+                "was": 107.926,
+                "change": "D>E",
+                "shift_buckets": -1,
+                "agree": "24/34",
+                "moved_beats": -0.9,
+                "raw_offset_beats": 0.83,
+                "offset_after_beats": -0.07
+              },
+              {
+                "at": 113.664,
+                "was": 113.964,
+                "change": "D>E",
+                "shift_buckets": -1,
+                "agree": "24/34",
+                "moved_beats": -0.37,
+                "raw_offset_beats": 0.3,
+                "offset_after_beats": -0.07
+              },
+              {
+                "at": 218.442,
+                "was": 218.732,
+                "change": "D>E",
+                "shift_buckets": -1,
+                "agree": "24/34",
+                "moved_beats": -0.36,
+                "raw_offset_beats": 0.28,
+                "offset_after_beats": -0.08
+              },
+              {
+                "at": 270.455,
+                "was": 270.745,
+                "change": "D>E",
+                "shift_buckets": -1,
+                "agree": "24/34",
+                "moved_beats": -0.36,
+                "raw_offset_beats": 0.28,
+                "offset_after_beats": -0.08
+              },
+              {
+                "at": 283.481,
+                "was": 283.841,
+                "change": "D>E",
+                "shift_buckets": -1,
+                "agree": "24/34",
+                "moved_beats": -0.44,
+                "raw_offset_beats": 0.36,
+                "offset_after_beats": -0.08
+              }
+            ]
+          },
+          "notes": [
+            "The exporter's auto-timing moved 7 repeated changes (2 by a whole beat, the rest small snaps). By this check's own measure the raw chart has 10 isolated mistimed changes and the shipped timeline 8; 2 of the 7 moves it can measure fix a change that was about a beat off."
+          ]
+        },
+        "embed": {
+          "status": "unknown",
+          "evidence": [],
+          "reasons": [],
+          "note": "no embed check recorded in the repo for this recording"
+        },
+        "instrument": {
+          "status": "pass",
+          "reasons": [],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.506,
+          "lead_other": {
+            "tag": "synthesizer",
+            "score": 0.056
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.973,
+            "yamnet_best_guitar": 0.506,
+            "yamnet_lead_other": {
+              "tag": "synthesizer",
+              "score": 0.056
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7715,
+            "restrike_onbeat_se": 0.0086,
+            "onbeat_attacks": 387,
+            "single_onbeat": 0.0761,
+            "version": "strum-features-1"
+          }
+        }
+      },
+      "verdict": "flag",
+      "reasons": [
+        "consistency: 8 of 124 repeated chord changes (6%) fall about a beat away from where the same change usually falls; first at 117.68s A>D (-0.97 beat), 160.13s D>E (+0.88 beat), 161.89s E>A (+1.07 beat), 224.21s A>D (+1.22 beat)."
+      ],
+      "notes": [
+        "consistency: The exporter's auto-timing moved 7 repeated changes (2 by a whole beat, the rest small snaps). By this check's own measure the raw chart has 10 isolated mistimed changes and the shipped timeline 8; 2 of the 7 moves it can measure fix a change that was about a beat off."
+      ],
+      "not_checked": [
+        "embed (unknown)",
+        "tempo range (default prior)"
+      ]
+    },
+    {
+      "recording_id": "elvis-presley-thats-all-right-youtube-20261026",
+      "title": "That's All Right",
+      "artist": "Elvis Presley",
+      "pack": "strumalong-additions-v3",
+      "shipped": true,
+      "exported": true,
+      "view_source": "exported",
+      "chart_sha256": "49135b6da8e7a4657a7222eb09026321857657de00135230bcf92bd04b8782e2",
+      "exported_sha256": "ad70b0f980154cadeebdcd1d387aabe0f95071791e7a4157059236f007456ad6",
+      "checks": {
+        "chords": {
+          "status": "pass",
+          "reasons": [],
+          "reference": "experiments/analysis/strumalong/expected-chords-v3.json",
+          "reference_confidence": "medium-high (key A per Musicnotes published key and a three-chord lesson; sheets use A, A7, D, E7)",
+          "expected": [
+            "A",
+            "D",
+            "E"
+          ],
+          "accepted_extra": [],
+          "cover": 1,
+          "chart_main": [
+            {
+              "family": "A",
+              "share": 0.599
+            },
+            {
+              "family": "D",
+              "share": 0.204
+            },
+            {
+              "family": "E",
+              "share": 0.197
+            }
+          ],
+          "missing": [],
+          "weak": [],
+          "unexpected_main": [],
+          "unexpected_main_detail": []
+        },
+        "tempo": {
+          "status": "pass",
+          "reasons": [],
+          "pulse_bpm": 103.36,
+          "implied_bpm": 103.45,
+          "interval_cv": 0.055,
+          "range": null,
+          "note": "no rhythm config entry"
+        },
+        "plausibility": {
+          "status": "flag",
+          "reasons": [
+            "13% of chord time sits in holds of 24+ beats (longest 25.84 beats of A)."
+          ],
+          "n_share": 0.01,
+          "x_share": 0,
+          "nx_share": 0.01,
+          "long_hold_share": 0.132,
+          "long_hold_count": 1,
+          "max_hold_beats": 25.84,
+          "max_hold": {
+            "family": "A",
+            "start_seconds": 0,
+            "beats": 25.84
+          },
+          "top_family": {
+            "family": "A",
+            "share": 0.599
+          },
+          "long_hold_dominant": {
+            "family": "A",
+            "share_of_chord_time": 0.132
+          },
+          "expected_families": 3,
+          "progression_basis": "expected",
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "mismatch",
+            "note": "made from the pack chart, checked on the exported chart",
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
+        },
+        "consistency": {
+          "status": "flag",
+          "reasons": [
+            "20% of repeated changes sit in stretches that are a steady beat off, a phase slip of the grid or the chart: 97.25-106.44s (3 changes, -1.1 beat, the exporter's bar anchors do not follow)."
+          ],
+          "beats_per_bar": 4,
+          "bpb_assumed": false,
+          "source": "exported",
+          "changes": 15,
+          "positioned": 15,
+          "outside_grid": 0,
+          "repeated_groups": 3,
+          "eligible_changes": 15,
+          "coverage": 1,
+          "deviants": 0,
+          "half_bar_placements": 0,
+          "consistency": 1,
+          "shift_share": 0.2,
+          "shifts": [
+            {
+              "from_seconds": 97.25,
+              "to_seconds": 106.44,
+              "changes": 3,
+              "offset_beats": -1.1,
+              "anchor_follows": false
+            }
+          ],
+          "deviant_list": [],
+          "exporter": {
+            "bar_model": "anchored-1",
+            "bar_confident_pct": 61.4,
+            "anchor_phases": 2,
+            "approx_anchored_events": 6,
+            "corrected_events": 0,
+            "auto_timed_events": 0,
+            "other_chord_keys": []
+          },
+          "evidence": "sufficient",
+          "unhandled_shift_share": 0.2
+        },
+        "embed": {
+          "status": "unknown",
+          "evidence": [],
+          "reasons": [],
+          "note": "no embed check recorded in the repo for this recording"
+        },
+        "instrument": {
+          "status": "pass",
+          "reasons": [],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.733,
+          "lead_other": {
+            "tag": "violin",
+            "score": 0.038
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 1,
+            "yamnet_best_guitar": 0.733,
+            "yamnet_lead_other": {
+              "tag": "violin",
+              "score": 0.038
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.6966,
+            "restrike_onbeat_se": 0.0139,
+            "onbeat_attacks": 164,
+            "single_onbeat": 0.1098,
+            "version": "strum-features-1"
+          }
+        }
+      },
+      "verdict": "flag",
+      "reasons": [
+        "plausibility: 13% of chord time sits in holds of 24+ beats (longest 25.84 beats of A).",
+        "consistency: 20% of repeated changes sit in stretches that are a steady beat off, a phase slip of the grid or the chart: 97.25-106.44s (3 changes, -1.1 beat, the exporter's bar anchors do not follow)."
+      ],
+      "notes": [],
+      "not_checked": [
+        "embed (unknown)",
+        "tempo range (default prior)"
+      ]
+    },
+    {
+      "recording_id": "johnny-cash-jackson-youtube-20261026",
+      "title": "Jackson",
+      "artist": "Johnny Cash & June Carter",
+      "pack": "strumalong-additions-v3",
+      "shipped": true,
+      "exported": true,
+      "view_source": "exported",
+      "chart_sha256": "2e5ef9e3aa65848df07e5294f4759fa49897737b2fa58d371267f5da15644575",
+      "exported_sha256": "bb9713d5da53dc30b5fbf78602f288871c66fa1199f0ec599c229dbba283c7c6",
+      "checks": {
+        "chords": {
+          "status": "pass",
+          "reasons": [],
+          "reference": "experiments/analysis/strumalong/expected-chords-v3.json",
+          "reference_confidence": "medium (Ultimate Guitar beginner chart C, C7, F, G7 with no capo; SongBPM mono version key C; Capo 3 shapes A D E; the signature riff is picked)",
+          "expected": [
+            "C",
+            "F",
+            "G"
+          ],
+          "accepted_extra": [],
+          "cover": 1,
+          "chart_main": [
+            {
+              "family": "C",
+              "share": 0.77
+            },
+            {
+              "family": "F",
+              "share": 0.17
+            },
+            {
+              "family": "G",
+              "share": 0.059
+            }
+          ],
+          "missing": [],
+          "weak": [],
+          "unexpected_main": [],
+          "unexpected_main_detail": []
+        },
+        "tempo": {
+          "status": "pass",
+          "reasons": [],
+          "pulse_bpm": 129.2,
+          "implied_bpm": 129.31,
+          "interval_cv": 0.029,
+          "range": null,
+          "note": "no rhythm config entry"
+        },
+        "plausibility": {
+          "status": "flag",
+          "reasons": [
+            "66% of chord time sits in 6 single holds of 24+ beats (longest 48.9 beats of C) although the progression has 3 families; the chart may merge alternating chords, but the hold check does not match this chart (made from the pack chart, checked on the exported chart)."
+          ],
+          "n_share": 0.013,
+          "x_share": 0,
+          "nx_share": 0.013,
+          "long_hold_share": 0.659,
+          "long_hold_count": 6,
+          "max_hold_beats": 48.9,
+          "max_hold": {
+            "family": "C",
+            "start_seconds": 0,
+            "beats": 48.9
+          },
+          "top_family": {
+            "family": "C",
+            "share": 0.77
+          },
+          "long_hold_dominant": {
+            "family": "C",
+            "share_of_chord_time": 0.659
+          },
+          "expected_families": 3,
+          "progression_basis": "expected",
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "mismatch",
+            "note": "made from the pack chart, checked on the exported chart",
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": true
+        },
+        "consistency": {
+          "status": "flag",
+          "reasons": [
+            "12% of the chord changes needed the exporter's auto-timing fix; the chart leans heavily on it."
+          ],
+          "beats_per_bar": 4,
+          "bpb_assumed": false,
+          "source": "exported",
+          "changes": 25,
+          "positioned": 25,
+          "outside_grid": 0,
+          "repeated_groups": 4,
+          "eligible_changes": 25,
+          "coverage": 1,
+          "deviants": 0,
+          "half_bar_placements": 7,
+          "consistency": 1,
+          "shift_share": 0,
+          "shifts": [],
+          "deviant_list": [],
+          "exporter": {
+            "bar_model": "anchored-1",
+            "bar_confident_pct": 100,
+            "anchor_phases": 2,
+            "approx_anchored_events": 0,
+            "corrected_events": 0,
+            "auto_timed_events": 3,
+            "other_chord_keys": []
+          },
+          "evidence": "sufficient",
+          "unhandled_shift_share": 0,
+          "auto_timing": {
+            "moves": 3,
+            "flagged_events": 3,
+            "share": 0.12,
+            "exporter_note": "3 chord changes moved by one beat to match the other repeats of the same sequence (automatic; raw chart unchanged)",
+            "raw_chart": {
+              "status": "pass",
+              "eligible_changes": 25,
+              "deviants": 0,
+              "shifts": 0,
+              "deviant_list": []
+            },
+            "shipped_deviants": 0,
+            "moves_measured": 3,
+            "full_beat_moves": 0,
+            "moves_that_fix_a_mistiming": 0,
+            "moves_that_made_it_worse": 1,
+            "details": [
+              {
+                "at": 26.15,
+                "was": 26.378,
+                "change": "D>A",
+                "shift_buckets": -1,
+                "agree": "3/5",
+                "moved_beats": -0.49,
+                "raw_offset_beats": -1.72,
+                "offset_after_beats": -2.21
+              },
+              {
+                "at": 60.465,
+                "was": 60.651,
+                "change": "E>A",
+                "shift_buckets": -1,
+                "agree": "3/4",
+                "moved_beats": -0.4,
+                "raw_offset_beats": 0.28,
+                "offset_after_beats": -0.12
+              },
+              {
+                "at": 108.925,
+                "was": 109.134,
+                "change": "D>A",
+                "shift_buckets": -1,
+                "agree": "3/5",
+                "moved_beats": -0.45,
+                "raw_offset_beats": 0.27,
+                "offset_after_beats": -0.18
+              }
+            ]
+          },
+          "notes": [
+            "The exporter's auto-timing moved 3 repeated changes (0 by a whole beat, the rest small snaps). By this check's own measure the raw chart has 0 isolated mistimed changes and the shipped timeline 0; 0 of the 3 moves it can measure fix a change that was about a beat off."
+          ]
+        },
+        "embed": {
+          "status": "unknown",
+          "evidence": [],
+          "reasons": [],
+          "note": "no embed check recorded in the repo for this recording"
+        },
+        "instrument": {
+          "status": "pass",
+          "reasons": [],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.315,
+          "lead_other": {
+            "tag": "banjo",
+            "score": 0.134
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 1,
+            "yamnet_best_guitar": 0.315,
+            "yamnet_lead_other": {
+              "tag": "banjo",
+              "score": 0.134
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7472,
+            "restrike_onbeat_se": 0.008,
+            "onbeat_attacks": 320,
+            "single_onbeat": 0.0219,
+            "version": "strum-features-1"
+          }
+        }
+      },
+      "verdict": "flag",
+      "reasons": [
+        "plausibility: 66% of chord time sits in 6 single holds of 24+ beats (longest 48.9 beats of C) although the progression has 3 families; the chart may merge alternating chords, but the hold check does not match this chart (made from the pack chart, checked on the exported chart).",
+        "consistency: 12% of the chord changes needed the exporter's auto-timing fix; the chart leans heavily on it."
+      ],
+      "notes": [
+        "consistency: The exporter's auto-timing moved 3 repeated changes (0 by a whole beat, the rest small snaps). By this check's own measure the raw chart has 0 isolated mistimed changes and the shipped timeline 0; 0 of the 3 moves it can measure fix a change that was about a beat off."
+      ],
+      "not_checked": [
+        "embed (unknown)",
+        "plausibility: hold homogeneity (no matching hold check)",
+        "tempo range (default prior)"
+      ]
+    },
+    {
+      "recording_id": "eric-clapton-lay-down-sally-youtube-20261026",
+      "title": "Lay Down Sally",
+      "artist": "Eric Clapton",
+      "pack": "strumalong-additions-v3",
+      "shipped": true,
+      "exported": true,
+      "view_source": "exported",
+      "chart_sha256": "3af622d6419db6e8e417098438d61dac2933be8d90f5d68cd0519f81adef30df",
+      "exported_sha256": "c91c544512753685b87a8f7a5bc2e1de8a45013433323fe41696169320f5c9ea",
+      "checks": {
+        "chords": {
+          "status": "pass",
+          "reasons": [],
+          "reference": "experiments/analysis/strumalong/expected-chords-v3.json",
+          "reference_confidence": "medium (key A per E-Chords and a ChordU transcription: A D E with passing G and F#m; SongBPM 2005 remaster A, original page E)",
+          "expected": [
+            "A",
+            "D",
+            "E"
+          ],
+          "accepted_extra": [],
+          "cover": 1,
+          "chart_main": [
+            {
+              "family": "A",
+              "share": 0.721
+            },
+            {
+              "family": "D",
+              "share": 0.159
+            },
+            {
+              "family": "E",
+              "share": 0.121
+            }
+          ],
+          "missing": [],
+          "weak": [],
+          "unexpected_main": [],
+          "unexpected_main_detail": []
+        },
+        "tempo": {
+          "status": "pass",
+          "reasons": [],
+          "pulse_bpm": 95.7,
+          "implied_bpm": 95.69,
+          "interval_cv": 0.018,
+          "range": null,
+          "note": "no rhythm config entry"
+        },
+        "plausibility": {
+          "status": "flag",
+          "reasons": [
+            "51% of chord time sits in 4 single holds of 24+ beats (longest 75.96 beats of A) although the progression has 3 families; the chart may merge alternating chords, but the hold check does not match this chart (made from the pack chart, checked on the exported chart)."
+          ],
+          "n_share": 0.043,
+          "x_share": 0,
+          "nx_share": 0.043,
+          "long_hold_share": 0.509,
+          "long_hold_count": 4,
+          "max_hold_beats": 75.96,
+          "max_hold": {
+            "family": "A",
+            "start_seconds": 102.91,
+            "beats": 75.96
+          },
+          "top_family": {
+            "family": "A",
+            "share": 0.721
+          },
+          "long_hold_dominant": {
+            "family": "A",
+            "share_of_chord_time": 0.509
+          },
+          "expected_families": 3,
+          "progression_basis": "expected",
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "mismatch",
+            "note": "made from the pack chart, checked on the exported chart",
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": true
+        },
+        "consistency": {
+          "status": "pass",
+          "reasons": [],
+          "beats_per_bar": 4,
+          "bpb_assumed": false,
+          "source": "exported",
+          "changes": 39,
+          "positioned": 39,
+          "outside_grid": 0,
+          "repeated_groups": 3,
+          "eligible_changes": 36,
+          "coverage": 0.923,
+          "deviants": 0,
+          "half_bar_placements": 0,
+          "consistency": 1,
+          "shift_share": 0,
+          "shifts": [],
+          "deviant_list": [],
+          "exporter": {
+            "bar_model": "anchored-1",
+            "bar_confident_pct": 100,
+            "anchor_phases": 1,
+            "approx_anchored_events": 0,
+            "corrected_events": 0,
+            "auto_timed_events": 0,
+            "other_chord_keys": []
+          },
+          "evidence": "sufficient",
+          "unhandled_shift_share": 0
+        },
+        "embed": {
+          "status": "unknown",
+          "evidence": [],
+          "reasons": [],
+          "note": "no embed check recorded in the repo for this recording"
+        },
+        "instrument": {
+          "status": "pass",
+          "reasons": [],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.658,
+          "lead_other": {
+            "tag": "keyboard",
+            "score": 0.096
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 1,
+            "yamnet_best_guitar": 0.658,
+            "yamnet_lead_other": {
+              "tag": "keyboard",
+              "score": 0.096
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7316,
+            "restrike_onbeat_se": 0.0137,
+            "onbeat_attacks": 229,
+            "single_onbeat": 0.1004,
+            "version": "strum-features-1"
+          }
+        }
+      },
+      "verdict": "flag",
+      "reasons": [
+        "plausibility: 51% of chord time sits in 4 single holds of 24+ beats (longest 75.96 beats of A) although the progression has 3 families; the chart may merge alternating chords, but the hold check does not match this chart (made from the pack chart, checked on the exported chart)."
+      ],
+      "notes": [],
+      "not_checked": [
+        "embed (unknown)",
+        "plausibility: hold homogeneity (no matching hold check)",
+        "tempo range (default prior)"
+      ]
+    },
+    {
+      "recording_id": "buddy-holly-peggy-sue-youtube-20261026",
+      "title": "Peggy Sue",
+      "artist": "Buddy Holly",
+      "pack": "strumalong-additions-v3",
+      "shipped": true,
+      "exported": true,
+      "view_source": "exported",
+      "chart_sha256": "5e87b0db77e60423e32cbe11e57775dd55489e9c2d249aa822c8dcd8f9a57251",
+      "exported_sha256": "b3977b4042d6c8ba78ca50a88d055feb9394797f8ecdcbdc21bde75fe461c9b9",
+      "checks": {
+        "chords": {
+          "status": "pass",
+          "reasons": [],
+          "reference": "experiments/analysis/strumalong/expected-chords-v3.json",
+          "reference_confidence": "medium (key A per Lauren Bateman and Andy Guitar lessons: A D E with one F chord in the bridge; drums are tom-led)",
+          "expected": [
+            "A",
+            "D",
+            "E"
+          ],
+          "accepted_extra": [],
+          "cover": 0.981,
+          "chart_main": [
+            {
+              "family": "A",
+              "share": 0.482
+            },
+            {
+              "family": "D",
+              "share": 0.376
+            },
+            {
+              "family": "E",
+              "share": 0.123
+            }
+          ],
+          "missing": [],
+          "weak": [],
+          "unexpected_main": [],
+          "unexpected_main_detail": []
+        },
+        "tempo": {
+          "status": "pass",
+          "reasons": [],
+          "pulse_bpm": 152,
+          "implied_bpm": 151.9,
+          "interval_cv": 0.04,
+          "range": null,
+          "note": "no rhythm config entry"
+        },
+        "plausibility": {
+          "status": "pass",
+          "reasons": [],
+          "n_share": 0.016,
+          "x_share": 0,
+          "nx_share": 0.016,
+          "long_hold_share": 0,
+          "long_hold_count": 0,
+          "max_hold_beats": 8.52,
+          "max_hold": {
+            "family": "A",
+            "start_seconds": 68.82,
+            "beats": 8.52
+          },
+          "top_family": {
+            "family": "A",
+            "share": 0.482
+          },
+          "long_hold_dominant": null,
+          "expected_families": 3,
+          "progression_basis": "expected",
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
+        },
+        "consistency": {
+          "status": "pass",
+          "reasons": [],
+          "beats_per_bar": 4,
+          "bpb_assumed": false,
+          "source": "exported",
+          "changes": 88,
+          "positioned": 88,
+          "outside_grid": 0,
+          "repeated_groups": 3,
+          "eligible_changes": 46,
+          "coverage": 0.523,
+          "deviants": 0,
+          "half_bar_placements": 0,
+          "consistency": 1,
+          "shift_share": 0,
+          "shifts": [],
+          "deviant_list": [],
+          "exporter": {
+            "bar_model": "anchored-1",
+            "bar_confident_pct": 100,
+            "anchor_phases": 1,
+            "approx_anchored_events": 0,
+            "corrected_events": 0,
+            "auto_timed_events": 0,
+            "other_chord_keys": []
+          },
+          "evidence": "sufficient",
+          "unhandled_shift_share": 0
+        },
+        "embed": {
+          "status": "unknown",
+          "evidence": [],
+          "reasons": [],
+          "note": "no embed check recorded in the repo for this recording"
+        },
+        "instrument": {
+          "status": "pass",
+          "reasons": [],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.78,
+          "lead_other": {
+            "tag": "organ",
+            "score": 0.067
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.956,
+            "yamnet_best_guitar": 0.78,
+            "yamnet_lead_other": {
+              "tag": "organ",
+              "score": 0.067
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7017,
+            "restrike_onbeat_se": 0.0109,
+            "onbeat_attacks": 369,
+            "single_onbeat": 0.0569,
+            "version": "strum-features-1"
+          }
+        }
+      },
+      "verdict": "pass",
+      "reasons": [],
+      "notes": [],
+      "not_checked": [
+        "embed (unknown)",
+        "tempo range (default prior)"
+      ]
+    },
+    {
+      "recording_id": "bill-haley-rock-around-the-clock-youtube-20261026",
+      "title": "Rock Around the Clock",
+      "artist": "Bill Haley & His Comets",
+      "pack": "strumalong-additions-v3",
+      "shipped": true,
+      "exported": true,
+      "view_source": "exported",
+      "chart_sha256": "cd70f92015b2bb09784851c30ac0c4f31f15c1404b44be421d37cc591f6284a9",
+      "exported_sha256": "d3c0a75234b354a1cf925a475a7f159455d76e4112a037e1101423754862991f",
+      "checks": {
+        "chords": {
+          "status": "pass",
+          "reasons": [],
+          "reference": "experiments/analysis/strumalong/expected-chords-v3.json",
+          "reference_confidence": "medium (key A per SongBPM and chord sources; A7 D7 E7 versions of the same shapes; fast swing)",
+          "expected": [
+            "A",
+            "D",
+            "E"
+          ],
+          "accepted_extra": [],
+          "cover": 0.984,
+          "chart_main": [
+            {
+              "family": "A",
+              "share": 0.68
+            },
+            {
+              "family": "E",
+              "share": 0.28
+            }
+          ],
+          "missing": [],
+          "weak": [
+            "D"
+          ],
+          "unexpected_main": [],
+          "unexpected_main_detail": []
+        },
+        "tempo": {
+          "status": "pass",
+          "reasons": [],
+          "pulse_bpm": 184.57,
+          "implied_bpm": 184.62,
+          "interval_cv": 0.039,
+          "range": null,
+          "note": "no rhythm config entry"
+        },
+        "plausibility": {
+          "status": "flag",
+          "reasons": [
+            "58% of chord time sits in 6 single holds of 24+ beats (longest 39.64 beats of A) although the progression has 3 families; the chart may merge alternating chords, but the hold check does not match this chart (made from the pack chart, checked on the exported chart)."
+          ],
+          "n_share": 0.121,
+          "x_share": 0,
+          "nx_share": 0.121,
+          "long_hold_share": 0.58,
+          "long_hold_count": 6,
+          "max_hold_beats": 39.64,
+          "max_hold": {
+            "family": "A",
+            "start_seconds": 88.33,
+            "beats": 39.64
+          },
+          "top_family": {
+            "family": "A",
+            "share": 0.68
+          },
+          "long_hold_dominant": {
+            "family": "A",
+            "share_of_chord_time": 0.507
+          },
+          "expected_families": 3,
+          "progression_basis": "expected",
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "mismatch",
+            "note": "made from the pack chart, checked on the exported chart",
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": true
+        },
+        "consistency": {
+          "status": "flag",
+          "reasons": [
+            "2 of 15 repeated chord changes (13%) fall about a beat away from where the same change usually falls; first at 53.69s A>E (+0.87 beat), 101.24s A>E (+0.8 beat)."
+          ],
+          "beats_per_bar": 4,
+          "bpb_assumed": false,
+          "source": "exported",
+          "changes": 19,
+          "positioned": 19,
+          "outside_grid": 0,
+          "repeated_groups": 2,
+          "eligible_changes": 15,
+          "coverage": 0.789,
+          "deviants": 2,
+          "half_bar_placements": 0,
+          "consistency": 0.867,
+          "shift_share": 0,
+          "shifts": [],
+          "deviant_list": [
+            {
+              "t": 53.69,
+              "change": "A>E",
+              "offset_beats": 0.87,
+              "from_hold_beats": 7.83,
+              "to_hold_beats": 12.03
+            },
+            {
+              "t": 101.24,
+              "change": "A>E",
+              "offset_beats": 0.8,
+              "from_hold_beats": 39.64,
+              "to_hold_beats": 8.64
+            }
+          ],
+          "exporter": {
+            "bar_model": "anchored-1",
+            "bar_confident_pct": 0,
+            "anchor_phases": 2,
+            "approx_anchored_events": 21,
+            "corrected_events": 0,
+            "auto_timed_events": 0,
+            "other_chord_keys": []
+          },
+          "evidence": "sufficient",
+          "unhandled_shift_share": 0
+        },
+        "embed": {
+          "status": "unknown",
+          "evidence": [],
+          "reasons": [],
+          "note": "no embed check recorded in the repo for this recording"
+        },
+        "instrument": {
+          "status": "pass",
+          "reasons": [],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.452,
+          "lead_other": {
+            "tag": "violin",
+            "score": 0.104
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.892,
+            "yamnet_best_guitar": 0.452,
+            "yamnet_lead_other": {
+              "tag": "violin",
+              "score": 0.104
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7617,
+            "restrike_onbeat_se": 0.021,
+            "onbeat_attacks": 130,
+            "single_onbeat": 0.2441,
+            "version": "strum-features-1"
+          }
+        }
+      },
+      "verdict": "flag",
+      "reasons": [
+        "plausibility: 58% of chord time sits in 6 single holds of 24+ beats (longest 39.64 beats of A) although the progression has 3 families; the chart may merge alternating chords, but the hold check does not match this chart (made from the pack chart, checked on the exported chart).",
+        "consistency: 2 of 15 repeated chord changes (13%) fall about a beat away from where the same change usually falls; first at 53.69s A>E (+0.87 beat), 101.24s A>E (+0.8 beat)."
+      ],
+      "notes": [],
+      "not_checked": [
+        "embed (unknown)",
+        "plausibility: hold homogeneity (no matching hold check)",
+        "tempo range (default prior)"
       ]
     }
   ]

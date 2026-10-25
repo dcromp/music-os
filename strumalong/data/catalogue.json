@@ -29,6 +29,15 @@
       "metadata": "strumalong/data/additions-v2.json",
       "required": false,
       "note": "Strumming-first additions imported 25 Oct 2026 from docs/STRUMALONG_SONG_RESEARCH.md (gitignored pack; rebuild with experiments/analysis/strumalong/additions_pipeline.py and the v2 fixtures)."
+    },
+    {
+      "id": "strumalong-additions-v3",
+      "kind": "additions",
+      "dir": "experiments/generated/strumalong-additions-v3",
+      "rhythm": "experiments/generated/strumalong-additions-v3/rhythm.json",
+      "metadata": "strumalong/data/additions-v3.json",
+      "required": false,
+      "note": "Level 1 additions (A/D/E/Em/Am shapes) imported 26 Oct 2026 (gitignored pack)."
     }
   ],
   "exclude": [
@@ -81,6 +90,21 @@
       "recording_id": "james-sit-down-youtube-20261025",
       "title": "Sit Down",
       "reason": "Automated check (25 Oct): strum score restrike_onbeat 0.592, below 5 of the 6 founder-labelled picked/riff songs and low across the whole song, plus chart plausibility and timing flags. Listen-check before restoring."
+    },
+    {
+      "recording_id": "plastic-ono-band-give-peace-a-chance-youtube-20261026",
+      "title": "Give Peace a Chance",
+      "reason": "Automated check (26 Oct): not guitar-led (guitar 6% of the harmonic stems; YAMNet hears no guitar)."
+    },
+    {
+      "recording_id": "creedence-clearwater-revival-down-on-the-corner-youtube-20261026",
+      "title": "Down on the Corner",
+      "reason": "Automated check (26 Oct): not guitar-led (guitar 4% of the harmonic stems; YAMNet guitar tag 0.13)."
+    },
+    {
+      "recording_id": "buddy-holly-not-fade-away-youtube-20261026",
+      "title": "Not Fade Away",
+      "reason": "Automated check (26 Oct): 8 of 34 repeated chord changes sit about a beat off their repeats, and long single-chord holds; chart timing unreliable."
     }
   ],
   "level_overrides": [

@@ -713,7 +713,7 @@ function loadInputs(repo = REPO, options = {}) {
 
   // expected chord files (curated, additions)
   const expectedDir = options.expectedDir || abs("experiments/analysis/strumalong");
-  const expectedFiles = ["expected-chords.json", "expected-chords-v2.json"].map(f => path.join(expectedDir, f));
+  const expectedFiles = ["expected-chords.json", "expected-chords-v2.json", "expected-chords-v3.json"].map(f => path.join(expectedDir, f));
   const expected = new Map();
   for (const f of expectedFiles) {
     const d = tryJSON(f); if (!d) continue;

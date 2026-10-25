@@ -1,0 +1,97 @@
+{
+  "plastic-ono-band-give-peace-a-chance-youtube-20261026": {
+    "sounding": [
+      "C#",
+      "G#"
+    ],
+    "confidence": "medium: JustinGuitar teaches D and A (A7) and gitaartabs lists Db and Ab, consistent with the record sitting a semitone flat of D/A; capo-4 shapes A and E sound C# and G#; no independent audio key check"
+  },
+  "billy-ray-cyrus-achy-breaky-heart-youtube-20261026": {
+    "sounding": [
+      "A",
+      "E",
+      "D"
+    ],
+    "confidence": "medium: A major per Wikipedia and SongBPM (Wikipedia names A and E; a D is expected in the chorus); a mixmeister estimate says E minor"
+  },
+  "everly-brothers-bye-bye-love-youtube-20261026": {
+    "sounding": [
+      "A",
+      "D",
+      "E"
+    ],
+    "confidence": "high for A D E (SongBPM A major, Musicnotes A major; the intro uses A5 C5 D5 power-chord voicings); medium on a brief non-diatonic chord"
+  },
+  "ritchie-valens-la-bamba-youtube-20261026": {
+    "sounding": [
+      "C",
+      "F",
+      "G"
+    ],
+    "confidence": "high (key C per SongBPM; chord sheets give C F G throughout, with Capo III shapes C=A, F=D, G=E)"
+  },
+  "creedence-clearwater-revival-down-on-the-corner-youtube-20261026": {
+    "sounding": [
+      "C",
+      "G",
+      "F"
+    ],
+    "confidence": "medium-high (key C per Ultimate Guitar, E-Chords and SongBPM, chords C G F; Capo III shapes A E D; the lead-guitar fills are not strummed)"
+  },
+  "buddy-holly-not-fade-away-youtube-20261026": {
+    "sounding": [
+      "E",
+      "A",
+      "D"
+    ],
+    "confidence": "medium: chord sheets (Ultimate Guitar, E-Chords) and a Fender lesson give E A D (key E); SongBPM's estimate says A major, so a grid check should confirm the sounding key"
+  },
+  "bob-marley-stir-it-up-youtube-20261026": {
+    "sounding": [
+      "A",
+      "D",
+      "E"
+    ],
+    "confidence": "medium-high (A major on most chord sites and SongBPM; AZChords uses A D E only, other sheets add F#m and C#m; reggae off-beat chops)"
+  },
+  "elvis-presley-thats-all-right-youtube-20261026": {
+    "sounding": [
+      "A",
+      "D",
+      "E"
+    ],
+    "confidence": "medium-high (key A per Musicnotes published key and a three-chord lesson; sheets use A, A7, D, E7)"
+  },
+  "johnny-cash-jackson-youtube-20261026": {
+    "sounding": [
+      "C",
+      "F",
+      "G"
+    ],
+    "confidence": "medium (Ultimate Guitar beginner chart C, C7, F, G7 with no capo; SongBPM mono version key C; Capo 3 shapes A D E; the signature riff is picked)"
+  },
+  "eric-clapton-lay-down-sally-youtube-20261026": {
+    "sounding": [
+      "A",
+      "D",
+      "E"
+    ],
+    "confidence": "medium (key A per E-Chords and a ChordU transcription: A D E with passing G and F#m; SongBPM 2005 remaster A, original page E)"
+  },
+  "buddy-holly-peggy-sue-youtube-20261026": {
+    "sounding": [
+      "A",
+      "D",
+      "E"
+    ],
+    "confidence": "medium (key A per Lauren Bateman and Andy Guitar lessons: A D E with one F chord in the bridge; drums are tom-led)"
+  },
+  "bill-haley-rock-around-the-clock-youtube-20261026": {
+    "sounding": [
+      "A",
+      "D",
+      "E"
+    ],
+    "confidence": "medium (key A per SongBPM and chord sources; A7 D7 E7 versions of the same shapes; fast swing)"
+  }
+}
