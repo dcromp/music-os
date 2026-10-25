@@ -367,7 +367,7 @@ if (!fs.existsSync(REVIEW_APP)) {
     assert.ok(cfg.packs.some(p => p.id === "automatic-first-ten-v1" && p.required));
     assert.ok(cfg.packs.some(p => p.id === "strumalong-additions-v2"), "v2 pack is configured (skipped while missing)");
     for (const id of ["radiohead-creep-youtube-20261010", "beatles-love-me-do-youtube-20261011", "green-day-good-riddance-youtube-20261024"]) assert.ok(cfg.exclude.has(id), id);
-    assert.equal(cfg.exclude.size, 9, "founder-feedback drops (incl. Riptide, ukulele-led) plus A Horse with No Name (chart misses its changes)");
+    assert.equal(cfg.exclude.size, 10, "founder-feedback drops (incl. Riptide, ukulele-led) plus A Horse with No Name (chart misses its changes)");
   });
   test("readCatalogue: rejects bad schema, missing reasons, unknown kinds and conflicting entries", () => {
     const base = { schema: "strumalong-catalogue-config-1", packs: [basePack] };

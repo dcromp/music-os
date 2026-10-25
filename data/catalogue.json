@@ -76,6 +76,11 @@
       "recording_id": "vance-joy-riptide-youtube-20261024",
       "title": "Riptide",
       "reason": "Founder (25 Oct): more a ukulele song than a guitar song."
+    },
+    {
+      "recording_id": "james-sit-down-youtube-20261025",
+      "title": "Sit Down",
+      "reason": "Automated check (25 Oct): strum score restrike_onbeat 0.592, below 5 of the 6 founder-labelled picked/riff songs and low across the whole song, plus chart plausibility and timing flags. Listen-check before restoring."
     }
   ],
   "level_overrides": [

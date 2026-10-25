@@ -77,32 +77,11 @@
       "embed_note": ""
     },
     {
-      "id": "james-sit-down-youtube-20261025",
-      "title": "Sit Down",
-      "artist": "James",
-      "group": "level-1",
-      "order": 3,
-      "level": 1,
-      "level_label": "First chords",
-      "video_id": "taJbFJlk9KA",
-      "duration_seconds": 244.89,
-      "bpm": 129,
-      "meter_label": "4/4 assumed (swung feel)",
-      "capo": 7,
-      "core_shapes": [
-        "A",
-        "D",
-        "E"
-      ],
-      "playable_embed": true,
-      "embed_note": ""
-    },
-    {
       "id": "troggs-wild-thing-youtube-20261011",
       "title": "Wild Thing",
       "artist": "The Troggs",
       "group": "level-1",
-      "order": 4,
+      "order": 3,
       "level": 1,
       "level_label": "First chords",
       "video_id": "bLJkrOYHNw8",
