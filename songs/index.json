@@ -312,33 +312,11 @@
       "embed_note": ""
     },
     {
-      "id": "vance-joy-riptide-youtube-20261024",
-      "title": "Riptide",
-      "artist": "Vance Joy",
-      "group": "level-2",
-      "order": 10,
-      "level": 2,
-      "level_label": "Open chords",
-      "video_id": "TL_oroU9eN8",
-      "duration_seconds": 204.3,
-      "bpm": 103,
-      "meter_label": "4/4 assumed",
-      "capo": 1,
-      "core_shapes": [
-        "C",
-        "Am",
-        "G",
-        "F"
-      ],
-      "playable_embed": true,
-      "embed_note": ""
-    },
-    {
       "id": "neil-young-heart-of-gold-youtube-20261025",
       "title": "Heart of Gold",
       "artist": "Neil Young",
       "group": "level-2",
-      "order": 11,
+      "order": 10,
       "level": 2,
       "level_label": "Open chords",
       "video_id": "X3IA6pIVank",
@@ -360,7 +338,7 @@
       "title": "Free Fallin'",
       "artist": "Tom Petty",
       "group": "level-2",
-      "order": 12,
+      "order": 11,
       "level": 2,
       "level_label": "Open chords",
       "video_id": "1lWJXDG2i0A",
@@ -381,7 +359,7 @@
       "title": "Wagon Wheel",
       "artist": "Old Crow Medicine Show",
       "group": "level-2",
-      "order": 13,
+      "order": 12,
       "level": 2,
       "level_label": "Open chords",
       "video_id": "Oe5hm0v67zM",
@@ -403,7 +381,7 @@
       "title": "Brown Eyed Girl",
       "artist": "Van Morrison",
       "group": "level-2",
-      "order": 14,
+      "order": 13,
       "level": 2,
       "level_label": "Open chords",
       "video_id": "nEQmbFWnQeE",
@@ -436,8 +414,8 @@
       "core_shapes": [
         "G",
         "C",
-        "D",
-        "Em"
+        "Em",
+        "D"
       ],
       "playable_embed": true,
       "embed_note": ""

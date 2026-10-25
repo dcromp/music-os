@@ -71,6 +71,11 @@
       "recording_id": "america-a-horse-with-no-name-youtube-20261025",
       "title": "A Horse with No Name",
       "reason": "The automatic chart cannot tell its two chords apart (Em and the D6add9/F# grip share notes), so it shows Em for up to 46 beats while the song alternates every bar. Needs a hand-checked chart before it can return."
+    },
+    {
+      "recording_id": "vance-joy-riptide-youtube-20261024",
+      "title": "Riptide",
+      "reason": "Founder (25 Oct): more a ukulele song than a guitar song."
     }
   ],
   "level_overrides": [
@@ -78,6 +83,16 @@
       "recording_id": "oasis-wonderwall-youtube-20261010",
       "level": 3,
       "reason": "Syncopated strum (the founder's 'trickiest song') and capo-2 sus/add9 shapes; its change rate alone would compute Level 2."
+    }
+  ],
+  "timing_fix_off": [
+    {
+      "recording_id": "tom-petty-free-fallin-youtube-20261024",
+      "reason": "Pushed changes: the fix followed an off-beat majority and lowered on-bar/half-bar changes from 58% to 51%."
+    },
+    {
+      "recording_id": "tom-petty-learning-to-fly-youtube-20261025",
+      "reason": "Pushed changes: the fix followed an off-beat majority and lowered on-bar/half-bar changes from 68% to 61%."
     }
   ]
 }

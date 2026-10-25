@@ -8,7 +8,7 @@
 "level":4,
 "recording":{"id":"lumineers-ho-hey-youtube-20261025","duration_seconds":163.154,"audio_sha256":"54183217d127aff04ae952c1090a4e64bfa259696e403c42136c88b662b239ec"},
 "videos":[{"video_id":"SuZytYa71lk","uploader":"The Lumineers","kind":"analysed","duration_seconds":163,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],
-"chart":{"source":"CREMA automatic draft","sha256":"b67719e559284c7eaf69246dff70d2f2ebe18412c1547a14071d879411b03571","status":"provisional","corrections":[]},
+"chart":{"source":"CREMA automatic draft","sha256":"b67719e559284c7eaf69246dff70d2f2ebe18412c1547a14071d879411b03571","status":"provisional","corrections":[{"id":"auto-timing","kind":"timing","count":1,"start":107.172,"end":107.555,"note":"1 chord change moved by one beat to match the other repeats of the same sequence (automatic; raw chart unchanged)","moves":[{"at":107.172,"was":107.555,"from":"Am","to":"G","shift":-1,"agree":"6/7"}]}]},
 "capo":0,
 "capo_source":"none",
 "setup_note":"Standard tuning (EADGBE). No capo suggested: C, Am and G are open shapes; F can start as a small four-string F.",
@@ -37,8 +37,8 @@
 {"s":96.967,"e":99.939,"l":"C","b":2},
 {"s":99.939,"e":101.518,"l":"Am","b":2},
 {"s":101.518,"e":105.976,"l":"C","b":2},
-{"s":105.976,"e":107.555,"l":"Am","b":2},
-{"s":107.555,"e":108.948,"l":"G","b":2},
+{"s":105.976,"e":107.172,"l":"Am","b":2},
+{"s":107.172,"e":108.948,"l":"G","t":1,"b":2},
 {"s":108.948,"e":111.92,"l":"C","b":2},
 {"s":111.92,"e":114.242,"l":"F","b":2},
 {"s":114.242,"e":117.957,"l":"C","b":2},
@@ -56,5 +56,5 @@
 ],
 "strumming":{"note":"Default practice patterns for Level 4 songs; not checked against the recording.","source":"level-default","patterns":[{"id":"folk-strum","name":"Start: D — D U — U D U","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","—","D","U","—","U","D","U"],"description":"Keep the down-up pendulum going; miss the strings on the \"&\" of 1 and on 3. A common pop and rock strum."},{"id":"anchor-1-3","name":"Next: anchor beats 1 and 3","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","—","D","U","D","—","D","U"],"description":"Down on every count with an up after 2 and 4. Fewer strokes keep the barre hand settled through changes."}]},
 "learning":{"skill_focus":"A slow four-chord loop with an F chord; the stomping, syncopated strum is part of the record. Learn the loop with downstrokes first, then add the syncopation.","prerequisites":"","sources":[{"title":"Published arrangement tempo marking: Ho Hey","url":"https://www.musicnotes.com/sheetmusic/the-lumineers/ho-hey/MN0107271"}]},
-"provenance":{"pack":"strumalong-additions-v2","manifest_sha256":"55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd","rhythm_sha256":"0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459","practice_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","learning_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","additions_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","catalogue_sha256":"27613ecdc23153bc099a3182664b9a91eaf141c80e355c3c40a5738b102c92a8"}
+"provenance":{"pack":"strumalong-additions-v2","manifest_sha256":"55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd","rhythm_sha256":"0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459","practice_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","learning_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","additions_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","catalogue_sha256":"fa60f8598d4348fa496f1094bb85771f570f49ad1f1a629ef3dd230d1192576c"}
 }

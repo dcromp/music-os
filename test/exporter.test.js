@@ -170,6 +170,118 @@ if (!fs.existsSync(REVIEW_APP)) {
     assert.equal(core.buildTimeline(after, { quality: "full" }).length, 12);
   });
 
+  // --- timing fix (repetition consistency) ----------------------------------------------------------
+  // Chords from holds in beats on the 120 BPM grid, each change `lag` seconds before its beat (CREMA-like).
+  function loopSong(holds, labels, opts = {}) {
+    const song = songFromHolds(holds, { start: 1, labels, ...opts });
+    const lag = opts.lag === undefined ? 0.05 : opts.lag;
+    song.chords.forEach((c, i) => { if (i) c.s = +(c.s - lag).toFixed(3); if (i + 1 < song.chords.length) c.e = +(c.e - lag).toFixed(3); });
+    return song;
+  }
+  const EmCGD = ["Em", "C", "G", "D"];
+  const holdCounts = song => X.gridHolds(song).filter(h => h.inGrid).map(h => h.count);
+  const fixed = (song, opts) => { const copy = JSON.parse(JSON.stringify(song)); const result = X.applyTimingFix(copy, opts); return { copy, result }; };
+
+  test("timing fix: a loop with one late and one early change is moved onto the other repeats; labels unchanged", () => {
+    const holds = Array(40).fill(4);
+    holds[12] = 5; holds[13] = 3;  // repeat 4: C one beat late (Em 5, C 3)
+    holds[25] = 3; holds[26] = 5;  // repeat 7: G one beat early (C 3, G 5)
+    const song = loopSong(holds, EmCGD);
+    const { copy, result } = fixed(song);
+    assert.deepEqual(result.moves.map(m => [m.from, m.to, m.shift]), [["Em", "C", -1], ["C", "G", 1]]);
+    assert.deepEqual(holdCounts(copy), Array(40).fill(4), "every hold is a bar again");
+    assert.deepEqual(copy.chords.map(c => c.l), song.chords.map(c => c.l), "labels never change");
+    assert.equal(copy.chords.length, song.chords.length);
+    assert.deepEqual(copy.chords.map((c, i) => (c.t ? i : -1)).filter(i => i >= 0), [13, 26], "t:1 on the chords whose start moved");
+    for (const m of result.moves) {
+      const i = copy.chords.findIndex(c => c.s === m.at);
+      assert.equal(copy.chords[i - 1].e, m.at, "the previous chord ends where the moved one starts");
+      assert.equal(m.at, +(0.5 * Math.round(m.at / 0.5) - 0.05).toFixed(3), "moved change keeps the repeats' 50 ms lead on its beat");
+      assert.ok(Math.abs(m.at - m.was) <= 0.5 + 1e-9, "never more than one beat in time");
+    }
+    assert.deepEqual(result.moves.map(m => m.agree), ["8/9", "9/10"], "repeats with the same four-chord context (the first has no previous chord)");
+    const entry = X.timingCorrection(result.moves);
+    assert.deepEqual([entry.id, entry.kind, entry.count, entry.moves.length], ["auto-timing", "timing", 2, 2]);
+    assert.equal(entry.note, "2 chord changes moved by one beat to match the other repeats of the same sequence (automatic; raw chart unchanged)");
+    assert.equal(X.timingCorrection([]), null);
+    const before = X.timingConsistency(song), after = X.timingConsistency(copy, { anchors: X.barAnchors(song).anchors });
+    assert.ok(before.pct < 100 && after.pct === 100, `${before.pct} -> ${after.pct}`);
+  });
+  test("timing fix: idempotent; run on its own output it moves nothing", () => {
+    const holds = Array(40).fill(4);
+    holds[12] = 5; holds[13] = 3; holds[13 + 8] = 5; holds[14 + 8] = 3;
+    const once = fixed(loopSong(holds, EmCGD)).copy;
+    const twice = fixed(once);
+    assert.equal(twice.result.moves.length, 0);
+    assert.deepEqual(twice.copy.chords, once.chords);
+    assert.deepEqual(twice.result.left, []);
+  });
+  test("timing fix: no clear majority, too few repeats, or two beats off: untouched", () => {
+    const split = Array(32).fill(4);                     // 8 repeats, C late in 4 of them: 4 vs 4
+    for (const r of [1, 3, 5, 7]) { split[4 * r] = 5; split[4 * r + 1] = 3; }
+    let { copy, result } = fixed(loopSong(split, EmCGD));
+    assert.equal(result.moves.length, 0);
+    assert.ok(result.left.length && result.left.every(m => /no clear majority/.test(m.reason)), JSON.stringify(result.left));
+    assert.deepEqual(holdCounts(copy), holdCounts(loopSong(split, EmCGD)));
+    const three = Array(16).fill(4); three[4] = 5; three[5] = 3;   // 3 repeats of D Em C G, 2 agree: below minAgree (3)
+    ({ result } = fixed(loopSong(three, EmCGD)));
+    assert.equal(result.moves.length, 0);
+    assert.match(result.left[0].reason, /2 of 3 repeats agree/);
+    const two = Array(40).fill(4); two[12] = 6; two[13] = 2;       // C two beats late: a different arrangement
+    ({ result } = fixed(loopSong(two, EmCGD)));
+    assert.equal(result.moves.length, 0);
+    assert.match(result.left[0].reason, /2 beats from the other repeats/);
+  });
+  test("timing fix: never leaves a hold or the shortened chord under one beat, never touches corrected chords", () => {
+    // G (4 beats) then a one-beat G7 merge into one Core hold of 5 before a late C: moving C would empty the G7.
+    const song = loopSong(Array(40).fill(4), EmCGD);
+    const late = song.chords[13], g = song.chords[12];
+    song.chords.splice(13, 0, { s: +(late.s).toFixed(3), e: +(late.s + 0.5).toFixed(3), l: "Em7" });
+    late.s = +(late.s + 0.5).toFixed(3);
+    assert.equal(holdCounts(song)[12], 5, "Em + Em7 is one 5-beat Em hold in Simple view");
+    let { result } = fixed(song);
+    assert.equal(result.moves.length, 0);
+    assert.match(result.left[0].reason, /shortened chord would drop below one beat/);
+    assert.ok(g.l === "Em");
+    const corrected = loopSong(Object.assign(Array(40).fill(4), { 12: 5, 13: 3 }), EmCGD);
+    corrected.chords[13].c = 1;
+    ({ result } = fixed(corrected));
+    assert.equal(result.moves.length, 0);
+    assert.match(result.left[0].reason, /corrected chord/);
+    const off = fixed(loopSong(Object.assign(Array(40).fill(4), { 12: 5, 13: 3 }), EmCGD), { enabled: false });
+    assert.equal(off.result.moves.length, 0, "catalogue timing_fix_off");
+    assert.match(off.result.left[0].reason, /timing fix off/);
+    const twoFour = loopSong(Object.assign(Array(40).fill(4), { 12: 5, 13: 3 }), EmCGD, { bpb: 2 });
+    assert.equal(fixed(twoFour).result.moves.length, 0, "two beats per bar: one beat either way is ambiguous");
+  });
+  test("timing fix: a beat-grid slip (every later change shifted) is not 'fixed'", () => {
+    const holds = [...Array(24).fill(4), 5, ...Array(23).fill(4)];
+    const song = loopSong(holds, EmCGD);
+    const { copy, result } = fixed(song);
+    assert.equal(result.moves.length, 0, JSON.stringify(result.moves));
+    assert.deepEqual(copy.chords, song.chords);
+  });
+  test("timing fix: under a confident bar phase a change is never moved off the bar or half-bar line", () => {
+    // Bars of G 4, C 4, D 4, Em 3 + A 1 (A pushed onto beat 4): 80% of changes on the bar, a confident phase.
+    // One repeat plays Em 2 + A 2 (A on the half-bar); the other repeats round A to beat 4.
+    const unit = [4, 4, 4, 3, 1], labels = ["G", "C", "D", "Em", "A"];
+    const holds = Array(10).fill(unit).flat();
+    holds[5 * 4 + 3] = 2; holds[5 * 4 + 4] = 2;
+    const { result } = fixed(loopSong(holds, labels));
+    assert.equal(result.moves.length, 0);
+    assert.ok(result.left.some(m => /confident bar phase/.test(m.reason)), JSON.stringify(result.left));
+    const guess = fixed(loopSong(holds, labels, { assumed: true })); // assumed meter: the bars are a guess, the repeats decide
+    assert.deepEqual(guess.result.moves.map(m => [m.from, m.to, m.shift]), [["Em", "A", 1]]);
+  });
+  test("readCatalogue: timing_fix_off entries need a recording_id and a reason", () => {
+    const base = { schema: "strumalong-catalogue-config-1", packs: [{ id: "p", kind: "additions", dir: "d", rhythm: "r", metadata: "m" }] };
+    const os = require("node:os");
+    const cfgFile = obj => { const f = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "strumalong-cfg-")), "catalogue.json"); fs.writeFileSync(f, JSON.stringify(obj)); return f; };
+    assert.deepEqual([...X.readCatalogue(cfgFile({ ...base, timing_fix_off: [{ recording_id: "a", reason: "r" }] })).timingOff.keys()], ["a"]);
+    assert.throws(() => X.readCatalogue(cfgFile({ ...base, timing_fix_off: [{ recording_id: "a" }] })), /timing_fix_off/);
+    assert.equal(X.readCatalogue(cfgFile(base)).timingOff.size, 0);
+  });
+
   // --- difficulty -------------------------------------------------------------------------------
   test("shapeTier: lead tiers, slash shapes by root, everything else tier 4", () => {
     assert.deepEqual(["A", "Em", "Asus4", "G", "C", "B7", "G/B", "D/F#", "F", "Bm", "F#m", "B", "Cm", "Bb", "G#m", "Fm", "C/E", "F/C", "D/A"].map(X.shapeTier),
@@ -255,7 +367,7 @@ if (!fs.existsSync(REVIEW_APP)) {
     assert.ok(cfg.packs.some(p => p.id === "automatic-first-ten-v1" && p.required));
     assert.ok(cfg.packs.some(p => p.id === "strumalong-additions-v2"), "v2 pack is configured (skipped while missing)");
     for (const id of ["radiohead-creep-youtube-20261010", "beatles-love-me-do-youtube-20261011", "green-day-good-riddance-youtube-20261024"]) assert.ok(cfg.exclude.has(id), id);
-    assert.equal(cfg.exclude.size, 8, "7 founder-feedback drops plus A Horse with No Name (chart misses its changes)");
+    assert.equal(cfg.exclude.size, 9, "founder-feedback drops (incl. Riptide, ukulele-led) plus A Horse with No Name (chart misses its changes)");
   });
   test("readCatalogue: rejects bad schema, missing reasons, unknown kinds and conflicting entries", () => {
     const base = { schema: "strumalong-catalogue-config-1", packs: [basePack] };
@@ -302,6 +414,80 @@ if (!fs.existsSync(REVIEW_APP)) {
       assert.deepEqual(rebuilt.chords, song.chords, `${f}: anchors are reproducible from the chart and grid`);
     }
     assert.ok(afterTotal <= beforeTotal / 2, `odd lines overall: ${beforeTotal} -> ${afterTotal}`);
+  });
+
+  // --- real data: the timing fix over every built song ------------------------------------------
+  // The unfixed chart is recoverable from the recorded moves (`was`), so the fix can be re-run from it.
+  const plainChords = chords => chords.map(({ b, a, t, ...rest }) => rest);
+  function unfixedOf(song) {
+    const entry = song.chart.corrections.find(k => k.kind === "timing");
+    const chords = plainChords(song.chords);
+    for (const m of entry ? entry.moves : []) {
+      const i = chords.findIndex(c => c.s === m.at);
+      chords[i].s = m.was; chords[i - 1].e = m.was;
+    }
+    return { ...song, chords };
+  }
+  test("real data: the timing fix is reproducible from the recorded moves, idempotent, and only moves times", () => {
+    if (!built.length) return;
+    // Songs opted out in the catalogue config ship their unfixed chart, so there is nothing to reproduce.
+    const cfgFile = path.join(__dirname, "..", "data", "catalogue.json");
+    const optedOut = new Set((JSON.parse(fs.readFileSync(cfgFile, "utf8")).timing_fix_off || []).map(t => t.recording_id));
+    let moved = 0;
+    for (const f of built) {
+      const song = JSON.parse(fs.readFileSync(path.join(SONGS, f), "utf8"));
+      if (optedOut.has(song.id)) {
+        assert.ok(!song.chart.corrections.some(k => k.kind === "timing"), `${f}: opted out, so no timing moves are recorded`);
+        continue;
+      }
+      const entry = song.chart.corrections.find(k => k.kind === "timing");
+      const raw = unfixedOf(song), rerun = JSON.parse(JSON.stringify(raw));
+      const result = X.applyTimingFix(rerun);
+      assert.deepEqual(result.moves, entry ? entry.moves : [], `${f}: the fix re-run on the unfixed chart makes the recorded moves`);
+      assert.deepEqual(rerun.chords, song.chords.map(({ b, a, ...rest }) => rest), `${f}: and the shipped chords`);
+      assert.deepEqual(raw.chords.map(c => c.l), song.chords.map(c => c.l), `${f}: labels never change`);
+      const again = JSON.parse(JSON.stringify({ ...song, chords: song.chords.map(({ b, a, ...rest }) => rest) }));
+      assert.equal(X.applyTimingFix(again).moves.length, 0, `${f}: idempotent`);
+      moved += result.moves.length;
+    }
+    assert.ok(moved > 0, "some songs have moves");
+  });
+  test("real data: every move is exactly one drawn beat, at most one beat in time, and leaves holds of a beat or more", () => {
+    for (const f of built) {
+      const song = JSON.parse(fs.readFileSync(path.join(SONGS, f), "utf8"));
+      const entry = song.chart.corrections.find(k => k.kind === "timing");
+      if (!entry) continue;
+      const holds = X.gridHolds(song);
+      for (const m of entry.moves) {
+        const p1 = core.gridPosition(song.beats, m.at), p0 = core.gridPosition(song.beats, m.was);
+        assert.equal(Math.round(p1) - Math.round(p0), m.shift, `${f} ${m.at}: one drawn beat`);
+        assert.ok(Math.abs(p1 - p0) <= 1 + 1e-6, `${f} ${m.at}: ${Math.abs(p1 - p0).toFixed(2)} beats in time`);
+        const i = holds.findIndex(h => h.s === m.at);
+        assert.ok(i > 0, `${f} ${m.at}: a default-view change`);
+        for (const h of [holds[i - 1], holds[i]]) assert.ok(h.inGrid && !h.quick && h.count >= 1 && h.span >= 1 - 1e-6, `${f} ${m.at}: hold under a beat`);
+        assert.deepEqual([holds[i - 1].label, holds[i].label], [m.from, m.to], `${f} ${m.at}: labels as recorded`);
+      }
+    }
+  });
+  test("real data: the fix makes repeats more consistent and never adds odd bar lines or approx bars", () => {
+    for (const f of built) {
+      const song = JSON.parse(fs.readFileSync(path.join(SONGS, f), "utf8"));
+      const raw = unfixedOf(song), reference = { anchors: X.barAnchors(raw).anchors };
+      const before = X.timingConsistency(raw, reference), after = X.timingConsistency(song, reference);
+      assert.ok(after.pct >= before.pct, `${f}: consistency ${before.pct} -> ${after.pct}`);
+      const anchoredRaw = JSON.parse(JSON.stringify(raw));
+      X.applyBarAnchors(anchoredRaw);
+      const b = X.barMetrics(anchoredRaw), a = X.barMetrics(song);
+      assert.ok(a.weird <= b.weird && a.split <= b.split, `${f}: weird ${b.weird} -> ${a.weird}, split ${b.split} -> ${a.split}`);
+      assert.ok(a.approx_pct <= b.approx_pct + 1e-9, `${f}: approx bars ${b.approx_pct}% -> ${a.approx_pct}%`);
+    }
+  });
+  test("real data: Zombie's late C (founder report, 25 Oct) is moved one beat earlier", () => {
+    const file = path.join(SONGS, "cranberries-zombie-youtube-20261024.json");
+    if (!fs.existsSync(file)) return;
+    const song = JSON.parse(fs.readFileSync(file, "utf8"));
+    const entry = song.chart.corrections.find(k => k.kind === "timing");
+    assert.ok(entry && entry.moves.some(m => m.from === "Em" && m.to === "C" && m.shift === -1 && Math.abs(m.was - 133.933) < 0.01), JSON.stringify(entry));
   });
 }
 

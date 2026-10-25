@@ -8,7 +8,7 @@
 "level":2,
 "recording":{"id":"bob-dylan-knockin-heavens-door-youtube-20261011","duration_seconds":149.895,"audio_sha256":"4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f"},
 "videos":[{"video_id":"z4R5crZylQ0","uploader":"Bob Dylan","kind":"analysed","duration_seconds":150,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],
-"chart":{"source":"CREMA automatic draft","sha256":"022405eadb0d332a34ca66b74989e72cc5e597e57417c1a289178e0a7a084082","status":"provisional","corrections":[]},
+"chart":{"source":"CREMA automatic draft","sha256":"022405eadb0d332a34ca66b74989e72cc5e597e57417c1a289178e0a7a084082","status":"provisional","corrections":[{"id":"auto-timing","kind":"timing","count":1,"start":76.254,"end":76.705,"note":"1 chord change moved by one beat to match the other repeats of the same sequence (automatic; raw chart unchanged)","moves":[{"at":76.705,"was":76.254,"from":"Am","to":"G","shift":1,"agree":"8/9"}]}]},
 "capo":0,
 "capo_source":"none",
 "setup_note":"The teacher uses standard tuning. Capo and exact recording pitch remain unchecked.",
@@ -48,8 +48,8 @@
 {"s":66.502,"e":69.939,"l":"C","b":0},
 {"s":69.939,"e":71.61,"l":"G","b":0},
 {"s":71.61,"e":73.468,"l":"D","b":0},
-{"s":73.468,"e":76.254,"l":"Am","b":0},
-{"s":76.254,"e":78.483,"l":"G","b":0},
+{"s":73.468,"e":76.705,"l":"Am","b":0},
+{"s":76.705,"e":78.483,"l":"G","t":1,"b":0},
 {"s":78.483,"e":80.248,"l":"D","b":0},
 {"s":80.248,"e":83.592,"l":"C","b":0},
 {"s":83.592,"e":85.357,"l":"G","b":0},
@@ -84,5 +84,5 @@
 ],
 "strumming":{"note":"A starting rhythm exercise. The recording may use a different pattern or picking.","beats_description":"Count four beats; & is halfway between beats","source":"authored","patterns":[{"id":"steady-down","name":"Start: steady downstrokes","counts":["1","2","3","4"],"strokes":["D","D","D","D"],"description":"Strum down on each count. Keep the motion steady and change shape when the chord cue changes."},{"id":"down-up","name":"Next: down and up","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","U","D","U","D","U","D","U"],"description":"Add an upstroke between counts. Begin slowly; keep moving through chord changes."}]},
 "learning":{"skill_focus":"Add Am to steady changes; leave flowing subdivisions and picking for later.","prerequisites":"Add Am and steady changes","sources":[{"title":"Jon MacLennan: Knockin' On Heaven's Door","url":"https://www.jonmaclennan.com/blog/knockin-on-heaven%27s-door-chords"}]},
-"provenance":{"pack":"automatic-first-ten-v1","manifest_sha256":"556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671","rhythm_sha256":"09c5c68dc1dc44f8380871744c59d00043e1c6ea42650f3911353f84a78962f7","practice_sha256":"da5c40283594ac871243b0e56e651b887b5fbcddcb9285e61acf95839e64f181","learning_sha256":"3c6b61546aa89b32b17e3bbe9c048c9c3c5ea492ac24d8affc8496e409e280f4","catalogue_sha256":"27613ecdc23153bc099a3182664b9a91eaf141c80e355c3c40a5738b102c92a8"}
+"provenance":{"pack":"automatic-first-ten-v1","manifest_sha256":"556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671","rhythm_sha256":"09c5c68dc1dc44f8380871744c59d00043e1c6ea42650f3911353f84a78962f7","practice_sha256":"da5c40283594ac871243b0e56e651b887b5fbcddcb9285e61acf95839e64f181","learning_sha256":"3c6b61546aa89b32b17e3bbe9c048c9c3c5ea492ac24d8affc8496e409e280f4","catalogue_sha256":"fa60f8598d4348fa496f1094bb85771f570f49ad1f1a629ef3dd230d1192576c"}
 }
