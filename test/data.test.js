@@ -8,7 +8,9 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const SONGS_DIR = path.join(__dirname, "..", "songs");
-const GROUPS = ["path", "more", "riff", "outside"];
+const LEVELS = [1, 2, 3, 4, 5];
+const GROUPS = LEVELS.map(n => `level-${n}`);
+const LEVEL_LABELS = { 1: "First chords", 2: "Open chords", 3: "More changes", 4: "First barre (F / Bm)", 5: "Barre chords" };
 const CAPO_SOURCES = ["catalogue", "suggested", "none"];
 const VIDEO_KINDS = ["analysed", "alternate"];
 const STROKES = ["D", "U", "—"];
@@ -38,17 +40,26 @@ function main() {
   let index = null;
   check("index.json parses", () => { index = JSON.parse(fs.readFileSync(path.join(SONGS_DIR, "index.json"), "utf8")); });
   if (!index) return finish();
-  check("index: schema", () => assert.equal(index.schema, "strumalong-catalogue-1"));
-  check("index: groups", () => {
+  check("index: schema", () => assert.equal(index.schema, "strumalong-catalogue-2"));
+  check("index: groups are levels in order", () => {
     assert.ok(Array.isArray(index.groups) && index.groups.length > 0);
     const ids = new Set();
+    let previous = 0;
     for (const g of index.groups) {
       assert.ok(GROUPS.includes(g.id), `unknown group ${g.id}`);
       assert.ok(!ids.has(g.id), `duplicate group ${g.id}`);
       ids.add(g.id);
-      assert.ok(str(g.title), `group ${g.id} title`);
-      assert.equal(typeof g.note, "string", `group ${g.id} note`);
+      assert.equal(g.id, `level-${g.level}`);
+      assert.ok(g.level > previous, "levels ascend");
+      previous = g.level;
+      assert.equal(g.title, `Level ${g.level} · ${LEVEL_LABELS[g.level]}`);
+      assert.ok(str(g.note), `group ${g.id} needs a one-line explanation`);
+      assert.ok((index.songs || []).some(s => s.group === g.id), `group ${g.id} is empty`);
     }
+  });
+  check("index: songs listed level by level, in within-level order", () => {
+    const keys = (index.songs || []).map(s => [s.level, s.order]);
+    for (let i = 1; i < keys.length; i++) assert.ok(keys[i][0] > keys[i - 1][0] || (keys[i][0] === keys[i - 1][0] && keys[i][1] === keys[i - 1][1] + 1), `song ${i} out of order`);
   });
   check("index: songs array", () => assert.ok(Array.isArray(index.songs) && index.songs.length > 0));
   const indexIds = (index.songs || []).map(s => s.id);
@@ -58,12 +69,27 @@ function main() {
     const notInIndex = fileIds.filter(x => !indexIds.includes(x)), noFile = indexIds.filter(x => !fileIds.includes(x));
     assert.ok(!notInIndex.length && !noFile.length, `song files missing from index: [${notInIndex}]; index entries without a file: [${noFile}]`);
   });
+  check("index: membership follows strumalong/data/catalogue.json (exclusions and level overrides)", () => {
+    const cfg = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "data", "catalogue.json"), "utf8"));
+    const excluded = new Set((cfg.exclude || []).map(x => x.recording_id));
+    for (const x of cfg.exclude || []) assert.ok(str(x.reason), `exclusion ${x.recording_id} needs a reason`);
+    const listed = indexIds.filter(x => excluded.has(x));
+    assert.deepEqual(listed, [], "excluded recordings must not ship");
+    for (const o of cfg.level_overrides || []) {
+      const card = (index.songs || []).find(x => x.id === o.recording_id);
+      if (!card) continue;
+      assert.equal(card.level, o.level, `${o.recording_id}: override level`);
+    }
+  });
   const groupIds = new Set((index.groups || []).map(g => g.id));
   const seenOrder = new Set();
   for (const card of index.songs || []) {
     check(`index[${card.id}]: fields`, () => {
-      assert.ok(hasKeys(card, ["id", "title", "artist", "group", "order", "video_id", "duration_seconds", "bpm", "meter_label", "capo",
+      assert.ok(hasKeys(card, ["id", "title", "artist", "group", "order", "level", "level_label", "video_id", "duration_seconds", "bpm", "meter_label", "capo",
         "core_shapes", "playable_embed", "embed_note"]), "missing keys");
+      assert.ok(LEVELS.includes(card.level), `level ${card.level}`);
+      assert.equal(card.group, `level-${card.level}`);
+      assert.equal(card.level_label, LEVEL_LABELS[card.level]);
       assert.ok(str(card.id) && str(card.title) && str(card.artist));
       assert.ok(groupIds.has(card.group), `group ${card.group} not declared in groups`);
       assert.ok(Number.isInteger(card.order) && card.order >= 1);
@@ -103,11 +129,13 @@ function main() {
       if (bytes > SONG_BYTES_TARGET) console.warn(`data.test: note - ${file} is ${bytes} bytes (target < ${SONG_BYTES_TARGET})`);
     });
     check(`${id}: header`, () => {
-      assert.equal(song.schema, "strumalong-song-1");
+      assert.equal(song.schema, "strumalong-song-2");
       assert.equal(song.id, id, "id must equal file name");
       assert.ok(str(song.title) && str(song.artist));
       assert.ok(GROUPS.includes(song.group), `group ${song.group}`);
       assert.ok(Number.isInteger(song.order) && song.order >= 1);
+      assert.ok(LEVELS.includes(song.level) && song.group === `level-${song.level}`);
+      assert.equal(song.riff, undefined, "riff songs are no longer part of the catalogue");
     });
     check(`${id}: recording`, () => {
       assert.ok(song.recording && song.recording.id === id);
@@ -164,6 +192,9 @@ function main() {
       assert.ok(Number.isInteger(r.bar_phase) && r.bar_phase >= 0 && r.bar_phase < r.beats_per_bar, "bar_phase in [0, beats_per_bar)");
       assert.equal(typeof r.bar_phase_confident, "boolean");
       if (r.beats_per_bar_assumed) assert.equal(r.bar_phase_confident, false, "assumed meter cannot have confident bar lines");
+      assert.equal(r.bar_model, "anchored-1");
+      assert.ok(isNum(r.bar_confident_pct) && r.bar_confident_pct >= 0 && r.bar_confident_pct <= 100, "bar_confident_pct");
+      if (r.beats_per_bar_assumed) assert.equal(r.bar_confident_pct, 0, "assumed meter: every bar is approx");
     });
     check(`${id}: beats`, () => {
       assert.ok(Array.isArray(song.beats) && song.beats.length >= 2);
@@ -183,17 +214,17 @@ function main() {
         assert.ok(e.e > e.s, `chord ${i} has no length`);
         assert.ok(e.s >= previousEnd - 1e-9, `chord ${i} overlaps the previous one`);
         assert.ok(e.c === undefined || e.c === 1, `chord ${i} c flag`);
-        assert.deepEqual(Object.keys(e).filter(k => !["s", "e", "l", "c"].includes(k)), [], `chord ${i} unexpected keys`);
+        assert.ok(e.b === undefined || (Number.isInteger(e.b) && e.b >= 0 && e.b < r.beats_per_bar), `chord ${i} bar anchor b`);
+        assert.ok(e.a === undefined || (e.a === 1 && e.b !== undefined), `chord ${i} approx flag a`);
+        assert.deepEqual(Object.keys(e).filter(k => !["s", "e", "l", "c", "b", "a"].includes(k)), [], `chord ${i} unexpected keys`);
         previousEnd = e.e;
       });
       assert.ok(song.chords[0].s <= 0.001 || song.chords[0].s < song.beats[0], "chart should start at the beginning of the recording");
     });
-    check(`${id}: strumming and riff`, () => {
+    check(`${id}: strumming`, () => {
       assert.ok(song.strumming && typeof song.strumming.note === "string" && Array.isArray(song.strumming.patterns));
-      assert.ok(song.riff === null || (typeof song.riff === "object" && str(song.riff.note)), "riff must be null or {note}");
-      if (song.group === "riff") assert.ok(song.riff && str(song.riff.note), "riff-group songs need riff.note");
-      if (song.riff) assert.equal(song.strumming.patterns.length, 0, "riff songs get no strum drill");
-      else assert.ok(song.strumming.patterns.length >= 1, "non-riff songs need at least one practice pattern");
+      assert.ok(["authored", "level-default"].includes(song.strumming.source), `strumming.source ${song.strumming.source}`);
+      assert.ok(song.strumming.patterns.length >= 1, "every song needs at least one practice pattern");
       for (const p of song.strumming.patterns) {
         assert.ok(str(p.id) && str(p.name) && str(p.description), "pattern text fields");
         assert.ok(Array.isArray(p.counts) && Array.isArray(p.strokes), "pattern arrays");
@@ -203,6 +234,20 @@ function main() {
         assert.equal(p.counts.length % r.beats_per_bar, 0, `pattern ${p.id}: ${p.counts.length} steps do not divide into ${r.beats_per_bar} beats`);
       }
       assert.equal(new Set(song.strumming.patterns.map(p => p.id)).size, song.strumming.patterns.length, "duplicate pattern ids");
+    });
+    check(`${id}: difficulty`, () => {
+      const d = song.difficulty;
+      assert.ok(d && LEVELS.includes(d.level) && d.level === song.level, "difficulty.level");
+      assert.equal(d.label, LEVEL_LABELS[d.level]);
+      assert.ok(Array.isArray(d.main_shapes) && d.main_shapes.length > 0 && d.main_shapes.every(str), "main_shapes");
+      assert.ok(d.main_shapes.includes(d.hardest_shape), "hardest_shape is a main shape");
+      assert.ok(str(d.tier_reason), "tier_reason");
+      assert.ok(isNum(d.changes_per_min) && d.changes_per_min >= 0, "changes_per_min");
+      assert.ok(isNum(d.median_hold_beats) && d.median_hold_beats >= 1, "median_hold_beats");
+      if (d.computed_level !== undefined) {
+        assert.ok(LEVELS.includes(d.computed_level) && d.computed_level !== d.level, "an override changes the level");
+        assert.ok(str(d.override_reason), "an override needs a reason");
+      } else assert.equal(d.override_reason, undefined);
     });
     check(`${id}: learning`, () => {
       const l = song.learning;
@@ -223,6 +268,7 @@ function main() {
       assert.equal(card.artist, song.artist);
       assert.equal(card.group, song.group);
       assert.equal(card.order, song.order);
+      assert.equal(card.level, song.level);
       assert.equal(card.video_id, song.videos[0].video_id);
       assert.ok(Math.abs(card.duration_seconds - duration) <= 0.006, "duration_seconds");
       assert.ok(Math.abs(card.bpm - r.bpm) <= 0.55, "bpm");

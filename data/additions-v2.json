@@ -1,0 +1,703 @@
+{
+  "schema": "strumalong-additions-1",
+  "note": "Strumming-first additions chosen from docs/STRUMALONG_SONG_RESEARCH.md (25 Oct 2026). Capo, setup and skill notes are authored suggestions; practice patterns come from the level defaults unless given. Not checked against the recordings beyond the automatic chart sanity check.",
+  "songs": [
+    {
+      "recording_id": "bob-marley-three-little-birds-youtube-20261025",
+      "title": "Three Little Birds",
+      "artist": "Bob Marley & The Wailers",
+      "order": 1,
+      "expected_level": 1,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open A, D and E shapes.",
+      "skill_focus": "Three easy open chords (A, D, E) with long holds and a relaxed reggae pulse. The recording's guitar plays short chops on the off-beats; start with four steady downstrokes per bar and learn the changes first.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Three Little Birds",
+          "url": "https://www.musicnotes.com/sheetmusic/bob-marley/three-little-birds/MN0092983"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart A/D/E; capo 0 confirmed. Pulse ~74 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "america-a-horse-with-no-name-youtube-20261025",
+      "title": "A Horse with No Name",
+      "artist": "America",
+      "order": 2,
+      "expected_level": 1,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo. Two shapes: Em, then D6add9/F# (2 0 0 2 0 0: first-finger F# on the low E string, second finger on the G string).",
+      "skill_focus": "Two shapes alternating, one per bar: an easy first change in a steady folk strum. The recording is a strummed acoustic guitar with a relaxed pulse.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: A Horse with No Name",
+          "url": "https://www.musicnotes.com/sheetmusic/america/a-horse-with-no-name/MN0042260"
+        }
+      ],
+      "expected_shapes": [
+        "Em",
+        "D6add9/F#"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart Em7/Em with a second chord named F#m7, Dmaj7/F# or D; displayed as the played D6add9/F# grip via a label alias. Pulse ~123 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      },
+      "label_aliases": {
+        "map": {
+          "F#m7": "D6add9/F#",
+          "F#m": "D6add9/F#",
+          "Dmaj7/F#": "D6add9/F#",
+          "Dmaj7": "D6add9/F#",
+          "D": "D6add9/F#",
+          "D/F#": "D6add9/F#"
+        },
+        "note": "The song alternates Em with the two-finger D6add9/F# grip (200200); the automatic chart names that chord F#m7, Dmaj7/F# or D"
+      }
+    },
+    {
+      "recording_id": "neil-diamond-sweet-caroline-youtube-20261025",
+      "title": "Sweet Caroline",
+      "artist": "Neil Diamond",
+      "order": 3,
+      "expected_level": 1,
+      "capo": 2,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 2 suggested: the recording is in B major, and with the capo on the 2nd fret the open shapes are A, D and E.",
+      "skill_focus": "A steady chord-per-bar song in three open shapes with a slightly swung strum under horns. A short walkdown near the chorus passes through F#m and Bm shapes; these are optional and you can stay on E.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Sweet Caroline",
+          "url": "https://www.musicnotes.com/sheetmusic/neil-diamond/sweet-caroline/MN0056809"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart sounding B/E/F#; capo 2 gives A/D/E shapes. Pulse ~129 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "old-crow-medicine-show-wagon-wheel-youtube-20261025",
+      "title": "Wagon Wheel",
+      "artist": "Old Crow Medicine Show",
+      "order": 4,
+      "expected_level": 2,
+      "capo": 2,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 2 suggested: play G, D, Em and C shapes; they sound as A, E, F#m and D.",
+      "skill_focus": "A four-chord loop (G-D-Em-C shapes) at a brisk tempo; keep the strum light and steady and change on time.",
+      "sources": [
+        {
+          "title": "Wagon Wheel (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Wagon_Wheel_(song)"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "D",
+        "Em",
+        "C"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart sounding D/A/E/F#m; capo 2 gives C/G/D/Em shapes. Pulse ~144 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "james-sit-down-youtube-20261025",
+      "title": "Sit Down",
+      "artist": "James",
+      "order": 5,
+      "expected_level": 1,
+      "capo": 7,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 7 suggested: the recording is in E major with E, A and B, and the capo on the 7th fret turns them into open A, D and E shapes. Capo 2 with D, G and A shapes gives the same sounding chords.",
+      "skill_focus": "Three chords with a bouncy, swung strum. Keep the strum loose and in time, and change on the bar line.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Sit Down",
+          "url": "https://www.musicnotes.com/sheetmusic/james/sit-down/MN0107451"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart sounding E/A/B; capo 7 gives A/D/E shapes (capo 2 would give D/G/A). Pulse ~129 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "coldplay-yellow-youtube-20261025",
+      "title": "Yellow",
+      "artist": "Coldplay",
+      "order": 6,
+      "expected_level": 2,
+      "capo": 4,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 4 suggested: the recording is in B major, and with the capo on the 4th fret the open shapes are G, D, C and Em.",
+      "skill_focus": "Big open strummed chords, one per bar, at a slow-to-medium tempo. Let the strings ring and practise the G, D, C and Em changes.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Yellow",
+          "url": "https://www.musicnotes.com/sheetmusic/coldplay/yellow/MN0043564"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "D",
+        "C",
+        "Em"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart sounding B/E/F#/G#m; capo 4 gives G/C/D/Em shapes. Pulse ~86 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "4-non-blondes-whats-up-youtube-20261025",
+      "title": "What's Up?",
+      "artist": "4 Non Blondes",
+      "order": 7,
+      "expected_level": 2,
+      "capo": 2,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 2 suggested: the recording uses A, Bm and D, and with the capo on the 2nd fret the shapes are G, Am and C, which avoids the Bm barre.",
+      "skill_focus": "Three chords, one per bar, under a driving strummed acoustic. Keep the strum steady and change on the bar line.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: What's Up?",
+          "url": "https://www.musicnotes.com/sheetmusic/4-non-blondes/whats-up/MN0027666"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "Am",
+        "C"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart sounding A/Bm/D; capo 2 gives G/Am/C shapes. Pulse ~136 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "deep-blue-something-breakfast-at-tiffanys-youtube-20261025",
+      "title": "Breakfast at Tiffany's",
+      "artist": "Deep Blue Something",
+      "order": 8,
+      "expected_level": 2,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open D, G and A shapes (Dsus and Asus4 are optional colours).",
+      "skill_focus": "D, G and A at a brisk pace with a driving down-up strum on a bright acoustic. Practise quick changes between neighbouring open shapes.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Breakfast at Tiffany's",
+          "url": "https://www.musicnotes.com/sheetmusic/deep-blue-something/breakfast-at-tiffanys/MN0135577"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "G",
+        "A"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart D/A/G with G/B and D/A passing shapes; capo 0. Pulse ~112 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "george-ezra-budapest-youtube-20261025",
+      "title": "Budapest",
+      "artist": "George Ezra",
+      "order": 9,
+      "expected_level": 2,
+      "capo": 3,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 3 suggested: the recording is in F major, and with the capo on the 3rd fret the open shapes are D, G and A.",
+      "skill_focus": "Three chords at a bright, steady pace with a strummed acoustic feel. Aim for even down-up strumming and clean D, G and A changes.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Budapest",
+          "url": "https://www.musicnotes.com/sheetmusic/george-ezra/budapest/MN0135694"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "G",
+        "A"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart sounding F/Bb/C; capo 3 gives D/G/A shapes. Pulse ~129 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "verve-lucky-man-youtube-20261025",
+      "title": "Lucky Man",
+      "artist": "The Verve",
+      "order": 10,
+      "expected_level": 2,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open G, D, Asus4 (or a plain A) and Em shapes.",
+      "skill_focus": "A slow four-chord loop that lets the chords ring, with strings and a gradual build in the arrangement. Aim for even strumming and smooth changes.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Lucky Man",
+          "url": "https://www.musicnotes.com/sheetmusic/the-verve/lucky-man/MN0095000"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "D",
+        "Asus4",
+        "Em"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart A/G/D (Em rare); capo 0. Pulse ~76 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "neil-young-heart-of-gold-youtube-20261025",
+      "title": "Heart of Gold",
+      "artist": "Neil Young",
+      "order": 11,
+      "expected_level": 3,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open Em, C, D and G shapes (an Em7 shape is a common variation).",
+      "skill_focus": "Four open shapes changing every two beats in a relaxed folk strum. Harmonica breaks appear, but the strummed guitar is the main part. Practise small, quick changes.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Heart of Gold",
+          "url": "https://www.musicnotes.com/sheetmusic/neil-young/heart-of-gold/MN0046673"
+        }
+      ],
+      "expected_shapes": [
+        "Em",
+        "C",
+        "D",
+        "G"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart Em/G/C/D; capo 0. Pulse ~86 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "eagles-take-it-easy-youtube-20261025",
+      "title": "Take It Easy",
+      "artist": "Eagles",
+      "order": 12,
+      "expected_level": 3,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open G, C, D, Em and Am shapes.",
+      "skill_focus": "Five open chords in a bright country-rock strum with quick changes. The banjo and lead guitar colour the record, but the strummed acoustic drives it.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Take It Easy",
+          "url": "https://www.musicnotes.com/sheetmusic/the-eagles/take-it-easy/MN0039080"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "C",
+        "D",
+        "Em",
+        "Am"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart G/C/Em/D/Am; capo 0. Pulse ~136 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "stealers-wheel-stuck-in-the-middle-with-you-youtube-20261025",
+      "title": "Stuck in the Middle with You",
+      "artist": "Stealers Wheel",
+      "order": 13,
+      "expected_level": 3,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open D, G, A, C and Am shapes.",
+      "skill_focus": "Open chords with a percussive slapped strum (a muted thwack on most down-strums). Start with plain downstrokes and add the slap once the changes are steady.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Stuck in the Middle with You",
+          "url": "https://www.musicnotes.com/sheetmusic/stealers-wheel/stuck-in-the-middle-with-you/MN0079793"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "G",
+        "A",
+        "C",
+        "Am"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart D/G/A (A7/D7 colours); capo 0. Pulse ~123 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "jason-mraz-im-yours-youtube-20261025",
+      "title": "I'm Yours",
+      "artist": "Jason Mraz",
+      "order": 14,
+      "expected_level": 3,
+      "capo": 4,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 4 suggested: the recording is in B major, and with the capo on the 4th fret the open shapes are G, D, Em and C.",
+      "skill_focus": "A four-chord loop under an island-style strum with muted chucks, so the rhythm is the skill. Learn the changes with steady downstrokes first, then add the muted chucks.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: I'm Yours",
+          "url": "https://www.musicnotes.com/sheetmusic/jason-mraz/im-yours/MN0074661"
+        },
+        {
+          "title": "Key and tempo listing: I'm Yours (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/I%27m_Yours_(Jason_Mraz_song)"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "D",
+        "Em",
+        "C"
+      ],
+      "needs_syncopation": true,
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart sounding B/E/F#/G#m; capo 4 gives G/C/D/Em shapes. Pulse ~76 BPM (quarter-note level). Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "green-day-boulevard-of-broken-dreams-youtube-20261025",
+      "title": "Boulevard of Broken Dreams",
+      "artist": "Green Day",
+      "order": 15,
+      "expected_level": 3,
+      "capo": 1,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 1 suggested: the recording is in F minor, and with the capo on the 1st fret the shapes are open Em, G, D, A, C and B7.",
+      "skill_focus": "Six open shapes with a quiet verse and a driving chorus of strummed electric chords, mostly one per bar. The B7 shape is brief.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Boulevard of Broken Dreams",
+          "url": "https://www.musicnotes.com/sheetmusic/green-day/boulevard-of-broken-dreams/MN0052222"
+        }
+      ],
+      "expected_shapes": [
+        "Em",
+        "G",
+        "D",
+        "A",
+        "C",
+        "B7"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart sounding G#/D#/Fm/C#/A# plus C; capo 1 gives G/D/Em/C/A shapes, and the C (song V chord) becomes a B barre shape, so the computed level is 5. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "beatles-i-want-to-hold-your-hand-youtube-20261025",
+      "title": "I Want to Hold Your Hand",
+      "artist": "The Beatles",
+      "order": 16,
+      "expected_level": 3,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open G, D, Em, B7, C, Dm and Am shapes.",
+      "skill_focus": "Seven open shapes with quick two-beat changes under a driving rhythm-guitar strum. A first song for faster changes, including the B7 and Dm.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: I Want to Hold Your Hand",
+          "url": "https://www.musicnotes.com/sheetmusic/the-beatles/i-want-to-hold-your-hand/MN0091924"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "D",
+        "Em",
+        "B7",
+        "C",
+        "Dm",
+        "Am"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart D/G/C/Bm/E/Em; capo 0. Bm puts it at level 4. Pulse ~129 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "eagle-eye-cherry-save-tonight-youtube-20261025",
+      "title": "Save Tonight",
+      "artist": "Eagle-Eye Cherry",
+      "order": 17,
+      "expected_level": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: Am, C and G are open shapes; F can start as a small four-string F before the full barre.",
+      "skill_focus": "A one-chord-per-bar loop where F is the only new shape, strummed on acoustic. A good step from open chords to the F chord.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Save Tonight",
+          "url": "https://www.musicnotes.com/sheetmusic/eagle-eye-cherry/save-tonight/MN0112888"
+        }
+      ],
+      "expected_shapes": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart F/C/G/Am; capo 0. Pulse ~117 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "tom-petty-learning-to-fly-youtube-20261025",
+      "title": "Learning to Fly",
+      "artist": "Tom Petty",
+      "order": 18,
+      "expected_level": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: C, Am and G are open shapes; F can start as a small four-string F.",
+      "skill_focus": "The same F, C, Am, G loop for most of the song at an easy tempo: an ideal first F-chord song, with one chord per bar and an eighth-note strum.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Learning to Fly",
+          "url": "https://www.musicnotes.com/sheetmusic/tom-petty/learning-to-fly/MN0086068"
+        }
+      ],
+      "expected_shapes": [
+        "F",
+        "C",
+        "Am",
+        "G"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart G/C/F/Am; capo 0. Pulse ~117 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "lumineers-ho-hey-youtube-20261025",
+      "title": "Ho Hey",
+      "artist": "The Lumineers",
+      "order": 19,
+      "expected_level": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: C, Am and G are open shapes; F can start as a small four-string F.",
+      "skill_focus": "A slow four-chord loop with an F chord; the stomping, syncopated strum is part of the record. Learn the loop with downstrokes first, then add the syncopation.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Ho Hey",
+          "url": "https://www.musicnotes.com/sheetmusic/the-lumineers/ho-hey/MN0107271"
+        }
+      ],
+      "expected_shapes": [
+        "C",
+        "F",
+        "Am",
+        "G"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart C/Am/G/F; capo 0. Pulse ~81 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "cat-stevens-wild-world-youtube-20261025",
+      "title": "Wild World",
+      "artist": "Cat Stevens",
+      "order": 20,
+      "expected_level": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open Am, D, G, C, Dm and E shapes plus one F (small or full).",
+      "skill_focus": "Seven open shapes plus an F, one chord per bar at a slow tempo with steady downstrokes. A strummed acoustic with piano on the recording.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Wild World",
+          "url": "https://www.musicnotes.com/sheetmusic/cat-stevens/wild-world/MN0107652"
+        }
+      ],
+      "expected_shapes": [
+        "Am",
+        "D",
+        "G",
+        "C",
+        "F",
+        "Dm",
+        "E"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart F/C/G/D/E/Am/Dm; capo 0. Pulse ~76 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "beatles-help-youtube-20261025",
+      "title": "Help!",
+      "artist": "The Beatles",
+      "order": 21,
+      "expected_level": 5,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open A, D, G and E shapes plus C#m, F#m and Bm barre chords.",
+      "skill_focus": "First barre-chord territory: C#m appears in every verse, with F#m and Bm. A driving strummed acoustic underneath, so start slowly.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Help!",
+          "url": "https://www.musicnotes.com/sheetmusic/the-beatles/help/MN0053739"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "C#m",
+        "F#m",
+        "D",
+        "G",
+        "Bm",
+        "E"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart A/G/Bm/F#m/C#m/E/D; capo 0. Pulse ~96 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "proclaimers-im-gonna-be-500-miles-youtube-20261025",
+      "title": "I'm Gonna Be (500 Miles)",
+      "artist": "The Proclaimers",
+      "order": 22,
+      "expected_level": 5,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open E and A shapes plus B, C#m and F#m barre chords.",
+      "skill_focus": "Fast, staccato strumming with B and C#m barre chords: a test of changing between barres at pace. Palm-muted in the verses.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: I'm Gonna Be (500 Miles)",
+          "url": "https://www.musicnotes.com/sheetmusic/the-proclaimers/im-gonna-be-500-miles/MN0064940"
+        }
+      ],
+      "expected_shapes": [
+        "E",
+        "A",
+        "B",
+        "C#m",
+        "F#m"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart E/B/A; capo 0; B is a barre shape. Pulse ~129 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "natalie-imbruglia-torn-youtube-20261025",
+      "title": "Torn",
+      "artist": "Natalie Imbruglia",
+      "order": 23,
+      "expected_level": 5,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: F and Bb are barre shapes, with open Am, Dm and C. A capo on the 5th fret turns the same chords into open C, Em, Am and F shapes.",
+      "skill_focus": "A steady one-chord-per-bar loop where Bb, an A-shape barre, appears in every verse. A first barre-chord song with an eighth-note strum.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Torn",
+          "url": "https://www.musicnotes.com/sheetmusic/natalie-imbruglia/torn/MN0043476"
+        }
+      ],
+      "expected_shapes": [
+        "F",
+        "Am",
+        "Dm",
+        "Bb",
+        "C"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart F/C/Bb/Dm/Am; capo 0. Pulse ~96 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    },
+    {
+      "recording_id": "queen-crazy-little-thing-called-love-youtube-20261025",
+      "title": "Crazy Little Thing Called Love",
+      "artist": "Queen",
+      "order": 24,
+      "expected_level": 5,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open D, G, C, A and E shapes plus a Bb barre in the turnaround.",
+      "skill_focus": "A swung rockabilly strum on acoustic. The Bb turnaround before each chorus is the one barre chord.",
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Crazy Little Thing Called Love",
+          "url": "https://www.musicnotes.com/sheetmusic/queen/crazy-little-thing-called-love/MN0063995"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "G",
+        "C",
+        "A",
+        "E",
+        "Bb"
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-25",
+        "note": "Chart D/G/Bb/C/Dm; capo 0. Pulse ~152 BPM. Automatic sanity check against the well-known progression and published tempo; not a musical review."
+      }
+    }
+  ]
+}

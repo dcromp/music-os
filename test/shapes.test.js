@@ -82,6 +82,8 @@ function assertSoundsLike(label, shape) {
   const pcs = shape.frets.map((f, i) => (f < 0 ? null : (OPEN[i] + f) % 12));
   const sounding = pcs.filter(pc => pc !== null);
   const allowed = new Set(formula.allowed.map(i => (parsed.rootPc + i) % 12));
+  // A label that asks for a 6/9 chord (e.g. A Horse with No Name's D6add9/F#) is simplified to "6"; its 9th is still a chord tone.
+  if (parsed.quality === "6" && /6(\/9|add9|9)/.test(label)) allowed.add((parsed.rootPc + 2) % 12);
   if (parsed.bassPc !== null && !omitted) allowed.add(parsed.bassPc);
   for (const pc of sounding) assert.ok(allowed.has(pc), `${label}: note ${pc} is not in the chord ${JSON.stringify(shape)}`);
   for (const interval of formula.required) {

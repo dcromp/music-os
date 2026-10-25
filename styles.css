@@ -115,6 +115,7 @@ select {
   white-space: nowrap;
 }
 .badge.capo { background: var(--accent); color: var(--on-accent); }
+.badge.level { background: var(--soft); border-color: var(--btn-border); color: var(--text); }
 .badge.warn { border-color: var(--warn-text); color: var(--warn-text); background: var(--warn-bg); }
 .tag { font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 6px; border-radius: 6px; white-space: nowrap; }
 .tag.quick { background: var(--warn-bg); color: var(--warn-text); }
@@ -179,7 +180,7 @@ select {
 .top-title h1, .top-title p { margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .top-title h1 { font-size: 18px; }
 .top-title p { font-size: 14px; color: var(--muted); }
-.top-badges { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+.top-badges { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 3px; max-width: 48%; }
 
 /* Full-bleed player in portrait: 16:9, at least 200 px tall, nothing on top. */
 .view-song .col-video { margin: 0 calc(-1 * var(--gr)) 0 calc(-1 * var(--gl)); }
