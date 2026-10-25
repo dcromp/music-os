@@ -3,7 +3,7 @@
   "generated_from": {
     "catalogue": {
       "path": "strumalong/data/catalogue.json",
-      "sha256": "fa60f8598d4348fa496f1094bb85771f570f49ad1f1a629ef3dd230d1192576c"
+      "sha256": "5cd3781b0a21e17bcec4115fe106bb6322ceb1bc119659ab2a2fd234b9a80ec6"
     },
     "packs": [
       {
@@ -93,9 +93,16 @@
         "sha256": "09c5c68dc1dc44f8380871744c59d00043e1c6ea42650f3911353f84a78962f7"
       }
     ],
-    "songs_index_sha256": "f231f98316ddb7d4bde9423d9133a440d01dcc56ef8c6eb829a9fefc9d1200ff",
-    "exported_songs": 35,
-    "instrument_tags": null
+    "songs_index_sha256": "af7a842ab924fd43b5c2738f83f11a31fe400161797f2e283b1c4d07e5e2226e",
+    "exported_songs": 34,
+    "instrument_tags": {
+      "path": "experiments/generated/strumalong-instrument-tags.json",
+      "sha256": "f06ab6ad2c5294b26227ffa42ebaf303b090c22d1fff14bcd333d295926b71c3"
+    },
+    "hold_checks": {
+      "path": "experiments/generated/strumalong-hold-checks.json",
+      "sha256": "0b1ec266fde363d3a1c2c1fac8dfd2d4464e03ea17ccada6d68c98a02aecc6f9"
+    }
   },
   "thresholds": {
     "main_family_share": 0.04,
@@ -126,7 +133,10 @@
       "flag_nx_share": 0.2,
       "fail_nx_share": 0.5,
       "blip_beats": 0.75,
-      "absent_family_floor": 0.01
+      "absent_family_floor": 0.01,
+      "hold_fail_missed": 0.25,
+      "hold_min_bars": 12,
+      "hold_match_seconds": 1
     },
     "consistency": {
       "min_group": 4,
@@ -164,23 +174,25 @@
         "violin",
         "harp"
       ],
+      "share_fail": 0.1,
+      "share_flag": 0.33,
+      "min_guitar": 0.25,
       "min_other": 0.3,
       "fail_margin": 0.15,
-      "flag_margin": 0,
-      "min_guitar": 0.25,
-      "min_strum": 0.2
+      "restrike_flag": 0.64,
+      "restrike_min_attacks": 50
     }
   },
   "summary": {
     "recordings": 44,
-    "shipped": 35,
-    "excluded": 9,
-    "shipped_pass": 21,
-    "shipped_flag": 12,
-    "shipped_fail": 2,
-    "excluded_pass": 5,
-    "excluded_flag": 2,
-    "excluded_fail": 2
+    "shipped": 34,
+    "excluded": 10,
+    "shipped_pass": 19,
+    "shipped_flag": 15,
+    "shipped_fail": 0,
+    "excluded_pass": 0,
+    "excluded_flag": 7,
+    "excluded_fail": 3
   },
   "unmatched_exclusions": [],
   "songs": [
@@ -193,7 +205,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81",
-      "exported_sha256": "91e830cad160b550bfd1ae788ece59ad8a93f62bb717bcef04d5254f9422937a",
+      "exported_sha256": "9e8cbbdb4173d1b52077305f92ecffdbd1f2bc78454ba738c6553295fb83cea9",
       "checks": {
         "chords": {
           "status": "pass",
@@ -269,7 +281,34 @@
           },
           "expected_families": 3,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "measured",
+            "long_holds": 2,
+            "bars": 17,
+            "missed_bars": 4,
+            "missed_change_fraction": 0.235,
+            "holds": [
+              {
+                "start_seconds": 23.78,
+                "beats": 38.44,
+                "family": "A",
+                "bars": 9,
+                "missed_bars": 3
+              },
+              {
+                "start_seconds": 91.67,
+                "beats": 33.51,
+                "family": "A",
+                "bars": 8,
+                "missed_bars": 1
+              }
+            ],
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -347,9 +386,42 @@
           "note": "no embed check recorded in the repo for this recording"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.694,
+          "lead_other": {
+            "tag": "violin",
+            "score": 0.037
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.718,
+            "yamnet_best_guitar": 0.694,
+            "yamnet_lead_other": {
+              "tag": "violin",
+              "score": 0.037
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.6626,
+            "restrike_onbeat_se": 0.0114,
+            "onbeat_attacks": 206,
+            "single_onbeat": 0.0149,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "flag",
@@ -359,7 +431,6 @@
       "notes": [],
       "not_checked": [
         "embed (unknown)",
-        "instrument (not run)",
         "tempo range (default prior)"
       ]
     },
@@ -372,7 +443,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "022405eadb0d332a34ca66b74989e72cc5e597e57417c1a289178e0a7a084082",
-      "exported_sha256": "a492929af70df234138afe29c89a95cc0e970a6a3760caae43fbf4a65ac1521c",
+      "exported_sha256": "4b7b736f88404bf4fe7749703a6476022d78d4b76dd6b8604d61fe38d5e10787",
       "checks": {
         "chords": {
           "status": "pass",
@@ -448,7 +519,14 @@
           "long_hold_dominant": null,
           "expected_families": 4,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -518,17 +596,49 @@
           "note": "no embed check recorded in the repo for this recording"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.734,
+          "lead_other": {
+            "tag": "organ",
+            "score": 0.01
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 1,
+            "yamnet_best_guitar": 0.734,
+            "yamnet_lead_other": {
+              "tag": "organ",
+              "score": 0.01
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.681,
+            "restrike_onbeat_se": 0.0111,
+            "onbeat_attacks": 167,
+            "single_onbeat": 0.0479,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
       "reasons": [],
       "notes": [],
       "not_checked": [
-        "embed (unknown)",
-        "instrument (not run)"
+        "embed (unknown)"
       ]
     },
     {
@@ -540,7 +650,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "1bc1f1c9467a8bea0aab8e8ae9ea4ccbd3f71ce47c52a1376f591528bcb1170d",
-      "exported_sha256": "ecbc7afda84c3c22d05cf268c475c975fbaca40a85c0eb55af14981e6feb13b4",
+      "exported_sha256": "623adbde3844eeca70b62450c052ea4d9e3d26995f9352358828b2610713b901",
       "checks": {
         "chords": {
           "status": "pass",
@@ -612,7 +722,14 @@
           "long_hold_dominant": null,
           "expected_families": 4,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -692,17 +809,49 @@
           "note": "no embed check recorded in the repo for this recording"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.789,
+          "lead_other": {
+            "tag": "organ",
+            "score": 0.049
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.993,
+            "yamnet_best_guitar": 0.789,
+            "yamnet_lead_other": {
+              "tag": "organ",
+              "score": 0.049
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7185,
+            "restrike_onbeat_se": 0.0115,
+            "onbeat_attacks": 319,
+            "single_onbeat": 0.0533,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
       "reasons": [],
       "notes": [],
       "not_checked": [
-        "embed (unknown)",
-        "instrument (not run)"
+        "embed (unknown)"
       ]
     },
     {
@@ -788,7 +937,34 @@
           },
           "expected_families": 3,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "measured",
+            "long_holds": 2,
+            "bars": 12,
+            "missed_bars": 4,
+            "missed_change_fraction": 0.333,
+            "holds": [
+              {
+                "start_seconds": 42.82,
+                "beats": 25.94,
+                "family": "C",
+                "bars": 6,
+                "missed_bars": 3
+              },
+              {
+                "start_seconds": 101.42,
+                "beats": 24.06,
+                "family": "G",
+                "bars": 6,
+                "missed_bars": 1
+              }
+            ],
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -818,20 +994,57 @@
           "note": "no embed check recorded in the repo for this recording"
         },
         "instrument": {
-          "status": "not run",
-          "reasons": [],
-          "note": "no instrument tags for this recording"
+          "status": "flag",
+          "reasons": [
+            "guitar-led: Guitar carries only 14% of the harmonic accompaniment (Demucs guitar / (guitar + piano + other)); another instrument may lead. Listen."
+          ],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.251,
+          "lead_other": {
+            "tag": "harmonica",
+            "score": 0.285
+          },
+          "guitar_led": {
+            "status": "flag",
+            "reasons": [
+              "Guitar carries only 14% of the harmonic accompaniment (Demucs guitar / (guitar + piano + other)); another instrument may lead. Listen."
+            ],
+            "guitar_share_of_harmonic": 0.136,
+            "yamnet_best_guitar": 0.251,
+            "yamnet_lead_other": {
+              "tag": "harmonica",
+              "score": 0.285
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.6948,
+            "restrike_onbeat_se": 0.0124,
+            "onbeat_attacks": 261,
+            "single_onbeat": 0.0843,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "flag",
       "reasons": [
         "tempo: The beat grid's own spacing (152 BPM) disagrees with the recorded pulse (143.55 BPM).",
-        "plausibility: 15% of chord time sits in holds of 24+ beats (longest 25.94 beats of C)."
+        "plausibility: 15% of chord time sits in holds of 24+ beats (longest 25.94 beats of C).",
+        "instrument: guitar-led: Guitar carries only 14% of the harmonic accompaniment (Demucs guitar / (guitar + piano + other)); another instrument may lead. Listen."
       ],
       "notes": [],
       "not_checked": [
         "embed (unknown)",
-        "instrument (not run)",
         "tempo range (default prior)"
       ]
     },
@@ -844,7 +1057,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "09f64db9a6563e2256c528576bd9776b13c84128ce3b982810b8dfbe6145bb59",
-      "exported_sha256": "01e5de38ba33b98ef51fb8f26c694631015ce0faf191c9ba95910d5b0baad3dd",
+      "exported_sha256": "0fde25db6155e6f3416783cae5fe2dbaae6dbd73f150fe5bcf89aa8209238c08",
       "checks": {
         "chords": {
           "status": "pass",
@@ -916,7 +1129,27 @@
           },
           "expected_families": 3,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "measured",
+            "long_holds": 1,
+            "bars": 6,
+            "missed_bars": 0,
+            "missed_change_fraction": 0,
+            "holds": [
+              {
+                "start_seconds": 82.85,
+                "beats": 27.99,
+                "family": "A",
+                "bars": 6,
+                "missed_bars": 0
+              }
+            ],
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -1012,17 +1245,49 @@
           "note": "no embed check recorded in the repo for this recording"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.464,
+          "lead_other": {
+            "tag": "violin",
+            "score": 0.025
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.723,
+            "yamnet_best_guitar": 0.464,
+            "yamnet_lead_other": {
+              "tag": "violin",
+              "score": 0.025
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7629,
+            "restrike_onbeat_se": 0.0237,
+            "onbeat_attacks": 102,
+            "single_onbeat": 0.0392,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
       "reasons": [],
       "notes": [],
       "not_checked": [
-        "embed (unknown)",
-        "instrument (not run)"
+        "embed (unknown)"
       ]
     },
     {
@@ -1105,7 +1370,14 @@
           "long_hold_dominant": null,
           "expected_families": null,
           "progression_basis": "chart",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -1135,18 +1407,56 @@
           "note": "no embed check recorded in the repo for this recording"
         },
         "instrument": {
-          "status": "not run",
-          "reasons": [],
-          "note": "no instrument tags for this recording"
+          "status": "flag",
+          "reasons": [
+            "strummed: On-beat guitar attacks re-strike only 62% of the sounding partials (restrike_onbeat 0.615 ± 0.017, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+          ],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.389,
+          "lead_other": {
+            "tag": "synthesizer",
+            "score": 0.046
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 1,
+            "yamnet_best_guitar": 0.389,
+            "yamnet_lead_other": {
+              "tag": "synthesizer",
+              "score": 0.046
+            }
+          },
+          "strummed": {
+            "status": "flag",
+            "reasons": [
+              "On-beat guitar attacks re-strike only 62% of the sounding partials (restrike_onbeat 0.615 ± 0.017, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+            ],
+            "restrike_onbeat": 0.6153,
+            "restrike_onbeat_se": 0.0169,
+            "onbeat_attacks": 162,
+            "single_onbeat": 0.0875,
+            "version": "strum-features-1"
+          }
         }
       },
-      "verdict": "pass",
-      "reasons": [],
+      "verdict": "flag",
+      "reasons": [
+        "instrument: strummed: On-beat guitar attacks re-strike only 62% of the sounding partials (restrike_onbeat 0.615 ± 0.017, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+      ],
       "notes": [],
       "not_checked": [
         "chords (no reference)",
-        "embed (unknown)",
-        "instrument (not run)"
+        "embed (unknown)"
       ]
     },
     {
@@ -1225,7 +1535,14 @@
           "long_hold_dominant": null,
           "expected_families": null,
           "progression_basis": "chart",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -1259,19 +1576,56 @@
           ]
         },
         "instrument": {
-          "status": "not run",
-          "reasons": [],
-          "note": "no instrument tags for this recording"
+          "status": "flag",
+          "reasons": [
+            "strummed: On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.627 ± 0.013, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+          ],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.553,
+          "lead_other": {
+            "tag": "keyboard",
+            "score": 0.013
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.996,
+            "yamnet_best_guitar": 0.553,
+            "yamnet_lead_other": {
+              "tag": "keyboard",
+              "score": 0.013
+            }
+          },
+          "strummed": {
+            "status": "flag",
+            "reasons": [
+              "On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.627 ± 0.013, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+            ],
+            "restrike_onbeat": 0.6267,
+            "restrike_onbeat_se": 0.0126,
+            "onbeat_attacks": 251,
+            "single_onbeat": 0.0873,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "fail",
       "reasons": [
-        "embed: Age-restricted: the catalogue upload cannot play in an embed."
+        "embed: Age-restricted: the catalogue upload cannot play in an embed.",
+        "instrument: strummed: On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.627 ± 0.013, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
       ],
       "notes": [],
       "not_checked": [
-        "chords (no reference)",
-        "instrument (not run)"
+        "chords (no reference)"
       ]
     },
     {
@@ -1369,7 +1723,14 @@
           "long_hold_dominant": null,
           "expected_families": 4,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -1407,17 +1768,55 @@
           "note": "no embed check recorded in the repo for this recording"
         },
         "instrument": {
-          "status": "not run",
-          "reasons": [],
-          "note": "no instrument tags for this recording"
+          "status": "flag",
+          "reasons": [
+            "strummed: On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.63 ± 0.011, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+          ],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.577,
+          "lead_other": {
+            "tag": "organ",
+            "score": 0.195
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.997,
+            "yamnet_best_guitar": 0.577,
+            "yamnet_lead_other": {
+              "tag": "organ",
+              "score": 0.195
+            }
+          },
+          "strummed": {
+            "status": "flag",
+            "reasons": [
+              "On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.63 ± 0.011, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+            ],
+            "restrike_onbeat": 0.6295,
+            "restrike_onbeat_se": 0.0105,
+            "onbeat_attacks": 244,
+            "single_onbeat": 0.1352,
+            "version": "strum-features-1"
+          }
         }
       },
-      "verdict": "pass",
-      "reasons": [],
+      "verdict": "flag",
+      "reasons": [
+        "instrument: strummed: On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.63 ± 0.011, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+      ],
       "notes": [],
       "not_checked": [
-        "embed (unknown)",
-        "instrument (not run)"
+        "embed (unknown)"
       ]
     },
     {
@@ -1514,7 +1913,14 @@
           "long_hold_dominant": null,
           "expected_families": 6,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -1544,17 +1950,55 @@
           "note": "no embed check recorded in the repo for this recording"
         },
         "instrument": {
-          "status": "not run",
-          "reasons": [],
-          "note": "no instrument tags for this recording"
+          "status": "flag",
+          "reasons": [
+            "strummed: On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.625 ± 0.01, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+          ],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.931,
+          "lead_other": {
+            "tag": "organ",
+            "score": 0.057
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.9,
+            "yamnet_best_guitar": 0.931,
+            "yamnet_lead_other": {
+              "tag": "organ",
+              "score": 0.057
+            }
+          },
+          "strummed": {
+            "status": "flag",
+            "reasons": [
+              "On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.625 ± 0.01, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+            ],
+            "restrike_onbeat": 0.6252,
+            "restrike_onbeat_se": 0.01,
+            "onbeat_attacks": 315,
+            "single_onbeat": 0.0635,
+            "version": "strum-features-1"
+          }
         }
       },
-      "verdict": "pass",
-      "reasons": [],
+      "verdict": "flag",
+      "reasons": [
+        "instrument: strummed: On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.625 ± 0.01, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+      ],
       "notes": [],
       "not_checked": [
-        "embed (unknown)",
-        "instrument (not run)"
+        "embed (unknown)"
       ]
     },
     {
@@ -1566,7 +2010,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "1d696977fe56f91126f3e838903939a6670a335d7079fc297b45e6573a3c3e83",
-      "exported_sha256": "eee504761a9c151850fe1a9b0103f56737fde75636d7bda66beb63aed2e9fca0",
+      "exported_sha256": "20bb73d9841697f0d67718999151c64f3aad728a59e18bfc98c29712b5d00625",
       "checks": {
         "chords": {
           "status": "pass",
@@ -1641,7 +2085,14 @@
           "long_hold_dominant": null,
           "expected_families": 5,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "flag",
@@ -1718,9 +2169,42 @@
           "note": "no embed check recorded in the repo for this recording"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.559,
+          "lead_other": {
+            "tag": "keyboard",
+            "score": 0.009
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.981,
+            "yamnet_best_guitar": 0.559,
+            "yamnet_lead_other": {
+              "tag": "keyboard",
+              "score": 0.009
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.6499,
+            "restrike_onbeat_se": 0.0084,
+            "onbeat_attacks": 323,
+            "single_onbeat": 0.044,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "flag",
@@ -1729,8 +2213,7 @@
       ],
       "notes": [],
       "not_checked": [
-        "embed (unknown)",
-        "instrument (not run)"
+        "embed (unknown)"
       ]
     },
     {
@@ -1742,7 +2225,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "8e469ae20cf655d02499b27ed2ffc1dcb993631faabd535d15dba7a9a5edfec4",
-      "exported_sha256": "aa3adfb412d249aae07772c61c6a4dd0b6c6e6f57711af54635e5005941a7600",
+      "exported_sha256": "1f29e41e49c725cf6a140c4dd65a114de0385f267fdf1f16d3a7c2e0a6e5401c",
       "checks": {
         "chords": {
           "status": "pass",
@@ -1816,7 +2299,14 @@
           "long_hold_dominant": null,
           "expected_families": 4,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -1935,9 +2425,42 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v1.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.635,
+          "lead_other": {
+            "tag": "organ",
+            "score": 0.013
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.997,
+            "yamnet_best_guitar": 0.635,
+            "yamnet_lead_other": {
+              "tag": "organ",
+              "score": 0.013
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.6439,
+            "restrike_onbeat_se": 0.0075,
+            "onbeat_attacks": 491,
+            "single_onbeat": 0.0609,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
@@ -1945,9 +2468,7 @@
       "notes": [
         "consistency: The exporter's auto-timing moved 4 repeated changes (2 by a whole beat, the rest small snaps). By this check's own measure the raw chart has 2 isolated mistimed changes and the shipped timeline 0; 2 of the 4 moves it can measure fix a change that was about a beat off."
       ],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "green-day-good-riddance-youtube-20261024",
@@ -2033,7 +2554,14 @@
           "long_hold_dominant": null,
           "expected_families": 4,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "flag",
@@ -2103,20 +2631,56 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v1.json"
         },
         "instrument": {
-          "status": "not run",
-          "reasons": [],
-          "note": "no instrument tags for this recording"
+          "status": "flag",
+          "reasons": [
+            "strummed: On-beat guitar attacks re-strike only 62% of the sounding partials (restrike_onbeat 0.623 ± 0.01, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+          ],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.984,
+          "lead_other": {
+            "tag": "piano",
+            "score": 0.009
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.993,
+            "yamnet_best_guitar": 0.984,
+            "yamnet_lead_other": {
+              "tag": "piano",
+              "score": 0.009
+            }
+          },
+          "strummed": {
+            "status": "flag",
+            "reasons": [
+              "On-beat guitar attacks re-strike only 62% of the sounding partials (restrike_onbeat 0.623 ± 0.01, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+            ],
+            "restrike_onbeat": 0.6229,
+            "restrike_onbeat_se": 0.0104,
+            "onbeat_attacks": 220,
+            "single_onbeat": 0.0727,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "flag",
       "reasons": [
         "consistency: 3 of 93 repeated chord changes (3%) fall about a beat away from where the same change usually falls; first at 45.05s G>C (-0.75 beat), 47.65s D>G (-0.91 beat), 52.57s D>G (-0.77 beat).",
-        "consistency: 26% of repeated changes sit in stretches that are a steady beat off, a phase slip of the grid or the chart: 7.43-19.97s (9 changes, -1.04 beat); 23.59-41.24s (15 changes, -1.08 beat)."
+        "consistency: 26% of repeated changes sit in stretches that are a steady beat off, a phase slip of the grid or the chart: 7.43-19.97s (9 changes, -1.04 beat); 23.59-41.24s (15 changes, -1.08 beat).",
+        "instrument: strummed: On-beat guitar attacks re-strike only 62% of the sounding partials (restrike_onbeat 0.623 ± 0.01, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
       ],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "oasis-dont-look-back-in-anger-youtube-20261024",
@@ -2127,7 +2691,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "d07d2aa849e7e175eac719399412c591ac660908dc51e82301171f1ebb11377a",
-      "exported_sha256": "139bc7e9920b88675d3d3603758ee94d9ed8969cfd8f0a05b994a185f7bed710",
+      "exported_sha256": "bcf169236e1707edc0078991f4f5d48eadb11612cde88532407dc3374f2fca6e",
       "checks": {
         "chords": {
           "status": "pass",
@@ -2214,7 +2778,14 @@
           "expected_absent": [
             "E",
             "Dm"
-          ]
+          ],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "flag",
@@ -2351,21 +2922,57 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v1.json"
         },
         "instrument": {
-          "status": "not run",
-          "reasons": [],
-          "note": "no instrument tags for this recording"
+          "status": "flag",
+          "reasons": [
+            "strummed: On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.631 ± 0.005, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+          ],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.59,
+          "lead_other": {
+            "tag": "keyboard",
+            "score": 0.027
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 1,
+            "yamnet_best_guitar": 0.59,
+            "yamnet_lead_other": {
+              "tag": "keyboard",
+              "score": 0.027
+            }
+          },
+          "strummed": {
+            "status": "flag",
+            "reasons": [
+              "On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.631 ± 0.005, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+            ],
+            "restrike_onbeat": 0.631,
+            "restrike_onbeat_se": 0.0051,
+            "onbeat_attacks": 463,
+            "single_onbeat": 0.0151,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "flag",
       "reasons": [
-        "consistency: 3 of 133 repeated chord changes (2%) fall about a beat away from where the same change usually falls; first at 207.22s G>Am (+0.84 beat), 219.38s G>Am (+1.35 beat), 279.38s F>C (-0.99 beat)."
+        "consistency: 3 of 133 repeated chord changes (2%) fall about a beat away from where the same change usually falls; first at 207.22s G>Am (+0.84 beat), 219.38s G>Am (+1.35 beat), 279.38s F>C (-0.99 beat).",
+        "instrument: strummed: On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.631 ± 0.005, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
       ],
       "notes": [
         "consistency: The exporter's auto-timing moved 2 repeated changes (1 by a whole beat, the rest small snaps). By this check's own measure the raw chart has 4 isolated mistimed changes and the shipped timeline 3; 1 of the 2 moves it can measure fix a change that was about a beat off."
       ],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "ccr-have-you-ever-seen-the-rain-youtube-20261024",
@@ -2376,7 +2983,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "b68b9c01e4b2e942a62c35141d48f32de51ece294edba84a38078190756d28c4",
-      "exported_sha256": "a5ff682393b50111f790f0ce90eaac7208246306b47828212e4e189a5c7c711c",
+      "exported_sha256": "8ab6da437017b56d307a20b9fb9dcf7312a3cc3ecd27637250fb84f4164670a3",
       "checks": {
         "chords": {
           "status": "pass",
@@ -2464,7 +3071,48 @@
           "expected_absent": [
             "Dm",
             "E"
-          ]
+          ],
+          "hold_evidence": {
+            "status": "measured",
+            "long_holds": 4,
+            "bars": 24,
+            "missed_bars": 0,
+            "missed_change_fraction": 0,
+            "holds": [
+              {
+                "start_seconds": 8.73,
+                "beats": 24.19,
+                "family": "C",
+                "bars": 6,
+                "missed_bars": 0
+              },
+              {
+                "start_seconds": 25.36,
+                "beats": 24.14,
+                "family": "C",
+                "bars": 6,
+                "missed_bars": 0
+              },
+              {
+                "start_seconds": 66.69,
+                "beats": 24.32,
+                "family": "C",
+                "bars": 6,
+                "missed_bars": 0
+              },
+              {
+                "start_seconds": 83.22,
+                "beats": 24.03,
+                "family": "C",
+                "bars": 6,
+                "missed_bars": 0
+              }
+            ],
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -2505,9 +3153,42 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v1.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.706,
+          "lead_other": {
+            "tag": "keyboard",
+            "score": 0.03
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.944,
+            "yamnet_best_guitar": 0.706,
+            "yamnet_lead_other": {
+              "tag": "keyboard",
+              "score": 0.03
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7044,
+            "restrike_onbeat_se": 0.0078,
+            "onbeat_attacks": 357,
+            "single_onbeat": 0.0112,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "flag",
@@ -2516,9 +3197,7 @@
         "plausibility: Expected chords absent from the chart: Dm E."
       ],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "ccr-bad-moon-rising-youtube-20261024",
@@ -2529,7 +3208,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "fe8288a193a6107105e2146c04d6712670ea75b508bf437617878a63bb9c8518",
-      "exported_sha256": "4fab7340f8e87ae1f0f03266b9ea715119f2f456732533c8f814f57f9062fd02",
+      "exported_sha256": "41e7817295e191404659fdecf7898ebfd6dad5a0d462c6cd37640bf9120e4761",
       "checks": {
         "chords": {
           "status": "pass",
@@ -2598,7 +3277,14 @@
           "long_hold_dominant": null,
           "expected_families": 3,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -2639,17 +3325,48 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v1.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.897,
+          "lead_other": {
+            "tag": "banjo",
+            "score": 0.003
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.999,
+            "yamnet_best_guitar": 0.897,
+            "yamnet_lead_other": {
+              "tag": "banjo",
+              "score": 0.003
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7726,
+            "restrike_onbeat_se": 0.0106,
+            "onbeat_attacks": 199,
+            "single_onbeat": 0.005,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
       "reasons": [],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "tom-petty-free-fallin-youtube-20261024",
@@ -2660,7 +3377,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "d30c536b8eb3dbbc24fc7706dd333a8bdee83ba3702d11701cde1caae3a43790",
-      "exported_sha256": "e7a9f80fcb33719a0591233f34ac5a1bc161d7d36d399a1a9e4fafb9f33dfdcc",
+      "exported_sha256": "849770ba5e6f3e01d967feafa5eec1bf195942a3ae05fbc97ab077c35613d7db",
       "checks": {
         "chords": {
           "status": "pass",
@@ -2729,7 +3446,14 @@
           "long_hold_dominant": null,
           "expected_families": 3,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -2770,17 +3494,48 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v1.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.304,
+          "lead_other": {
+            "tag": "accordion",
+            "score": 0.109
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.934,
+            "yamnet_best_guitar": 0.304,
+            "yamnet_lead_other": {
+              "tag": "accordion",
+              "score": 0.109
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.6675,
+            "restrike_onbeat_se": 0.0102,
+            "onbeat_attacks": 256,
+            "single_onbeat": 0.0508,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
       "reasons": [],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "weezer-island-in-the-sun-youtube-20261024",
@@ -2791,7 +3546,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "e609fff29eea7b6ffdc6d054a0df80404d3adae24dd3bc85f378627772f13597",
-      "exported_sha256": "c0497f6b59a3977dbc0b596c74d0c5dcc999f9c38000c0e62f10f430b5c6b1dc",
+      "exported_sha256": "e8b66f37a885a3fac81cd294cfe16bfab3faf41cd8cd5206af210dafe1e2e779",
       "checks": {
         "chords": {
           "status": "flag",
@@ -2877,7 +3632,14 @@
           "long_hold_dominant": null,
           "expected_families": 4,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -2918,9 +3680,42 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v1.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.904,
+          "lead_other": {
+            "tag": "violin",
+            "score": 0.005
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 1,
+            "yamnet_best_guitar": 0.904,
+            "yamnet_lead_other": {
+              "tag": "violin",
+              "score": 0.005
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7146,
+            "restrike_onbeat_se": 0.008,
+            "onbeat_attacks": 348,
+            "single_onbeat": 0.0287,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "flag",
@@ -2929,9 +3724,7 @@
         "chords: Unexpected main chord: Am 21%."
       ],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "john-denver-country-roads-youtube-20261024",
@@ -2942,7 +3735,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "70a20c55bb7528e8a6a7453962244fb1c8fd292be8db3af71692fb5287a595de",
-      "exported_sha256": "d62f80654c7537d8d0ac51953ae58cef76ede2b12f91c8ec2e403ba9b30a0ebf",
+      "exported_sha256": "a7dc021f7c98bb3d5a97757491526cc12c5a8b515f25b0dc76701dd3947cbef6",
       "checks": {
         "chords": {
           "status": "pass",
@@ -3016,7 +3809,14 @@
           "long_hold_dominant": null,
           "expected_families": 4,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -3057,17 +3857,48 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v1.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.876,
+          "lead_other": {
+            "tag": "harmonica",
+            "score": 0.018
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.973,
+            "yamnet_best_guitar": 0.876,
+            "yamnet_lead_other": {
+              "tag": "harmonica",
+              "score": 0.018
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7148,
+            "restrike_onbeat_se": 0.0087,
+            "onbeat_attacks": 238,
+            "single_onbeat": 0.0546,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
       "reasons": [],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "lynyrd-skynyrd-sweet-home-alabama-youtube-20261024",
@@ -3148,7 +3979,14 @@
           "long_hold_dominant": null,
           "expected_families": 3,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -3180,17 +4018,54 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v1.json"
         },
         "instrument": {
-          "status": "not run",
-          "reasons": [],
-          "note": "no instrument tags for this recording"
+          "status": "flag",
+          "reasons": [
+            "strummed: On-beat guitar attacks re-strike only 58% of the sounding partials (restrike_onbeat 0.583 ± 0.011, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+          ],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.921,
+          "lead_other": {
+            "tag": "piano",
+            "score": 0.007
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.997,
+            "yamnet_best_guitar": 0.921,
+            "yamnet_lead_other": {
+              "tag": "piano",
+              "score": 0.007
+            }
+          },
+          "strummed": {
+            "status": "flag",
+            "reasons": [
+              "On-beat guitar attacks re-strike only 58% of the sounding partials (restrike_onbeat 0.583 ± 0.011, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+            ],
+            "restrike_onbeat": 0.5832,
+            "restrike_onbeat_se": 0.0112,
+            "onbeat_attacks": 372,
+            "single_onbeat": 0.1536,
+            "version": "strum-features-1"
+          }
         }
       },
-      "verdict": "pass",
-      "reasons": [],
+      "verdict": "flag",
+      "reasons": [
+        "instrument: strummed: On-beat guitar attacks re-strike only 58% of the sounding partials (restrike_onbeat 0.583 ± 0.011, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+      ],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "vance-joy-riptide-youtube-20261024",
@@ -3271,7 +4146,14 @@
           "long_hold_dominant": null,
           "expected_families": 3,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -3303,17 +4185,57 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v1.json"
         },
         "instrument": {
-          "status": "not run",
-          "reasons": [],
-          "note": "no instrument tags for this recording"
+          "status": "fail",
+          "reasons": [
+            "guitar-led: The Demucs guitar stem is nearly empty (guitar 4% of the guitar + piano + other energy) and YAMNet hears no guitar (best guitar tag 0.06): not a guitar-led recording."
+          ],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.059,
+          "lead_other": {
+            "tag": "ukulele",
+            "score": 0.111
+          },
+          "guitar_led": {
+            "status": "fail",
+            "reasons": [
+              "The Demucs guitar stem is nearly empty (guitar 4% of the guitar + piano + other energy) and YAMNet hears no guitar (best guitar tag 0.06): not a guitar-led recording."
+            ],
+            "guitar_share_of_harmonic": 0.042,
+            "yamnet_best_guitar": 0.059,
+            "yamnet_lead_other": {
+              "tag": "ukulele",
+              "score": 0.111
+            }
+          },
+          "strummed": {
+            "status": "not measured",
+            "reasons": [],
+            "restrike_onbeat": 0.6639,
+            "restrike_onbeat_se": 0.0293,
+            "onbeat_attacks": 100,
+            "single_onbeat": 0.08,
+            "version": "strum-features-1",
+            "note": "not guitar-led, so the guitar stem holds mostly bleed from other instruments"
+          }
         }
       },
-      "verdict": "pass",
-      "reasons": [],
+      "verdict": "fail",
+      "reasons": [
+        "instrument: guitar-led: The Demucs guitar stem is nearly empty (guitar 4% of the guitar + piano + other energy) and YAMNet hears no guitar (best guitar tag 0.06): not a guitar-led recording."
+      ],
       "notes": [],
       "not_checked": [
         "consistency (too few repeated changes)",
-        "instrument (not run)"
+        "instrument: strummed (not measured: not guitar-led, so the guitar stem holds mostly bleed from other instruments)"
       ]
     },
     {
@@ -3325,7 +4247,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "c885e27d9f3036067a5b492cf43118b63a8a16722b5a8b2dda25d9d4d49a98fb",
-      "exported_sha256": "becf8938f9c8224425afe563439e1878136d3b1a8a22eb4cd896ab12226e8e6f",
+      "exported_sha256": "9e57d2420bacef85cbe05c6bc9d0899b8758f53224de2820dee0638920d45655",
       "checks": {
         "chords": {
           "status": "pass",
@@ -3399,7 +4321,27 @@
           },
           "expected_families": 3,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "measured",
+            "long_holds": 1,
+            "bars": 6,
+            "missed_bars": 2,
+            "missed_change_fraction": 0.333,
+            "holds": [
+              {
+                "start_seconds": 1.58,
+                "beats": 24.09,
+                "family": "A",
+                "bars": 6,
+                "missed_bars": 2
+              }
+            ],
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -3440,19 +4382,55 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
-          "reasons": [],
-          "note": "no instrument tags for this recording"
+          "status": "flag",
+          "reasons": [
+            "guitar-led: Guitar carries only 22% of the harmonic accompaniment (Demucs guitar / (guitar + piano + other)); another instrument may lead. Listen."
+          ],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.296,
+          "lead_other": {
+            "tag": "harmonica",
+            "score": 0.077
+          },
+          "guitar_led": {
+            "status": "flag",
+            "reasons": [
+              "Guitar carries only 22% of the harmonic accompaniment (Demucs guitar / (guitar + piano + other)); another instrument may lead. Listen."
+            ],
+            "guitar_share_of_harmonic": 0.215,
+            "yamnet_best_guitar": 0.296,
+            "yamnet_lead_other": {
+              "tag": "harmonica",
+              "score": 0.077
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7671,
+            "restrike_onbeat_se": 0.0214,
+            "onbeat_attacks": 120,
+            "single_onbeat": 0.05,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "flag",
       "reasons": [
-        "plausibility: 11% of chord time sits in holds of 24+ beats (longest 24.09 beats of A)."
+        "plausibility: 11% of chord time sits in holds of 24+ beats (longest 24.09 beats of A).",
+        "instrument: guitar-led: Guitar carries only 22% of the harmonic accompaniment (Demucs guitar / (guitar + piano + other)); another instrument may lead. Listen."
       ],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "america-a-horse-with-no-name-youtube-20261025",
@@ -3523,7 +4501,7 @@
         "plausibility": {
           "status": "fail",
           "reasons": [
-            "36% of chord time sits in 5 single holds of 24+ beats (longest 52.33 beats of Em) although the progression has 2 families; the chart probably merges alternating chords."
+            "36% of chord time sits in 5 single holds of 24+ beats (longest 52.33 beats of Em) although the progression has 2 families, and the audio inside those holds changes chord: in 17 of 45 bars another main chord fits better than the held one (hold check). The chart probably merges alternating chords."
           ],
           "n_share": 0.008,
           "x_share": 0,
@@ -3546,7 +4524,55 @@
           },
           "expected_families": 2,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "measured",
+            "long_holds": 5,
+            "bars": 45,
+            "missed_bars": 17,
+            "missed_change_fraction": 0.378,
+            "holds": [
+              {
+                "start_seconds": 4.64,
+                "beats": 45.86,
+                "family": "Em",
+                "bars": 11,
+                "missed_bars": 2
+              },
+              {
+                "start_seconds": 28.89,
+                "beats": 28.19,
+                "family": "Em",
+                "bars": 7,
+                "missed_bars": 3
+              },
+              {
+                "start_seconds": 44.4,
+                "beats": 28.43,
+                "family": "Em",
+                "bars": 7,
+                "missed_bars": 3
+              },
+              {
+                "start_seconds": 83.41,
+                "beats": 28.24,
+                "family": "Em",
+                "bars": 7,
+                "missed_bars": 3
+              },
+              {
+                "start_seconds": 141.73,
+                "beats": 52.33,
+                "family": "Em",
+                "bars": 13,
+                "missed_bars": 6
+              }
+            ],
+            "file_view_source": "pack",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": true
         },
         "consistency": {
           "status": "flag",
@@ -3595,21 +4621,52 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.861,
+          "lead_other": {
+            "tag": "banjo",
+            "score": 0.01
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.939,
+            "yamnet_best_guitar": 0.861,
+            "yamnet_lead_other": {
+              "tag": "banjo",
+              "score": 0.01
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7032,
+            "restrike_onbeat_se": 0.01,
+            "onbeat_attacks": 398,
+            "single_onbeat": 0.0377,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "fail",
       "reasons": [
         "chords: Unexpected main chord: F#m 8%.",
-        "plausibility: 36% of chord time sits in 5 single holds of 24+ beats (longest 52.33 beats of Em) although the progression has 2 families; the chart probably merges alternating chords.",
+        "plausibility: 36% of chord time sits in 5 single holds of 24+ beats (longest 52.33 beats of Em) although the progression has 2 families, and the audio inside those holds changes chord: in 17 of 45 bars another main chord fits better than the held one (hold check). The chart probably merges alternating chords.",
         "consistency: 2 of 50 repeated chord changes (4%) fall about a beat away from where the same change usually falls; first at 101.89s Em>D (+1.49 beat), 106.25s D>Em (-0.83 beat)."
       ],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "neil-diamond-sweet-caroline-youtube-20261025",
@@ -3620,7 +4677,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "a966d83c22b233d4aecd53defc22bafdbd461f4e2abc805ee109bea16ead81e1",
-      "exported_sha256": "f53cefade2bbf3b0ef90c2d486822b60addace642425b017b4b4449bd9aa2575",
+      "exported_sha256": "a9fbdd7e68e6d8e996d92f3416ba2cffd048ae4412ff03bef39bbffbbe6fc18b",
       "checks": {
         "chords": {
           "status": "pass",
@@ -3692,7 +4749,27 @@
           },
           "expected_families": 3,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "measured",
+            "long_holds": 1,
+            "bars": 6,
+            "missed_bars": 4,
+            "missed_change_fraction": 0.667,
+            "holds": [
+              {
+                "start_seconds": 158.64,
+                "beats": 27.79,
+                "family": "F#",
+                "bars": 6,
+                "missed_bars": 4
+              }
+            ],
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -3733,17 +4810,54 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
-          "reasons": [],
-          "note": "no instrument tags for this recording"
+          "status": "flag",
+          "reasons": [
+            "guitar-led: Guitar carries only 17% of the harmonic accompaniment (Demucs guitar / (guitar + piano + other)); another instrument may lead. Listen."
+          ],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.42,
+          "lead_other": {
+            "tag": "keyboard",
+            "score": 0.068
+          },
+          "guitar_led": {
+            "status": "flag",
+            "reasons": [
+              "Guitar carries only 17% of the harmonic accompaniment (Demucs guitar / (guitar + piano + other)); another instrument may lead. Listen."
+            ],
+            "guitar_share_of_harmonic": 0.172,
+            "yamnet_best_guitar": 0.42,
+            "yamnet_lead_other": {
+              "tag": "keyboard",
+              "score": 0.068
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.8413,
+            "restrike_onbeat_se": 0.0119,
+            "onbeat_attacks": 276,
+            "single_onbeat": 0.0614,
+            "version": "strum-features-1"
+          }
         }
       },
-      "verdict": "pass",
-      "reasons": [],
+      "verdict": "flag",
+      "reasons": [
+        "instrument: guitar-led: Guitar carries only 17% of the harmonic accompaniment (Demucs guitar / (guitar + piano + other)); another instrument may lead. Listen."
+      ],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "old-crow-medicine-show-wagon-wheel-youtube-20261025",
@@ -3754,7 +4868,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "58d8a7f9b9d6da0d54ba81d20d9233f74dd5fdbb41a88f37867c96319f4e0d66",
-      "exported_sha256": "1b194c4a1dc5ff9db207268f952cc9c5de9725c8a347b2b0986a1c699e8528c8",
+      "exported_sha256": "44511cb50f2bc9545ee932f806e100eed829dd5a1d3a70ca7869695d5b3ea728",
       "checks": {
         "chords": {
           "status": "pass",
@@ -3828,7 +4942,14 @@
           "long_hold_dominant": null,
           "expected_families": 4,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -3967,9 +5088,42 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.7,
+          "lead_other": {
+            "tag": "banjo",
+            "score": 0.099
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.59,
+            "yamnet_best_guitar": 0.7,
+            "yamnet_lead_other": {
+              "tag": "banjo",
+              "score": 0.099
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.8075,
+            "restrike_onbeat_se": 0.0076,
+            "onbeat_attacks": 468,
+            "single_onbeat": 0.0427,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
@@ -3977,20 +5131,19 @@
       "notes": [
         "consistency: The exporter's auto-timing moved 6 repeated changes (2 by a whole beat, the rest small snaps). By this check's own measure the raw chart has 2 isolated mistimed changes and the shipped timeline 0; 2 of the 6 moves it can measure fix a change that was about a beat off."
       ],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "james-sit-down-youtube-20261025",
       "title": "Sit Down",
       "artist": "James",
       "pack": "strumalong-additions-v2",
-      "shipped": true,
-      "exported": true,
-      "view_source": "exported",
+      "shipped": false,
+      "excluded_reason": "Automated check (25 Oct): strum score restrike_onbeat 0.592, below 5 of the 6 founder-labelled picked/riff songs and low across the whole song, plus chart plausibility and timing flags. Listen-check before restoring.",
+      "exported": false,
+      "view_source": "pack",
       "chart_sha256": "cb38ffbd8a8a883ba4d343153fa6305f6ecccab1ed2c5c51a04d481778563718",
-      "exported_sha256": "4d4ce8fb1479490372b8351a33a30387c9526b7ed8b24bd5673ee0a0f6f3a6d5",
+      "exported_sha256": null,
       "checks": {
         "chords": {
           "status": "pass",
@@ -4027,8 +5180,8 @@
           "status": "pass",
           "reasons": [],
           "pulse_bpm": 129.2,
-          "implied_bpm": 129.03,
-          "interval_cv": 0.037,
+          "implied_bpm": 129.2,
+          "interval_cv": 0.038,
           "start_bpm": 124,
           "range": [
             100,
@@ -4041,18 +5194,18 @@
         "plausibility": {
           "status": "flag",
           "reasons": [
-            "30% of chord time sits in holds of 24+ beats (longest 29.08 beats of E)."
+            "30% of chord time sits in holds of 24+ beats (longest 29.09 beats of E)."
           ],
           "n_share": 0.012,
           "x_share": 0,
           "nx_share": 0.012,
           "long_hold_share": 0.304,
           "long_hold_count": 6,
-          "max_hold_beats": 29.08,
+          "max_hold_beats": 29.09,
           "max_hold": {
             "family": "E",
             "start_seconds": 157.9,
-            "beats": 29.08
+            "beats": 29.09
           },
           "top_family": {
             "family": "E",
@@ -4064,16 +5217,24 @@
           },
           "expected_families": 3,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "mismatch",
+            "note": "made from the exported chart, checked on the pack chart",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "flag",
           "reasons": [
-            "5 of 60 repeated chord changes (8%) fall about a beat away from where the same change usually falls; first at 80.71s E>A (+0.78 beat), 149.35s E>A (+0.93 beat), 150.37s A>E (-0.86 beat), 156.97s E>A (+0.89 beat)."
+            "5 of 60 repeated chord changes (8%) fall about a beat away from where the same change usually falls; first at 80.71s E>A (+0.78 beat), 149.35s E>A (+0.93 beat), 150.37s A>E (-0.81 beat), 156.97s E>A (+0.89 beat)."
           ],
           "beats_per_bar": 4,
           "bpb_assumed": false,
-          "source": "exported",
+          "source": "pack",
           "changes": 67,
           "positioned": 66,
           "outside_grid": 1,
@@ -4097,14 +5258,14 @@
               "t": 149.35,
               "change": "E>A",
               "offset_beats": 0.93,
-              "from_hold_beats": 25.34,
-              "to_hold_beats": 2.11
+              "from_hold_beats": 25.33,
+              "to_hold_beats": 2.12
             },
             {
               "t": 150.37,
               "change": "A>E",
-              "offset_beats": -0.86,
-              "from_hold_beats": 2.11,
+              "offset_beats": -0.81,
+              "from_hold_beats": 2.12,
               "to_hold_beats": 13.85
             },
             {
@@ -4112,96 +5273,18 @@
               "change": "E>A",
               "offset_beats": 0.89,
               "from_hold_beats": 13.85,
-              "to_hold_beats": 1.97
+              "to_hold_beats": 1.96
             },
             {
               "t": 157.9,
               "change": "A>E",
-              "offset_beats": -1.05,
-              "from_hold_beats": 1.97,
-              "to_hold_beats": 29.08
+              "offset_beats": -1,
+              "from_hold_beats": 1.96,
+              "to_hold_beats": 29.09
             }
           ],
-          "exporter": {
-            "bar_model": "anchored-1",
-            "bar_confident_pct": 82.7,
-            "anchor_phases": 2,
-            "approx_anchored_events": 6,
-            "corrected_events": 0,
-            "auto_timed_events": 1,
-            "other_chord_keys": []
-          },
           "evidence": "sufficient",
-          "unhandled_shift_share": 0,
-          "auto_timing": {
-            "moves": 1,
-            "flagged_events": 1,
-            "share": 0.015,
-            "exporter_note": "1 chord change moved by one beat to match the other repeats of the same sequence (automatic; raw chart unchanged)",
-            "raw_chart": {
-              "status": "flag",
-              "eligible_changes": 60,
-              "deviants": 5,
-              "shifts": 0,
-              "deviant_list": [
-                {
-                  "t": 80.71,
-                  "change": "E>A",
-                  "offset_beats": 0.78,
-                  "from_hold_beats": 8.92,
-                  "to_hold_beats": 3.11
-                },
-                {
-                  "t": 149.35,
-                  "change": "E>A",
-                  "offset_beats": 0.93,
-                  "from_hold_beats": 25.33,
-                  "to_hold_beats": 2.12
-                },
-                {
-                  "t": 150.37,
-                  "change": "A>E",
-                  "offset_beats": -0.81,
-                  "from_hold_beats": 2.12,
-                  "to_hold_beats": 13.85
-                },
-                {
-                  "t": 156.97,
-                  "change": "E>A",
-                  "offset_beats": 0.89,
-                  "from_hold_beats": 13.85,
-                  "to_hold_beats": 1.96
-                },
-                {
-                  "t": 157.9,
-                  "change": "A>E",
-                  "offset_beats": -1,
-                  "from_hold_beats": 1.96,
-                  "to_hold_beats": 29.09
-                }
-              ]
-            },
-            "shipped_deviants": 5,
-            "moves_measured": 1,
-            "full_beat_moves": 0,
-            "moves_that_fix_a_mistiming": 0,
-            "moves_that_made_it_worse": 0,
-            "details": [
-              {
-                "at": 13.607,
-                "was": 13.468,
-                "change": "D>A",
-                "shift_buckets": 1,
-                "agree": "7/8",
-                "moved_beats": 0.3,
-                "raw_offset_beats": -0.24,
-                "offset_after_beats": 0.06
-              }
-            ]
-          },
-          "notes": [
-            "The exporter's auto-timing moved 1 repeated change (0 by a whole beat, the rest small snaps). By this check's own measure the raw chart has 5 isolated mistimed changes and the shipped timeline 5; 0 of the 1 moves it can measure fix a change that was about a beat off."
-          ]
+          "unhandled_shift_share": 0
         },
         "embed": {
           "status": "pass",
@@ -4212,22 +5295,56 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
-          "reasons": [],
-          "note": "no instrument tags for this recording"
+          "status": "flag",
+          "reasons": [
+            "strummed: On-beat guitar attacks re-strike only 59% of the sounding partials (restrike_onbeat 0.592 ± 0.008, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+          ],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.441,
+          "lead_other": {
+            "tag": "violin",
+            "score": 0.024
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.983,
+            "yamnet_best_guitar": 0.441,
+            "yamnet_lead_other": {
+              "tag": "violin",
+              "score": 0.024
+            }
+          },
+          "strummed": {
+            "status": "flag",
+            "reasons": [
+              "On-beat guitar attacks re-strike only 59% of the sounding partials (restrike_onbeat 0.592 ± 0.008, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+            ],
+            "restrike_onbeat": 0.592,
+            "restrike_onbeat_se": 0.0081,
+            "onbeat_attacks": 396,
+            "single_onbeat": 0.0783,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "flag",
       "reasons": [
-        "plausibility: 30% of chord time sits in holds of 24+ beats (longest 29.08 beats of E).",
-        "consistency: 5 of 60 repeated chord changes (8%) fall about a beat away from where the same change usually falls; first at 80.71s E>A (+0.78 beat), 149.35s E>A (+0.93 beat), 150.37s A>E (-0.86 beat), 156.97s E>A (+0.89 beat)."
+        "plausibility: 30% of chord time sits in holds of 24+ beats (longest 29.09 beats of E).",
+        "consistency: 5 of 60 repeated chord changes (8%) fall about a beat away from where the same change usually falls; first at 80.71s E>A (+0.78 beat), 149.35s E>A (+0.93 beat), 150.37s A>E (-0.81 beat), 156.97s E>A (+0.89 beat).",
+        "instrument: strummed: On-beat guitar attacks re-strike only 59% of the sounding partials (restrike_onbeat 0.592 ± 0.008, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
       ],
-      "notes": [
-        "consistency: The exporter's auto-timing moved 1 repeated change (0 by a whole beat, the rest small snaps). By this check's own measure the raw chart has 5 isolated mistimed changes and the shipped timeline 5; 0 of the 1 moves it can measure fix a change that was about a beat off."
-      ],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "notes": [],
+      "not_checked": []
     },
     {
       "recording_id": "coldplay-yellow-youtube-20261025",
@@ -4238,7 +5355,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "1ccd88181bc734bcf92749863a24eed0e881cb275d7f54093bc8c225f99cd188",
-      "exported_sha256": "c67e030280fc2228054e1477cf13b35ce484ebf2e64f38c368b127dd4827ccc2",
+      "exported_sha256": "d5e16deb06419fa11c4c3f6320a7d3c24ec0bfbde7da767013aec9ea6085a611",
       "checks": {
         "chords": {
           "status": "pass",
@@ -4315,7 +5432,34 @@
           },
           "expected_families": 4,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "measured",
+            "long_holds": 2,
+            "bars": 13,
+            "missed_bars": 0,
+            "missed_change_fraction": 0,
+            "holds": [
+              {
+                "start_seconds": 0,
+                "beats": 31.96,
+                "family": "B",
+                "bars": 7,
+                "missed_bars": 0
+              },
+              {
+                "start_seconds": 210.19,
+                "beats": 24.2,
+                "family": "B",
+                "bars": 6,
+                "missed_bars": 0
+              }
+            ],
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -4356,19 +5500,55 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
-          "reasons": [],
-          "note": "no instrument tags for this recording"
+          "status": "flag",
+          "reasons": [
+            "strummed: On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.634 ± 0.007, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+          ],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.933,
+          "lead_other": {
+            "tag": "violin",
+            "score": 0.011
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 1,
+            "yamnet_best_guitar": 0.933,
+            "yamnet_lead_other": {
+              "tag": "violin",
+              "score": 0.011
+            }
+          },
+          "strummed": {
+            "status": "flag",
+            "reasons": [
+              "On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.634 ± 0.007, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+            ],
+            "restrike_onbeat": 0.6341,
+            "restrike_onbeat_se": 0.0065,
+            "onbeat_attacks": 400,
+            "single_onbeat": 0.065,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "flag",
       "reasons": [
-        "plausibility: 15% of chord time sits in holds of 24+ beats (longest 31.96 beats of B)."
+        "plausibility: 15% of chord time sits in holds of 24+ beats (longest 31.96 beats of B).",
+        "instrument: strummed: On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.634 ± 0.007, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
       ],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "4-non-blondes-whats-up-youtube-20261025",
@@ -4379,7 +5559,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "b4f37504487f0627679560a4173df4d14b4eeff1f27a0edf9c44d537c49d5c51",
-      "exported_sha256": "1ad173c255750eebd16b2f50d2cfa21e1feef47a84d43a99c69822c283693bea",
+      "exported_sha256": "a1b6dae7d175bf3f4a3a60ff82c78957aaca785aae03ef7d5587639cb6e9029b",
       "checks": {
         "chords": {
           "status": "pass",
@@ -4448,7 +5628,14 @@
           "long_hold_dominant": null,
           "expected_families": 3,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -4520,17 +5707,48 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.756,
+          "lead_other": {
+            "tag": "harmonica",
+            "score": 0.003
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.952,
+            "yamnet_best_guitar": 0.756,
+            "yamnet_lead_other": {
+              "tag": "harmonica",
+              "score": 0.003
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.6669,
+            "restrike_onbeat_se": 0.0056,
+            "onbeat_attacks": 604,
+            "single_onbeat": 0.0281,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
       "reasons": [],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "deep-blue-something-breakfast-at-tiffanys-youtube-20261025",
@@ -4541,7 +5759,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "df2a7a22a32782cf745b2b30035f887b3c90e3d4a8496e9c557e7fa8b83c4fa8",
-      "exported_sha256": "4f8ec8b5d24d830b802b70d560ec181b829b247e1fc0f308d55f2c74b64daf25",
+      "exported_sha256": "072f358990313be8e31776af51f0159f2bef445e9e3dff48a35acb4d5fb11cf6",
       "checks": {
         "chords": {
           "status": "pass",
@@ -4610,7 +5828,14 @@
           "long_hold_dominant": null,
           "expected_families": 3,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -4712,17 +5937,49 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.836,
+          "lead_other": {
+            "tag": "harmonica",
+            "score": 0.002
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 1,
+            "yamnet_best_guitar": 0.836,
+            "yamnet_lead_other": {
+              "tag": "harmonica",
+              "score": 0.002
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.6473,
+            "restrike_onbeat_se": 0.0082,
+            "onbeat_attacks": 300,
+            "single_onbeat": 0.03,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
       "reasons": [],
       "notes": [],
       "not_checked": [
-        "consistency (too few repeated changes)",
-        "instrument (not run)"
+        "consistency (too few repeated changes)"
       ]
     },
     {
@@ -4734,7 +5991,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "47e99fe5301772fb21ad30316bd7f4fae949055fc0d5a04884dd9baa00d64830",
-      "exported_sha256": "657ecc6d6e2208740020e8e587b9cea310ab8aa951e67e73906387cf9ffd5981",
+      "exported_sha256": "b0ce4641dabefe339a42c21a1f853706681cd98ea5a7c7945f21026ed8b0dd07",
       "checks": {
         "chords": {
           "status": "pass",
@@ -4808,7 +6065,41 @@
           },
           "expected_families": 3,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "measured",
+            "long_holds": 3,
+            "bars": 19,
+            "missed_bars": 0,
+            "missed_change_fraction": 0,
+            "holds": [
+              {
+                "start_seconds": 0,
+                "beats": 31.78,
+                "family": "F",
+                "bars": 7,
+                "missed_bars": 0
+              },
+              {
+                "start_seconds": 108.86,
+                "beats": 24,
+                "family": "F",
+                "bars": 6,
+                "missed_bars": 0
+              },
+              {
+                "start_seconds": 176.29,
+                "beats": 24.75,
+                "family": "F",
+                "bars": 6,
+                "missed_bars": 0
+              }
+            ],
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -4928,9 +6219,42 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.67,
+          "lead_other": {
+            "tag": "organ",
+            "score": 0.089
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.997,
+            "yamnet_best_guitar": 0.67,
+            "yamnet_lead_other": {
+              "tag": "organ",
+              "score": 0.089
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.6658,
+            "restrike_onbeat_se": 0.0103,
+            "onbeat_attacks": 307,
+            "single_onbeat": 0.0879,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "flag",
@@ -4940,9 +6264,7 @@
       "notes": [
         "consistency: The exporter's auto-timing moved 4 repeated changes (0 by a whole beat, the rest small snaps). By this check's own measure the raw chart has 1 isolated mistimed change and the shipped timeline 1; 0 of the 4 moves it can measure fix a change that was about a beat off."
       ],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "verve-lucky-man-youtube-20261025",
@@ -4953,7 +6275,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "2822729f0ac23162532d8da1b8b04293c1d4a349f7be7ac9933d9ee502e72c37",
-      "exported_sha256": "b16d5c7c55462120b2e312b4bd7fc1aac313792b97daafe520aaa5b120a87a67",
+      "exported_sha256": "9daded40a86f2c11a541050759bf9d94699f0713c9883a8733e8065de23673b9",
       "checks": {
         "chords": {
           "status": "pass",
@@ -5025,7 +6347,14 @@
           "long_hold_dominant": null,
           "expected_families": 4,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -5117,19 +6446,56 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
-          "reasons": [],
-          "note": "no instrument tags for this recording"
+          "status": "flag",
+          "reasons": [
+            "strummed: On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.627 ± 0.007, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+          ],
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.606,
+          "lead_other": {
+            "tag": "keyboard",
+            "score": 0.012
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.834,
+            "yamnet_best_guitar": 0.606,
+            "yamnet_lead_other": {
+              "tag": "keyboard",
+              "score": 0.012
+            }
+          },
+          "strummed": {
+            "status": "flag",
+            "reasons": [
+              "On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.627 ± 0.007, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+            ],
+            "restrike_onbeat": 0.627,
+            "restrike_onbeat_se": 0.0065,
+            "onbeat_attacks": 364,
+            "single_onbeat": 0.0412,
+            "version": "strum-features-1"
+          }
         }
       },
-      "verdict": "pass",
-      "reasons": [],
+      "verdict": "flag",
+      "reasons": [
+        "instrument: strummed: On-beat guitar attacks re-strike only 63% of the sounding partials (restrike_onbeat 0.627 ± 0.007, flag under 0.64; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen."
+      ],
       "notes": [
         "consistency: The exporter's auto-timing moved 2 repeated changes (1 by a whole beat, the rest small snaps). By this check's own measure the raw chart has 1 isolated mistimed change and the shipped timeline 0; 1 of the 2 moves it can measure fix a change that was about a beat off."
       ],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "neil-young-heart-of-gold-youtube-20261025",
@@ -5140,7 +6506,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "514b81f4fd52035b9ebea06828a64df80cce8702eee6ff1fcaee6812b5324f18",
-      "exported_sha256": "6354ee893f64305a274615c300136347548e4b18207d030e27f5e4f25eb24502",
+      "exported_sha256": "ae47017441a1a81b2c7b25724ccf5696d30617c29d6719ea32d43bb2b675ab2a",
       "checks": {
         "chords": {
           "status": "pass",
@@ -5214,7 +6580,14 @@
           "long_hold_dominant": null,
           "expected_families": 4,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -5288,9 +6661,42 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.792,
+          "lead_other": {
+            "tag": "harmonica",
+            "score": 0.185
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.878,
+            "yamnet_best_guitar": 0.792,
+            "yamnet_lead_other": {
+              "tag": "harmonica",
+              "score": 0.185
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7517,
+            "restrike_onbeat_se": 0.0107,
+            "onbeat_attacks": 227,
+            "single_onbeat": 0.0176,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
@@ -5298,9 +6704,7 @@
       "notes": [
         "consistency: The exporter's auto-timing moved 1 repeated change (1 by a whole beat, the rest small snaps). By this check's own measure the raw chart has 0 isolated mistimed changes and the shipped timeline 0; 1 of the 1 moves it can measure fix a change that was about a beat off."
       ],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "eagles-take-it-easy-youtube-20261025",
@@ -5311,7 +6715,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "a8c68fa1fd05b69e5e41e7995da529d1b18b681a8ee67c628d1a665f0c779c13",
-      "exported_sha256": "ef6a2540fb9fe4768d86f5c8a6fa3addb28f5315b7342b288fa3d068432bbb68",
+      "exported_sha256": "6fe458d5629866adc5f9d121552b471d6b2b7ea052f0207bbe92365ee80364f7",
       "checks": {
         "chords": {
           "status": "pass",
@@ -5393,7 +6797,27 @@
           },
           "expected_families": 5,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "measured",
+            "long_holds": 1,
+            "bars": 6,
+            "missed_bars": 3,
+            "missed_change_fraction": 0.5,
+            "holds": [
+              {
+                "start_seconds": 54.99,
+                "beats": 26.58,
+                "family": "G",
+                "bars": 6,
+                "missed_bars": 3
+              }
+            ],
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -5442,17 +6866,48 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.793,
+          "lead_other": {
+            "tag": "organ",
+            "score": 0.011
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.95,
+            "yamnet_best_guitar": 0.793,
+            "yamnet_lead_other": {
+              "tag": "organ",
+              "score": 0.011
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7208,
+            "restrike_onbeat_se": 0.0092,
+            "onbeat_attacks": 391,
+            "single_onbeat": 0.0588,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
       "reasons": [],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "stealers-wheel-stuck-in-the-middle-with-you-youtube-20261025",
@@ -5463,7 +6918,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "9f0946dd85aabcd9c3514cfce306124ad455607a51ced7d1eaddb2eb7244e1fa",
-      "exported_sha256": "6ca03863724fbad5b7ff5dfc94db84b6d9e25a20b59e4f7a4fe5b14f99faa92a",
+      "exported_sha256": "8105ddda604bd430e88046279c8d992557de610bb00697e612b4469baf780fb4",
       "checks": {
         "chords": {
           "status": "pass",
@@ -5518,9 +6973,9 @@
           "median_hold_beats": 8.03
         },
         "plausibility": {
-          "status": "fail",
+          "status": "flag",
           "reasons": [
-            "56% of chord time sits in 6 single holds of 24+ beats (longest 48.89 beats of D) although the progression has 5 families; the chart probably merges alternating chords.",
+            "56% of chord time sits in 6 single holds of 24+ beats (longest 48.89 beats of D) although the progression has 5 families; the chart may merge alternating chords, but the audio inside them mostly stays on the held chord (1 of 55 bars fit another chord better, under 25%), so they may be real vamps or breaks.",
             "Expected chord absent from the chart: Am."
           ],
           "n_share": 0.027,
@@ -5546,7 +7001,62 @@
           "progression_basis": "expected",
           "expected_absent": [
             "Am"
-          ]
+          ],
+          "hold_evidence": {
+            "status": "measured",
+            "long_holds": 6,
+            "bars": 55,
+            "missed_bars": 1,
+            "missed_change_fraction": 0.018,
+            "holds": [
+              {
+                "start_seconds": 0,
+                "beats": 48.89,
+                "family": "D",
+                "bars": 12,
+                "missed_bars": 0
+              },
+              {
+                "start_seconds": 35.67,
+                "beats": 24.13,
+                "family": "D",
+                "bars": 6,
+                "missed_bars": 1
+              },
+              {
+                "start_seconds": 74.49,
+                "beats": 47.99,
+                "family": "D",
+                "bars": 11,
+                "missed_bars": 0
+              },
+              {
+                "start_seconds": 109.88,
+                "beats": 24,
+                "family": "D",
+                "bars": 6,
+                "missed_bars": 0
+              },
+              {
+                "start_seconds": 148.61,
+                "beats": 47.97,
+                "family": "D",
+                "bars": 11,
+                "missed_bars": 0
+              },
+              {
+                "start_seconds": 184.18,
+                "beats": 39.57,
+                "family": "D",
+                "bars": 9,
+                "missed_bars": 0
+              }
+            ],
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": true
         },
         "consistency": {
           "status": "pass",
@@ -5587,20 +7097,51 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.616,
+          "lead_other": {
+            "tag": "harmonica",
+            "score": 0.051
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.991,
+            "yamnet_best_guitar": 0.616,
+            "yamnet_lead_other": {
+              "tag": "harmonica",
+              "score": 0.051
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.8097,
+            "restrike_onbeat_se": 0.01,
+            "onbeat_attacks": 286,
+            "single_onbeat": 0.0245,
+            "version": "strum-features-1"
+          }
         }
       },
-      "verdict": "fail",
+      "verdict": "flag",
       "reasons": [
-        "plausibility: 56% of chord time sits in 6 single holds of 24+ beats (longest 48.89 beats of D) although the progression has 5 families; the chart probably merges alternating chords.",
+        "plausibility: 56% of chord time sits in 6 single holds of 24+ beats (longest 48.89 beats of D) although the progression has 5 families; the chart may merge alternating chords, but the audio inside them mostly stays on the held chord (1 of 55 bars fit another chord better, under 25%), so they may be real vamps or breaks.",
         "plausibility: Expected chord absent from the chart: Am."
       ],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "jason-mraz-im-yours-youtube-20261025",
@@ -5611,7 +7152,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "8609131feeb01a4b9aa45a8e34f891a59f6177657f4b074cc8a06a17467e9ea5",
-      "exported_sha256": "890da1231d52600c825dd719319f96fc68b2eff29cfa786ff1eb9f687bc00b23",
+      "exported_sha256": "ba4abe8d04b849fe332350fa38560336679ec3409d1d3cd5b7cd29218df98189",
       "checks": {
         "chords": {
           "status": "pass",
@@ -5685,7 +7226,14 @@
           "long_hold_dominant": null,
           "expected_families": 4,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -5759,9 +7307,42 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.37,
+          "lead_other": {
+            "tag": "keyboard",
+            "score": 0.146
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.612,
+            "yamnet_best_guitar": 0.37,
+            "yamnet_lead_other": {
+              "tag": "keyboard",
+              "score": 0.146
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7818,
+            "restrike_onbeat_se": 0.0264,
+            "onbeat_attacks": 113,
+            "single_onbeat": 0.1491,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
@@ -5770,8 +7351,7 @@
         "consistency: The exporter's auto-timing moved 1 repeated change (1 by a whole beat, the rest small snaps). By this check's own measure the raw chart has 0 isolated mistimed changes and the shipped timeline 0; none of the moves is in a group large enough to measure."
       ],
       "not_checked": [
-        "consistency (too few repeated changes)",
-        "instrument (not run)"
+        "consistency (too few repeated changes)"
       ]
     },
     {
@@ -5783,7 +7363,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "3d2e7547477fd3d3605ccf128551368dfdb842c5fa21ad33d195b5577c0b8f1a",
-      "exported_sha256": "b0d98473113dc6909afca1b4219457e569f34b7da592f49f1ec51670c996c8ec",
+      "exported_sha256": "e458c83db57028e5e7fb5a025a5d1b4e6587f2548f927c031c8c20dd2f73f758",
       "checks": {
         "chords": {
           "status": "pass",
@@ -5878,7 +7458,14 @@
           "long_hold_dominant": null,
           "expected_families": 6,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -5919,17 +7506,48 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.691,
+          "lead_other": {
+            "tag": "synthesizer",
+            "score": 0.011
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.992,
+            "yamnet_best_guitar": 0.691,
+            "yamnet_lead_other": {
+              "tag": "synthesizer",
+              "score": 0.011
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.655,
+            "restrike_onbeat_se": 0.0073,
+            "onbeat_attacks": 382,
+            "single_onbeat": 0.0163,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
       "reasons": [],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "beatles-i-want-to-hold-your-hand-youtube-20261025",
@@ -5940,7 +7558,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "fdfbe54473058032e62a5e6a5b42dde97a833e6fcdeb13ab94eccc6fb93fa216",
-      "exported_sha256": "b92356c56e987eca448e7528d0039c5f525df17bf8ac65e54f225d0348a4fffe",
+      "exported_sha256": "10f18560f14c5e47bc36a9f3a317c7089707bc79db556f754e21a6fba3ec7492",
       "checks": {
         "chords": {
           "status": "flag",
@@ -6043,7 +7661,14 @@
           "long_hold_dominant": null,
           "expected_families": 7,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -6084,9 +7709,42 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.531,
+          "lead_other": {
+            "tag": "violin",
+            "score": 0.131
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.911,
+            "yamnet_best_guitar": 0.531,
+            "yamnet_lead_other": {
+              "tag": "violin",
+              "score": 0.131
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7161,
+            "restrike_onbeat_se": 0.0143,
+            "onbeat_attacks": 196,
+            "single_onbeat": 0.0663,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "flag",
@@ -6094,9 +7752,7 @@
         "chords: Unexpected main chord: Bm 9%."
       ],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "eagle-eye-cherry-save-tonight-youtube-20261025",
@@ -6107,7 +7763,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "679635fe8df12a73c6ec6160b7951baba89be6a967f1d6b5446c9264d1305caa",
-      "exported_sha256": "a82b034ec603c69d98715dc220eb2310fa8fdddde695b30c8569a4d56432c8dd",
+      "exported_sha256": "464b044bbc3052b17a8daf0f89d96fdfd484f89aff7b449accae12087b0b87b4",
       "checks": {
         "chords": {
           "status": "pass",
@@ -6181,7 +7837,14 @@
           "long_hold_dominant": null,
           "expected_families": 4,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -6323,17 +7986,48 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.835,
+          "lead_other": {
+            "tag": "violin",
+            "score": 0.018
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.998,
+            "yamnet_best_guitar": 0.835,
+            "yamnet_lead_other": {
+              "tag": "violin",
+              "score": 0.018
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.695,
+            "restrike_onbeat_se": 0.0086,
+            "onbeat_attacks": 393,
+            "single_onbeat": 0.0204,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
       "reasons": [],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "tom-petty-learning-to-fly-youtube-20261025",
@@ -6344,7 +8038,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "3aa2bcb86eca1eb9ec98aba1a52c144f55e845b9e0c862f2c6e55fe197808ecb",
-      "exported_sha256": "766fe1706da36ca0262e5d59aff2ff8959cc98cbfdb19e09ff2bb2d7371aae4c",
+      "exported_sha256": "8ce699494b9f81db79d032458aeb7d6794308db27aae1343be9330dae2bb27ce",
       "checks": {
         "chords": {
           "status": "pass",
@@ -6418,7 +8112,14 @@
           "long_hold_dominant": null,
           "expected_families": 4,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -6459,17 +8160,48 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.409,
+          "lead_other": {
+            "tag": "banjo",
+            "score": 0.062
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.676,
+            "yamnet_best_guitar": 0.409,
+            "yamnet_lead_other": {
+              "tag": "banjo",
+              "score": 0.062
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.643,
+            "restrike_onbeat_se": 0.0084,
+            "onbeat_attacks": 383,
+            "single_onbeat": 0.0261,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
       "reasons": [],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "lumineers-ho-hey-youtube-20261025",
@@ -6480,7 +8212,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "b67719e559284c7eaf69246dff70d2f2ebe18412c1547a14071d879411b03571",
-      "exported_sha256": "802a2fc5fe03bbbc5140e55b6ea6dfe0fa8c3041c43684233b67881ce8976d3a",
+      "exported_sha256": "8262d4e465c2ff55bfb57061709aeeae6b6f9ceeba279f6a5af8513ec7cb9e9a",
       "checks": {
         "chords": {
           "status": "pass",
@@ -6534,9 +8266,9 @@
           "median_hold_beats": 2.95
         },
         "plausibility": {
-          "status": "fail",
+          "status": "flag",
           "reasons": [
-            "44% of chord time sits in 3 single holds of 24+ beats (longest 33.79 beats of C) although the progression has 4 families; the chart probably merges alternating chords."
+            "44% of chord time sits in 3 single holds of 24+ beats (longest 33.79 beats of C) although the progression has 4 families; the chart may merge alternating chords, but the audio inside them mostly stays on the held chord (1 of 22 bars fit another chord better, under 25%), so they may be real vamps or breaks."
           ],
           "n_share": 0.069,
           "x_share": 0,
@@ -6559,7 +8291,41 @@
           },
           "expected_families": 4,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "measured",
+            "long_holds": 3,
+            "bars": 22,
+            "missed_bars": 1,
+            "missed_change_fraction": 0.045,
+            "holds": [
+              {
+                "start_seconds": 2.6,
+                "beats": 33.79,
+                "family": "C",
+                "bars": 8,
+                "missed_bars": 0
+              },
+              {
+                "start_seconds": 30.47,
+                "beats": 24.03,
+                "family": "C",
+                "bars": 6,
+                "missed_bars": 1
+              },
+              {
+                "start_seconds": 63.9,
+                "beats": 32.09,
+                "family": "C",
+                "bars": 8,
+                "missed_bars": 0
+              }
+            ],
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": true
         },
         "consistency": {
           "status": "pass",
@@ -6631,19 +8397,50 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.841,
+          "lead_other": {
+            "tag": "mandolin",
+            "score": 0.05
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.978,
+            "yamnet_best_guitar": 0.841,
+            "yamnet_lead_other": {
+              "tag": "mandolin",
+              "score": 0.05
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.8547,
+            "restrike_onbeat_se": 0.0156,
+            "onbeat_attacks": 134,
+            "single_onbeat": 0.0226,
+            "version": "strum-features-1"
+          }
         }
       },
-      "verdict": "fail",
+      "verdict": "flag",
       "reasons": [
-        "plausibility: 44% of chord time sits in 3 single holds of 24+ beats (longest 33.79 beats of C) although the progression has 4 families; the chart probably merges alternating chords."
+        "plausibility: 44% of chord time sits in 3 single holds of 24+ beats (longest 33.79 beats of C) although the progression has 4 families; the chart may merge alternating chords, but the audio inside them mostly stays on the held chord (1 of 22 bars fit another chord better, under 25%), so they may be real vamps or breaks."
       ],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "cat-stevens-wild-world-youtube-20261025",
@@ -6654,7 +8451,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "6dc513a6cf8920a4c1def41d827c8d438c01602a845f19fde86992477d63ff09",
-      "exported_sha256": "40796bd7a8c0a7a860883036e67928d4c2744304c024ab77ba8ad49e4961e6f1",
+      "exported_sha256": "1fe1d223e5d9a7d2ddc194a6070efa862a192472e423e45118fbb2ddf912416c",
       "checks": {
         "chords": {
           "status": "pass",
@@ -6743,7 +8540,14 @@
           "long_hold_dominant": null,
           "expected_families": 7,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -6784,17 +8588,48 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.734,
+          "lead_other": {
+            "tag": "keyboard",
+            "score": 0.041
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.862,
+            "yamnet_best_guitar": 0.734,
+            "yamnet_lead_other": {
+              "tag": "keyboard",
+              "score": 0.041
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.724,
+            "restrike_onbeat_se": 0.0158,
+            "onbeat_attacks": 185,
+            "single_onbeat": 0.0703,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
       "reasons": [],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "beatles-help-youtube-20261025",
@@ -6805,7 +8640,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "cf0c692de972294652ead5439a02fe484ea114030229a4eac1e1b8bc156bc146",
-      "exported_sha256": "d99724f9c5de2479f2bce7dff00035ffe40dd7acca164a5b7702785f48b2e255",
+      "exported_sha256": "b3cdb0d675fd21f67356b40f7efc6e3b910836bc299375a864ac7aff2b71801e",
       "checks": {
         "chords": {
           "status": "pass",
@@ -6892,7 +8727,14 @@
           "long_hold_dominant": null,
           "expected_families": 7,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "no long holds",
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -6933,17 +8775,48 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.659,
+          "lead_other": {
+            "tag": "harmonica",
+            "score": 0.076
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.996,
+            "yamnet_best_guitar": 0.659,
+            "yamnet_lead_other": {
+              "tag": "harmonica",
+              "score": 0.076
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7478,
+            "restrike_onbeat_se": 0.0129,
+            "onbeat_attacks": 184,
+            "single_onbeat": 0.0652,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
       "reasons": [],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "proclaimers-im-gonna-be-500-miles-youtube-20261025",
@@ -6954,7 +8827,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "af11215c0c87523ecf11d615ec17b104d45bf5515afe431da49778e16ae87ebf",
-      "exported_sha256": "73322ed2aca94c3e528ea0f312cf7491f44b35a5604cd1ab571d608759d131f7",
+      "exported_sha256": "43cddb9a5e2e2b20157e53928df081ed73d07c4deb0e811551866193e04e4c02",
       "checks": {
         "chords": {
           "status": "pass",
@@ -7037,7 +8910,34 @@
           "expected_absent": [
             "C#m",
             "F#m"
-          ]
+          ],
+          "hold_evidence": {
+            "status": "measured",
+            "long_holds": 2,
+            "bars": 13,
+            "missed_bars": 1,
+            "missed_change_fraction": 0.077,
+            "holds": [
+              {
+                "start_seconds": 0,
+                "beats": 26.32,
+                "family": "E",
+                "bars": 6,
+                "missed_bars": 0
+              },
+              {
+                "start_seconds": 12.91,
+                "beats": 28.4,
+                "family": "E",
+                "bars": 7,
+                "missed_bars": 1
+              }
+            ],
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -7078,9 +8978,42 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.917,
+          "lead_other": {
+            "tag": "accordion",
+            "score": 0.011
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.99,
+            "yamnet_best_guitar": 0.917,
+            "yamnet_lead_other": {
+              "tag": "accordion",
+              "score": 0.011
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.9178,
+            "restrike_onbeat_se": 0.0068,
+            "onbeat_attacks": 380,
+            "single_onbeat": 0.0211,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "flag",
@@ -7089,9 +9022,7 @@
         "plausibility: Expected chords absent from the chart: C#m F#m."
       ],
       "notes": [],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "natalie-imbruglia-torn-youtube-20261025",
@@ -7102,7 +9033,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "a81abc4208122da8c7deb589d4412e96521ca80078aab2f62cf121b984055810",
-      "exported_sha256": "77d8a39666561ec7f256520438406cff9b1c1ff4f2f9c381acc87d4eef213383",
+      "exported_sha256": "1a4cfc6e682071f6512dc94a6d8707a23b717a459aa52f3e305e739849c8b2a3",
       "checks": {
         "chords": {
           "status": "pass",
@@ -7184,7 +9115,27 @@
           },
           "expected_families": 5,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "measured",
+            "long_holds": 1,
+            "bars": 6,
+            "missed_bars": 2,
+            "missed_change_fraction": 0.333,
+            "holds": [
+              {
+                "start_seconds": 1.58,
+                "beats": 24.41,
+                "family": "F",
+                "bars": 6,
+                "missed_bars": 2
+              }
+            ],
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -7266,9 +9217,42 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.426,
+          "lead_other": {
+            "tag": "organ",
+            "score": 0.112
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 0.993,
+            "yamnet_best_guitar": 0.426,
+            "yamnet_lead_other": {
+              "tag": "organ",
+              "score": 0.112
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.6844,
+            "restrike_onbeat_se": 0.0082,
+            "onbeat_attacks": 312,
+            "single_onbeat": 0.0513,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "pass",
@@ -7276,9 +9260,7 @@
       "notes": [
         "consistency: The exporter's auto-timing moved 1 repeated change (1 by a whole beat, the rest small snaps). By this check's own measure the raw chart has 1 isolated mistimed change and the shipped timeline 0; 1 of the 1 moves it can measure fix a change that was about a beat off."
       ],
-      "not_checked": [
-        "instrument (not run)"
-      ]
+      "not_checked": []
     },
     {
       "recording_id": "queen-crazy-little-thing-called-love-youtube-20261025",
@@ -7289,7 +9271,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "a1a50b938faa250ecdbcd7b3a02fedb3ff3a53f662cbf1587c85c624db280a9a",
-      "exported_sha256": "fe8c074a4d14c0a88dafa62048b8beed3a5c3d9377dce8b75f0aa72b0d5482c4",
+      "exported_sha256": "d053d443aa0d012a13be0b89b36ea8e74dc362672bf3efbee236602d806c7b41",
       "checks": {
         "chords": {
           "status": "flag",
@@ -7384,7 +9366,27 @@
           },
           "expected_families": 6,
           "progression_basis": "expected",
-          "expected_absent": []
+          "expected_absent": [],
+          "hold_evidence": {
+            "status": "measured",
+            "long_holds": 1,
+            "bars": 6,
+            "missed_bars": 0,
+            "missed_change_fraction": 0,
+            "holds": [
+              {
+                "start_seconds": 0,
+                "beats": 24.35,
+                "family": "D",
+                "bars": 6,
+                "missed_bars": 0
+              }
+            ],
+            "file_view_source": "exported",
+            "margin": 0.1,
+            "templates": "claim"
+          },
+          "merge_signature": false
         },
         "consistency": {
           "status": "pass",
@@ -7433,9 +9435,42 @@
           "source": "experiments/fixtures/strumalong-additions-candidates-v2.json"
         },
         "instrument": {
-          "status": "not run",
+          "status": "pass",
           "reasons": [],
-          "note": "no instrument tags for this recording"
+          "model": {
+            "aggregation": "top-5 frame fraction of YAMNet class scores, max of full mix and guitar stem; no strum key",
+            "name": "yamnet",
+            "sha256": "b80da2a1a56926fb0767205051a200dd7b3beaf3ea1ea126c42a53943996e5e0",
+            "stem_model": {
+              "name": "htdemucs_6s",
+              "weights_sha256": "34c22ccb381c6f9fdbf324f04e1e2fe21aaaf293f5ded163a162697ff9a02ddd"
+            },
+            "version": "1"
+          },
+          "guitar": 0.532,
+          "lead_other": {
+            "tag": "accordion",
+            "score": 0.056
+          },
+          "guitar_led": {
+            "status": "pass",
+            "reasons": [],
+            "guitar_share_of_harmonic": 1,
+            "yamnet_best_guitar": 0.532,
+            "yamnet_lead_other": {
+              "tag": "accordion",
+              "score": 0.056
+            }
+          },
+          "strummed": {
+            "status": "pass",
+            "reasons": [],
+            "restrike_onbeat": 0.7252,
+            "restrike_onbeat_se": 0.0126,
+            "onbeat_attacks": 187,
+            "single_onbeat": 0.1278,
+            "version": "strum-features-1"
+          }
         }
       },
       "verdict": "flag",
@@ -7444,8 +9479,7 @@
       ],
       "notes": [],
       "not_checked": [
-        "consistency (too few repeated changes)",
-        "instrument (not run)"
+        "consistency (too few repeated changes)"
       ]
     }
   ]

@@ -50,6 +50,15 @@ function loopPairs(chords, loops, len = 4, tweak = null) {
   return out;
 }
 const EXPECT = (families, accepted = []) => ({ families, accepted, source: "test", confidence: "test" });
+/** A hold-check entry in hold_homogeneity.py's shape for a view: every run of 16+ beats becomes a hold of floor(beats / 4) bars,
+ *  `missed(bars)` of which fit another chord better. `shift` moves the hold starts (seconds), to fake a file from another chart. */
+function holdEntryFor(view, missed, { viewSource = view.source, shift = 0 } = {}) {
+  const runs = cc.familyRuns(view, 0.75).filter(r => r.key !== null && r.beats >= 16);
+  return { view_source: viewSource, margin: 0.1, templates: "claim", holds: runs.map(r => {
+    const bars = Math.floor(r.beats / 4);
+    return { start_s: +(r.s + shift).toFixed(3), end_s: r.e, beats: Math.round(r.beats * 100) / 100, bars, missed_bars: missed(bars), held: r.label };
+  }) };
+}
 
 // ---------------------------------------------------------------------------------------------------- chord families
 test("familyKey reduces labels to root + major/minor/sus/power/dim/aug", () => {
@@ -175,15 +184,58 @@ test("tempo: a grid whose spacing disagrees with the pulse flags", () => {
 });
 
 // ---------------------------------------------------------------------------------------------------- plausibility
-test("plausibility: the A Horse with No Name failure (long holds, chords that should alternate) fails", () => {
-  // Em for 46-ish beats, D for 3, repeated, although the song alternates every bar
-  const pairs = [["Em", 6], ["D", 3], ["Em", 46], ["D", 3], ["Em", 28], ["D", 3], ["Em", 28], ["D", 3], ["Em", 12], ["D", 3]];
-  const r = cc.checkPlausibility(viewOf(pairs), EXPECT(["Em", "D"]));
+// Em for 46-ish beats, D for 3, repeated, although the song alternates every bar: the A Horse with No Name chart signature.
+const HORSE = [["Em", 6], ["D", 3], ["Em", 46], ["D", 3], ["Em", 28], ["D", 3], ["Em", 28], ["D", 3], ["Em", 12], ["D", 3]];
+test("plausibility: the A Horse with No Name failure fails when the audio inside the long holds changes chord", () => {
+  const view = viewOf(HORSE);
+  const r = cc.checkPlausibility(view, EXPECT(["Em", "D"]), holdEntryFor(view, bars => Math.ceil(bars / 2)));
   assert.equal(r.status, "fail");
+  assert.equal(r.merge_signature, true);
   assert.ok(r.long_hold_share >= 0.25);
   assert.equal(r.long_hold_count, 3);
   assert.ok(r.max_hold_beats >= 46);
-  assert.match(r.reasons.join(" "), /merges alternating chords/);
+  assert.equal(r.hold_evidence.status, "measured");
+  assert.equal(r.hold_evidence.long_holds, 3, "only the chart's 24+ beat holds are judged, not the 16-beat ones in the file");
+  assert.equal(r.hold_evidence.bars, 11 + 7 + 7);
+  assert.ok(r.hold_evidence.missed_change_fraction >= 0.25);
+  assert.match(r.reasons.join(" "), /changes chord: in 14 of 25 bars .* merges alternating chords/);
+});
+test("plausibility: the chart signature alone only flags (no hold check, a real vamp, too few bars, or a stale file)", () => {
+  const view = viewOf(HORSE), exp = EXPECT(["Em", "D"]);
+  const none = cc.checkPlausibility(view, exp);
+  assert.equal(none.status, "flag");
+  assert.equal(none.merge_signature, true);
+  assert.match(none.reasons.join(" "), /no hold-homogeneity evidence/);
+  const vamp = cc.checkPlausibility(view, exp, holdEntryFor(view, bars => (bars > 10 ? 1 : 0)));
+  assert.equal(vamp.status, "flag", "the audio stays on the held chord: Ho Hey / Stuck in the Middle");
+  assert.equal(vamp.hold_evidence.missed_change_fraction, 0.04);
+  assert.match(vamp.reasons.join(" "), /real vamps or breaks/);
+  const borderline = cc.checkPlausibility(view, exp, holdEntryFor(view, bars => Math.floor(bars * 0.24)));
+  assert.equal(borderline.status, "flag", "under 25% of bars is not enough");
+  const few = cc.checkPlausibility(view, exp, { ...holdEntryFor(view, () => 2), holds: holdEntryFor(view, () => 2).holds.map(h => ({ ...h, bars: 3 })) });
+  assert.equal(few.hold_evidence.bars, 9);
+  assert.equal(few.status, "flag", "9 bars, all of them 'missed', is still too little evidence");
+  assert.match(few.reasons.join(" "), /measured only 9 bars/);
+  const otherChart = cc.checkPlausibility(view, exp, holdEntryFor(view, bars => bars, { viewSource: "exported" }));
+  assert.equal(otherChart.status, "flag");
+  assert.equal(otherChart.hold_evidence.status, "mismatch");
+  const shifted = cc.checkPlausibility(view, exp, holdEntryFor(view, bars => bars, { shift: 3 }));
+  assert.equal(shifted.status, "flag");
+  assert.equal(shifted.hold_evidence.status, "mismatch");
+  assert.match(shifted.reasons.join(" "), /does not match this chart/);
+  const c = cc.combine({ chords: { status: "pass", reasons: [], reference: "x" }, tempo: { status: "pass", reasons: [], pulse_bpm: 100, range: [1, 2] },
+    plausibility: none, consistency: { status: "pass", reasons: [], evidence: "sufficient" }, embed: { status: "pass", reasons: [] }, instrument: { status: "not run", reasons: [] } });
+  assert.ok(c.not_checked.includes("plausibility: hold homogeneity (no matching hold check)"));
+});
+test("plausibility: hold evidence is reported for songs without the signature but never changes their status", () => {
+  const pairs = [...loopPairs(["A", "D", "E", "D"], 5, 2), ["A", 38], ...loopPairs(["A", "D", "E", "D"], 5, 2)];
+  const view = viewOf(pairs);
+  const r = cc.checkPlausibility(view, EXPECT(["A", "D", "E"]), holdEntryFor(view, bars => bars));
+  assert.equal(r.status, "flag");
+  assert.equal(r.merge_signature, false);
+  assert.equal(r.hold_evidence.missed_change_fraction, 1);
+  const loop = viewOf(loopPairs(["Em", "C", "G", "D"], 8));
+  assert.equal(cc.checkPlausibility(loop, EXPECT(["Em", "C", "G", "D"]), { view_source: "pack", holds: [] }).hold_evidence.status, "no long holds");
 });
 test("plausibility: one legitimate long break only flags", () => {
   const pairs = [...loopPairs(["A", "D", "E", "D"], 5, 2), ["A", 38], ...loopPairs(["A", "D", "E", "D"], 5, 2)];
@@ -351,39 +403,86 @@ test("embed: the recorded age restriction fails; an exporter-marked unplayable u
   assert.equal(cc.checkEmbed("x", {}).status, "unknown");
 });
 
-// ---------------------------------------------------------------------------------------------------- instrument slot
-test("instrument: not run without tags", () => {
+// ---------------------------------------------------------------------------------------------------- instrument
+const STRUM = (restrike, extra = {}) => ({ restrike_onbeat: restrike, restrike_onbeat_se: 0.01, onbeat_attacks: 300, single_onbeat: 0.05, version: "strum-features-1", ...extra });
+const GUITAR = { guitar: 0.7, acoustic_guitar: 0.5, ukulele: 0.02, piano: 0.03 };
+test("instrument: not run without tags, or with an entry that carries nothing", () => {
   assert.equal(cc.checkInstrument(null).status, "not run");
+  assert.equal(cc.checkInstrument({ model: "m" }).status, "not run");
 });
-test("instrument: a clearly leading non-guitar tag fails (ukulele, piano, harmonica)", () => {
+test("instrument: a strummed, guitar-led recording passes both parts", () => {
+  const r = cc.checkInstrument({ model: "m", scores: GUITAR, stems: { guitar_share_of_harmonic: 0.95 }, strum: STRUM(0.72) });
+  assert.equal(r.status, "pass");
+  assert.equal(r.guitar_led.status, "pass");
+  assert.equal(r.strummed.status, "pass");
+  assert.equal(r.guitar_led.guitar_share_of_harmonic, 0.95);
+  assert.equal(r.strummed.restrike_onbeat, 0.72);
+  assert.equal(r.guitar, 0.7);
+});
+test("instrument: the Riptide signature fails (empty guitar stem and no YAMNet guitar), and technique is then not measured", () => {
+  const r = cc.checkInstrument({ scores: { guitar: 0.06, ukulele: 0.11, plucked_string: 0.15 }, stems: { guitar_share_of_harmonic: 0.04 }, strum: STRUM(0.66) });
+  assert.equal(r.status, "fail");
+  assert.equal(r.guitar_led.status, "fail");
+  assert.match(r.reasons.join(" "), /nearly empty .* not a guitar-led recording/);
+  assert.equal(r.strummed.status, "not measured");
+  const c = cc.combine({ chords: { status: "pass", reasons: [], reference: "x" }, tempo: { status: "pass", reasons: [], pulse_bpm: 100, range: [1, 2] },
+    plausibility: { status: "pass", reasons: [] }, consistency: { status: "pass", reasons: [], evidence: "sufficient" }, embed: { status: "pass", reasons: [] }, instrument: r });
+  assert.ok(c.not_checked.some(x => /strummed \(not measured/.test(x)));
+});
+test("instrument: one weak guitar signal only flags (Love Me Do, Sweet Caroline, Three Little Birds)", () => {
+  const lowShare = cc.checkInstrument({ scores: { guitar: 0.25, harmonica: 0.28 }, stems: { guitar_share_of_harmonic: 0.14 }, strum: STRUM(0.70) });
+  assert.equal(lowShare.status, "flag", "guitar share 0.14 with YAMNet still hearing guitar is borderline, not strong evidence");
+  assert.match(lowShare.reasons.join(" "), /only 14% of the harmonic accompaniment/);
+  const emptyStemOnly = cc.checkInstrument({ scores: GUITAR, stems: { guitar_share_of_harmonic: 0.05 }, strum: STRUM(0.70) });
+  assert.equal(emptyStemOnly.status, "flag", "an empty stem that YAMNet contradicts may be a separation failure");
+  const noYamnetGuitar = cc.checkInstrument({ scores: { guitar: 0.1, piano: 0.05 }, stems: { guitar_share_of_harmonic: 0.9 }, strum: STRUM(0.70) });
+  assert.equal(noYamnetGuitar.status, "flag");
+  assert.match(noYamnetGuitar.reasons.join(" "), /YAMNet hears little guitar/);
+});
+test("instrument: a low guitar share with a clear YAMNet lead fails; YAMNet alone never fails", () => {
   for (const tag of ["ukulele", "piano", "harmonica", "banjo"]) {
-    const r = cc.checkInstrument({ model: "m", scores: { guitar: 0.3, acoustic_guitar: 0.2, strum: 0.4, [tag]: 0.8 } });
-    assert.equal(r.status, "fail", tag);
-    assert.match(r.reasons.join(" "), new RegExp(tag));
+    const both = cc.checkInstrument({ scores: { guitar: 0.3, acoustic_guitar: 0.2, [tag]: 0.8 }, stems: { guitar_share_of_harmonic: 0.2 } });
+    assert.equal(both.status, "fail", tag);
+    assert.match(both.reasons.join(" "), new RegExp(`${tag} \\(0.8\\) clearly ahead`));
+    const tagsOnly = cc.checkInstrument({ scores: { guitar: 0.3, [tag]: 0.8 } });
+    assert.equal(tagsOnly.status, "flag", `${tag}: no stem statistics, so only a flag`);
   }
+  const close = cc.checkInstrument({ scores: { guitar: 0.6, ukulele: 0.62 }, stems: { guitar_share_of_harmonic: 0.9 } });
+  assert.equal(close.status, "flag");
+  assert.match(close.reasons.join(" "), /ukulele \(0.62\) at least as often as guitar/);
 });
-test("instrument: a close call flags; a guitar lead with a strum passes", () => {
-  assert.equal(cc.checkInstrument({ scores: { guitar: 0.6, ukulele: 0.62, strum: 0.5 } }).status, "flag");
-  const ok = cc.checkInstrument({ scores: { acoustic_guitar: 0.8, guitar: 0.7, strum: 0.6, ukulele: 0.1 } });
-  assert.equal(ok.status, "pass");
-  assert.equal(ok.guitar, 0.8);
+test("instrument: a low on-beat restrike flags as picked-like and never fails", () => {
+  for (const v of [0.63, 0.59, 0.30]) {
+    const r = cc.checkInstrument({ scores: GUITAR, stems: { guitar_share_of_harmonic: 0.99 }, strum: STRUM(v) });
+    assert.equal(r.status, "flag", String(v));
+    assert.equal(r.strummed.status, "flag");
+    assert.match(r.reasons.join(" "), /strummed: On-beat guitar attacks re-strike only/);
+  }
+  assert.equal(cc.checkInstrument({ scores: GUITAR, stems: { guitar_share_of_harmonic: 0.99 }, strum: STRUM(cc.T.instrument.restrike_flag) }).status, "pass");
 });
-test("instrument: weak strum evidence and absent guitar flag; bad scores are rejected", () => {
-  const weak = cc.checkInstrument({ scores: { guitar: 0.8, strum: 0.05 } });
-  assert.equal(weak.status, "flag");
-  assert.match(weak.reasons.join(" "), /strum/i);
-  assert.equal(cc.checkInstrument({ scores: { piano: 0.1, strum: 0.5 } }).status, "flag");
+test("instrument: too few on-beat attacks or no strum block leave technique unjudged", () => {
+  const few = cc.checkInstrument({ scores: GUITAR, stems: { guitar_share_of_harmonic: 0.99 }, strum: STRUM(0.5, { onbeat_attacks: 20 }) });
+  assert.equal(few.status, "pass");
+  assert.equal(few.strummed.status, "not measured");
+  const none = cc.checkInstrument({ scores: GUITAR, stems: { guitar_share_of_harmonic: 0.99 } });
+  assert.equal(none.strummed.status, "not run");
+  const c = cc.combine({ chords: { status: "pass", reasons: [], reference: "x" }, tempo: { status: "pass", reasons: [], pulse_bpm: 100, range: [1, 2] },
+    plausibility: { status: "pass", reasons: [] }, consistency: { status: "pass", reasons: [], evidence: "sufficient" }, embed: { status: "pass", reasons: [] }, instrument: none });
+  assert.ok(c.not_checked.includes("instrument: strummed (not run)"));
+});
+test("instrument: YAMNet's strum class is ignored (it does not separate picked from strummed)", () => {
+  assert.equal(cc.checkInstrument({ scores: { ...GUITAR, strum: 0.01 }, stems: { guitar_share_of_harmonic: 0.99 } }).status, "pass");
+});
+test("instrument: bad scores and stale tags or stems flag", () => {
   assert.equal(cc.checkInstrument({ scores: { guitar: 7.2 } }).status, "flag");
-  assert.equal(cc.checkInstrument({ model: "m" }).status, "flag");
-});
-test("instrument: tags made from a different audio file are stale and flag", () => {
-  const tags = { audio_sha256: "aaa", scores: { acoustic_guitar: 0.9, strum: 0.7 } };
+  assert.equal(cc.checkInstrument({ model: "m", scores: "x" }).status, "flag");
+  const tags = { audio_sha256: "aaa", scores: GUITAR, stems: { guitar_share_of_harmonic: 0.9 }, strum: STRUM(0.7, { audio_sha256: "aaa" }) };
   assert.equal(cc.checkInstrument(tags, "aaa").status, "pass");
   assert.equal(cc.checkInstrument(tags, "bbb").status, "flag");
   assert.equal(cc.checkInstrument(tags, null).status, "pass", "no pack hash to compare with");
-});
-test("instrument: a missing strum tag is not weak strum evidence", () => {
-  assert.equal(cc.checkInstrument({ scores: { guitar: 0.8, piano: 0.1 } }).status, "pass");
+  const staleStrum = cc.checkInstrument({ ...tags, strum: STRUM(0.7, { audio_sha256: "old" }) }, "aaa");
+  assert.equal(staleStrum.status, "flag");
+  assert.match(staleStrum.reasons.join(" "), /re-run stems_6s.py and strum_features.py/);
 });
 
 // ---------------------------------------------------------------------------------------------------- combine
@@ -405,7 +504,7 @@ test("combine: the verdict is the worst check; unknown, not run and no reference
 
 // ---------------------------------------------------------------------------------------------------- end to end on a synthetic repo
 function writeJSON(file, value) { fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, JSON.stringify(value, null, 2)); }
-function makeRepo({ shipBad = false, flagGood = false, goodTweak = null } = {}) {
+function makeRepo({ shipBad = false, flagGood = false, goodTweak = null, holds = true } = {}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "catalogue-checks-"));
   tempRoots.push(root);
   const w = (rel, v) => writeJSON(path.join(root, rel), v);
@@ -433,6 +532,11 @@ function makeRepo({ shipBad = false, flagGood = false, goodTweak = null } = {}) 
     { recording_id: ids.good, title: "Good Song", artist: "A", embed: null }, { recording_id: ids.bad, title: "Bad Song", artist: "B" }] });
   w("experiments/analysis/strumalong/expected-chords.json", { [ids.good]: { sounding: LOOP, confidence: "high" }, [ids.bad]: { sounding: ["Em", "D"], confidence: "medium" } });
   w("strumalong/songs/index.json", { schema: "strumalong-catalogue-2", songs: [] });
+  // hold_homogeneity.py output: the bad song's long Em holds really alternate (every other bar fits D better)
+  if (holds) {
+    const view = { source: "pack", chords: chordsFromBeats(bad), beats: grid(bad.reduce((n, [, b]) => n + b, 0) + 8) };
+    w("experiments/generated/strumalong-hold-checks.json", { [ids.bad]: holdEntryFor(view, bars => Math.ceil(bars / 2)) });
+  }
   return { root, ids };
 }
 test("end to end: the good song passes, the A-Horse-like song fails plausibility, and a stale exclusion is reported", () => {
@@ -454,8 +558,19 @@ test("end to end: the good song passes, the A-Horse-like song fails plausibility
   assert.ok(report.generated_from.catalogue.sha256 && report.generated_from.packs[0].manifest_sha256);
   assert.ok(report.generated_from.files.some(f => f.path.endsWith("expected-chords.json")));
   assert.equal(report.generated_from.instrument_tags, null);
+  assert.ok(report.generated_from.hold_checks && report.generated_from.hold_checks.sha256);
+  assert.equal(bad.checks.plausibility.hold_evidence.status, "measured");
   assert.ok(good.not_checked.includes("embed (unknown)") === false, "the fixture-level embed check counts as evidence");
   assert.ok(good.not_checked.includes("instrument (not run)"));
+});
+test("end to end: without the hold-check file the A-Horse-like chart only flags", () => {
+  const { root, ids } = makeRepo({ holds: false });
+  const report = cc.runChecks(root);
+  const bad = report.songs.find(s => s.recording_id === ids.bad);
+  assert.equal(bad.checks.plausibility.status, "flag");
+  assert.equal(bad.verdict, "flag");
+  assert.equal(report.generated_from.hold_checks, null);
+  assert.ok(bad.not_checked.includes("plausibility: hold homogeneity (no matching hold check)"));
 });
 test("end to end: an exported song is preferred over the pack chart, and instrument tags are applied when the file exists", () => {
   const { root, ids } = makeRepo();
@@ -467,7 +582,7 @@ test("end to end: an exported song is preferred over the pack chart, and instrum
   writeJSON(path.join(root, `strumalong/songs/${ids.good}.json`), song);
   writeJSON(path.join(root, "strumalong/songs/index.json"), { songs: [{ id: ids.good, title: "Exported Title", artist: "Exported Artist", playable_embed: false, embed_note: "age-restricted; alternate" }] });
   writeJSON(path.join(root, "experiments/generated/strumalong-instrument-tags.json"), { schema: cc.INSTRUMENT_SCHEMA, model: { name: "test" }, recordings: {
-    [ids.good]: { scores: { guitar: 0.2, ukulele: 0.9, strum: 0.5 } } } });
+    [ids.good]: { scores: { guitar: 0.2, ukulele: 0.9 }, stems: { guitar_share_of_harmonic: 0.05 }, strum: { restrike_onbeat: 0.7, onbeat_attacks: 200 } } } });
   const report = cc.runChecks(root);
   const good = report.songs.find(s => s.recording_id === ids.good);
   assert.equal(good.view_source, "exported");
@@ -475,16 +590,19 @@ test("end to end: an exported song is preferred over the pack chart, and instrum
   assert.equal(good.exported, true);
   assert.equal(good.checks.embed.status, "flag");
   assert.equal(good.checks.instrument.status, "fail");
+  assert.equal(good.checks.instrument.guitar_led.status, "fail");
+  assert.equal(good.checks.instrument.strummed.status, "not measured");
   assert.equal(good.verdict, "fail");
   assert.ok(report.generated_from.instrument_tags && report.generated_from.instrument_tags.sha256);
   assert.equal(good.checks.consistency.exporter.anchor_phases, 1);
 });
 test("end to end: the bare map form of the instrument tags file is accepted", () => {
   const { root, ids } = makeRepo();
-  writeJSON(path.join(root, "experiments/generated/strumalong-instrument-tags.json"), { [ids.good]: { model: "m", scores: { acoustic_guitar: 0.9, strum: 0.7 } } });
+  writeJSON(path.join(root, "experiments/generated/strumalong-instrument-tags.json"), { [ids.good]: { model: "m", scores: { acoustic_guitar: 0.9 } } });
   const good = cc.runChecks(root).songs.find(s => s.recording_id === ids.good);
   assert.equal(good.checks.instrument.status, "pass");
   assert.equal(good.checks.instrument.model, "m");
+  assert.ok(good.not_checked.includes("instrument: strummed (not run)"));
 });
 /** Write an exported song for the good recording: `pairs` are the shipped chords, `flagged` the start times that carry t:1. */
 function writeExported(root, ids, pairs, { moves = [], flagged = [] } = {}) {
@@ -604,11 +722,19 @@ else {
   test("real packs: every catalogue exclusion names a recording that exists", () => {
     assert.deepEqual(real.unmatched_exclusions, []);
   });
-  test("real packs: A Horse with No Name (excluded, long Em holds) fails plausibility", () => {
+  const haveHolds = fs.existsSync(path.join(REPO, "experiments/generated/strumalong-hold-checks.json"));
+  test("real packs: A Horse with No Name (excluded, long Em holds) fails plausibility; the vamps Ho Hey and Stuck in the Middle only flag", () => {
     const s = byId("america-a-horse-with-no-name-youtube-20261025");
     assert.equal(s.shipped, false);
-    assert.equal(s.checks.plausibility.status, "fail");
+    assert.equal(s.checks.plausibility.merge_signature, true);
     assert.ok(s.checks.plausibility.max_hold_beats >= 46);
+    assert.equal(s.checks.plausibility.status, haveHolds ? "fail" : "flag");
+    for (const id of ["lumineers-ho-hey-youtube-20261025", "stealers-wheel-stuck-in-the-middle-with-you-youtube-20261025"]) {
+      const p = byId(id).checks.plausibility;
+      assert.equal(p.merge_signature, true, id);
+      assert.equal(p.status, "flag", `${id}: the chart signature alone never fails`);
+      if (haveHolds) assert.ok(p.hold_evidence.status === "measured" && p.hold_evidence.missed_change_fraction < 0.1, id);
+    }
   });
   test("real packs: Come As You Are is caught by the recorded age restriction", () => {
     assert.equal(byId("nirvana-come-as-you-are-youtube-20261011").checks.embed.status, "fail");
@@ -624,13 +750,32 @@ else {
     const shipped = byId("cranberries-zombie-youtube-20261024").checks.consistency;
     assert.ok(shipped.status === "flag" || (shipped.auto_timing && shipped.auto_timing.raw_chart.deviants > shipped.auto_timing.shipped_deviants), "shipped Zombie is flagged or reported as auto-timed");
   });
-  test("real packs: the instrument-only failures are NOT caught without the instrument stage (honest limits)", () => {
+  const INSTRUMENT_NEGATIVES = ["vance-joy-riptide-youtube-20261024", "beatles-love-me-do-youtube-20261011", "radiohead-creep-youtube-20261010",
+    "green-day-good-riddance-youtube-20261024", "animals-house-rising-sun-official-20261011", "white-stripes-seven-nation-army-youtube-20261011",
+    "nirvana-come-as-you-are-youtube-20261011", "lynyrd-skynyrd-sweet-home-alabama-youtube-20261024"];
+  const tagsPath = path.join(REPO, "experiments/generated/strumalong-instrument-tags.json");
+  const haveStrum = fs.existsSync(tagsPath) && Object.values(JSON.parse(fs.readFileSync(tagsPath, "utf8")).recordings || {}).every(r => r.strum && r.stems);
+  test("real packs: the instrument-only negatives are not caught by the other checks (honest limits)", () => {
     for (const id of ["radiohead-creep-youtube-20261010", "animals-house-rising-sun-official-20261011", "white-stripes-seven-nation-army-youtube-20261011",
       "lynyrd-skynyrd-sweet-home-alabama-youtube-20261024", "vance-joy-riptide-youtube-20261024"]) {
-      assert.notEqual(byId(id).verdict, "fail", `${id} has no non-instrument failure`);
-      assert.equal(byId(id).checks.instrument.status, "not run");
+      const others = ["chords", "tempo", "plausibility", "consistency", "embed"].map(n => byId(id).checks[n].status);
+      assert.ok(!others.includes("fail"), `${id} has no non-instrument failure`);
     }
   });
+  if (!haveStrum) console.log("(instrument-stage validation skipped: run stems_6s.py, yamnet_tags.py and strum_features.py)");
+  else {
+    test("real packs: the instrument stage catches every founder-labelled instrument or technique negative (in-sample)", () => {
+      for (const id of INSTRUMENT_NEGATIVES) assert.ok(["flag", "fail"].includes(byId(id).checks.instrument.status), id);
+      assert.equal(byId("vance-joy-riptide-youtube-20261024").checks.instrument.guitar_led.status, "fail", "ukulele-led: empty guitar stem, no YAMNet guitar");
+      assert.equal(byId("beatles-love-me-do-youtube-20261011").checks.instrument.guitar_led.status, "flag", "harmonica-led: low guitar share, but YAMNet still hears guitar");
+      for (const id of INSTRUMENT_NEGATIVES.slice(2)) assert.equal(byId(id).checks.instrument.strummed.status, "flag", id);
+    });
+    test("real packs: the instrument stage is conservative: only Riptide fails it, and A Horse with No Name (strummed) passes it", () => {
+      assert.deepEqual(real.songs.filter(s => s.checks.instrument.status === "fail").map(s => s.recording_id), ["vance-joy-riptide-youtube-20261024"]);
+      assert.equal(byId("america-a-horse-with-no-name-youtube-20261025").checks.instrument.status, "pass");
+      assert.equal(byId("proclaimers-im-gonna-be-500-miles-youtube-20261025").checks.instrument.status, "pass");
+    });
+  }
   test("real packs: every song carries all six checks and a verdict", () => {
     for (const s of real.songs) {
       assert.deepEqual(Object.keys(s.checks), ["chords", "tempo", "plausibility", "consistency", "embed", "instrument"]);

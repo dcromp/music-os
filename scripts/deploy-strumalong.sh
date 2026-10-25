@@ -16,6 +16,8 @@ fi
 node strumalong/test/run.js
 # songs/ must be exactly what the exporter builds from the current packs (fails on stale or extra files).
 node strumalong/tools/build-songs.js --check
+# Catalogue checks (chords, tempo, plausibility, timing, embed, instrument): exits non-zero when a shipped song fails a hard gate.
+node experiments/analysis/strumalong/catalogue_checks.js --no-write > /dev/null
 
 SOURCE=$(git rev-parse --short HEAD)
 TREE=$(git rev-parse "HEAD:strumalong")

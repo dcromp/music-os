@@ -56,6 +56,12 @@ const T = {
     fail_nx_share: 0.50,
     blip_beats: 0.75,             // holds shorter than this are blips (the exporter's "quick" line)
     absent_family_floor: 0.01,    // with long holds, an expected family below this share counts as absent
+    // Hold homogeneity (experiments/generated/strumalong-hold-checks.json, hold_homogeneity.py). The chart signature above alone
+    // only flags; it fails when the audio inside those same long holds also changes chord. Calibrated on 25 Oct 2026: A Horse with
+    // No Name 17 of 45 bars (0.38) against the vamps Ho Hey 1 of 22 (0.05) and Stuck in the Middle with You 1 of 55 (0.02).
+    hold_fail_missed: 0.25,       // fail: >= 25% of the bars inside the chart's long holds fit another main chord better
+    hold_min_bars: 12,            // ... measured over at least 12 bars (3 bars of evidence) ...
+    hold_match_seconds: 1.0,      // a hold in the hold-check file is the chart's hold when its start is within 1 s
   },
   consistency: {
     min_group: 4,                 // a repeated change needs 4+ occurrences of the same from>to pair
@@ -73,14 +79,21 @@ const T = {
     flag_shift_share: 0.10,       // flag: phase shifts the exporter's bar anchors do not follow, covering 10%+ of repeated changes
     list_deviants: 12,            // deviants listed per song
   },
+  // Calibrated on 25 Oct 2026 against the founder's labels (44 recordings; docs/STRUMALONG_CATALOGUE_CHECKS.md, Validation).
+  // Two questions. Guitar-led: the Demucs guitar stem's share of the harmonic accompaniment, corroborated by YAMNet tags (top-5
+  // frame fractions). Strummed: restrike_onbeat from strum_features.py. Technique never fails on its own: the labelled picked and
+  // riff songs (0.583-0.630) and dense strummed songs (0.627-0.655) overlap within about two standard errors.
   instrument: {
     guitar_keys: ["guitar", "acoustic_guitar", "electric_guitar", "steel_guitar"],
     other_keys: ["ukulele", "piano", "harmonica", "banjo", "mandolin", "accordion", "organ", "keyboard", "synthesizer", "violin", "harp"],
-    min_other: 0.30,              // a non-guitar tag below this is ignored
-    fail_margin: 0.15,            // a non-guitar tag this far above the best guitar tag fails
-    flag_margin: 0.0,             // ... any non-guitar tag at or above the best guitar tag flags
-    min_guitar: 0.25,             // best guitar tag below this: no guitar evidence at all (flag)
-    min_strum: 0.20,              // strum tag below this (when the model has one) is weak strum evidence (flag)
+    share_fail: 0.10,             // guitar stem under 10% of guitar + piano + other: the stem is nearly empty (Riptide 0.04) ...
+    share_flag: 0.33,             // ... under a third: guitar may not lead (Love Me Do 0.14, lowest shipped 0.17 and 0.22, next 0.59)
+    // YAMNet thresholds as designed before the batch ran (top-5 frame fractions); they now only corroborate the guitar share.
+    min_guitar: 0.25,             // best guitar tag below this: YAMNet hears no guitar
+    min_other: 0.30,              // a non-guitar tag below this is ignored; at or above the best guitar tag it is reported
+    fail_margin: 0.15,            // a non-guitar tag this far above the best guitar tag is a clear YAMNet lead
+    restrike_flag: 0.64,          // restrike_onbeat below this flags: the highest labelled picked song (Creep 0.630) + 1 SE (0.01)
+    restrike_min_attacks: 50,     // fewer on-beat attacks than this: not enough to judge
   },
 };
 
@@ -305,7 +318,32 @@ function checkTempo(view, config) {
 }
 
 // ------------------------------------------------------------------------------------------------ check 3: chart plausibility
-function checkPlausibility(view, expected) {
+/** Hold homogeneity on the chart's own long holds. `holds` is the recording's entry in strumalong-hold-checks.json
+ *  (hold_homogeneity.py: per hold `start_s`, `beats`, `bars`, `missed_bars`, and `view_source`). Each long run of this check is
+ *  matched to the hold-check hold that starts within hold_match_seconds; the evidence is the missed bars over the matched bars.
+ *  null without an entry; status "mismatch" when the entry was made from another chart (view source or holds do not line up). */
+function holdEvidence(longRuns, holds, viewSource) {
+  const P = T.plausibility;
+  if (!holds || !Array.isArray(holds.holds)) return null;
+  const base = { file_view_source: holds.view_source ?? null, margin: holds.margin ?? null, templates: holds.templates ?? null };
+  if (!longRuns.length) return { status: "no long holds", ...base };
+  if (holds.view_source && holds.view_source !== viewSource) return { status: "mismatch", note: `made from the ${holds.view_source} chart, checked on the ${viewSource} chart`, ...base };
+  let bars = 0, missed = 0;
+  const matched = [];
+  for (const r of longRuns) {
+    const h = holds.holds.find(x => isNum(x.start_s) && Math.abs(x.start_s - r.s) <= P.hold_match_seconds && isNum(x.bars) && isNum(x.missed_bars));
+    if (!h) continue;
+    bars += h.bars; missed += h.missed_bars;
+    matched.push({ start_seconds: r2(r.s), beats: r2(r.beats), family: r.key, bars: h.bars, missed_bars: h.missed_bars });
+  }
+  if (matched.length < longRuns.length) {
+    return { status: "mismatch", note: `${longRuns.length - matched.length} of ${longRuns.length} long holds have no matching hold in the hold-check file; re-run hold_homogeneity.py`, matched_holds: matched.length, ...base };
+  }
+  return { status: "measured", long_holds: longRuns.length, bars, missed_bars: missed, missed_change_fraction: bars ? r3(missed / bars) : null,
+    holds: matched, ...base };
+}
+
+function checkPlausibility(view, expected, holds = null) {
   const P = T.plausibility;
   const { byFamily, chordSecs, nSecs, xSecs } = familyShares(view.chords);
   const out = { status: "pass", reasons: [] };
@@ -341,9 +379,25 @@ function checkPlausibility(view, expected) {
     absent = expFams.filter(e => share(e) < P.absent_family_floor);
   }
   out.expected_absent = absent;
-  if (expFams && expFams.length >= 2 && out.long_hold_share >= P.fail_long_share && long.length >= P.fail_long_count && out.max_hold_beats >= P.fail_max_hold_beats) {
-    out.status = "fail";
-    out.reasons.push(`${pct(out.long_hold_share)} of chord time sits in ${long.length} single holds of ${P.long_hold_beats}+ beats (longest ${out.max_hold_beats} beats of ${out.max_hold.family}) although the progression has ${expFams.length} families; the chart probably merges alternating chords.`);
+  const ev = holdEvidence(long, holds, view.source);
+  if (ev) out.hold_evidence = ev;
+  const signature = expFams && expFams.length >= 2 && out.long_hold_share >= P.fail_long_share && long.length >= P.fail_long_count && out.max_hold_beats >= P.fail_max_hold_beats;
+  out.merge_signature = !!signature;
+  if (signature) {
+    // The chart shape alone is also what a real vamp or a long intro looks like, so it only flags. It fails when the audio inside
+    // the same holds changes chord (hold homogeneity), the second, independent piece of evidence.
+    const chart = `${pct(out.long_hold_share)} of chord time sits in ${long.length} single holds of ${P.long_hold_beats}+ beats (longest ${out.max_hold_beats} beats of ${out.max_hold.family}) although the progression has ${expFams.length} families`;
+    if (ev && ev.status === "measured" && ev.bars >= P.hold_min_bars && ev.missed_change_fraction >= P.hold_fail_missed) {
+      out.status = "fail";
+      out.reasons.push(`${chart}, and the audio inside those holds changes chord: in ${ev.missed_bars} of ${ev.bars} bars another main chord fits better than the held one (hold check). The chart probably merges alternating chords.`);
+    } else {
+      out.status = "flag";
+      const why = !ev ? "no hold-homogeneity evidence (run hold_homogeneity.py)"
+        : ev.status !== "measured" ? `the hold check does not match this chart (${ev.note})`
+        : ev.bars < P.hold_min_bars ? `the hold check measured only ${ev.bars} bars`
+        : `the audio inside them mostly stays on the held chord (${ev.missed_bars} of ${ev.bars} bars fit another chord better, under ${pct(P.hold_fail_missed)}), so they may be real vamps or breaks`;
+      out.reasons.push(`${chart}; the chart may merge alternating chords, but ${why}.`);
+    }
   } else if (alternating && out.long_hold_share >= P.flag_long_share) {
     out.status = "flag";
     out.reasons.push(`${pct(out.long_hold_share)} of chord time sits in holds of ${P.long_hold_beats}+ beats (longest ${out.max_hold_beats} beats of ${out.max_hold.family}).`);
@@ -542,32 +596,79 @@ function checkEmbed(id, evidence) {
   return { status: "unknown", evidence: [], reasons: [], note: "no embed check recorded in the repo for this recording" };
 }
 
-// ------------------------------------------------------------------------------------------------ check 6: instrument (slot)
-/** tags: {model, audio_sha256?, scores:{...}} or null. See docs/STRUMALONG_CATALOGUE_CHECKS.md for the file schema.
- *  audioSha: the pack's sha256 of the prepared audio; tags made from another file are stale and flag. */
+// ------------------------------------------------------------------------------------------------ check 6: instrument
+/** tags: the recording's entry in strumalong-instrument-tags.json, or null. Fields read (docs/STRUMALONG_CATALOGUE_CHECKS.md):
+ *   audio_sha256, model, scores (YAMNet, yamnet_tags.py), stems.guitar_share_of_harmonic (Demucs, stems_6s.py) and
+ *   strum.{restrike_onbeat, restrike_onbeat_se, onbeat_attacks, single_onbeat, audio_sha256} (strum_features.py).
+ *  audioSha: the pack's sha256 of the prepared audio; tags or strum features made from another file are stale and flag.
+ *  Two parts, each pass / flag / fail / not run: `guitar_led` and `strummed`. The check's status is the worse of the two. */
 function checkInstrument(tags, audioSha = null) {
   const I = T.instrument;
   if (!tags) return { status: "not run", reasons: [], note: "no instrument tags for this recording" };
+  const out = { status: "pass", reasons: [], model: tags.model ?? null };
   if (tags.audio_sha256 && audioSha && tags.audio_sha256 !== audioSha) {
     return { status: "flag", reasons: ["The instrument tags were made from a different audio file than the pack's prepared audio; re-run the tagger."], model: tags.model ?? null };
   }
-  const scores = tags.scores;
-  if (!scores || typeof scores !== "object") return { status: "flag", reasons: ["Instrument tags carry no scores object."], model: tags.model ?? null };
-  const bad = Object.entries(scores).filter(([, v]) => !isNum(v) || v < 0 || v > 1);
-  if (bad.length) return { status: "flag", reasons: [`Instrument scores must be probabilities in [0,1]; invalid: ${bad.slice(0, 4).map(([k]) => k).join(", ")}.`], model: tags.model ?? null };
-  const score = k => (isNum(scores[k]) ? scores[k] : 0);
-  const guitar = Math.max(...I.guitar_keys.map(score));
-  const others = I.other_keys.filter(k => k in scores).map(k => [k, scores[k]]).sort((a, b) => b[1] - a[1]);
-  const [lead, leadScore] = others[0] || [null, 0];
-  const out = { status: "pass", reasons: [], model: tags.model ?? null, guitar: r3(guitar), strum: "strum" in scores ? r3(scores.strum) : null, lead_other: lead ? { tag: lead, score: r3(leadScore) } : null };
-  if (lead && leadScore >= I.min_other && leadScore >= guitar + I.fail_margin) {
-    out.status = "fail"; out.reasons.push(`${lead} (${r2(leadScore)}) clearly leads guitar (${r2(guitar)}): not a guitar-led recording.`);
-  } else if (lead && leadScore >= I.min_other && leadScore >= guitar + I.flag_margin) {
-    out.status = "flag"; out.reasons.push(`${lead} (${r2(leadScore)}) is at least as strong as guitar (${r2(guitar)}).`);
-  } else if (guitar < I.min_guitar) {
-    out.status = "flag"; out.reasons.push(`No clear guitar evidence (best guitar tag ${r2(guitar)}).`);
+  // --- guitar-led: Demucs guitar share of the harmonic accompaniment, corroborated by YAMNet
+  const share = isNum(tags.stems?.guitar_share_of_harmonic) ? tags.stems.guitar_share_of_harmonic : null;
+  let scores = tags.scores && typeof tags.scores === "object" ? tags.scores : null;
+  const g = { status: "pass", reasons: [], guitar_share_of_harmonic: r3(share) };
+  if (tags.scores !== undefined && !scores) { g.status = "flag"; g.reasons.push("Instrument tags carry no scores object."); }
+  if (scores) {
+    const bad = Object.entries(scores).filter(([, v]) => !isNum(v) || v < 0 || v > 1);
+    if (bad.length) { g.status = "flag"; g.reasons.push(`Instrument scores must be in [0,1]; invalid: ${bad.slice(0, 4).map(([k]) => k).join(", ")}.`); scores = null; }
   }
-  if ("strum" in scores && scores.strum < I.min_strum) { out.status = worst([out.status, "flag"]); out.reasons.push(`Weak strum evidence (strum ${r2(scores.strum)}).`); }
+  if (!scores && share === null && !g.reasons.length) { g.status = "not run"; g.note = "no YAMNet scores and no stem statistics"; }
+  else {
+    const score = k => (scores && isNum(scores[k]) ? scores[k] : 0);
+    const guitar = scores ? Math.max(...I.guitar_keys.map(score)) : null;
+    const others = scores ? I.other_keys.filter(k => k in scores).map(k => [k, scores[k]]).sort((a, b) => b[1] - a[1]) : [];
+    const [lead, leadScore] = others[0] || [null, 0];
+    g.yamnet_best_guitar = r3(guitar);
+    g.yamnet_lead_other = lead ? { tag: lead, score: r3(leadScore) } : null;
+    out.guitar = g.yamnet_best_guitar;                       // kept at the top level for older readers of the report
+    out.lead_other = g.yamnet_lead_other;
+    const noGuitar = scores !== null && guitar < I.min_guitar;
+    const otherAsStrong = scores !== null && lead && leadScore >= I.min_other && leadScore >= guitar;
+    const clearLead = scores !== null && lead && leadScore >= I.min_other && leadScore >= guitar + I.fail_margin;
+    const lowShare = share !== null && share < I.share_flag;
+    if (share !== null && share < I.share_fail && noGuitar) {
+      g.status = "fail";
+      g.reasons.push(`The Demucs guitar stem is nearly empty (guitar ${pct(share)} of the guitar + piano + other energy) and YAMNet hears no guitar (best guitar tag ${r2(guitar)}): not a guitar-led recording.`);
+    } else if (lowShare && clearLead) {
+      g.status = "fail";
+      g.reasons.push(`Guitar is ${pct(share)} of the harmonic accompaniment and YAMNet hears ${lead} (${r2(leadScore)}) clearly ahead of guitar (${r2(guitar)}): not a guitar-led recording.`);
+    } else {
+      if (lowShare) g.reasons.push(`Guitar carries only ${pct(share)} of the harmonic accompaniment (Demucs guitar / (guitar + piano + other)); another instrument may lead. Listen.`);
+      if (noGuitar) g.reasons.push(`YAMNet hears little guitar (best guitar tag ${r2(guitar)}).`);
+      if (!noGuitar && (otherAsStrong || clearLead)) g.reasons.push(`YAMNet hears ${lead} (${r2(leadScore)}) at least as often as guitar (${r2(guitar)}).`);
+      if (g.reasons.length) g.status = worst([g.status, "flag"]);
+    }
+  }
+  // --- strummed: on-beat restrike of the guitar stem (strum_features.py)
+  const s = tags.strum && typeof tags.strum === "object" ? tags.strum : null;
+  const st = { status: "pass", reasons: [] };
+  if (!s) { st.status = "not run"; st.note = "no strum features (run strum_features.py)"; }
+  else {
+    Object.assign(st, { restrike_onbeat: s.restrike_onbeat ?? null, restrike_onbeat_se: s.restrike_onbeat_se ?? null, onbeat_attacks: s.onbeat_attacks ?? null,
+      single_onbeat: s.single_onbeat ?? null, version: s.version ?? null });
+    if (s.audio_sha256 && audioSha && s.audio_sha256 !== audioSha) {
+      st.status = "flag"; st.reasons.push("The strum features were made from a stem of a different audio file than the pack's prepared audio; re-run stems_6s.py and strum_features.py.");
+    } else if (g.status === "fail") {
+      st.status = "not measured"; st.note = "not guitar-led, so the guitar stem holds mostly bleed from other instruments";
+    } else if (!isNum(s.restrike_onbeat) || !isNum(s.onbeat_attacks) || s.onbeat_attacks < I.restrike_min_attacks) {
+      st.status = "not measured"; st.note = `too few on-beat guitar attacks (${s.onbeat_attacks ?? 0}; need ${I.restrike_min_attacks})`;
+    } else if (s.restrike_onbeat < I.restrike_flag) {
+      st.status = "flag";
+      st.reasons.push(`On-beat guitar attacks re-strike only ${pct(s.restrike_onbeat)} of the sounding partials (restrike_onbeat ${r3(s.restrike_onbeat)}${isNum(s.restrike_onbeat_se) ? ` ± ${r3(s.restrike_onbeat_se)}` : ""}, flag under ${I.restrike_flag}; the founder-labelled picked and riff songs score 0.58 to 0.63). The recorded guitar may be picked or a riff, or this is dense or distorted strumming (a known false alarm). Listen.`);
+    }
+  }
+  out.guitar_led = g;
+  out.strummed = st;
+  const parts = [g.status, st.status].filter(x => x === "pass" || x === "flag" || x === "fail");
+  out.status = parts.length ? worst(parts) : "not run";
+  for (const r of g.reasons) out.reasons.push(`guitar-led: ${r}`);
+  for (const r of st.reasons) out.reasons.push(`strummed: ${r}`);
   return out;
 }
 
@@ -586,6 +687,13 @@ function combine(checks) {
   if (checks.consistency.evidence === "insufficient") notChecked.push("consistency (too few repeated changes)");
   if (checks.embed.status === "unknown") notChecked.push("embed (unknown)");
   if (checks.instrument.status === "not run") notChecked.push("instrument (not run)");
+  else {
+    const ins = checks.instrument;
+    if (ins.guitar_led && ins.guitar_led.status === "not run") notChecked.push("instrument: guitar-led (not run)");
+    if (ins.strummed && ins.strummed.status === "not run") notChecked.push("instrument: strummed (not run)");
+    if (ins.strummed && ins.strummed.status === "not measured") notChecked.push(`instrument: strummed (not measured: ${ins.strummed.note})`);
+  }
+  if (checks.plausibility.merge_signature && !(checks.plausibility.hold_evidence && checks.plausibility.hold_evidence.status === "measured")) notChecked.push("plausibility: hold homogeneity (no matching hold check)");
   if (checks.tempo.range === null && checks.tempo.pulse_bpm !== undefined) notChecked.push("tempo range (default prior)");
   return { verdict, reasons, notes, not_checked: notChecked };
 }
@@ -676,6 +784,16 @@ function loadInputs(repo = REPO, options = {}) {
     instrument = new Map(Object.entries(map).filter(([, v]) => v && typeof v === "object" && !Array.isArray(v)).map(([id, v]) => [id, { ...v, model: v.model ?? instrumentRaw.model ?? null }]));
   }
 
+  // hold homogeneity (optional; hold_homogeneity.py). Keyed by recording id; a {recordings: {...}} wrapper is accepted too.
+  const holdPath = options.holdChecks || abs("experiments/generated/strumalong-hold-checks.json");
+  const holdRaw = tryJSON(holdPath);
+  let holdChecks = null, holdSha = null;
+  if (holdRaw && typeof holdRaw === "object") {
+    holdSha = fileSha(holdPath);
+    const map = holdRaw.recordings && typeof holdRaw.recordings === "object" ? holdRaw.recordings : holdRaw;
+    holdChecks = new Map(Object.entries(map).filter(([, v]) => v && typeof v === "object" && Array.isArray(v.holds)));
+  }
+
   // packs
   const packs = [];
   const recordings = [];
@@ -705,6 +823,7 @@ function loadInputs(repo = REPO, options = {}) {
   return {
     catalogue, cataloguePath, excluded, index, indexById, indexSha: fileSha(path.join(songsDir, "index.json")),
     expected, candidates, fixtureChecked, rhythmConfig, instrument, instrumentPath: instrumentRaw ? rel(instrumentPath) : null, instrumentSha,
+    holdChecks, holdPath: holdChecks ? rel(holdPath) : null, holdSha,
     packs, recordings, exported, titles, sources, rel,
   };
 }
@@ -814,7 +933,7 @@ function checkRecording(rec, inputs) {
   const checks = {
     chords: checkChords(view, expected),
     tempo: checkTempo(view, inputs.rhythmConfig.get(rec.id) || null),
-    plausibility: checkPlausibility(view, expected),
+    plausibility: checkPlausibility(view, expected, inputs.holdChecks ? inputs.holdChecks.get(rec.id) || null : null),
     consistency,
     embed: checkEmbed(rec.id, embedEvidence),
     instrument: checkInstrument(inputs.instrument ? inputs.instrument.get(rec.id) || null : null, rec.audioSha),
@@ -845,6 +964,7 @@ function runChecks(repo = REPO, options = {}) {
       songs_index_sha256: inputs.indexSha,
       exported_songs: songs.filter(s => s.exported).length,
       instrument_tags: inputs.instrumentPath ? { path: inputs.instrumentPath, sha256: inputs.instrumentSha } : null,
+      hold_checks: inputs.holdPath ? { path: inputs.holdPath, sha256: inputs.holdSha } : null,
     },
     thresholds: T,
     summary,
@@ -927,7 +1047,7 @@ function main(argv, env = process.env) {
 module.exports = {
   T, SCHEMA, INSTRUMENT_SCHEMA, KNOWN_EMBED,
   parseChord, familyKey, familyMatches, transposeLabel, familyRuns, familyShares, beatAt,
-  checkChords, checkTempo, checkPlausibility, checkConsistency, changeSequence, checkEmbed, checkInstrument, combine,
+  checkChords, checkTempo, checkPlausibility, holdEvidence, checkConsistency, changeSequence, checkEmbed, checkInstrument, combine,
   loadInputs, buildView, buildPackView, exporterAutoTiming, checkRecording, runChecks, table, markdownTable, main,
 };
 
