@@ -34,11 +34,115 @@
   ],
   "songs": [
     {
+      "id": "elvis-presley-thats-all-right-youtube-20261026",
+      "title": "That's All Right",
+      "artist": "Elvis Presley",
+      "group": "level-1",
+      "order": 1,
+      "level": 1,
+      "level_label": "First chords",
+      "video_id": "UKdLVgCBS50",
+      "duration_seconds": 115.3,
+      "bpm": 103,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "billy-ray-cyrus-achy-breaky-heart-youtube-20261026",
+      "title": "Achy Breaky Heart",
+      "artist": "Billy Ray Cyrus",
+      "group": "level-1",
+      "order": 2,
+      "level": 1,
+      "level_label": "First chords",
+      "video_id": "byQIPdHMpjc",
+      "duration_seconds": 233.5,
+      "bpm": 123,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "E",
+        "A",
+        "Am"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "johnny-cash-jackson-youtube-20261026",
+      "title": "Jackson",
+      "artist": "Johnny Cash & June Carter",
+      "group": "level-1",
+      "order": 3,
+      "level": 1,
+      "level_label": "First chords",
+      "video_id": "E_aKKl5SjvE",
+      "duration_seconds": 164.76,
+      "bpm": 129,
+      "meter_label": "4/4 assumed",
+      "capo": 3,
+      "core_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "bill-haley-rock-around-the-clock-youtube-20261026",
+      "title": "Rock Around the Clock",
+      "artist": "Bill Haley & His Comets",
+      "group": "level-1",
+      "order": 4,
+      "level": 1,
+      "level_label": "First chords",
+      "video_id": "hzYBEJgKjv0",
+      "duration_seconds": 129.9,
+      "bpm": 185,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "A",
+        "E"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "eric-clapton-lay-down-sally-youtube-20261026",
+      "title": "Lay Down Sally",
+      "artist": "Eric Clapton",
+      "group": "level-1",
+      "order": 5,
+      "level": 1,
+      "level_label": "First chords",
+      "video_id": "9BYyPok2O5k",
+      "duration_seconds": 236.11,
+      "bpm": 96,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
       "id": "bob-marley-three-little-birds-youtube-20261025",
       "title": "Three Little Birds",
       "artist": "Bob Marley & The Wailers",
       "group": "level-1",
-      "order": 1,
+      "order": 6,
       "level": 1,
       "level_label": "First chords",
       "video_id": "MUNNRAdizz0",
@@ -59,7 +163,7 @@
       "title": "Sweet Caroline",
       "artist": "Neil Diamond",
       "group": "level-1",
-      "order": 2,
+      "order": 7,
       "level": 1,
       "level_label": "First chords",
       "video_id": "GmK5_lnQUbE",
@@ -77,11 +181,53 @@
       "embed_note": ""
     },
     {
+      "id": "everly-brothers-bye-bye-love-youtube-20261026",
+      "title": "Bye Bye Love",
+      "artist": "The Everly Brothers",
+      "group": "level-1",
+      "order": 8,
+      "level": 1,
+      "level_label": "First chords",
+      "video_id": "CKXROTu81sU",
+      "duration_seconds": 142.93,
+      "bpm": 83,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "bob-marley-stir-it-up-youtube-20261026",
+      "title": "Stir It Up",
+      "artist": "Bob Marley & The Wailers",
+      "group": "level-1",
+      "order": 9,
+      "level": 1,
+      "level_label": "First chords",
+      "video_id": "1hwL3S3Gtzs",
+      "duration_seconds": 334.53,
+      "bpm": 74,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
       "id": "troggs-wild-thing-youtube-20261011",
       "title": "Wild Thing",
       "artist": "The Troggs",
       "group": "level-1",
-      "order": 3,
+      "order": 10,
       "level": 1,
       "level_label": "First chords",
       "video_id": "bLJkrOYHNw8",
@@ -93,6 +239,27 @@
         "A",
         "E",
         "D"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "buddy-holly-peggy-sue-youtube-20261026",
+      "title": "Peggy Sue",
+      "artist": "Buddy Holly",
+      "group": "level-1",
+      "order": 11,
+      "level": 1,
+      "level_label": "First chords",
+      "video_id": "1sWvwBYEzvE",
+      "duration_seconds": 150.96,
+      "bpm": 152,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "A",
+        "D",
+        "E"
       ],
       "playable_embed": true,
       "embed_note": ""
@@ -488,11 +655,32 @@
       "embed_note": ""
     },
     {
+      "id": "ritchie-valens-la-bamba-youtube-20261026",
+      "title": "La Bamba",
+      "artist": "Ritchie Valens",
+      "group": "level-3",
+      "order": 6,
+      "level": 3,
+      "level_label": "More changes",
+      "video_id": "BycLmWI97Nc",
+      "duration_seconds": 126.98,
+      "bpm": 152,
+      "meter_label": "4/4 assumed",
+      "capo": 3,
+      "core_shapes": [
+        "E",
+        "A",
+        "D"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
       "id": "weezer-island-in-the-sun-youtube-20261024",
       "title": "Island in the Sun",
       "artist": "Weezer",
       "group": "level-3",
-      "order": 6,
+      "order": 7,
       "level": 3,
       "level_label": "More changes",
       "video_id": "erG5rgNYSdk",
