@@ -8,7 +8,7 @@
 "level":2,
 "recording":{"id":"verve-lucky-man-youtube-20261025","duration_seconds":293.603,"audio_sha256":"6ba47f6f5594bafee9d45daab2cd834912c0cef1bf31a8c89b70e1ea1fb982ef"},
 "videos":[{"video_id":"73hPtwo1sYQ","uploader":"The Verve","kind":"analysed","duration_seconds":294,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],
-"chart":{"source":"CREMA automatic draft","sha256":"2822729f0ac23162532d8da1b8b04293c1d4a349f7be7ac9933d9ee502e72c37","status":"provisional","corrections":[]},
+"chart":{"source":"CREMA automatic draft","sha256":"2822729f0ac23162532d8da1b8b04293c1d4a349f7be7ac9933d9ee502e72c37","status":"provisional","corrections":[{"id":"auto-timing","kind":"timing","count":2,"start":24.613,"end":214.761,"note":"2 chord changes moved by one beat to match the other repeats of the same sequence (automatic; raw chart unchanged)","moves":[{"at":25.358,"was":24.613,"from":"G","to":"A","shift":1,"agree":"3/5"},{"at":214.761,"was":214.367,"from":"G","to":"A","shift":1,"agree":"3/5"}]}]},
 "capo":0,
 "capo_source":"none",
 "setup_note":"Standard tuning (EADGBE). No capo suggested: open G, D, Asus4 (or a plain A) and Em shapes.",
@@ -25,8 +25,8 @@
 {"s":15.604,"e":17.461,"l":"G","b":1},
 {"s":17.461,"e":19.133,"l":"D","b":1},
 {"s":19.133,"e":22.198,"l":"A","b":1},
-{"s":22.198,"e":24.613,"l":"G","b":1},
-{"s":24.613,"e":28.514,"l":"A","b":1},
+{"s":22.198,"e":25.358,"l":"G","b":1},
+{"s":25.358,"e":28.514,"l":"A","t":1,"b":1},
 {"s":28.514,"e":30.557,"l":"G","b":1},
 {"s":30.557,"e":31.672,"l":"D","b":1},
 {"s":31.672,"e":34.83,"l":"A","b":1},
@@ -109,8 +109,8 @@
 {"s":205.264,"e":206.936,"l":"G","b":1},
 {"s":206.936,"e":208.422,"l":"D","b":1},
 {"s":208.422,"e":211.58,"l":"A","b":1},
-{"s":211.58,"e":214.367,"l":"G","b":1},
-{"s":214.367,"e":217.803,"l":"A","b":1},
+{"s":211.58,"e":214.761,"l":"G","b":1},
+{"s":214.761,"e":217.803,"l":"A","t":1,"b":1},
 {"s":217.803,"e":233.871,"l":"G","b":1},
 {"s":233.871,"e":237.029,"l":"A","b":1},
 {"s":237.029,"e":240.28,"l":"G","b":1},
@@ -133,5 +133,5 @@
 ],
 "strumming":{"note":"Default practice patterns for Level 2 songs; not checked against the recording.","source":"level-default","patterns":[{"id":"down-up","name":"Start: down-up eighths","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","U","D","U","D","U","D","U"],"description":"Alternate down and up in steady eighth notes: down on the numbers, up on the \"&\". Keep the hand moving through chord changes."},{"id":"folk-strum","name":"Next: D — D U — U D U","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","—","D","U","—","U","D","U"],"description":"Keep the down-up pendulum going; miss the strings on the \"&\" of 1 and on 3. A common pop and rock strum."}]},
 "learning":{"skill_focus":"A slow four-chord loop that lets the chords ring, with strings and a gradual build in the arrangement. Aim for even strumming and smooth changes.","prerequisites":"","sources":[{"title":"Published arrangement tempo marking: Lucky Man","url":"https://www.musicnotes.com/sheetmusic/the-verve/lucky-man/MN0095000"}]},
-"provenance":{"pack":"strumalong-additions-v2","manifest_sha256":"55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd","rhythm_sha256":"0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459","practice_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","learning_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","additions_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","catalogue_sha256":"27613ecdc23153bc099a3182664b9a91eaf141c80e355c3c40a5738b102c92a8"}
+"provenance":{"pack":"strumalong-additions-v2","manifest_sha256":"55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd","rhythm_sha256":"0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459","practice_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","learning_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","additions_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","catalogue_sha256":"fa60f8598d4348fa496f1094bb85771f570f49ad1f1a629ef3dd230d1192576c"}
 }

@@ -127,7 +127,14 @@ function readCatalogue(file = CATALOGUE) {
     if (exclude.has(item.recording_id)) fail(`${item.recording_id} is both excluded and overridden`);
     overrides.set(item.recording_id, item);
   }
-  return { ...cfg, exclude, overrides, sha256: sha(bytes) };
+  // Per-song opt-out of the automatic timing fix ("Timing fix"): {recording_id, reason}.
+  const timingOff = new Map();
+  for (const item of cfg.timing_fix_off || []) {
+    if (!isStr(item.recording_id) || !isStr(item.reason)) fail("every timing_fix_off entry needs recording_id and reason");
+    if (timingOff.has(item.recording_id)) fail(`duplicate timing_fix_off ${item.recording_id}`);
+    timingOff.set(item.recording_id, item);
+  }
+  return { ...cfg, exclude, overrides, timingOff, sha256: sha(bytes) };
 }
 
 // ---------------------------------------------------------------- helpers
@@ -318,7 +325,7 @@ function applyBarAnchors(song) {
   let h = 0;
   // New chord objects (a new array): lib/core.js caches its per-beat anchor map by chord-array identity.
   song.chords = song.chords.map(native => {
-    const chord = { s: native.s, e: native.e, l: native.l, ...(native.c ? { c: native.c } : {}) };
+    const chord = { s: native.s, e: native.e, l: native.l, ...(native.c ? { c: native.c } : {}), ...(native.t ? { t: native.t } : {}) };
     while (h < holds.length && holds[h].e <= chord.s + 1e-6) h++;
     const hold = holds[h];
     if (!hold || !(hold.s <= chord.s + 1e-6 && chord.e <= hold.e + 1e-6) || !anchors[h]) return chord;
@@ -361,6 +368,189 @@ function barMetrics(song) {
   const pct = (a, b) => (b ? r1(100 * a / b) : 0);
   return { changes, on_bar: pct(onBar, changes), on_bar_or_half: pct(onBar + onHalf, changes), weird, split, lines, restarts,
     approx_pct: pct(approxBeats, chordBeats) };
+}
+
+// ---------------------------------------------------------------- repetition-consistency timing fix
+// (docs/STRUMALONG_APP.md, "Timing fix"). Founder feedback, 25 Oct 2026: in Zombie one Em -> C change sat a beat later
+// than every other time the same sequence is played. Pop songs repeat chord sequences with the same bar placement, so
+// a change that sits exactly one beat away from where the other repeats of the same sequence sit is moved by one beat
+// to match them. Display-level only: the raw chart (primary.json) is unchanged, labels never change, and every move is
+// listed in chart.corrections. Runs before the bar anchors and the difficulty, so both see the fixed chart.
+//
+// A "change" is the start of a default-view hold (Core shapes at the song's capo, so quality blips do not split
+// groups) between two in-grid chord holds that are neither N/X nor quick. Its group is the four-label context
+// (previous, from, to, next). Its position is the beat of the change within the bar under a provisional phase: the
+// bar-model Viterbi (barAnchors) run on the current chart, ignoring any stored b/a. A lone wrong change cannot pull a
+// phase run onto itself (two phase switches cost more than one off-bar change), and the hold-length check below is
+// phase-free, so a phase artefact alone can never justify a move. A move needs all of:
+//   - a group of >= minAgree + 1 repeats whose most common position holds >= minShare of them and >= minAgree repeats;
+//   - this change exactly one beat from that position (two beats or more is a different arrangement: left alone);
+//   - both holds in the same phase run (a run boundary may be a beat-grid slip, not a chart error);
+//   - under a confident phase, the change not leaving a bar or half-bar line for an off-beat position (a push that
+//     most repeats round the other way only moves where the bars are a guess anyway: approx bars);
+//   - the two holds' lengths after the move closer to the majority's median lengths (neither worse, the sum better,
+//     and within maxDevAfter beats in total), with both holds and the shrinking native chord still >= 1 beat;
+//   - no founder/alias correction (c:1) on either native chord, and the boundary not moved before (t:1).
+// The moved change takes the majority repeats' median offset from their beat (clamped so it still rounds to the target
+// beat and moves at most one beat in time), so it looks like the repeats it now matches. Passes repeat until nothing
+// moves, so the fix is idempotent: run on its own output it moves nothing.
+const TIMING_FIX = { minAgree: 3, minShare: 0.6, maxDevAfter: 1, minBeats: 1, maxFrac: 0.4, maxPasses: 8 };
+
+const timingKey = (holds, i) => [i >= 2 ? holds[i - 2].label : "^", holds[i - 1].label, holds[i].label,
+  i + 1 < holds.length ? holds[i + 1].label : "$"].join(" ");
+
+// Seconds at fractional grid position p (the inverse of Core.beatPosition inside the grid).
+function secondsAtPosition(beats, p) {
+  const i = Math.min(beats.length - 2, Math.max(0, Math.floor(p)));
+  return beats[i] + (p - i) * (beats[i + 1] - beats[i]);
+}
+
+/**
+ * The changes of the default-view timeline with their repeat groups, under the provisional phase (opts.anchors: a
+ * reference anchor per hold instead, e.g. the unfixed chart's, so a before/after comparison shares one bar grid).
+ * @returns {{holds, changes: Array<{i, key, pos, lenA, lenB, frac, sameRun, native}>, groups: Map<string, object>}}
+ *   group: {key, members, mode, agree, share, typA, typB, frac} for groups of 2+ changes (mode = most common position,
+ *   ties to the lowest; typA/typB/frac = medians over the members at the mode).
+ */
+function timingGroups(song, opts = {}) {
+  const bpb = song.rhythm.beats_per_bar;
+  const provisional = barAnchors(song), holds = provisional.holds;
+  const anchors = opts.anchors && opts.anchors.length === holds.length ? opts.anchors : provisional.anchors;
+  const firstNative = new Map(song.chords.map((ch, k) => [ch.s, k]));
+  const chordHold = h => h && h.inGrid && !h.quick && h.label !== "N" && h.label !== "X";
+  const changes = [];
+  for (let i = 1; i < holds.length; i++) {
+    const A = holds[i - 1], B = holds[i], anchor = anchors[i];
+    if (!chordHold(A) || !chordHold(B) || !anchor || anchor.mode !== "phase") continue;
+    const prev = anchors[i - 1];
+    changes.push({ i, key: timingKey(holds, i), pos: mod(B.base - anchor.phase, bpb), lenA: A.count, lenB: B.count,
+      frac: B.sb - B.base, sameRun: Boolean(prev && prev.mode === "phase" && prev.phase === anchor.phase), confident: !anchor.approx,
+      native: firstNative.has(B.s) ? firstNative.get(B.s) : -1 });
+  }
+  const groups = new Map();
+  for (const ch of changes) {
+    if (!groups.has(ch.key)) groups.set(ch.key, { key: ch.key, members: [] });
+    groups.get(ch.key).members.push(ch);
+  }
+  for (const [key, g] of groups) {
+    if (g.members.length < 2) { groups.delete(key); continue; }
+    const tally = new Map();
+    for (const ch of g.members) tally.set(ch.pos, (tally.get(ch.pos) || 0) + 1);
+    const [mode, agree] = [...tally].sort((a, b) => b[1] - a[1] || a[0] - b[0])[0];
+    const at = g.members.filter(ch => ch.pos === mode);
+    Object.assign(g, { mode, agree, share: agree / g.members.length, typA: median(at.map(ch => ch.lenA)), typB: median(at.map(ch => ch.lenB)),
+      frac: median(at.map(ch => ch.frac)) });
+  }
+  return { holds, changes, groups };
+}
+
+// Share of changes in repeated groups (3+ repeats) that sit at their group's most common position. Compare a chart
+// before and after the fix under one reference phase (opts.anchors): re-phasing a whole section by half a bar
+// changes the drawn bars, not where the chords sit relative to each other.
+function timingConsistency(song, opts = {}) {
+  if (!(song.rhythm.beats_per_bar >= 3)) return { repeated: 0, consistent: 0, pct: 100 };
+  let repeated = 0, consistent = 0;
+  for (const g of timingGroups(song, opts).groups.values()) {
+    if (g.members.length < 3) continue;
+    repeated += g.members.length; consistent += g.agree;
+  }
+  return { repeated, consistent, pct: repeated ? r1(100 * consistent / repeated) : 100 };
+}
+
+// Every change that disagrees with a repeated group, with the move it would get or the reason it is left alone.
+function timingCandidates(song, opts = {}) {
+  const W = { ...TIMING_FIX, ...(opts.settings || {}) };
+  const bpb = song.rhythm.beats_per_bar, beats = song.beats, chords = song.chords;
+  const { holds, changes, groups } = timingGroups(song, opts);
+  const out = [];
+  for (const ch of changes) {
+    const g = groups.get(ch.key);
+    if (!g || g.members.length < 3 || ch.pos === g.mode) continue;
+    const A = holds[ch.i - 1], B = holds[ch.i];
+    const item = { change: ch, group: g, at: B.s, from: A.label, to: B.label, shift: 0, reason: null };
+    out.push(item);
+    const d = mod(ch.pos - g.mode, bpb);
+    item.shift = d === 1 ? -1 : d === bpb - 1 ? 1 : 0;
+    const k = ch.native;
+    if (g.agree < W.minAgree || g.share < W.minShare - 1e-9) { item.reason = `no clear majority (${g.agree} of ${g.members.length} repeats agree)`; continue; }
+    if (!item.shift) { item.reason = `${Math.min(d, bpb - d)} beats from the other repeats (only one-beat moves)`; continue; }
+    if (!ch.sameRun) { item.reason = "starts a new bar-phase run (may be a beat-grid slip)"; continue; }
+    const onLine = pos => pos === 0 || (bpb % 2 === 0 && pos === bpb / 2);
+    if (ch.confident && onLine(ch.pos) && !onLine(g.mode)) { item.reason = "would leave the bar or half-bar line of a confident bar phase"; continue; }
+    if (k < 1 || Math.abs(chords[k - 1].e - chords[k].s) > 1e-6 || Math.abs(chords[k - 1].e - A.e) > 1e-6) { item.reason = "chord boundary not contiguous"; continue; }
+    if (chords[k].t) { item.reason = "already moved once"; continue; }
+    if (chords[k].c || chords[k - 1].c) { item.reason = "next to a corrected chord"; continue; }
+    const lenA = ch.lenA + item.shift, lenB = ch.lenB - item.shift;
+    if (lenA < W.minBeats || lenB < W.minBeats) { item.reason = "a hold would drop below one beat"; continue; }
+    const dev = (a, b) => [Math.abs(a - g.typA), Math.abs(b - g.typB)];
+    const [a0, b0] = dev(ch.lenA, ch.lenB), [a1, b1] = dev(lenA, lenB);
+    if (!(a1 <= a0 && b1 <= b0 && a1 + b1 < a0 + b0 && a1 + b1 <= W.maxDevAfter + 1e-9)) {
+      item.reason = `hold lengths ${ch.lenA}+${ch.lenB} would become ${lenA}+${lenB}, not the repeats' ${g.typA}+${g.typB}`; continue;
+    }
+    // Placement: the majority's offset from its beat, at most one beat from where the change was, still rounding to the target.
+    const target = B.base + item.shift;
+    let p = target + Math.max(-W.maxFrac, Math.min(W.maxFrac, g.frac));
+    p = Math.max(B.sb - 1, Math.min(B.sb + 1, p));
+    if (!(target >= 0 && target <= beats.length - 1 && p >= 0 && p <= beats.length - 1)) { item.reason = "target beat outside the beat grid"; continue; }
+    const s = r3(secondsAtPosition(beats, p)), q = Core.gridPosition(beats, s);
+    const shrinking = item.shift < 0 ? [chords[k - 1].s, s] : [s, chords[k].e];
+    const shrunk = Core.gridPosition(beats, shrinking[1]) - Core.gridPosition(beats, shrinking[0]);
+    if (!(shrunk >= W.minBeats - 1e-9)) { item.reason = "the shortened chord would drop below one beat"; continue; }
+    if (q === null || Math.round(q) !== target || Math.abs(q - B.sb) > 1 + 1e-6 || !(s > chords[k - 1].s && s < chords[k].e)) { item.reason = "no clean target time"; continue; }
+    item.newStart = s;
+  }
+  return out;
+}
+
+/**
+ * Apply the timing fix to song.chords (a new array; moved chords are new objects with t:1). Returns the moves
+ * ({at, was, from, to, shift, agree}, in time order) and the changes still disagreeing with their group, with reasons.
+ * opts.enabled false (catalogue timing_fix_off) or fewer than 3 beats per bar (direction ambiguous) moves nothing.
+ */
+function applyTimingFix(song, opts = {}) {
+  const W = { ...TIMING_FIX, ...(opts.settings || {}) };
+  const moves = [];
+  let passes = 0, settled = true;
+  if (opts.enabled !== false && song.rhythm.beats_per_bar >= 3 && song.beats.length >= 2) {
+    song.chords = song.chords.map(ch => ({ ...ch }));
+    for (settled = false; passes < W.maxPasses; passes++) {
+      const touched = new Set(), pass = [];
+      for (const item of timingCandidates(song, { settings: opts.settings })) {
+        const i = item.change.i; // hold index: a neighbouring boundary changes this one's hold lengths, so it waits a pass
+        if (item.newStart === undefined || touched.has(i - 1) || touched.has(i + 1)) continue;
+        touched.add(i);
+        pass.push({ k: item.change.native, item });
+      }
+      if (!pass.length) { settled = true; break; }
+      for (const { k, item } of pass) {
+        const was = song.chords[k].s;
+        song.chords[k - 1] = { ...song.chords[k - 1], e: item.newStart };
+        song.chords[k] = { ...song.chords[k], s: item.newStart, t: 1 };
+        moves.push({ at: item.newStart, was, from: item.from, to: item.to, shift: item.shift, agree: `${item.group.agree}/${item.group.members.length}` });
+      }
+    }
+  }
+  moves.sort((a, b) => a.at - b.at);
+  return { moves, left: timingLeftAlone(song, { settings: opts.settings, enabled: opts.enabled }), passes, settled };
+}
+
+// The changes that still disagree with a repeated group, with the reason each was left alone. opts.anchors: judge them
+// under a reference phase (the build report uses the unfixed chart's, matching its consistency column).
+function timingLeftAlone(song, opts = {}) {
+  if (!(song.rhythm.beats_per_bar >= 3)) return [];
+  return timingCandidates(song, opts).map(item => ({ at: item.at, from: item.from, to: item.to, shift: item.shift,
+    agree: `${item.group.agree}/${item.group.members.length}`, reason: opts.enabled === false ? "timing fix off for this song" : item.reason ||
+      (opts.anchors ? "one beat off under the unfixed chart's bar phase, not under the phase re-fitted after the other moves" : "would move next pass") }));
+}
+
+// The one chart.corrections entry that summarises the moves (none when nothing moved).
+function timingCorrection(moves) {
+  if (!moves.length) return null;
+  const n = moves.length;
+  return { id: "auto-timing", kind: "timing", count: n,
+    start: Math.min(...moves.map(m => Math.min(m.at, m.was))), end: Math.max(...moves.map(m => Math.max(m.at, m.was))),
+    note: `${n} chord change${n === 1 ? "" : "s"} moved by one beat to match the other repeats of the same sequence (automatic; raw chart unchanged)`,
+    moves: moves.map(({ at, was, from, to, shift, agree }) => ({ at, was, from, to, shift, agree })) };
 }
 
 // ---------------------------------------------------------------- difficulty (docs/STRUMALONG_APP.md, "Difficulty levels")
@@ -489,7 +679,8 @@ function videoEntry(v) {
 // ---------------------------------------------------------------- song builder
 
 /**
- * @param ctx { c, packId, packDir, hashes, rhythmCase, correctionSet, meta, alternateMeta }
+ * @param ctx { c, packId, packDir, hashes, rhythmCase, correctionSet, meta, alternateMeta, timingFix }
+ *   timingFix false: the catalogue's timing_fix_off lists this recording (no repetition-consistency moves).
  *   meta: { title, artist, capo, capo_source, setup_note, strumming|null, learning, needs_syncopation?, playable_embed?, embed_note? }
  *   strumming null means "no authored patterns": the level's default patterns are filled in by finishSong.
  */
@@ -567,10 +758,25 @@ function buildSong(ctx) {
       learning_sha256: hashes.learning, ...(hashes.additions ? { additions_sha256: hashes.additions } : {}), catalogue_sha256: hashes.catalogue },
   };
 
+  // repetition-consistency timing fix (display-level), measured against the same anchored bars without it
+  const raw = { ...song, chords: song.chords };
+  const timing = applyTimingFix(song, { enabled: ctx.timingFix !== false });
+  const timingEntry = timingCorrection(timing.moves);
+  if (timingEntry) corrections.push(timingEntry);
+  if (!timing.settled) warn(`${c.id}: timing fix still moving after ${timing.passes} passes`);
+  const unfixed = { ...raw, chords: raw.chords.map(ch => ({ ...ch })) };
+  const reference = { anchors: barAnchors(unfixed).anchors };
+  const timingBefore = { consistency: timingConsistency(unfixed, reference) };
+  applyBarAnchors(unfixed);
+  timingBefore.bars = barMetrics(unfixed);
+  const timingAfter = { consistency: timingConsistency(song, reference),
+    left: timingLeftAlone(song, { ...reference, enabled: ctx.timingFix !== false }) };
+
   // bar anchors on the chords, then the bar summary the details panel reads
   const before = barMetrics(song);
   const bars = applyBarAnchors(song);
   const after = barMetrics(song);
+  timingAfter.bars = after;
   rhythm.bar_model = "anchored-1";
   rhythm.bar_confident_pct = r1(100 - after.approx_pct);
   const difficulty = difficultyOf(song, { needsSyncopation: meta.needs_syncopation === true });
@@ -580,13 +786,14 @@ function buildSong(ctx) {
     id: c.id, title: meta.title, artist: meta.artist, group: null, order: null, level: null, level_label: null,
     video_id: analysed.video_id, duration_seconds: r2(c.recording.duration_seconds),
     bpm: Math.round(rhythmCase.pulse_bpm), meter_label: rhythmCase.meter_label, capo: meta.capo,
-    core_shapes: coreShapes(chords, meta.capo),
+    core_shapes: coreShapes(song.chords, meta.capo),
     playable_embed: !embedBlocked,
     embed_note: !embedBlocked ? "" : (meta.embed_note ||
       (alt && alt.timing_checked ? "This upload can't play in the app; using the official video (start offset measured)."
         : "This upload can't play in the app; using the official video with unchecked timing.")),
   };
-  return { song, card, difficulty, packId, stats: { chords: chords.length, beats: beats.length, vote, confident, before, after, runs: bars.runs } };
+  return { song, card, difficulty, packId, stats: { chords: chords.length, beats: beats.length, vote, confident, before, after, runs: bars.runs,
+    timing: { ...timing, enabled: ctx.timingFix !== false, before: timingBefore, after: timingAfter } } };
 }
 
 // Level (with any override), default patterns for unauthored songs, and the grouping fields.
@@ -660,7 +867,7 @@ function loadPrepared(pack, cfg, built) {
     const capo = c.practice && Number.isInteger(c.practice.capo) ? c.practice.capo : 0;
     built.push(buildSong({
       c, packId: manifest.pack_id, packDir: dir, hashes, rhythmCase: rhythmById.get(c.id), correctionSet: prac.display_corrections,
-      alternateMeta: null,
+      alternateMeta: null, timingFix: !cfg.timingOff.has(c.id),
       meta: { title: titles[0], artist: titles[1], capo, capo_source: capo > 0 ? "catalogue" : "none",
         setup_note: entry ? entry.setup_note : "Standard tuning (EADGBE). Capo and exact recording pitch are unchecked.",
         strumming: { note: prac.note, beats_description: prac.beats_description, source: "authored",
@@ -747,6 +954,7 @@ function loadAdditions(pack, cfg, built) {
       } : null;
       built.push(buildSong({
         c, packId, packDir: dir, hashes, rhythmCase: rhythmById.get(c.id), correctionSet: undefined, alternateMeta: meta,
+        timingFix: !cfg.timingOff.has(c.id),
         meta: { title: entry.title, artist: entry.artist,
           // "suggested" with capo 0 means no capo is suggested: the song contract is capo_source "none" exactly at capo 0.
           capo: entry.capo, capo_source: entry.capo > 0 ? entry.capo_source : "none", setup_note: entry.setup_note, strumming,
@@ -773,6 +981,7 @@ function buildCatalogue(cfg) {
   const ids = new Set();
   for (const b of built) { if (ids.has(b.song.id)) throw new Error(`duplicate song id ${b.song.id}`); ids.add(b.song.id); }
   for (const id of cfg.overrides.keys()) if (!ids.has(id)) warn(`level override for ${id}, which is not in the catalogue`);
+  for (const id of cfg.timingOff.keys()) if (!ids.has(id)) warn(`timing_fix_off for ${id}, which is not in the catalogue`);
   for (const b of built) finishSong(b, cfg.overrides.get(b.song.id));
   const ordered = [];
   for (const { level } of LEVELS) {
@@ -799,6 +1008,30 @@ function report(built) {
       `${pad(`${b.split}→${a.split}`, 9)} ${pad(`${b.restarts}→${a.restarts}`, 9)} ${pad(`${b.approx_pct}→${a.approx_pct}`, 10)}  ` +
       s.runs.map(r => `${r.mode === "hold" ? "H" : r.state}${r.confident ? "" : "?"}×${r.to - r.from}`).join(" "));
   }
+  console.log("\nTiming fix (repetition consistency; anchored bars without -> with the fix). consistent = % of changes in repeated");
+  console.log("sequences (3+ repeats) at their group's usual bar position:");
+  console.log(`${"song".padEnd(40)} ${"moved".padStart(5)} ${"consistent %".padStart(13)} ${"weird".padStart(7)} ${"split".padStart(7)} ${"on bar+half".padStart(12)}  left alone`);
+  let movedTotal = 0;
+  for (const { song, stats: { timing: t } } of built) {
+    const b = t.before, a = t.after;
+    movedTotal += t.moves.length;
+    console.log(`${song.title.slice(0, 40).padEnd(40)} ${pad(t.enabled ? t.moves.length : "off", 5)} ${pad(`${b.consistency.pct}→${a.consistency.pct}`, 13)} ` +
+      `${pad(`${b.bars.weird}→${a.bars.weird}`, 7)} ${pad(`${b.bars.split}→${a.bars.split}`, 7)} ${pad(`${b.bars.on_bar_or_half}→${a.bars.on_bar_or_half}`, 12)}  ${a.left.length}`);
+  }
+  console.log(`${movedTotal} chord changes moved in total. Moves (shape labels at the default view; -1 = one beat earlier):`);
+  for (const { song, stats: { timing: t } } of built) {
+    if (!t.moves.length) continue;
+    console.log(`  ${song.title}: ` + t.moves.map(m => `${Core.formatTime(m.at)} ${m.from}→${m.to} ${m.shift < 0 ? "-1" : "+1"}`).join(", "));
+  }
+  const detail = (process.argv.find(arg => arg.startsWith("--timing-detail=")) || "").slice("--timing-detail=".length);
+  for (const { song, stats: { timing: t } } of built) {
+    if (!detail || !song.id.includes(detail)) continue;
+    console.log(`\nTiming detail: ${song.title} (${song.id})`);
+    for (const m of t.moves) console.log(`  moved ${Core.formatTime(m.at)} (${m.at.toFixed(3)} s, was ${m.was.toFixed(3)} s) ${m.from}→${m.to} ` +
+      `one beat ${m.shift < 0 ? "earlier" : "later"}; ${m.agree} repeats agree`);
+    for (const m of t.after.left) console.log(`  left  ${Core.formatTime(m.at)} (${m.at.toFixed(3)} s) ${m.from}→${m.to}; ${m.agree} repeats agree: ${m.reason}`);
+  }
+
   console.log("\nLevels:");
   for (const { song } of built) {
     const d = song.difficulty;
@@ -842,6 +1075,7 @@ function main() {
 }
 
 module.exports = { barPhaseVote, barPhaseConfident, coreShapes, gridHolds, barAnchors, applyBarAnchors, barMetrics, BAR_COST,
+  TIMING_FIX, timingGroups, timingConsistency, timingCandidates, applyTimingFix, timingLeftAlone, timingCorrection,
   shapeTier, difficultyOf, applyLevelOverride, defaultPatterns, readCatalogue, finishSong, LEVELS };
 
 if (require.main === module) main();

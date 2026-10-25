@@ -168,12 +168,33 @@ function main() {
       assert.match(song.chart.sha256, SHA256);
       assert.equal(song.chart.status, "provisional");
       assert.ok(Array.isArray(song.chart.corrections));
-      for (const k of song.chart.corrections) {
+      const labelFixes = song.chart.corrections.filter(k => k.kind !== "timing");
+      for (const k of labelFixes) {
         assert.ok(str(k.id) && str(k.from) && str(k.to) && str(k.note));
         assert.ok(isNum(k.start) && isNum(k.end) && k.start >= 0 && k.end > k.start && k.end <= duration + 1);
         assert.ok(song.chords.some(e => e.c === 1 && e.s >= k.start - 1e-9 && e.e <= k.end + 1e-9 && e.l === k.to), `correction ${k.id} has no marked chord event`);
       }
-      assert.equal(song.chords.filter(e => e.c === 1).length >= song.chart.corrections.length, true);
+      assert.equal(song.chords.filter(e => e.c === 1).length >= labelFixes.length, true);
+    });
+    check(`${id}: timing fix entry`, () => {
+      // docs/STRUMALONG_APP.md "Timing fix": one summary entry listing every moved change; each move flags its chord t:1.
+      const entries = song.chart.corrections.filter(k => k.kind === "timing");
+      const flagged = song.chords.filter(e => e.t === 1);
+      assert.ok(entries.length <= 1, "at most one timing entry");
+      if (!entries.length) { assert.equal(flagged.length, 0, "t:1 chords without a timing entry"); return; }
+      const k = entries[0];
+      assert.equal(k.id, "auto-timing");
+      assert.ok(Number.isInteger(k.count) && k.count > 0 && Array.isArray(k.moves) && k.moves.length === k.count, "count matches moves");
+      assert.equal(flagged.length, k.count, "one t:1 chord per move");
+      assert.ok(str(k.note) && k.note.startsWith(`${k.count} chord change`) && /raw chart unchanged/.test(k.note));
+      assert.ok(isNum(k.start) && isNum(k.end) && k.start >= 0 && k.end >= k.start && k.end <= duration + 1);
+      for (const m of k.moves) {
+        assert.ok(isNum(m.at) && isNum(m.was) && decimals3(m.at) && m.at !== m.was && m.at >= k.start && m.at <= k.end, "move times");
+        assert.ok(str(m.from) && str(m.to) && m.from !== m.to && (m.shift === 1 || m.shift === -1) && /^\d+\/\d+$/.test(m.agree), "move fields");
+        const i = song.chords.findIndex(e => e.s === m.at);
+        assert.ok(i > 0 && song.chords[i].t === 1 && song.chords[i - 1].e === m.at, `move at ${m.at} has no t:1 chord with a contiguous predecessor`);
+        assert.equal(Math.sign(m.at - m.was), m.shift, "the move goes the way its shift says");
+      }
     });
     check(`${id}: capo and setup`, () => {
       assert.ok(Number.isInteger(song.capo) && song.capo >= 0 && song.capo <= 12);
@@ -214,9 +235,10 @@ function main() {
         assert.ok(e.e > e.s, `chord ${i} has no length`);
         assert.ok(e.s >= previousEnd - 1e-9, `chord ${i} overlaps the previous one`);
         assert.ok(e.c === undefined || e.c === 1, `chord ${i} c flag`);
+        assert.ok(e.t === undefined || e.t === 1, `chord ${i} t flag (timing fix)`);
         assert.ok(e.b === undefined || (Number.isInteger(e.b) && e.b >= 0 && e.b < r.beats_per_bar), `chord ${i} bar anchor b`);
         assert.ok(e.a === undefined || (e.a === 1 && e.b !== undefined), `chord ${i} approx flag a`);
-        assert.deepEqual(Object.keys(e).filter(k => !["s", "e", "l", "c", "b", "a"].includes(k)), [], `chord ${i} unexpected keys`);
+        assert.deepEqual(Object.keys(e).filter(k => !["s", "e", "l", "c", "t", "b", "a"].includes(k)), [], `chord ${i} unexpected keys`);
         previousEnd = e.e;
       });
       assert.ok(song.chords[0].s <= 0.001 || song.chords[0].s < song.beats[0], "chart should start at the beginning of the recording");

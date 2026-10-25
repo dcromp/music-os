@@ -839,7 +839,12 @@
     add("Beats", `Estimated beat grid: ${bpm}${esc(rhythm.meter_label || "meter unknown")}. Bars are approximate; downbeats are not verified.${rhythm.beats_per_bar_assumed ? ` ${esc(rhythm.beats_per_bar || 4)} beats per bar assumed.` : ""}${barNote}`);
     const corrections = chart.corrections && Array.isArray(chart.corrections) ? chart.corrections : [];
     if (corrections.length) {
-      add("Corrections", `<ul>${corrections.map(c => `<li>${Core.formatTime(c.start)}–${Core.formatTime(c.end)}: ${esc(c.from)} → ${esc(c.to)}${c.note ? ` (${esc(c.note)})` : ""}</li>`).join("")}</ul>`);
+      // A "timing" entry summarises the exporter's repetition-consistency moves (docs/STRUMALONG_APP.md, "Timing fix").
+      const item = c => c.kind === "timing"
+        ? `<li>${esc(c.note || "Some chord changes moved by one beat")}${Array.isArray(c.moves) && c.moves.length
+          ? `: ${c.moves.map(m => `${Core.formatTime(m.at)} ${esc(m.from)} → ${esc(m.to)} ${m.shift < 0 ? "earlier" : "later"}`).join(", ")}` : ""}.</li>`
+        : `<li>${Core.formatTime(c.start)}–${Core.formatTime(c.end)}: ${esc(c.from)} → ${esc(c.to)}${c.note ? ` (${esc(c.note)})` : ""}</li>`;
+      add("Corrections", `<ul>${corrections.map(item).join("")}</ul>`);
     }
     if (song.strumming && song.strumming.note) add("Strumming", esc(song.strumming.note));
     const v = S.video;

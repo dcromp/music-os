@@ -8,7 +8,7 @@
 "level":1,
 "recording":{"id":"troggs-wild-thing-youtube-20261011","duration_seconds":155.352,"audio_sha256":"3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf"},
 "videos":[{"video_id":"bLJkrOYHNw8","uploader":"The Troggs - Topic","kind":"analysed","duration_seconds":155,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],
-"chart":{"source":"CREMA automatic draft","sha256":"13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81","status":"provisional","corrections":[{"id":"wild-thing-a-near-25s-20261017","start":23.777,"end":26.099,"from":"E","to":"A","note":"Founder play-along feedback in chat, 17 October 2026; provisional relabel, boundaries unverified."}]},
+"chart":{"source":"CREMA automatic draft","sha256":"13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81","status":"provisional","corrections":[{"id":"wild-thing-a-near-25s-20261017","start":23.777,"end":26.099,"from":"E","to":"A","note":"Founder play-along feedback in chat, 17 October 2026; provisional relabel, boundaries unverified."},{"id":"auto-timing","kind":"timing","count":1,"start":13.461,"end":13.653,"note":"1 chord change moved by one beat to match the other repeats of the same sequence (automatic; raw chart unchanged)","moves":[{"at":13.461,"was":13.653,"from":"A","to":"D","shift":-1,"agree":"11/12"}]}]},
 "capo":0,
 "capo_source":"none",
 "setup_note":"Teacher setup: E standard (EADGBE). The exact recording's physical tuning/capo remains unchecked.",
@@ -24,8 +24,8 @@
 {"s":8.824,"e":9.66,"l":"D","b":0},
 {"s":9.66,"e":11.331,"l":"E","b":0},
 {"s":11.331,"e":11.981,"l":"D","b":0},
-{"s":11.981,"e":13.653,"l":"A","b":0},
-{"s":13.653,"e":14.303,"l":"D","b":0},
+{"s":11.981,"e":13.461,"l":"A","b":0},
+{"s":13.461,"e":14.303,"l":"D","t":1,"b":0},
 {"s":14.303,"e":15.79,"l":"E","b":0},
 {"s":15.79,"e":16.625,"l":"D","b":0},
 {"s":16.625,"e":18.204,"l":"A","b":0},
@@ -99,5 +99,5 @@
 ],
 "strumming":{"note":"A starting rhythm exercise. The recording may use a different pattern or picking.","beats_description":"Count four beats; & is halfway between beats","source":"authored","patterns":[{"id":"steady-down","name":"Start: steady downstrokes","counts":["1","2","3","4"],"strokes":["D","D","D","D"],"description":"Strum down on each count. Keep the motion steady and change shape when the chord cue changes."},{"id":"down-up","name":"Next: down and up","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","U","D","U","D","U","D","U"],"description":"Add an upstroke between counts. Begin slowly; keep moving through chord changes."}]},
 "learning":{"skill_focus":"Keep open-chord changes steady; add the contrasting figure later.","prerequisites":"A/D/E changes","sources":[{"title":"Andy Guitar: Wild Thing","url":"https://www.andyguitar.co.uk/videos/electric-guitar-day-7-wild-thing"},{"title":"Carl Brown: Wild Thing","url":"https://guitarlessons365.com/wild-thing-guitar-lesson-the-troggs/"}]},
-"provenance":{"pack":"automatic-first-ten-v1","manifest_sha256":"556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671","rhythm_sha256":"09c5c68dc1dc44f8380871744c59d00043e1c6ea42650f3911353f84a78962f7","practice_sha256":"da5c40283594ac871243b0e56e651b887b5fbcddcb9285e61acf95839e64f181","learning_sha256":"3c6b61546aa89b32b17e3bbe9c048c9c3c5ea492ac24d8affc8496e409e280f4","catalogue_sha256":"27613ecdc23153bc099a3182664b9a91eaf141c80e355c3c40a5738b102c92a8"}
+"provenance":{"pack":"automatic-first-ten-v1","manifest_sha256":"556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671","rhythm_sha256":"09c5c68dc1dc44f8380871744c59d00043e1c6ea42650f3911353f84a78962f7","practice_sha256":"da5c40283594ac871243b0e56e651b887b5fbcddcb9285e61acf95839e64f181","learning_sha256":"3c6b61546aa89b32b17e3bbe9c048c9c3c5ea492ac24d8affc8496e409e280f4","catalogue_sha256":"fa60f8598d4348fa496f1094bb85771f570f49ad1f1a629ef3dd230d1192576c"}
 }

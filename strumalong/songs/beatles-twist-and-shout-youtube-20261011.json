@@ -8,7 +8,7 @@
 "level":3,
 "recording":{"id":"beatles-twist-and-shout-youtube-20261011","duration_seconds":155.236,"audio_sha256":"4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c"},
 "videos":[{"video_id":"2RicaUqd9Hg","uploader":"The Beatles","kind":"analysed","duration_seconds":155,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],
-"chart":{"source":"CREMA automatic draft","sha256":"09f64db9a6563e2256c528576bd9776b13c84128ce3b982810b8dfbe6145bb59","status":"provisional","corrections":[]},
+"chart":{"source":"CREMA automatic draft","sha256":"09f64db9a6563e2256c528576bd9776b13c84128ce3b982810b8dfbe6145bb59","status":"provisional","corrections":[{"id":"auto-timing","kind":"timing","count":2,"start":55.356,"end":59.374,"note":"2 chord changes moved by one beat to match the other repeats of the same sequence (automatic; raw chart unchanged)","moves":[{"at":55.542,"was":55.356,"from":"G","to":"A","shift":1,"agree":"29/33"},{"at":59.374,"was":59.257,"from":"G","to":"A","shift":1,"agree":"29/33"}]}]},
 "capo":0,
 "capo_source":"none",
 "setup_note":"Teacher setup: E standard (EADGBE). The exact recording's physical tuning/capo remains unchecked.",
@@ -60,11 +60,11 @@
 {"s":50.898,"e":51.92,"l":"G","b":1},
 {"s":51.92,"e":53.592,"l":"A","b":1},
 {"s":53.592,"e":54.613,"l":"D","b":1},
-{"s":54.613,"e":55.356,"l":"G","b":1},
-{"s":55.356,"e":57.493,"l":"A","b":1},
+{"s":54.613,"e":55.542,"l":"G","b":1},
+{"s":55.542,"e":57.493,"l":"A","t":1,"b":1},
 {"s":57.493,"e":58.421,"l":"D","b":1},
-{"s":58.421,"e":59.257,"l":"G","b":1},
-{"s":59.257,"e":61.301,"l":"A","b":1},
+{"s":58.421,"e":59.374,"l":"G","b":1},
+{"s":59.374,"e":61.301,"l":"A","t":1,"b":1},
 {"s":61.301,"e":62.322,"l":"D","b":1},
 {"s":62.322,"e":63.251,"l":"G","b":1},
 {"s":63.251,"e":65.109,"l":"A","b":1},
@@ -121,5 +121,5 @@
 ],
 "strumming":{"note":"A starting rhythm exercise. The recording may use a different pattern or picking.","beats_description":"Count four beats; & is halfway between beats","source":"authored","patterns":[{"id":"steady-down","name":"Start: steady downstrokes","counts":["1","2","3","4"],"strokes":["D","D","D","D"],"description":"Strum down on each count. Keep the motion steady and change shape when the chord cue changes."},{"id":"down-up","name":"Next: down and up","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","U","D","U","D","U","D","U"],"description":"Add an upstroke between counts. Begin slowly; keep moving through chord changes."}]},
 "learning":{"skill_focus":"Keep D/G/A changes moving at a quicker feel; the all-down build-up is later work.","prerequisites":"D/G/A changes at a quicker feel","sources":[{"title":"Andy Guitar: Twist And Shout","url":"https://www.andyguitar.co.uk/videos/beatles-guitar-day-02-twist-and-shout"},{"title":"Jon MacLennan: Twist And Shout","url":"https://www.jonmaclennan.com/blog/twist-and-shout-chords"}]},
-"provenance":{"pack":"automatic-first-ten-v1","manifest_sha256":"556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671","rhythm_sha256":"09c5c68dc1dc44f8380871744c59d00043e1c6ea42650f3911353f84a78962f7","practice_sha256":"da5c40283594ac871243b0e56e651b887b5fbcddcb9285e61acf95839e64f181","learning_sha256":"3c6b61546aa89b32b17e3bbe9c048c9c3c5ea492ac24d8affc8496e409e280f4","catalogue_sha256":"27613ecdc23153bc099a3182664b9a91eaf141c80e355c3c40a5738b102c92a8"}
+"provenance":{"pack":"automatic-first-ten-v1","manifest_sha256":"556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671","rhythm_sha256":"09c5c68dc1dc44f8380871744c59d00043e1c6ea42650f3911353f84a78962f7","practice_sha256":"da5c40283594ac871243b0e56e651b887b5fbcddcb9285e61acf95839e64f181","learning_sha256":"3c6b61546aa89b32b17e3bbe9c048c9c3c5ea492ac24d8affc8496e409e280f4","catalogue_sha256":"fa60f8598d4348fa496f1094bb85771f570f49ad1f1a629ef3dd230d1192576c"}
 }

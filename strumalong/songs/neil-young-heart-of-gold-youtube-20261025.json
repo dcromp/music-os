@@ -4,11 +4,11 @@
 "title":"Heart of Gold",
 "artist":"Neil Young",
 "group":"level-2",
-"order":11,
+"order":10,
 "level":2,
 "recording":{"id":"neil-young-heart-of-gold-youtube-20261025","duration_seconds":187.024,"audio_sha256":"b9b3e08e7804846bda06e2dcc80d870d6916316011651de12d838fdb40722d4d"},
 "videos":[{"video_id":"X3IA6pIVank","uploader":"neilyoungchannel","kind":"analysed","duration_seconds":187,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],
-"chart":{"source":"CREMA automatic draft","sha256":"514b81f4fd52035b9ebea06828a64df80cce8702eee6ff1fcaee6812b5324f18","status":"provisional","corrections":[]},
+"chart":{"source":"CREMA automatic draft","sha256":"514b81f4fd52035b9ebea06828a64df80cce8702eee6ff1fcaee6812b5324f18","status":"provisional","corrections":[{"id":"auto-timing","kind":"timing","count":1,"start":77.276,"end":77.867,"note":"1 chord change moved by one beat to match the other repeats of the same sequence (automatic; raw chart unchanged)","moves":[{"at":77.867,"was":77.276,"from":"D","to":"G","shift":1,"agree":"14/15"}]}]},
 "capo":0,
 "capo_source":"none",
 "setup_note":"Standard tuning (EADGBE). No capo suggested: open Em, C, D and G shapes (an Em7 shape is a common variation).",
@@ -56,8 +56,8 @@
 {"s":71.889,"e":73.654,"l":"G","b":0},
 {"s":73.654,"e":75.047,"l":"Em","b":0},
 {"s":75.047,"e":76.44,"l":"C","b":0},
-{"s":76.44,"e":77.276,"l":"D","b":0},
-{"s":77.276,"e":79.226,"l":"G","b":0},
+{"s":76.44,"e":77.867,"l":"D","b":0},
+{"s":77.867,"e":79.226,"l":"G","t":1,"b":0},
 {"s":79.226,"e":80.713,"l":"Em","b":0},
 {"s":80.713,"e":82.106,"l":"C","b":0},
 {"s":82.106,"e":83.499,"l":"D","b":0},
@@ -111,5 +111,5 @@
 ],
 "strumming":{"note":"Default practice patterns for Level 2 songs; not checked against the recording.","source":"level-default","patterns":[{"id":"down-up","name":"Start: down-up eighths","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","U","D","U","D","U","D","U"],"description":"Alternate down and up in steady eighth notes: down on the numbers, up on the \"&\". Keep the hand moving through chord changes."},{"id":"folk-strum","name":"Next: D — D U — U D U","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","—","D","U","—","U","D","U"],"description":"Keep the down-up pendulum going; miss the strings on the \"&\" of 1 and on 3. A common pop and rock strum."}]},
 "learning":{"skill_focus":"Four open shapes changing every two beats in a relaxed folk strum. Harmonica breaks appear, but the strummed guitar is the main part. Practise small, quick changes.","prerequisites":"","sources":[{"title":"Published arrangement tempo marking: Heart of Gold","url":"https://www.musicnotes.com/sheetmusic/neil-young/heart-of-gold/MN0046673"}]},
-"provenance":{"pack":"strumalong-additions-v2","manifest_sha256":"55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd","rhythm_sha256":"0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459","practice_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","learning_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","additions_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","catalogue_sha256":"27613ecdc23153bc099a3182664b9a91eaf141c80e355c3c40a5738b102c92a8"}
+"provenance":{"pack":"strumalong-additions-v2","manifest_sha256":"55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd","rhythm_sha256":"0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459","practice_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","learning_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","additions_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","catalogue_sha256":"fa60f8598d4348fa496f1094bb85771f570f49ad1f1a629ef3dd230d1192576c"}
 }
