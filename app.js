@@ -8,6 +8,7 @@
   const RepeatTiming = window.StrumRepeatTiming;
   const Session = window.StrumSession;
   const Library = window.StrumLibrary;
+  const CountIn = window.StrumCountIn; // optional: without it, Play just plays
   const app = document.getElementById("app");
   if (!app) return;
   if (!Core) { app.innerHTML = '<p class="msg error">Strum Along could not start: lib/core.js did not load. Reload to try again.</p><p><a class="btn" href="">Reload</a></p>'; return; }
@@ -328,6 +329,7 @@
             <div class="cue-foot"><span id="cue-count" class="cue-count"></span><span id="cue-hint" class="cue-hint"></span><button type="button" id="btn-play-cue" class="btn btn-play cue-play" data-act="play" disabled aria-label="Play">▶ Play</button></div>
           </div>
           <div id="cue-cover" class="cue-cover" hidden></div>
+          <div id="count-big" class="count-big" role="status" aria-live="assertive" hidden></div>
         </section>
         <section id="strum-panel" class="panel strum-panel" aria-label="Suggested practice pattern"></section>
         <section id="diagram-panel" class="panel diagram-panel" aria-label="Chord diagrams"${settings().diagrams ? "" : " hidden"}>
@@ -344,6 +346,7 @@
           <div class="row">
             <label id="speed-wrap" class="speed" hidden>Speed <select id="sel-speed" aria-label="Playback speed"></select></label>
             <button type="button" id="btn-hide" class="btn" data-act="hide" aria-pressed="false">Hide cues</button>
+            ${CountIn ? `<button type="button" id="btn-countin" class="btn" data-act="countin" aria-pressed="false">Count-in off</button>` : ""}
           </div>
           <div class="row sync" role="group" aria-label="Sync nudge">
             <span class="row-label">Sync</span>
@@ -449,6 +452,8 @@
 
   function onState(code) {
     S.session.stateChange(code);
+    // Pausing or ending the video after the count started it cancels the count.
+    if (S.count && (code === 0 || (code === 2 && S.count.sawPlaying))) cancelCountIn();
     if (code === 1) {
       window.clearTimeout(S.playTimer);
       setMsg("autoplay", null);
@@ -526,7 +531,7 @@
 
   function togglePlay() {
     if (!S || !S.session.controllable) return;
-    if (S.session.playing) { S.session.pause(); return; }
+    if (S.session.playing || S.count) { cancelCountIn(); if (S.session.playing) S.session.pause(); return; }
     // Never start audio with the official player off screen (the lower Play button can be reached
     // after scrolling): bring the player, and the "Tap ▶ in the video" hint under it, into view first.
     const f = document.querySelector(".player-frame");
@@ -534,8 +539,12 @@
       const r = f.getBoundingClientRect();
       if (r.top < 0 || r.bottom > window.innerHeight) f.scrollIntoView({ block: "start", behavior: "smooth" });
     }
-    if (!S.session.play()) return;
+    const counting = settings().countIn && CountIn ? startCountIn() : null;
+    if (!counting && !S.session.play()) return;
     requestWakeLock();
+    if (!counting || counting.playCalled) armPlayHint(); // a pre-roll arms it when it starts the video
+  }
+  function armPlayHint() {
     const page = S;
     window.clearTimeout(S.playTimer);
     S.playTimer = window.setTimeout(() => {
@@ -544,8 +553,125 @@
   }
 
   function seekTo(seconds) {
-    if (!S || !S.session.seek(seconds)) return;
+    if (!S) return;
+    cancelCountIn();
+    if (!S.session.seek(seconds)) return;
     frame();
+  }
+
+  // ---------------------------------------------------------------- count-in (#60)
+  // One bar of numbered clicks at the song's tempo that leads into a bar start, then clicks fading out over
+  // the first bar of the music. Mid-song the video starts a bar early and the count follows its clock (run-up).
+  // When the count would start before the video's 0 (most songs, from the start), it runs on its own clock
+  // (pre-roll), starts the video during the count and follows the video's clock once it plays.
+  // lib/count-in.js plans the beats; this part owns the clock, the clicks and the big numbers.
+  const COUNT_LOOKAHEAD_S = 0.15, COUNT_LATE_S = 0.06;
+  let audio = null;
+  let startDelay = 0.35; // YouTube's start-up delay in seconds, learned from each pre-roll on this page
+  function unlockAudio() {
+    try {
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return;
+      if (!audio) audio = new Ctx();
+      if (audio.state === "suspended") audio.resume();
+      // iOS unlocks Web Audio only for a sound started inside the tap.
+      const src = audio.createBufferSource();
+      src.buffer = audio.createBuffer(1, 1, 22050);
+      src.connect(audio.destination);
+      src.start(0);
+    } catch (_) { audio = null; }
+  }
+  function scheduleClick(c, when, accent, gain) {
+    if (!audio) return;
+    try {
+      const osc = audio.createOscillator(), env = audio.createGain();
+      osc.frequency.value = accent ? 1600 : 1000;
+      env.gain.setValueAtTime(0.0001, when);
+      env.gain.exponentialRampToValueAtTime(0.6 * gain, when + 0.003);
+      env.gain.exponentialRampToValueAtTime(0.0001, when + 0.07);
+      osc.connect(env);
+      env.connect(audio.destination);
+      osc.start(when);
+      osc.stop(when + 0.09);
+      c.nodes.push(osc);
+    } catch (_) { /* no click; the numbers still show */ }
+  }
+  function showCount(n) {
+    const el = $("count-big");
+    if (!el) return;
+    el.textContent = n ? String(n) : "";
+    el.hidden = !n;
+  }
+  function startCountIn() {
+    const { t, pt } = S.session.tick();
+    const plan = CountIn.plan(S.song, t);
+    if (!plan) return null;
+    cancelCountIn();
+    unlockAudio();
+    const shift = t - pt; // chart time minus player time (video offset, sync nudge, audio delay)
+    const c = { plan, shift, rate: S.rate || 1, next: 0, raf: 0, timers: [], nodes: [], t0: performance.now(),
+      preroll: plan.startAt - shift < 0, playCalled: false, sawPlaying: false };
+    S.count = c;
+    if (c.preroll) {
+      if (pt > 0.05) S.session.seek(0);
+    } else {
+      if (!S.session.seek(plan.startAt - shift) || !S.session.play()) { S.count = null; return null; }
+      c.playCalled = true;
+    }
+    updateTransport();
+    frame();
+    c.raf = window.requestAnimationFrame(countLoop);
+    return c;
+  }
+  // Chart time for the count: the video's clock once it plays; before that, a pre-roll's own clock.
+  function countClock(c) {
+    if (S.state === 1) {
+      const { t } = S.session.tick();
+      if (c.preroll && !c.sawPlaying) {
+        // Learn how late the video really started, for the next pre-roll on this page.
+        const own = c.plan.startAt + (performance.now() - c.t0) / 1000 * c.rate;
+        startDelay = Math.max(0, Math.min(1.5, startDelay + 0.5 * (own - t) / c.rate));
+      }
+      c.sawPlaying = true;
+      return t;
+    }
+    if (c.preroll && !c.sawPlaying) return c.plan.startAt + (performance.now() - c.t0) / 1000 * c.rate;
+    return null; // a run-up waiting for the video to start
+  }
+  function countLoop() {
+    const c = S && S.count;
+    if (!c) return;
+    c.raf = 0;
+    const t = countClock(c);
+    if (t !== null) {
+      if (c.preroll && !c.playCalled && t >= c.shift - startDelay * c.rate) {
+        c.playCalled = true;
+        if (!S.session.play()) { cancelCountIn(); return; }
+        armPlayHint();
+      }
+      const r = CountIn.due(c.plan.clicks, c.next, t, COUNT_LOOKAHEAD_S, COUNT_LATE_S);
+      c.next = r.next;
+      for (const { click, delay } of r.fire) {
+        const wait = delay / c.rate;
+        if (audio) scheduleClick(c, audio.currentTime + wait, click.n === 1, click.gain);
+        c.timers.push(window.setTimeout(() => showCount(click.n), wait * 1000));
+      }
+      if (r.done) {
+        c.timers.push(window.setTimeout(() => { if (S && S.count === c) { S.count = null; showCount(0); updateTransport(); } }, 400));
+        return;
+      }
+    }
+    c.raf = window.requestAnimationFrame(countLoop);
+  }
+  function cancelCountIn(page) {
+    const p = page || S;
+    const c = p && p.count;
+    if (!c) return;
+    p.count = null;
+    if (c.raf) window.cancelAnimationFrame(c.raf);
+    for (const id of c.timers) window.clearTimeout(id);
+    for (const osc of c.nodes) { try { osc.stop(0); } catch (_) { /* already stopped */ } }
+    if (p === S) { showCount(0); updateTransport(); frame(); }
   }
 
   function startLoop() { if (S && !S.raf) S.raf = window.requestAnimationFrame(loop); }
@@ -562,6 +688,7 @@
 
   function leaveSong() {
     if (!S) return;
+    cancelCountIn();
     const s = S;
     S = null;
     s.session.leave(); // saves the last-played position and destroys the player
@@ -591,6 +718,7 @@
   }
   function stateNote() {
     if (!S.video) return "";
+    if (S.count && S.state !== 1) return "Count-in";
     if (S.state === 3) return "Buffering…";
     if (S.state === 2) return "Paused";
     if (S.state === 0) return "Ended";
@@ -816,7 +944,7 @@
     if (!S) return;
     const enabled = S.session.controllable;
     for (const id of ["btn-play", "btn-play-cue", "btn-back", "btn-restart"]) { const b = $(id); if (b) b.disabled = !enabled; }
-    const playing = S.state === 1 || S.state === 3;
+    const playing = S.state === 1 || S.state === 3 || Boolean(S.count);
     for (const id of ["btn-play", "btn-play-cue"]) {
       const play = $(id);
       if (!play) continue;
@@ -828,7 +956,9 @@
   }
 
   function renderViewControls() {
-    const { quality, view, diagrams } = settings();
+    const { quality, view, diagrams, countIn } = settings();
+    const ci = $("btn-countin");
+    if (ci) { ci.setAttribute("aria-pressed", String(countIn)); ci.textContent = countIn ? "Count-in on" : "Count-in off"; }
     for (const b of app.querySelectorAll('[data-act="quality"]')) b.setAttribute("aria-pressed", String(b.dataset.v === quality));
     for (const b of app.querySelectorAll('[data-act="view"]')) b.setAttribute("aria-pressed", String(b.dataset.v === view));
     const d = $("btn-diagrams");
@@ -954,6 +1084,8 @@
         S.session.setQuality(target.dataset.v); renderViewControls(); frame(); break;
       case "view":
         S.session.setView(target.dataset.v); renderViewControls(); frame(); break;
+      case "countin":
+        store.setCountIn(!settings().countIn); renderViewControls(); break;
       case "diagrams":
         store.setDiagrams(!settings().diagrams); S.memo.diag = null; renderViewControls(); frame(); break;
       case "pattern":
@@ -996,6 +1128,7 @@
     if (!S) return;
     if (document.visibilityState === "hidden") {
       // No background play: pause when the page is hidden.
+      cancelCountIn();
       if (S.session.playing) S.session.pause();
       saveLast();
     } else if (S.state === 1) requestWakeLock();
