@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Band Mode Builder</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<!-- PROTOTYPE, throwaway (#71). Three UI shapes for Band mode's guided song builder, switched with #A / #B / #C
+     and the floating bar. Fake data and simple synthesized sound; nothing is saved. Never deploy. -->
+<style>
+/* Layout concept: a phone-first song builder in Strum Along's palette; the song (sections and their colours)
+   is the one constant across the three shapes, which disagree about where the guidance lives. */
+:root {
+  --bg: #f4f1e8; --text: #222b27; --muted: #5d6a62; --accent: #22543e; --on-accent: #ffffff;
+  --panel: #ffffff; --border: #d4d8cc; --soft: #e9eee6; --warn-bg: #fff0d2; --warn-text: #744900;
+  --verse: #3f7d5c; --pre: #b07a1e; --chorus: #2f5f9e; --bridge: #8a4f8f; --on-sec: #ffffff;
+  --bar-bg: #1f2622; --bar-text: #f4f1e8;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  --font-num: ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121815; --text: #e6ebe5; --muted: #a0ada5; --accent: #7cc4a0; --on-accent: #0c1310;
+  --panel: #1b2320; --border: #34413a; --soft: #25302a; --warn-bg: #3a2f13; --warn-text: #f1cf8a;
+  --verse: #5fae86; --pre: #d9a54a; --chorus: #6f9fe0; --bridge: #c08ac5; --on-sec: #0c1310;
+  --bar-bg: #e6ebe5; --bar-text: #121815; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #121815; --text: #e6ebe5; --muted: #a0ada5; --accent: #7cc4a0; --on-accent: #0c1310;
+  --panel: #1b2320; --border: #34413a; --soft: #25302a; --warn-bg: #3a2f13; --warn-text: #f1cf8a;
+  --verse: #5fae86; --pre: #d9a54a; --chorus: #6f9fe0; --bridge: #c08ac5; --on-sec: #0c1310;
+  --bar-bg: #e6ebe5; --bar-text: #121815; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.4;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 12px 96px; }
+#app { max-width: 980px; margin: 0 auto; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+h1 { font-size: 20px; } h2 { font-size: 17px; } h3 { font-size: 15px; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+.label { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn { min-height: 44px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--panel); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-weight: 600; }
+.btn.ghost { background: transparent; }
+.btn.on { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); font-weight: 600; }
+.btn:disabled { opacity: .45; cursor: default; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.stack { display: grid; gap: 12px; }
+.panel { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 14px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--on-sec); }
+.sec-verse { background: var(--verse); } .sec-pre { background: var(--pre); } .sec-chorus { background: var(--chorus); } .sec-bridge { background: var(--bridge); }
+.soon { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; background: var(--warn-bg); color: var(--warn-text); padding: 2px 7px; border-radius: 6px; }
+.fake { font-size: 12px; color: var(--muted); font-style: italic; }
+
+/* shared editors */
+.bars { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.slot { min-height: 52px; border-radius: 10px; border: 1px dashed var(--border); background: var(--soft); font-size: 18px; font-weight: 700; display: grid; place-items: center; }
+.slot.filled { border-style: solid; background: var(--panel); }
+.slot.sel { border-color: var(--accent); box-shadow: inset 0 0 0 2px var(--accent); }
+.slot small { display: block; font-size: 10px; font-weight: 500; color: var(--muted); }
+.palette { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+.palette button { min-height: 48px; border-radius: 10px; border: 1px solid var(--border); background: var(--panel); font-weight: 700; }
+.palette button small { display: block; font-size: 10px; color: var(--muted); font-weight: 500; }
+.sugg { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; }
+.sugg button { flex: none; text-align: left; padding: 6px 10px; border-radius: 10px; border: 1px solid var(--border); background: var(--panel); min-height: 44px; }
+.sugg button b { display: block; font-size: 14px; }
+.sugg button span { font-size: 11px; color: var(--muted); }
+.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.seg button { min-height: 40px; padding: 0 12px; border: 0; background: var(--panel); border-right: 1px solid var(--border); }
+.seg button:last-child { border-right: 0; }
+.seg button.on { background: var(--accent); color: var(--on-accent); font-weight: 600; }
+.meter { display: inline-flex; gap: 3px; }
+.meter i { width: 10px; height: 16px; border-radius: 3px; background: var(--border); display: inline-block; }
+.meter i.on { background: var(--accent); }
+
+/* mini song strip (shared) */
+.strip { display: flex; gap: 3px; height: 34px; align-items: stretch; position: relative; }
+.strip .blk { border-radius: 6px; color: var(--on-sec); font-size: 11px; font-weight: 700; display: grid; place-items: center; overflow: hidden; white-space: nowrap; min-width: 0; }
+.strip .blk.empty { opacity: .45; }
+.playhead { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--text); pointer-events: none; }
+
+/* ---------------- Variant A: step-by-step wizard */
+.A-top { display: grid; gap: 10px; }
+.A-steps { display: flex; gap: 4px; }
+.A-steps button { flex: 1; height: 6px; border-radius: 3px; border: 0; background: var(--border); padding: 0; min-height: 0; }
+.A-steps button.done { background: var(--accent); opacity: .5; } .A-steps button.cur { background: var(--accent); }
+.A-body { margin-top: 14px; display: grid; gap: 14px; }
+.A-nav { position: sticky; bottom: 64px; display: flex; gap: 8px; margin-top: 18px; }
+.A-nav .btn { flex: 1; }
+.A-dock { margin-top: 16px; display: grid; gap: 6px; }
+.A-big { font-size: 26px; font-weight: 800; letter-spacing: -.01em; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+.tile { text-align: left; padding: 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--panel); display: grid; gap: 6px; min-height: 44px; }
+.tile.on { border-color: var(--accent); box-shadow: inset 0 0 0 2px var(--accent); }
+.tile .order { display: flex; gap: 2px; flex-wrap: wrap; }
+.tile .order i { width: 12px; height: 8px; border-radius: 2px; display: inline-block; }
+
+/* ---------------- Variant B: timeline first + coach */
+.B { display: grid; gap: 10px; }
+.B-head { display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.B-tl { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--panel); }
+.B-grid { display: grid; grid-template-columns: 74px 1fr; min-width: 640px; }
+.B-lane-name { padding: 8px; font-size: 12px; font-weight: 600; color: var(--muted); border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); display: flex; align-items: center; background: var(--soft); }
+.B-lane { display: flex; gap: 2px; padding: 4px; border-bottom: 1px solid var(--border); position: relative; min-height: 44px; }
+.B-cell { border-radius: 6px; border: 0; padding: 4px 6px; text-align: left; font-size: 12px; overflow: hidden; white-space: nowrap; min-width: 0; }
+.B-cell.sec { color: var(--on-sec); font-weight: 700; }
+.B-cell.part { background: var(--soft); color: var(--text); }
+.B-cell.part.empty { background: transparent; border: 1px dashed var(--border); color: var(--muted); }
+.B-cell.locked { background: transparent; border: 1px dashed var(--border); color: var(--muted); opacity: .7; }
+.B-cell.sel { box-shadow: inset 0 0 0 2px var(--text); }
+.B-coach { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 14px; background: var(--bar-bg); color: var(--bar-text); }
+.B-coach .who { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; opacity: .75; font-weight: 700; }
+.B-coach .btn { background: transparent; color: var(--bar-text); border-color: currentColor; min-height: 38px; }
+.B-sheet { border-top: 3px solid var(--accent); }
+.B-rotate { display: none; }
+@media (orientation: portrait) and (max-width: 600px) { .B-rotate { display: block; } }
+
+/* ---------------- Variant C: section cards */
+.C { display: grid; gap: 14px; }
+.C-order { display: flex; gap: 6px; overflow-x: auto; padding: 2px 0 4px; align-items: center; }
+.C-order .chip { flex: none; min-height: 34px; padding: 0 10px; border: 0; }
+.C-order .add { flex: none; min-height: 34px; border-radius: 999px; border: 1px dashed var(--border); background: transparent; padding: 0 10px; color: var(--muted); }
+.C-cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+.C-card { border-radius: 16px; border: 1px solid var(--border); background: var(--panel); overflow: hidden; }
+.C-card header { padding: 12px 14px; color: var(--on-sec); display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.C-card header p { font-size: 12px; opacity: .9; }
+.C-card .rows { display: grid; }
+.C-row { display: grid; grid-template-columns: 70px 1fr; gap: 10px; padding: 10px 14px; border-top: 1px solid var(--border); align-items: center; text-align: left; background: transparent; border-left: 0; border-right: 0; border-bottom: 0; width: 100%; min-height: 48px; }
+.C-row .what { font-size: 12px; font-weight: 600; color: var(--muted); }
+.C-open { padding: 12px 14px; border-top: 1px solid var(--border); background: var(--soft); display: grid; gap: 10px; }
+
+/* floating prototype switcher: not part of the design */
+.switcher { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 50;
+  display: flex; align-items: center; gap: 4px; background: #111; color: #fff; border-radius: 999px; padding: 4px; box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+.switcher button { min-width: 44px; min-height: 40px; border-radius: 999px; border: 0; background: #2a2a2a; color: #fff; font-size: 18px; }
+.switcher span { padding: 0 10px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+.playbtn { min-width: 44px; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<div id="app"></div>
+<div class="switcher" role="navigation" aria-label="Prototype variants">
+  <button type="button" id="sw-prev" aria-label="Previous variant">‹</button>
+  <span id="sw-label">A</span>
+  <button type="button" id="sw-next" aria-label="Next variant">›</button>
+</div>
+
+<script>
+"use strict";
+// ============================================================ shared song model (fake data, in memory only)
+const KEYS = {
+  C: ["C", "Dm", "Em", "F", "G", "Am"], G: ["G", "Am", "Bm", "C", "D", "Em"], D: ["D", "Em", "F#m", "G", "A", "Bm"],
+  A: ["A", "Bm", "C#m", "D", "E", "F#m"], E: ["E", "F#m", "G#m", "A", "B", "C#m"],
+};
+const NUMERALS = ["I", "ii", "iii", "IV", "V", "vi"];
+const PROGS = [
+  { name: "Anthem", deg: [0, 4, 5, 3] }, { name: "Bittersweet", deg: [5, 3, 0, 4] }, { name: "Classic rock", deg: [0, 3, 4, 3] },
+  { name: "Fifties", deg: [0, 5, 3, 4] }, { name: "Campfire", deg: [0, 3, 0, 4] }, { name: "Lift-off", deg: [3, 4, 0, 0] },
+];
+const FEELS = ["Rock", "Pop", "Ballad", "Shuffle"];
+const SHAPES = [
+  { id: "vc", name: "Verse–chorus", desc: "The usual pop and rock shape. The chorus repeats the big idea.", order: ["verse", "chorus", "verse", "chorus", "bridge", "chorus"] },
+  { id: "vpc", name: "With a pre-chorus", desc: "A short build-up lifts each chorus.", order: ["verse", "pre", "chorus", "verse", "pre", "chorus", "bridge", "chorus"] },
+  { id: "aaba", name: "AABA", desc: "Verses carry the song; a middle section brings contrast.", order: ["verse", "verse", "bridge", "verse"] },
+  { id: "loop", name: "Two-part loop", desc: "Back and forth. Good for a first song.", order: ["verse", "chorus", "verse", "chorus"] },
+];
+const BLOCKS = {
+  verse: { name: "Verse", job: "Tells the story: the details and scenes." },
+  pre: { name: "Pre-chorus", job: "Builds tension into the chorus." },
+  chorus: { name: "Chorus", job: "The big idea and the title. It repeats." },
+  bridge: { name: "Bridge", job: "Something new before the last chorus." },
+};
+const DRUM_TRACKS = [
+  { id: "rock8", name: "Steady rock eighths", style: "Rock", busy: 2 },
+  { id: "floor", name: "Four on the floor", style: "Pop", busy: 2 },
+  { id: "laid", name: "Laid-back ballad", style: "Ballad", busy: 1 },
+  { id: "shuf", name: "Shuffle groove", style: "Shuffle", busy: 2 },
+];
+// The "AI drummer" (style and controls, #68 Q4): it picks a part per section from the feel and the section's job.
+function aiDrums(feel, kind) {
+  const busy = { verse: 1, pre: 2, chorus: 3, bridge: 1 }[kind] || 2;
+  const loud = { verse: 2, pre: 2, chorus: 3, bridge: 1 }[kind] || 2;
+  const style = kind === "bridge" && feel !== "Ballad" ? "Half-time" : feel;
+  return { style, busy, loud, fill: kind !== "bridge" };
+}
+const BASS = [
+  { id: "root", name: "Roots", desc: "One note a beat, the chord's root" },
+  { id: "fifth", name: "Root–fifth", desc: "Root, then the fifth" },
+  { id: "pulse", name: "Driving eighths", desc: "Pumping eighth notes" },
+  { id: "walk", name: "Walking", desc: "Steps towards the next chord" },
+];
+const STEPS = [
+  { id: "setup", name: "Set up" }, { id: "structure", name: "Structure" }, { id: "chords", name: "Chords" },
+  { id: "band", name: "Drums and bass" }, { id: "lyrics", name: "Lyrics", soon: true }, { id: "melody", name: "Melody and singer", soon: true },
+  { id: "guitar", name: "Your guitar", soon: true }, { id: "mix", name: "Mix and share", soon: true },
+];
+const SOON = {
+  lyrics: "Section by section, with a title and hook first, each section's job, syllable and rhyme checks, and AI line ideas on request. You write; the AI suggests.",
+  melody: "Sing or hum a guide melody. An AI voice can re-sing it. Typed notes-and-lyrics singing is still limited (see the singing research).",
+  guitar: "Record your guitar over the band through your audio interface, take by take.",
+  mix: "Balance the parts, then share a demo.",
+};
+
+function newBlock(kind) { return { bars: [null, null, null, null], drums: { mode: "ai", track: "rock8", over: null }, bass: "root" }; }
+function sampleSong() {
+  const s = { title: "Untitled song", key: "G", tempo: 100, feel: "Rock", shape: "vc", order: SHAPES[0].order.slice(), blocks: {} };
+  for (const k of Object.keys(BLOCKS)) s.blocks[k] = newBlock(k);
+  s.blocks.verse.bars = ["G", "D", "Em", "C"]; // example: the verse is written, the rest is not (yet)
+  return s;
+}
+let song = sampleSong();
+const ui = { step: 0, block: "verse", slot: 0, listening: false, sel: null, open: null, coachSkip: 0 };
+
+const kindsInSong = () => [...new Set(song.order)];
+const filledBars = k => song.blocks[k].bars.filter(Boolean).length;
+const drumsFor = k => {
+  const d = song.blocks[k].drums;
+  if (d.over) return d.over;
+  if (d.mode === "track") { const t = DRUM_TRACKS.find(x => x.id === d.track); return { style: t.style, busy: t.busy, loud: 2, fill: true }; }
+  return aiDrums(song.feel, k);
+};
+function setShape(id) { const sh = SHAPES.find(s => s.id === id); song.shape = id; song.order = sh.order.slice(); }
+function setKey(key) {
+  // keep the chords' functions when the key changes
+  const old = KEYS[song.key], neu = KEYS[key];
+  for (const b of Object.values(song.blocks)) b.bars = b.bars.map(c => c && old.includes(c) ? neu[old.indexOf(c)] : c);
+  song.key = key;
+}
+function applyProg(k, deg) { song.blocks[k].bars = deg.map(d => KEYS[song.key][d]); }
+function fakeListen(k) {
+  ui.listening = k; render();
+  setTimeout(() => { applyProg(k, PROGS[(Object.keys(BLOCKS).indexOf(k) + 1) % PROGS.length].deg); ui.listening = false; render(); }, 1800);
+}
+
+// ============================================================ simple synthesized playback
+const audio = { ctx: null, master: null, playing: false, t0: 0, total: 0, raf: 0, map: [] };
+const NOTE = { C: 0, "C#": 1, Db: 1, D: 2, "D#": 3, Eb: 3, E: 4, F: 5, "F#": 6, Gb: 6, G: 7, "G#": 8, Ab: 8, A: 9, "A#": 10, Bb: 10, B: 11 };
+const hz = m => 440 * Math.pow(2, (m - 69) / 12);
+function chordNotes(c) { const m = /^([A-G][#b]?)(m?)/.exec(c); const r = NOTE[m[1]]; return { root: r, minor: m[2] === "m" }; }
+function tone(t, freq, dur, type, gain, dest) {
+  const o = audio.ctx.createOscillator(), g = audio.ctx.createGain();
+  o.type = type; o.frequency.value = freq;
+  g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(gain, t + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  o.connect(g); g.connect(dest); o.start(t); o.stop(t + dur + 0.05);
+}
+let noiseBuf = null;
+function noise(t, dur, filter, f, gain, dest) {
+  if (!noiseBuf) { noiseBuf = audio.ctx.createBuffer(1, audio.ctx.sampleRate, audio.ctx.sampleRate); const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; }
+  const s = audio.ctx.createBufferSource(), fl = audio.ctx.createBiquadFilter(), g = audio.ctx.createGain();
+  s.buffer = noiseBuf; fl.type = filter; fl.frequency.value = f;
+  g.gain.setValueAtTime(gain, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  s.connect(fl); fl.connect(g); g.connect(dest); s.start(t); s.stop(t + dur + 0.02);
+}
+function kick(t, g, d) { const o = audio.ctx.createOscillator(), v = audio.ctx.createGain(); o.frequency.setValueAtTime(140, t); o.frequency.exponentialRampToValueAtTime(45, t + 0.12); v.gain.setValueAtTime(g, t); v.gain.exponentialRampToValueAtTime(0.0001, t + 0.3); o.connect(v); v.connect(d); o.start(t); o.stop(t + 0.32); }
+function scheduleSong(onlyKind) {
+  const ctx = audio.ctx, beat = 60 / song.tempo, bar = beat * 4, start = ctx.currentTime + 0.1;
+  const master = ctx.createGain(); master.gain.value = 0.7; master.connect(ctx.destination); audio.master = master;
+  const order = onlyKind ? [onlyKind] : song.order;
+  let t = start; audio.map = [];
+  order.forEach((k, idx) => {
+    const blk = song.blocks[k], dr = drumsFor(k), nextK = order[idx + 1];
+    const vol = [0.45, 0.6, 0.8][dr.loud - 1] || 0.6;
+    let last = null;
+    audio.map.push({ idx, start: t - start, end: t - start + bar * blk.bars.length });
+    blk.bars.forEach((c, bi) => {
+      const chord = c || last; last = chord;
+      const lastBar = bi === blk.bars.length - 1;
+      if (chord) {
+        const { root, minor } = chordNotes(chord);
+        const base = 52 + ((root - 4 + 12) % 12); // voice around E3
+        [0, minor ? 3 : 4, 7].forEach((iv, n) => tone(t + n * 0.012, hz(base + iv), bar * 0.95, "triangle", 0.05, master));
+        const bassRoot = 40 + ((root - 4 + 12) % 12);
+        const fifth = bassRoot + 7, third = bassRoot + (minor ? 3 : 4);
+        const pat = { root: [[0, bassRoot], [1, bassRoot], [2, bassRoot], [3, bassRoot]],
+          fifth: [[0, bassRoot], [2, fifth]],
+          pulse: [0, .5, 1, 1.5, 2, 2.5, 3, 3.5].map(b => [b, bassRoot]),
+          walk: [[0, bassRoot], [1, third], [2, fifth], [3, bassRoot + (lastBar ? -1 : 9)]] }[blk.bass];
+        pat.forEach(([b, m]) => tone(t + b * beat, hz(m), blk.bass === "pulse" ? beat * 0.45 : beat * 0.9, "sawtooth", 0.06, master));
+      }
+      // drums: eighth-note grid per style and busyness
+      const swing = dr.style === "Shuffle" ? beat / 6 : 0;
+      for (let s = 0; s < 8; s++) {
+        const tt = t + s * beat / 2 + (s % 2 ? swing : 0);
+        const fillZone = dr.fill && lastBar && nextK && nextK !== k && s >= 4;
+        if (fillZone) { noise(tt, 0.12, "bandpass", 1800, 0.5 * vol, master); if (s % 2) noise(tt + beat / 4, 0.1, "bandpass", 1500, 0.4 * vol, master); continue; }
+        const half = dr.style === "Half-time" || dr.style === "Ballad";
+        const kickOn = half ? s === 0 || (dr.busy > 1 && s === 5) : dr.style === "Pop" ? s % 2 === 0 : s === 0 || s === 4 || (dr.busy > 1 && s === 5) || (dr.busy > 2 && s === 3);
+        const snareOn = half ? s === 4 : s === 2 || s === 6;
+        const hatOn = dr.busy === 1 ? s % 2 === 0 : true;
+        if (kickOn) kick(tt, 0.9 * vol, master);
+        if (snareOn) noise(tt, 0.18, "bandpass", 1800, 0.55 * vol, master);
+        if (hatOn) noise(tt, dr.busy > 2 && s % 2 ? 0.09 : 0.04, "highpass", 7000, 0.18 * vol, master);
+      }
+      t += bar;
+    });
+  });
+  audio.t0 = start; audio.total = t - start;
+}
+function play(onlyKind) {
+  try {
+    if (!audio.ctx) audio.ctx = new (window.AudioContext || window.webkitAudioContext)();
+    audio.ctx.resume();
+  } catch (_) { return; }
+  stop(); scheduleSong(onlyKind); audio.playing = onlyKind || true; tick(); renderPlay();
+}
+function stop() {
+  if (audio.master) { try { audio.master.disconnect(); } catch (_) {} audio.master = null; }
+  audio.playing = false; cancelAnimationFrame(audio.raf); renderPlay(); positionHeads(-1);
+}
+function tick() {
+  const pos = audio.ctx.currentTime - audio.t0;
+  if (pos > audio.total + 0.2) { stop(); return; }
+  positionHeads(pos);
+  audio.raf = requestAnimationFrame(tick);
+}
+function positionHeads(pos) {
+  for (const el of document.querySelectorAll("[data-head]")) {
+    if (pos < 0 || !audio.total) { el.hidden = true; continue; }
+    el.hidden = false; el.style.left = Math.min(100, pos / audio.total * 100) + "%";
+  }
+}
+function renderPlay() {
+  for (const b of document.querySelectorAll('[data-act="play"]')) b.textContent = audio.playing ? "■ Stop" : b.dataset.label || "▶ Play song";
+}
+
+// ============================================================ shared editors (each variant places them differently)
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const secChip = k => `<span class="chip sec-${k}">${BLOCKS[k].name}</span>`;
+function strip() {
+  const total = song.order.reduce((n, k) => n + song.blocks[k].bars.length, 0);
+  return `<div class="strip" aria-label="Song order">${song.order.map(k => `<div class="blk sec-${k}${filledBars(k) ? "" : " empty"}" style="flex:${song.blocks[k].bars.length}" title="${BLOCKS[k].name}">${BLOCKS[k].name}</div>`).join("")}<div class="playhead" data-head hidden></div></div>
+    <div class="row small muted"><span>${song.order.length} sections · ${total} bars · ${Math.round(total * 4 * 60 / song.tempo)} s at ${song.tempo} bpm</span></div>`;
+}
+function setupEditor() {
+  return `<div class="stack">
+    <div><p class="label">Key</p><div class="seg" role="group" aria-label="Key">${Object.keys(KEYS).map(k => `<button type="button" data-act="key" data-v="${k}" class="${song.key === k ? "on" : ""}">${k}</button>`).join("")}</div>
+      <p class="small muted" style="margin-top:4px">Guitar-friendly keys. Your chords move with the key.</p></div>
+    <div><p class="label">Tempo</p><div class="row"><button type="button" class="btn" data-act="tempo" data-v="-5" aria-label="Slower">−5</button><span class="A-big" style="font-variant-numeric:tabular-nums">${song.tempo}</span><span class="muted">bpm</span><button type="button" class="btn" data-act="tempo" data-v="5" aria-label="Faster">+5</button></div></div>
+    <div><p class="label">Feel</p><div class="seg" role="group" aria-label="Feel">${FEELS.map(f => `<button type="button" data-act="feel" data-v="${f}" class="${song.feel === f ? "on" : ""}">${f}</button>`).join("")}</div></div>
+  </div>`;
+}
+function structureEditor() {
+  return `<div class="tiles">${SHAPES.map(sh => `<button type="button" class="tile${song.shape === sh.id ? " on" : ""}" data-act="shape" data-v="${sh.id}">
+      <b>${sh.name}</b><span class="small muted">${sh.desc}</span>
+      <span class="order">${sh.order.map(k => `<i class="sec-${k}"></i>`).join("")}</span></button>`).join("")}</div>`;
+}
+function orderEditor() {
+  return `<div class="stack"><div class="row">${song.order.map((k, i) => `<span class="row" style="gap:2px">${secChip(k)}<button type="button" class="btn ghost small" style="min-height:32px;padding:0 6px" data-act="del" data-v="${i}" aria-label="Remove ${BLOCKS[k].name}">×</button></span>`).join("")}</div>
+    <div class="row"><span class="small muted">Add:</span>${Object.keys(BLOCKS).map(k => `<button type="button" class="btn small" style="min-height:36px" data-act="addsec" data-v="${k}">+ ${BLOCKS[k].name}</button>`).join("")}</div></div>`;
+}
+function chordEditor(k) {
+  const b = song.blocks[k], keyChords = KEYS[song.key];
+  const listening = ui.listening === k;
+  return `<div class="stack">
+    <p class="small muted">${BLOCKS[k].job} Every ${BLOCKS[k].name.toLowerCase()} uses these bars.</p>
+    <div class="bars">${b.bars.map((c, i) => `<button type="button" class="slot${c ? " filled" : ""}${ui.block === k && ui.slot === i ? " sel" : ""}" data-act="slot" data-k="${k}" data-v="${i}" aria-label="Bar ${i + 1}: ${c || "empty"}">${c || "+"}<small>bar ${i + 1}</small></button>`).join("")}</div>
+    <div class="palette">${keyChords.map((c, i) => `<button type="button" data-act="chord" data-k="${k}" data-v="${c}">${c}<small>${NUMERALS[i]}</small></button>`).join("")}</div>
+    <div><p class="label">Suggestions in ${song.key}</p><div class="sugg">${PROGS.map((p, i) => `<button type="button" data-act="prog" data-k="${k}" data-v="${i}"><b>${p.deg.map(d => keyChords[d]).join(" ")}</b><span>${p.name}</span></button>`).join("")}</div></div>
+    <div class="row"><button type="button" class="btn" data-act="listen" data-k="${k}" ${listening ? "disabled" : ""}>${listening ? "Listening… strum your idea" : "🎸 Play it in"}</button>
+      <button type="button" class="btn ghost" data-act="clear" data-k="${k}">Clear</button>
+      <button type="button" class="btn ghost" data-act="play" data-k="${k}" data-label="▶ Hear ${BLOCKS[k].name.toLowerCase()}">▶ Hear ${BLOCKS[k].name.toLowerCase()}</button></div>
+    <p class="fake">Prototype: "Play it in" pretends to listen and fills in chords you can then edit.</p>
+  </div>`;
+}
+function drumEditor(k) {
+  const d = song.blocks[k].drums, eff = drumsFor(k);
+  const meter = (n, act) => `<span class="meter" role="group">${[1, 2, 3].map(i => `<i class="${i <= n ? "on" : ""}"></i>`).join("")}</span><button type="button" class="btn small" style="min-height:36px" data-act="${act}" data-k="${k}" data-v="-1" aria-label="Less">−</button><button type="button" class="btn small" style="min-height:36px" data-act="${act}" data-k="${k}" data-v="1" aria-label="More">+</button>`;
+  return `<div class="stack">
+    <div class="seg" role="group" aria-label="Drum source"><button type="button" data-act="dmode" data-k="${k}" data-v="ai" class="${d.mode === "ai" ? "on" : ""}">AI drummer</button><button type="button" data-act="dmode" data-k="${k}" data-v="track" class="${d.mode === "track" ? "on" : ""}">Drum track</button></div>
+    ${d.mode === "ai"
+      ? `<p class="small muted">Follows your song: ${song.feel.toLowerCase()} feel, plays the ${BLOCKS[k].name.toLowerCase()} as <b>${eff.style.toLowerCase()}</b>${eff.fill ? ", with a fill into the next section" : ""}.</p>`
+      : `<div class="stack" style="gap:6px">${DRUM_TRACKS.map(t => `<button type="button" class="tile${d.track === t.id ? " on" : ""}" data-act="dtrack" data-k="${k}" data-v="${t.id}"><b>${t.name}</b></button>`).join("")}</div>`}
+    <div class="row"><span class="label" style="width:64px">Busy</span>${meter(eff.busy, "dbusy")}</div>
+    <div class="row"><span class="label" style="width:64px">Loud</span>${meter(eff.loud, "dloud")}</div>
+    ${d.over ? `<button type="button" class="btn ghost small" data-act="dreset" data-k="${k}">Back to ${d.mode === "ai" ? "the AI drummer's" : "the track's"} choice</button>` : ""}
+    <p class="fake">Prototype: a style-and-controls drummer (it may not be true AI). Edit the hits on a grid later.</p>
+  </div>`;
+}
+function bassEditor(k) {
+  return `<div class="stack" style="gap:6px"><p class="small muted">The bass follows your chords.</p>
+    ${BASS.map(b => `<button type="button" class="tile${song.blocks[k].bass === b.id ? " on" : ""}" data-act="bass" data-k="${k}" data-v="${b.id}"><b>${b.name}</b><span class="small muted">${b.desc}</span></button>`).join("")}</div>`;
+}
+function soonPanel(id) { const s = STEPS.find(x => x.id === id); return `<div class="panel stack"><div class="row"><h3>${s.name}</h3><span class="soon">Later prototype</span></div><p class="small">${SOON[id]}</p></div>`; }
+function blockTabs(act) {
+  return `<div class="seg" role="group" aria-label="Section">${kindsInSong().map(k => `<button type="button" data-act="${act}" data-v="${k}" class="${ui.block === k ? "on" : ""}">${BLOCKS[k].name}${filledBars(k) === 4 ? " ✓" : ""}</button>`).join("")}</div>`;
+}
+
+// ============================================================ Variant A: step-by-step wizard
+function VariantA() {
+  const st = STEPS[ui.step];
+  if (!kindsInSong().includes(ui.block)) ui.block = kindsInSong()[0];
+  let body = "";
+  if (st.id === "setup") body = `<p class="muted">Pick a starting point. You can change all of this later.</p>${setupEditor()}`;
+  else if (st.id === "structure") body = `<p class="muted">Choose a shape for your song. Each colour is a section you'll write once.</p>${structureEditor()}<details><summary class="small">Change the order</summary><div style="margin-top:8px">${orderEditor()}</div></details>`;
+  else if (st.id === "chords") body = `${blockTabs("blk")}${chordEditor(ui.block)}`;
+  else if (st.id === "band") body = `${blockTabs("blk")}<div class="panel"><h3>Drums · ${BLOCKS[ui.block].name}</h3><div style="margin-top:10px">${drumEditor(ui.block)}</div></div><div class="panel"><h3>Bass · ${BLOCKS[ui.block].name}</h3><div style="margin-top:10px">${bassEditor(ui.block)}</div></div>`;
+  else body = soonPanel(st.id);
+  return `<section aria-label="Step by step">
+    <div class="A-top">
+      <div class="row" style="justify-content:space-between"><p class="label">Step ${ui.step + 1} of ${STEPS.length}</p><p class="small muted">${esc(song.title)} · ${song.key} · ${song.tempo} bpm</p></div>
+      <div class="A-steps">${STEPS.map((s, i) => `<button type="button" data-act="goto" data-v="${i}" class="${i < ui.step ? "done" : i === ui.step ? "cur" : ""}" aria-label="${s.name}"></button>`).join("")}</div>
+      <h1 class="A-big">${st.name}${st.soon ? ' <span class="soon">Later</span>' : ""}</h1>
+    </div>
+    <div class="A-body">${body}</div>
+    <div class="A-dock panel"><div class="row" style="justify-content:space-between"><p class="label">Your song so far</p><button type="button" class="btn small playbtn" data-act="play" data-label="▶ Play song">▶ Play song</button></div>${strip()}</div>
+    <div class="A-nav"><button type="button" class="btn" data-act="back" ${ui.step === 0 ? "disabled" : ""}>Back</button><button type="button" class="btn primary" data-act="next" ${ui.step === STEPS.length - 1 ? "disabled" : ""}>Next: ${STEPS[ui.step + 1] ? STEPS[ui.step + 1].name : "Done"}</button></div>
+  </section>`;
+}
+
+// ============================================================ Variant B: timeline first, with a coach
+function coachTips() {
+  const tips = [];
+  for (const k of kindsInSong()) if (filledBars(k) < 4) tips.push({ text: `Your ${BLOCKS[k].name.toLowerCase()} needs chords. ${BLOCKS[k].job}`, act: "B-open", k, part: "chords", cta: `Write the ${BLOCKS[k].name.toLowerCase()}` });
+  if (kindsInSong().includes("bridge") && song.blocks.bridge.drums.mode === "ai" && !song.blocks.bridge.drums.over) tips.push({ text: "The AI drummer plays the bridge half-time for contrast. Have a listen.", act: "B-open", k: "bridge", part: "drums", cta: "Open the bridge drums" });
+  tips.push({ text: "Next up: lyrics. Start with a title for your chorus.", act: null, cta: null, soon: true });
+  return tips;
+}
+function VariantB() {
+  const lanes = [["Sections", "sec"], ["Chords", "chords"], ["Drums", "drums"], ["Bass", "bass"], ["Lyrics", "lyrics"], ["Vocal", "melody"], ["Guitar", "guitar"]];
+  const tips = coachTips(), tip = tips[ui.coachSkip % tips.length];
+  const cell = (k, i, lane) => {
+    const w = `flex:${song.blocks[k].bars.length}`, sel = ui.sel && ui.sel.i === i && ui.sel.part === lane ? " sel" : "";
+    if (lane === "sec") return `<button type="button" class="B-cell sec sec-${k}${sel}" style="${w}" data-act="B-sel" data-v="${i}" data-p="sec">${BLOCKS[k].name}</button>`;
+    if (lane === "chords") { const n = filledBars(k); return `<button type="button" class="B-cell part${n ? "" : " empty"}${sel}" style="${w}" data-act="B-sel" data-v="${i}" data-p="chords">${n ? song.blocks[k].bars.map(c => c || "·").join(" ") : "+ chords"}</button>`; }
+    if (lane === "drums") { const d = drumsFor(k); return `<button type="button" class="B-cell part${sel}" style="${w}" data-act="B-sel" data-v="${i}" data-p="drums">${song.blocks[k].drums.mode === "ai" ? "AI · " : ""}${d.style}</button>`; }
+    if (lane === "bass") return `<button type="button" class="B-cell part${sel}" style="${w}" data-act="B-sel" data-v="${i}" data-p="bass">${BASS.find(b => b.id === song.blocks[k].bass).name}</button>`;
+    return `<button type="button" class="B-cell locked" style="${w}" data-act="B-sel" data-v="${i}" data-p="${lane}">later</button>`;
+  };
+  let sheet = "";
+  if (ui.sel) {
+    const k = song.order[ui.sel.i], p = ui.sel.part;
+    const ed = p === "sec" ? `${structureEditor()}<div style="margin-top:10px">${orderEditor()}</div>` : p === "chords" ? chordEditor(k) : p === "drums" ? drumEditor(k) : p === "bass" ? bassEditor(k) : `<p class="small">${SOON[p]}</p>`;
+    sheet = `<div class="panel B-sheet stack"><div class="row" style="justify-content:space-between"><h2>${p === "sec" ? "Song structure" : `${BLOCKS[k].name} · ${p === "melody" ? "vocal" : p}`}</h2><button type="button" class="btn ghost" data-act="B-close">Done</button></div>${ed}</div>`;
+  }
+  return `<section class="B" aria-label="Timeline with coach">
+    <div class="B-head"><div><h1>${esc(song.title)}</h1><p class="small muted">${song.key} · ${song.tempo} bpm · ${song.feel} <button type="button" class="btn ghost small" style="min-height:32px" data-act="B-setup">Edit</button></p></div>
+      <button type="button" class="btn primary playbtn" data-act="play" data-label="▶ Play song">▶ Play song</button></div>
+    <p class="B-rotate small muted">Tip: turn your phone sideways for a wider timeline.</p>
+    <div class="B-coach" role="status"><div style="flex:1;display:grid;gap:6px"><span class="who">Coach</span><p>${tip.text}${tip.soon ? ' <span class="soon">Later</span>' : ""}</p>
+      <div class="row">${tip.act ? `<button type="button" class="btn" data-act="${tip.act}" data-k="${tip.k}" data-p="${tip.part}">${tip.cta}</button>` : ""}<button type="button" class="btn" data-act="B-skip">${tips.length > 1 ? "Another tip" : "OK"}</button></div></div></div>
+    <div class="B-tl"><div class="B-grid">
+      ${lanes.map(([name, lane]) => `<div class="B-lane-name">${name}</div><div class="B-lane">${song.order.map((k, i) => cell(k, i, lane)).join("")}${lane === "sec" ? '<div class="playhead" data-head hidden></div>' : ""}</div>`).join("")}
+    </div></div>
+    ${ui.open === "setup" ? `<div class="panel B-sheet stack"><div class="row" style="justify-content:space-between"><h2>Song setup</h2><button type="button" class="btn ghost" data-act="B-close">Done</button></div>${setupEditor()}</div>` : ""}
+    ${sheet}
+  </section>`;
+}
+
+// ============================================================ Variant C: section cards
+function VariantC() {
+  const total = song.order.length;
+  const card = k => {
+    const open = ui.open && ui.open.k === k ? ui.open.part : null;
+    const d = drumsFor(k);
+    const row = (part, what, val) => `<button type="button" class="C-row" data-act="C-open" data-k="${k}" data-p="${part}" aria-expanded="${open === part}"><span class="what">${what}</span><span>${val}</span></button>${open === part ? `<div class="C-open">${part === "chords" ? chordEditor(k) : part === "drums" ? drumEditor(k) : part === "bass" ? bassEditor(k) : `<p class="small">${SOON[part]}</p>`}</div>` : ""}`;
+    const count = song.order.filter(x => x === k).length;
+    return `<article class="C-card"><header class="sec-${k}"><h2>${BLOCKS[k].name}</h2><p>${count}× in the song</p></header>
+      <div style="padding:8px 14px 0"><p class="small muted">${BLOCKS[k].job}</p></div>
+      <div class="rows">
+        ${row("chords", "Chords", filledBars(k) ? `<b>${song.blocks[k].bars.map(c => c || "·").join(" · ")}</b>` : '<span class="muted">Add chords</span>')}
+        ${row("drums", "Drums", `${song.blocks[k].drums.mode === "ai" ? "AI drummer · " : ""}${d.style}, ${["light", "steady", "busy"][d.busy - 1]}`)}
+        ${row("bass", "Bass", BASS.find(b => b.id === song.blocks[k].bass).name)}
+        ${row("lyrics", "Lyrics", '<span class="soon">Later</span>')}
+        ${row("melody", "Vocal", '<span class="soon">Later</span>')}
+      </div>
+      <div style="padding:10px 14px" class="row"><button type="button" class="btn small" data-act="play" data-k="${k}" data-label="▶ Hear it">▶ Hear it</button></div></article>`;
+  };
+  return `<section class="C" aria-label="Section cards">
+    <div class="row" style="justify-content:space-between"><div><h1>${esc(song.title)}</h1><p class="small muted">${song.key} · ${song.tempo} bpm · ${song.feel}</p></div><button type="button" class="btn primary playbtn" data-act="play" data-label="▶ Play song">▶ Play song</button></div>
+    <details class="panel"><summary><b>Key, tempo and feel</b></summary><div style="margin-top:10px">${setupEditor()}</div></details>
+    <div class="stack" style="gap:6px"><p class="label">Song order · ${total} sections</p>
+      <div class="C-order">${song.order.map((k, i) => `<button type="button" class="chip sec-${k}" data-act="C-move" data-v="${i}" aria-label="${BLOCKS[k].name}, move later">${BLOCKS[k].name} ›</button>`).join("")}<button type="button" class="add" data-act="C-shape">Shape…</button></div>
+      <p class="small muted">Tap a section to move it later. "Shape…" swaps the whole order.</p>
+      ${ui.open === "shape" ? `<div class="panel">${structureEditor()}<div style="margin-top:10px">${orderEditor()}</div></div>` : ""}
+      ${strip()}</div>
+    <div class="C-cards">${kindsInSong().map(card).join("")}</div>
+    <div class="panel stack"><div class="row"><h3>Then</h3></div><div class="row">${["guitar", "mix"].map(id => `<span class="small"><b>${STEPS.find(s => s.id === id).name}</b> <span class="soon">Later</span></span>`).join(" ")}</div></div>
+  </section>`;
+}
+
+// ============================================================ switcher, render and events
+const VARIANTS = [["A", "Step by step", VariantA], ["B", "Timeline + coach", VariantB], ["C", "Section cards", VariantC]];
+const cur = () => { const h = (location.hash || "#A").slice(1).toUpperCase(); return VARIANTS.find(v => v[0] === h) || VARIANTS[0]; };
+function render() {
+  const [key, name, View] = cur();
+  document.getElementById("app").innerHTML = View();
+  document.getElementById("sw-label").textContent = `${key} · ${name}`;
+  renderPlay();
+}
+function cycle(d) { const i = VARIANTS.indexOf(cur()); location.hash = VARIANTS[(i + d + VARIANTS.length) % VARIANTS.length][0]; }
+window.addEventListener("hashchange", () => { ui.sel = null; ui.open = null; render(); });
+document.getElementById("sw-prev").onclick = () => cycle(-1);
+document.getElementById("sw-next").onclick = () => cycle(1);
+document.addEventListener("keydown", e => {
+  if (e.target.closest && e.target.closest("input, textarea, select, [contenteditable]")) return;
+  if (e.key === "ArrowLeft") cycle(-1); else if (e.key === "ArrowRight") cycle(1);
+});
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+function override(k, field, delta) {
+  const b = song.blocks[k].drums, base = { ...drumsFor(k) };
+  base[field] = clamp(base[field] + delta, 1, 3); b.over = base;
+}
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-act]"); if (!t) return;
+  const { act, v, k, p } = t.dataset;
+  switch (act) {
+    case "play": if (audio.playing) stop(); else play(k); return;
+    case "key": setKey(v); break;
+    case "tempo": song.tempo = clamp(song.tempo + Number(v), 60, 180); break;
+    case "feel": song.feel = v; break;
+    case "shape": setShape(v); break;
+    case "del": if (song.order.length > 1) song.order.splice(Number(v), 1); break;
+    case "addsec": song.order.push(v); break;
+    case "slot": ui.block = k; ui.slot = Number(v); break;
+    case "chord": { const b = song.blocks[k]; if (ui.block !== k) { ui.block = k; ui.slot = b.bars.findIndex(c => !c); if (ui.slot < 0) ui.slot = 0; }
+      b.bars[ui.slot] = v; ui.slot = Math.min(b.bars.length - 1, ui.slot + 1); break; }
+    case "prog": applyProg(k, PROGS[Number(v)].deg); break;
+    case "listen": fakeListen(k); return;
+    case "clear": song.blocks[k].bars = [null, null, null, null]; ui.block = k; ui.slot = 0; break;
+    case "dmode": song.blocks[k].drums.mode = v; song.blocks[k].drums.over = null; break;
+    case "dtrack": song.blocks[k].drums.track = v; song.blocks[k].drums.over = null; break;
+    case "dbusy": override(k, "busy", Number(v)); break;
+    case "dloud": override(k, "loud", Number(v)); break;
+    case "dreset": song.blocks[k].drums.over = null; break;
+    case "bass": song.blocks[k].bass = v; break;
+    case "blk": ui.block = v; ui.slot = Math.max(0, song.blocks[v].bars.findIndex(c => !c)); break;
+    case "goto": ui.step = Number(v); break;
+    case "back": ui.step = Math.max(0, ui.step - 1); break;
+    case "next": ui.step = Math.min(STEPS.length - 1, ui.step + 1); window.scrollTo(0, 0); break;
+    case "B-sel": ui.sel = { i: Number(v), part: p }; ui.open = null; ui.block = song.order[Number(v)]; break;
+    case "B-open": { const i = song.order.indexOf(k); ui.sel = { i, part: p }; ui.block = k; ui.slot = Math.max(0, song.blocks[k].bars.findIndex(c => !c)); break; }
+    case "B-close": ui.sel = null; ui.open = null; break;
+    case "B-skip": ui.coachSkip++; break;
+    case "B-setup": ui.open = "setup"; ui.sel = null; break;
+    case "C-open": ui.open = ui.open && ui.open.k === k && ui.open.part === p ? null : { k, part: p }; ui.block = k; ui.slot = Math.max(0, song.blocks[k].bars.findIndex(c => !c)); break;
+    case "C-move": { const i = Number(v), o = song.order; if (i < o.length - 1) [o[i], o[i + 1]] = [o[i + 1], o[i]]; else o.unshift(o.pop()); break; }
+    case "C-shape": ui.open = ui.open === "shape" ? null : "shape"; break;
+    default: return;
+  }
+  if (audio.playing) stop();
+  render();
+});
+render();
+</script>
+
+</html>
