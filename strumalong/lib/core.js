@@ -1,49 +1,20 @@
 /* Strum Along core: pure timeline, cue and strum helpers (no DOM, no network).
- * UMD: window.StrumCore in the browser, module.exports under node.
+ * UMD: window.StrumCore in the browser, module.exports under node. Needs lib/chords.js
+ * (window.StrumChords) for chord labels; load it first.
  * Spec: docs/STRUMALONG_APP.md, section "lib/core.js API".
  * Charts are provisional automatic drafts, beats come from an estimated grid and
  * bars are approximate. Nothing here verifies downbeats or recorded strumming. */
 (function (root, factory) {
   "use strict";
-  const api = factory();
-  if (typeof module !== "undefined" && module.exports) module.exports = api;
+  const node = typeof module !== "undefined" && module.exports;
+  const api = factory(node ? require("./chords.js") : root.StrumChords);
+  if (node) module.exports = api;
   if (root) root.StrumCore = api;
-})(typeof window !== "undefined" ? window : null, function () {
+})(typeof window !== "undefined" ? window : null, function (Chords) {
   "use strict";
 
   function validNumber(value) { return typeof value === "number" && Number.isFinite(value); }
   function mod(value, n) { return ((value % n) + n) % n; }
-  const hasOwn = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
-
-  // Ported from experiments/review/app.js line 181 (transposePracticeLabel). Behaviour unchanged.
-  function transposePracticeLabel(label, capo) {
-    if (!Number.isInteger(capo) || capo < 0 || capo > 12) throw new Error("Use a capo fret from 0 to 12.");
-    if (typeof label !== "string" || !capo || label === "N" || label === "X") return label;
-    const notes = { C: 0, "B#": 0, "C#": 1, Db: 1, D: 2, "D#": 3, Eb: 3, E: 4, Fb: 4,
-      "E#": 5, F: 5, "F#": 6, Gb: 6, G: 7, "G#": 8, Ab: 8, A: 9, "A#": 10, Bb: 10, B: 11, Cb: 11 };
-    const sharp = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-    const flat = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
-    const shifted = (note, preferFlat = false) => (note.includes("b") || preferFlat ? flat : sharp)[(notes[note] - capo + 12) % 12];
-    const parsed = /^([A-G](?:#|b)?)([^/]*)(?:\/(.*))?$/.exec(label);
-    if (!parsed || !(parsed[1] in notes)) return label;
-    const bass = parsed[3] === undefined ? "" : "/" + (/^[A-G](?:#|b)?$/.test(parsed[3]) && parsed[3] in notes ? shifted(parsed[3], parsed[1].includes("b")) : parsed[3]);
-    return shifted(parsed[1]) + parsed[2] + bass;
-  }
-
-  // Ported from experiments/review/app.js line 195 (coreChordLabel). Behaviour unchanged;
-  // Object.hasOwn is replaced by an equivalent own-property check.
-  function coreChordLabel(label) {
-    if (typeof label !== "string") return label;
-    // Reduce only explicit, known qualities. Suspensions do not contain a major
-    // or minor third, so they must not become ordinary major/minor chords.
-    const parsed = /^([A-G](?:#|b)?)([^/]*)(\/(?:[A-G](?:#|b)?|[b#]?[1-7]))?$/.exec(label);
-    if (!parsed) return label;
-    const qualities = { m7: "m", min7: "m", minor7: "m", maj7: "", major7: "", add9: "", add2: "", "7": "", "7sus4": "sus4", "7sus": "sus4",
-      "maj(9)": "", "maj(add9)": "", "(1,3,5,9)": "", "sus4(b7)": "sus4" };
-    const suffix = parsed[2].replace(/^:/, "");
-    if (!hasOwn(qualities, suffix)) return label;
-    return parsed[1] + qualities[suffix] + (parsed[3] || "");
-  }
 
   function capoFret(value) { return Number.isInteger(value) && value >= 0 && value <= 12 ? value : 0; }
 
@@ -51,8 +22,8 @@
   // Equivalent to experiments/review/app.js practiceLabel (line 207) with renamed options.
   function shapeLabel(sounding, opts) {
     const o = opts || {};
-    const shape = o.view === "sounding" ? sounding : transposePracticeLabel(sounding, capoFret(o.capo));
-    return o.quality === "full" ? shape : coreChordLabel(shape);
+    const shape = o.view === "sounding" ? sounding : Chords.shapeForCapo(sounding, capoFret(o.capo));
+    return o.quality === "full" ? shape : Chords.coreLabel(shape);
   }
 
   function displayLabel(label) {
@@ -76,7 +47,7 @@
       if (chord.s < previousEnd - 1e-6) continue; // overlapping/out-of-order events are dropped, never reordered
       previousEnd = chord.e;
       const full = shapeLabel(chord.l, { capo, view, quality: "full" });
-      const label = quality === "core" ? coreChordLabel(full) : full;
+      const label = quality === "core" ? Chords.coreLabel(full) : full;
       const prev = out[out.length - 1];
       if (prev && label !== "N" && label !== "X" && prev.label === label && Math.abs(prev.e - chord.s) < 1e-3) {
         prev.e = chord.e;
@@ -321,34 +292,6 @@
     return Math.min(pattern.strokes.length - 1, Math.max(0, step));
   }
 
-  const EASY_SHAPES = new Set(["A", "Am", "C", "D", "Dm", "E", "Em", "G"]);
-  const HALF_SHAPES = new Set(["F", "Bm", "B7"]);
-
-  // Capo suggestion for the exporter: share of chord seconds on easy open shapes.
-  function suggestCapo(chords) {
-    const list = Array.isArray(chords) ? chords : [];
-    const scores = [];
-    for (let capo = 0; capo <= 7; capo++) {
-      let total = 0, credit = 0;
-      for (const chord of list) {
-        if (!chord) continue;
-        const label = typeof chord.l === "string" ? chord.l : typeof chord.sounding === "string" ? chord.sounding : chord.label;
-        const s = validNumber(chord.s) ? chord.s : chord.start, e = validNumber(chord.e) ? chord.e : chord.end;
-        if (typeof label !== "string" || label === "N" || label === "X" || !validNumber(s) || !validNumber(e) || e <= s) continue;
-        const seconds = e - s;
-        total += seconds;
-        const shape = transposePracticeLabel(label, capo).split("/")[0];
-        const core = coreChordLabel(shape);
-        if (EASY_SHAPES.has(core)) credit += seconds;
-        else if (HALF_SHAPES.has(core) || HALF_SHAPES.has(shape)) credit += seconds / 2;
-      }
-      scores.push(total > 0 ? credit / total : 0);
-    }
-    const best = Math.max(...scores);
-    const capo = scores.findIndex(score => score >= best - 0.03);
-    return { capo, score: scores[capo], scores };
-  }
-
   // Mirrors experiments/review/app.js line 635 (timeLabel): "m:ss".
   function formatTime(seconds) {
     const whole = validNumber(seconds) ? Math.max(0, Math.floor(seconds)) : 0;
@@ -381,6 +324,6 @@
     return Math.abs(playerDuration - expected) > (validNumber(tolerance) ? tolerance : 3);
   }
 
-  return { transposePracticeLabel, coreChordLabel, shapeLabel, displayLabel, buildTimeline, chordIndexAt, beatPosition,
-    gridPosition, barAnchorAt, cueAt, strumStep, suggestCapo, formatTime, strokeGlyph, cueTime, expectedDuration, durationMismatch };
+  return { shapeLabel, displayLabel, buildTimeline, chordIndexAt, beatPosition,
+    gridPosition, barAnchorAt, cueAt, strumStep, formatTime, strokeGlyph, cueTime, expectedDuration, durationMismatch };
 });

@@ -1,11 +1,11 @@
 /*
  * Strum Along chord shapes: a curated grip table, a movable-barre generator and an SVG renderer.
  *
- * UMD: window.StrumShapes in the browser, module.exports under node. No dependencies, ES2020.
+ * UMD: window.StrumShapes in the browser, module.exports under node. ES2020. Needs lib/chords.js
+ * (window.StrumChords), which reads the labels (Chords.normalize); load it first.
  *
  *   getShape(label)  -> { name, frets[6], fingers[6], baseFret, barre, note, source } | null
  *   renderShapeSVG(shape, { size, title, fingers, className }) -> SVG markup string
- *   parseChord(label) -> { name, root, rootPc, quality, bass, bassPc, simplified } | null
  *
  * Conventions
  *   - frets and fingers run low E (index 0) to high e (index 5). Fret -1 is a muted string,
@@ -19,124 +19,13 @@
  *     these are common textbook grips, not the voicing on any recording.
  */
 (function (root, factory) {
-  if (typeof module === "object" && module.exports) module.exports = factory();
-  else root.StrumShapes = factory();
-})(typeof self !== "undefined" ? self : this, function () {
+  if (typeof module === "object" && module.exports) module.exports = factory(require("./chords.js"));
+  else root.StrumShapes = factory(root.StrumChords);
+})(typeof self !== "undefined" ? self : this, function (Chords) {
   "use strict";
 
-  // ---------------------------------------------------------------- chord vocabulary
-
-  const NATURAL_PC = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
-  const SHARP_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-  const FLAT_NAMES = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
   const OPEN_STRING_PC = [4, 9, 2, 7, 11, 4]; // standard tuning EADGBE
-
-  // Canonical qualities the shape engine knows. The empty string is a major triad.
-  const QUALITIES = ["", "m", "7", "m7", "maj7", "sus2", "sus4", "7sus4", "add9", "6", "m6", "dim", "aug", "9", "5", "dim7", "m7b5"];
-
-  function pcOf(letter, accidental) {
-    let pc = NATURAL_PC[letter];
-    if (accidental === "#") pc += 1;
-    else if (accidental === "b") pc -= 1;
-    return (pc + 12) % 12;
-  }
-
-  // Exact spellings (after lower-casing, with parentheses removed) -> canonical quality.
-  const EXACT = {
-    "": "", maj: "", major: "", m: "m", min: "m", minor: "m", "-": "m",
-    "7": "7", dom7: "7", dom: "7",
-    m7: "m7", min7: "m7", minor7: "m7", "-7": "m7",
-    maj7: "maj7", major7: "maj7", ma7: "maj7",
-    sus2: "sus2", "2": "sus2", sus4: "sus4", sus: "sus4", "4": "sus4",
-    "7sus4": "7sus4", "7sus": "7sus4", sus4b7: "7sus4", sus7: "7sus4",
-    add9: "add9", add2: "add9", majadd9: "add9", "add(9)": "add9",
-    "6": "6", maj6: "6", m6: "m6", min6: "m6", "-6": "m6",
-    dim: "dim", o: "dim", "\u00b0": "dim", mb5: "dim", minb5: "dim",
-    dim7: "dim7", o7: "dim7", "\u00b07": "dim7",
-    hdim7: "m7b5", hdim: "m7b5", m7b5: "m7b5", min7b5: "m7b5", "m7-5": "m7b5", "\u00f8": "m7b5", "\u00f87": "m7b5",
-    aug: "aug", "+": "aug", aug5: "aug", "#5": "aug", "5#": "aug",
-    "9": "9", dom9: "9", "5": "5"
-  };
-
-  /**
-   * Map a chord-quality suffix (everything between the root and any slash bass) onto one of
-   * QUALITIES. Returns { quality, simplified } or null when the suffix is not understood.
-   * `simplified` is true when an extension had to be dropped (for example m9 -> m7).
-   */
-  function normalizeQuality(raw) {
-    let q = String(raw == null ? "" : raw).replace(/\s+/g, "").replace(/^:/, "");
-    // Case-sensitive spellings first: M means major, m means minor.
-    if (/^(maj\(9\)|maj\(add9\)|\(1,3,5,9\))$/i.test(q)) return { quality: "add9", simplified: false };
-    q = q.replace(/[()]/g, "");
-    if (/^(M|Maj|MAJ|major|Major)$/.test(q)) return { quality: "", simplified: false };
-    if (/^(M7|M\u03947|\u0394|\u03947|Maj7|MAJ7|Ma7|MA7)$/.test(q)) return { quality: "maj7", simplified: false };
-    if (/^(m|min|-)(maj|Maj|M|\u0394)/.test(q)) return { quality: "m", simplified: true }; // minor-major seventh
-    const lower = q.toLowerCase();
-    if (Object.prototype.hasOwnProperty.call(EXACT, lower)) return { quality: EXACT[lower], simplified: false };
-    if (/^(maj|major|ma)(7|9|11|13)/.test(lower)) return { quality: "maj7", simplified: true };
-    if (/^(maj|major)/.test(lower)) return { quality: "maj7", simplified: true };
-    let m;
-    if ((m = /^(?:minor|min|m|-)(.*)$/.exec(lower))) {
-      const rest = m[1];
-      // Only known minor extensions (madd9, m(add11), m9, m6, msus...); "Amxyz" is not a chord.
-      if (rest && !/^(add|sus|maj|[0-9b#(])/.test(rest)) return null;
-      if (/^b5/.test(rest)) return { quality: "dim", simplified: true };
-      if (/^(7|9|11|13)/.test(rest)) return { quality: "m7", simplified: true };
-      if (/^6/.test(rest)) return { quality: "m6", simplified: true };
-      return { quality: "m", simplified: true }; // madd9, m(add11), ...
-    }
-    if (/^7sus/.test(lower) || /^sus4?b7/.test(lower)) return { quality: "7sus4", simplified: true };
-    if (/^sus2/.test(lower)) return { quality: "sus2", simplified: true };
-    if (/^sus/.test(lower)) return { quality: "sus4", simplified: true };
-    if (/^9/.test(lower)) return { quality: "9", simplified: true };
-    if (/^(11|13)/.test(lower)) return { quality: "7", simplified: true };
-    if (/^7/.test(lower)) return { quality: "7", simplified: true }; // 7b9, 7#9, 7#5, 7b5 ...
-    if (/^6/.test(lower)) return { quality: "6", simplified: true }; // 6/9
-    if (/^add/.test(lower)) return { quality: "add9", simplified: true };
-    // Exact "o" and "o7" are in EXACT; a bare "o" prefix is not ("Foo", "Bob" are not chords).
-    if (/^(dim|\u00b0)/.test(lower)) return { quality: "dim", simplified: true };
-    if (/^(aug|\+)/.test(lower)) return { quality: "aug", simplified: true };
-    return null;
-  }
-
-  const DEGREE_PC = { 1: 0, 2: 2, 3: 4, 4: 5, 5: 7, 6: 9, 7: 11 };
-
-  /**
-   * Parse a chord label: "F#m7", "Bb", "C/E", "A:min7", "E5", "Cm/D#", "G/b7" (Harte interval bass).
-   * Returns null for N / X / no-chord markers and for anything without a recognisable root.
-   */
-  function parseChord(label) {
-    if (typeof label !== "string") return null;
-    const s = label.trim().replace(/\u266f/g, "#").replace(/\u266d/g, "b").replace(/[\u2212\u2013]/g, "-");
-    if (!s || /^(N|X|N\.?C\.?|NC|\*)$/i.test(s)) return null;
-    const m = /^([A-G])([#b])?(.*)$/.exec(s);
-    if (!m) return null;
-    const rootText = m[1] + (m[2] || "");
-    let rest = m[3];
-    let bassText = null, bassPc = null;
-    const slash = /^(.*)\/([A-G][#b]?|[b#]?[1-7])$/.exec(rest);
-    if (slash) {
-      rest = slash[1];
-      const tail = slash[2];
-      const note = /^([A-G])([#b])?$/.exec(tail);
-      if (note) { bassText = tail; bassPc = pcOf(note[1], note[2]); }
-      else {
-        const degree = /^([b#]?)([1-7])$/.exec(tail);
-        const rootPc = pcOf(m[1], m[2]);
-        bassPc = (rootPc + DEGREE_PC[degree[2]] + (degree[1] === "#" ? 1 : degree[1] === "b" ? -1 : 0) + 12) % 12;
-        bassText = ((m[2] === "b" || (m[1] === "F" && !m[2])) ? FLAT_NAMES : SHARP_NAMES)[bassPc];
-      }
-    }
-    const quality = normalizeQuality(rest);
-    if (!quality) return null;
-    const rootPc = pcOf(m[1], m[2]);
-    if (bassPc === rootPc) { bassText = null; bassPc = null; } // C/C is just C
-    return {
-      name: rootText + quality.quality + (bassText ? "/" + bassText : ""),
-      root: rootText, rootPc, quality: quality.quality,
-      bass: bassText, bassPc, simplified: quality.simplified, input: label
-    };
-  }
+  const parseChord = Chords.normalize;
 
   // ---------------------------------------------------------------- curated grip table
 
@@ -414,5 +303,5 @@
   /** Chord labels that have an explicit table grip (before the generator), for tests and tooling. */
   function listGripLabels() { return GRIPS.map(g => g[0]); }
 
-  return { getShape, renderShapeSVG, parseChord, normalizeQuality, listGripLabels, QUALITIES, OPEN_STRING_PC };
+  return { getShape, renderShapeSVG, listGripLabels, OPEN_STRING_PC };
 });

@@ -52,76 +52,20 @@ function songHouse(phase = 0, confident = true) {
   };
 }
 
-// --- Ported label helpers ------------------------------------------------------------------
-test("transposePracticeLabel: capo shapes", () => {
-  assert.equal(core.transposePracticeLabel("A", 2), "G");
-  assert.equal(core.transposePracticeLabel("F#m7", 2), "Em7");
-  assert.equal(core.transposePracticeLabel("Bb", 1), "A");
-  assert.equal(core.transposePracticeLabel("E/G#", 2), "D/F#");
-  assert.equal(core.transposePracticeLabel("Eb/G", 1), "D/Gb");
-  assert.equal(core.transposePracticeLabel("N", 3), "N");
-  assert.equal(core.transposePracticeLabel("X", 3), "X");
-  assert.equal(core.transposePracticeLabel("C", 0), "C");
-  assert.throws(() => core.transposePracticeLabel("C", 13));
-  assert.throws(() => core.transposePracticeLabel("C", 1.5));
+// --- Beat grid and time helpers ---------------------------------------------------------
+test("beatPosition: fractional grid position, null outside the grid", () => {
+  const beats = song4(true).beats; // 1.0 s + 0.5 s per beat, 41 beats
+  assert.equal(core.beatPosition(beats, 1), 0);
+  assert.equal(core.beatPosition(beats, 1.25), 0.5);
+  assert.equal(core.beatPosition(beats, 3.2), 4.4);
+  assert.equal(core.beatPosition(beats, 21), 40, "the last beat itself");
+  for (const t of [0.99, 21.01, NaN, Infinity, "3", null]) assert.equal(core.beatPosition(beats, t), null, String(t));
+  assert.equal(core.beatPosition([1], 1), null, "one beat is not a grid");
+  assert.equal(core.beatPosition(null, 1), null);
 });
-test("coreChordLabel: reduces known qualities only", () => {
-  assert.equal(core.coreChordLabel("F#m7"), "F#m");
-  assert.equal(core.coreChordLabel("Cmaj7"), "C");
-  assert.equal(core.coreChordLabel("A:min7"), "Am");
-  assert.equal(core.coreChordLabel("E7sus4"), "Esus4");
-  assert.equal(core.coreChordLabel("Bsus4"), "Bsus4");
-  assert.equal(core.coreChordLabel("G/B"), "G/B");
-  assert.equal(core.coreChordLabel("Am7/G"), "Am/G");
-  assert.equal(core.coreChordLabel("B7"), "B");
-  assert.equal(core.coreChordLabel("N"), "N");
-  assert.equal(core.coreChordLabel(null), null);
-});
-
-const mac = (() => {
-  const file = path.join(__dirname, "..", "..", "experiments", "review", "app.js");
-  try { return fs.existsSync(file) ? require(file) : null; } catch (_) { return null; }
-})();
-const PARITY_LABELS = ["N", "X", "A", "Am", "A:min", "A:maj", "A7", "Amaj7", "Am7", "F#m7", "F#m", "Bsus4", "Bsus2", "E/B", "E/G#", "Cm/D#",
-  "F/C", "G/B", "D/F#", "C/G", "Bb", "Eb", "Db", "Gb7", "C#m", "Abmaj7", "B7", "Bm7", "Bm", "Cmaj7", "D7", "Dsus2", "Esus4", "E7sus4",
-  "A7sus", "Gmaj(9)", "Cmaj(add9)", "C(1,3,5,9)", "Csus4(b7)", "Cadd9", "Cadd2", "Fmaj7", "Em7", "E:min7", "Fm", "Hm", "", "C/b7", "C/3",
-  "Cb", "B#", "E#", "Fb", "Am/C", "Dm7", "G7", "E7", "Fmaj7/C", "Bbm", "A#dim", "Cdim7", "Caug", "C6", "Cm6", "C9", "C11", "C13", "c", "Am/", "Eb/Bb"];
-function extraLabels() {
-  // Labels from built songs and the local chart pack, when present (both optional).
-  const found = new Set();
-  const songsDir = path.join(__dirname, "..", "songs");
-  try { for (const f of fs.readdirSync(songsDir)) if (f.endsWith(".json") && f !== "index.json") {
-    for (const c of JSON.parse(fs.readFileSync(path.join(songsDir, f), "utf8")).chords || []) found.add(c.l);
-  } } catch (_) { /* songs not built yet */ }
-  return [...found];
-}
-test("parity: transposePracticeLabel and coreChordLabel match experiments/review/app.js", () => {
-  if (!mac) { console.log("  (skipped parity: experiments/review/app.js not found)"); return; }
-  const labels = [...new Set([...PARITY_LABELS, ...extraLabels()])];
-  let checks = 0;
-  for (const label of labels) {
-    assert.equal(core.coreChordLabel(label), mac.coreChordLabel(label), `core ${label}`); checks++;
-    for (let capo = 0; capo <= 12; capo++) {
-      assert.equal(core.transposePracticeLabel(label, capo), mac.transposePracticeLabel(label, capo), `transpose ${label} capo ${capo}`);
-      assert.equal(core.shapeLabel(label, { capo, view: "shapes", quality: "core" }), mac.practiceLabel(label, "capo-shapes", capo, "core-chords"));
-      assert.equal(core.shapeLabel(label, { capo, view: "shapes", quality: "full" }), mac.practiceLabel(label, "capo-shapes", capo, "full-chords"));
-      assert.equal(core.shapeLabel(label, { capo, view: "sounding", quality: "core" }), mac.practiceLabel(label, "sounding-pitches", capo, "core-chords"));
-      checks += 4;
-    }
-  }
-  for (const capo of [-1, 13, 2.5, "2", null]) {
-    assert.throws(() => core.transposePracticeLabel("A", capo));
-    assert.throws(() => mac.transposePracticeLabel("A", capo));
-  }
-  assert.ok(checks > 1000);
-});
-test("parity: beatPosition and formatTime match experiments/review/app.js", () => {
-  if (!mac) return;
-  const beats = song4(true).beats;
-  for (let t = -1; t <= 23; t += 0.137) assert.equal(core.beatPosition(beats, t), mac.beatPosition(beats, t));
-  for (const t of [0, 21, 1, 1.25, NaN, Infinity, "3"]) assert.equal(core.beatPosition(beats, t), mac.beatPosition(beats, t));
-  assert.equal(core.beatPosition([1], 1), mac.beatPosition([1], 1));
-  for (const s of [0, 0.4, 59.99, 60, 61.5, 3599, 3600, 7322]) assert.equal(core.formatTime(s), mac.timeLabel(s));
+test("formatTime: whole seconds as m:ss", () => {
+  const cases = { 0: "0:00", 0.4: "0:00", 59.99: "0:59", 60: "1:00", 61.5: "1:01", 3599: "59:59", 3600: "60:00", 7322: "122:02" };
+  for (const [s, label] of Object.entries(cases)) assert.equal(core.formatTime(Number(s)), label, s);
 });
 
 test("shapeLabel: view and quality options", () => {
@@ -514,40 +458,6 @@ test("strumStep: outside the grid is null; one-beat extension at each end", () =
 test("strumStep: assumed 4 beats per bar for a null meter", () => {
   const song = song4(false); song.rhythm.beats_per_bar = null;
   assert.equal(core.strumStep(song, song.strumming.patterns[1], 2.75), 7);
-});
-
-// --- suggestCapo -----------------------------------------------------------------------------
-test("suggestCapo: open shapes at capo 0 score 1", () => {
-  const r = core.suggestCapo([{ s: 0, e: 4, l: "A" }, { s: 4, e: 8, l: "D" }, { s: 8, e: 12, l: "E" }, { s: 12, e: 20, l: "N" }]);
-  assert.equal(r.capo, 0);
-  assert.equal(r.score, 1);
-  assert.equal(r.scores.length, 8);
-});
-test("suggestCapo: capo 2 shapes win for an F#m/A/Bm/D/E chart", () => {
-  const chords = ["F#m", "A", "Bm", "D", "E"].map((l, i) => ({ s: i * 2, e: i * 2 + 2, l }));
-  const r = core.suggestCapo(chords);
-  assert.equal(r.capo, 2);
-  assert.equal(r.score, 1);
-  close(r.scores[0], (2 + 1 + 2 + 2) / 10);
-});
-test("suggestCapo: lower capo on near-ties; half credit for F, Bm and B7", () => {
-  const r = core.suggestCapo([{ s: 0, e: 98, l: "A" }, { s: 98, e: 100, l: "F#m" }]);
-  close(r.scores[0], 0.98); close(r.scores[2], 1);
-  assert.equal(r.capo, 0);
-  assert.equal(core.suggestCapo([{ s: 0, e: 1, l: "B7" }]).scores[0], 0.5);
-  assert.equal(core.suggestCapo([{ s: 0, e: 1, l: "F" }]).scores[0], 0.5);
-  const cSharpMinor = core.suggestCapo([{ s: 0, e: 1, l: "C#m" }]);
-  assert.equal(cSharpMinor.capo, 4, "C#m -> Am shape at capo 4");
-  assert.equal(cSharpMinor.scores[2], 0.5, "C#m -> Bm shape at capo 2 is half credit");
-  assert.equal(core.suggestCapo([{ s: 0, e: 1, l: "C#7" }]).capo, 1, "C#7 -> C7 (core C) at capo 1");
-  assert.equal(core.suggestCapo([{ s: 0, e: 1, l: "G/B" }]).scores[0], 1, "slash chords score on their root shape");
-});
-test("suggestCapo: accepts start/end/sounding events; empty charts", () => {
-  assert.equal(core.suggestCapo([{ start: 0, end: 2, sounding: "Bb" }]).capo, 1);
-  const empty = core.suggestCapo([]);
-  assert.deepEqual([empty.capo, empty.score], [0, 0]);
-  assert.equal(core.suggestCapo([{ s: 0, e: 3, l: "X" }]).score, 0);
-  assert.equal(core.suggestCapo(null).capo, 0);
 });
 
 // --- small helpers ---------------------------------------------------------------------------
