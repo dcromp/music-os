@@ -7,10 +7,12 @@
   const Core = window.StrumCore;
   const RepeatTiming = window.StrumRepeatTiming;
   const Session = window.StrumSession;
+  const Library = window.StrumLibrary;
   const app = document.getElementById("app");
   if (!app) return;
   if (!Core) { app.innerHTML = '<p class="msg error">Strum Along could not start: lib/core.js did not load. Reload to try again.</p><p><a class="btn" href="">Reload</a></p>'; return; }
   if (!Session) { app.innerHTML = '<p class="msg error">Strum Along could not start: lib/session.js did not load. Reload to try again.</p><p><a class="btn" href="">Reload</a></p>'; return; }
+  if (!Library) { app.innerHTML = '<p class="msg error">Strum Along could not start: lib/library.js did not load. Reload to try again.</p><p><a class="btn" href="">Reload</a></p>'; return; }
 
   // ---------------------------------------------------------------- practice session + storage adapter
   // Playback, resume and persistence rules live in lib/session.js; app.js only renders.
@@ -104,21 +106,29 @@
   function route() {
     const gen = ++routeGen;
     leaveSong();
-    const match = /^#\/song\/([^/?#]+)\/?$/.exec(location.hash || "");
+    const match = /^#\/(song|ready)\/([^/?#]+)\/?$/.exec(location.hash || "");
     if (match) {
       let id = "";
-      try { id = decodeURIComponent(match[1]); } catch (_) { id = ""; }
-      showSong(id, gen);
+      try { id = decodeURIComponent(match[2]); } catch (_) { id = ""; }
+      if (match[1] === "ready") showReady(id, gen); else showSong(id, gen);
     } else showLibrary(gen);
     try { window.scrollTo(0, 0); } catch (_) { /* ignore */ }
   }
 
-  // ---------------------------------------------------------------- library
+  // ---------------------------------------------------------------- library (Jukebox journey, #53)
+  // Search and Surprise me on top, the resume chip, then horizontal shelves: favourites, then one per level.
+  let libQuery = ""; // kept while moving between the library and a song
+
+  const listedSongs = catalogue => Array.isArray(catalogue && catalogue.songs) ? catalogue.songs.filter(s => s && validSongId(s.id)) : [];
+  const readyHref = id => `#/ready/${encodeURIComponent(id)}`;
+
   async function showLibrary(gen) {
     document.title = "Strum Along";
     app.className = "app view-library";
-    app.innerHTML = `<header class="lib-head"><h1>Strum Along <span class="sub">· music-os</span></h1>
-      <p class="tagline">Provisional automatic chord charts. For personal practice.</p></header>
+    app.innerHTML = `<header class="lib-head"><div class="lib-title"><h1>Strum Along <span class="sub">· music-os</span></h1>
+        <button type="button" class="btn" data-act="surprise">🎲 Surprise me</button></div>
+      <p class="tagline">Provisional automatic chord charts. For personal practice.</p>
+      <input id="lib-search" class="lib-search" type="search" placeholder="Search songs or artists" aria-label="Search songs or artists" autocomplete="off" autocorrect="off" spellcheck="false" value="${esc(libQuery)}"></header>
       <div id="lib-body"><p class="muted">Loading songs…</p></div>`;
     let catalogue;
     try { catalogue = await getCatalogue(); }
@@ -129,44 +139,107 @@
       return;
     }
     if (gen !== routeGen) return;
-    const songs = Array.isArray(catalogue && catalogue.songs) ? catalogue.songs.filter(s => s && validSongId(s.id)) : [];
-    const groups = Array.isArray(catalogue && catalogue.groups) ? catalogue.groups.filter(g => g && typeof g.id === "string") : [];
-    const known = new Set(groups.map(g => g.id));
-    const leftovers = songs.filter(s => !known.has(s.group));
-    if (leftovers.length) groups.push({ id: "__other", title: "Other songs", note: "" });
+    renderLibrary(catalogue);
+  }
+
+  function renderLibrary(catalogue) {
+    const body = $("lib-body");
+    if (!body) return;
+    const songs = listedSongs(catalogue);
     let html = "";
-    const resumePoint = store.resumePoint(songs);
-    if (resumePoint) {
-      const { song: lastSong, t } = resumePoint;
-      html += `<a class="resume" href="#/song/${encodeURIComponent(lastSong.id)}" data-act="resume" data-id="${esc(lastSong.id)}" data-t="${t}">
-        <span class="resume-icon" aria-hidden="true">▶</span><span>${t ? "Resume" : "Last played:"} <b>${esc(lastSong.title)}</b>${t ? ` at ${Core.formatTime(t)}` : ""}</span></a>`;
+    if (libQuery.trim()) {
+      const found = Library.search(songs, libQuery);
+      html += found.length ? `<ul class="cards results">${found.map(songCard).join("")}</ul>`
+        : `<p class="msg">No song matches “${esc(libQuery.trim())}”.</p>`;
+    } else {
+      const resumePoint = store.resumePoint(songs);
+      if (resumePoint) {
+        const { song: lastSong, t } = resumePoint;
+        html += `<a class="resume" href="#/song/${encodeURIComponent(lastSong.id)}" data-act="resume" data-id="${esc(lastSong.id)}" data-t="${t}">
+          <span class="resume-icon" aria-hidden="true">${t ? "▶" : "↻"}</span><span>${t ? "Resume" : "Play again:"} <b>${esc(lastSong.title)}</b>${t ? ` at ${Core.formatTime(t)}` : ""}</span></a>`;
+      }
+      for (const shelf of Library.shelves({ groups: catalogue && catalogue.groups, songs }, store.favourites())) {
+        html += `<section class="group shelf-group"><h2>${esc(shelf.title)}</h2>${shelf.note ? `<p class="group-note">${esc(shelf.note)}</p>` : ""}
+          <ul class="cards shelf">${shelf.songs.map(songCard).join("")}</ul></section>`;
+      }
+      if (!songs.length) html += `<p class="msg">No songs are listed yet.</p>`;
     }
-    for (const group of groups) {
-      const members = songs.filter(s => group.id === "__other" ? !known.has(s.group) : s.group === group.id)
-        .sort((a, b) => (num(a.order) ? a.order : 999) - (num(b.order) ? b.order : 999) || String(a.title).localeCompare(String(b.title)));
-      if (!members.length) continue;
-      html += `<section class="group"><h2>${esc(group.title)}</h2>${group.note ? `<p class="group-note">${esc(group.note)}</p>` : ""}
-        <ul class="cards">${members.map(songCard).join("")}</ul></section>`;
-    }
-    if (!songs.length) html += `<p class="msg">No songs are listed yet.</p>`;
     html += `<footer class="lib-foot"><p>Chords are automatic drafts and may be wrong. Strum patterns are practice suggestions, not the recorded parts. Beats are estimated; bars are approximate.</p></footer>`;
-    $("lib-body").innerHTML = html;
+    body.innerHTML = html;
   }
 
   function songCard(s) {
     const chips = (Array.isArray(s.core_shapes) ? s.core_shapes : []).map(c => `<span class="chip">${esc(c)}</span>`).join("");
-    const meta = [];
-    if (num(s.bpm)) meta.push(`~${Math.round(s.bpm)} BPM`);
-    if (s.meter_label) meta.push(esc(s.meter_label));
     const badges = [];
     if (num(s.capo) && s.capo > 0) badges.push(`<span class="badge capo">Capo ${esc(s.capo)}</span>`);
     if (s.playable_embed === false) badges.push(`<span class="badge warn">${/unchecked/i.test(s.embed_note) ? "timing unchecked" : "alternate video"}</span>`);
-    return `<li><a class="card" href="#/song/${encodeURIComponent(s.id)}">
+    return `<li><a class="card" href="${readyHref(s.id)}">
       <span class="card-main"><span class="card-title">${esc(s.title)}</span><span class="card-artist">${esc(s.artist)}</span></span>
       ${chips ? `<span class="chips" aria-label="Core shapes">${chips}</span>` : ""}
-      <span class="card-meta">${meta.join(" · ")}${badges.length ? ` ${badges.join(" ")}` : ""}</span>
-      ${s.embed_note ? `<span class="card-note">${esc(s.embed_note)}</span>` : ""}
+      ${badges.length ? `<span class="card-meta">${badges.join(" ")}</span>` : ""}
     </a></li>`;
+  }
+
+  // Surprise me: a song at the learner's level, opened on its get-ready sheet.
+  async function surpriseMe(lastId) {
+    let catalogue;
+    try { catalogue = await getCatalogue(); } catch (_) { return; }
+    const pick = Library.surprise(listedSongs(catalogue), { lastId, plays: store.plays() });
+    if (pick) location.hash = readyHref(pick.id);
+  }
+
+  const favouriteLabel = id => store.favourites().includes(id) ? "★ Favourite" : "☆ Favourite";
+
+  // ---------------------------------------------------------------- get-ready sheet
+  // What you need before pressing Play: capo, the core shapes, and the first practice pattern.
+  async function showReady(id, gen) {
+    app.className = "app view-ready";
+    app.innerHTML = `<header class="topbar"><a class="back" href="#/">‹ Songs</a><div class="top-title"><h1>Loading…</h1></div></header>
+      <p class="muted pad">Loading song…</p>`;
+    if (!validSongId(id)) { songError("Song not found.", false); return; }
+    let song;
+    try { song = await getSong(id); }
+    catch (error) {
+      if (gen !== routeGen) return;
+      songError(error && error.status === 404 ? "Song not found." : "Couldn't load this song. Check your connection.", !(error && error.status === 404));
+      return;
+    }
+    if (gen !== routeGen) return;
+    if (!song || !Array.isArray(song.chords)) { songError("This song's chart is missing or damaged.", false); return; }
+    document.title = `${song.title || "Song"} · Strum Along`;
+    const capo = num(song.capo) && song.capo > 0 ? song.capo : 0;
+    const d = song.difficulty || {};
+    const shapes = Array.isArray(d.main_shapes) && d.main_shapes.length ? d.main_shapes : [];
+    const pattern = song.strumming && Array.isArray(song.strumming.patterns) ? song.strumming.patterns.find(p => p && Array.isArray(p.strokes) && p.strokes.length) : null;
+    const bpm = song.rhythm && num(song.rhythm.bpm) ? Math.round(song.rhythm.bpm) : null;
+    const lib = window.StrumShapes;
+    const diagram = label => {
+      let svg = "";
+      try { const shape = lib && lib.getShape(label); svg = shape ? String(lib.renderShapeSVG(shape, { size: 84 }) || "") : ""; } catch (_) { svg = ""; }
+      return `<figure class="diagram"><figcaption><span class="d-name">${esc(label)}</span></figcaption>${svg ? `<div class="d-svg">${svg}</div>` : `<p class="muted d-missing">No diagram</p>`}</figure>`;
+    };
+    app.innerHTML = `<header class="topbar">
+      <a class="back" href="#/" aria-label="Back to songs">‹ Songs</a>
+      <div class="top-title"><h1>${esc(song.title)}</h1><p>${esc(song.artist)}</p></div>
+      <span class="top-badges">${capo ? `<span class="badge capo">Capo ${capo}</span>` : ""}${levelBadge(song)}<span class="badge prov" title="Automatic chord chart; not reviewed">Provisional</span></span>
+    </header>
+    <div class="ready">
+      <p class="ready-meta">${esc([capo ? "" : "No capo", bpm ? `~${bpm} BPM` : ""].filter(Boolean).join(" · "))}</p>
+      ${song.setup_note ? `<p class="hint">${esc(song.setup_note)}</p>` : ""}
+      ${shapes.length ? `<section class="panel"><h2 class="panel-title">You'll need</h2><div class="diagrams ready-diagrams">${shapes.map(diagram).join("")}</div></section>` : ""}
+      ${pattern ? `<section class="panel"><h2 class="panel-title">Strum</h2>${strokeGrid(pattern)}
+        <p class="hint">${esc(pattern.name || "")}. A practice suggestion, not the recorded part; switch patterns in the player.</p></section>` : ""}
+      <a class="btn btn-play ready-play" href="#/song/${encodeURIComponent(song.id)}">▶ Play</a>
+      <p class="row"><button type="button" class="btn" data-act="fav" data-id="${esc(song.id)}" aria-pressed="${store.favourites().includes(song.id)}">${favouriteLabel(song.id)}</button></p>
+    </div>`;
+  }
+
+  function strokeGrid(pattern) {
+    const n = pattern.strokes.length;
+    const counts = Array.isArray(pattern.counts) ? pattern.counts : [];
+    return `<div class="stroke-grid" style="grid-template-columns:repeat(${n},1fr)" role="img" aria-label="${esc(pattern.strokes.join(" "))}">
+      ${pattern.strokes.map(x => `<span class="stroke${x === "D" || x === "U" ? "" : " rest"}">${x === "D" || x === "U" ? esc(x) : "·"}</span>`).join("")}
+      ${pattern.strokes.map((_, i) => `<span class="stroke-count">${esc(counts[i] || "")}</span>`).join("")}</div>`;
   }
 
   // ---------------------------------------------------------------- song page
@@ -243,6 +316,7 @@
         <div id="player-status" class="player-status" role="status" aria-live="polite"></div>
       </div>
       <div class="col-cues">
+        <section id="after-panel" class="panel after-panel" aria-label="Song finished" hidden></section>
         <section id="cue-panel" class="panel cue-panel" aria-label="Chord cues">
           <div id="cue-live" class="cue-live">
             <div class="cue-row">
@@ -389,7 +463,8 @@
     }
     if (code === 3) window.clearTimeout(S.playTimer);
     // The lock is kept while paused (chords are read during a pause) and released when the song ends.
-    if (code === 0) releaseWakeLock();
+    if (code === 0) { releaseWakeLock(); showAfter(); }
+    else if (code === 1) setHidden($("after-panel"), true);
     updateTransport();
     frame();
   }
@@ -586,6 +661,25 @@
       noteEl.textContent = note;
       setHidden(noteEl, !note);
     }
+  }
+
+  // After the song (Jukebox journey, #53): count the play, then offer Again, favourite, Surprise me
+  // and songs that share its chords.
+  async function showAfter() {
+    const page = S;
+    const count = store.recordPlay(page.song.id);
+    let others = [];
+    try { const songs = listedSongs(await getCatalogue()); others = Library.similar(songs, songs.find(x => x.id === page.song.id), 5); } catch (_) { others = []; }
+    const box = $("after-panel");
+    if (S !== page || !box || S.state !== 0) return;
+    box.innerHTML = `<h2 class="after-title">Nice one 🎸</h2>
+      <p class="hint">${esc(page.song.title)} · played ${count === 1 ? "once" : `${count} times`} on this phone</p>
+      <div class="row"><button type="button" class="btn btn-play" data-act="again">↻ Again</button>
+        <button type="button" class="btn" data-act="fav" data-id="${esc(page.song.id)}" aria-pressed="${store.favourites().includes(page.song.id)}">${favouriteLabel(page.song.id)}</button>
+        <button type="button" class="btn" data-act="surprise">🎲 Surprise me</button></div>
+      ${others.length ? `<h3 class="after-sub">Another like this</h3><ul class="cards after-list">${others.map(songCard).join("")}</ul>` : ""}`;
+    setHidden(box, false);
+    box.scrollIntoView({ block: "nearest", behavior: "smooth" });
   }
 
   function setHidden(el, hidden) { if (el && el.hidden !== hidden) el.hidden = hidden; }
@@ -827,6 +921,13 @@
     if (!target || !app.contains(target)) return;
     const act = target.dataset.act;
     if (act === "reload") { location.reload(); return; }
+    if (act === "surprise") { surpriseMe(S ? S.song.id : null); return; }
+    if (act === "fav") {
+      const on = store.toggleFavourite(target.dataset.id);
+      target.setAttribute("aria-pressed", String(on));
+      target.textContent = on ? "★ Favourite" : "☆ Favourite";
+      return;
+    }
     if (act === "resume") {
       const t = Number(target.dataset.t);
       resumeRequest = { id: target.dataset.id, t: Number.isFinite(t) ? t : 0 };
@@ -837,6 +938,7 @@
       case "play": togglePlay(); break;
       case "back10": seekTo(S.pt - 10); break;
       case "restart": seekTo(0); break;
+      case "again": setHidden($("after-panel"), true); seekTo(0); if (!S.session.playing) togglePlay(); break;
       case "hide": S.cuesHidden = !S.cuesHidden; updateTransport(); frame(); break;
       case "nudge": {
         S.session.nudgeBy(Number(target.dataset.ms));
@@ -867,6 +969,12 @@
         break;
       default: break;
     }
+  });
+
+  app.addEventListener("input", event => {
+    if (event.target.id !== "lib-search") return;
+    libQuery = event.target.value;
+    getCatalogue().then(catalogue => { if (!S && $("lib-search")) renderLibrary(catalogue); }).catch(() => {});
   });
 
   app.addEventListener("change", event => {

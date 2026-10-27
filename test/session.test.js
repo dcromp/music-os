@@ -399,5 +399,29 @@ test("the epoch only moves when cached cue rendering must be redrawn", () => {
   assert.equal(session.epoch, e0 + 2);
 });
 
+test("favourites and play counts persist under their own keys and tolerate garbage", () => {
+  const map = new Map();
+  const store = createStore(mapStorage(map));
+  assert.deepEqual(store.favourites(), []);
+  assert.equal(store.toggleFavourite("song-1"), true);
+  assert.equal(store.toggleFavourite("song-2"), true);
+  assert.equal(store.toggleFavourite("song-1"), false);
+  assert.deepEqual(store.favourites(), ["song-2"]);
+  assert.equal(raw(map, "favourites"), JSON.stringify(["song-2"]));
+  assert.equal(store.recordPlay("song-2"), 1);
+  assert.equal(store.recordPlay("song-2"), 2);
+  assert.deepEqual(store.plays(), { "song-2": 2 });
+  assert.equal(raw(map, "plays"), JSON.stringify({ "song-2": 2 }));
+  const reread = createStore(mapStorage(map));
+  assert.deepEqual(reread.favourites(), ["song-2"]);
+  assert.deepEqual(reread.plays(), { "song-2": 2 });
+  const junk = createStore(mapStorage(new Map([[PREFIX + "favourites", '{"a":1}'], [PREFIX + "plays", '["x"]']])));
+  assert.deepEqual(junk.favourites(), []);
+  assert.deepEqual(junk.plays(), {});
+  const mixed = createStore(mapStorage(new Map([[PREFIX + "favourites", '["ok", 3, null, "ok"]'], [PREFIX + "plays", '{"a": 2, "b": "x", "c": -1}']])));
+  assert.deepEqual(mixed.favourites(), ["ok"]);
+  assert.deepEqual(mixed.plays(), { a: 2 });
+});
+
 console.log(`session.test.js: ${results.passed} passed, ${results.failed.length} failed`);
 if (results.failed.length) throw new Error(`session.test.js: ${results.failed.length} failing test(s): ${results.failed.join("; ")}`);
