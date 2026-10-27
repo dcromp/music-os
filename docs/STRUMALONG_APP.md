@@ -43,6 +43,7 @@ strumalong/                 # deployable root (published to gh-pages as-is)
   index.html                # app shell; hash routes: #/ (library), #/song/<id>
   app.js                    # DOM, routing, YouTube controller, render loop
   styles.css
+  lib/chords.js             # chord shape vocabulary: parse, capo shape/sounding, core label (UMD: window.StrumChords + module.exports)
   lib/core.js               # pure timeline/cue/strum helpers (UMD: window.StrumCore + module.exports)
   lib/shapes.js             # chord grip table + SVG renderer (UMD: window.StrumShapes + module.exports)
   songs/index.json          # catalogue summary (generated)
@@ -55,7 +56,7 @@ strumalong/                 # deployable root (published to gh-pages as-is)
   manifest.webmanifest, icons/, .nojekyll
 ```
 
-Plain static files with no bundler and no npm install. Scripts are classic `<script defer>` tags in this order: `lib/core.js`, `lib/shapes.js`, `app.js`.
+Plain static files with no bundler and no npm install. Scripts are classic `<script defer>` tags in this order: `lib/chords.js`, `lib/core.js`, `lib/shapes.js`, `app.js`. core.js and shapes.js use chords.js.
 
 ## Data schema
 
@@ -109,7 +110,7 @@ Plain static files with no bundler and no npm install. Scripts are classic `<scr
 - `c:1` marks a corrected event (a label correction or alias).
 - `t:1` marks an event whose start the timing fix moved by one beat (see "Timing fix"). The previous event ends at the same time.
 - `b` and `a` are the chord's bar anchor (see "Bar model"): `b` is the bar phase while the chord is held, and `a:1` marks an approximate anchor. Chords outside the beat grid have no `b`.
-- Shape (capo) and Core labels are computed at runtime by `lib/core.js`.
+- Shape (capo) and Core labels are computed at runtime by `lib/core.js`, using `lib/chords.js`.
 - `chart.corrections` holds label corrections (`{id, start, end, from, to, note}`) and, when the timing fix moved anything, one entry `{id:"auto-timing", kind:"timing", count, start, end, note, moves:[{at, was, from, to, shift, agree}]}`. `at`/`was` are the new and raw start times, `from`/`to` the default-view labels (Core shapes at the song's capo), `shift` −1 (one beat earlier) or +1 (later), and `agree` how many repeats of the sequence sat where the change now sits (e.g. `"7/8"`). Details shows the note and the list of moves.
 - When `beats_per_bar` is null (Wonderwall), the exporter writes 4 and `beats_per_bar_assumed: true`.
 - `bar_phase` is the old song-wide heuristic: a chord-start residue vote, not a verified downbeat. Every native chord start that is not N or X and lies strictly inside the beat grid votes for `round(beatPosition(start)) mod beats_per_bar`. Ties keep the lowest residue. `bar_phase_confident` is true when there are at least 8 votes and the winning share is at least 0.7; an assumed meter is never confident. `bar_phase_share` records the share. Since the bar model, these fields are only the fallback for chords without `b` and a summary.
@@ -339,11 +340,21 @@ Levels on 25 October 2026:
 
 Level 5 is empty now; Creep would have been Level 5 (B, Cm).
 
+## `lib/chords.js` API: chord shape vocabulary (pure, unit-tested)
+
+The one implementation of chord-label maths for the app, the exporter and the catalogue checks. Its pitch-class and quality tables are internal. The frozen Mac review player (`experiments/review/app.js`) keeps its own copy as evidence. On 27 October `shapeForCapo` and `coreLabel` matched its `transposePracticeLabel` and `coreChordLabel` on 6,462 labels at every capo from 0 to 12 ([#45](https://github.com/dcromp/music-os/issues/45)).
+
+- `parse(label)` returns `{root, rootPc, quality, bass, bassPc}` or null for N, X, junk and an unreadable bass. quality is the suffix as written, without a Harte `:`. A degree bass (`G/b7`) gets its pitch class.
+- `shapeForCapo(sounding, capo)` returns the chord shape fretted with that capo (`A`, 2 → `G`). A flat root keeps flat spelling. A note bass moves; a degree bass is kept. It throws for a capo outside 0–12.
+- `soundingForCapo(shape, capo)` is the reverse, with sharp spelling (`G/B`, 2 → `A/C#`). The catalogue checks use it to turn teaching shapes into sounding chords.
+- `coreLabel(label)` removes known extensions: m7 → m, maj7/7/add9 → major, 7sus4 → sus4. Suspensions and unknown qualities stay unchanged.
+- `normalize(label)` maps a label onto one of `QUALITIES` for diagrams (`Am9` → `m7`, `simplified: true`). It also accepts Unicode sharp/flat signs and `C6/9`.
+- `noteName(pc)` returns the sharp spelling of a pitch class.
+
 ## `lib/core.js` API (pure, unit-tested)
 
 Ported helpers from `experiments/review/app.js` keep their names and behaviour. Each carries a comment naming its source line.
 
-- `transposePracticeLabel(label, capo)` and `coreChordLabel(label)` follow the Mac player.
 - `shapeLabel(sounding, {capo, view:'shapes'|'sounding', quality:'core'|'full'})`
 - `buildTimeline(song, opts)` returns display events `{s,e,label,full,sounding,c}`. Adjacent equal labels are merged after transforms. Merges never bridge N or X.
 - `chordIndexAt(events, t)` is a binary search that returns the index, or -1.
@@ -360,7 +371,6 @@ Ported helpers from `experiments/review/app.js` keep their names and behaviour. 
   - `pos = ((beatFloat - phase(floor(beatFloat))) mod bpb + bpb) mod bpb`, with `phase` the per-beat anchor
   - `step = floor(pos*stepsPerBeat)`
 - `barAnchorAt(song, beat)` returns `{phase, approx, bar, half, anchored}` for an integer grid beat (a fractional one uses its floor). `bar` means the strum count reads 1 there. The per-beat map is cached per song object and rebuilt when `song.chords`, `song.beats` or the rhythm fields change identity or value.
-- `suggestCapo(chords)` is exported for the exporter. For each capo from 0 to 7 it scores the share of chord seconds whose core shape is one of the easy open shapes A, Am, C, D, Dm, E, Em, G. F, Bm and B7 get half credit. It returns `{capo, score, scores[]}`, preferring the lower capo on near-ties (within 0.03).
 - `cueTime(playerSeconds, offsetSeconds, nudgeMs, latencyMs, rate)` returns `player + offset + nudge/1000 − latency/1000 × rate`. Latency is wall-clock delay, so at 0.5× it covers half as much media time. The nudge and offset are media time and are not scaled. A rate that is not a positive number counts as 1.
 - `formatTime(s)` returns "m:ss".
 

@@ -1,10 +1,12 @@
 "use strict";
 // Sanity checks for a Strum Along additions pack. Read-only. Uses the learner player's own validators
-// (experiments/review/app.js) so the pack is accepted by exactly the code the exporter will use.
+// (experiments/review/app.js) and the app's chord vocabulary (strumalong/lib/chords.js), so the pack is
+// accepted by exactly the code the exporter will use.
 //   node check_pack.js <pack dir> <rhythm config json> [--json]
 const fs = require("node:fs"), path = require("node:path"), crypto = require("node:crypto");
 const REPO = path.resolve(__dirname, "../../..");
 const app = require(path.join(REPO, "experiments/review/app.js"));
+const Chords = require(path.join(REPO, "strumalong/lib/chords.js"));
 const [PACK, CONFIG] = [process.argv[2], process.argv[3]];
 const AS_JSON = process.argv.includes("--json");
 const sha = b => crypto.createHash("sha256").update(b).digest("hex");
@@ -16,17 +18,14 @@ const expectedPath = path.join(__dirname, "expected-chords.json");
 const expected = fs.existsSync(expectedPath) ? JSON.parse(read(expectedPath)) : {};
 const rhythmById = app.validateRhythmManifest(rhythm, manifest.cases);
 
-const PC = { C: 0, "B#": 0, "C#": 1, Db: 1, D: 2, "D#": 3, Eb: 3, E: 4, Fb: 4, "E#": 5, F: 5, "F#": 6, Gb: 6, G: 7, "G#": 8, Ab: 8, A: 9, "A#": 10, Bb: 10, B: 11, Cb: 11 };
-const NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 // Reduce to {root pitch class, major|minor|other} ignoring bass, extensions and suspensions' naming.
 function family(label) {
   if (label === "N" || label === "X") return null;
-  const core = app.coreChordLabel(label).split("/")[0];
-  const m = /^([A-G](?:#|b)?)(.*)$/.exec(core);
-  if (!m || !(m[1] in PC)) return null;
-  const q = m[2];
+  const p = Chords.parse(Chords.coreLabel(label).split("/")[0]);
+  if (!p) return null;
+  const q = p.quality;
   const kind = q === "" ? "" : /^m(?!aj)/.test(q) ? "m" : /^sus/.test(q) ? "sus" : q.startsWith("dim") ? "dim" : q.startsWith("aug") ? "aug" : "?";
-  return { root: PC[m[1]], kind, text: NAMES[PC[m[1]]] + (kind === "?" ? q : kind) };
+  return { root: p.rootPc, kind, text: Chords.noteName(p.rootPc) + (kind === "?" ? q : kind) };
 }
 const EASY = new Set(["A", "Am", "C", "D", "Dm", "E", "Em", "G"]), HALF = new Set(["F", "Bm", "B7"]);
 function shapeScore(events, capo) {
@@ -35,7 +34,7 @@ function shapeScore(events, capo) {
     if (e.label === "N" || e.label === "X") continue;
     const d = e.end_seconds - e.start_seconds;
     total += d;
-    const c = app.coreChordLabel(app.transposePracticeLabel(e.label, capo)).split("/")[0];
+    const c = Chords.coreLabel(Chords.shapeForCapo(e.label, capo)).split("/")[0];
     score += EASY.has(c) ? d : HALF.has(c) ? d * 0.5 : 0;
   }
   return total ? score / total : 0;

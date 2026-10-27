@@ -7,7 +7,9 @@ const vm = require("node:vm");
 
 const SHAPES_PATH = path.resolve(__dirname, "..", "lib", "shapes.js");
 const S = require(SHAPES_PATH);
-const { getShape, renderShapeSVG, parseChord, QUALITIES, OPEN_STRING_PC: OPEN } = S;
+const Chords = require(path.resolve(__dirname, "..", "lib", "chords.js"));
+const { getShape, renderShapeSVG, OPEN_STRING_PC: OPEN } = S;
+const { QUALITIES, normalize: parseChord } = Chords;
 
 let passed = 0, failed = 0;
 function test(name, fn) {
@@ -100,9 +102,13 @@ test("loads as UMD in node and in a browser-like global scope", () => {
   assert.equal(typeof getShape, "function");
   assert.equal(typeof renderShapeSVG, "function");
   const source = fs.readFileSync(SHAPES_PATH, "utf8");
-  assert.ok(/^[\x00-\x7f]*$/.test(source), "source is ASCII only so it loads correctly whatever charset the host sends");
+  const chordsSource = fs.readFileSync(path.resolve(__dirname, "..", "lib", "chords.js"), "utf8");
+  for (const text of [source, chordsSource]) assert.ok(/^[\x00-\x7f]*$/.test(text), "source is ASCII only so it loads correctly whatever charset the host sends");
   const sandbox = {};
-  vm.runInNewContext(source, { self: sandbox });
+  const context = vm.createContext({ self: sandbox });
+  vm.runInContext(chordsSource, context); // index.html loads lib/chords.js first
+  assert.equal(typeof sandbox.StrumChords.normalize, "function");
+  vm.runInContext(source, context);
   assert.equal(typeof sandbox.StrumShapes.getShape, "function");
   assert.equal(typeof sandbox.StrumShapes.renderShapeSVG, "function");
   assert.equal(JSON.stringify(sandbox.StrumShapes.getShape("G")), JSON.stringify(getShape("G")));
@@ -141,26 +147,6 @@ test("parses common label spellings to the same chord", () => {
   equal("Asus", "Asus4"); equal("A7sus", "A7sus4"); equal("A:sus4(b7)", "A7sus4");
   equal("A:maj(9)", "Aadd9"); equal("A:hdim7", "Am7b5"); equal("A:dim7", "Adim7"); equal("C♯", "C#"); equal("D♭m", "Dbm");
   equal("A:min/b3", "Am/C");
-});
-
-test("parseChord reports root, quality and bass", () => {
-  assert.deepEqual(
-    (({ root, rootPc, quality, bass, bassPc }) => ({ root, rootPc, quality, bass, bassPc }))(parseChord("F#m7")),
-    { root: "F#", rootPc: 6, quality: "m7", bass: null, bassPc: null });
-  assert.deepEqual(
-    (({ root, rootPc, quality, bass, bassPc }) => ({ root, rootPc, quality, bass, bassPc }))(parseChord("Cm/D#")),
-    { root: "C", rootPc: 0, quality: "m", bass: "D#", bassPc: 3 });
-  assert.equal(parseChord("Bb").rootPc, 10);
-  assert.equal(parseChord("A#").rootPc, 10);
-  assert.equal(parseChord("E5").quality, "5");
-  assert.equal(parseChord("G/G").bass, null, "G/G is just G");
-  assert.equal(parseChord("A:min/b3").bass, "C");
-  assert.equal(parseChord("Am9").quality, "m7");
-  assert.equal(parseChord("Am9").simplified, true);
-  assert.equal(parseChord("C7b9").quality, "7");
-  assert.equal(parseChord("Cmaj9").quality, "maj7");
-  assert.equal(parseChord("Cmmaj7").quality, "m");
-  assert.equal(parseChord("C6/9").quality, "6");
 });
 
 test("enharmonic roots give the same grip but keep the spelling the caller used", () => {
@@ -471,16 +457,13 @@ test("every root x quality renders to well-formed SVG with the right marker coun
 // ---------------------------------------------------------------- coverage over real charts
 
 const REPO = path.resolve(__dirname, "..", "..");
-const APP_JS = path.join(REPO, "experiments", "review", "app.js");
-let review = null;
-try { if (fs.existsSync(APP_JS)) review = require(APP_JS); } catch (error) { console.log("note: could not load experiments/review/app.js (" + error.message + ")"); }
 
 function labelVariants(label, capos) {
-  const out = new Set([label, review.coreChordLabel(label)]);
+  const out = new Set([label, Chords.coreLabel(label)]);
   for (const capo of capos) {
-    const shifted = review.transposePracticeLabel(label, capo);
+    const shifted = Chords.shapeForCapo(label, capo);
     out.add(shifted);
-    out.add(review.coreChordLabel(shifted));
+    out.add(Chords.coreLabel(shifted));
   }
   return out;
 }
@@ -499,8 +482,7 @@ function assertCovered(variants, where) {
 }
 
 const PACK_CASES = path.join(REPO, "experiments", "generated", "automatic-first-ten-v1", "cases");
-if (!review) console.log("skip coverage tests: experiments/review/app.js not available");
-else if (!fs.existsSync(PACK_CASES)) console.log("skip pack coverage: experiments/generated/automatic-first-ten-v1 is not present (it is gitignored)");
+if (!fs.existsSync(PACK_CASES)) console.log("skip pack coverage: experiments/generated/automatic-first-ten-v1 is not present (it is gitignored)");
 else {
   test("shapes cover every chord in the first-ten pack, plus core forms and capo shapes (capo 2 and 0-7)", () => {
     const labels = new Set();
@@ -523,7 +505,7 @@ else {
 }
 
 const SONGS_DIR = path.join(REPO, "strumalong", "songs");
-if (review && fs.existsSync(SONGS_DIR)) {
+if (fs.existsSync(SONGS_DIR)) {
   const songFiles = fs.readdirSync(SONGS_DIR).filter(name => name.endsWith(".json") && name !== "index.json");
   if (songFiles.length) {
     test(`shapes cover every chord in ${songFiles.length} exported song files (core and capo shapes)`, () => {

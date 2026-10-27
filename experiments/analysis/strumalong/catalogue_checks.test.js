@@ -76,13 +76,6 @@ test("familyMatches: same root and quality, sus and power chords are third-less,
   assert.ok(!cc.familyMatches("Asus", "B"));
   assert.equal(cc.familyKey("Bb"), cc.familyKey("A#"));
 });
-test("transposeLabel keeps quality and bass", () => {
-  assert.equal(cc.transposeLabel("Em7", 2), "F#m7");
-  assert.equal(cc.transposeLabel("Cadd9", 2), "Dadd9");
-  assert.equal(cc.transposeLabel("G/B", 2), "A/C#");
-  assert.equal(cc.transposeLabel("B", 1), "C");
-  assert.equal(cc.transposeLabel("A", 0), "A");
-});
 
 // ---------------------------------------------------------------------------------------------------- chords check
 test("chords: expected progression passes and reports cover 100%", () => {
