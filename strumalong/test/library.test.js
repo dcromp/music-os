@@ -33,20 +33,30 @@ test("search matches every word against title and artist, ignoring case, accents
   assert.deepEqual(search(songs, "   "), []);
 });
 
-test("shelves: favourites first (in saved order, only listed songs), then one shelf per level in catalogue order", () => {
+test("shelves: favourites, Easy to jump into, then themed shelves rising in difficulty", () => {
   const out = shelves({ groups, songs }, ["yellow", "gone", "wild-thing"]);
-  assert.deepEqual(out.map(s => s.id), ["favourites", "level-1", "level-2", "level-3", "level-5"]);
+  assert.deepEqual(out.map(s => s.id), ["favourites", "three-chord", "campfire", "barre"], "no Easy shelf without change rates");
   assert.deepEqual(ids(out[0].songs), ["yellow", "wild-thing"]);
   assert.deepEqual(ids(out[1].songs), ["thats-all-right", "wild-thing", "achy"]);
-  assert.equal(out[1].title, "Level 1");
-  assert.equal(out[1].note, "note 1");
+  assert.deepEqual(ids(out[2].songs), ["brown-eyed", "sweet-home", "yellow", "wonderwall"], "levels 2-3, level then order then title");
+  assert.deepEqual(ids(out[3].songs), ["creep"]);
+  assert.ok(out.every(s => !/level/i.test(s.title)), "no level numbers in shelf titles");
   assert.equal(shelves({ groups, songs }, []).some(s => s.id === "favourites"), false);
 });
 
-test("shelves keep songs whose group is missing on an 'Other songs' shelf", () => {
-  const out = shelves({ groups: groups.slice(0, 1), songs }, []);
-  assert.deepEqual(out.map(s => s.id), ["level-1", "other"]);
-  assert.equal(out[1].songs.length, songs.length - 3);
+test("Easy to jump into: up to ten songs at level 3 or below, fewest changes a minute first", () => {
+  const many = songs.map((s, i) => ({ ...s, changes_per_min: [12, 8, 20, 9, 30, 11, 5, 10][i] }));
+  const easy = shelves({ songs: many }, []).find(s => s.id === "easy");
+  assert.deepEqual(ids(easy.songs), ["thats-all-right", "yellow", "wonderwall", "sweet-home", "wild-thing", "achy", "brown-eyed"]);
+  assert.ok(!ids(easy.songs).includes("creep"), "barre songs are not easy, however calm");
+  const lots = Array.from({ length: 15 }, (_, i) => S(`s${i}`, 1, ["A"], { changes_per_min: i }));
+  assert.equal(shelves({ songs: lots }, []).find(s => s.id === "easy").songs.length, 10);
+  assert.equal(shelves({ songs }, []).some(s => s.id === "easy"), false, "no shelf without change rates");
+});
+
+test("songs without a known level go on an 'Other songs' shelf", () => {
+  const out = shelves({ songs: songs.concat({ id: "mystery", title: "Mystery", core_shapes: [] }) }, []);
+  assert.deepEqual(ids(out[out.length - 1].songs), ["mystery"]);
 });
 
 test("similar: shares chords, at most one level harder, most shared first, never itself", () => {

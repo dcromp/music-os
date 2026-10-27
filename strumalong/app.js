@@ -125,7 +125,7 @@
   async function showLibrary(gen) {
     document.title = "Strum Along";
     app.className = "app view-library";
-    app.innerHTML = `<header class="lib-head"><div class="lib-title"><h1>Strum Along <span class="sub">· music-os</span></h1>
+    app.innerHTML = `<header class="lib-head"><div class="lib-title"><h1>Strum Along</h1>
         <button type="button" class="btn" data-act="surprise">🎲 Surprise me</button></div>
       <p class="tagline">Provisional automatic chord charts. For personal practice.</p>
       <input id="lib-search" class="lib-search" type="search" placeholder="Search songs or artists" aria-label="Search songs or artists" autocomplete="off" autocorrect="off" spellcheck="false" value="${esc(libQuery)}"></header>
@@ -221,7 +221,7 @@
     app.innerHTML = `<header class="topbar">
       <a class="back" href="#/" aria-label="Back to songs">‹ Songs</a>
       <div class="top-title"><h1>${esc(song.title)}</h1><p>${esc(song.artist)}</p></div>
-      <span class="top-badges">${capo ? `<span class="badge capo">Capo ${capo}</span>` : ""}${levelBadge(song)}<span class="badge prov" title="Automatic chord chart; not reviewed">Provisional</span></span>
+      <span class="top-badges">${capo ? `<span class="badge capo">Capo ${capo}</span>` : ""}<span class="badge prov" title="Automatic chord chart; not reviewed">Provisional</span></span>
     </header>
     <div class="ready">
       <p class="ready-meta">${esc([capo ? "" : "No capo", bpm ? `~${bpm} BPM` : ""].filter(Boolean).join(" · "))}</p>

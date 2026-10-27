@@ -74,7 +74,7 @@ Plain static files with no bundler and no npm install. Scripts are classic `<scr
                "group":"level-1", "order":1, "level":1, "level_label":"First chords",
                "video_id":"bLJkrOYHNw8", "duration_seconds":155.35,
                "bpm":103, "meter_label":"4/4 assumed", "capo":0,
-               "core_shapes":["A","E","D"], "playable_embed": true, "embed_note":"" } ] }
+               "core_shapes":["A","E","D"], "changes_per_min":7.4, "playable_embed": true, "embed_note":"" } ] }
 ```
 
 - One group per level that has songs, in level order, each with a one-line explanation. `songs` is listed level by level.
@@ -415,7 +415,7 @@ This module takes playback events in and gives cue time, the resume point and sa
 Pure rules over the catalogue summaries, tested in `test/library.test.js`.
 
 - `search(songs, query)`: songs whose title or artist contains every query word, ignoring case, accents and apostrophes. An empty query returns `[]`.
-- `shelves(catalogue, favouriteIds)`: `[{id, title, note, songs}]`, with favourites first, then one shelf per level group in catalogue order, then "Other songs". Empty shelves are dropped.
+- `shelves(catalogue, favouriteIds)`: `[{id, title, note, songs}]`. The order is "★ Your favourites", then "Easy to jump into" (the 10 songs at level 3 or below with the fewest `changes_per_min`), then the themed shelves "Three-chord classics" (level 1), "Campfire open chords" (levels 2–3) and "Barre-chord songs" (levels 4–5), then "Other songs". Empty shelves are dropped.
 - `similar(songs, song, limit = 5)`: songs that share at least one core shape and are at most one level harder. Ordered by most shared shapes, then fewest new shapes, then easier, then catalogue order.
 - `surprise(songs, {lastId, plays, rng})`: a random song no harder than the hardest level played (at least level 2), avoiding the song just played.
 
@@ -424,10 +424,10 @@ Pure rules over the catalogue summaries, tested in `test/library.test.js`.
 The end-user journey is **Jukebox** (founder's choice from the journey prototype, 27 October 2026, #53; prototype on branch `prototype/strumalong-journey`). Find a song fast, see a short get-ready sheet, play, then get offered "another like this". Strum Along supports lessons taken elsewhere; it does not teach.
 
 - **Library (`#/`).**
-  - The header reads "Strum Along · music-os", with a **🎲 Surprise me** button (see `surprise`, which opens that song's get-ready sheet), the line "Provisional automatic chord charts. For personal practice." and a **search** box (title or artist). While the box has text, matching cards replace the shelves. The query is kept while moving between pages.
+  - The header reads "Strum Along", with a **🎲 Surprise me** button (see `surprise`, which opens that song's get-ready sheet), the line "Provisional automatic chord charts. For personal practice." and a **search** box (title or artist). While the box has text, matching cards replace the shelves. The query is kept while moving between pages.
   - A last-played song gets a resume chip ("Resume … at m:ss", or "Play again: …"). It opens the player directly.
-  - **Shelves** scroll horizontally. "★ Your favourites" comes first when there are any, then one shelf per level ("Level 1 · First chords" … "Level 5 · Barre chords") with its one-line explanation, easiest first. Each card shows the title, artist and main shapes as chips, plus a capo badge and the "timing unchecked" / "alternate video" badge where they apply. Cards open the get-ready sheet.
-- **Get ready (`#/ready/<id>`).** The same top bar as the song page. ~BPM (or "No capo"), the setup note, diagrams of the main shapes ("You'll need"), the first practice pattern as a stroke grid with counts (labelled a practice suggestion), a big **▶ Play** link to `#/song/<id>` and a ☆/★ Favourite toggle. The YouTube player only loads on the song page, so the learner presses Play there as well.
+  - **Shelves** scroll horizontally, as in prototype A: "★ Your favourites" when there are any, "Easy to jump into", "Three-chord classics", "Campfire open chords" and "Barre-chord songs" (see `shelves`). Difficulty still rises shelf by shelf, but the library shows no level numbers. The level stays on the song page badge and in Details. Each card shows the title, artist and main shapes as chips, plus a capo badge and the "timing unchecked" / "alternate video" badge where they apply. Cards open the get-ready sheet.
+- **Get ready (`#/ready/<id>`).** The song page's top bar without the level badge. ~BPM (or "No capo"), the setup note, diagrams of the main shapes ("You'll need"), the first practice pattern as a stroke grid with counts (labelled a practice suggestion), a big **▶ Play** link to `#/song/<id>` and a ☆/★ Favourite toggle. The YouTube player only loads on the song page, so the learner presses Play there as well.
 - **After the song.** When the video ends, a panel opens at the top of the cue column. It shows "Nice one", the play count on this phone, **↻ Again** (restart and play), Favourite, Surprise me, and up to five "Another like this" cards (`similar`). Playing again hides it. Nothing is placed over the player.
 - **Song (`#/song/<id>`), portrait, top to bottom:**
   1. A top bar with a back link, the title, and the capo, level ("Level 2", titled with its label) and provisional badges.
