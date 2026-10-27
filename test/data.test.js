@@ -86,7 +86,7 @@ function main() {
   for (const card of index.songs || []) {
     check(`index[${card.id}]: fields`, () => {
       assert.ok(hasKeys(card, ["id", "title", "artist", "group", "order", "level", "level_label", "video_id", "duration_seconds", "bpm", "meter_label", "capo",
-        "core_shapes", "playable_embed", "embed_note"]), "missing keys");
+        "core_shapes", "changes_per_min", "playable_embed", "embed_note"]), "missing keys");
       assert.ok(LEVELS.includes(card.level), `level ${card.level}`);
       assert.equal(card.group, `level-${card.level}`);
       assert.equal(card.level_label, LEVEL_LABELS[card.level]);

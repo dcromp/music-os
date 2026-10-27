@@ -623,6 +623,7 @@ function exportSong(draft, metadata, settings = {}) {
     video_id: src.video_id, duration_seconds: r2(c.recording.duration_seconds),
     bpm: Math.round(rhythmCase.pulse_bpm), meter_label: rhythmCase.meter_label, capo: meta.capo,
     core_shapes: difficulty.main_shapes, // the shapes the level counts (one Arrangement profile)
+    changes_per_min: difficulty.changes_per_min, // the library's "Easy to jump into" shelf
     playable_embed: true, embed_note: "",
   };
   const report = { warnings, expected, chords: chords.length, beats: beats.length, vote, bars: { before, after, runs: bars.runs },
