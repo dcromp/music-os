@@ -44,6 +44,7 @@ strumalong/                 # deployable root (published to gh-pages as-is)
   app.js                    # DOM, routing, YouTube controller, render loop
   styles.css
   lib/core.js               # pure timeline/cue/strum helpers (UMD: window.StrumCore + module.exports)
+  lib/repeat-timing.js      # repeat timing: groups repeated changes, drawn/played judgements, auto-timing entry (UMD: window.StrumRepeatTiming)
   lib/shapes.js             # chord grip table + SVG renderer (UMD: window.StrumShapes + module.exports)
   songs/index.json          # catalogue summary (generated)
   songs/<id>.json           # one per recording (generated)
@@ -55,7 +56,7 @@ strumalong/                 # deployable root (published to gh-pages as-is)
   manifest.webmanifest, icons/, .nojekyll
 ```
 
-Plain static files with no bundler and no npm install. Scripts are classic `<script defer>` tags in this order: `lib/core.js`, `lib/shapes.js`, `app.js`.
+Plain static files with no bundler and no npm install. Scripts are classic `<script defer>` tags in this order: `lib/core.js`, `lib/repeat-timing.js`, `lib/shapes.js`, `app.js`.
 
 ## Data schema
 
@@ -206,7 +207,7 @@ Many songs lose the "approx bars" label because a steady phase now fits changes 
 
 The problem (founder, 25 October 2026): in Zombie one Em → C change came a beat late, so Em showed 5 beats and C 3, while the other seven times the band plays G Em C G each chord gets 4. CREMA places most changes well, but now and then one lands a beat early or late. Pop songs repeat their chord sequences with the same bar placement, so the repeats are the check: a change that sits exactly one beat from where the other repeats of the same sequence sit is moved by one beat to match them.
 
-It is a **display-level** correction in the exporter (`applyTimingFix` in `tools/build-songs.js`). The raw chart (`primary.json`) is unchanged, labels never change, and every move is recorded. It runs before the bar anchors and the difficulty, so both use the fixed chart.
+It is a **display-level** correction in the exporter (`applyTimingFix` in `tools/build-songs.js`). Its grouping and judgement are the *drawn timing* measure of `lib/repeat-timing.js`, which also builds the `auto-timing` entry; the catalogue checker uses the same module's *played timing* measure ([ADR 0001](adr/0001-repeat-timing-two-measures.md)). The raw chart (`primary.json`) is unchanged, labels never change, and every move is recorded. It runs before the bar anchors and the difficulty, so both use the fixed chart.
 
 **What is compared.**
 

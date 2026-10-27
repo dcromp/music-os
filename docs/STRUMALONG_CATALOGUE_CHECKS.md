@@ -108,7 +108,7 @@ The 25% line rests on one failing song and two vamps that pass. Nobody has liste
 
 ### 4. Timing consistency
 
-The founder's test: "every other time that sequence is played the timing is correct". Defined on family labels with blips removed:
+The founder's test: "every other time that sequence is played the timing is correct". This is the *played timing* measure of `strumalong/lib/repeat-timing.js` (`playedJudgement`); the exporter's timing fix uses the same module's *drawn timing* measure, so the two consistency numbers differ by design ([ADR 0001](adr/0001-repeat-timing-two-measures.md)). Defined on family labels with blips removed (the blip line is `lib/core.js` `QUICK_BEATS`, 0.75 beat):
 
 - A **change** is the boundary between two consecutive real chords with no N or X between them.
 - Its **position** is the fractional beat index of the new chord's start, modulo beats per bar. Absolute phase never matters.

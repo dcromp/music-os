@@ -25,6 +25,7 @@ const CATALOGUE = process.env.STRUMALONG_CATALOGUE || path.join(ROOT, "data/cata
 const REVIEW = path.join(REPO, "experiments/review");
 const app = require(path.join(REVIEW, "app.js"));
 const Core = require(path.join(ROOT, "lib/core.js"));
+const RepeatTiming = require(path.join(ROOT, "lib/repeat-timing.js"));
 
 const CHECK = process.argv.includes("--check");
 const warnings = [];
@@ -62,7 +63,7 @@ const LEVELS = [
 const LEVEL = new Map(LEVELS.map(l => [l.level, l]));
 const levelTitle = n => `Level ${n} · ${LEVEL.get(n).label}`;
 const MAIN_SHAPE_SHARE = 0.04;   // main shapes cover at least 4% of chord time
-const BLIP_BEATS = 0.75;         // holds shorter than this are blips (the app's "quick" threshold)
+const BLIP_BEATS = Core.QUICK_BEATS;  // holds shorter than this are blips (the app's "quick" threshold, 0.75 beat)
 const QUICK_CPM = 40, QUICK_MEDIAN_BEATS = 2, QUICK_MEDIAN_BPM = 120;
 
 // Default practice patterns for songs without authored patterns (4 beats per bar). Prepared and authored songs keep theirs.
@@ -396,8 +397,6 @@ function barMetrics(song) {
 // moves, so the fix is idempotent: run on its own output it moves nothing.
 const TIMING_FIX = { minAgree: 3, minShare: 0.6, maxDevAfter: 1, minBeats: 1, maxFrac: 0.4, maxPasses: 8 };
 
-const timingKey = (holds, i) => [i >= 2 ? holds[i - 2].label : "^", holds[i - 1].label, holds[i].label,
-  i + 1 < holds.length ? holds[i + 1].label : "$"].join(" ");
 
 // Seconds at fractional grid position p (the inverse of Core.beatPosition inside the grid).
 function secondsAtPosition(beats, p) {
@@ -406,7 +405,7 @@ function secondsAtPosition(beats, p) {
 }
 
 /**
- * The changes of the default-view timeline with their repeat groups, under the provisional phase (opts.anchors: a
+ * The changes of the default-view timeline with their repeat groups (drawn timing, lib/repeat-timing.js), under the provisional phase (opts.anchors: a
  * reference anchor per hold instead, e.g. the unfixed chart's, so a before/after comparison shares one bar grid).
  * @returns {{holds, changes: Array<{i, key, pos, lenA, lenB, frac, sameRun, native}>, groups: Map<string, object>}}
  *   group: {key, members, mode, agree, share, typA, typB, frac} for groups of 2+ changes (mode = most common position,
@@ -418,30 +417,16 @@ function timingGroups(song, opts = {}) {
   const anchors = opts.anchors && opts.anchors.length === holds.length ? opts.anchors : provisional.anchors;
   const firstNative = new Map(song.chords.map((ch, k) => [ch.s, k]));
   const chordHold = h => h && h.inGrid && !h.quick && h.label !== "N" && h.label !== "X";
-  const changes = [];
+  const labels = holds.map(h => h.label), changes = [];
   for (let i = 1; i < holds.length; i++) {
     const A = holds[i - 1], B = holds[i], anchor = anchors[i];
     if (!chordHold(A) || !chordHold(B) || !anchor || anchor.mode !== "phase") continue;
     const prev = anchors[i - 1];
-    changes.push({ i, key: timingKey(holds, i), pos: mod(B.base - anchor.phase, bpb), lenA: A.count, lenB: B.count,
+    changes.push({ i, key: RepeatTiming.contextKey(labels, i), pos: mod(B.base - anchor.phase, bpb), lenA: A.count, lenB: B.count,
       frac: B.sb - B.base, sameRun: Boolean(prev && prev.mode === "phase" && prev.phase === anchor.phase), confident: !anchor.approx,
       native: firstNative.has(B.s) ? firstNative.get(B.s) : -1 });
   }
-  const groups = new Map();
-  for (const ch of changes) {
-    if (!groups.has(ch.key)) groups.set(ch.key, { key: ch.key, members: [] });
-    groups.get(ch.key).members.push(ch);
-  }
-  for (const [key, g] of groups) {
-    if (g.members.length < 2) { groups.delete(key); continue; }
-    const tally = new Map();
-    for (const ch of g.members) tally.set(ch.pos, (tally.get(ch.pos) || 0) + 1);
-    const [mode, agree] = [...tally].sort((a, b) => b[1] - a[1] || a[0] - b[0])[0];
-    const at = g.members.filter(ch => ch.pos === mode);
-    Object.assign(g, { mode, agree, share: agree / g.members.length, typA: median(at.map(ch => ch.lenA)), typB: median(at.map(ch => ch.lenB)),
-      frac: median(at.map(ch => ch.frac)) });
-  }
-  return { holds, changes, groups };
+  return { holds, changes, groups: RepeatTiming.drawnGroups(changes) };
 }
 
 // Share of changes in repeated groups (3+ repeats) that sit at their group's most common position. Compare a chart
@@ -449,12 +434,7 @@ function timingGroups(song, opts = {}) {
 // changes the drawn bars, not where the chords sit relative to each other.
 function timingConsistency(song, opts = {}) {
   if (!(song.rhythm.beats_per_bar >= 3)) return { repeated: 0, consistent: 0, pct: 100 };
-  let repeated = 0, consistent = 0;
-  for (const g of timingGroups(song, opts).groups.values()) {
-    if (g.members.length < 3) continue;
-    repeated += g.members.length; consistent += g.agree;
-  }
-  return { repeated, consistent, pct: repeated ? r1(100 * consistent / repeated) : 100 };
+  return RepeatTiming.drawnConsistency(timingGroups(song, opts).groups, 3);
 }
 
 // Every change that disagrees with a repeated group, with the move it would get or the reason it is left alone.
@@ -469,8 +449,8 @@ function timingCandidates(song, opts = {}) {
     const A = holds[ch.i - 1], B = holds[ch.i];
     const item = { change: ch, group: g, at: B.s, from: A.label, to: B.label, shift: 0, reason: null };
     out.push(item);
-    const d = mod(ch.pos - g.mode, bpb);
-    item.shift = d === 1 ? -1 : d === bpb - 1 ? 1 : 0;
+    const { d, shift } = RepeatTiming.drawnOffset(ch.pos, g.mode, bpb);
+    item.shift = shift;
     const k = ch.native;
     if (g.agree < W.minAgree || g.share < W.minShare - 1e-9) { item.reason = `no clear majority (${g.agree} of ${g.members.length} repeats agree)`; continue; }
     if (!item.shift) { item.reason = `${Math.min(d, bpb - d)} beats from the other repeats (only one-beat moves)`; continue; }
@@ -543,15 +523,8 @@ function timingLeftAlone(song, opts = {}) {
       (opts.anchors ? "one beat off under the unfixed chart's bar phase, not under the phase re-fitted after the other moves" : "would move next pass") }));
 }
 
-// The one chart.corrections entry that summarises the moves (none when nothing moved).
-function timingCorrection(moves) {
-  if (!moves.length) return null;
-  const n = moves.length;
-  return { id: "auto-timing", kind: "timing", count: n,
-    start: Math.min(...moves.map(m => Math.min(m.at, m.was))), end: Math.max(...moves.map(m => Math.max(m.at, m.was))),
-    note: `${n} chord change${n === 1 ? "" : "s"} moved by one beat to match the other repeats of the same sequence (automatic; raw chart unchanged)`,
-    moves: moves.map(({ at, was, from, to, shift, agree }) => ({ at, was, from, to, shift, agree })) };
-}
+// The one chart.corrections entry that summarises the moves (none when nothing moved); its shape lives in lib/repeat-timing.js.
+const timingCorrection = moves => RepeatTiming.correction(moves);
 
 // ---------------------------------------------------------------- difficulty (docs/STRUMALONG_APP.md, "Difficulty levels")
 
@@ -998,6 +971,17 @@ function buildCatalogue(cfg) {
 
 // ---------------------------------------------------------------- output
 
+// Exclusion stays a person's call (docs/adr/0001-repeat-timing-two-measures.md): catalogue.json `exclude` is edited by hand.
+// The catalogue checker's report on disk is only read to warn when a song this build ships has a "fail" verdict there.
+const CHECKS_REPORT = path.join(REPO, "docs/STRUMALONG_CATALOGUE_CHECKS.json");
+function warnCheckerFailures(built, file = CHECKS_REPORT) {
+  if (!fs.existsSync(file)) return;
+  const verdicts = new Map((JSON.parse(read(file)).songs || []).map(s => [s.recording_id, s.verdict]));
+  for (const { song } of built) {
+    if (verdicts.get(song.recording.id) === "fail") warn(`${song.id}: the catalogue checker's report (${rel(file)}) fails this shipped song; review it or add it to catalogue.json exclude`);
+  }
+}
+
 function report(built) {
   const pad = (v, n) => String(v).padStart(n);
   console.log("\nBar model (before = one song-wide bar_phase; after = anchored bars). weird/split counts, % of changes on bar or half-bar:");
@@ -1043,6 +1027,7 @@ function report(built) {
 function main() {
   const cfg = readCatalogue();
   const { built, index } = buildCatalogue(cfg);
+  warnCheckerFailures(built);
   const outputs = new Map();
   for (const b of built) outputs.set(b.song.id + ".json", serializeSong(b.song));
   outputs.set("index.json", JSON.stringify(index, null, 2) + "\n");
@@ -1076,6 +1061,6 @@ function main() {
 
 module.exports = { barPhaseVote, barPhaseConfident, coreShapes, gridHolds, barAnchors, applyBarAnchors, barMetrics, BAR_COST,
   TIMING_FIX, timingGroups, timingConsistency, timingCandidates, applyTimingFix, timingLeftAlone, timingCorrection,
-  shapeTier, difficultyOf, applyLevelOverride, defaultPatterns, readCatalogue, finishSong, LEVELS };
+  shapeTier, difficultyOf, applyLevelOverride, defaultPatterns, readCatalogue, finishSong, warnCheckerFailures, LEVELS };
 
 if (require.main === module) main();
