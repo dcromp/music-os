@@ -41,10 +41,11 @@ Later the same day, after the 36-song build:
 ```
 strumalong/                 # deployable root (published to gh-pages as-is)
   index.html                # app shell; hash routes: #/ (library), #/song/<id>
-  app.js                    # DOM, routing, YouTube controller, render loop
+  app.js                    # DOM rendering, routing, YouTube adapter, render loop, wake lock
   styles.css
   lib/core.js               # pure timeline/cue/strum helpers (UMD: window.StrumCore + module.exports)
   lib/shapes.js             # chord grip table + SVG renderer (UMD: window.StrumShapes + module.exports)
+  lib/session.js            # practice session: playback rules + persistence (UMD: window.StrumSession + module.exports)
   songs/index.json          # catalogue summary (generated)
   songs/<id>.json           # one per recording (generated)
   data/catalogue.json       # which recordings ship: packs to read, exclusions with reasons, level overrides
@@ -55,7 +56,7 @@ strumalong/                 # deployable root (published to gh-pages as-is)
   manifest.webmanifest, icons/, .nojekyll
 ```
 
-Plain static files with no bundler and no npm install. Scripts are classic `<script defer>` tags in this order: `lib/core.js`, `lib/shapes.js`, `app.js`.
+Plain static files with no bundler and no npm install. Scripts are classic `<script defer>` tags in this order: `lib/core.js`, `lib/shapes.js`, `lib/session.js`, `app.js`.
 
 ## Data schema
 
@@ -370,6 +371,27 @@ Ported helpers from `experiments/review/app.js` keep their names and behaviour. 
   - Slash chords fall back to their root shape with `note:"bass note omitted"`, unless an explicit grip exists (G/B, D/F#, C/G).
   - Coverage must include every Core and Full shape label that appears in any built song, at its default capo view. Unknown labels return null, and the UI then shows the name only.
 - `renderShapeSVG(shape, {size})` returns an accessible SVG string with `role="img"` and an `aria-label` that names the chord and frets. It has 6 strings and 5 frets, × and ○ markers, a barre bar, a base-fret label, and uses `currentColor` so it themes.
+
+## `lib/session.js` API (practice session)
+
+This module takes playback events in and gives cue time, the resume point and saved settings out. It has no DOM, timers or network access. It reaches the outside world only through two adapters. The tests in `test/session.test.js` drive it with a fake player and a Map.
+
+- **Storage adapter** `{getItem, setItem}`: `localStorage` in the app, `mapStorage(new Map())` in tests. Every access is guarded.
+- **Player adapter** `{currentTime, duration, playbackRate, availableRates, seekTo, cue, play, pause, setRate, destroy}`: `youTubeAdapter(YT.Player)` in `app.js`, a fake in tests. Every call is guarded, and a throwing player keeps the last known value.
+- `createStore(storage)` owns the v1 keys and JSON (see **Persistence**). It provides:
+  - `settings()`, a sanitised, frozen value
+  - `setQuality`, `setView`, `setDiagrams`, `setPattern(songId, id)`
+  - `latency()` / `setLatency(ms)`, clamped to ±1000
+  - `nudge(videoId)` / `setNudge(videoId, ms)`, clamped to ±30000
+  - `saveLast(id, t)`
+  - `resumePoint(songs)`, the library chip: `{song, t}`, where `t` is 0 under 5 s or within 5 s of the end
+- `createSession({song, store, resume, now})`, one per song page:
+  - **Events in:** `attach(player)`, `playerReady()`, `stateChange(code)`, `rateChange(r)`, `error(code)`. `error` returns `{action:"switch"|"fail"|"retry"}`; a fail carries `reason` `referrer`, `unavailable` or `no-embed`.
+  - **Transport:** `play`, `pause`, `seek`, `setRate`, `retry`.
+  - **Learner settings:** `nudgeBy`, `resetNudge`, `setQuality`, `setView`, `setPattern`.
+  - **Exit:** `saveLast`, `leave`.
+  - **`tick()`** returns `{pt, t, cue}`. It holds a resumed start until the first play, runs the ad guard while playing, and saves the last-played position every 5 s.
+  - **Read-only fields:** `video`, `state`, `played`, `ready`, `failed`, `ad`, `rate`, `pt`, `timeline`, `patternId`, `nudgeMs`, `controllable`, `playing`. `epoch` increments whenever cached cue rendering is stale: a new timeline, rate, video or failure.
 
 ## UI
 
