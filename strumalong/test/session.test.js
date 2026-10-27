@@ -70,7 +70,7 @@ test("store reads the v1 keys and JSON a learner already has saved", () => {
   ]);
   const store = createStore(mapStorage(map));
   assert.deepEqual({ ...store.settings(), patterns: { ...store.settings().patterns } },
-    { quality: "full", view: "sounding", diagrams: false, patterns: { synthetic: "next" } });
+    { quality: "full", view: "sounding", diagrams: false, countIn: false, patterns: { synthetic: "next" } });
   assert.equal(store.latency(), 120);
   assert.equal(store.nudge(vid("a")), -350);
   assert.deepEqual(store.resumePoint([{ id: "synthetic", duration_seconds: 120 }]), { song: { id: "synthetic", duration_seconds: 120 }, t: 42 });
@@ -85,7 +85,7 @@ test("store writes exactly the v1 key names and JSON shapes", () => {
   store.setNudge(vid("a"), 250);
   store.saveLast("song-1", 33);
   assert.deepEqual([...map.keys()].sort(), [PREFIX + "last", PREFIX + "latency", PREFIX + "offset:" + vid("a"), PREFIX + "settings"].sort());
-  assert.equal(raw(map, "settings"), JSON.stringify({ quality: "full", view: "shapes", diagrams: true, patterns: { "song-1": "next" } }));
+  assert.equal(raw(map, "settings"), JSON.stringify({ quality: "full", view: "shapes", diagrams: true, countIn: false, patterns: { "song-1": "next" } }));
   assert.equal(raw(map, "latency"), "75");
   assert.equal(raw(map, "offset:" + vid("a")), "250");
   assert.equal(raw(map, "last"), JSON.stringify({ id: "song-1", t: 33 }));
@@ -97,6 +97,12 @@ test("settings are sanitised: unknown values fall back, non-string patterns are 
   assert.equal(s.quality, "core");
   assert.equal(s.view, "shapes");
   assert.equal(s.diagrams, true); // only an explicit false turns diagrams off
+  assert.equal(s.countIn, false); // count-in (#60) is off unless explicitly true
+  const counting = createStore(mapStorage(new Map()));
+  counting.setCountIn(1);
+  assert.equal(counting.settings().countIn, true);
+  counting.setCountIn(false);
+  assert.equal(counting.settings().countIn, false);
   assert.deepEqual({ ...s.patterns }, { a: "x" });
   for (const bad of ["not json", "null", "[1,2]", '"text"']) {
     const t = createStore(mapStorage(new Map([[PREFIX + "settings", bad]]))).settings();

@@ -419,6 +419,16 @@ Pure rules over the catalogue summaries, tested in `test/library.test.js`.
 - `similar(songs, song, limit = 5)`: songs that share at least one core shape and are at most one level harder. Ordered by most shared shapes, then fewest new shapes, then easier, then catalogue order.
 - `surprise(songs, {lastId, plays, rng})`: a random song no harder than the hardest level played (at least level 2), avoiding the song just played.
 
+## `lib/count-in.js` API (count-in, #60)
+
+Pure planning, tested in `test/count-in.test.js`. Times are chart (cue) seconds.
+
+- `plan(song, from)` → `{downbeat, count, fade, clicks, startAt}`, or null when the song has no beat grid and no BPM.
+  - `downbeat` is the first bar start (from the bar anchors) at or after `from`. A bar start up to 0.08 s before `from` counts.
+  - `count` holds the bar before it, numbered 1 to beats-per-bar. `fade` holds the first bar of the music, with falling gains.
+  - `startAt` is 0.4 s before the first count beat. Before the first estimated beat, the grid is extended by its own spacing, so `startAt` can fall before the video's 0.
+- `due(clicks, next, t, lookahead, late)` lists the clicks to schedule now and skips any that are more than `late` behind.
+
 ## UI
 
 The end-user journey is **Jukebox** (founder's choice from the journey prototype, 27 October 2026, #53; prototype on branch `prototype/strumalong-journey`). Find a song fast, see a short get-ready sheet, play, then get offered "another like this". Strum Along supports lessons taken elsewhere; it does not teach.
@@ -443,7 +453,7 @@ The end-user journey is **Jukebox** (founder's choice from the journey prototype
   5. **Chord diagrams** for NOW and NEXT. They always draw the capo-shape grip, the shape the hand holds. In Sounding view the caption keeps the sounding name and a note reads "G shape, capo 2".
   6. **Controls**:
      - Big Play/Pause.
-     - "−10 s", restart, speed (`getAvailablePlaybackRates`), and "Hide cues" for interruptions.
+     - "−10 s", restart, speed (`getAvailablePlaybackRates`), "Hide cues" for interruptions, and **Count-in on/off** (off by default, saved in `settings.countIn`).
      - A **sync nudge** (−/+ 50 ms, showing the current offset), saved per video in localStorage.
      - A **View** group: Simple (Core) or Full chords, Capo shapes or Sounding when the capo is above 0, and Diagrams on or off.
   7. **Details** (collapsed): setup note, level with its reason (or the override reason), skill focus, sources (links), chart status, beats and bars (how much of the song shows approx bars), corrections (label corrections, and the timing fix's line with each moved change), the strumming note, the video's uploader, and "Open on YouTube".
@@ -469,6 +479,11 @@ The end-user journey is **Jukebox** (founder's choice from the journey prototype
   - 100: "Video unavailable".
   - 2 or 5: offer a retry button.
 - **Wake Lock.** Call `navigator.wakeLock.request('screen')` on Play and again on `visibilitychange` to visible while playing, inside try/catch. The lock is kept while paused, because chords are read during a pause. It is released when the song ends (state 0) or the page is left. Before iOS 18.4, Wake Lock does not work in Home Screen web apps.
+- **Count-in (#60, founder request, 27 October 2026).** With count-in on, every Play press (both buttons, Space/K, Again) counts one bar at the song's tempo. Clicks play through Web Audio, higher on "1", and a big number sits between NOW and NEXT, never over the player. The clicks then carry on over the first bar of the music, fading out.
+  - **Run-up.** When `startAt` is at or after the video's 0, the video seeks there and plays, and the count follows the video's clock.
+  - **Pre-roll.** Otherwise (most songs, played from the start), the count runs on its own clock. It calls `playVideo()` a learned start-up delay early (default 0.35 s, updated after each pre-roll), then follows the video's clock once it plays.
+  - While counting, the Play buttons read Pause and the NOW tag reads "Count-in". Pause, −10 s, Restart, a YouTube pause, the song ending or a hidden page cancel the count.
+  - On iPhone the clicks may be silent with the ring switch on silent; the numbers still show.
 - **Visibility.** Pause the video when the page becomes hidden.
 - **Gestures.** Both Play buttons call `player.playVideo()` from the click handler. If the player frame is not fully in the viewport, it is first scrolled into view. If `onAutoplayBlocked` fires, show "Tap ▶ in the video to start".
 - **Load failures.** Every message that says to reload carries a Reload button of at least 44 px. After 15 s without the IFrame API, the cached API promise is dropped, so the next song page retries the load.
