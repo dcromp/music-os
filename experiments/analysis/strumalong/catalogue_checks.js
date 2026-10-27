@@ -19,8 +19,8 @@ const path = require("node:path");
 const crypto = require("node:crypto");
 
 const REPO = path.resolve(__dirname, "../../..");
-const app = require(path.join(REPO, "experiments/review/app.js"));   // beatPosition: the same maths the player and exporter use
-const Core = require(path.join(REPO, "strumalong/lib/core.js"));      // QUICK_BEATS: the app's and the exporter's blip line
+const Core = require(path.join(REPO, "strumalong/lib/core.js"));       // beatPosition: the same maths the app and exporter use
+const Chords = require(path.join(REPO, "strumalong/lib/chords.js"));   // chord-label parsing and capo transposition
 const RepeatTiming = require(path.join(REPO, "strumalong/lib/repeat-timing.js"));  // the played-timing judgement (check 4)
 
 const SCHEMA = "strumalong-catalogue-checks-1";
@@ -125,15 +125,12 @@ const STATUS_RANK = { pass: 0, flag: 1, fail: 2 };
 const worst = statuses => statuses.reduce((w, s) => (STATUS_RANK[s] > STATUS_RANK[w] ? s : w), "pass");
 
 // ------------------------------------------------------------------------------------------------ chord families
-const PC = { C: 0, "B#": 0, "C#": 1, Db: 1, D: 2, "D#": 3, Eb: 3, E: 4, Fb: 4, "E#": 5, F: 5, "F#": 6, Gb: 6, G: 7, "G#": 8, Ab: 8, A: 9, "A#": 10, Bb: 10, B: 11, Cb: 11 };
-const NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-
 /** Parse a chord label into {root, kind, bass}. kind: "" major-ish, "m" minor-ish, "sus", "5", "dim", "aug". null for N, X or junk. */
 function parseChord(label) {
   if (typeof label !== "string" || label === "N" || label === "X") return null;
-  const m = /^([A-G](?:#|b)?)([^/]*)(?:\/([A-G](?:#|b)?|[b#]?[1-7]))?$/.exec(label.trim());
-  if (!m || !(m[1] in PC)) return null;
-  const q = m[2].replace(/^:/, "");
+  const p = Chords.parse(label.trim());
+  if (!p) return null;
+  const q = p.quality;
   // Order matters: "maj7" and "m7b5" both start with "m".
   let kind;
   if (q === "") kind = "";
@@ -144,14 +141,14 @@ function parseChord(label) {
   else if (/^(maj|M)/.test(q)) kind = "";
   else if (/^(m|min|minor)/.test(q)) kind = "m";
   else kind = "";                       // 6, 7, 9, 11, 13, add9, (...) keep the major triad
-  return { root: PC[m[1]], kind, bass: m[3] || null };
+  return { root: p.rootPc, kind, bass: p.bass };
 }
 /** Family key: root + kind ("Em", "G", "Asus", "D5"). null for N, X, junk. */
 function familyKey(label) {
   const p = parseChord(label);
-  return p ? NAMES[p.root] + p.kind : null;
+  return p ? Chords.noteName(p.root) + p.kind : null;
 }
-const splitFamily = key => { const m = /^([A-G]#?)(.*)$/.exec(key); return { root: PC[m[1]], kind: m[2] }; };
+const splitFamily = key => { const p = Chords.parse(key); return { root: p.rootPc, kind: p.quality }; };
 /** A chart family satisfies an expected family when the root matches and the quality agrees. A sus or power chord has no
  *  third, so it satisfies either the major or the minor chord on its root. */
 function familyMatches(chartKey, expectedKey) {
@@ -161,12 +158,6 @@ function familyMatches(chartKey, expectedKey) {
   if ((c.kind === "sus" || c.kind === "5") && (e.kind === "" || e.kind === "m")) return true;
   if ((e.kind === "sus" || e.kind === "5") && (c.kind === "" || c.kind === "m")) return true;
   return false;
-}
-/** Transpose a chord label up by `semis` semitones (sharp spelling), keeping quality and bass. */
-function transposeLabel(label, semis) {
-  const m = /^([A-G](?:#|b)?)([^/]*)(?:\/([A-G](?:#|b)?))?$/.exec(label);
-  if (!m || !(m[1] in PC)) return label;
-  return NAMES[mod(PC[m[1]] + semis, 12)] + m[2] + (m[3] && m[3] in PC ? "/" + NAMES[mod(PC[m[3]] + semis, 12)] : m[3] ? "/" + m[3] : "");
 }
 const dedupe = list => [...new Set(list)];
 
@@ -179,7 +170,7 @@ function medianInterval(beats) {
 }
 /** Fractional beat index at time t; outside the grid it extrapolates at the median interval so every hold has a length. */
 function beatAt(beats, t) {
-  const p = app.beatPosition(beats, t);
+  const p = Core.beatPosition(beats, t);
   if (p !== null) return p;
   const iv = medianInterval(beats);
   if (!iv || !beats.length) return null;
@@ -462,7 +453,7 @@ function checkConsistency(view) {
     if (a.key === null || b.key === null || gapBeats(a, b) > GAP_TOLERANCE_BEATS) continue;
     total++;
     if (!(b.s >= first && b.s < last)) { outside++; continue; }
-    const beat = app.beatPosition(view.beats, b.s);
+    const beat = Core.beatPosition(view.beats, b.s);
     changes.push({ t: b.s, key: RepeatTiming.pairKey(a.key, b.key), pos: mod(beat, bpb), fromBeats: a.beats, toBeats: b.beats });
   }
   out.changes = total;
@@ -693,7 +684,7 @@ function loadInputs(repo = REPO, options = {}) {
       const t = s.teaching || {};
       if (Array.isArray(t.chord_set) && t.chord_set.length) {
         const capo = isNum(t.capo) ? t.capo : isNum(t.proposed_capo) ? t.proposed_capo : 0;
-        expected.set(id, { families: [...t.chord_set, ...(t.optional_shapes || [])].map(l => transposeLabel(l, capo)), accepted: [],
+        expected.set(id, { families: [...t.chord_set, ...(t.optional_shapes || [])].map(l => Chords.soundingForCapo(l, capo)), accepted: [],
           confidence: `teaching chord set${capo ? ` at capo ${capo}` : ""}; not a complete timed chart`, source: `${rel(reviewPath)} (teaching.chord_set, sounding at capo ${capo})` });
       }
     }
@@ -1004,7 +995,7 @@ function main(argv, env = process.env) {
 
 module.exports = {
   T, SCHEMA, INSTRUMENT_SCHEMA, KNOWN_EMBED,
-  parseChord, familyKey, familyMatches, transposeLabel, familyRuns, familyShares, beatAt,
+  parseChord, familyKey, familyMatches, familyRuns, familyShares, beatAt,
   checkChords, checkTempo, checkPlausibility, holdEvidence, checkConsistency, changeSequence, checkEmbed, checkInstrument, combine,
   loadInputs, buildView, buildPackView, exporterAutoTiming, checkRecording, runChecks, table, markdownTable, main,
 };

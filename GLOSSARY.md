@@ -24,6 +24,10 @@ _Avoid_: Sounding chord (when describing only the fingering).
 A suggested strumming or picking exercise for practising a song. It can be simpler than the recorded guitar part.
 _Avoid_: Recorded strumming (unless checked against the recording).
 
+**Arrangement profile**:
+An arrangement's main chord shapes, its level (1–5) on the learning path and the reasons for that level. The main shapes are the shapes a learner sees for the song and the only shapes its level counts.
+_Avoid_: Core shapes, chips (when meaning the set the level is judged on); difficulty (alone, when the shapes are meant too).
+
 **Learning path**:
 An ordered set of songs and practice goals that helps a guitarist progress through musical skills.
 _Avoid_: Song list (when an intended skill progression is part of the meaning).

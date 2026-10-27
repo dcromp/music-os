@@ -8,6 +8,10 @@
 // validation, display corrections, beat-grid pairing and Core/capo label maths are the same code the reviewed
 // player uses, and lib/core.js for the timeline the app itself draws.
 //
+// exportSong is the Song export module: one draft + its metadata + the catalogue's settings -> song, card, report,
+// with no file access. Everything below it is the filesystem adapter: read the config and packs, order the catalogue,
+// write songs/ (or compare it, --check) and print the report.
+//
 //   node strumalong/tools/build-songs.js           # build (re-runnable, deterministic) and print the bar/level report
 //   node strumalong/tools/build-songs.js --check   # build in memory and fail if songs/ on disk differs
 //
@@ -19,13 +23,13 @@ const crypto = require("node:crypto");
 
 const ROOT = path.resolve(__dirname, "..");            // strumalong/
 const REPO = path.resolve(ROOT, "..");                 // repo root
-// STRUMALONG_* overrides exist only so the exporter can be exercised against fixtures without touching the real outputs.
-const SONGS_DIR = process.env.STRUMALONG_SONGS_DIR || path.join(ROOT, "songs");
-const CATALOGUE = process.env.STRUMALONG_CATALOGUE || path.join(ROOT, "data/catalogue.json");
+const SONGS_DIR = path.join(ROOT, "songs");
+const CATALOGUE = path.join(ROOT, "data/catalogue.json");
 const REVIEW = path.join(REPO, "experiments/review");
 const app = require(path.join(REVIEW, "app.js"));
 const Core = require(path.join(ROOT, "lib/core.js"));
 const RepeatTiming = require(path.join(ROOT, "lib/repeat-timing.js"));
+const { arrangementProfile, compareExpected, gridHolds, LEVELS, LEVEL } = require("./arrangement-profile.js");
 
 const CHECK = process.argv.includes("--check");
 const warnings = [];
@@ -42,29 +46,9 @@ const mod = (value, n) => ((value % n) + n) % n;
 const repoPath = p => path.resolve(REPO, p);
 const rel = p => path.relative(REPO, p);
 
-// ---------------------------------------------------------------- difficulty vocabulary (lead decision, 25 Oct 2026)
+// ---------------------------------------------------------------- levels (tiers, main shapes and level rules: tools/arrangement-profile.js)
 
-// Shape tiers are what the player frets: Core shapes at the song's default view (capo shapes, Simple quality).
-const TIER_SHAPES = {
-  1: ["A", "D", "E", "Em", "Am", "A7", "D7", "E7", "Am7", "Em7", "Asus2", "Asus4", "Dsus2", "Dsus4", "Esus4", "D6add9/F#"],
-  2: ["G", "C", "Dm", "G7", "C7", "B7", "Cadd9", "Cmaj7", "Fmaj7", "Dm7", "G/B", "D/F#", "C/G"],
-  3: ["F", "Bm", "Bm7", "F#m"],
-};
-const TIER_OF = new Map(Object.entries(TIER_SHAPES).flatMap(([tier, shapes]) => shapes.map(s => [s, Number(tier)])));
-const TIER_NAMES = { 1: "first-chord shape", 2: "open chord", 3: "first barre-type shape", 4: "barre shape" };
-
-const LEVELS = [
-  { level: 1, label: "First chords", note: "Up to three easy shapes from A, D, E, Em and Am." },
-  { level: 2, label: "Open chords", note: "Open chords such as G and C, up to four shapes, at a relaxed pace." },
-  { level: 3, label: "More changes", note: "Open chords with more shapes, quicker changes or a syncopated strum." },
-  { level: 4, label: "First barre (F / Bm)", note: "Adds a first barre-type shape: F, Bm or F#m." },
-  { level: 5, label: "Barre chords", note: "Full barre shapes such as B, Bb, Cm or C#m." },
-];
-const LEVEL = new Map(LEVELS.map(l => [l.level, l]));
 const levelTitle = n => `Level ${n} · ${LEVEL.get(n).label}`;
-const MAIN_SHAPE_SHARE = 0.04;   // main shapes cover at least 4% of chord time
-const BLIP_BEATS = Core.QUICK_BEATS;  // holds shorter than this are blips (the app's "quick" threshold, 0.75 beat)
-const QUICK_CPM = 40, QUICK_MEDIAN_BEATS = 2, QUICK_MEDIAN_BPM = 120;
 
 // Default practice patterns for songs without authored patterns (4 beats per bar). Prepared and authored songs keep theirs.
 const P = {
@@ -171,40 +155,6 @@ function barPhaseVote(beats, nativeEvents, bpb) {
 // A varying meter (beats_per_bar null, so assumed 4) makes a global residue vote meaningless: never confident.
 function barPhaseConfident(vote, assumed) {
   return !assumed && vote.votes >= 8 && vote.share >= 0.7;
-}
-
-// Library-card chips: the Core shapes (at the song's capo) that carry the chart, by seconds held. N and X are
-// skipped; shapes under 3% of chord time are dropped, slash shapes under 10%; longest first (ties by first
-// appearance), at most 6. Rare shapes stay in the chart and diagrams; they are only left off the card.
-function coreShapes(chords, capo) {
-  const seconds = new Map(); // insertion order = first appearance
-  for (const e of chords) {
-    if (e.l === "N" || e.l === "X") continue;
-    const shape = app.coreChordLabel(app.transposePracticeLabel(e.l, capo));
-    if (shape === "N" || shape === "X") continue;
-    seconds.set(shape, (seconds.get(shape) || 0) + (e.e - e.s));
-  }
-  const total = [...seconds.values()].reduce((a, b) => a + b, 0);
-  if (!(total > 0)) return [];
-  return [...seconds].map(([shape, held], order) => ({ shape, held, share: held / total, order }))
-    .filter(x => x.share >= 0.03 && !(x.shape.includes("/") && x.share < 0.10))
-    .sort((a, b) => b.held - a.held || a.order - b.order)
-    .slice(0, 6)
-    .map(x => x.shape);
-}
-
-// The holds the app draws in its default view (Core quality; merges are view-independent), with the same beat
-// rounding as lib/core.js cuePart: dots run round(startBeat) .. round(endBeat) - 1, a span under 0.75 beat is quick.
-function gridHolds(song) {
-  return Core.buildTimeline(song).map(ev => {
-    const sb = Core.gridPosition(song.beats, ev.s), eb = Core.gridPosition(song.beats, ev.e);
-    const hold = { s: ev.s, e: ev.e, label: ev.label, inGrid: sb !== null && eb !== null && eb > sb };
-    if (!hold.inGrid) return hold;
-    hold.sb = sb; hold.eb = eb; hold.base = Math.round(sb); hold.span = eb - sb;
-    hold.quick = hold.span < BLIP_BEATS;
-    hold.count = hold.quick ? 1 : Math.max(1, Math.round(eb) - hold.base);
-    return hold;
-  });
 }
 
 // ---------------------------------------------------------------- bar model (docs/STRUMALONG_APP.md, "Bar model")
@@ -320,13 +270,14 @@ function barAnchors(song, opts = {}) {
 }
 
 // Write the anchors onto the native chords: b = bar phase, a = 1 when approximate. Natives inside one merged hold
-// share its anchor, so Full view (no merges) draws the same bars as Simple view.
+// share its anchor, so Full view (no merges) draws the same bars as Simple view. Any earlier b/a is replaced; every
+// other chord field (c, t, and anything added later) is kept.
 function applyBarAnchors(song) {
   const { holds, anchors, runs } = barAnchors(song);
   let h = 0;
   // New chord objects (a new array): lib/core.js caches its per-beat anchor map by chord-array identity.
-  song.chords = song.chords.map(native => {
-    const chord = { s: native.s, e: native.e, l: native.l, ...(native.c ? { c: native.c } : {}), ...(native.t ? { t: native.t } : {}) };
+  song.chords = song.chords.map(({ b, a, ...native }) => {
+    const chord = { ...native };
     while (h < holds.length && holds[h].e <= chord.s + 1e-6) h++;
     const hold = holds[h];
     if (!hold || !(hold.s <= chord.s + 1e-6 && chord.e <= hold.e + 1e-6) || !anchors[h]) return chord;
@@ -526,69 +477,11 @@ function timingLeftAlone(song, opts = {}) {
 // The one chart.corrections entry that summarises the moves (none when nothing moved); its shape lives in lib/repeat-timing.js.
 const timingCorrection = moves => RepeatTiming.correction(moves);
 
-// ---------------------------------------------------------------- difficulty (docs/STRUMALONG_APP.md, "Difficulty levels")
-
-function shapeTier(shape) {
-  if (TIER_OF.has(shape)) return TIER_OF.get(shape);
-  const slash = /^([^/]+)\/.+$/.exec(shape);  // other slash shapes are fretted as their root shape (bass note omitted)
-  if (slash && TIER_OF.has(slash[1])) return TIER_OF.get(slash[1]);
-  return 4;
-}
+// ---------------------------------------------------------------- level override (the profile itself: tools/arrangement-profile.js)
 
 function median(values) {
   const v = [...values].sort((a, b) => a - b), n = v.length;
   return n ? (n % 2 ? v[(n - 1) / 2] : (v[n / 2 - 1] + v[n / 2]) / 2) : 0;
-}
-
-/**
- * Difficulty at the song's default view (capo shapes, Simple). Main shapes: Core shapes covering >= 4% of chord time,
- * ignoring N, X and blips (< 0.75 beat). Changes: label changes between consecutive non-blip chord holds (not across
- * N or X), per minute of non-blip chord time. Median hold: beats per non-blip chord hold.
- *   L5 any tier-4 main shape; L4 any tier-3; else L1 when all tier 1 and <= 3 shapes, L2 when <= 4 shapes (any
- *   number if all tier 1), L3 when 5+ shapes; and L1/L2 move to L3 on quick changes (median hold <= 2 beats at
- *   >= 120 BPM, or >= 40 changes/min) or an authored needs_syncopation flag.
- */
-function difficultyOf(song, opts = {}) {
-  const bpm = song.rhythm.bpm;
-  const seconds = new Map(), holdBeats = [];
-  let changes = 0, chordSeconds = 0, previous = null;
-  for (const hold of gridHolds(song)) {
-    if (hold.label === "N" || hold.label === "X") { previous = null; continue; }
-    const span = hold.inGrid ? hold.span : (hold.e - hold.s) * bpm / 60;
-    if (span < BLIP_BEATS) continue;
-    const beats = hold.inGrid ? hold.count : Math.max(1, Math.round(span));
-    const held = hold.e - hold.s;
-    seconds.set(hold.label, (seconds.get(hold.label) || 0) + held);
-    chordSeconds += held;
-    holdBeats.push(beats);
-    if (previous !== null && previous !== hold.label) changes++;
-    previous = hold.label;
-  }
-  const main = [...seconds].map(([shape, held], order) => ({ shape, share: held / chordSeconds, order, tier: shapeTier(shape) }))
-    .filter(x => x.share >= MAIN_SHAPE_SHARE)
-    .sort((a, b) => b.share - a.share || a.order - b.order);
-  const cpm = chordSeconds > 0 ? changes / (chordSeconds / 60) : 0;
-  const medianHold = median(holdBeats);
-  const hardest = main.reduce((best, x) => (!best || x.tier > best.tier ? x : best), null);
-  const maxTier = hardest ? hardest.tier : 1;
-  const names = main.map(x => x.shape).join(", ");
-  const bumps = [];
-  if (cpm >= QUICK_CPM) bumps.push(`${r1(cpm)} changes a minute (${QUICK_CPM}+)`);
-  if (medianHold <= QUICK_MEDIAN_BEATS && bpm >= QUICK_MEDIAN_BPM) bumps.push(`median hold ${medianHold} beats at ~${Math.round(bpm)} BPM`);
-  if (opts.needsSyncopation) bumps.push("a syncopated strum is needed");
-  let level, reason;
-  if (maxTier === 4) { level = 5; reason = `${hardest.shape} is a barre shape (tier 4); main shapes ${names}.`; }
-  else if (maxTier === 3) { level = 4; reason = `${hardest.shape} is a first barre-type shape (tier 3); main shapes ${names}.`; }
-  else {
-    level = maxTier === 1 ? (main.length <= 3 ? 1 : 2) : main.length <= 4 ? 2 : 3;
-    reason = maxTier === 1 ? `${names}: all first-chord shapes (tier 1), ${main.length} main shapes.`
-      : `${names}: open chords (hardest ${hardest.shape}, tier 2), ${main.length} main shapes.`;
-    if (bumps.length && level < 3) level = 3;
-  }
-  // The pace part: quick-change evidence when present, otherwise the plain change rate.
-  reason += bumps.length ? ` Quicker: ${bumps.join("; ")}.` : ` About ${r1(cpm)} changes a minute.`;
-  return { level, label: LEVEL.get(level).label, main_shapes: main.map(x => x.shape), hardest_shape: hardest ? hardest.shape : null,
-    tier_reason: reason, changes_per_min: r1(cpm), median_hold_beats: medianHold };
 }
 
 function applyLevelOverride(difficulty, override) {
@@ -597,81 +490,46 @@ function applyLevelOverride(difficulty, override) {
     override_reason: override.reason };
 }
 
-// ---------------------------------------------------------------- alternates
-
-function mergeAlternate(base, override) {
-  const out = { ...base };
-  if (isStr(override.uploader)) out.uploader = override.uploader;
-  if (isNum(override.duration_seconds) && override.duration_seconds > 0) out.duration_seconds = override.duration_seconds;
-  if (isNum(override.offset_seconds)) out.offset_seconds = r3(override.offset_seconds);
-  if (typeof override.timing_checked === "boolean") out.timing_checked = override.timing_checked;
-  if (isStr(override.note)) out.note = override.note;
-  else if (out.timing_checked && override.timing_checked === true) out.note = "Official video; start offset measured against the analysed audio.";
-  return out;
-}
-
-// additions metadata "alternates" (merge by video_id). Accepted shapes:
-//   { "<recording_id>": [ {video_id, offset_seconds, timing_checked, ...}, ... ] }
-//   { "<recording_id>": { video_id, ... } }            { "<recording_id>": { "<video_id>": {...} } }
-//   { "<video_id>": { offset_seconds, ... } }
-// A new alternate needs video_id, uploader and duration_seconds.
-function applyAlternateOverrides(meta, recordingId, alternates) {
-  const table = meta && meta.alternates;
-  if (!table || typeof table !== "object") return alternates;
-  const candidates = [];
-  const byRecording = table[recordingId];
-  if (Array.isArray(byRecording)) candidates.push(...byRecording);
-  else if (byRecording && typeof byRecording === "object") {
-    if (byRecording.video_id) candidates.push(byRecording);
-    else for (const [video_id, value] of Object.entries(byRecording)) if (value && typeof value === "object") candidates.push({ video_id, ...value });
-  }
-  for (const alt of alternates) {
-    const byVideo = table[alt.video_id];
-    if (byVideo && typeof byVideo === "object" && !Array.isArray(byVideo)) candidates.push({ video_id: alt.video_id, ...byVideo });
-  }
-  let result = alternates.map(a => ({ ...a }));
-  for (const cand of candidates) {
-    if (!cand || !isStr(cand.video_id)) continue;
-    const i = result.findIndex(a => a.video_id === cand.video_id);
-    if (i >= 0) result[i] = mergeAlternate(result[i], cand);
-    else if (isNum(cand.duration_seconds) && isStr(cand.uploader)) {
-      result.push(mergeAlternate({ video_id: cand.video_id, uploader: cand.uploader, kind: "alternate", duration_seconds: cand.duration_seconds,
-        offset_seconds: 0, timing_checked: false, note: "Alternate upload; timing unchecked. Use the sync nudge." }, cand));
-    }
-  }
-  return result;
-}
-
-function videoEntry(v) {
-  return { video_id: v.video_id, uploader: v.uploader, kind: v.kind, duration_seconds: v.duration_seconds,
-    offset_seconds: v.offset_seconds, timing_checked: v.timing_checked, note: v.note,
-    // Written only when false: the app skips this upload at start instead of waiting for a YouTube error.
-    ...(v.embeddable === false ? { embeddable: false } : {}) };
-}
-
-// ---------------------------------------------------------------- song builder
+// ---------------------------------------------------------------- song export
 
 /**
- * @param ctx { c, packId, packDir, hashes, rhythmCase, correctionSet, meta, alternateMeta, timingFix }
- *   timingFix false: the catalogue's timing_fix_off lists this recording (no repetition-consistency moves).
- *   meta: { title, artist, capo, capo_source, setup_note, strumming|null, learning, needs_syncopation?, playable_embed?, embed_note? }
- *   strumming null means "no authored patterns": the level's default patterns are filled in by finishSong.
+ * Song export: one analysed chord draft, its authored metadata and the catalogue's settings for it -> the song file,
+ * its library card and a build report. Pure: it reads and writes no files (main() below is the filesystem adapter).
+ *
+ * @param draft { case, primary, rhythmCase, correctionSet, packId, hashes }
+ *   case: the pack manifest case (id, recording, source.source, artifacts.primary_sha256, primary_name).
+ *   primary: the bytes of cases/<id>/primary.json, checked against case.artifacts.primary_sha256.
+ *   rhythmCase: the paired beat grid. correctionSet: reported display corrections (prepared pack) or undefined.
+ *   hashes: { manifest, rhythm, practice, learning, additions?, catalogue } for song.provenance.
+ * @param metadata { title, artist, capo, capo_source, setup_note, strumming|null, learning, needs_syncopation?,
+ *   playable_embed?, label_aliases?, expected?: { level, shapes } }  strumming null means "no authored patterns": the level's defaults are used.
+ * @param settings { timingFix?, levelOverride? }  timingFix false: catalogue timing_fix_off lists this recording.
+ *   levelOverride: a catalogue level_overrides entry ({ level, reason }).
+ * @returns {{ song, card, report }}  song.order and card.order stay null: order within a level is a catalogue decision.
+ *   report: { warnings, expected: compareExpected result, chords, beats, vote, bars: {before, after, runs}, timing: {moves, left, passes, settled,
+ *   enabled, before, after} } for the build report.
+ *
+ * Each chart step gets its own copy of the chords (chartView), so no step depends on whether another one replaces
+ * song.chords or edits it in place: the unfixed chart stays the unfixed chart.
  */
-function buildSong(ctx) {
-  const { c, packId, packDir, hashes, rhythmCase, correctionSet, meta } = ctx;
-  const bytes = read(path.join(packDir, "cases", c.id, "primary.json"));
-  const primarySha = sha(bytes);
+function exportSong(draft, metadata, settings = {}) {
+  const { case: c, primary, rhythmCase, correctionSet, packId, hashes } = draft;
+  const meta = metadata, timingFix = settings.timingFix !== false;
+  const warnings = [];
+  const primarySha = sha(primary);
   if (primarySha !== c.artifacts.primary_sha256) throw new Error(`primary.json sha256 mismatch for ${c.id}`);
-  const chart = app.validateCandidate(JSON.parse(bytes), c.recording);
+  const chart = app.validateCandidate(JSON.parse(primary), c.recording);
   const display = app.correctedDisplayEvents(chart, correctionSet, packId, primarySha);
   if (!rhythmCase) throw new Error(`no paired rhythm grid for ${c.id}`);
+  // Alternate uploads were removed (#44): the analysed upload is the only video, so it has to embed.
+  if (meta.playable_embed === false) throw new Error(`${c.id}: playable_embed false needs an embeddable alternate video, and alternates are not supported`);
 
   // chords: sounding label after display corrections; c:1 marks a corrected event
   // Optional per-song label aliases from additions metadata: a chart label the detector names differently from the
   // grip players use (e.g. A Horse with No Name's F#m7 is played as D6add9/F#). Applied to whole events; c:1 marks them.
-  const aliases = (meta && meta.label_aliases) || null;
+  const aliases = meta.label_aliases || null;
   const aliasCounts = {};
-  const chords = display.map(e => {
+  const unfixed = display.map(e => {
     const out = { s: r3(e.start_seconds), e: r3(e.end_seconds), l: e.label };
     if (e.display_correction) out.c = 1;
     if (aliases && Object.prototype.hasOwnProperty.call(aliases.map, e.label)) {
@@ -681,9 +539,9 @@ function buildSong(ctx) {
     }
     return out;
   });
-  chords.forEach((e, i) => {
+  unfixed.forEach((e, i) => {
     if (!(e.s >= 0) || !(e.e > e.s)) throw new Error(`${c.id}: chord ${i} collapsed after rounding`);
-    if (i && e.s < chords[i - 1].e) throw new Error(`${c.id}: chord ${i} overlaps previous after rounding`);
+    if (i && e.s < unfixed[i - 1].e) throw new Error(`${c.id}: chord ${i} overlaps previous after rounding`);
   });
 
   const corrections = (correctionSet ? correctionSet.corrections : []).map(item => {
@@ -702,91 +560,74 @@ function buildSong(ctx) {
   const assumed = rhythmCase.beats_per_bar === null;
   const bpb = assumed ? 4 : rhythmCase.beats_per_bar;
   const vote = barPhaseVote(beats, chart.chords, bpb);
-  const confident = barPhaseConfident(vote, assumed);
   const rhythm = { status: rhythmCase.status, bpm: r1(rhythmCase.pulse_bpm), beats_per_bar: bpb, beats_per_bar_assumed: assumed,
-    meter_label: rhythmCase.meter_label, bar_phase: vote.phase, bar_phase_confident: confident, bar_phase_share: r2(vote.share) };
+    meter_label: rhythmCase.meter_label, bar_phase: vote.phase, bar_phase_confident: barPhaseConfident(vote, assumed), bar_phase_share: r2(vote.share) };
+  // What the chart steps (and lib/core.js) read of a song, around a fresh copy of the given chords.
+  const chartView = chords => ({ capo: meta.capo, beats, rhythm, chords: chords.map(ch => ({ ...ch })) });
 
-  // videos
-  const embedBlocked = meta.playable_embed === false;
+  // repetition-consistency timing fix (display-level), measured against the same anchored bars without it
+  const fixing = chartView(unfixed);
+  const timing = applyTimingFix(fixing, { enabled: timingFix });
+  const fixed = fixing.chords;
+  const timingEntry = timingCorrection(timing.moves);
+  if (timingEntry) corrections.push(timingEntry);
+  if (!timing.settled) warnings.push(`${c.id}: timing fix still moving after ${timing.passes} passes`);
+  const reference = { anchors: barAnchors(chartView(unfixed)).anchors };
+  const anchoredUnfixed = chartView(unfixed);
+  applyBarAnchors(anchoredUnfixed);
+  const timingBefore = { consistency: timingConsistency(chartView(unfixed), reference), bars: barMetrics(anchoredUnfixed) };
+  const timingAfter = { consistency: timingConsistency(chartView(fixed), reference),
+    left: timingLeftAlone(chartView(fixed), { ...reference, enabled: timingFix }) };
+
+  // bar anchors on the fixed chords, then the bar summary the details panel reads
+  const before = barMetrics(chartView(fixed));
+  const anchoring = chartView(fixed);
+  const bars = applyBarAnchors(anchoring);
+  const chords = anchoring.chords;
+  const after = barMetrics(anchoring);
+  timingAfter.bars = after;
+
+  // level (with any catalogue override) and the level's default patterns for unauthored songs
+  const difficulty = applyLevelOverride(arrangementProfile(anchoring, { needsSyncopation: meta.needs_syncopation === true }), settings.levelOverride);
+  // editorial expected_level / expected_shapes (additions research drafts): reported only, never a reference
+  const expected = compareExpected(difficulty, meta.expected || {});
+  if (expected.level) warnings.push(`${c.id}: built Level ${expected.level.built}, metadata expected_level ${expected.level.expected} (report only)`);
+  const strumming = meta.strumming ? { ...meta.strumming, source: meta.strumming.source || "authored" }
+    : { note: `Default practice patterns for Level ${difficulty.level} songs; not checked against the recording.`,
+      source: "level-default", patterns: defaultPatterns(difficulty.level, bpb).map(pickPattern) };
+  for (const p of strumming.patterns) {
+    if (p.counts.length !== p.strokes.length || p.counts.length % bpb !== 0) throw new Error(`${c.id}: pattern ${p.id} does not fit ${bpb} beats per bar`);
+  }
+  const group = `level-${difficulty.level}`;
+
   const src = c.source.source;
-  const analysed = { video_id: src.video_id, uploader: src.uploader, kind: "analysed", duration_seconds: src.duration_seconds,
-    offset_seconds: 0, timing_checked: true, note: "Chart computed from this upload's audio.", ...(embedBlocked ? { embeddable: false } : {}) };
-  const alternates = applyAlternateOverrides(ctx.alternateMeta, c.id, []);
-  if (embedBlocked && !alternates.some(a => a.embeddable !== false)) throw new Error(`${c.id}: playable_embed false needs an embeddable alternate video`);
-  const videos = [analysed, ...alternates].map(videoEntry);
-
-  const recording = { id: c.recording.id, duration_seconds: r3(c.recording.duration_seconds), audio_sha256: c.recording.audio_sha256 };
   const song = {
     schema: "strumalong-song-2",
-    id: c.id, title: meta.title, artist: meta.artist, group: null, order: null, level: null,
-    recording, videos,
+    id: c.id, title: meta.title, artist: meta.artist, group, order: null, level: difficulty.level,
+    recording: { id: c.recording.id, duration_seconds: r3(c.recording.duration_seconds), audio_sha256: c.recording.audio_sha256 },
+    videos: [{ video_id: src.video_id, uploader: src.uploader, kind: "analysed", duration_seconds: src.duration_seconds,
+      offset_seconds: 0, timing_checked: true, note: "Chart computed from this upload's audio." }],
     chart: { source: c.primary_name || "CREMA automatic draft", sha256: primarySha, status: "provisional", corrections },
     capo: meta.capo, capo_source: meta.capo_source,
     setup_note: meta.setup_note,
-    difficulty: null,
-    rhythm, beats, chords,
-    strumming: meta.strumming,
+    difficulty,
+    rhythm: { ...rhythm, bar_model: "anchored-1", bar_confident_pct: r1(100 - after.approx_pct) },
+    beats, chords,
+    strumming,
     learning: meta.learning,
     provenance: { pack: packId, manifest_sha256: hashes.manifest, rhythm_sha256: hashes.rhythm, practice_sha256: hashes.practice,
       learning_sha256: hashes.learning, ...(hashes.additions ? { additions_sha256: hashes.additions } : {}), catalogue_sha256: hashes.catalogue },
   };
-
-  // repetition-consistency timing fix (display-level), measured against the same anchored bars without it
-  const raw = { ...song, chords: song.chords };
-  const timing = applyTimingFix(song, { enabled: ctx.timingFix !== false });
-  const timingEntry = timingCorrection(timing.moves);
-  if (timingEntry) corrections.push(timingEntry);
-  if (!timing.settled) warn(`${c.id}: timing fix still moving after ${timing.passes} passes`);
-  const unfixed = { ...raw, chords: raw.chords.map(ch => ({ ...ch })) };
-  const reference = { anchors: barAnchors(unfixed).anchors };
-  const timingBefore = { consistency: timingConsistency(unfixed, reference) };
-  applyBarAnchors(unfixed);
-  timingBefore.bars = barMetrics(unfixed);
-  const timingAfter = { consistency: timingConsistency(song, reference),
-    left: timingLeftAlone(song, { ...reference, enabled: ctx.timingFix !== false }) };
-
-  // bar anchors on the chords, then the bar summary the details panel reads
-  const before = barMetrics(song);
-  const bars = applyBarAnchors(song);
-  const after = barMetrics(song);
-  timingAfter.bars = after;
-  rhythm.bar_model = "anchored-1";
-  rhythm.bar_confident_pct = r1(100 - after.approx_pct);
-  const difficulty = difficultyOf(song, { needsSyncopation: meta.needs_syncopation === true });
-
-  const alt = alternates.find(a => a.timing_checked) || alternates[0];
   const card = {
-    id: c.id, title: meta.title, artist: meta.artist, group: null, order: null, level: null, level_label: null,
-    video_id: analysed.video_id, duration_seconds: r2(c.recording.duration_seconds),
+    id: c.id, title: meta.title, artist: meta.artist, group, order: null, level: difficulty.level, level_label: difficulty.label,
+    video_id: src.video_id, duration_seconds: r2(c.recording.duration_seconds),
     bpm: Math.round(rhythmCase.pulse_bpm), meter_label: rhythmCase.meter_label, capo: meta.capo,
-    core_shapes: coreShapes(song.chords, meta.capo),
-    playable_embed: !embedBlocked,
-    embed_note: !embedBlocked ? "" : (meta.embed_note ||
-      (alt && alt.timing_checked ? "This upload can't play in the app; using the official video (start offset measured)."
-        : "This upload can't play in the app; using the official video with unchecked timing.")),
+    core_shapes: difficulty.main_shapes, // the shapes the level counts (one Arrangement profile)
+    playable_embed: true, embed_note: "",
   };
-  return { song, card, difficulty, packId, stats: { chords: chords.length, beats: beats.length, vote, confident, before, after, runs: bars.runs,
-    timing: { ...timing, enabled: ctx.timingFix !== false, before: timingBefore, after: timingAfter } } };
-}
-
-// Level (with any override), default patterns for unauthored songs, and the grouping fields.
-function finishSong(built, override) {
-  const { song, card } = built;
-  const difficulty = applyLevelOverride(built.difficulty, override);
-  song.difficulty = difficulty;
-  song.level = card.level = difficulty.level;
-  card.level_label = difficulty.label;
-  song.group = card.group = `level-${difficulty.level}`;
-  if (!song.strumming) {
-    song.strumming = { note: `Default practice patterns for Level ${difficulty.level} songs; not checked against the recording.`,
-      source: "level-default", patterns: defaultPatterns(difficulty.level, song.rhythm.beats_per_bar).map(pickPattern) };
-  } else song.strumming.source = song.strumming.source || "authored";
-  for (const p of song.strumming.patterns) {
-    if (p.counts.length !== p.strokes.length || p.counts.length % song.rhythm.beats_per_bar !== 0) {
-      throw new Error(`${song.id}: pattern ${p.id} does not fit ${song.rhythm.beats_per_bar} beats per bar`);
-    }
-  }
-  return built;
+  const report = { warnings, expected, chords: chords.length, beats: beats.length, vote, bars: { before, after, runs: bars.runs },
+    timing: { ...timing, enabled: timingFix, before: timingBefore, after: timingAfter } };
+  return { song, card, report };
 }
 
 // ---------------------------------------------------------------- serialisation
@@ -816,6 +657,16 @@ const TITLES = {
   "oasis-wonderwall-youtube-20261010": ["Wonderwall", "Oasis"],
 };
 
+// The catalogue's settings for one recording, and its export from the pack's draft bytes (song warnings go to the log).
+const settingsFor = (cfg, id) => ({ timingFix: !cfg.timingOff.has(id), levelOverride: cfg.overrides.get(id) });
+function exportCase(cfg, packDir, draft, metadata) {
+  const c = draft.case;
+  const primary = read(path.join(packDir, "cases", c.id, "primary.json"));
+  const result = exportSong({ ...draft, primary }, metadata, settingsFor(cfg, c.id));
+  result.report.warnings.forEach(warn);
+  return result;
+}
+
 function loadPrepared(pack, cfg, built) {
   const dir = repoPath(pack.dir);
   const manifestBytes = read(path.join(dir, "manifest.json")), manifest = JSON.parse(manifestBytes);
@@ -838,16 +689,14 @@ function loadPrepared(pack, cfg, built) {
     if (!prac) throw new Error(`no practice case for ${c.id}`);
     for (const paired of [prac, entry]) if (paired && !pairedRecording(paired.recording, c.recording)) throw new Error(`recording identity mismatch for ${c.id}`);
     const capo = c.practice && Number.isInteger(c.practice.capo) ? c.practice.capo : 0;
-    built.push(buildSong({
-      c, packId: manifest.pack_id, packDir: dir, hashes, rhythmCase: rhythmById.get(c.id), correctionSet: prac.display_corrections,
-      alternateMeta: null, timingFix: !cfg.timingOff.has(c.id),
-      meta: { title: titles[0], artist: titles[1], capo, capo_source: capo > 0 ? "catalogue" : "none",
+    built.push(exportCase(cfg, dir,
+      { case: c, packId: manifest.pack_id, hashes, rhythmCase: rhythmById.get(c.id), correctionSet: prac.display_corrections },
+      { title: titles[0], artist: titles[1], capo, capo_source: capo > 0 ? "catalogue" : "none",
         setup_note: entry ? entry.setup_note : "Standard tuning (EADGBE). Capo and exact recording pitch are unchecked.",
         strumming: { note: prac.note, beats_description: prac.beats_description, source: "authored",
           patterns: prac.patterns.map(p => ({ id: p.id, name: p.name, counts: p.counts, strokes: p.strokes, description: p.description })) },
         learning: entry ? { skill_focus: entry.skill_focus, prerequisites: entry.prerequisites, sources: entry.sources.map(s => ({ title: s.title, url: s.url })) }
-          : { skill_focus: "", prerequisites: "", sources: [] } },
-    }));
+          : { skill_focus: "", prerequisites: "", sources: [] } }));
   }
 }
 
@@ -925,17 +774,17 @@ function loadAdditions(pack, cfg, built) {
         ...(entry.strumming.beats_description ? { beats_description: entry.strumming.beats_description } : {}), source: "authored",
         patterns: entry.strumming.patterns.map(p => ({ id: p.id, name: p.name, counts: p.counts, strokes: p.strokes, description: p.description })),
       } : null;
-      built.push(buildSong({
-        c, packId, packDir: dir, hashes, rhythmCase: rhythmById.get(c.id), correctionSet: undefined, alternateMeta: meta,
-        timingFix: !cfg.timingOff.has(c.id),
-        meta: { title: entry.title, artist: entry.artist,
+      built.push(exportCase(cfg, dir,
+        { case: c, packId, hashes, rhythmCase: rhythmById.get(c.id), correctionSet: undefined },
+        { title: entry.title, artist: entry.artist,
           // "suggested" with capo 0 means no capo is suggested: the song contract is capo_source "none" exactly at capo 0.
           capo: entry.capo, capo_source: entry.capo > 0 ? entry.capo_source : "none", setup_note: entry.setup_note, strumming,
-          needs_syncopation: entry.needs_syncopation === true, playable_embed: entry.playable_embed, embed_note: entry.embed_note,
+          needs_syncopation: entry.needs_syncopation === true, playable_embed: entry.playable_embed,
           label_aliases: entry.label_aliases || null,
+          // editorial research drafts, compared with the built profile and reported only
+          expected: { level: entry.expected_level, shapes: entry.expected_shapes },
           learning: { skill_focus: entry.skill_focus || "", prerequisites: entry.prerequisites || "",
-            sources: (entry.sources || []).map(s => ({ title: s.title, url: s.url })) } },
-      }));
+            sources: (entry.sources || []).map(s => ({ title: s.title, url: s.url })) } }));
     } catch (error) { warn(`${pack.id}: ${c.id} skipped (${error.message})`); }
   }
 }
@@ -955,7 +804,6 @@ function buildCatalogue(cfg) {
   for (const b of built) { if (ids.has(b.song.id)) throw new Error(`duplicate song id ${b.song.id}`); ids.add(b.song.id); }
   for (const id of cfg.overrides.keys()) if (!ids.has(id)) warn(`level override for ${id}, which is not in the catalogue`);
   for (const id of cfg.timingOff.keys()) if (!ids.has(id)) warn(`timing_fix_off for ${id}, which is not in the catalogue`);
-  for (const b of built) finishSong(b, cfg.overrides.get(b.song.id));
   const ordered = [];
   for (const { level } of LEVELS) {
     const members = built.filter(b => b.song.level === level).sort((x, y) => compareWithinLevel(
@@ -986,7 +834,7 @@ function report(built) {
   const pad = (v, n) => String(v).padStart(n);
   console.log("\nBar model (before = one song-wide bar_phase; after = anchored bars). weird/split counts, % of changes on bar or half-bar:");
   console.log(`${"song".padEnd(40)} ${"on bar+half".padStart(12)} ${"weird".padStart(8)} ${"split".padStart(9)} ${"restarts".padStart(9)} ${"approx%".padStart(10)}  runs`);
-  for (const { song, stats: s } of built) {
+  for (const { song, report: { bars: s } } of built) {
     const b = s.before, a = s.after;
     console.log(`${song.title.slice(0, 40).padEnd(40)} ${pad(`${b.on_bar_or_half}→${a.on_bar_or_half}`, 12)} ${pad(`${b.weird}→${a.weird}`, 8)} ` +
       `${pad(`${b.split}→${a.split}`, 9)} ${pad(`${b.restarts}→${a.restarts}`, 9)} ${pad(`${b.approx_pct}→${a.approx_pct}`, 10)}  ` +
@@ -996,25 +844,36 @@ function report(built) {
   console.log("sequences (3+ repeats) at their group's usual bar position:");
   console.log(`${"song".padEnd(40)} ${"moved".padStart(5)} ${"consistent %".padStart(13)} ${"weird".padStart(7)} ${"split".padStart(7)} ${"on bar+half".padStart(12)}  left alone`);
   let movedTotal = 0;
-  for (const { song, stats: { timing: t } } of built) {
+  for (const { song, report: { timing: t } } of built) {
     const b = t.before, a = t.after;
     movedTotal += t.moves.length;
     console.log(`${song.title.slice(0, 40).padEnd(40)} ${pad(t.enabled ? t.moves.length : "off", 5)} ${pad(`${b.consistency.pct}→${a.consistency.pct}`, 13)} ` +
       `${pad(`${b.bars.weird}→${a.bars.weird}`, 7)} ${pad(`${b.bars.split}→${a.bars.split}`, 7)} ${pad(`${b.bars.on_bar_or_half}→${a.bars.on_bar_or_half}`, 12)}  ${a.left.length}`);
   }
   console.log(`${movedTotal} chord changes moved in total. Moves (shape labels at the default view; -1 = one beat earlier):`);
-  for (const { song, stats: { timing: t } } of built) {
+  for (const { song, report: { timing: t } } of built) {
     if (!t.moves.length) continue;
     console.log(`  ${song.title}: ` + t.moves.map(m => `${Core.formatTime(m.at)} ${m.from}→${m.to} ${m.shift < 0 ? "-1" : "+1"}`).join(", "));
   }
   const detail = (process.argv.find(arg => arg.startsWith("--timing-detail=")) || "").slice("--timing-detail=".length);
-  for (const { song, stats: { timing: t } } of built) {
+  for (const { song, report: { timing: t } } of built) {
     if (!detail || !song.id.includes(detail)) continue;
     console.log(`\nTiming detail: ${song.title} (${song.id})`);
     for (const m of t.moves) console.log(`  moved ${Core.formatTime(m.at)} (${m.at.toFixed(3)} s, was ${m.was.toFixed(3)} s) ${m.from}→${m.to} ` +
       `one beat ${m.shift < 0 ? "earlier" : "later"}; ${m.agree} repeats agree`);
     for (const m of t.after.left) console.log(`  left  ${Core.formatTime(m.at)} (${m.at.toFixed(3)} s) ${m.from}→${m.to}; ${m.agree} repeats agree: ${m.reason}`);
   }
+
+  console.log("\nExpected shapes (additions metadata expected_shapes vs built main shapes; editorial drafts, report only):");
+  let shapeMismatches = 0;
+  for (const { song, report: { expected } } of built) {
+    const sh = expected && expected.shapes;
+    if (!sh) continue;
+    shapeMismatches++;
+    console.log(`  ${song.title}: expected ${sh.expected.join(" ")} · built ${sh.built.join(" ")}` +
+      `${sh.missing.length ? ` · not main: ${sh.missing.join(" ")}` : ""}${sh.extra.length ? ` · unexpected: ${sh.extra.join(" ")}` : ""}`);
+  }
+  console.log(`  ${shapeMismatches} song(s) differ.`);
 
   console.log("\nLevels:");
   for (const { song } of built) {
@@ -1048,7 +907,7 @@ function main() {
   for (const [f, text] of outputs) fs.writeFileSync(path.join(SONGS_DIR, f), text);
   for (const f of stale) { fs.unlinkSync(path.join(SONGS_DIR, f)); console.log(`removed stale ${f}`); }
 
-  for (const { song, stats: s } of built) {
+  for (const { song, report: s } of built) {
     const bytes = Buffer.byteLength(outputs.get(song.id + ".json"));
     console.log(`${song.id.slice(0, 44).padEnd(44)} L${song.level}#${song.order} chords=${String(s.chords).padStart(3)} beats=${String(s.beats).padStart(3)} ` +
       `bpm=${String(song.rhythm.bpm).padEnd(5)} bpb=${song.rhythm.beats_per_bar}${song.rhythm.beats_per_bar_assumed ? "(assumed)" : ""} ` +
@@ -1059,8 +918,15 @@ function main() {
   console.log(`\nwrote ${built.length} songs + index.json to ${rel(SONGS_DIR)}${warnings.length ? `; ${warnings.length} warning(s)` : ""}`);
 }
 
-module.exports = { barPhaseVote, barPhaseConfident, coreShapes, gridHolds, barAnchors, applyBarAnchors, barMetrics, BAR_COST,
-  TIMING_FIX, timingGroups, timingConsistency, timingCandidates, applyTimingFix, timingLeftAlone, timingCorrection,
-  shapeTier, difficultyOf, applyLevelOverride, defaultPatterns, readCatalogue, finishSong, warnCheckerFailures, LEVELS };
+module.exports = {
+  exportSong,
+  // adapter: the catalogue config, and the whole catalogue built in memory from the packs (what main() writes)
+  readCatalogue, buildCatalogue,
+  // Exported only for unit tests the chord vocabulary and repeat-timing deepenings will move into their own modules
+  // (the Arrangement profile is tools/arrangement-profile.js); nothing else should import them.
+  barPhaseVote, barPhaseConfident, gridHolds, barAnchors, applyTimingFix, timingConsistency, timingCorrection,
+  // the checker-report warning (exclusion stays manual, docs/adr/0001-repeat-timing-two-measures.md)
+  warnCheckerFailures,
+};
 
 if (require.main === module) main();

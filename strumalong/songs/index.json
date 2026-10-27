@@ -174,8 +174,7 @@
       "core_shapes": [
         "E",
         "D",
-        "A",
-        "Esus4"
+        "A"
       ],
       "playable_embed": true,
       "embed_note": ""
@@ -301,8 +300,7 @@
       "core_shapes": [
         "G",
         "C",
-        "D",
-        "Em"
+        "D"
       ],
       "playable_embed": true,
       "embed_note": ""
@@ -538,8 +536,28 @@
       "core_shapes": [
         "G",
         "D",
-        "C",
-        "Em"
+        "C"
+      ],
+      "playable_embed": true,
+      "embed_note": ""
+    },
+    {
+      "id": "deep-blue-something-breakfast-at-tiffanys-youtube-20261025",
+      "title": "Breakfast at Tiffany's",
+      "artist": "Deep Blue Something",
+      "group": "level-2",
+      "order": 14,
+      "level": 2,
+      "level_label": "Open chords",
+      "video_id": "ewo6AGUJaUA",
+      "duration_seconds": 257.38,
+      "bpm": 112,
+      "meter_label": "4/4 assumed",
+      "capo": 0,
+      "core_shapes": [
+        "D",
+        "A",
+        "G"
       ],
       "playable_embed": true,
       "embed_note": ""
@@ -606,29 +624,7 @@
         "Em",
         "G",
         "C",
-        "D",
-        "A"
-      ],
-      "playable_embed": true,
-      "embed_note": ""
-    },
-    {
-      "id": "deep-blue-something-breakfast-at-tiffanys-youtube-20261025",
-      "title": "Breakfast at Tiffany's",
-      "artist": "Deep Blue Something",
-      "group": "level-3",
-      "order": 4,
-      "level": 3,
-      "level_label": "More changes",
-      "video_id": "ewo6AGUJaUA",
-      "duration_seconds": 257.38,
-      "bpm": 112,
-      "meter_label": "4/4 assumed",
-      "capo": 0,
-      "core_shapes": [
-        "D",
-        "A",
-        "G"
+        "D"
       ],
       "playable_embed": true,
       "embed_note": ""
@@ -638,7 +634,7 @@
       "title": "Twist and Shout",
       "artist": "The Beatles",
       "group": "level-3",
-      "order": 5,
+      "order": 4,
       "level": 3,
       "level_label": "More changes",
       "video_id": "2RicaUqd9Hg",
@@ -659,7 +655,7 @@
       "title": "La Bamba",
       "artist": "Ritchie Valens",
       "group": "level-3",
-      "order": 6,
+      "order": 5,
       "level": 3,
       "level_label": "More changes",
       "video_id": "BycLmWI97Nc",
@@ -680,7 +676,7 @@
       "title": "Island in the Sun",
       "artist": "Weezer",
       "group": "level-3",
-      "order": 7,
+      "order": 6,
       "level": 3,
       "level_label": "More changes",
       "video_id": "erG5rgNYSdk",
@@ -783,7 +779,8 @@
         "G",
         "D",
         "E",
-        "Am"
+        "Am",
+        "Dm"
       ],
       "playable_embed": true,
       "embed_note": ""
@@ -966,7 +963,8 @@
         "Em",
         "C",
         "A",
-        "B"
+        "B",
+        "E"
       ],
       "playable_embed": true,
       "embed_note": ""
