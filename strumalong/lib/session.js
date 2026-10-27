@@ -41,7 +41,7 @@
     const patterns = {};
     if (s.patterns && typeof s.patterns === "object") for (const [k, v] of Object.entries(s.patterns)) if (typeof v === "string") patterns[k] = v;
     return { quality: s.quality === "full" ? "full" : "core", view: s.view === "sounding" ? "sounding" : "shapes",
-      diagrams: s.diagrams !== false, patterns };
+      diagrams: s.diagrams !== false, countIn: s.countIn === true, patterns };
   }
   const freeze = s => Object.freeze({ ...s, patterns: Object.freeze({ ...s.patterns }) });
 
@@ -83,6 +83,7 @@
       setQuality: value => updateSettings({ quality: value }),
       setView: value => updateSettings({ view: value }),
       setDiagrams: on => updateSettings({ diagrams: Boolean(on) }),
+      setCountIn: on => updateSettings({ countIn: Boolean(on) }),
       setPattern: (songId, patternId) => updateSettings({ patterns: { [songId]: patternId } }),
       latency: () => latency,
       setLatency(ms) { latency = clampInt(Number(ms), LATENCY_LIMIT_MS); save("latency", latency); return latency; },
