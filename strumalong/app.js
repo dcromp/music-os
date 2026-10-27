@@ -171,7 +171,7 @@
   }
 
   function songCard(s) {
-    const chips = (Array.isArray(s.core_shapes) ? s.core_shapes : []).slice(0, 6).map(c => `<span class="chip">${esc(c)}</span>`).join("");
+    const chips = (Array.isArray(s.core_shapes) ? s.core_shapes : []).map(c => `<span class="chip">${esc(c)}</span>`).join("");
     const meta = [];
     if (num(s.bpm)) meta.push(`~${Math.round(s.bpm)} BPM`);
     if (s.meter_label) meta.push(esc(s.meter_label));

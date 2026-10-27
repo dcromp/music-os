@@ -4,7 +4,7 @@
 "title":"La Bamba",
 "artist":"Ritchie Valens",
 "group":"level-3",
-"order":6,
+"order":5,
 "level":3,
 "recording":{"id":"ritchie-valens-la-bamba-youtube-20261026","duration_seconds":126.977,"audio_sha256":"8febd1e050a8716a71ec01cc32c3da8b2326989af8793ed2172717bf6b476881"},
 "videos":[{"video_id":"BycLmWI97Nc","uploader":"Ritchie Valens - Topic","kind":"analysed","duration_seconds":127,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],

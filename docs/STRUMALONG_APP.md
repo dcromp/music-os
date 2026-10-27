@@ -115,7 +115,7 @@ Plain static files with no bundler and no npm install. Scripts are classic `<scr
 - `bar_phase` is the old song-wide heuristic: a chord-start residue vote, not a verified downbeat. Every native chord start that is not N or X and lies strictly inside the beat grid votes for `round(beatPosition(start)) mod beats_per_bar`. Ties keep the lowest residue. `bar_phase_confident` is true when there are at least 8 votes and the winning share is at least 0.7; an assumed meter is never confident. `bar_phase_share` records the share. Since the bar model, these fields are only the fallback for chords without `b` and a summary.
 - `bar_confident_pct` is the share of chord beats under a confident (not approx) anchor.
 - `strumming.source` is `authored` for the prepared songs' `practice.json` patterns and for patterns in an additions metadata file, and `level-default` when the song had none (see "Difficulty levels").
-- `core_shapes` (index card chips) lists the Core shapes at the song's capo by chord seconds. Shapes under 3% of chord time are dropped, as are slash shapes under 10%. The list is longest first and holds at most 6.
+- `core_shapes` (index card chips) is exactly `difficulty.main_shapes`: the main shapes the level was computed on (see "Difficulty levels"), longest first, with no cap. Both come from one Arrangement profile (`tools/arrangement-profile.js`).
 - A video entry carries `embeddable: false` only when that upload is known not to play in an embed (`playable_embed: false` in additions metadata, which also needs an embeddable alternate). The app then starts on the first embeddable entry.
 
 ## Catalogue config (`strumalong/data/catalogue.json`)
@@ -290,11 +290,11 @@ Lead decision, 25 October 2026. Shapes are what the player frets: Core shapes at
 
 Other slash shapes take their root shape's tier, because the diagram omits the bass note.
 
-- **Main shapes** are Core shapes covering at least 4% of chord time, ignoring N, X and blips (holds under 0.75 beat).
+- **Main shapes** are Core shapes covering at least 4% of chord time (slash shapes at least 10%), ignoring N, X and blips (holds under 0.75 beat). They are also the card chips, so a card always shows the shapes its level counts (one rule since 27 October 2026, [#41](https://github.com/dcromp/music-os/issues/41); before, the card used 3% with blips and at most 6 chips, and 7 of 43 cards differed).
 - **Changes per minute** counts label changes between consecutive non-blip chord holds, but not across N or X, per minute of non-blip chord time.
 - **Median hold** is in beats per non-blip chord hold.
 
-| Level | Rule (`difficultyOf`) |
+| Level | Rule (`arrangementProfile` in `tools/arrangement-profile.js`) |
 |---|---|
 | 5 · Barre chords | any T4 main shape |
 | 4 · First barre (F / Bm) | any T3 main shape, no T4 |
@@ -303,6 +303,8 @@ Other slash shapes take their root shape's tier, because the diagram omits the b
 | 1 · First chords | all T1 with ≤ 3 main shapes |
 
 `tier_reason` states the main shapes, the hardest tier and the pace. A `level_overrides` entry in the catalogue config replaces the level and keeps the computed one.
+
+**Expected level and shapes.** An additions metadata entry's `expected_level` and `expected_shapes` are editorial research drafts. The exporter compares them with the built profile (after any override) and reports only: a level mismatch is a `WARN` line (counted, never failing the build), and shape-set mismatches are listed under "Expected shapes" in the build report. `chart_check` is research bookkeeping and is not read.
 
 **Label aliases (25 Oct 2026).** An additions metadata entry may carry `label_aliases: {map: {chartLabel: displayLabel}, note}` when the automatic chart names a chord differently from the grip players use. It was built for A Horse with No Name (chart `F#m7`, `Dmaj7/F#`, `Dmaj7`, `D`, `D/F#` → the two-finger `D6add9/F#` grip `200200`, a tier-1 shape), but that song was then excluded: its chart misses most of the bar-by-bar changes. Aliased events carry `c:1`, and each alias is listed in `chart.corrections` with the span of the events it relabels. Timings never change.
 
@@ -374,7 +376,7 @@ Ported helpers from `experiments/review/app.js` keep their names and behaviour. 
 ## UI
 
 - **Library (`#/`).**
-  - Song cards grouped by level ("Level 1 · First chords" … "Level 5 · Barre chords"), each group with its one-line explanation, in the index order (easiest first within a level). Each card shows the title, artist, up to 6 Core shape chips, ~BPM and a capo badge. When the analysed upload can't be embedded, the card also gets a "timing unchecked" badge (or "alternate video" if the alternate's timing was checked).
+  - Song cards grouped by level ("Level 1 · First chords" … "Level 5 · Barre chords"), each group with its one-line explanation, in the index order (easiest first within a level). Each card shows the title, artist, the song's main shapes as chips (the shapes its level counts; they wrap), ~BPM and a capo badge. When the analysed upload can't be embedded, the card also gets a "timing unchecked" badge (or "alternate video" if the alternate's timing was checked).
   - A last-played song gets a resume chip.
   - The header reads "Strum Along · music-os", with the line "Provisional automatic chord charts. For personal practice."
 - **Song (`#/song/<id>`), portrait, top to bottom:**
