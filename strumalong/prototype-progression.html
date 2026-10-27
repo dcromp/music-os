@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Progression rules prototype</title>
+<!-- PROTOTYPE, throwaway. Never deploy. Branch prototype/strumalong-progression. Opens by double-click. -->
+<style>
+  :root { --bg:#fbfaf7; --card:#fff; --ink:#1d1d1b; --muted:#6b6a65; --line:#e4e1d8; --accent:#c2410c; --accent-soft:#fdeee5; --ok:#166534; --ok-soft:#e7f4ea; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#161614; --card:#20201d; --ink:#ecebe6; --muted:#a3a29b; --line:#34332e; --accent:#fb923c; --accent-soft:#3a2416; --ok:#86efac; --ok-soft:#173222; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  main { max-width: 1180px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 24px; margin: 0 0 6px; } h2 { font-size: 16px; margin: 0 0 10px; } h3 { font-size: 14px; margin: 14px 0 6px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+  p { margin: 0 0 10px; } .muted { color: var(--muted); } small { color: var(--muted); }
+  .intro { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin: 14px 0 18px; }
+  .intro ol { margin: 6px 0 0; padding-left: 20px; } .intro li { margin: 3px 0; }
+  .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 18px; align-items: start; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .tab, .btn { font: inherit; border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+  .tab[aria-selected="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn:hover, .tab:hover { border-color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn:disabled { opacity: .4; cursor: default; }
+  .steps { margin: 10px 0 0; padding: 0; list-style: none; counter-reset: s; }
+  .steps li { display: flex; gap: 10px; align-items: center; padding: 6px 0; border-top: 1px solid var(--line); }
+  .steps li::before { counter-increment: s; content: counter(s); width: 22px; height: 22px; border-radius: 50%; background: var(--line); display: inline-grid; place-items: center; font-size: 12px; flex: none; }
+  .steps li.done { color: var(--muted); } .steps li.done::before { background: var(--ok-soft); color: var(--ok); content: "✓"; }
+  .steps li.next::before { background: var(--accent); color: #fff; }
+  .watch { background: var(--accent-soft); border-radius: 8px; padding: 8px 10px; margin-top: 10px; }
+  .songs { max-height: 520px; overflow: auto; border-top: 1px solid var(--line); margin-top: 8px; }
+  .song { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; padding: 7px 2px; border-bottom: 1px solid var(--line); }
+  .song .t { font-weight: 600; } .song .meta { font-size: 13px; color: var(--muted); }
+  .song .acts { display: flex; gap: 4px; } .song .acts .btn { padding: 3px 9px; font-size: 13px; }
+  .count { display: inline-block; min-width: 20px; text-align: center; background: var(--ok-soft); color: var(--ok); border-radius: 999px; font-size: 12px; padding: 0 6px; margin-left: 4px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 5px; } .chip { border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; font-size: 13px; }
+  .chip.new { border-color: var(--accent); color: var(--accent); font-weight: 600; } .chip.mine { background: var(--ok-soft); border-color: transparent; color: var(--ok); }
+  .shelf { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+  .card { flex: 0 0 170px; border: 1px solid var(--line); border-radius: 10px; padding: 9px 10px; background: var(--bg); }
+  .card .t { font-weight: 600; font-size: 14px; } .card .why { font-size: 12px; color: var(--accent); margin-top: 4px; font-weight: 600; }
+  .card .a { font-size: 12px; color: var(--muted); }
+  .facts { display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; margin: 0; }
+  .facts dt { color: var(--muted); } .facts dd { margin: 0; }
+  .changed { background: var(--accent-soft); border-radius: 8px; padding: 8px 10px; margin-bottom: 12px; font-size: 14px; }
+  .rule { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 6px 0; }
+  .empty { color: var(--muted); font-style: italic; font-size: 14px; }
+  input[type=search] { font: inherit; width: 100%; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Strum Along: how should a returning player move up?</h1>
+  <p class="muted">Throwaway prototype, 27 October 2026. The 43 real songs, their chord shapes and their pace. Nothing here ships; it is for deciding the rules.</p>
+
+  <div class="intro">
+    <p><b>The question.</b> Jukebox doesn't teach and doesn't ask anyone to tick chords. So what can it do for someone who comes back again and again? It only knows two things: <b>which songs they played to the end</b> (and how often) and <b>which songs they starred</b>. Can it use just those to nudge them, quietly, toward slightly harder songs, without levels, locks or lessons?</p>
+    <p><b>Proposed rules</b> (each is something to agree or change):</p>
+    <ol>
+      <li><b>Your chords</b> are the shapes in the songs you've played to the end. A star alone doesn't count: starring isn't playing.</li>
+      <li><b>Your pace</b> is the fastest chord changes per minute among the songs you've finished.</li>
+      <li>A <b>“Your next step”</b> shelf appears after your first finished song. It holds songs you haven't finished that add <b>one new chord</b> at a pace you've managed, or use only your chords with <b>quicker changes</b> (up to about half again your pace). Each card says why, e.g. “+ G” or “Quicker changes”. It stays within one level of you: no harder than one level above your hardest finished song, no easier than one level below the song you finished last. If no song fits, it falls back to the fewest new chords.</li>
+      <li><b>Surprise me</b> picks from songs that use only your chords, plus your next steps. A new player gets the first two levels, as today.</li>
+      <li><b>Another like this</b> stays as it is (shared chords, at most one level harder), but each card gains the same “+ chord” tag.</li>
+      <li>Nothing is locked or hidden. All the other shelves stay the same.</li>
+    </ol>
+  </div>
+
+  <div class="grid">
+    <section>
+      <div class="panel">
+        <h2>Guided walkthroughs</h2>
+        <div class="tabs" role="tablist" id="tabs"></div>
+        <div id="scenario"></div>
+      </div>
+
+      <div class="panel" style="margin-top:18px">
+        <h2>Free play</h2>
+        <div class="rule">A chord counts as yours after
+          <button class="btn" data-rule="1">1 finished play</button>
+          <button class="btn" data-rule="2">2 finished plays</button>
+        </div>
+        <div class="rule"><button class="btn" data-act="reset">Start over (new player)</button><button class="btn" data-act="surprise">Press Surprise me</button></div>
+        <input type="search" id="q" placeholder="Filter songs by title, artist or chord" aria-label="Filter songs">
+        <div class="songs" id="songs"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="state"></section>
+  </div>
+</main>
+
+<script>
+/* ---------------------------------------------------------------- pure module (liftable into lib/library.js)
+ * history: {plays: {songId: finishedCount}, favourites: [songId], lastId}. Same shapes the app already stores.
+ * rules: {chordAfter: 1|2}. No DOM. */
+const Progression = (() => {
+  const shapesOf = s => s.core_shapes || [];
+  const NEW_PLAYER_LEVEL = 2;   // Surprise me for someone with nothing finished (today's rule)
+  const PACE_STRETCH = 1.5;     // "quicker changes" means up to half again your fastest pace
+  const NEXT_LIMIT = 6;
+
+  function record(history, event) {
+    const h = { plays: { ...history.plays }, favourites: [...history.favourites], lastId: history.lastId };
+    if (event.type === "finish") { h.plays[event.id] = (h.plays[event.id] || 0) + 1; h.lastId = event.id; }
+    if (event.type === "star") h.favourites = h.favourites.includes(event.id) ? h.favourites.filter(x => x !== event.id) : h.favourites.concat(event.id);
+    return h;
+  }
+
+  function profile(songs, history, rules) {
+    const finished = songs.filter(s => (history.plays[s.id] || 0) > 0);
+    const counted = finished.filter(s => history.plays[s.id] >= rules.chordAfter);
+    const mine = new Set(counted.flatMap(shapesOf));
+    const pace = counted.length ? Math.max(...counted.map(s => s.changes_per_min)) : 0;
+    // Level window for next steps: no harder than one above your hardest finished song, and no easier than one
+    // below the song you finished last (so an experienced player isn't sent back to three-chord songs).
+    const top = counted.length ? Math.max(...counted.map(s => s.level)) : 0;
+    const lastSong = finished.find(s => s.id === history.lastId);
+    const floor = lastSong ? lastSong.level - 1 : 0;
+    return { finished, counted, mine, pace, top, floor, isNew: counted.length === 0 };
+  }
+
+  const newShapes = (song, mine) => shapesOf(song).filter(c => !mine.has(c));
+
+  // [{song, fresh: [shape], why}] for songs not yet finished.
+  function nextStep(songs, history, rules) {
+    const p = profile(songs, history, rules);
+    if (p.isNew) return [];
+    const open = songs.filter(s => !(history.plays[s.id] > 0) && s.level <= p.top + 1 && s.level >= p.floor).map(s => ({ song: s, fresh: newShapes(s, p.mine) }));
+    const oneNew = open.filter(x => x.fresh.length === 1 && x.song.changes_per_min <= p.pace * PACE_STRETCH)
+      .sort((a, b) => a.song.changes_per_min - b.song.changes_per_min)
+      .map(x => ({ ...x, why: "+ " + x.fresh[0] }));
+    const quicker = open.filter(x => x.fresh.length === 0 && x.song.changes_per_min > p.pace && x.song.changes_per_min <= p.pace * PACE_STRETCH)
+      .sort((a, b) => a.song.changes_per_min - b.song.changes_per_min)
+      .map(x => ({ ...x, why: "Quicker changes" }));
+    const out = [];
+    for (let i = 0; out.length < NEXT_LIMIT && (i < oneNew.length || i < quicker.length); i++) {
+      if (oneNew[i]) out.push(oneNew[i]);
+      if (quicker[i] && out.length < NEXT_LIMIT) out.push(quicker[i]);
+    }
+    if (out.length) return out;
+    // Fallback: fewest new chords, then calmest.
+    if (!open.length) return [];
+    const least = Math.min(...open.map(x => x.fresh.length));
+    return open.filter(x => x.fresh.length === least && least > 0)
+      .sort((a, b) => a.song.changes_per_min - b.song.changes_per_min).slice(0, NEXT_LIMIT)
+      .map(x => ({ ...x, why: "+ " + x.fresh.join(", ") }));
+  }
+
+  // The songs Surprise me may pick from, with the reason each is in the pool.
+  function surprisePool(songs, history, rules) {
+    const p = profile(songs, history, rules);
+    if (p.isNew) return songs.filter(s => s.level <= NEW_PLAYER_LEVEL).map(song => ({ song, why: "Levels 1–2 (new player)" }));
+    const next = new Map(nextStep(songs, history, rules).map(x => [x.song.id, x.why]));
+    return songs.filter(s => s.id !== history.lastId)
+      .filter(s => next.has(s.id) || newShapes(s, p.mine).length === 0)
+      .map(song => ({ song, why: next.get(song.id) || (history.plays[song.id] ? "Played before" : "Your chords") }));
+  }
+
+  // Today's rule, for comparison: any song up to the hardest level finished (at least level 2).
+  function surprisePoolToday(songs, history) {
+    const lv = songs.filter(s => history.plays[s.id] > 0).map(s => s.level);
+    const cap = Math.max(NEW_PLAYER_LEVEL, ...lv);
+    return songs.filter(s => s.id !== history.lastId && s.level <= cap);
+  }
+
+  // Today's "Another like this" (lib/library.js similar), plus the new tag.
+  function anotherLikeThis(songs, song, history, rules) {
+    if (!song) return [];
+    const p = profile(songs, history, rules);
+    const mineOf = new Set(shapesOf(song));
+    return songs.filter(o => o.id !== song.id && o.level <= song.level + 1)
+      .map(o => { const shared = shapesOf(o).filter(c => mineOf.has(c)).length; return { o, shared, fresh: shapesOf(o).length - shared }; })
+      .filter(x => x.shared > 0)
+      .sort((a, b) => b.shared - a.shared || a.fresh - b.fresh || a.o.level - b.o.level || a.o.order - b.o.order)
+      .slice(0, 5).map(x => { const f = newShapes(x.o, p.mine); return { song: x.o, fresh: f, why: f.length ? "+ " + f.join(", ") : "" }; });
+  }
+
+  return { record, profile, nextStep, surprisePool, surprisePoolToday, anotherLikeThis, newShapes };
+})();
+
+/* ---------------------------------------------------------------- data: strumalong/songs/index.json, 27 Oct 2026 */
+const SONGS = [{"id":"elvis-presley-thats-all-right-youtube-20261026","title":"That's All Right","artist":"Elvis Presley","level":1,"order":1,"core_shapes":["A","D","E"],"changes_per_min":7.9},{"id":"billy-ray-cyrus-achy-breaky-heart-youtube-20261026","title":"Achy Breaky Heart","artist":"Billy Ray Cyrus","level":1,"order":2,"core_shapes":["E","A","Am"],"changes_per_min":8},{"id":"johnny-cash-jackson-youtube-20261026","title":"Jackson","artist":"Johnny Cash & June Carter","level":1,"order":3,"core_shapes":["A","D","E"],"changes_per_min":9.2},{"id":"bill-haley-rock-around-the-clock-youtube-20261026","title":"Rock Around the Clock","artist":"Bill Haley & His Comets","level":1,"order":4,"core_shapes":["A","E"],"changes_per_min":10},{"id":"eric-clapton-lay-down-sally-youtube-20261026","title":"Lay Down Sally","artist":"Eric Clapton","level":1,"order":5,"core_shapes":["A","D","E"],"changes_per_min":10.4},{"id":"bob-marley-three-little-birds-youtube-20261025","title":"Three Little Birds","artist":"Bob Marley & The Wailers","level":1,"order":6,"core_shapes":["A","D","E"],"changes_per_min":10.5},{"id":"neil-diamond-sweet-caroline-youtube-20261025","title":"Sweet Caroline","artist":"Neil Diamond","level":1,"order":7,"core_shapes":["E","D","A"],"changes_per_min":16.1},{"id":"everly-brothers-bye-bye-love-youtube-20261026","title":"Bye Bye Love","artist":"The Everly Brothers","level":1,"order":8,"core_shapes":["A","D","E"],"changes_per_min":23.1},{"id":"bob-marley-stir-it-up-youtube-20261026","title":"Stir It Up","artist":"Bob Marley & The Wailers","level":1,"order":9,"core_shapes":["A","D","E"],"changes_per_min":25.5},{"id":"troggs-wild-thing-youtube-20261011","title":"Wild Thing","artist":"The Troggs","level":1,"order":10,"core_shapes":["A","E","D"],"changes_per_min":30.2},{"id":"buddy-holly-peggy-sue-youtube-20261026","title":"Peggy Sue","artist":"Buddy Holly","level":1,"order":11,"core_shapes":["A","D","E"],"changes_per_min":35.5},{"id":"stealers-wheel-stuck-in-the-middle-with-you-youtube-20261025","title":"Stuck in the Middle with You","artist":"Stealers Wheel","level":2,"order":1,"core_shapes":["D","G","A"],"changes_per_min":10.6},{"id":"coldplay-yellow-youtube-20261025","title":"Yellow","artist":"Coldplay","level":2,"order":2,"core_shapes":["G","C","D"],"changes_per_min":11},{"id":"4-non-blondes-whats-up-youtube-20261025","title":"What's Up?","artist":"4 Non Blondes","level":2,"order":3,"core_shapes":["G","Am","C"],"changes_per_min":12.5},{"id":"george-ezra-budapest-youtube-20261025","title":"Budapest","artist":"George Ezra","level":2,"order":4,"core_shapes":["D","G","A"],"changes_per_min":14.8},{"id":"cranberries-zombie-youtube-20261024","title":"Zombie","artist":"The Cranberries","level":2,"order":5,"core_shapes":["Em","G","C","D"],"changes_per_min":18.5},{"id":"john-denver-country-roads-youtube-20261024","title":"Take Me Home, Country Roads","artist":"John Denver","level":2,"order":6,"core_shapes":["G","D","C","Em"],"changes_per_min":19.1},{"id":"verve-lucky-man-youtube-20261025","title":"Lucky Man","artist":"The Verve","level":2,"order":7,"core_shapes":["A","G","D"],"changes_per_min":23.1},{"id":"bob-dylan-knockin-heavens-door-youtube-20261011","title":"Knockin' on Heaven's Door","artist":"Bob Dylan","level":2,"order":8,"core_shapes":["G","D","Am","C"],"changes_per_min":26.1},{"id":"ccr-bad-moon-rising-youtube-20261024","title":"Bad Moon Rising","artist":"Creedence Clearwater Revival","level":2,"order":9,"core_shapes":["D","G","A"],"changes_per_min":28.7},{"id":"neil-young-heart-of-gold-youtube-20261025","title":"Heart of Gold","artist":"Neil Young","level":2,"order":10,"core_shapes":["Em","G","C","D"],"changes_per_min":29.2},{"id":"tom-petty-free-fallin-youtube-20261024","title":"Free Fallin'","artist":"Tom Petty","level":2,"order":11,"core_shapes":["D","G","A"],"changes_per_min":30.7},{"id":"old-crow-medicine-show-wagon-wheel-youtube-20261025","title":"Wagon Wheel","artist":"Old Crow Medicine Show","level":2,"order":12,"core_shapes":["C","G","D","Em"],"changes_per_min":30.8},{"id":"van-morrison-brown-eyed-girl-youtube-20261011","title":"Brown Eyed Girl","artist":"Van Morrison","level":2,"order":13,"core_shapes":["G","D","C"],"changes_per_min":34.2},{"id":"deep-blue-something-breakfast-at-tiffanys-youtube-20261025","title":"Breakfast at Tiffany's","artist":"Deep Blue Something","level":2,"order":14,"core_shapes":["D","A","G"],"changes_per_min":38.1},{"id":"jason-mraz-im-yours-youtube-20261025","title":"I'm Yours","artist":"Jason Mraz","level":3,"order":1,"core_shapes":["G","C","Em","D"],"changes_per_min":19.6},{"id":"eagles-take-it-easy-youtube-20261025","title":"Take It Easy","artist":"Eagles","level":3,"order":2,"core_shapes":["G","C","Em","D","Am"],"changes_per_min":24.9},{"id":"oasis-wonderwall-youtube-20261010","title":"Wonderwall","artist":"Oasis","level":3,"order":3,"core_shapes":["Em","G","C","D"],"changes_per_min":34},{"id":"beatles-twist-and-shout-youtube-20261011","title":"Twist and Shout","artist":"The Beatles","level":3,"order":4,"core_shapes":["A","D","G"],"changes_per_min":40.2},{"id":"ritchie-valens-la-bamba-youtube-20261026","title":"La Bamba","artist":"Ritchie Valens","level":3,"order":5,"core_shapes":["E","A","D"],"changes_per_min":48.6},{"id":"weezer-island-in-the-sun-youtube-20261024","title":"Island in the Sun","artist":"Weezer","level":3,"order":6,"core_shapes":["D","G","Em","Am"],"changes_per_min":51.4},{"id":"lumineers-ho-hey-youtube-20261025","title":"Ho Hey","artist":"The Lumineers","level":4,"order":1,"core_shapes":["C","Am","G","F"],"changes_per_min":13.4},{"id":"ccr-have-you-ever-seen-the-rain-youtube-20261024","title":"Have You Ever Seen the Rain","artist":"Creedence Clearwater Revival","level":4,"order":2,"core_shapes":["C","G","F","Am"],"changes_per_min":18.2},{"id":"oasis-dont-look-back-in-anger-youtube-20261024","title":"Don't Look Back in Anger","artist":"Oasis","level":4,"order":3,"core_shapes":["C","G","F","Am","Em"],"changes_per_min":29.8},{"id":"cat-stevens-wild-world-youtube-20261025","title":"Wild World","artist":"Cat Stevens","level":4,"order":4,"core_shapes":["F","C","G","D","E","Am","Dm"],"changes_per_min":30.2},{"id":"beatles-i-want-to-hold-your-hand-youtube-20261025","title":"I Want to Hold Your Hand","artist":"The Beatles","level":4,"order":5,"core_shapes":["D","G","C","Bm","E","Em"],"changes_per_min":33.4},{"id":"tom-petty-learning-to-fly-youtube-20261025","title":"Learning to Fly","artist":"Tom Petty","level":4,"order":6,"core_shapes":["G","C","F","Am"],"changes_per_min":54.8},{"id":"eagle-eye-cherry-save-tonight-youtube-20261025","title":"Save Tonight","artist":"Eagle-Eye Cherry","level":4,"order":7,"core_shapes":["F","C","G","Am"],"changes_per_min":57.3},{"id":"natalie-imbruglia-torn-youtube-20261025","title":"Torn","artist":"Natalie Imbruglia","level":5,"order":1,"core_shapes":["F","C","Dm","A#","Am"],"changes_per_min":19.8},{"id":"beatles-help-youtube-20261025","title":"Help!","artist":"The Beatles","level":5,"order":2,"core_shapes":["A","G","Bm","E","F#m","C#m"],"changes_per_min":20.6},{"id":"proclaimers-im-gonna-be-500-miles-youtube-20261025","title":"I'm Gonna Be (500 Miles)","artist":"The Proclaimers","level":5,"order":3,"core_shapes":["E","B","A"],"changes_per_min":21.5},{"id":"queen-crazy-little-thing-called-love-youtube-20261025","title":"Crazy Little Thing Called Love","artist":"Queen","level":5,"order":4,"core_shapes":["D","G","A#","C","Dm"],"changes_per_min":34.4},{"id":"green-day-boulevard-of-broken-dreams-youtube-20261025","title":"Boulevard of Broken Dreams","artist":"Green Day","level":5,"order":5,"core_shapes":["G","D","Em","C","A","B","E"],"changes_per_min":37.4}];
+const byTitle = t => SONGS.find(s => s.title === t);
+
+/* ---------------------------------------------------------------- walkthroughs */
+const SCENARIOS = [
+  { name: "Brand-new player", text: "Someone opens the app for the first time and finishes one easy song.",
+    watch: "Before anything is finished there is no “Your next step” shelf and Surprise me draws from levels 1–2. After one finished song the shelf appears, and every card says what it adds.",
+    steps: [["finish", "That's All Right"]] },
+  { name: "Climbing", text: "A beginner finishes an A–D–E song, then takes the first suggestion that adds G, then one that adds C.",
+    watch: "Each finished song adds its chords to “Your chords”, and the next-step shelf moves on. Does it feel like a gentle ladder, or does it jump?",
+    steps: [["finish", "Three Little Birds"], ["finish", "Stuck in the Middle with You"], ["finish", "Yellow"], ["finish", "Brown Eyed Girl"]] },
+  { name: "Experienced player", text: "Someone who already plays well goes straight for a barre-chord song.",
+    watch: "Nothing holds them back: one finished barre song gives them lots of chords at a fast pace, and the next step stays on level 4–5 songs. Easy songs are still on the other shelves; they just aren't pushed.",
+    steps: [["finish", "Boulevard of Broken Dreams"]] },
+  { name: "Comfort song", text: "Someone plays the same easy song five times and nothing else.",
+    watch: "The shelf stays the same each time, which is honest but could feel stale. Also try the “2 finished plays” rule here and compare.",
+    steps: [["finish", "Sweet Caroline"], ["finish", "Sweet Caroline"], ["finish", "Sweet Caroline"], ["finish", "Sweet Caroline"], ["finish", "Sweet Caroline"]] },
+  { name: "Starred, never played", text: "Someone stars a hard song they'd love to play one day, but only finishes an easy one.",
+    watch: "Under the proposed rules the star doesn't count as playing, so Help!'s chords don't become “yours”. Today's Surprise me rule also ignores stars. Should a starred dream song steer the next step toward it?",
+    steps: [["star", "Help!"], ["finish", "Wild Thing"]] },
+  { name: "Today vs proposed", text: "A one-off: someone finishes a single level-5 song, then mostly easy ones.",
+    watch: "Compare the two Surprise me pools on the right. Today's pool is any song up to level 5, so one barre song opens everything. The proposed pool stays on songs that use chords they've shown they can play. The next step follows what they finished last (easy songs), not the one-off.",
+    steps: [["finish", "I'm Gonna Be (500 Miles)"], ["finish", "Jackson"], ["finish", "Bye Bye Love"]] },
+];
+
+/* ---------------------------------------------------------------- page state (throwaway) */
+const fresh = () => ({ plays: {}, favourites: [], lastId: null });
+let history = fresh(), rules = { chordAfter: 1 }, changed = "", scenarioIdx = 0, stepIdx = 0, drawn = null, query = "";
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const chips = (shapes, mine) => `<span class="chips">${shapes.map(c => `<span class="chip ${mine && mine.has(c) ? "mine" : mine ? "new" : ""}">${esc(c)}</span>`).join("")}</span>`;
+
+function act(type, id) {
+  const before = Progression.profile(SONGS, history, rules);
+  const beforeNext = Progression.nextStep(SONGS, history, rules).map(x => x.song.id);
+  history = Progression.record(history, { type, id });
+  const after = Progression.profile(SONGS, history, rules);
+  const afterNext = Progression.nextStep(SONGS, history, rules).map(x => x.song.id);
+  const s = SONGS.find(x => x.id === id);
+  const gained = [...after.mine].filter(c => !before.mine.has(c));
+  const parts = [type === "finish" ? `Finished <b>${esc(s.title)}</b> (${history.plays[id]}×).` : `${history.favourites.includes(id) ? "Starred" : "Unstarred"} <b>${esc(s.title)}</b>.`];
+  if (gained.length) parts.push(`New chords: ${gained.map(esc).join(", ")}.`);
+  else if (type === "finish") parts.push("No new chords.");
+  if (after.pace > before.pace) parts.push(`Pace rose to ${after.pace} changes/min.`);
+  const added = afterNext.filter(x => !beforeNext.includes(x)).length, gone = beforeNext.filter(x => !afterNext.includes(x)).length;
+  parts.push(added || gone ? `Next step: ${added} in, ${gone} out.` : "Next step unchanged.");
+  changed = parts.join(" ");
+  drawn = null;
+  render();
+}
+
+function renderState() {
+  const p = Progression.profile(SONGS, history, rules);
+  const next = Progression.nextStep(SONGS, history, rules);
+  const pool = Progression.surprisePool(SONGS, history, rules);
+  const today = Progression.surprisePoolToday(SONGS, history);
+  const last = SONGS.find(s => s.id === history.lastId);
+  const like = Progression.anotherLikeThis(SONGS, last, history, rules);
+  const card = x => `<div class="card"><div class="t">${esc(x.song.title)}</div><div class="a">${esc(x.song.artist)} · ${x.song.changes_per_min}/min</div>${chips(x.song.core_shapes, p.mine)}${x.why ? `<div class="why">${esc(x.why)}</div>` : ""}</div>`;
+  const finishedList = p.finished.map(s => `${esc(s.title)}<span class="count">${history.plays[s.id]}</span>`).join(", ");
+  document.getElementById("state").innerHTML = `
+    <h2>What the app knows and shows</h2>
+    ${changed ? `<div class="changed">${changed}</div>` : `<div class="changed">A new player: nothing finished, nothing starred.</div>`}
+    <dl class="facts">
+      <dt>Finished</dt><dd>${finishedList || '<span class="empty">nothing yet</span>'}</dd>
+      <dt>Starred</dt><dd>${history.favourites.map(id => esc(SONGS.find(s => s.id === id).title)).join(", ") || '<span class="empty">none</span>'}</dd>
+      <dt>Your chords</dt><dd>${p.mine.size ? chips([...p.mine]) : '<span class="empty">none yet</span>'}${rules.chordAfter > 1 && p.finished.length > p.counted.length ? ` <small>(${p.finished.length - p.counted.length} song(s) finished once don't count yet)</small>` : ""}</dd>
+      <dt>Your pace</dt><dd>${p.pace ? `${p.pace} chord changes a minute` : '<span class="empty">not yet known</span>'}</dd>
+      <dt>Next-step levels</dt><dd>${p.isNew ? '<span class="empty">not yet known</span>' : `${Math.max(1, p.floor)}–${Math.min(5, p.top + 1)} <small>(the app never shows level numbers; this is for you)</small>`}</dd>
+    </dl>
+    <h3>Your next step (new shelf)</h3>
+    ${next.length ? `<div class="shelf">${next.map(card).join("")}</div>` : '<p class="empty">Hidden until you finish a song.</p>'}
+    <h3>After the song: Another like this${last ? ` <span style="text-transform:none">(after ${esc(last.title)})</span>` : ""}</h3>
+    ${like.length ? `<div class="shelf">${like.map(card).join("")}</div>` : '<p class="empty">Shown after a finished song.</p>'}
+    <h3>Surprise me</h3>
+    <p>Proposed pool: <b>${pool.length}</b> songs. Today's rule: <b>${today.length}</b> songs.</p>
+    ${drawn ? `<div class="shelf">${card(drawn)}</div>` : '<p class="empty">Press “Surprise me” in Free play to draw one.</p>'}
+    <details style="margin-top:8px"><summary class="muted">Show both pools</summary>
+      <p style="margin-top:8px"><b>Proposed:</b> ${pool.map(x => `${esc(x.song.title)} <small>(${esc(x.why)})</small>`).join(", ")}</p>
+      <p><b>Today:</b> ${today.map(s => esc(s.title)).join(", ")}</p>
+    </details>`;
+}
+
+function renderSongs() {
+  const p = Progression.profile(SONGS, history, rules);
+  const q = query.trim().toLowerCase();
+  const list = SONGS.slice().sort((a, b) => a.level - b.level || a.order - b.order)
+    .filter(s => !q || `${s.title} ${s.artist} ${s.core_shapes.join(" ")}`.toLowerCase().includes(q));
+  document.getElementById("songs").innerHTML = list.map(s => `<div class="song"><div><div class="t">${esc(s.title)}${history.plays[s.id] ? `<span class="count">${history.plays[s.id]}</span>` : ""}</div>
+    <div class="meta">${esc(s.artist)} · level ${s.level} · ${s.changes_per_min}/min</div>${chips(s.core_shapes, p.isNew ? null : p.mine)}</div>
+    <div class="acts"><button class="btn" data-finish="${esc(s.id)}">Played to the end</button><button class="btn" data-star="${esc(s.id)}" aria-pressed="${history.favourites.includes(s.id)}">${history.favourites.includes(s.id) ? "★" : "☆"}</button></div></div>`).join("");
+  document.querySelectorAll("[data-rule]").forEach(b => b.classList.toggle("primary", Number(b.dataset.rule) === rules.chordAfter));
+}
+
+function renderScenario() {
+  document.getElementById("tabs").innerHTML = SCENARIOS.map((s, i) => `<button class="tab" role="tab" aria-selected="${i === scenarioIdx}" data-tab="${i}">${esc(s.name)}</button>`).join("");
+  const sc = SCENARIOS[scenarioIdx];
+  document.getElementById("scenario").innerHTML = `<p>${esc(sc.text)}</p>
+    <ol class="steps">${sc.steps.map(([type, title], i) => `<li class="${i < stepIdx ? "done" : i === stepIdx ? "next" : ""}">
+      <button class="btn ${i === stepIdx ? "primary" : ""}" data-step="${i}" ${i === stepIdx ? "" : "disabled"}>${type === "finish" ? "Play to the end" : "Star"}: ${esc(title)}</button></li>`).join("")}</ol>
+    <div class="watch"><b>Watch for:</b> ${esc(sc.watch)}</div>`;
+}
+
+function render() { renderScenario(); renderState(); renderSongs(); }
+
+function startScenario(i) { scenarioIdx = i; stepIdx = 0; history = fresh(); changed = ""; drawn = null; render(); }
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("button"); if (!t) return;
+  if (t.dataset.tab) return startScenario(Number(t.dataset.tab));
+  if (t.dataset.step) { const [type, title] = SCENARIOS[scenarioIdx].steps[stepIdx]; stepIdx++; return act(type === "finish" ? "finish" : "star", byTitle(title).id); }
+  if (t.dataset.finish) return act("finish", t.dataset.finish);
+  if (t.dataset.star) return act("star", t.dataset.star);
+  if (t.dataset.rule) { rules = { chordAfter: Number(t.dataset.rule) }; changed = `Rule changed: a chord now counts as yours after ${rules.chordAfter} finished play${rules.chordAfter > 1 ? "s" : ""}.`; return render(); }
+  if (t.dataset.act === "reset") { history = fresh(); changed = ""; drawn = null; stepIdx = 0; return render(); }
+  if (t.dataset.act === "surprise") { const pool = Progression.surprisePool(SONGS, history, rules); drawn = pool[Math.floor(Math.random() * pool.length)] || null; changed = drawn ? `Surprise me drew <b>${esc(drawn.song.title)}</b> from ${pool.length} songs.` : "Nothing to draw."; return renderState(); }
+});
+document.getElementById("q").addEventListener("input", e => { query = e.target.value; renderSongs(); });
+for (const [type, title] of SCENARIOS.flatMap(s => s.steps)) if (!byTitle(title)) console.error("missing song", title);
+render();
+</script>
+</body>
+</html>
