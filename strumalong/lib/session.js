@@ -31,6 +31,10 @@
   const RESUME_MIN_S = 5;       // a last-played time under this resumes from the start
   const RESUME_END_GAP_S = 5;   // ... and so does one within this of the recording's end
   const SAVE_EVERY_MS = 5000;   // last-played position while playing
+  // The embed's cached currentTime() lags a seekTo() by ~100 ms, so a seek stays pending until the player
+  // reports a time this close to it, or for at most this long (#31: quick repeated −10 s presses).
+  const SEEK_CAUGHT_UP_S = 0.3;
+  const SEEK_PENDING_MAX_MS = 1500;
 
   function sanitiseSettings(raw) {
     const s = raw && typeof raw === "object" ? raw : {};
@@ -133,6 +137,7 @@
 
     let player = null, ready = false, state = -1, played = false, rate = 1, failed = null, ad = false, lastSave = 0;
     let pt = resume, startAt = resume, epoch = 0, timeline = [];
+    let pendingSeek = null; // {target, at}
     // An analysed upload known not to embed (age-restricted) is skipped: start on the first embeddable entry.
     let videoIdx = Math.max(0, videos.findIndex(v => v.embeddable !== false));
     let video = videos[videoIdx] || null;
@@ -164,6 +169,11 @@
       if (controllable()) {
         const value = attempt(() => player.currentTime(), null);
         if (num(value)) t = value;
+        if (pendingSeek) {
+          const caughtUp = num(value) && Math.abs(value - pendingSeek.target) <= SEEK_CAUGHT_UP_S;
+          if (caughtUp || clock() - pendingSeek.at >= SEEK_PENDING_MAX_MS) pendingSeek = null;
+          else return pendingSeek.target;
+        }
         // A resumed start is not reported until playback begins.
         if (!played && startAt > 0 && t < 0.5) t = startAt;
       }
@@ -179,7 +189,7 @@
       videoIdx = index;
       video = videos[index];
       nudgeMs = store.nudge(video.video_id);
-      ad = false; state = -1; pt = 0; startAt = 0;
+      ad = false; state = -1; pt = 0; startAt = 0; pendingSeek = null;
       invalidate();
       try { player.cue(video.video_id, 0); } catch (_) { fail("no-embed"); return false; }
       return true;
@@ -243,6 +253,7 @@
         const target = Math.max(0, seconds);
         try { player.seekTo(target); } catch (_) { return false; }
         pt = target;
+        pendingSeek = { target, at: clock() };
         return true;
       },
       setRate(value) { if (controllable() && num(value)) attempt(() => player.setRate(value)); },
