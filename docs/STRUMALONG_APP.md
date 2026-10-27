@@ -51,7 +51,8 @@ strumalong/                 # deployable root (published to gh-pages as-is)
   data/catalogue.json       # which recordings ship: packs to read, exclusions with reasons, level overrides
   data/additions.json       # authored metadata for the v1 additions: capo, setup notes, practice patterns
   data/additions-v2.json    # (future) the same for the v2 additions pack; skipped while missing
-  tools/build-songs.js      # node exporter: catalogue.json + packs -> songs/*.json (not deployed logic, harmless if published)
+  tools/build-songs.js      # node exporter: catalogue.json + packs -> songs/*.json (not deployed logic, harmless if published).
+                            # exportSong(draft, metadata, settings) -> {song, card, report} is pure; the rest is its filesystem adapter
   test/*.test.js            # node:assert tests; run: node strumalong/test/run.js
   manifest.webmanifest, icons/, .nojekyll
 ```
@@ -117,7 +118,7 @@ Plain static files with no bundler and no npm install. Scripts are classic `<scr
 - `bar_confident_pct` is the share of chord beats under a confident (not approx) anchor.
 - `strumming.source` is `authored` for the prepared songs' `practice.json` patterns and for patterns in an additions metadata file, and `level-default` when the song had none (see "Difficulty levels").
 - `core_shapes` (index card chips) lists the Core shapes at the song's capo by chord seconds. Shapes under 3% of chord time are dropped, as are slash shapes under 10%. The list is longest first and holds at most 6.
-- A video entry carries `embeddable: false` only when that upload is known not to play in an embed (`playable_embed: false` in additions metadata, which also needs an embeddable alternate). The app then starts on the first embeddable entry.
+- A video entry carries `embeddable: false` only when that upload is known not to play in an embed. The app then starts on the first embeddable entry. The exporter writes only the analysed upload: alternate-video overrides were removed in #44 because no metadata used them. `playable_embed: false` in additions metadata therefore stops the export of that song until alternates return.
 
 ## Catalogue config (`strumalong/data/catalogue.json`)
 
@@ -145,7 +146,7 @@ Dropped on 25 October 2026 (founder feedback), still in their packs:
 | America – A Horse with No Name | The automatic chart cannot tell its two chords apart; needs a hand-checked chart. |
 | Vance Joy – Riptide | Founder (25 Oct, second round): more a ukulele song than a guitar song. |
 
-13 songs remain. With the riff songs gone, the exporter's riff mode, the learning-path, riff and "also available" groups, and the Come as You Are alternate-video constants were removed. Generic alternate videos (`alternates` in additions metadata) remain.
+13 songs remain. With the riff songs gone, the exporter's riff mode, the learning-path, riff and "also available" groups, and the Come as You Are alternate-video constants were removed. Generic alternate videos (`alternates` in additions metadata) remained until #44 removed them as unused.
 
 ## Bar model
 
