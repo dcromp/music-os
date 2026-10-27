@@ -294,11 +294,12 @@ test("after a failure the player is no longer read or driven", () => {
 
 // --- Session: transport and a throwing player -----------------------------------------------------
 test("seek clamps at 0 and moves the position; a throwing player keeps the last values", () => {
-  const { session, player } = setup({ player: { time: 30 } });
+  const { session, player, clock } = setup({ player: { time: 30 } });
   assert.equal(session.seek(-4), true);
   assert.deepEqual(player.called("seekTo").pop(), ["seekTo", 0]);
   assert.equal(session.pt, 0);
   player.time = 33;
+  clock.now += 1500; // past the pending-seek window, so the player clock counts again
   session.tick();
   player.throws.add("currentTime").add("playbackRate").add("seekTo").add("play");
   assert.equal(session.tick().pt, 33);
@@ -307,6 +308,31 @@ test("seek clamps at 0 and moves the position; a throwing player keeps the last 
   assert.equal(session.seek(5), false);
   assert.equal(session.pt, 33);
   assert.equal(session.play(), false);
+});
+
+test("repeated −10 s presses build on the pending seek until the player's cached clock catches up", () => {
+  // The embed reports the old time for ~100 ms after seekTo (measured in desktop Chromium, #31).
+  const { session, player, clock } = setup({ player: { time: 61.9 } });
+  player.seekTo = s => { player.calls.push(["seekTo", s]); }; // lagging: currentTime() keeps the old value
+  session.tick();
+  for (let i = 0; i < 3; i++) { session.seek(session.pt - 10); session.tick(); clock.now += 30; } // as app.js seekTo() + frame()
+  close(session.pt, 31.9, 1e-6);
+  assert.deepEqual(player.called("seekTo").map(c => Math.round(c[1] * 10) / 10), [51.9, 41.9, 31.9]);
+  close(session.tick().pt, 31.9, 1e-6); // a paused poll still shows the target, so the cue panel is current
+  player.time = 31.8; // the player catches up (within 0.3 s): its clock takes over again
+  close(session.tick().pt, 31.8, 1e-6);
+  player.time = 32.5;
+  close(session.tick().pt, 32.5, 1e-6);
+});
+
+test("a pending seek the player never reaches gives way to the player clock after 1.5 s", () => {
+  const { session, player, clock } = setup({ player: { time: 50 } });
+  player.seekTo = () => {};
+  session.seek(10);
+  clock.now += 1499;
+  assert.equal(session.tick().pt, 10);
+  clock.now += 1;
+  assert.equal(session.tick().pt, 50);
 });
 
 test("playback rate and available rates come from the player", () => {
