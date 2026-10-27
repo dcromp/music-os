@@ -2,8 +2,9 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Band Mode Builder</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<!-- PROTOTYPE, throwaway (#71). Three UI shapes for Band mode's guided song builder, switched with #A / #B / #C
-     and the floating bar. Fake data and simple synthesized sound; nothing is saved. Never deploy. -->
+<!-- PROTOTYPE, throwaway (#71). UI shapes for Band mode's guided song builder, switched with #D / #A / #B / #C
+     and the floating bar. D (round 2) is B's timeline with A's step guidance, the founder's pick from round 1.
+     Fake data and simple synthesized sound; nothing is saved. Never deploy. -->
 <style>
 /* Layout concept: a phone-first song builder in Strum Along's palette; the song (sections and their colours)
    is the one constant across the three shapes, which disagree about where the guidance lives. */
@@ -127,6 +128,30 @@ button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); o
 .C-row { display: grid; grid-template-columns: 70px 1fr; gap: 10px; padding: 10px 14px; border-top: 1px solid var(--border); align-items: center; text-align: left; background: transparent; border-left: 0; border-right: 0; border-bottom: 0; width: 100%; min-height: 48px; }
 .C-row .what { font-size: 12px; font-weight: 600; color: var(--muted); }
 .C-open { padding: 12px 14px; border-top: 1px solid var(--border); background: var(--soft); display: grid; gap: 10px; }
+
+/* ---------------- Variant D: B's timeline with A's step guidance (founder's pick, round 1) */
+.D { display: grid; gap: 10px; }
+.D-steps { display: flex; gap: 4px; overflow-x: auto; padding-bottom: 2px; }
+.D-steps button { flex: none; min-height: 36px; padding: 0 10px; border-radius: 999px; border: 1px solid var(--border); background: var(--panel); font-size: 13px; white-space: nowrap; }
+.D-steps button.cur { background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-weight: 700; }
+.D-steps button.done { color: var(--muted); }
+.D-steps button.soonstep { border-style: dashed; color: var(--muted); }
+.D-guide { display: grid; gap: 8px; padding: 12px 14px; border-radius: 14px; background: var(--bar-bg); color: var(--bar-text); }
+.D-guide .who { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; opacity: .75; font-weight: 700; }
+.D-guide .btn { background: transparent; color: var(--bar-text); border-color: currentColor; min-height: 38px; }
+.D-guide .btn.primary { background: var(--bar-text); color: var(--bar-bg); border-color: var(--bar-text); }
+.D-main { display: grid; gap: 10px; align-items: start; }
+@media (orientation: landscape) and (min-width: 700px) { .D-main { grid-template-columns: minmax(0, 1.5fr) minmax(300px, 1fr); } }
+.B > *, .D > *, .D-main > * { min-width: 0; } /* the wide timeline scrolls inside its box instead of widening the page */
+@media (orientation: landscape) and (max-height: 500px) {
+  .D-guide { grid-template-columns: minmax(0, 1fr) auto; align-items: center; padding: 8px 12px; gap: 4px 12px; }
+  .D-guide .who { grid-column: 1 / -1; }
+  .D-guide p { font-size: 13px; }
+  .D-guide .row { flex-wrap: nowrap; }
+}
+.D .B-lane.dim, .D .B-lane-name.dim { opacity: .35; }
+.D .B-lane-name.lit { color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
+.D .B-cell.cur { box-shadow: inset 0 0 0 2px var(--text); }
 
 /* floating prototype switcher: not part of the design */
 .switcher { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 50;
@@ -477,9 +502,63 @@ function VariantC() {
   </section>`;
 }
 
+// ============================================================ Variant D: B's timeline + A's step guidance
+const STEP_LANES = { setup: [], structure: ["sec"], chords: ["chords"], band: ["drums", "bass"], lyrics: ["lyrics"], melody: ["melody"], guitar: ["guitar"], mix: [] };
+const STEP_HELP = {
+  setup: "Pick a key, tempo and feel. You can change them any time.",
+  structure: "Choose a song shape. Each colour on the timeline is a section you write once.",
+  chords: "Give each section its chords. Tap a bar, then a chord, or try a suggestion.",
+  band: "Choose how the drums and bass play each section.",
+  lyrics: SOON.lyrics, melody: SOON.melody, guitar: SOON.guitar, mix: SOON.mix,
+};
+const LANE_STEP = { sec: "structure", chords: "chords", drums: "band", bass: "band", lyrics: "lyrics", melody: "melody", guitar: "guitar" };
+function stepDone(id) {
+  if (id === "setup" || id === "structure") return true;
+  if (id === "chords") return kindsInSong().every(k => filledBars(k) === 4);
+  return false;
+}
+function VariantD() {
+  const st = STEPS[ui.step], lit = STEP_LANES[st.id];
+  if (!kindsInSong().includes(ui.block)) ui.block = kindsInSong()[0];
+  const lanes = [["Sections", "sec"], ["Chords", "chords"], ["Drums", "drums"], ["Bass", "bass"], ["Lyrics", "lyrics"], ["Vocal", "melody"], ["Guitar", "guitar"]];
+  const perSection = st.id === "chords" || st.id === "band";
+  const cell = (k, i, lane) => {
+    const w = `flex:${song.blocks[k].bars.length}`, curCell = perSection && lit.includes(lane) && ui.block === k ? " cur" : "";
+    const attrs = `data-act="D-cell" data-v="${i}" data-p="${lane}"`;
+    if (lane === "sec") return `<button type="button" class="B-cell sec sec-${k}" style="${w}" ${attrs}>${BLOCKS[k].name}</button>`;
+    if (lane === "chords") { const n = filledBars(k); return `<button type="button" class="B-cell part${n ? "" : " empty"}${curCell}" style="${w}" ${attrs}>${n ? song.blocks[k].bars.map(c => c || "·").join(" ") : "+ chords"}</button>`; }
+    if (lane === "drums") { const d = drumsFor(k); return `<button type="button" class="B-cell part${curCell}" style="${w}" ${attrs}>${song.blocks[k].drums.mode === "ai" ? "AI · " : ""}${d.style}</button>`; }
+    if (lane === "bass") return `<button type="button" class="B-cell part${curCell}" style="${w}" ${attrs}>${BASS.find(b => b.id === song.blocks[k].bass).name}</button>`;
+    return `<button type="button" class="B-cell locked" style="${w}" ${attrs}>later</button>`;
+  };
+  const dim = lane => lit.length && !lit.includes(lane) ? " dim" : lit.includes(lane) ? " lit" : "";
+  let editor;
+  if (st.id === "setup") editor = setupEditor();
+  else if (st.id === "structure") editor = `${structureEditor()}<details><summary class="small">Change the order</summary><div style="margin-top:8px">${orderEditor()}</div></details>`;
+  else if (st.id === "chords") editor = `${blockTabs("blk")}${chordEditor(ui.block)}`;
+  else if (st.id === "band") editor = `${blockTabs("blk")}<h3>Drums · ${BLOCKS[ui.block].name}</h3>${drumEditor(ui.block)}<h3>Bass · ${BLOCKS[ui.block].name}</h3>${bassEditor(ui.block)}`;
+  else editor = soonPanel(st.id);
+  const todo = st.id === "chords" ? kindsInSong().filter(k => filledBars(k) < 4).map(k => BLOCKS[k].name) : [];
+  return `<section class="D" aria-label="Timeline with steps">
+    <div class="B-head"><div><h1>${esc(song.title)}</h1><p class="small muted">${song.key} · ${song.tempo} bpm · ${song.feel}</p></div>
+      <button type="button" class="btn primary playbtn" data-act="play" data-label="▶ Play song">▶ Play song</button></div>
+    <nav class="D-steps" aria-label="Steps">${STEPS.map((s, i) => `<button type="button" data-act="goto" data-v="${i}" class="${i === ui.step ? "cur" : stepDone(s.id) ? "done" : s.soon ? "soonstep" : ""}"${i === ui.step ? ' aria-current="step"' : ""}>${i + 1}. ${s.name}${stepDone(s.id) && i !== ui.step ? " ✓" : ""}</button>`).join("")}</nav>
+    <div class="D-guide" role="status"><span class="who">Step ${ui.step + 1} of ${STEPS.length} · ${st.name}${st.soon ? " · later prototype" : ""}</span>
+      <p>${STEP_HELP[st.id]}${todo.length ? ` Still to do: ${todo.join(", ")}.` : ""}</p>
+      <div class="row"><button type="button" class="btn" data-act="back" ${ui.step === 0 ? "disabled" : ""}>Back</button><button type="button" class="btn primary" data-act="next" ${ui.step === STEPS.length - 1 ? "disabled" : ""}>Next: ${STEPS[ui.step + 1] ? STEPS[ui.step + 1].name : "Done"}</button></div></div>
+    <p class="B-rotate small muted">Tip: turn your phone sideways to see the timeline and the step side by side.</p>
+    <div class="D-main">
+      <div class="B-tl"><div class="B-grid">
+        ${lanes.map(([name, lane]) => `<div class="B-lane-name${dim(lane)}">${name}</div><div class="B-lane${dim(lane)}">${song.order.map((k, i) => cell(k, i, lane)).join("")}${lane === "sec" ? '<div class="playhead" data-head hidden></div>' : ""}</div>`).join("")}
+      </div></div>
+      <div class="panel stack B-sheet">${editor}</div>
+    </div>
+  </section>`;
+}
+
 // ============================================================ switcher, render and events
-const VARIANTS = [["A", "Step by step", VariantA], ["B", "Timeline + coach", VariantB], ["C", "Section cards", VariantC]];
-const cur = () => { const h = (location.hash || "#A").slice(1).toUpperCase(); return VARIANTS.find(v => v[0] === h) || VARIANTS[0]; };
+const VARIANTS = [["D", "Timeline + steps", VariantD], ["A", "Step by step", VariantA], ["B", "Timeline + coach", VariantB], ["C", "Section cards", VariantC]];
+const cur = () => { const h = (location.hash || "#D").slice(1).toUpperCase(); return VARIANTS.find(v => v[0] === h) || VARIANTS[0]; };
 function render() {
   const [key, name, View] = cur();
   document.getElementById("app").innerHTML = View();
@@ -526,6 +605,8 @@ document.addEventListener("click", e => {
     case "goto": ui.step = Number(v); break;
     case "back": ui.step = Math.max(0, ui.step - 1); break;
     case "next": ui.step = Math.min(STEPS.length - 1, ui.step + 1); window.scrollTo(0, 0); break;
+    case "D-cell": { const k2 = song.order[Number(v)]; ui.block = k2; ui.slot = Math.max(0, song.blocks[k2].bars.findIndex(c => !c));
+      ui.step = STEPS.findIndex(s => s.id === LANE_STEP[p]); break; }
     case "B-sel": ui.sel = { i: Number(v), part: p }; ui.open = null; ui.block = song.order[Number(v)]; break;
     case "B-open": { const i = song.order.indexOf(k); ui.sel = { i, part: p }; ui.block = k; ui.slot = Math.max(0, song.blocks[k].bars.findIndex(c => !c)); break; }
     case "B-close": ui.sel = null; ui.open = null; break;
