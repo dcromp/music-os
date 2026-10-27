@@ -165,6 +165,34 @@ select {
 .card-note { display: block; font-size: 13px; color: var(--warn-text); margin-top: 4px; }
 .lib-foot { margin-top: 24px; font-size: 13px; color: var(--muted); }
 
+/* Jukebox journey (#53): search, horizontal shelves, get-ready sheet, after-song panel. */
+.lib-title { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.lib-search {
+  width: 100%; min-height: 48px; padding: 10px 14px; margin: 0 0 6px;
+  font: inherit; color: var(--text); background: var(--panel);
+  border: 1px solid var(--btn-border); border-radius: 12px;
+}
+.cards.shelf {
+  display: flex; gap: 10px; overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity; padding: 2px 2px 8px; margin: 0 calc(-1 * var(--gr)) 0 0;
+}
+.cards.shelf > li { flex: 0 0 min(46vw, 200px); scroll-snap-align: start; display: flex; }
+.cards.shelf .card { width: 100%; }
+.cards.shelf .card-title { font-size: 17px; }
+.ready { max-width: 640px; }
+.ready-meta { color: var(--muted); margin: 4px 0 8px; }
+.ready-diagrams { justify-content: flex-start; flex-wrap: wrap; min-height: 0; }
+.ready-play { display: flex; align-items: center; justify-content: center; text-decoration: none; margin: 14px 0 8px; }
+.stroke-grid { display: grid; gap: 4px; margin: 8px 0 0; }
+.stroke { text-align: center; padding: 8px 0; border-radius: 8px; background: var(--soft); font-weight: 700; font-size: 20px; }
+.stroke.rest { color: var(--muted); font-weight: 400; }
+.stroke-count { text-align: center; font-size: 13px; color: var(--muted); }
+.after-panel { border-color: var(--accent); }
+.after-title { font-size: 22px; margin: 0; }
+.after-panel .row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.after-panel .btn-play { min-height: 48px; font-size: 18px; }
+.after-sub { font-size: 15px; color: var(--muted); margin: 14px 0 6px; }
+
 /* ---------- song page: top bar and player ---------- */
 .topbar { display: flex; align-items: center; gap: 6px; min-height: 52px; }
 .back {
@@ -325,4 +353,5 @@ select {
   .cue-now { --chord: clamp(56px, 9vw, 110px); }
   .cue-next { --chord: clamp(34px, 5.5vw, 64px); }
   .cards { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  .after-list { grid-template-columns: 1fr; }
 }

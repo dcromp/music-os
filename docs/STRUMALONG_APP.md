@@ -48,6 +48,7 @@ strumalong/                 # deployable root (published to gh-pages as-is)
   lib/repeat-timing.js      # repeat timing: groups repeated changes, drawn/played judgements, auto-timing entry (UMD: window.StrumRepeatTiming)
   lib/shapes.js             # chord grip table + SVG renderer (UMD: window.StrumShapes + module.exports)
   lib/session.js            # practice session: playback rules + persistence (UMD: window.StrumSession + module.exports)
+  lib/library.js            # Jukebox journey rules: search, shelves, similar songs, Surprise me (UMD: window.StrumLibrary)
   songs/index.json          # catalogue summary (generated)
   songs/<id>.json           # one per recording (generated)
   data/catalogue.json       # which recordings ship: packs to read, exclusions with reasons, level overrides
@@ -59,7 +60,7 @@ strumalong/                 # deployable root (published to gh-pages as-is)
   manifest.webmanifest, icons/, .nojekyll
 ```
 
-Plain static files with no bundler and no npm install. Scripts are classic `<script defer>` tags in this order: `lib/chords.js`, `lib/core.js`, `lib/repeat-timing.js`, `lib/shapes.js`, `lib/session.js`, `app.js`. core.js and shapes.js use chords.js; session.js uses core.js.
+Plain static files with no bundler and no npm install. Scripts are classic `<script defer>` tags in this order: `lib/chords.js`, `lib/core.js`, `lib/repeat-timing.js`, `lib/shapes.js`, `lib/session.js`, `lib/library.js`, `app.js`. core.js and shapes.js use chords.js; session.js uses core.js.
 
 ## Data schema
 
@@ -399,6 +400,8 @@ This module takes playback events in and gives cue time, the resume point and sa
   - `nudge(videoId)` / `setNudge(videoId, ms)`, clamped to ±30000
   - `saveLast(id, t)`
   - `resumePoint(songs)`, the library chip: `{song, t}`, where `t` is 0 under 5 s or within 5 s of the end
+  - `favourites()` / `toggleFavourite(id)` (returns the new state), in the order they were added
+  - `plays()` / `recordPlay(id)` (returns the new count), the finished-play count per song
 - `createSession({song, store, resume, now})`, one per song page:
   - **Events in:** `attach(player)`, `playerReady()`, `stateChange(code)`, `rateChange(r)`, `error(code)`. `error` returns `{action:"switch"|"fail"|"retry"}`; a fail carries `reason` `referrer`, `unavailable` or `no-embed`.
   - **Transport:** `play`, `pause`, `seek`, `setRate`, `retry`.
@@ -407,12 +410,25 @@ This module takes playback events in and gives cue time, the resume point and sa
   - **`tick()`** returns `{pt, t, cue}`. It holds a resumed start until the first play, runs the ad guard while playing, and saves the last-played position every 5 s.
   - **Read-only fields:** `video`, `state`, `played`, `ready`, `failed`, `ad`, `rate`, `pt`, `timeline`, `patternId`, `nudgeMs`, `controllable`, `playing`. `epoch` increments whenever cached cue rendering is stale: a new timeline, rate, video or failure.
 
+## `lib/library.js` API (Jukebox journey)
+
+Pure rules over the catalogue summaries, tested in `test/library.test.js`.
+
+- `search(songs, query)`: songs whose title or artist contains every query word, ignoring case, accents and apostrophes. An empty query returns `[]`.
+- `shelves(catalogue, favouriteIds)`: `[{id, title, note, songs}]`, with favourites first, then one shelf per level group in catalogue order, then "Other songs". Empty shelves are dropped.
+- `similar(songs, song, limit = 5)`: songs that share at least one core shape and are at most one level harder. Ordered by most shared shapes, then fewest new shapes, then easier, then catalogue order.
+- `surprise(songs, {lastId, plays, rng})`: a random song no harder than the hardest level played (at least level 2), avoiding the song just played.
+
 ## UI
 
+The end-user journey is **Jukebox** (founder's choice from the journey prototype, 27 October 2026, #53; prototype on branch `prototype/strumalong-journey`). Find a song fast, see a short get-ready sheet, play, then get offered "another like this". Strum Along supports lessons taken elsewhere; it does not teach.
+
 - **Library (`#/`).**
-  - Song cards grouped by level ("Level 1 · First chords" … "Level 5 · Barre chords"), each group with its one-line explanation, in the index order (easiest first within a level). Each card shows the title, artist, the song's main shapes as chips (the shapes its level counts; they wrap), ~BPM and a capo badge. When the analysed upload can't be embedded, the card also gets a "timing unchecked" badge (or "alternate video" if the alternate's timing was checked).
-  - A last-played song gets a resume chip.
-  - The header reads "Strum Along · music-os", with the line "Provisional automatic chord charts. For personal practice."
+  - The header reads "Strum Along · music-os", with a **🎲 Surprise me** button (see `surprise`, which opens that song's get-ready sheet), the line "Provisional automatic chord charts. For personal practice." and a **search** box (title or artist). While the box has text, matching cards replace the shelves. The query is kept while moving between pages.
+  - A last-played song gets a resume chip ("Resume … at m:ss", or "Play again: …"). It opens the player directly.
+  - **Shelves** scroll horizontally. "★ Your favourites" comes first when there are any, then one shelf per level ("Level 1 · First chords" … "Level 5 · Barre chords") with its one-line explanation, easiest first. Each card shows the title, artist and main shapes as chips, plus a capo badge and the "timing unchecked" / "alternate video" badge where they apply. Cards open the get-ready sheet.
+- **Get ready (`#/ready/<id>`).** The same top bar as the song page. ~BPM (or "No capo"), the setup note, diagrams of the main shapes ("You'll need"), the first practice pattern as a stroke grid with counts (labelled a practice suggestion), a big **▶ Play** link to `#/song/<id>` and a ☆/★ Favourite toggle. The YouTube player only loads on the song page, so the learner presses Play there as well.
+- **After the song.** When the video ends, a panel opens at the top of the cue column. It shows "Nice one", the play count on this phone, **↻ Again** (restart and play), Favourite, Surprise me, and up to five "Another like this" cards (`similar`). Playing again hides it. Nothing is placed over the player.
 - **Song (`#/song/<id>`), portrait, top to bottom:**
   1. A top bar with a back link, the title, and the capo, level ("Level 2", titled with its label) and provisional badges.
   2. The YouTube player at full width, 16:9, with nothing on top.
@@ -456,7 +472,7 @@ This module takes playback events in and gives cue time, the resume point and sa
 - **Visibility.** Pause the video when the page becomes hidden.
 - **Gestures.** Both Play buttons call `player.playVideo()` from the click handler. If the player frame is not fully in the viewport, it is first scrolled into view. If `onAutoplayBlocked` fires, show "Tap ▶ in the video to start".
 - **Load failures.** Every message that says to reload carries a Reload button of at least 44 px. After 15 s without the IFrame API, the cached API promise is dropped, so the next song page retries the load.
-- **Persistence.** The localStorage keys are `music-os-strumalong-v1:` + `settings`, `offset:<video_id>`, `last` (`{id, t}`) and `latency`, which is a global ms offset for Bluetooth. Wrap every access in try/catch.
+- **Persistence.** The localStorage keys are `music-os-strumalong-v1:` + `settings`, `offset:<video_id>`, `last` (`{id, t}`), `latency` (a global ms offset for Bluetooth), `favourites` (an array of song ids) and `plays` (`{id: count}`). Wrap every access in try/catch.
 
 ## Additions pipeline (new songs)
 
