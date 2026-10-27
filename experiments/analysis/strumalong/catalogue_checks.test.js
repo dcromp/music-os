@@ -763,8 +763,16 @@ else {
       assert.equal(byId("beatles-love-me-do-youtube-20261011").checks.instrument.guitar_led.status, "flag", "harmonica-led: low guitar share, but YAMNet still hears guitar");
       for (const id of INSTRUMENT_NEGATIVES.slice(2)) assert.equal(byId(id).checks.instrument.strummed.status, "flag", id);
     });
-    test("real packs: the instrument stage is conservative: only Riptide fails it, and A Horse with No Name (strummed) passes it", () => {
-      assert.deepEqual(real.songs.filter(s => s.checks.instrument.status === "fail").map(s => s.recording_id), ["vance-joy-riptide-youtube-20261024"]);
+    // Fails are only "not guitar-led": Riptide (ukulele) and, since the v3 pack (26 Oct), Give Peace a Chance and Down on the
+    // Corner, which catalogue.json excludes for that reason. No strummed guitar recording fails, and nothing shipped does.
+    test("real packs: the instrument stage is conservative: only the three non-guitar-led recordings fail it, and A Horse with No Name (strummed) passes it", () => {
+      const fails = real.songs.filter(s => s.checks.instrument.status === "fail");
+      assert.deepEqual(fails.map(s => s.recording_id), ["vance-joy-riptide-youtube-20261024",
+        "plastic-ono-band-give-peace-a-chance-youtube-20261026", "creedence-clearwater-revival-down-on-the-corner-youtube-20261026"]);
+      for (const s of fails) {
+        assert.equal(s.checks.instrument.guitar_led.status, "fail", s.recording_id);
+        assert.equal(s.shipped, false, `${s.recording_id} is excluded`);
+      }
       assert.equal(byId("america-a-horse-with-no-name-youtube-20261025").checks.instrument.status, "pass");
       assert.equal(byId("proclaimers-im-gonna-be-500-miles-youtube-20261025").checks.instrument.status, "pass");
     });
@@ -775,7 +783,8 @@ else {
       assert.ok(["pass", "flag", "fail"].includes(s.verdict), s.recording_id);
       assert.ok(typeof s.shipped === "boolean");
     }
-    assert.equal(real.songs.length, 44);
+    assert.equal(real.songs.length, 56);   // 44 + the 12 recordings of strumalong-additions-v3 (26 Oct): 43 shipped, 13 excluded
+    assert.equal(real.summary.shipped, 43);
   });
 }
 
