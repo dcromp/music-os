@@ -2,8 +2,9 @@
 // Tests for strumalong/tools/build-songs.js. The Song export module (exportSong) is the test surface: songs are
 // exported from in-memory drafts (a primary.json and a rhythm case built here) and checked on the song, card and
 // report it returns. The adapter is tested in process (buildCatalogue, readCatalogue), and the real-data properties
-// run on the catalogue built in memory from the packs when they are present. The difficulty, library-chip and
-// timing-fix unit tests below still call those helpers directly until their own modules take them over.
+// run on the catalogue built in memory from the packs when they are present. The timing-fix unit tests below still
+// call those helpers directly until their own module takes them over; the Arrangement profile (main shapes, level)
+// is tested through its own interface in arrangement-profile.test.js.
 // Run: node strumalong/test/run.js (or this file directly). Requiring the exporter does not build anything.
 const assert = require("node:assert/strict");
 const path = require("node:path");
@@ -24,7 +25,7 @@ if (!fs.existsSync(REVIEW_APP)) {
   console.log("exporter.test.js: SKIP - experiments/review/app.js not found (the exporter needs it)");
 } else {
   const X = require(EXPORTER);
-  const { barPhaseVote, barPhaseConfident, coreShapes } = X;
+  const { barPhaseVote, barPhaseConfident } = X;
   const core = require(path.join(__dirname, "..", "lib", "core.js"));
   const grid = (first, step, count) => Array.from({ length: count }, (_, i) => +(first + step * i).toFixed(6));
   const event = (start, label = "A") => ({ start_seconds: start, end_seconds: start + 0.5, label });
@@ -97,29 +98,6 @@ if (!fs.existsSync(REVIEW_APP)) {
     assert.deepEqual([vote.phase, rhythm.bar_phase_confident], [2, true]);
     assert.deepEqual(barPhaseVote([1], events, 4), { phase: 0, share: 0, votes: 0, eligible: 0 });
   });
-
-  // --- coreShapes --------------------------------------------------------------------------------
-  const chord = (s, e, l) => ({ s, e, l });
-  test("coreShapes: ordered by seconds held, rare shapes and rare slash shapes dropped, at most 6", () => {
-    const chords = [
-      chord(0, 2, "N"), chord(2, 12, "G"), chord(12, 32, "B"), chord(32, 34, "Cm/D#"), // Cm/D# 2/97 s: rare slash
-      chord(34, 64, "C"), chord(64, 65, "F"), chord(65, 80, "Cm"), chord(80, 81, "X"), chord(81, 101, "G7"),
-    ];
-    // G + G7 -> G (30 s), B 20, Cm 15, C 30, F 1 (1%), Cm/D# 2 (2%): ties keep first appearance (G before C).
-    assert.deepEqual(coreShapes(chords, 0), ["G", "C", "B", "Cm"]);
-  });
-  test("coreShapes: a slash shape needs 10% of chord time; plain shapes need 3%", () => {
-    const chords = [chord(0, 80, "A"), chord(80, 88, "G/B"), chord(88, 92, "D"), chord(92, 100, "D/F#"), chord(100, 112, "E/G#")];
-    // total 112: G/B 7.1% (dropped), D 3.6% (kept), D/F# 7.1% (dropped), E/G# 10.7% (kept)
-    assert.deepEqual(coreShapes(chords, 0), ["A", "E/G#", "D"]);
-  });
-  test("coreShapes: capo shapes and the 6-chip cap", () => {
-    const labels = ["A", "B", "C#m", "D", "E", "F#m", "G#m"];
-    const chords = labels.map((l, i) => chord(i * 10, i * 10 + 10 - i, l)); // shorter each time
-    assert.deepEqual(coreShapes(chords, 2), ["G", "A", "Bm", "C", "D", "Em"]);
-    assert.deepEqual(coreShapes([chord(0, 1, "N")], 0), []);
-  });
-
 
   // --- bar model --------------------------------------------------------------------------------
   // Synthetic song on a 120 BPM grid (beat i at 0.5 i s) with chord holds given in beats.
@@ -367,47 +345,23 @@ if (!fs.existsSync(REVIEW_APP)) {
     assert.equal(X.readCatalogue(cfgFile(base)).timingOff.size, 0);
   });
 
-  // --- difficulty -------------------------------------------------------------------------------
-  test("shapeTier: lead tiers, slash shapes by root, everything else tier 4", () => {
-    assert.deepEqual(["A", "Em", "Asus4", "G", "C", "B7", "G/B", "D/F#", "F", "Bm", "F#m", "B", "Cm", "Bb", "G#m", "Fm", "C/E", "F/C", "D/A"].map(X.shapeTier),
-      [1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 4, 4, 2, 3, 1]);
+  // --- level (rules: arrangement-profile.test.js) ---------------------------------------------------
+  test("exportSong: the card chips are the shapes the level counts", () => {
+    // A rare slash shape (G/B, 6%) is neither a chip nor a level shape: D, A, G open chords, Level 2.
+    const { song, card } = exportHolds([...Array(10).fill([20, 10, 5]).flat(), 22], { labels: [...Array(10).fill(["D", "A", "G"]).flat(), "G/B"] });
+    assert.deepEqual(card.core_shapes, song.difficulty.main_shapes);
+    assert.deepEqual([card.core_shapes, song.level], [["D", "A", "G"], 2]);
   });
-  const levelOf = (holds, labels, opts = {}) => {
-    const song = songFromHolds(holds, { labels, ...opts });
-    if (opts.bpm) song.rhythm.bpm = opts.bpm;
-    return X.difficultyOf(song, opts);
-  };
-  test("difficultyOf: levels 1 to 5 from main shapes", () => {
-    let d = levelOf(Array(12).fill(8), ["A", "D", "E"]);
-    assert.deepEqual([d.level, d.label, d.main_shapes, d.hardest_shape], [1, "First chords", ["A", "D", "E"], "A"]);
-    assert.equal(levelOf(Array(12).fill(8), ["A", "D", "E", "Em"]).level, 2, "all tier 1 with 4 shapes");
-    assert.equal(levelOf(Array(12).fill(8), ["G", "C", "D", "Em"]).level, 2);
-    d = levelOf(Array(15).fill(8), ["G", "C", "D", "Em", "Am"]);
-    assert.deepEqual([d.level, d.main_shapes.length], [3, 5], "5+ open shapes");
-    d = levelOf(Array(12).fill(8), ["C", "G", "F", "Am"]);
-    assert.deepEqual([d.level, d.hardest_shape], [4, "F"]);
-    d = levelOf(Array(12).fill(8), ["C", "G", "B", "Bm"]);
-    assert.deepEqual([d.level, d.hardest_shape], [5, "B"]);
-  });
-  test("difficultyOf: rare shapes (under 4%) and blips do not count; quick changes and syncopation move L1/L2 to L3", () => {
-    const holds = [...Array(30).fill(8), 2], labels = [...Array(30).fill(0).map((_, i) => ["A", "D", "E"][i % 3]), "B"];
-    let d = levelOf(holds, labels);
-    assert.deepEqual([d.level, d.main_shapes.includes("B")], [1, false], "B at 0.8% of chord time is not a main shape");
-    assert.equal(d.changes_per_min, 14.9, "8-beat holds at 120 BPM: 30 changes in 121 s of chords");
-    assert.equal(d.median_hold_beats, 8);
-    d = levelOf(Array(40).fill(4), ["A", "D", "E"]);
-    assert.deepEqual([d.changes_per_min, d.level], [29.3, 1], "39 changes in 80 s: under the 40-a-minute line");
-    d = levelOf(Array(40).fill(2), ["A", "D", "E"], { bpm: 120, beats: 100 });
-    assert.equal(d.level, 3, "median hold 2 beats at 120 BPM");
-    assert.match(d.tier_reason, /median hold 2 beats/);
-    assert.match(levelOf(Array(12).fill(8), ["G", "C", "D"]).tier_reason, /About 13.8 changes a minute\.$/);
-    d = levelOf(Array(40).fill(3), ["A", "D", "E"], { beats: 130 });
-    assert.deepEqual([d.changes_per_min, d.level], [39, 1], "39 changes a minute is under the 40 line");
-    d = levelOf(Array(60).fill(2), ["A", "D", "E"], { bpm: 100 });
-    assert.equal(d.level, 3, "40+ changes a minute is quick even below 120 BPM");
-    assert.match(d.tier_reason, /changes a minute \(40\+\)/);
-    assert.equal(levelOf(Array(12).fill(8), ["G", "C", "D"], { needsSyncopation: true }).level, 3);
-    assert.equal(levelOf(Array(60).fill(2), ["C", "G", "F"], { bpm: 100 }).level, 4, "quick changes never lower a barre level");
+  test("exportSong: expected_level mismatches warn and expected_shapes mismatches are reported, never failing", () => {
+    const holds = Array(12).fill(8), labels = ["A", "D", "E"];
+    const ok = exportHolds(holds, { labels, metadata: { expected: { level: 1, shapes: ["E", "D", "A"] } } });
+    assert.deepEqual([ok.report.expected, ok.report.warnings.length], [{ level: null, shapes: null }, 0]);
+    const off = exportHolds(holds, { labels, metadata: { expected: { level: 3, shapes: ["A", "D", "Asus4"] } } });
+    assert.equal(off.song.level, 1, "the expectation never changes the level");
+    assert.deepEqual(off.report.expected.level, { expected: 3, built: 1 });
+    assert.deepEqual([off.report.expected.shapes.missing, off.report.expected.shapes.extra], [["Asus4"], ["E"]]);
+    assert.ok(off.report.warnings.some(w => /built Level 1, metadata expected_level 3/.test(w)));
+    assert.deepEqual(exportHolds(holds, { labels }).report.expected, { level: null, shapes: null }, "no expectations, nothing checked");
   });
   test("exportSong: a catalogue level override sets the level, group and default patterns, and keeps the computed level", () => {
     const quick = { bpm: 100, labels: ["A", "D", "E"] };

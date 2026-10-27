@@ -28,7 +28,7 @@ const CATALOGUE = path.join(ROOT, "data/catalogue.json");
 const REVIEW = path.join(REPO, "experiments/review");
 const app = require(path.join(REVIEW, "app.js"));
 const Core = require(path.join(ROOT, "lib/core.js"));
-const Chords = require(path.join(ROOT, "lib/chords.js"));
+const { arrangementProfile, compareExpected, gridHolds, LEVELS, LEVEL } = require("./arrangement-profile.js");
 
 const CHECK = process.argv.includes("--check");
 const warnings = [];
@@ -45,29 +45,9 @@ const mod = (value, n) => ((value % n) + n) % n;
 const repoPath = p => path.resolve(REPO, p);
 const rel = p => path.relative(REPO, p);
 
-// ---------------------------------------------------------------- difficulty vocabulary (lead decision, 25 Oct 2026)
+// ---------------------------------------------------------------- levels (tiers, main shapes and level rules: tools/arrangement-profile.js)
 
-// Shape tiers are what the player frets: Core shapes at the song's default view (capo shapes, Simple quality).
-const TIER_SHAPES = {
-  1: ["A", "D", "E", "Em", "Am", "A7", "D7", "E7", "Am7", "Em7", "Asus2", "Asus4", "Dsus2", "Dsus4", "Esus4", "D6add9/F#"],
-  2: ["G", "C", "Dm", "G7", "C7", "B7", "Cadd9", "Cmaj7", "Fmaj7", "Dm7", "G/B", "D/F#", "C/G"],
-  3: ["F", "Bm", "Bm7", "F#m"],
-};
-const TIER_OF = new Map(Object.entries(TIER_SHAPES).flatMap(([tier, shapes]) => shapes.map(s => [s, Number(tier)])));
-const TIER_NAMES = { 1: "first-chord shape", 2: "open chord", 3: "first barre-type shape", 4: "barre shape" };
-
-const LEVELS = [
-  { level: 1, label: "First chords", note: "Up to three easy shapes from A, D, E, Em and Am." },
-  { level: 2, label: "Open chords", note: "Open chords such as G and C, up to four shapes, at a relaxed pace." },
-  { level: 3, label: "More changes", note: "Open chords with more shapes, quicker changes or a syncopated strum." },
-  { level: 4, label: "First barre (F / Bm)", note: "Adds a first barre-type shape: F, Bm or F#m." },
-  { level: 5, label: "Barre chords", note: "Full barre shapes such as B, Bb, Cm or C#m." },
-];
-const LEVEL = new Map(LEVELS.map(l => [l.level, l]));
 const levelTitle = n => `Level ${n} · ${LEVEL.get(n).label}`;
-const MAIN_SHAPE_SHARE = 0.04;   // main shapes cover at least 4% of chord time
-const BLIP_BEATS = 0.75;         // holds shorter than this are blips (the app's "quick" threshold)
-const QUICK_CPM = 40, QUICK_MEDIAN_BEATS = 2, QUICK_MEDIAN_BPM = 120;
 
 // Default practice patterns for songs without authored patterns (4 beats per bar). Prepared and authored songs keep theirs.
 const P = {
@@ -174,40 +154,6 @@ function barPhaseVote(beats, nativeEvents, bpb) {
 // A varying meter (beats_per_bar null, so assumed 4) makes a global residue vote meaningless: never confident.
 function barPhaseConfident(vote, assumed) {
   return !assumed && vote.votes >= 8 && vote.share >= 0.7;
-}
-
-// Library-card chips: the Core shapes (at the song's capo) that carry the chart, by seconds held. N and X are
-// skipped; shapes under 3% of chord time are dropped, slash shapes under 10%; longest first (ties by first
-// appearance), at most 6. Rare shapes stay in the chart and diagrams; they are only left off the card.
-function coreShapes(chords, capo) {
-  const seconds = new Map(); // insertion order = first appearance
-  for (const e of chords) {
-    if (e.l === "N" || e.l === "X") continue;
-    const shape = Chords.coreLabel(Chords.shapeForCapo(e.l, capo));
-    if (shape === "N" || shape === "X") continue;
-    seconds.set(shape, (seconds.get(shape) || 0) + (e.e - e.s));
-  }
-  const total = [...seconds.values()].reduce((a, b) => a + b, 0);
-  if (!(total > 0)) return [];
-  return [...seconds].map(([shape, held], order) => ({ shape, held, share: held / total, order }))
-    .filter(x => x.share >= 0.03 && !(x.shape.includes("/") && x.share < 0.10))
-    .sort((a, b) => b.held - a.held || a.order - b.order)
-    .slice(0, 6)
-    .map(x => x.shape);
-}
-
-// The holds the app draws in its default view (Core quality; merges are view-independent), with the same beat
-// rounding as lib/core.js cuePart: dots run round(startBeat) .. round(endBeat) - 1, a span under 0.75 beat is quick.
-function gridHolds(song) {
-  return Core.buildTimeline(song).map(ev => {
-    const sb = Core.gridPosition(song.beats, ev.s), eb = Core.gridPosition(song.beats, ev.e);
-    const hold = { s: ev.s, e: ev.e, label: ev.label, inGrid: sb !== null && eb !== null && eb > sb };
-    if (!hold.inGrid) return hold;
-    hold.sb = sb; hold.eb = eb; hold.base = Math.round(sb); hold.span = eb - sb;
-    hold.quick = hold.span < BLIP_BEATS;
-    hold.count = hold.quick ? 1 : Math.max(1, Math.round(eb) - hold.base);
-    return hold;
-  });
 }
 
 // ---------------------------------------------------------------- bar model (docs/STRUMALONG_APP.md, "Bar model")
@@ -558,69 +504,11 @@ function timingCorrection(moves) {
     moves: moves.map(({ at, was, from, to, shift, agree }) => ({ at, was, from, to, shift, agree })) };
 }
 
-// ---------------------------------------------------------------- difficulty (docs/STRUMALONG_APP.md, "Difficulty levels")
-
-function shapeTier(shape) {
-  if (TIER_OF.has(shape)) return TIER_OF.get(shape);
-  const slash = /^([^/]+)\/.+$/.exec(shape);  // other slash shapes are fretted as their root shape (bass note omitted)
-  if (slash && TIER_OF.has(slash[1])) return TIER_OF.get(slash[1]);
-  return 4;
-}
+// ---------------------------------------------------------------- level override (the profile itself: tools/arrangement-profile.js)
 
 function median(values) {
   const v = [...values].sort((a, b) => a - b), n = v.length;
   return n ? (n % 2 ? v[(n - 1) / 2] : (v[n / 2 - 1] + v[n / 2]) / 2) : 0;
-}
-
-/**
- * Difficulty at the song's default view (capo shapes, Simple). Main shapes: Core shapes covering >= 4% of chord time,
- * ignoring N, X and blips (< 0.75 beat). Changes: label changes between consecutive non-blip chord holds (not across
- * N or X), per minute of non-blip chord time. Median hold: beats per non-blip chord hold.
- *   L5 any tier-4 main shape; L4 any tier-3; else L1 when all tier 1 and <= 3 shapes, L2 when <= 4 shapes (any
- *   number if all tier 1), L3 when 5+ shapes; and L1/L2 move to L3 on quick changes (median hold <= 2 beats at
- *   >= 120 BPM, or >= 40 changes/min) or an authored needs_syncopation flag.
- */
-function difficultyOf(song, opts = {}) {
-  const bpm = song.rhythm.bpm;
-  const seconds = new Map(), holdBeats = [];
-  let changes = 0, chordSeconds = 0, previous = null;
-  for (const hold of gridHolds(song)) {
-    if (hold.label === "N" || hold.label === "X") { previous = null; continue; }
-    const span = hold.inGrid ? hold.span : (hold.e - hold.s) * bpm / 60;
-    if (span < BLIP_BEATS) continue;
-    const beats = hold.inGrid ? hold.count : Math.max(1, Math.round(span));
-    const held = hold.e - hold.s;
-    seconds.set(hold.label, (seconds.get(hold.label) || 0) + held);
-    chordSeconds += held;
-    holdBeats.push(beats);
-    if (previous !== null && previous !== hold.label) changes++;
-    previous = hold.label;
-  }
-  const main = [...seconds].map(([shape, held], order) => ({ shape, share: held / chordSeconds, order, tier: shapeTier(shape) }))
-    .filter(x => x.share >= MAIN_SHAPE_SHARE)
-    .sort((a, b) => b.share - a.share || a.order - b.order);
-  const cpm = chordSeconds > 0 ? changes / (chordSeconds / 60) : 0;
-  const medianHold = median(holdBeats);
-  const hardest = main.reduce((best, x) => (!best || x.tier > best.tier ? x : best), null);
-  const maxTier = hardest ? hardest.tier : 1;
-  const names = main.map(x => x.shape).join(", ");
-  const bumps = [];
-  if (cpm >= QUICK_CPM) bumps.push(`${r1(cpm)} changes a minute (${QUICK_CPM}+)`);
-  if (medianHold <= QUICK_MEDIAN_BEATS && bpm >= QUICK_MEDIAN_BPM) bumps.push(`median hold ${medianHold} beats at ~${Math.round(bpm)} BPM`);
-  if (opts.needsSyncopation) bumps.push("a syncopated strum is needed");
-  let level, reason;
-  if (maxTier === 4) { level = 5; reason = `${hardest.shape} is a barre shape (tier 4); main shapes ${names}.`; }
-  else if (maxTier === 3) { level = 4; reason = `${hardest.shape} is a first barre-type shape (tier 3); main shapes ${names}.`; }
-  else {
-    level = maxTier === 1 ? (main.length <= 3 ? 1 : 2) : main.length <= 4 ? 2 : 3;
-    reason = maxTier === 1 ? `${names}: all first-chord shapes (tier 1), ${main.length} main shapes.`
-      : `${names}: open chords (hardest ${hardest.shape}, tier 2), ${main.length} main shapes.`;
-    if (bumps.length && level < 3) level = 3;
-  }
-  // The pace part: quick-change evidence when present, otherwise the plain change rate.
-  reason += bumps.length ? ` Quicker: ${bumps.join("; ")}.` : ` About ${r1(cpm)} changes a minute.`;
-  return { level, label: LEVEL.get(level).label, main_shapes: main.map(x => x.shape), hardest_shape: hardest ? hardest.shape : null,
-    tier_reason: reason, changes_per_min: r1(cpm), median_hold_beats: medianHold };
 }
 
 function applyLevelOverride(difficulty, override) {
@@ -641,11 +529,11 @@ function applyLevelOverride(difficulty, override) {
  *   rhythmCase: the paired beat grid. correctionSet: reported display corrections (prepared pack) or undefined.
  *   hashes: { manifest, rhythm, practice, learning, additions?, catalogue } for song.provenance.
  * @param metadata { title, artist, capo, capo_source, setup_note, strumming|null, learning, needs_syncopation?,
- *   playable_embed?, label_aliases? }  strumming null means "no authored patterns": the level's defaults are used.
+ *   playable_embed?, label_aliases?, expected?: { level, shapes } }  strumming null means "no authored patterns": the level's defaults are used.
  * @param settings { timingFix?, levelOverride? }  timingFix false: catalogue timing_fix_off lists this recording.
  *   levelOverride: a catalogue level_overrides entry ({ level, reason }).
  * @returns {{ song, card, report }}  song.order and card.order stay null: order within a level is a catalogue decision.
- *   report: { warnings, chords, beats, vote, bars: {before, after, runs}, timing: {moves, left, passes, settled,
+ *   report: { warnings, expected: compareExpected result, chords, beats, vote, bars: {before, after, runs}, timing: {moves, left, passes, settled,
  *   enabled, before, after} } for the build report.
  *
  * Each chart step gets its own copy of the chords (chartView), so no step depends on whether another one replaces
@@ -727,7 +615,10 @@ function exportSong(draft, metadata, settings = {}) {
   timingAfter.bars = after;
 
   // level (with any catalogue override) and the level's default patterns for unauthored songs
-  const difficulty = applyLevelOverride(difficultyOf(anchoring, { needsSyncopation: meta.needs_syncopation === true }), settings.levelOverride);
+  const difficulty = applyLevelOverride(arrangementProfile(anchoring, { needsSyncopation: meta.needs_syncopation === true }), settings.levelOverride);
+  // editorial expected_level / expected_shapes (additions research drafts): reported only, never a reference
+  const expected = compareExpected(difficulty, meta.expected || {});
+  if (expected.level) warnings.push(`${c.id}: built Level ${expected.level.built}, metadata expected_level ${expected.level.expected} (report only)`);
   const strumming = meta.strumming ? { ...meta.strumming, source: meta.strumming.source || "authored" }
     : { note: `Default practice patterns for Level ${difficulty.level} songs; not checked against the recording.`,
       source: "level-default", patterns: defaultPatterns(difficulty.level, bpb).map(pickPattern) };
@@ -758,10 +649,10 @@ function exportSong(draft, metadata, settings = {}) {
     id: c.id, title: meta.title, artist: meta.artist, group, order: null, level: difficulty.level, level_label: difficulty.label,
     video_id: src.video_id, duration_seconds: r2(c.recording.duration_seconds),
     bpm: Math.round(rhythmCase.pulse_bpm), meter_label: rhythmCase.meter_label, capo: meta.capo,
-    core_shapes: coreShapes(chords, meta.capo),
+    core_shapes: difficulty.main_shapes, // the shapes the level counts (one Arrangement profile)
     playable_embed: true, embed_note: "",
   };
-  const report = { warnings, chords: chords.length, beats: beats.length, vote, bars: { before, after, runs: bars.runs },
+  const report = { warnings, expected, chords: chords.length, beats: beats.length, vote, bars: { before, after, runs: bars.runs },
     timing: { ...timing, enabled: timingFix, before: timingBefore, after: timingAfter } };
   return { song, card, report };
 }
@@ -917,6 +808,8 @@ function loadAdditions(pack, cfg, built) {
           capo: entry.capo, capo_source: entry.capo > 0 ? entry.capo_source : "none", setup_note: entry.setup_note, strumming,
           needs_syncopation: entry.needs_syncopation === true, playable_embed: entry.playable_embed,
           label_aliases: entry.label_aliases || null,
+          // editorial research drafts, compared with the built profile and reported only
+          expected: { level: entry.expected_level, shapes: entry.expected_shapes },
           learning: { skill_focus: entry.skill_focus || "", prerequisites: entry.prerequisites || "",
             sources: (entry.sources || []).map(s => ({ title: s.title, url: s.url })) } }));
     } catch (error) { warn(`${pack.id}: ${c.id} skipped (${error.message})`); }
@@ -987,6 +880,17 @@ function report(built) {
     for (const m of t.after.left) console.log(`  left  ${Core.formatTime(m.at)} (${m.at.toFixed(3)} s) ${m.from}→${m.to}; ${m.agree} repeats agree: ${m.reason}`);
   }
 
+  console.log("\nExpected shapes (additions metadata expected_shapes vs built main shapes; editorial drafts, report only):");
+  let shapeMismatches = 0;
+  for (const { song, report: { expected } } of built) {
+    const sh = expected && expected.shapes;
+    if (!sh) continue;
+    shapeMismatches++;
+    console.log(`  ${song.title}: expected ${sh.expected.join(" ")} · built ${sh.built.join(" ")}` +
+      `${sh.missing.length ? ` · not main: ${sh.missing.join(" ")}` : ""}${sh.extra.length ? ` · unexpected: ${sh.extra.join(" ")}` : ""}`);
+  }
+  console.log(`  ${shapeMismatches} song(s) differ.`);
+
   console.log("\nLevels:");
   for (const { song } of built) {
     const d = song.difficulty;
@@ -1033,10 +937,9 @@ module.exports = {
   exportSong,
   // adapter: the catalogue config, and the whole catalogue built in memory from the packs (what main() writes)
   readCatalogue, buildCatalogue,
-  // Exported only for unit tests the Arrangement profile, chord vocabulary and repeat-timing deepenings will move into
-  // their own modules; nothing else should import them.
-  barPhaseVote, barPhaseConfident, coreShapes, gridHolds, barAnchors, applyTimingFix, timingConsistency, timingCorrection,
-  shapeTier, difficultyOf,
+  // Exported only for unit tests the chord vocabulary and repeat-timing deepenings will move into their own modules
+  // (the Arrangement profile is tools/arrangement-profile.js); nothing else should import them.
+  barPhaseVote, barPhaseConfident, gridHolds, barAnchors, applyTimingFix, timingConsistency, timingCorrection,
 };
 
 if (require.main === module) main();

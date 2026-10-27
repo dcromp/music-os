@@ -4,7 +4,7 @@
 "title":"Twist and Shout",
 "artist":"The Beatles",
 "group":"level-3",
-"order":5,
+"order":4,
 "level":3,
 "recording":{"id":"beatles-twist-and-shout-youtube-20261011","duration_seconds":155.236,"audio_sha256":"4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c"},
 "videos":[{"video_id":"2RicaUqd9Hg","uploader":"The Beatles","kind":"analysed","duration_seconds":155,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],
