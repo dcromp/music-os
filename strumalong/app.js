@@ -6,42 +6,25 @@
   "use strict";
   const Core = window.StrumCore;
   const RepeatTiming = window.StrumRepeatTiming;
+  const Session = window.StrumSession;
   const app = document.getElementById("app");
   if (!app) return;
   if (!Core) { app.innerHTML = '<p class="msg error">Strum Along could not start: lib/core.js did not load. Reload to try again.</p><p><a class="btn" href="">Reload</a></p>'; return; }
+  if (!Session) { app.innerHTML = '<p class="msg error">Strum Along could not start: lib/session.js did not load. Reload to try again.</p><p><a class="btn" href="">Reload</a></p>'; return; }
 
-  // ---------------------------------------------------------------- storage (always guarded)
-  const PREFIX = "music-os-strumalong-v1:";
-  function load(key, fallback) {
-    try {
-      const raw = window.localStorage.getItem(PREFIX + key);
-      if (raw === null) return fallback;
-      const value = JSON.parse(raw);
-      return value === null || value === undefined ? fallback : value;
-    } catch (_) { return fallback; }
-  }
-  function save(key, value) { try { window.localStorage.setItem(PREFIX + key, JSON.stringify(value)); } catch (_) { /* private mode / quota */ } }
-  const clampInt = (value, limit) => Number.isFinite(value) ? Math.max(-limit, Math.min(limit, Math.round(value))) : 0;
-
-  const settings = (() => {
-    const raw = load("settings", {});
-    const s = raw && typeof raw === "object" ? raw : {};
-    const patterns = {};
-    if (s.patterns && typeof s.patterns === "object") for (const [k, v] of Object.entries(s.patterns)) if (typeof v === "string") patterns[k] = v;
-    return { quality: s.quality === "full" ? "full" : "core", view: s.view === "sounding" ? "sounding" : "shapes",
-      diagrams: s.diagrams !== false, patterns };
-  })();
-  const saveSettings = () => save("settings", settings);
-  let latencyMs = clampInt(Number(load("latency", 0)), 1000);
-  const NUDGE_LIMIT_MS = 30000;
-  const loadNudge = video => video ? clampInt(Number(load("offset:" + video.video_id, 0)), NUDGE_LIMIT_MS) : 0;
+  // ---------------------------------------------------------------- practice session + storage adapter
+  // Playback, resume and persistence rules live in lib/session.js; app.js only renders.
+  const store = Session.createStore({
+    getItem: key => window.localStorage.getItem(key),
+    setItem: (key, value) => window.localStorage.setItem(key, value),
+  });
+  const settings = () => store.settings();
 
   // ---------------------------------------------------------------- small helpers
   const $ = id => document.getElementById(id);
   const ESC = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
   const esc = value => String(value === null || value === undefined ? "" : value).replace(/[&<>"']/g, c => ESC[c]);
   const validSongId = id => typeof id === "string" && /^[A-Za-z0-9][A-Za-z0-9_-]{0,100}$/.test(id);
-  const validVideoId = id => typeof id === "string" && /^[A-Za-z0-9_-]{11}$/.test(id);
   const num = value => typeof value === "number" && Number.isFinite(value);
   function safeUrl(url) {
     try { const parsed = new URL(url, location.href); return /^https?:$/.test(parsed.protocol) ? parsed.href : null; } catch (_) { return null; }
@@ -152,10 +135,9 @@
     const leftovers = songs.filter(s => !known.has(s.group));
     if (leftovers.length) groups.push({ id: "__other", title: "Other songs", note: "" });
     let html = "";
-    const last = load("last", null);
-    const lastSong = last && typeof last === "object" ? songs.find(s => s.id === last.id) : null;
-    if (lastSong) {
-      const t = num(last.t) && last.t >= 5 && (!num(lastSong.duration_seconds) || last.t < lastSong.duration_seconds - 5) ? last.t : 0;
+    const resumePoint = store.resumePoint(songs);
+    if (resumePoint) {
+      const { song: lastSong, t } = resumePoint;
       html += `<a class="resume" href="#/song/${encodeURIComponent(lastSong.id)}" data-act="resume" data-id="${esc(lastSong.id)}" data-t="${t}">
         <span class="resume-icon" aria-hidden="true">▶</span><span>${t ? "Resume" : "Last played:"} <b>${esc(lastSong.title)}</b>${t ? ` at ${Core.formatTime(t)}` : ""}</span></a>`;
     }
@@ -211,29 +193,19 @@
       <p class="msg error">${esc(message)}</p>${retry ? `<p><button type="button" class="btn" data-act="reload">Try again</button></p>` : ""}`;
   }
 
-  function viewFor(song) { return num(song.capo) && song.capo > 0 ? settings.view : "shapes"; }
-  function patternsOf(song) {
-    const list = song.strumming && Array.isArray(song.strumming.patterns) ? song.strumming.patterns : [];
-    return list.filter(p => p && typeof p.id === "string" && Array.isArray(p.strokes) && p.strokes.length);
+  // Render-side state for the song page. Session fields read through it are read-only:
+  // every change goes through S.session.
+  const SESSION_FIELDS = ["song", "videos", "patterns", "video", "state", "played", "ready", "failed", "ad", "rate", "pt", "timeline", "patternId", "nudgeMs"];
+  function pageState(session, gen) {
+    const page = { gen, session, cuesHidden: false, raf: 0, poll: 0, loadTimer: 0, playTimer: 0, msgs: {}, memo: {}, epoch: session.epoch, strumCells: [] };
+    for (const key of SESSION_FIELDS) Object.defineProperty(page, key, { get: () => session[key], enumerable: true });
+    return page;
   }
 
   function startSong(song, gen) {
-    const videos = (Array.isArray(song.videos) ? song.videos : []).filter(v => v && validVideoId(v.video_id));
-    // An analysed upload known not to embed (age-restricted) is skipped: start on the first embeddable entry.
-    const videoIdx = Math.max(0, videos.findIndex(v => v.embeddable !== false));
     const resume = resumeRequest && resumeRequest.id === song.id && num(resumeRequest.t) ? resumeRequest.t : 0;
     resumeRequest = null;
-    const patterns = patternsOf(song);
-    const saved = settings.patterns[song.id];
-    S = {
-      gen, song, videos, videoIdx, video: videos[videoIdx] || null, player: null, ready: false, state: -1, played: false, rate: 1,
-      failed: null, cuesHidden: false, ad: false, raf: 0, poll: 0, loadTimer: 0, playTimer: 0, lastSave: 0,
-      pt: resume, startAt: resume, timeline: [], patterns,
-      patternId: patterns.some(p => p.id === saved) ? saved : patterns[0] ? patterns[0].id : null,
-      nudgeMs: 0, msgs: {}, memo: {}, strumCells: [],
-    };
-    S.nudgeMs = loadNudge(S.video);
-    rebuildTimeline();
+    S = pageState(Session.createSession({ song, store, resume }), gen);
     document.title = `${song.title || "Song"} · Strum Along`;
     app.innerHTML = songSkeleton(song);
     renderStrumPanel();
@@ -247,15 +219,15 @@
     S.poll = window.setInterval(() => { if (S && S.state !== 1) frame(); }, 250);
     if (!S.video) { fail("No embeddable video is listed for this song."); return; }
     noteVideo();
-    const session = S;
+    const page = S;
     S.loadTimer = window.setTimeout(() => {
-      if (S !== session || S.ready || S.failed) return;
+      if (S !== page || S.ready || S.failed) return;
       // A stalled API script never settles its promise: forget it so the next song page loads it again.
       if (!(window.YT && typeof window.YT.Player === "function")) ytPromise = null;
       setMsg("error", `YouTube is taking a while to load. Check the connection, or reload the page. <button type="button" class="btn small" data-act="reload">Reload</button>`);
     }, 15000);
-    loadYouTube().then(YT => { if (S === session) createPlayer(YT); })
-      .catch(() => { if (S === session) setMsg("error", `YouTube could not load. Check the connection. <button type="button" class="btn small" data-act="reload">Reload</button>`); });
+    loadYouTube().then(YT => { if (S === page) createPlayer(YT); })
+      .catch(() => { if (S === page) setMsg("error", `YouTube could not load. Check the connection. <button type="button" class="btn small" data-act="reload">Reload</button>`); });
   }
 
   function songSkeleton(song) {
@@ -284,7 +256,7 @@
           <div id="cue-cover" class="cue-cover" hidden></div>
         </section>
         <section id="strum-panel" class="panel strum-panel" aria-label="Suggested practice pattern"></section>
-        <section id="diagram-panel" class="panel diagram-panel" aria-label="Chord diagrams"${settings.diagrams ? "" : " hidden"}>
+        <section id="diagram-panel" class="panel diagram-panel" aria-label="Chord diagrams"${settings().diagrams ? "" : " hidden"}>
           <div id="diagrams" class="diagrams"></div>
         </section>
       </div>
@@ -338,21 +310,31 @@
     return l ? `<span class="badge level" title="${esc(l.label)}">Level ${l.level}</span>` : "";
   }
 
-  function rebuildTimeline() {
-    if (!S) return;
-    S.timeline = Core.buildTimeline(S.song, { view: viewFor(S.song), quality: settings.quality });
-    S.memo = {};
+  // ---------------------------------------------------------------- player
+  // The player adapter: the session module reaches YouTube only through these calls.
+  function youTubeAdapter(yt) {
+    return {
+      currentTime: () => yt.getCurrentTime(),
+      duration: () => yt.getDuration(),
+      playbackRate: () => yt.getPlaybackRate(),
+      availableRates: () => yt.getAvailablePlaybackRates(),
+      seekTo: seconds => yt.seekTo(seconds, true),
+      cue: (videoId, startSeconds) => yt.cueVideoById({ videoId, startSeconds }),
+      play: () => yt.playVideo(),
+      pause: () => yt.pauseVideo(),
+      setRate: rate => yt.setPlaybackRate(rate),
+      destroy: () => { if (typeof yt.destroy === "function") yt.destroy(); },
+    };
   }
 
-  // ---------------------------------------------------------------- player
   function createPlayer(YT) {
-    const session = S;
+    const page = S, session = page.session;
     const vars = { playsinline: 1, rel: 0, controls: 1, enablejsapi: 1, fs: 0 };
     if (/^https?:/.test(location.protocol)) vars.origin = location.origin;
     if (session.startAt > 0) vars.start = Math.floor(session.startAt);
-    const live = fn => (...args) => { if (S === session) { try { fn(...args); } catch (error) { console.error(error); } } };
+    const live = fn => (...args) => { if (S === page) { try { fn(...args); } catch (error) { console.error(error); } } };
     try {
-      session.player = new YT.Player("yt-player", {
+      session.attach(youTubeAdapter(new YT.Player("yt-player", {
         width: "100%", height: "100%", videoId: session.video.video_id, playerVars: vars,
         events: {
           onReady: live(onReady),
@@ -361,19 +343,18 @@
           onAutoplayBlocked: live(() => setMsg("autoplay", "Tap ▶ in the video to start.")),
           onPlaybackRateChange: live(event => {
             const sel = $("sel-speed"); if (sel) sel.value = String(event.data);
-            S.rate = num(event.data) && event.data > 0 ? event.data : 1;
-            S.memo = {};
+            S.session.rateChange(event.data);
             frame();
           }),
         },
-      });
+      })));
     } catch (_) {
       setMsg("error", `The YouTube player could not start. Reload to try again. <button type="button" class="btn small" data-act="reload">Reload</button>`);
     }
   }
 
   function onReady() {
-    S.ready = true;
+    S.session.playerReady();
     window.clearTimeout(S.loadTimer);
     if (S.msgs.error && !S.failed) setMsg("error", null);
     refreshRates();
@@ -383,11 +364,9 @@
 
   function refreshRates() {
     const wrap = $("speed-wrap"), sel = $("sel-speed");
-    if (!S.player) return;
-    try { const rate = S.player.getPlaybackRate(); S.rate = num(rate) && rate > 0 ? rate : 1; } catch (_) { /* keep the last rate */ }
+    S.session.refreshRate();
     if (!wrap || !sel) return;
-    let rates = [];
-    try { rates = (S.player.getAvailablePlaybackRates() || []).filter(num); } catch (_) { rates = []; }
+    const rates = S.session.availableRates();
     if (rates.length <= 1) { wrap.hidden = true; return; }
     sel.innerHTML = rates.map(r => `<option value="${r}">${r === 1 ? "1× (normal)" : `${r}×`}</option>`).join("");
     sel.value = String(S.rate);
@@ -395,9 +374,8 @@
   }
 
   function onState(code) {
-    S.state = code;
+    S.session.stateChange(code);
     if (code === 1) {
-      S.played = true;
       window.clearTimeout(S.playTimer);
       setMsg("autoplay", null);
       setMsg("info", null);
@@ -410,37 +388,36 @@
       stopLoop();
     }
     if (code === 3) window.clearTimeout(S.playTimer);
-    if (code === 2) saveLast();
-    if (code === 0) saveLast(0);
     // The lock is kept while paused (chords are read during a pause) and released when the song ends.
     if (code === 0) releaseWakeLock();
     updateTransport();
     frame();
   }
 
+  const FAIL_TEXT = {
+    referrer: "Player configuration error (referrer). This is a page setup problem, not your connection.",
+    unavailable: "Video unavailable.",
+    "no-embed": "This video can't play inside the app.",
+  };
+  const failText = reason => FAIL_TEXT[reason] || reason;
+
   function onPlayerError(code) {
     stopLoop();
     window.clearTimeout(S.playTimer);
-    if ([100, 101, 150, 152].includes(code) && S.videoIdx + 1 < S.videos.length) { switchVideo(S.videoIdx + 1, code); return; }
-    if (code === 153) { fail("Player configuration error (referrer). This is a page setup problem, not your connection."); return; }
-    if (code === 100) { fail("Video unavailable."); return; }
-    if ([101, 150, 152].includes(code)) { fail("This video can't play inside the app."); return; }
+    const decision = S.session.error(code);
+    if (decision.action === "switch") { showSwitch(code); return; }
+    if (decision.action === "fail") { fail(decision.reason); return; }
     setMsg("error", `YouTube reported a playback problem (error ${esc(code)}). <button type="button" class="btn small" data-act="retry">Retry</button>`);
   }
 
-  function switchVideo(index, code) {
-    S.videoIdx = index;
-    S.video = S.videos[index];
-    S.nudgeMs = loadNudge(S.video);
-    S.ad = false; S.state = -1; S.pt = 0; S.startAt = 0; S.memo = {};
+  // The session has already moved to the next listed video and cued it.
+  function showSwitch(code) {
     setMsg("error", null);
     const who = S.video && S.video.uploader ? `${esc(S.video.uploader)}'s` : "another";
     setMsg("switch", `Playing ${who} official video instead; the analysed upload can't play here.`);
     console.info(`Strum Along: switched video after YouTube error ${code}`);
     noteVideo();
     renderSync(); renderDetails(); updateTransport();
-    try { S.player.cueVideoById({ videoId: S.video.video_id, startSeconds: 0 }); }
-    catch (_) { fail("This video can't play inside the app."); return; }
     frame();
   }
 
@@ -458,47 +435,41 @@
   // The upload the chart was computed from (its times match the non-synced chord list).
   function analysedVideo() { return S.videos.find(v => v.kind === "analysed") || S.videos[0] || null; }
 
-  function fail(message) {
+  // reason is a session failure code (FAIL_TEXT) or a message.
+  function fail(reason) {
     stopLoop();
-    S.failed = message;
-    S.state = -1;
+    S.session.fail(reason);
     const video = analysedVideo();
     const link = video ? ` <a href="${esc(watchUrl(video.video_id, 0))}" target="_blank" rel="noopener" data-act="open-yt">Open on YouTube</a>` : "";
-    setMsg("error", `${esc(message)}${link}`, "error");
+    setMsg("error", `${esc(failText(reason))}${link}`, "error");
     setMsg("autoplay", null);
     setMsg("video", null);
     setMsg("info", null);
     updateTransport();
-    S.memo = {};
     frame();
   }
 
   function togglePlay() {
-    if (!S || !S.player || !S.ready || S.failed) return;
-    try {
-      if (S.state === 1 || S.state === 3) { S.player.pauseVideo(); return; }
-      // Never start audio with the official player off screen (the lower Play button can be reached
-      // after scrolling): bring the player, and the "Tap ▶ in the video" hint under it, into view first.
-      const f = document.querySelector(".player-frame");
-      if (f) {
-        const r = f.getBoundingClientRect();
-        if (r.top < 0 || r.bottom > window.innerHeight) f.scrollIntoView({ block: "start", behavior: "smooth" });
-      }
-      S.player.playVideo();
-    } catch (_) { return; }
+    if (!S || !S.session.controllable) return;
+    if (S.session.playing) { S.session.pause(); return; }
+    // Never start audio with the official player off screen (the lower Play button can be reached
+    // after scrolling): bring the player, and the "Tap ▶ in the video" hint under it, into view first.
+    const f = document.querySelector(".player-frame");
+    if (f) {
+      const r = f.getBoundingClientRect();
+      if (r.top < 0 || r.bottom > window.innerHeight) f.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+    if (!S.session.play()) return;
     requestWakeLock();
-    const session = S;
+    const page = S;
     window.clearTimeout(S.playTimer);
     S.playTimer = window.setTimeout(() => {
-      if (S === session && S.state !== 1 && S.state !== 3 && !S.failed) setMsg("autoplay", "Tap ▶ in the video to start.");
+      if (S === page && !S.session.playing && !S.failed) setMsg("autoplay", "Tap ▶ in the video to start.");
     }, 2500);
   }
 
   function seekTo(seconds) {
-    if (!S || !S.player || !S.ready || S.failed) return;
-    const target = Math.max(0, seconds);
-    try { S.player.seekTo(target, true); } catch (_) { return; }
-    S.pt = target;
+    if (!S || !S.session.seek(seconds)) return;
     frame();
   }
 
@@ -508,55 +479,30 @@
     if (!S) return;
     S.raf = 0;
     if (S.state !== 1) return;
-    frame();
-    const now = Date.now();
-    if (now - S.lastSave > 5000) { S.lastSave = now; saveLast(); }
+    frame(); // the session saves the last-played position every few seconds while playing
     S.raf = window.requestAnimationFrame(loop);
   }
 
-  function saveLast(forceT) {
-    if (!S || !S.played) return;
-    const t = num(forceT) ? forceT : Math.max(0, Math.floor(S.pt));
-    save("last", { id: S.song.id, t });
-  }
+  function saveLast() { if (S) S.session.saveLast(); }
 
   function leaveSong() {
     if (!S) return;
     const s = S;
-    saveLast();
     S = null;
+    s.session.leave(); // saves the last-played position and destroys the player
     if (s.raf) window.cancelAnimationFrame(s.raf);
     window.clearInterval(s.poll);
     window.clearTimeout(s.loadTimer);
     window.clearTimeout(s.playTimer);
-    try { if (s.player && typeof s.player.destroy === "function") s.player.destroy(); } catch (_) { /* ignore */ }
     releaseWakeLock();
   }
 
   // ---------------------------------------------------------------- frame + memoized rendering
-  function readPlayerTime() {
-    let pt = S.pt;
-    if (S.player && S.ready && !S.failed) {
-      try {
-        const value = S.player.getCurrentTime();
-        if (num(value)) pt = value;
-      } catch (_) { /* keep last */ }
-      // A resumed start is not reported until playback begins.
-      if (!S.played && S.startAt > 0 && pt < 0.5) pt = S.startAt;
-    }
-    return pt;
-  }
-
   function frame() {
     if (!S) return;
-    S.pt = readPlayerTime();
-    if (S.state === 1 && S.player && S.ready) {
-      let duration = 0;
-      try { duration = S.player.getDuration(); } catch (_) { duration = 0; }
-      S.ad = Core.durationMismatch(duration, Core.expectedDuration(S.song, S.video));
-    }
-    const t = Core.cueTime(S.pt, S.video && S.video.offset_seconds, S.nudgeMs, latencyMs, S.rate);
-    const cue = Core.cueAt(S.timeline, S.song, t);
+    const { t, cue } = S.session.tick();
+    // A new timeline, rate, video or failure makes every cached render key stale.
+    if (S.epoch !== S.session.epoch) { S.epoch = S.session.epoch; S.memo = {}; }
     renderCue(cue);
     renderStrumStep(t);
     renderDiagrams(cue);
@@ -696,7 +642,7 @@
     const items = S.timeline.filter(e => e.label !== "N").map(e => `<li><time>${Core.formatTime(e.s)}</time> <b>${esc(Core.displayLabel(e.label))}</b></li>`);
     const video = analysedVideo();
     const link = video ? `<a class="btn" href="${esc(watchUrl(video.video_id, 0))}" target="_blank" rel="noopener">Open on YouTube</a>` : "";
-    return `<p class="cover-title">${esc(S.failed || "Cues unavailable")}</p>${link ? `<p>${link}</p>` : ""}
+    return `<p class="cover-title">${esc(S.failed ? failText(S.failed) : "Cues unavailable")}</p>${link ? `<p>${link}</p>` : ""}
       <p class="muted">Chord list, not synced. Times are for the analysed recording.</p>
       <ol class="chord-list">${items.join("")}</ol>`;
   }
@@ -737,13 +683,13 @@
 
   // ---------------------------------------------------------------- chord diagrams
   function renderDiagrams(cue) {
-    if (!settings.diagrams) return;
+    if (!settings().diagrams) return;
     const mode = cueMode();
     const nowLabel = mode === "live" && cue.now && cue.now.idx >= 0 ? cue.now.label : null;
     const nextLabel = mode === "live" && cue.next ? cue.next.label : null;
     // Always draw the capo-shape fingering (what the hand holds); the view only changes the caption.
     const capo = num(S.song.capo) && S.song.capo > 0 ? S.song.capo : 0;
-    const grip = p => p && p.idx >= 0 && p.kind === "chord" ? Core.shapeLabel(p.sounding, { capo, view: "shapes", quality: settings.quality }) : null;
+    const grip = p => p && p.idx >= 0 && p.kind === "chord" ? Core.shapeLabel(p.sounding, { capo, view: "shapes", quality: settings().quality }) : null;
     const nowGrip = nowLabel ? grip(cue.now) : null, nextGrip = nextLabel ? grip(cue.next) : null;
     const key = `${nowLabel}|${nextLabel}|${nowGrip}|${nextGrip}`;
     if (S.memo.diag === key) return;
@@ -774,7 +720,7 @@
   // ---------------------------------------------------------------- controls and details
   function updateTransport() {
     if (!S) return;
-    const enabled = Boolean(S.player && S.ready && !S.failed);
+    const enabled = S.session.controllable;
     for (const id of ["btn-play", "btn-play-cue", "btn-back", "btn-restart"]) { const b = $(id); if (b) b.disabled = !enabled; }
     const playing = S.state === 1 || S.state === 3;
     for (const id of ["btn-play", "btn-play-cue"]) {
@@ -788,14 +734,15 @@
   }
 
   function renderViewControls() {
-    for (const b of app.querySelectorAll('[data-act="quality"]')) b.setAttribute("aria-pressed", String(b.dataset.v === settings.quality));
-    for (const b of app.querySelectorAll('[data-act="view"]')) b.setAttribute("aria-pressed", String(b.dataset.v === settings.view));
+    const { quality, view, diagrams } = settings();
+    for (const b of app.querySelectorAll('[data-act="quality"]')) b.setAttribute("aria-pressed", String(b.dataset.v === quality));
+    for (const b of app.querySelectorAll('[data-act="view"]')) b.setAttribute("aria-pressed", String(b.dataset.v === view));
     const d = $("btn-diagrams");
-    if (d) { d.setAttribute("aria-pressed", String(settings.diagrams)); d.textContent = settings.diagrams ? "Diagrams on" : "Diagrams off"; }
+    if (d) { d.setAttribute("aria-pressed", String(diagrams)); d.textContent = diagrams ? "Diagrams on" : "Diagrams off"; }
     const panel = $("diagram-panel");
-    if (panel) panel.hidden = !settings.diagrams;
+    if (panel) panel.hidden = !diagrams;
     const badge = $("capo-badge");
-    if (badge && S) badge.textContent = viewFor(S.song) === "shapes" ? `Capo ${S.song.capo}` : `Capo ${S.song.capo} · sounding names`;
+    if (badge && S) badge.textContent = S.session.view() === "shapes" ? `Capo ${S.song.capo}` : `Capo ${S.song.capo} · sounding names`;
   }
 
   function renderSync() {
@@ -807,7 +754,7 @@
 
   function renderLatency() {
     const out = $("latency-out");
-    if (out) out.textContent = `${latencyMs} ms`;
+    if (out) out.textContent = `${store.latency()} ms`;
   }
 
   function renderDetails() {
@@ -858,7 +805,7 @@
     const links = sources.map(s => { const url = safeUrl(s && s.url); return url ? `<li><a href="${esc(url)}" target="_blank" rel="noopener">${esc(s.title || url)}</a></li>` : ""; }).join("");
     if (links) add("Lessons", `<ul>${links}</ul>`);
     add("Audio delay", `<span class="row sync"><button type="button" class="btn small" data-act="latency" data-ms="-25" aria-label="Less audio delay">−25</button>
-      <output id="latency-out" class="nudge-out">${latencyMs} ms</output>
+      <output id="latency-out" class="nudge-out">${store.latency()} ms</output>
       <button type="button" class="btn small" data-act="latency" data-ms="25" aria-label="More audio delay">+25</button></span>
       <span class="muted">For Bluetooth speakers or headphones: delays every song's cues. Use Sync for one video.</span>`);
     body.innerHTML = `<dl>${rows.join("")}</dl>`;
@@ -892,41 +839,31 @@
       case "restart": seekTo(0); break;
       case "hide": S.cuesHidden = !S.cuesHidden; updateTransport(); frame(); break;
       case "nudge": {
-        S.nudgeMs = clampInt(S.nudgeMs + Number(target.dataset.ms), NUDGE_LIMIT_MS);
-        if (S.video) save("offset:" + S.video.video_id, S.nudgeMs);
+        S.session.nudgeBy(Number(target.dataset.ms));
         renderSync(); frame(); break;
       }
       case "nudge-reset":
-        S.nudgeMs = 0;
-        if (S.video) save("offset:" + S.video.video_id, 0);
+        S.session.resetNudge();
         renderSync(); frame(); break;
       case "latency":
-        latencyMs = clampInt(latencyMs + Number(target.dataset.ms), 1000);
-        save("latency", latencyMs);
+        store.setLatency(store.latency() + Number(target.dataset.ms));
         renderLatency(); frame(); break;
       case "quality":
-        settings.quality = target.dataset.v === "full" ? "full" : "core";
-        saveSettings(); rebuildTimeline(); renderViewControls(); frame(); break;
+        S.session.setQuality(target.dataset.v); renderViewControls(); frame(); break;
       case "view":
-        settings.view = target.dataset.v === "sounding" ? "sounding" : "shapes";
-        saveSettings(); rebuildTimeline(); renderViewControls(); frame(); break;
+        S.session.setView(target.dataset.v); renderViewControls(); frame(); break;
       case "diagrams":
-        settings.diagrams = !settings.diagrams;
-        saveSettings(); S.memo.diag = null; renderViewControls(); frame(); break;
+        store.setDiagrams(!settings().diagrams); S.memo.diag = null; renderViewControls(); frame(); break;
       case "pattern":
-        if (S.patterns.some(p => p.id === target.dataset.p)) {
-          S.patternId = target.dataset.p;
-          settings.patterns[S.song.id] = S.patternId;
-          saveSettings(); renderStrumPanel(); frame();
-        }
+        if (S.session.setPattern(target.dataset.p)) { renderStrumPanel(); frame(); }
         break;
       case "retry":
         setMsg("error", null);
-        try { S.player.cueVideoById({ videoId: S.video.video_id, startSeconds: Math.max(0, S.pt) }); } catch (_) { /* ignore */ }
+        S.session.retry();
         break;
       case "open-yt":
         if (S.video) target.href = watchUrl(S.video.video_id, S.pt);
-        try { if (S.player && S.ready && (S.state === 1 || S.state === 3)) S.player.pauseVideo(); } catch (_) { /* ignore */ }
+        if (S.session.playing) S.session.pause();
         break;
       default: break;
     }
@@ -935,7 +872,7 @@
   app.addEventListener("change", event => {
     if (!S || event.target.id !== "sel-speed") return;
     const rate = Number(event.target.value);
-    if (S.player && S.ready && num(rate)) { try { S.player.setPlaybackRate(rate); } catch (_) { /* ignore */ } }
+    S.session.setRate(rate);
   });
 
   document.addEventListener("keydown", event => {
@@ -951,7 +888,7 @@
     if (!S) return;
     if (document.visibilityState === "hidden") {
       // No background play: pause when the page is hidden.
-      try { if (S.player && S.ready && (S.state === 1 || S.state === 3)) S.player.pauseVideo(); } catch (_) { /* ignore */ }
+      if (S.session.playing) S.session.pause();
       saveLast();
     } else if (S.state === 1) requestWakeLock();
   });
