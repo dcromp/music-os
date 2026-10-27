@@ -4,7 +4,7 @@
 "title":"Island in the Sun",
 "artist":"Weezer",
 "group":"level-3",
-"order":7,
+"order":6,
 "level":3,
 "recording":{"id":"weezer-island-in-the-sun-youtube-20261024","duration_seconds":200.226,"audio_sha256":"ff532c67bf5b7e8057ba625d5471718a4e1165b95880db51a36e8d744c506790"},
 "videos":[{"video_id":"erG5rgNYSdk","uploader":"weezer","kind":"analysed","duration_seconds":200,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],
