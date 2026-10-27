@@ -11,7 +11,7 @@
 :root {
   --bg: #f4f1e8; --text: #222b27; --muted: #5d6a62; --accent: #22543e; --on-accent: #ffffff;
   --panel: #ffffff; --border: #d4d8cc; --soft: #e9eee6; --warn-bg: #fff0d2; --warn-text: #744900;
-  --verse: #3f7d5c; --pre: #b07a1e; --chorus: #2f5f9e; --bridge: #8a4f8f; --on-sec: #ffffff;
+  --verse: #3f7d5c; --pre: #b07a1e; --chorus: #2f5f9e; --bridge: #8a4f8f; --solo: #b3472f; --on-sec: #ffffff;
   --bar-bg: #1f2622; --bar-text: #f4f1e8;
   --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
   --font-num: ui-monospace, "SF Mono", Menlo, monospace;
@@ -19,12 +19,12 @@
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #121815; --text: #e6ebe5; --muted: #a0ada5; --accent: #7cc4a0; --on-accent: #0c1310;
   --panel: #1b2320; --border: #34413a; --soft: #25302a; --warn-bg: #3a2f13; --warn-text: #f1cf8a;
-  --verse: #5fae86; --pre: #d9a54a; --chorus: #6f9fe0; --bridge: #c08ac5; --on-sec: #0c1310;
+  --verse: #5fae86; --pre: #d9a54a; --chorus: #6f9fe0; --bridge: #c08ac5; --solo: #e8846c; --on-sec: #0c1310;
   --bar-bg: #e6ebe5; --bar-text: #121815; color-scheme: dark; } }
 :root[data-theme="dark"] {
   --bg: #121815; --text: #e6ebe5; --muted: #a0ada5; --accent: #7cc4a0; --on-accent: #0c1310;
   --panel: #1b2320; --border: #34413a; --soft: #25302a; --warn-bg: #3a2f13; --warn-text: #f1cf8a;
-  --verse: #5fae86; --pre: #d9a54a; --chorus: #6f9fe0; --bridge: #c08ac5; --on-sec: #0c1310;
+  --verse: #5fae86; --pre: #d9a54a; --chorus: #6f9fe0; --bridge: #c08ac5; --solo: #e8846c; --on-sec: #0c1310;
   --bar-bg: #e6ebe5; --bar-text: #121815; color-scheme: dark; }
 * { box-sizing: border-box; }
 body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.4;
@@ -46,9 +46,10 @@ button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); o
 .btn:disabled { opacity: .45; cursor: default; }
 .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .stack { display: grid; gap: 12px; }
+.stack > *, .A-body > *, .C-open > * { min-width: 0; } /* scrolling rows (suggestions) must not widen their column */
 .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 14px; }
 .chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--on-sec); }
-.sec-verse { background: var(--verse); } .sec-pre { background: var(--pre); } .sec-chorus { background: var(--chorus); } .sec-bridge { background: var(--bridge); }
+.sec-verse { background: var(--verse); } .sec-pre { background: var(--pre); } .sec-chorus { background: var(--chorus); } .sec-bridge { background: var(--bridge); } .sec-solo { background: var(--solo); }
 .soon { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; background: var(--warn-bg); color: var(--warn-text); padding: 2px 7px; border-radius: 6px; }
 .fake { font-size: 12px; color: var(--muted); font-style: italic; }
 
@@ -72,6 +73,19 @@ button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); o
 .meter { display: inline-flex; gap: 3px; }
 .meter i { width: 10px; height: 16px; border-radius: 3px; background: var(--border); display: inline-block; }
 .meter i.on { background: var(--accent); }
+
+/* solo scales */
+.scales { display: grid; gap: 8px; }
+.scale { border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; display: grid; gap: 6px; background: var(--panel); text-align: left; }
+.scale.on { border-color: var(--accent); box-shadow: inset 0 0 0 2px var(--accent); }
+.scale .notes { font-family: var(--font-num); font-size: 13px; letter-spacing: .02em; }
+.fret { width: 100%; max-width: 320px; height: auto; display: block; }
+.fret .str { stroke: var(--muted); stroke-width: 1; }
+.fret .fw { stroke: var(--border); stroke-width: 2; }
+.fret .nut { stroke: var(--text); stroke-width: 4; }
+.fret .dot { fill: var(--panel); stroke: var(--text); stroke-width: 1.5; }
+.fret .root { fill: var(--solo); stroke: var(--solo); }
+.fret text { fill: var(--muted); font-size: 10px; font-family: var(--font-num); }
 
 /* mini song strip (shared) */
 .strip { display: flex; gap: 3px; height: 34px; align-items: stretch; position: relative; }
@@ -186,6 +200,7 @@ const SHAPES = [
   { id: "vc", name: "Verse–chorus", desc: "The usual pop and rock shape. The chorus repeats the big idea.", order: ["verse", "chorus", "verse", "chorus", "bridge", "chorus"] },
   { id: "vpc", name: "With a pre-chorus", desc: "A short build-up lifts each chorus.", order: ["verse", "pre", "chorus", "verse", "pre", "chorus", "bridge", "chorus"] },
   { id: "aaba", name: "AABA", desc: "Verses carry the song; a middle section brings contrast.", order: ["verse", "verse", "bridge", "verse"] },
+  { id: "vcs", name: "Verse–chorus with a solo", desc: "Room for your guitar: a solo before the last chorus.", order: ["verse", "chorus", "verse", "chorus", "solo", "chorus"] },
   { id: "loop", name: "Two-part loop", desc: "Back and forth. Good for a first song.", order: ["verse", "chorus", "verse", "chorus"] },
 ];
 const BLOCKS = {
@@ -193,7 +208,15 @@ const BLOCKS = {
   pre: { name: "Pre-chorus", job: "Builds tension into the chorus." },
   chorus: { name: "Chorus", job: "The big idea and the title. It repeats." },
   bridge: { name: "Bridge", job: "Something new before the last chorus." },
+  solo: { name: "Solo", job: "An instrumental break: you play lead over the chords." },
 };
+// Scales to solo with in a major key: name, intervals from the key's root, and when to reach for it.
+const SCALES = [
+  { id: "majpent", name: "Major pentatonic", iv: [0, 2, 4, 7, 9], use: "Sweet and melodic. Every note fits every chord in the key, so it's the safest place to start." },
+  { id: "minpent", name: "Minor pentatonic", iv: [0, 3, 5, 7, 10], use: "Bluesy and gritty, the classic rock box. Clashes on purpose; bend the minor third up towards the major." },
+  { id: "major", name: "Major scale", iv: [0, 2, 4, 5, 7, 9, 11], use: "All seven notes of the key. More melodic choices, and two notes that need care over some chords." },
+  { id: "mixo", name: "Mixolydian", iv: [0, 2, 4, 5, 7, 9, 10], use: "Major with a flat seventh: a rock and jam-band sound. Great if your chords include a flat VII." },
+];
 const DRUM_TRACKS = [
   { id: "rock8", name: "Steady rock eighths", style: "Rock", busy: 2 },
   { id: "floor", name: "Four on the floor", style: "Pop", busy: 2 },
@@ -202,8 +225,8 @@ const DRUM_TRACKS = [
 ];
 // The "AI drummer" (style and controls, #68 Q4): it picks a part per section from the feel and the section's job.
 function aiDrums(feel, kind) {
-  const busy = { verse: 1, pre: 2, chorus: 3, bridge: 1 }[kind] || 2;
-  const loud = { verse: 2, pre: 2, chorus: 3, bridge: 1 }[kind] || 2;
+  const busy = { verse: 1, pre: 2, chorus: 3, bridge: 1, solo: 2 }[kind] || 2;
+  const loud = { verse: 2, pre: 2, chorus: 3, bridge: 1, solo: 3 }[kind] || 2;
   const style = kind === "bridge" && feel !== "Ballad" ? "Half-time" : feel;
   return { style, busy, loud, fill: kind !== "bridge" };
 }
@@ -225,7 +248,7 @@ const SOON = {
   mix: "Balance the parts, then share a demo.",
 };
 
-function newBlock(kind) { return { bars: [null, null, null, null], drums: { mode: "ai", track: "rock8", over: null }, bass: "root" }; }
+function newBlock(kind) { return { bars: [null, null, null, null], drums: { mode: "ai", track: "rock8", over: null }, bass: "root", scale: kind === "solo" ? "majpent" : null }; }
 function sampleSong() {
   const s = { title: "Untitled song", key: "G", tempo: 100, feel: "Rock", shape: "vc", order: SHAPES[0].order.slice(), blocks: {} };
   for (const k of Object.keys(BLOCKS)) s.blocks[k] = newBlock(k);
@@ -350,6 +373,42 @@ function renderPlay() {
 // ============================================================ shared editors (each variant places them differently)
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const secChip = k => `<span class="chip sec-${k}">${BLOCKS[k].name}</span>`;
+const PC = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+const PC_FLAT = { "D#": "Eb", "G#": "Ab", "A#": "Bb" };
+const scaleNotes = sc => sc.iv.map(i => { const n = PC[(NOTE[song.key] + i) % 12]; return sc.id === "minpent" || sc.id === "mixo" ? (PC_FLAT[n] || n) : n; });
+// One box position: five frets starting a fret below the key's root on the low E string. Standard tuning.
+function fretboard(sc) {
+  const tuning = [40, 45, 50, 55, 59, 64], rootPc = NOTE[song.key], set = new Set(sc.iv.map(i => (rootPc + i) % 12));
+  let rf = (rootPc - 4 + 12) % 12; const start = Math.max(0, rf - 1), frets = 5;
+  const W = 300, H = 120, x0 = 24, y0 = 12, fw = (W - x0 - 8) / frets, sh = (H - y0 - 22) / 5;
+  let g = "";
+  for (let f = 0; f <= frets; f++) g += `<line class="${f === 0 && start === 0 ? "nut" : "fw"}" x1="${x0 + f * fw}" y1="${y0}" x2="${x0 + f * fw}" y2="${y0 + 5 * sh}"/>`;
+  for (let st = 0; st < 6; st++) g += `<line class="str" x1="${x0}" y1="${y0 + (5 - st) * sh}" x2="${x0 + frets * fw}" y2="${y0 + (5 - st) * sh}"/>`;
+  for (let f = 0; f < frets; f++) g += `<text x="${x0 + (f + .5) * fw}" y="${H - 4}" text-anchor="middle">${start + f + 1}</text>`;
+  for (let st = 0; st < 6; st++) for (let f = start; f <= start + frets; f++) {
+    const pc = (tuning[st] + f) % 12; if (!set.has(pc)) continue;
+    const x = f === start && start > 0 ? null : f === 0 ? x0 - 10 : x0 + (f - start - .5) * fw; if (x === null) continue;
+    g += `<circle class="dot${pc === rootPc ? " root" : ""}" cx="${x}" cy="${y0 + (5 - st) * sh}" r="6"/>`;
+  }
+  return `<svg class="fret" viewBox="0 0 ${W} ${H}" role="img" aria-label="${sc.name} in ${song.key}, one position from fret ${start + 1}">${g}</svg>`;
+}
+function scalePanel(k) {
+  const b = song.blocks[k];
+  return `<div class="stack"><div><p class="label">Scales to solo with in ${song.key}</p><p class="small muted">Pick one to practise. The red dots are ${song.key}, the home note.</p></div>
+    <div class="scales">${SCALES.map(sc => `<div class="scale${b.scale === sc.id ? " on" : ""}">
+      <div class="row" style="justify-content:space-between"><b>${song.key} ${sc.name.toLowerCase()}</b>
+        <span class="row"><button type="button" class="btn small" style="min-height:36px" data-act="scale" data-k="${k}" data-v="${sc.id}">${b.scale === sc.id ? "Chosen" : "Use this"}</button><button type="button" class="btn small" style="min-height:36px" data-act="hearscale" data-v="${sc.id}">▶ Hear</button></span></div>
+      <p class="small">${sc.use}</p><p class="notes">${scaleNotes(sc).join(" · ")}</p>${b.scale === sc.id ? fretboard(sc) : ""}</div>`).join("")}</div></div>`;
+}
+function hearScale(id) {
+  const sc = SCALES.find(x => x.id === id);
+  try { if (!audio.ctx) audio.ctx = new (window.AudioContext || window.webkitAudioContext)(); audio.ctx.resume(); } catch (_) { return; }
+  stop();
+  const master = audio.ctx.createGain(); master.gain.value = 0.7; master.connect(audio.ctx.destination); audio.master = master;
+  const base = 55 + ((NOTE[song.key] - 7 + 12) % 12), step = 60 / song.tempo / 2, t = audio.ctx.currentTime + 0.05;
+  const up = sc.iv.concat([12]);
+  up.concat(up.slice(0, -1).reverse()).forEach((iv, i) => tone(t + i * step, hz(base + iv), step * 0.9, "sawtooth", 0.07, master));
+}
 function strip() {
   const total = song.order.reduce((n, k) => n + song.blocks[k].bars.length, 0);
   return `<div class="strip" aria-label="Song order">${song.order.map(k => `<div class="blk sec-${k}${filledBars(k) ? "" : " empty"}" style="flex:${song.blocks[k].bars.length}" title="${BLOCKS[k].name}">${BLOCKS[k].name}</div>`).join("")}<div class="playhead" data-head hidden></div></div>
@@ -384,6 +443,7 @@ function chordEditor(k) {
       <button type="button" class="btn ghost" data-act="clear" data-k="${k}">Clear</button>
       <button type="button" class="btn ghost" data-act="play" data-k="${k}" data-label="▶ Hear ${BLOCKS[k].name.toLowerCase()}">▶ Hear ${BLOCKS[k].name.toLowerCase()}</button></div>
     <p class="fake">Prototype: "Play it in" pretends to listen and fills in chords you can then edit.</p>
+    ${k === "solo" ? `${filledBars("verse") ? `<button type="button" class="btn" data-act="soloverse">Solo over the verse chords (${song.blocks.verse.bars.filter(Boolean).join(" ")})</button>` : ""}${scalePanel(k)}` : ""}
   </div>`;
 }
 function drumEditor(k) {
@@ -436,6 +496,7 @@ function coachTips() {
   const tips = [];
   for (const k of kindsInSong()) if (filledBars(k) < 4) tips.push({ text: `Your ${BLOCKS[k].name.toLowerCase()} needs chords. ${BLOCKS[k].job}`, act: "B-open", k, part: "chords", cta: `Write the ${BLOCKS[k].name.toLowerCase()}` });
   if (kindsInSong().includes("bridge") && song.blocks.bridge.drums.mode === "ai" && !song.blocks.bridge.drums.over) tips.push({ text: "The AI drummer plays the bridge half-time for contrast. Have a listen.", act: "B-open", k: "bridge", part: "drums", cta: "Open the bridge drums" });
+  if (kindsInSong().includes("solo")) tips.push({ text: `Your solo: pick a scale to play over it. In ${song.key}, the major pentatonic is the safest start.`, act: "B-open", k: "solo", part: "chords", cta: "Open the solo" });
   tips.push({ text: "Next up: lyrics. Start with a title for your chorus.", act: null, cta: null, soon: true });
   return tips;
 }
@@ -593,6 +654,9 @@ document.addEventListener("click", e => {
     case "chord": { const b = song.blocks[k]; if (ui.block !== k) { ui.block = k; ui.slot = b.bars.findIndex(c => !c); if (ui.slot < 0) ui.slot = 0; }
       b.bars[ui.slot] = v; ui.slot = Math.min(b.bars.length - 1, ui.slot + 1); break; }
     case "prog": applyProg(k, PROGS[Number(v)].deg); break;
+    case "soloverse": song.blocks.solo.bars = song.blocks.verse.bars.slice(); break;
+    case "scale": song.blocks[k].scale = v; break;
+    case "hearscale": hearScale(v); return;
     case "listen": fakeListen(k); return;
     case "clear": song.blocks[k].bars = [null, null, null, null]; ui.block = k; ui.slot = 0; break;
     case "dmode": song.blocks[k].drums.mode = v; song.blocks[k].drums.over = null; break;
