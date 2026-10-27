@@ -171,6 +171,7 @@
       anchored: Boolean(info.anchors && info.anchors.anchored) };
   }
 
+  // A hold under this many beats is quick (a blip). The exporter and the catalogue checker read this one value.
   const QUICK_BEATS = 0.75;
 
   function kindOf(label) { return label === "N" ? "none" : label === "X" ? "unclear" : "chord"; }
@@ -325,5 +326,5 @@
   }
 
   return { shapeLabel, displayLabel, buildTimeline, chordIndexAt, beatPosition,
-    gridPosition, barAnchorAt, cueAt, strumStep, formatTime, strokeGlyph, cueTime, expectedDuration, durationMismatch };
+    gridPosition, barAnchorAt, cueAt, strumStep, formatTime, strokeGlyph, cueTime, expectedDuration, durationMismatch, QUICK_BEATS };
 });

@@ -30,7 +30,7 @@ const LEVEL = new Map(LEVELS.map(l => [l.level, l]));
 
 const MAIN_SHAPE_SHARE = 0.04;   // main shapes cover at least 4% of non-blip chord time
 const MAIN_SLASH_SHARE = 0.10;   // a slash shape (bass-note variant) needs 10%
-const BLIP_BEATS = 0.75;         // holds shorter than this are blips (the app's "quick" threshold)
+const BLIP_BEATS = Core.QUICK_BEATS;  // holds shorter than this are blips (the app's "quick" threshold, 0.75 beat)
 const QUICK_CPM = 40, QUICK_MEDIAN_BEATS = 2, QUICK_MEDIAN_BPM = 120;
 
 const r1 = x => Math.round(x * 10) / 10;

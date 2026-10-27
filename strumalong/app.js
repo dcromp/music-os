@@ -5,6 +5,7 @@
 (function () {
   "use strict";
   const Core = window.StrumCore;
+  const RepeatTiming = window.StrumRepeatTiming;
   const app = document.getElementById("app");
   if (!app) return;
   if (!Core) { app.innerHTML = '<p class="msg error">Strum Along could not start: lib/core.js did not load. Reload to try again.</p><p><a class="btn" href="">Reload</a></p>'; return; }
@@ -840,9 +841,10 @@
     const corrections = chart.corrections && Array.isArray(chart.corrections) ? chart.corrections : [];
     if (corrections.length) {
       // A "timing" entry summarises the exporter's repetition-consistency moves (docs/STRUMALONG_APP.md, "Timing fix").
-      const item = c => c.kind === "timing"
-        ? `<li>${esc(c.note || "Some chord changes moved by one beat")}${Array.isArray(c.moves) && c.moves.length
-          ? `: ${c.moves.map(m => `${Core.formatTime(m.at)} ${esc(m.from)} → ${esc(m.to)} ${m.shift < 0 ? "earlier" : "later"}`).join(", ")}` : ""}.</li>`
+      const timing = c => RepeatTiming && RepeatTiming.describe(c);
+      const item = c => timing(c)
+        ? `<li>${esc(timing(c).note)}${timing(c).moves.length
+          ? `: ${timing(c).moves.map(m => `${Core.formatTime(m.at)} ${esc(m.from)} → ${esc(m.to)} ${m.direction}`).join(", ")}` : ""}.</li>`
         : `<li>${Core.formatTime(c.start)}–${Core.formatTime(c.end)}: ${esc(c.from)} → ${esc(c.to)}${c.note ? ` (${esc(c.note)})` : ""}</li>`;
       add("Corrections", `<ul>${corrections.map(item).join("")}</ul>`);
     }

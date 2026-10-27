@@ -21,6 +21,7 @@ const crypto = require("node:crypto");
 const REPO = path.resolve(__dirname, "../../..");
 const Core = require(path.join(REPO, "strumalong/lib/core.js"));       // beatPosition: the same maths the app and exporter use
 const Chords = require(path.join(REPO, "strumalong/lib/chords.js"));   // chord-label parsing and capo transposition
+const RepeatTiming = require(path.join(REPO, "strumalong/lib/repeat-timing.js"));  // the played-timing judgement (check 4)
 
 const SCHEMA = "strumalong-catalogue-checks-1";
 const INSTRUMENT_SCHEMA = "strumalong-instrument-tags-1";
@@ -55,7 +56,7 @@ const T = {
     fail_max_hold_beats: 32,      // ... and one of them 32+ beats (8+ bars of 4/4), with >= 2 expected families.
     flag_nx_share: 0.20,          // N + X share of the recording
     fail_nx_share: 0.50,
-    blip_beats: 0.75,             // holds shorter than this are blips (the exporter's "quick" line)
+    blip_beats: Core.QUICK_BEATS, // holds shorter than this (0.75) are blips: the app's and the exporter's "quick" line
     absent_family_floor: 0.01,    // with long holds, an expected family below this share counts as absent
     // Hold homogeneity (experiments/generated/strumalong-hold-checks.json, hold_homogeneity.py). The chart signature above alone
     // only flags; it fails when the audio inside those same long holds also changes chord. Calibrated on 25 Oct 2026: A Horse with
@@ -436,18 +437,6 @@ function changeSequence(view) {
   }
   return sequence;
 }
-const circDiff = (a, b, n) => { const d = mod(a - b, n); return d > n / 2 ? d - n : d; };      // a - b wrapped to (-n/2, n/2]
-/** The densest cluster of positions on a circle of length n: {centre, inliers}. */
-function usualPosition(positions, n, tol) {
-  let best = null;
-  for (const p of positions) {
-    const inliers = positions.filter(q => Math.abs(circDiff(q, p, n)) <= tol);
-    const centre = mod(p + inliers.reduce((s, q) => s + circDiff(q, p, n), 0) / inliers.length, n);
-    const spread = inliers.reduce((s, q) => s + Math.abs(circDiff(q, centre, n)), 0);
-    if (!best || inliers.length > best.inliers.length || (inliers.length === best.inliers.length && spread < best.spread)) best = { centre, inliers, spread };
-  }
-  return best;
-}
 function checkConsistency(view) {
   const C = T.consistency;
   const out = { status: "pass", reasons: [] };
@@ -465,50 +454,21 @@ function checkConsistency(view) {
     total++;
     if (!(b.s >= first && b.s < last)) { outside++; continue; }
     const beat = Core.beatPosition(view.beats, b.s);
-    changes.push({ t: b.s, key: `${a.key}>${b.key}`, pos: mod(beat, bpb), fromBeats: a.beats, toBeats: b.beats });
+    changes.push({ t: b.s, key: RepeatTiming.pairKey(a.key, b.key), pos: mod(beat, bpb), fromBeats: a.beats, toBeats: b.beats });
   }
   out.changes = total;
   out.positioned = changes.length;
   out.outside_grid = outside;
-  const groups = new Map();
-  for (const c of changes) { if (!groups.has(c.key)) groups.set(c.key, []); groups.get(c.key).push(c); }
-  const eligible = [];                                  // every member of every eligible group, with its offset from the usual position
-  let groupCount = 0;
-  for (const [key, members] of groups) {
-    if (members.length < C.min_group) continue;
-    const u = usualPosition(members.map(m => m.pos), bpb, C.inlier_beats);
-    if (u.inliers.length / members.length < C.min_majority) continue;
-    groupCount++;
-    for (const m of members) eligible.push({ ...m, offset: circDiff(m.pos, u.centre, bpb), usual: u.centre });
-  }
-  eligible.sort((x, y) => x.t - y.t);
-  // A mistiming candidate sits roughly one beat from the usual position: past the beat grid's noise (0.5) and short of a
-  // half bar, where the same change is simply placed differently (e.g. on beat 3 instead of beat 1). On a 2-beat bar a one-beat
-  // offset is already a half bar, so no mistiming can be reported there.
-  const upper = Math.min(C.half_bar_beats, bpb / 2 - 0.25);
-  const isDev = e => Math.abs(e.offset) >= C.deviant_beats && Math.abs(e.offset) < upper;
-  const halfBar = eligible.filter(e => Math.abs(e.offset) >= Math.max(upper, C.deviant_beats)).length;
-  // shift runs: consecutive eligible changes that all sit about the same amount early or late
-  const shiftIdx = new Set(), shifts = [], shiftStarts = [];
-  for (let i = 0; i < eligible.length;) {
-    if (!isDev(eligible[i])) { i++; continue; }
-    let j = i + 1;
-    while (j < eligible.length && isDev(eligible[j]) && Math.sign(eligible[j].offset) === Math.sign(eligible[i].offset) && Math.abs(eligible[j].offset - eligible[i].offset) <= 0.75) j++;
-    if (j - i >= C.min_shift_run) {
-      for (let k = i; k < j; k++) shiftIdx.add(k);
-      const offs = eligible.slice(i, j).map(e => e.offset);
-      shifts.push({ from_seconds: r2(eligible[i].t), to_seconds: r2(eligible[j - 1].t), changes: j - i, offset_beats: r2(offs.reduce((s, x) => s + x, 0) / offs.length) });
-      shiftStarts.push(i);
-    }
-    i = j;
-  }
-  const isolated = eligible.map((e, i) => ({ e, i })).filter(({ e, i }) => isDev(e) && !shiftIdx.has(i)).map(({ e }) => e);
+  // Played timing (lib/repeat-timing.js): usual positions, deviants about a beat off, and shift runs (a stretch sitting a beat off).
+  const judged = RepeatTiming.playedJudgement(changes, bpb, C);
+  const { eligible, halfBar, shiftIdx, shiftStarts, isolated, groupCount } = judged;
+  const shifts = judged.shifts.map(sh => ({ from_seconds: r2(sh.from), to_seconds: r2(sh.to), changes: sh.changes, offset_beats: r2(sh.offsets.reduce((x, y) => x + y, 0) / sh.offsets.length) }));
   out.repeated_groups = groupCount;
   out.eligible_changes = eligible.length;
   out.coverage = changes.length ? r3(eligible.length / changes.length) : 0;
   out.deviants = isolated.length;
   out.half_bar_placements = halfBar;
-  out.consistency = eligible.length ? r3(1 - isolated.length / eligible.length) : null;
+  out.consistency = judged.consistency === null ? null : r3(judged.consistency);
   out.shift_share = eligible.length ? r3(shiftIdx.size / eligible.length) : 0;
   out.shifts = shifts;
   Object.defineProperty(out, "_eligible", { value: eligible, enumerable: false });     // for withAutoTiming; not serialised
@@ -829,12 +789,9 @@ function buildPackView(rec, inputs) {
 }
 /** What the exporter says it moved: chart.corrections entries of kind "timing" (id "auto-timing") and the per-chord flag `t`. */
 function exporterAutoTiming(song) {
-  const entries = (song.chart?.corrections || []).filter(c => c && (c.kind === "timing" || c.id === "auto-timing"));
-  const flagged = (song.chords || []).filter(e => e.t).length;
-  const moves = entries.reduce((n, c) => n + (isNum(c.count) ? c.count : Array.isArray(c.moves) ? c.moves.length : 0), 0);
-  if (!entries.length && !flagged) return null;
-  return { moves, flagged_events: flagged, note: entries.map(c => c.note).filter(Boolean)[0] || null,
-    details: entries.flatMap(c => (Array.isArray(c.moves) ? c.moves : [])).slice(0, 12) };
+  const read = RepeatTiming.readCorrections(song);
+  if (!read) return null;
+  return { moves: read.moves, flagged_events: read.flagged, note: read.note, details: read.list.slice(0, 12) };
 }
 /** Build the view the checks run on: the exported song when there is one (what the learner sees, display corrections and the
  *  exporter's timing fixes included), else the pack's raw CREMA chart on the pack's beat grid. */
