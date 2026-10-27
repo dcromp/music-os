@@ -25,6 +25,7 @@ const CATALOGUE = process.env.STRUMALONG_CATALOGUE || path.join(ROOT, "data/cata
 const REVIEW = path.join(REPO, "experiments/review");
 const app = require(path.join(REVIEW, "app.js"));
 const Core = require(path.join(ROOT, "lib/core.js"));
+const Chords = require(path.join(ROOT, "lib/chords.js"));
 
 const CHECK = process.argv.includes("--check");
 const warnings = [];
@@ -179,7 +180,7 @@ function coreShapes(chords, capo) {
   const seconds = new Map(); // insertion order = first appearance
   for (const e of chords) {
     if (e.l === "N" || e.l === "X") continue;
-    const shape = app.coreChordLabel(app.transposePracticeLabel(e.l, capo));
+    const shape = Chords.coreLabel(Chords.shapeForCapo(e.l, capo));
     if (shape === "N" || shape === "X") continue;
     seconds.set(shape, (seconds.get(shape) || 0) + (e.e - e.s));
   }
