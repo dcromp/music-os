@@ -5,6 +5,7 @@
 (function () {
   "use strict";
   const Core = window.StrumCore;
+  const RepeatTiming = window.StrumRepeatTiming;
   const Session = window.StrumSession;
   const app = document.getElementById("app");
   if (!app) return;
@@ -153,7 +154,7 @@
   }
 
   function songCard(s) {
-    const chips = (Array.isArray(s.core_shapes) ? s.core_shapes : []).slice(0, 6).map(c => `<span class="chip">${esc(c)}</span>`).join("");
+    const chips = (Array.isArray(s.core_shapes) ? s.core_shapes : []).map(c => `<span class="chip">${esc(c)}</span>`).join("");
     const meta = [];
     if (num(s.bpm)) meta.push(`~${Math.round(s.bpm)} BPM`);
     if (s.meter_label) meta.push(esc(s.meter_label));
@@ -787,9 +788,10 @@
     const corrections = chart.corrections && Array.isArray(chart.corrections) ? chart.corrections : [];
     if (corrections.length) {
       // A "timing" entry summarises the exporter's repetition-consistency moves (docs/STRUMALONG_APP.md, "Timing fix").
-      const item = c => c.kind === "timing"
-        ? `<li>${esc(c.note || "Some chord changes moved by one beat")}${Array.isArray(c.moves) && c.moves.length
-          ? `: ${c.moves.map(m => `${Core.formatTime(m.at)} ${esc(m.from)} → ${esc(m.to)} ${m.shift < 0 ? "earlier" : "later"}`).join(", ")}` : ""}.</li>`
+      const timing = c => RepeatTiming && RepeatTiming.describe(c);
+      const item = c => timing(c)
+        ? `<li>${esc(timing(c).note)}${timing(c).moves.length
+          ? `: ${timing(c).moves.map(m => `${Core.formatTime(m.at)} ${esc(m.from)} → ${esc(m.to)} ${m.direction}`).join(", ")}` : ""}.</li>`
         : `<li>${Core.formatTime(c.start)}–${Core.formatTime(c.end)}: ${esc(c.from)} → ${esc(c.to)}${c.note ? ` (${esc(c.note)})` : ""}</li>`;
       add("Corrections", `<ul>${corrections.map(item).join("")}</ul>`);
     }

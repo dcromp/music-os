@@ -102,7 +102,6 @@ function main() {
       assert.ok(str(card.meter_label));
       assert.ok(Number.isInteger(card.capo) && card.capo >= 0 && card.capo <= 12);
       assert.ok(Array.isArray(card.core_shapes) && card.core_shapes.length > 0, "core_shapes empty");
-      assert.ok(card.core_shapes.length <= 6, `${card.core_shapes.length} core_shapes (at most 6 chips)`);
       assert.equal(new Set(card.core_shapes).size, card.core_shapes.length, "duplicate core shapes");
       assert.ok(card.core_shapes.every(s => str(s) && s !== "N" && s !== "X"), "N/X in core_shapes");
       assert.equal(typeof card.playable_embed, "boolean");
@@ -303,25 +302,14 @@ function main() {
     });
 
     if (core && typeof core.shapeLabel === "function") {
-      // Chips are the main Core shapes by chord time (rare shapes are left off the card on purpose), so only a chip
-      // that lib/core.js never produces for this chart is reported. Chip shares are checked against the card rule.
-      check(`${id}: core_shapes are main shapes by chord time`, () => {
-        const held = new Map();
-        for (const e of song.chords) {
-          if (e.l === "N" || e.l === "X") continue;
-          const shape = core.shapeLabel(e.l, { capo: song.capo, view: "shapes", quality: "core" });
-          held.set(shape, (held.get(shape) || 0) + (e.e - e.s));
-        }
-        const total = [...held.values()].reduce((a, b) => a + b, 0);
+      // One Arrangement profile: the card chips are exactly the main shapes the level was computed on, and every chip
+      // is a shape lib/core.js draws for this chart.
+      check(`${id}: core_shapes are the level's main shapes`, () => {
         const chips = card ? card.core_shapes : [];
-        const onlyIndex = chips.filter(c => !held.has(c));
-        if (onlyIndex.length) console.warn(`data.test: note - ${id}: core_shapes chips that lib/core.js shapeLabel does not produce (only in index: ${onlyIndex.join(" ")})`);
-        for (const c of chips) {
-          if (!held.has(c)) continue;
-          const share = held.get(c) / total;
-          assert.ok(share >= 0.03 - 1e-9, `chip ${c} is only ${(share * 100).toFixed(1)}% of chord time`);
-          if (c.includes("/")) assert.ok(share >= 0.10 - 1e-9, `slash chip ${c} is only ${(share * 100).toFixed(1)}% of chord time`);
-        }
+        assert.deepEqual(chips, song.difficulty.main_shapes, "card chips differ from difficulty.main_shapes");
+        const drawn = new Set(song.chords.map(e => core.shapeLabel(e.l, { capo: song.capo, view: "shapes", quality: "core" })));
+        const undrawn = chips.filter(c => !drawn.has(c));
+        assert.equal(undrawn.length, 0, `chips lib/core.js shapeLabel does not produce: ${undrawn.join(" ")}`);
       });
     }
   }

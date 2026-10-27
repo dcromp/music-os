@@ -43,7 +43,9 @@ strumalong/                 # deployable root (published to gh-pages as-is)
   index.html                # app shell; hash routes: #/ (library), #/song/<id>
   app.js                    # DOM rendering, routing, YouTube adapter, render loop, wake lock
   styles.css
+  lib/chords.js             # chord shape vocabulary: parse, capo shape/sounding, core label (UMD: window.StrumChords + module.exports)
   lib/core.js               # pure timeline/cue/strum helpers (UMD: window.StrumCore + module.exports)
+  lib/repeat-timing.js      # repeat timing: groups repeated changes, drawn/played judgements, auto-timing entry (UMD: window.StrumRepeatTiming)
   lib/shapes.js             # chord grip table + SVG renderer (UMD: window.StrumShapes + module.exports)
   lib/session.js            # practice session: playback rules + persistence (UMD: window.StrumSession + module.exports)
   songs/index.json          # catalogue summary (generated)
@@ -51,12 +53,13 @@ strumalong/                 # deployable root (published to gh-pages as-is)
   data/catalogue.json       # which recordings ship: packs to read, exclusions with reasons, level overrides
   data/additions.json       # authored metadata for the v1 additions: capo, setup notes, practice patterns
   data/additions-v2.json    # (future) the same for the v2 additions pack; skipped while missing
-  tools/build-songs.js      # node exporter: catalogue.json + packs -> songs/*.json (not deployed logic, harmless if published)
+  tools/build-songs.js      # node exporter: catalogue.json + packs -> songs/*.json (not deployed logic, harmless if published).
+                            # exportSong(draft, metadata, settings) -> {song, card, report} is pure; the rest is its filesystem adapter
   test/*.test.js            # node:assert tests; run: node strumalong/test/run.js
   manifest.webmanifest, icons/, .nojekyll
 ```
 
-Plain static files with no bundler and no npm install. Scripts are classic `<script defer>` tags in this order: `lib/core.js`, `lib/shapes.js`, `lib/session.js`, `app.js`.
+Plain static files with no bundler and no npm install. Scripts are classic `<script defer>` tags in this order: `lib/chords.js`, `lib/core.js`, `lib/repeat-timing.js`, `lib/shapes.js`, `lib/session.js`, `app.js`. core.js and shapes.js use chords.js; session.js uses core.js.
 
 ## Data schema
 
@@ -110,14 +113,14 @@ Plain static files with no bundler and no npm install. Scripts are classic `<scr
 - `c:1` marks a corrected event (a label correction or alias).
 - `t:1` marks an event whose start the timing fix moved by one beat (see "Timing fix"). The previous event ends at the same time.
 - `b` and `a` are the chord's bar anchor (see "Bar model"): `b` is the bar phase while the chord is held, and `a:1` marks an approximate anchor. Chords outside the beat grid have no `b`.
-- Shape (capo) and Core labels are computed at runtime by `lib/core.js`.
+- Shape (capo) and Core labels are computed at runtime by `lib/core.js`, using `lib/chords.js`.
 - `chart.corrections` holds label corrections (`{id, start, end, from, to, note}`) and, when the timing fix moved anything, one entry `{id:"auto-timing", kind:"timing", count, start, end, note, moves:[{at, was, from, to, shift, agree}]}`. `at`/`was` are the new and raw start times, `from`/`to` the default-view labels (Core shapes at the song's capo), `shift` −1 (one beat earlier) or +1 (later), and `agree` how many repeats of the sequence sat where the change now sits (e.g. `"7/8"`). Details shows the note and the list of moves.
 - When `beats_per_bar` is null (Wonderwall), the exporter writes 4 and `beats_per_bar_assumed: true`.
 - `bar_phase` is the old song-wide heuristic: a chord-start residue vote, not a verified downbeat. Every native chord start that is not N or X and lies strictly inside the beat grid votes for `round(beatPosition(start)) mod beats_per_bar`. Ties keep the lowest residue. `bar_phase_confident` is true when there are at least 8 votes and the winning share is at least 0.7; an assumed meter is never confident. `bar_phase_share` records the share. Since the bar model, these fields are only the fallback for chords without `b` and a summary.
 - `bar_confident_pct` is the share of chord beats under a confident (not approx) anchor.
 - `strumming.source` is `authored` for the prepared songs' `practice.json` patterns and for patterns in an additions metadata file, and `level-default` when the song had none (see "Difficulty levels").
-- `core_shapes` (index card chips) lists the Core shapes at the song's capo by chord seconds. Shapes under 3% of chord time are dropped, as are slash shapes under 10%. The list is longest first and holds at most 6.
-- A video entry carries `embeddable: false` only when that upload is known not to play in an embed (`playable_embed: false` in additions metadata, which also needs an embeddable alternate). The app then starts on the first embeddable entry.
+- `core_shapes` (index card chips) is exactly `difficulty.main_shapes`: the main shapes the level was computed on (see "Difficulty levels"), longest first, with no cap. Both come from one Arrangement profile (`tools/arrangement-profile.js`).
+- A video entry carries `embeddable: false` only when that upload is known not to play in an embed. The app then starts on the first embeddable entry. The exporter writes only the analysed upload: alternate-video overrides were removed in #44 because no metadata used them. `playable_embed: false` in additions metadata therefore stops the export of that song until alternates return.
 
 ## Catalogue config (`strumalong/data/catalogue.json`)
 
@@ -145,7 +148,7 @@ Dropped on 25 October 2026 (founder feedback), still in their packs:
 | America – A Horse with No Name | The automatic chart cannot tell its two chords apart; needs a hand-checked chart. |
 | Vance Joy – Riptide | Founder (25 Oct, second round): more a ukulele song than a guitar song. |
 
-13 songs remain. With the riff songs gone, the exporter's riff mode, the learning-path, riff and "also available" groups, and the Come as You Are alternate-video constants were removed. Generic alternate videos (`alternates` in additions metadata) remain.
+13 songs remain. With the riff songs gone, the exporter's riff mode, the learning-path, riff and "also available" groups, and the Come as You Are alternate-video constants were removed. Generic alternate videos (`alternates` in additions metadata) remained until #44 removed them as unused.
 
 ## Bar model
 
@@ -207,7 +210,7 @@ Many songs lose the "approx bars" label because a steady phase now fits changes 
 
 The problem (founder, 25 October 2026): in Zombie one Em → C change came a beat late, so Em showed 5 beats and C 3, while the other seven times the band plays G Em C G each chord gets 4. CREMA places most changes well, but now and then one lands a beat early or late. Pop songs repeat their chord sequences with the same bar placement, so the repeats are the check: a change that sits exactly one beat from where the other repeats of the same sequence sit is moved by one beat to match them.
 
-It is a **display-level** correction in the exporter (`applyTimingFix` in `tools/build-songs.js`). The raw chart (`primary.json`) is unchanged, labels never change, and every move is recorded. It runs before the bar anchors and the difficulty, so both use the fixed chart.
+It is a **display-level** correction in the exporter (`applyTimingFix` in `tools/build-songs.js`). Its grouping and judgement are the *drawn timing* measure of `lib/repeat-timing.js`, which also builds the `auto-timing` entry; the catalogue checker uses the same module's *played timing* measure ([ADR 0001](adr/0001-repeat-timing-two-measures.md)). The raw chart (`primary.json`) is unchanged, labels never change, and every move is recorded. It runs before the bar anchors and the difficulty, so both use the fixed chart.
 
 **What is compared.**
 
@@ -291,11 +294,11 @@ Lead decision, 25 October 2026. Shapes are what the player frets: Core shapes at
 
 Other slash shapes take their root shape's tier, because the diagram omits the bass note.
 
-- **Main shapes** are Core shapes covering at least 4% of chord time, ignoring N, X and blips (holds under 0.75 beat).
+- **Main shapes** are Core shapes covering at least 4% of chord time (slash shapes at least 10%), ignoring N, X and blips (holds under 0.75 beat). They are also the card chips, so a card always shows the shapes its level counts (one rule since 27 October 2026, [#41](https://github.com/dcromp/music-os/issues/41); before, the card used 3% with blips and at most 6 chips, and 7 of 43 cards differed).
 - **Changes per minute** counts label changes between consecutive non-blip chord holds, but not across N or X, per minute of non-blip chord time.
 - **Median hold** is in beats per non-blip chord hold.
 
-| Level | Rule (`difficultyOf`) |
+| Level | Rule (`arrangementProfile` in `tools/arrangement-profile.js`) |
 |---|---|
 | 5 · Barre chords | any T4 main shape |
 | 4 · First barre (F / Bm) | any T3 main shape, no T4 |
@@ -304,6 +307,8 @@ Other slash shapes take their root shape's tier, because the diagram omits the b
 | 1 · First chords | all T1 with ≤ 3 main shapes |
 
 `tier_reason` states the main shapes, the hardest tier and the pace. A `level_overrides` entry in the catalogue config replaces the level and keeps the computed one.
+
+**Expected level and shapes.** An additions metadata entry's `expected_level` and `expected_shapes` are editorial research drafts. The exporter compares them with the built profile (after any override) and reports only: a level mismatch is a `WARN` line (counted, never failing the build), and shape-set mismatches are listed under "Expected shapes" in the build report. `chart_check` is research bookkeeping and is not read.
 
 **Label aliases (25 Oct 2026).** An additions metadata entry may carry `label_aliases: {map: {chartLabel: displayLabel}, note}` when the automatic chart names a chord differently from the grip players use. It was built for A Horse with No Name (chart `F#m7`, `Dmaj7/F#`, `Dmaj7`, `D`, `D/F#` → the two-finger `D6add9/F#` grip `200200`, a tier-1 shape), but that song was then excluded: its chart misses most of the bar-by-bar changes. Aliased events carry `c:1`, and each alias is listed in `chart.corrections` with the span of the events it relabels. Timings never change.
 
@@ -340,11 +345,21 @@ Levels on 25 October 2026:
 
 Level 5 is empty now; Creep would have been Level 5 (B, Cm).
 
+## `lib/chords.js` API: chord shape vocabulary (pure, unit-tested)
+
+The one implementation of chord-label maths for the app, the exporter and the catalogue checks. Its pitch-class and quality tables are internal. The frozen Mac review player (`experiments/review/app.js`) keeps its own copy as evidence. On 27 October `shapeForCapo` and `coreLabel` matched its `transposePracticeLabel` and `coreChordLabel` on 6,462 labels at every capo from 0 to 12 ([#45](https://github.com/dcromp/music-os/issues/45)).
+
+- `parse(label)` returns `{root, rootPc, quality, bass, bassPc}` or null for N, X, junk and an unreadable bass. quality is the suffix as written, without a Harte `:`. A degree bass (`G/b7`) gets its pitch class.
+- `shapeForCapo(sounding, capo)` returns the chord shape fretted with that capo (`A`, 2 → `G`). A flat root keeps flat spelling. A note bass moves; a degree bass is kept. It throws for a capo outside 0–12.
+- `soundingForCapo(shape, capo)` is the reverse, with sharp spelling (`G/B`, 2 → `A/C#`). The catalogue checks use it to turn teaching shapes into sounding chords.
+- `coreLabel(label)` removes known extensions: m7 → m, maj7/7/add9 → major, 7sus4 → sus4. Suspensions and unknown qualities stay unchanged.
+- `normalize(label)` maps a label onto one of `QUALITIES` for diagrams (`Am9` → `m7`, `simplified: true`). It also accepts Unicode sharp/flat signs and `C6/9`.
+- `noteName(pc)` returns the sharp spelling of a pitch class.
+
 ## `lib/core.js` API (pure, unit-tested)
 
 Ported helpers from `experiments/review/app.js` keep their names and behaviour. Each carries a comment naming its source line.
 
-- `transposePracticeLabel(label, capo)` and `coreChordLabel(label)` follow the Mac player.
 - `shapeLabel(sounding, {capo, view:'shapes'|'sounding', quality:'core'|'full'})`
 - `buildTimeline(song, opts)` returns display events `{s,e,label,full,sounding,c}`. Adjacent equal labels are merged after transforms. Merges never bridge N or X.
 - `chordIndexAt(events, t)` is a binary search that returns the index, or -1.
@@ -361,7 +376,6 @@ Ported helpers from `experiments/review/app.js` keep their names and behaviour. 
   - `pos = ((beatFloat - phase(floor(beatFloat))) mod bpb + bpb) mod bpb`, with `phase` the per-beat anchor
   - `step = floor(pos*stepsPerBeat)`
 - `barAnchorAt(song, beat)` returns `{phase, approx, bar, half, anchored}` for an integer grid beat (a fractional one uses its floor). `bar` means the strum count reads 1 there. The per-beat map is cached per song object and rebuilt when `song.chords`, `song.beats` or the rhythm fields change identity or value.
-- `suggestCapo(chords)` is exported for the exporter. For each capo from 0 to 7 it scores the share of chord seconds whose core shape is one of the easy open shapes A, Am, C, D, Dm, E, Em, G. F, Bm and B7 get half credit. It returns `{capo, score, scores[]}`, preferring the lower capo on near-ties (within 0.03).
 - `cueTime(playerSeconds, offsetSeconds, nudgeMs, latencyMs, rate)` returns `player + offset + nudge/1000 − latency/1000 × rate`. Latency is wall-clock delay, so at 0.5× it covers half as much media time. The nudge and offset are media time and are not scaled. A rate that is not a positive number counts as 1.
 - `formatTime(s)` returns "m:ss".
 
@@ -396,7 +410,7 @@ This module takes playback events in and gives cue time, the resume point and sa
 ## UI
 
 - **Library (`#/`).**
-  - Song cards grouped by level ("Level 1 · First chords" … "Level 5 · Barre chords"), each group with its one-line explanation, in the index order (easiest first within a level). Each card shows the title, artist, up to 6 Core shape chips, ~BPM and a capo badge. When the analysed upload can't be embedded, the card also gets a "timing unchecked" badge (or "alternate video" if the alternate's timing was checked).
+  - Song cards grouped by level ("Level 1 · First chords" … "Level 5 · Barre chords"), each group with its one-line explanation, in the index order (easiest first within a level). Each card shows the title, artist, the song's main shapes as chips (the shapes its level counts; they wrap), ~BPM and a capo badge. When the analysed upload can't be embedded, the card also gets a "timing unchecked" badge (or "alternate video" if the alternate's timing was checked).
   - A last-played song gets a resume chip.
   - The header reads "Strum Along · music-os", with the line "Provisional automatic chord charts. For personal practice."
 - **Song (`#/song/<id>`), portrait, top to bottom:**
