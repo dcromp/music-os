@@ -113,7 +113,7 @@
         "sha256": "09c5c68dc1dc44f8380871744c59d00043e1c6ea42650f3911353f84a78962f7"
       }
     ],
-    "songs_index_sha256": "963caca186189e6465e891fbe22fc2f5bba7d43f9e62ac228671ea9c9433f92d",
+    "songs_index_sha256": "5c22bf00b0b7f5c72cf90ec95de7babc1ed774f863ea896f9cc73a0e7a91e9b0",
     "exported_songs": 43,
     "instrument_tags": {
       "path": "experiments/generated/strumalong-instrument-tags.json",
@@ -1077,7 +1077,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "09f64db9a6563e2256c528576bd9776b13c84128ce3b982810b8dfbe6145bb59",
-      "exported_sha256": "371a649116218d40e530a7ce548dc534dd07a2a5f3425b844a4ff707f328f5f2",
+      "exported_sha256": "b2407a208fdc258c0b9c5fc30e1b11056cbeddc3ae836e631e5200b5806a7b66",
       "checks": {
         "chords": {
           "status": "pass",
@@ -3566,7 +3566,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "e609fff29eea7b6ffdc6d054a0df80404d3adae24dd3bc85f378627772f13597",
-      "exported_sha256": "aba80da4eeefb3a726339b564de9cf2f3efb0c6622787142a67137a4db0d463a",
+      "exported_sha256": "8270f3f3c96d30b139e8e34efb780c8626ad918d47318d938d79fd3f8158c502",
       "checks": {
         "chords": {
           "status": "flag",
@@ -5826,7 +5826,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "df2a7a22a32782cf745b2b30035f887b3c90e3d4a8496e9c557e7fa8b83c4fa8",
-      "exported_sha256": "7e845cdf2960d9219b0764eb142a4a35dfc99b0f8e0bdaf241eb11cb6fcca06d",
+      "exported_sha256": "d3fda9d2424c8be902b95a5cb6a257abdf17740f096196a369c73f8beb02ee59",
       "checks": {
         "chords": {
           "status": "pass",
@@ -10093,7 +10093,7 @@
       "exported": true,
       "view_source": "exported",
       "chart_sha256": "c8bc69446d463f18550ac300bf67db01a7621f7722943624fd24aceea2599f51",
-      "exported_sha256": "ff2e2e77ad19640694cabdcd837ba63ee6546992f5d2cd581b028ca78110cdd4",
+      "exported_sha256": "3fe9c64656d1d1cfc7e4b5b19c122cceed720cbbe34048cef20a13fe8f493331",
       "checks": {
         "chords": {
           "status": "pass",
