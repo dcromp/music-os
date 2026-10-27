@@ -26,6 +26,7 @@ function fakePlayer(init = {}) {
     playbackRate: call("playbackRate", () => p.rate), availableRates: call("availableRates", () => p.rates),
     seekTo: call("seekTo", s => { p.time = s; }), cue: call("cue"), play: call("play"), pause: call("pause"),
     setRate: call("setRate", r => { p.rate = r; }), destroy: call("destroy"),
+    isMuted: call("isMuted", () => Boolean(p.mutedNow)), mute: call("mute", () => { p.mutedNow = true; }), unMute: call("unMute", () => { p.mutedNow = false; }),
   });
   p.called = name => p.calls.filter(c => c[0] === name);
   return p;
@@ -339,6 +340,17 @@ test("a pending seek the player never reaches gives way to the player clock afte
   assert.equal(session.tick().pt, 10);
   clock.now += 1;
   assert.equal(session.tick().pt, 50);
+});
+
+test("mute state goes through the player, and a throwing player reads as unmuted", () => {
+  const { session, player } = setup();
+  assert.equal(session.muted(), false);
+  session.setMuted(true);
+  assert.equal(session.muted(), true);
+  session.setMuted(false);
+  assert.equal(player.mutedNow, false);
+  player.throws.add("isMuted");
+  assert.equal(session.muted(), false);
 });
 
 test("playback rate and available rates come from the player", () => {

@@ -399,6 +399,9 @@
       cue: (videoId, startSeconds) => yt.cueVideoById({ videoId, startSeconds }),
       play: () => yt.playVideo(),
       pause: () => yt.pauseVideo(),
+      isMuted: () => yt.isMuted(),
+      mute: () => yt.mute(),
+      unMute: () => yt.unMute(),
       setRate: rate => yt.setPlaybackRate(rate),
       destroy: () => { if (typeof yt.destroy === "function") yt.destroy(); },
     };
@@ -559,15 +562,29 @@
     frame();
   }
 
+  // Restart while playing (or counting) with count-in on counts in again from the top; otherwise it just seeks.
+  function restart() {
+    if (!S) return;
+    const rolling = S.session.playing || Boolean(S.count);
+    if (!(rolling && settings().countIn && CountIn && S.session.controllable)) { seekTo(0); return; }
+    cancelCountIn();
+    S.session.pause();
+    S.session.seek(0);
+    if (!startCountIn()) { S.session.play(); return; }
+    requestWakeLock();
+  }
+
   // ---------------------------------------------------------------- count-in (#60)
   // One bar of numbered clicks at the song's tempo that leads into a bar start, then clicks fading out over
   // the first bar of the music. Mid-song the video starts a bar early and the count follows its clock (run-up).
   // When the count would start before the video's 0 (most songs, from the start), it runs on its own clock
-  // (pre-roll), starts the video during the count and follows the video's clock once it plays.
+  // (pre-roll), starts the video during the count and follows the video's clock once it plays. A video that
+  // hasn't played yet on this page is first warmed up: played muted until it really plays, then paused back
+  // at the start, so the count's start isn't lost to YouTube's loading delay (founder feedback, 27 October).
   // lib/count-in.js plans the beats; this part owns the clock, the clicks and the big numbers.
-  const COUNT_LOOKAHEAD_S = 0.15, COUNT_LATE_S = 0.06;
+  const COUNT_LOOKAHEAD_S = 0.15, COUNT_LATE_S = 0.06, WARM_UP_MAX_MS = 8000;
   let audio = null;
-  let startDelay = 0.35; // YouTube's start-up delay in seconds, learned from each pre-roll on this page
+  let startDelay = 0.08; // a warmed-up video's start delay in seconds, learned from each pre-roll on this page
   function unlockAudio() {
     try {
       const Ctx = window.AudioContext || window.webkitAudioContext;
@@ -610,10 +627,18 @@
     unlockAudio();
     const shift = t - pt; // chart time minus player time (video offset, sync nudge, audio delay)
     const c = { plan, shift, rate: S.rate || 1, next: 0, raf: 0, timers: [], nodes: [], t0: performance.now(),
-      preroll: plan.startAt - shift < 0, playCalled: false, sawPlaying: false };
+      preroll: plan.startAt - shift < 0, playCalled: false, sawPlaying: false, warming: false, wasMuted: false };
     S.count = c;
     if (c.preroll) {
       if (pt > 0.05) S.session.seek(0);
+      if (!S.played || S.state === -1 || S.state === 5) {
+        // Warm up inside the tap (which also lets iOS start the video later), muted.
+        c.warming = true;
+        c.wasMuted = S.session.muted();
+        S.session.setMuted(true);
+        if (!S.session.play()) { S.session.setMuted(c.wasMuted); S.count = null; return null; }
+        c.playCalled = true; // armPlayHint covers a blocked start
+      }
     } else {
       if (!S.session.seek(plan.startAt - shift) || !S.session.play()) { S.count = null; return null; }
       c.playCalled = true;
@@ -625,12 +650,12 @@
   }
   // Chart time for the count: the video's clock once it plays; before that, a pre-roll's own clock.
   function countClock(c) {
-    if (S.state === 1) {
+    if (S.state === 1 && c.playCalled && !c.warming) {
       const { t } = S.session.tick();
       if (c.preroll && !c.sawPlaying) {
         // Learn how late the video really started, for the next pre-roll on this page.
         const own = c.plan.startAt + (performance.now() - c.t0) / 1000 * c.rate;
-        startDelay = Math.max(0, Math.min(1.5, startDelay + 0.5 * (own - t) / c.rate));
+        startDelay = Math.max(0, Math.min(1.5, startDelay + 0.7 * (own - t) / c.rate));
       }
       c.sawPlaying = true;
       return t;
@@ -642,6 +667,22 @@
     const c = S && S.count;
     if (!c) return;
     c.raf = 0;
+    if (c.warming) {
+      const waited = performance.now() - c.t0;
+      if (S.state === 1 || waited > WARM_UP_MAX_MS) {
+        if (S.state !== 1) { cancelCountIn(); return; } // never started: the "Tap ▶ in the video" hint stays
+        // Warm: back to the start, sound back on, and start the count on its own clock from now.
+        S.session.pause();
+        S.session.seek(0);
+        S.session.setMuted(c.wasMuted);
+        Object.assign(c, { warming: false, playCalled: false, t0: performance.now() });
+        window.clearTimeout(S.playTimer);
+        updateTransport();
+        frame();
+      }
+      c.raf = window.requestAnimationFrame(countLoop);
+      return;
+    }
     const t = countClock(c);
     if (t !== null) {
       if (c.preroll && !c.playCalled && t >= c.shift - startDelay * c.rate) {
@@ -671,6 +712,7 @@
     if (c.raf) window.cancelAnimationFrame(c.raf);
     for (const id of c.timers) window.clearTimeout(id);
     for (const osc of c.nodes) { try { osc.stop(0); } catch (_) { /* already stopped */ } }
+    if (c.warming) { p.session.pause(); p.session.setMuted(c.wasMuted); }
     if (p === S) { showCount(0); updateTransport(); frame(); }
   }
 
@@ -718,6 +760,7 @@
   }
   function stateNote() {
     if (!S.video) return "";
+    if (S.count && S.count.warming) return "Getting the video ready…";
     if (S.count && S.state !== 1) return "Count-in";
     if (S.state === 3) return "Buffering…";
     if (S.state === 2) return "Paused";
@@ -1067,7 +1110,7 @@
     switch (act) {
       case "play": togglePlay(); break;
       case "back10": seekTo(S.pt - 10); break;
-      case "restart": seekTo(0); break;
+      case "restart": restart(); break;
       case "again": setHidden($("after-panel"), true); seekTo(0); if (!S.session.playing) togglePlay(); break;
       case "hide": S.cuesHidden = !S.cuesHidden; updateTransport(); frame(); break;
       case "nudge": {
