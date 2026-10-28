@@ -88,5 +88,11 @@
     return pool[Math.min(pool.length - 1, Math.floor(rng() * pool.length))];
   }
 
-  return { search, shelves, similar, surprise, fold };
+  // Genre filter (home page): "rock" or "pop" keeps songs with that tag; anything else ("all") keeps every song.
+  const GENRES = ["rock", "pop"];
+  function byGenre(songs, genre) {
+    return GENRES.includes(genre) ? songs.filter(s => s && s.genre === genre) : songs;
+  }
+
+  return { search, shelves, similar, surprise, fold, byGenre, GENRES };
 });

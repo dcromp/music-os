@@ -363,6 +363,12 @@ if (!fs.existsSync(REVIEW_APP)) {
     assert.ok(off.report.warnings.some(w => /built Level 1, metadata expected_level 3/.test(w)));
     assert.deepEqual(exportHolds(holds, { labels }).report.expected, { level: null, shapes: null }, "no expectations, nothing checked");
   });
+  test("exportSong: the catalogue genre tag lands on the song and its card, and is null when untagged", () => {
+    const tagged = exportHolds(Array(12).fill(8), { settings: { genre: "rock" } });
+    assert.deepEqual([tagged.song.genre, tagged.card.genre], ["rock", "rock"]);
+    const untagged = exportHolds(Array(12).fill(8), {});
+    assert.deepEqual([untagged.song.genre, untagged.card.genre], [null, null]);
+  });
   test("exportSong: a catalogue level override sets the level, group and default patterns, and keeps the computed level", () => {
     const quick = { bpm: 100, labels: ["A", "D", "E"] };
     const computed = exportHolds(Array(60).fill(2), quick);

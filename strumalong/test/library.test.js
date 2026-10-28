@@ -2,7 +2,7 @@
 // Tests for strumalong/lib/library.js: search, shelves, similar songs and Surprise me.
 // Run: node strumalong/test/run.js (or this file directly).
 const assert = require("node:assert/strict");
-const { search, shelves, similar, surprise } = require("../lib/library.js");
+const { search, shelves, similar, surprise, byGenre } = require("../lib/library.js");
 
 const results = { passed: 0, failed: [] };
 function test(name, fn) {
@@ -79,6 +79,15 @@ test("surprise: random song up to the learner's level (at least 2), never the on
   assert.ok(played.has("wonderwall") && !played.has("creep"));
   assert.equal(surprise([songs[0]], { lastId: "wild-thing", rng: () => 0 }).id, "wild-thing");
   assert.equal(surprise([], {}), null);
+});
+
+test("byGenre keeps one genre's songs; all, unknown or missing genres keep every song", () => {
+  const tagged = [S("a", 1, ["A"], { genre: "rock" }), S("b", 2, ["G"], { genre: "pop" }), S("c", 2, ["G"])];
+  assert.deepEqual(ids(byGenre(tagged, "rock")), ["a"]);
+  assert.deepEqual(ids(byGenre(tagged, "pop")), ["b"]);
+  assert.deepEqual(ids(byGenre(tagged, "all")), ["a", "b", "c"]);
+  assert.deepEqual(ids(byGenre(tagged, "jazz")), ["a", "b", "c"]);
+  assert.deepEqual(ids(byGenre(tagged, undefined)), ["a", "b", "c"]);
 });
 
 console.log(`library.test.js: ${results.passed} passed, ${results.failed.length} failed`);

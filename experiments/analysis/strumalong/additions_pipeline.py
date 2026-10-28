@@ -71,18 +71,30 @@ def run(cmd: list, **kw) -> None:
 
 
 def step_import(args) -> None:
+    # Paced: one recording at a time, a random pause between downloads, and the batch
+    # stops at the first upstream rate limit instead of retrying. Rerun to resume.
+    import random
+    import time
+    downloaded = 0
     for row in selected(args):
         target = Path(args.import_root) / row["recording_id"]
         if target.exists():
             print("skip (exists):", row["recording_id"])
             continue
+        if downloaded:
+            pause = random.uniform(args.pause_min, args.pause_max)
+            print(f"pause {pause:.0f} s", flush=True)
+            time.sleep(pause)
+        downloaded += 1
         url = f"https://www.youtube.com/watch?v={row['video_id']}"
-        try:
-            run([YOUTUBE_PY, ANALYSIS / "youtube_import.py", "--node", NODE, "import", url,
-                 "--recording-id", row["recording_id"], "--source-use", SOURCE_USE,
-                 "--output-root", args.import_root], timeout=600)
-        except subprocess.CalledProcessError as error:
-            print("IMPORT FAILED", row["recording_id"], error, file=sys.stderr)
+        result = subprocess.run([str(c) for c in [YOUTUBE_PY, ANALYSIS / "youtube_import.py", "--node", NODE,
+                                 "import", url, "--recording-id", row["recording_id"], "--source-use", SOURCE_USE,
+                                 "--output-root", args.import_root]], capture_output=True, text=True, timeout=600)
+        print(result.stdout, end="", flush=True)
+        if result.returncode != 0:
+            print("IMPORT FAILED", row["recording_id"], result.stderr.strip()[-300:], file=sys.stderr, flush=True)
+            if "429" in result.stdout + result.stderr or "rate limit" in (result.stdout + result.stderr).lower():
+                raise SystemExit("upstream rate limit: stopping the batch; rerun later to resume")
 
 
 def step_stage(args) -> None:
@@ -168,6 +180,8 @@ def main() -> None:
     p.add_argument("--candidates", default=str(ROOT / "experiments" / "fixtures" / "strumalong-additions-candidates-v1.json"))
     p.add_argument("--set", default="first", choices=["first", "fallbacks_in_order"])
     p.add_argument("--only", help="comma-separated recording ids")
+    p.add_argument("--pause-min", type=float, default=60.0, help="import: minimum seconds between downloads")
+    p.add_argument("--pause-max", type=float, default=150.0, help="import: maximum seconds between downloads")
     p.add_argument("--import-root", default=str(DEFAULT_IMPORT_ROOT))
     p.add_argument("--stage-dir", default=str(DEFAULT_STAGE))
     p.add_argument("--pack", default=str(DEFAULT_PACK))

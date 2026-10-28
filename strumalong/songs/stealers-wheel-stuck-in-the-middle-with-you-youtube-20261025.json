@@ -3,6 +3,7 @@
 "id":"stealers-wheel-stuck-in-the-middle-with-you-youtube-20261025",
 "title":"Stuck in the Middle with You",
 "artist":"Stealers Wheel",
+"genre":"rock",
 "group":"level-2",
 "order":1,
 "level":2,
@@ -58,5 +59,5 @@
 ],
 "strumming":{"note":"Default practice patterns for Level 2 songs; not checked against the recording.","source":"level-default","patterns":[{"id":"down-up","name":"Start: down-up eighths","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","U","D","U","D","U","D","U"],"description":"Alternate down and up in steady eighth notes: down on the numbers, up on the \"&\". Keep the hand moving through chord changes."},{"id":"folk-strum","name":"Next: D — D U — U D U","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","—","D","U","—","U","D","U"],"description":"Keep the down-up pendulum going; miss the strings on the \"&\" of 1 and on 3. A common pop and rock strum."}]},
 "learning":{"skill_focus":"Open chords with a percussive slapped strum (a muted thwack on most down-strums). Start with plain downstrokes and add the slap once the changes are steady.","prerequisites":"","sources":[{"title":"Published arrangement tempo marking: Stuck in the Middle with You","url":"https://www.musicnotes.com/sheetmusic/stealers-wheel/stuck-in-the-middle-with-you/MN0079793"}]},
-"provenance":{"pack":"strumalong-additions-v2","manifest_sha256":"55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd","rhythm_sha256":"0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459","practice_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","learning_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","additions_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","catalogue_sha256":"da053fc699c14948dd0dc0f5d76b747d1957d87a1bf7cf45147e78e6b3488d36"}
+"provenance":{"pack":"strumalong-additions-v2","manifest_sha256":"55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd","rhythm_sha256":"0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459","practice_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","learning_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","additions_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","catalogue_sha256":"05a5112cb3ec8c6c6ec3c5fd3d4538c38d9fe5a30f9ee3d65630441cce18f0cd"}
 }

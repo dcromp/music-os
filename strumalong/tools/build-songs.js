@@ -119,7 +119,14 @@ function readCatalogue(file = CATALOGUE) {
     if (timingOff.has(item.recording_id)) fail(`duplicate timing_fix_off ${item.recording_id}`);
     timingOff.set(item.recording_id, item);
   }
-  return { ...cfg, exclude, overrides, timingOff, sha256: sha(bytes) };
+  // Home-page genre filter: {recording_id: "rock" | "pop"}, one tag per song.
+  const genres = new Map();
+  for (const [id, genre] of Object.entries(cfg.genres || {})) {
+    if (!["rock", "pop"].includes(genre)) fail(`genre for ${id} must be "rock" or "pop"`);
+    if (exclude.has(id)) fail(`${id} is both excluded and given a genre`);
+    genres.set(id, genre);
+  }
+  return { ...cfg, exclude, overrides, timingOff, genres, sha256: sha(bytes) };
 }
 
 // ---------------------------------------------------------------- helpers
@@ -503,8 +510,8 @@ function applyLevelOverride(difficulty, override) {
  *   hashes: { manifest, rhythm, practice, learning, additions?, catalogue } for song.provenance.
  * @param metadata { title, artist, capo, capo_source, setup_note, strumming|null, learning, needs_syncopation?,
  *   playable_embed?, label_aliases?, expected?: { level, shapes } }  strumming null means "no authored patterns": the level's defaults are used.
- * @param settings { timingFix?, levelOverride? }  timingFix false: catalogue timing_fix_off lists this recording.
- *   levelOverride: a catalogue level_overrides entry ({ level, reason }).
+ * @param settings { timingFix?, levelOverride?, genre? }  timingFix false: catalogue timing_fix_off lists this recording.
+ *   levelOverride: a catalogue level_overrides entry ({ level, reason }). genre: the catalogue's "rock" | "pop" tag, or null.
  * @returns {{ song, card, report }}  song.order and card.order stay null: order within a level is a catalogue decision.
  *   report: { warnings, expected: compareExpected result, chords, beats, vote, bars: {before, after, runs}, timing: {moves, left, passes, settled,
  *   enabled, before, after} } for the build report.
@@ -603,7 +610,7 @@ function exportSong(draft, metadata, settings = {}) {
   const src = c.source.source;
   const song = {
     schema: "strumalong-song-2",
-    id: c.id, title: meta.title, artist: meta.artist, group, order: null, level: difficulty.level,
+    id: c.id, title: meta.title, artist: meta.artist, genre: settings.genre || null, group, order: null, level: difficulty.level,
     recording: { id: c.recording.id, duration_seconds: r3(c.recording.duration_seconds), audio_sha256: c.recording.audio_sha256 },
     videos: [{ video_id: src.video_id, uploader: src.uploader, kind: "analysed", duration_seconds: src.duration_seconds,
       offset_seconds: 0, timing_checked: true, note: "Chart computed from this upload's audio." }],
@@ -619,7 +626,7 @@ function exportSong(draft, metadata, settings = {}) {
       learning_sha256: hashes.learning, ...(hashes.additions ? { additions_sha256: hashes.additions } : {}), catalogue_sha256: hashes.catalogue },
   };
   const card = {
-    id: c.id, title: meta.title, artist: meta.artist, group, order: null, level: difficulty.level, level_label: difficulty.label,
+    id: c.id, title: meta.title, artist: meta.artist, genre: settings.genre || null, group, order: null, level: difficulty.level, level_label: difficulty.label,
     video_id: src.video_id, duration_seconds: r2(c.recording.duration_seconds),
     bpm: Math.round(rhythmCase.pulse_bpm), meter_label: rhythmCase.meter_label, capo: meta.capo,
     core_shapes: difficulty.main_shapes, // the shapes the level counts (one Arrangement profile)
@@ -659,7 +666,7 @@ const TITLES = {
 };
 
 // The catalogue's settings for one recording, and its export from the pack's draft bytes (song warnings go to the log).
-const settingsFor = (cfg, id) => ({ timingFix: !cfg.timingOff.has(id), levelOverride: cfg.overrides.get(id) });
+const settingsFor = (cfg, id) => ({ timingFix: !cfg.timingOff.has(id), levelOverride: cfg.overrides.get(id), genre: cfg.genres.get(id) || null });
 function exportCase(cfg, packDir, draft, metadata) {
   const c = draft.case;
   const primary = read(path.join(packDir, "cases", c.id, "primary.json"));
@@ -805,6 +812,7 @@ function buildCatalogue(cfg) {
   for (const b of built) { if (ids.has(b.song.id)) throw new Error(`duplicate song id ${b.song.id}`); ids.add(b.song.id); }
   for (const id of cfg.overrides.keys()) if (!ids.has(id)) warn(`level override for ${id}, which is not in the catalogue`);
   for (const id of cfg.timingOff.keys()) if (!ids.has(id)) warn(`timing_fix_off for ${id}, which is not in the catalogue`);
+  for (const id of ids) if (!cfg.genres.has(id)) warn(`${id} has no genre, so only "All" lists it`);
   const ordered = [];
   for (const { level } of LEVELS) {
     const members = built.filter(b => b.song.level === level).sort((x, y) => compareWithinLevel(
