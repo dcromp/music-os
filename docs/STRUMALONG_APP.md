@@ -431,33 +431,36 @@ Pure planning, tested in `test/count-in.test.js`. Times are chart (cue) seconds.
 
 ## UI
 
-The end-user journey is **Jukebox** (founder's choice from the journey prototype, 27 October 2026, #53; prototype on branch `prototype/strumalong-journey`). Find a song fast, see a short get-ready sheet, play, then get offered "another like this". Strum Along supports lessons taken elsewhere; it does not teach.
+The end-user journey is **Jukebox** (founder's choice from the journey prototype, 27 October 2026, #53; prototype on branch `prototype/strumalong-journey`). Find a song fast, open it on a page that shows what you need and plays the song, play, then get offered "another like this". Strum Along supports lessons taken elsewhere; it does not teach.
 
 - **Library (`#/`).**
-  - The header reads "Strum Along", with a **🎲 Surprise me** button (see `surprise`, which opens that song's get-ready sheet), the line "Provisional automatic chord charts. For personal practice." and a **search** box (title or artist). While the box has text, matching cards replace the shelves. The query is kept while moving between pages.
+  - The header reads "Strum Along", with a **🎲 Surprise me** button (see `surprise`, which opens that song's page), the line "Provisional automatic chord charts. For personal practice." and a **search** box (title or artist). While the box has text, matching cards replace the shelves. The query is kept while moving between pages.
   - A last-played song gets a resume chip ("Resume … at m:ss", or "Play again: …"). It opens the player directly.
-  - **Shelves** scroll horizontally, as in prototype A: "★ Your favourites" when there are any, "Easy to jump into", "Three-chord classics", "Campfire open chords" and "Barre-chord songs" (see `shelves`). Difficulty still rises shelf by shelf, but the library shows no level numbers. The level stays on the song page badge and in Details. Each card shows the title, artist and main shapes as chips, plus a capo badge and the "timing unchecked" / "alternate video" badge where they apply. Cards open the get-ready sheet.
-- **Get ready (`#/ready/<id>`).** The song page's top bar without the level badge. ~BPM (or "No capo"), the setup note, diagrams of the main shapes ("You'll need"), the first practice pattern as a stroke grid with counts (labelled a practice suggestion), a big **▶ Play** link to `#/song/<id>` and a ☆/★ Favourite toggle. The YouTube player only loads on the song page, so the learner presses Play there as well.
+  - **Shelves** scroll horizontally, as in prototype A: "★ Your favourites" when there are any, "Easy to jump into", "Three-chord classics", "Campfire open chords" and "Barre-chord songs" (see `shelves`). Difficulty still rises shelf by shelf, but the library shows no level numbers. The level stays on the song page badge and in Details. Each card shows the title, artist and main shapes as chips, plus a capo badge and the "timing unchecked" / "alternate video" badge where they apply. Cards open the song page.
+- **No separate get-ready page.** The founder chose to merge it into the song page (variant C of the 28 October prototype, branch `prototype/strumalong-merged-song`, #53). The old `#/ready/<id>` address opens `#/song/<id>`, so saved links still work.
 - **After the song.** When the video ends, a panel opens at the top of the cue column. It shows "Nice one", the play count on this phone, **↻ Again** (restart and play), Favourite, Surprise me, and up to five "Another like this" cards (`similar`). Playing again hides it. Nothing is placed over the player.
 - **Song (`#/song/<id>`), portrait, top to bottom:**
   1. A top bar with a back link, the title, and the capo, level ("Level 2", titled with its label) and provisional badges.
-  2. The YouTube player at full width, 16:9, with nothing on top.
-  3. The **cue panel**, layout A as approved in #23.
+  2. The YouTube player at full width, 16:9, with nothing on top. It loads as soon as the page opens.
+  3. The **chord strip** under the player, which replaces the get-ready sheet:
+     - "Chords" (or "Capo N") and the song's main shapes as chips. Tapping a chip opens its diagram under the strip; tapping it again closes it. While the song plays, the NOW chord's chip is filled and the NEXT chord's chip is outlined, matched by capo-shape grip at Core quality.
+     - A ☆/★ favourite toggle, and the setup note.
+     - "Strum": the current practice pattern as one line of ↓/↑/· with the live step highlighted, and ~BPM.
+  4. The **cue panel**, layout A as approved in #23.
      - The NOW chord is large, with the NEXT chord immediately to its right.
      - Beat dots sit under both chords: ● marks the active beat, ◉ past beats in the current hold, ○ future beats.
      - Vertical bar lines separate bars.
      - A line below reads "3 beats to change", or "4.2 s to change" outside the grid. Seconds are wall-clock: they are divided by the playback rate. Before the first play it reads "Loading video…", then "Tap ▶ to start" (or "Capo N on, then tap ▶").
      - A compact Play/Pause button sits at the right of that line, so playback can start with the player and cues on screen. It stays visible and usable above the Hide-cues and ad covers.
      - Quick changes get a "quick" marker.
-  4. The **strum panel**: the pattern's strokes as ↓/↑/· cells with counts underneath. The current step is highlighted from the beat grid. A small selector chooses between the Start and Next patterns. The label is "Suggested practice pattern, not the recorded part".
-  5. **Chord diagrams** for NOW and NEXT. They always draw the capo-shape grip, the shape the hand holds. In Sounding view the caption keeps the sounding name and a note reads "G shape, capo 2".
-  6. **Controls**:
-     - Big Play/Pause.
-     - "−10 s", restart, speed (`getAvailablePlaybackRates`), "Hide cues" for interruptions, and **Count-in on/off** (off by default, saved in `settings.countIn`).
+  5. **Controls**: big Play/Pause, "−10 s" and restart.
+  6. **Options** (collapsed):
+     - The pattern selector (Start or Next) with the pattern's name and description, labelled a practice suggestion, not the recorded part.
+     - Speed (`getAvailablePlaybackRates`), "Hide cues" for interruptions, and **Count-in on/off** (off by default, saved in `settings.countIn`).
      - A **sync nudge** (−/+ 50 ms, showing the current offset), saved per video in localStorage.
-     - A **View** group: Simple (Core) or Full chords, Capo shapes or Sounding when the capo is above 0, and Diagrams on or off.
+     - A **View** group: Simple (Core) or Full chords, and Capo shapes or Sounding when the capo is above 0. (The NOW/NEXT diagram panel and its Diagrams toggle were removed with the merge; `settings.diagrams` is still stored but unused.)
   7. **Details** (collapsed): setup note, level with its reason (or the override reason), skill focus, sources (links), chart status, beats and bars (how much of the song shows approx bars), corrections (label corrections, and the timing fix's line with each moved change), the strumming note, the video's uploader, and "Open on YouTube".
-- **Song (`#/song/<id>`), landscape at 700 px wide or more:** a two-column grid, with the player and controls on the left and cues, strum and diagrams on the right.
+- **Song (`#/song/<id>`), landscape at 700 px wide or more:** a two-column grid, with the player, chord strip, controls and options on the left and the cues on the right.
 - **Theme.** Use the palette of layout A and the Mac player: background `#f4f1e8`, text `#222b27`, accent `#22543e`, panels white with `#d4d8cc` borders. Add a dark mode via `prefers-color-scheme`.
 - **Sizing.** Large tap targets of at least 44 px. Respect safe areas with `viewport-fit=cover` and `env(safe-area-inset-*)`.
 - **iOS Home Screen.** Set the `apple-mobile-web-app-capable` meta and add a manifest and `apple-touch-icon`.

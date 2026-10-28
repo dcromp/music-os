@@ -165,7 +165,7 @@ select {
 .card-note { display: block; font-size: 13px; color: var(--warn-text); margin-top: 4px; }
 .lib-foot { margin-top: 24px; font-size: 13px; color: var(--muted); }
 
-/* Jukebox journey (#53): search, horizontal shelves, get-ready sheet, after-song panel. */
+/* Jukebox journey (#53): search, horizontal shelves, after-song panel. */
 .lib-title { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
 .lib-search {
   width: 100%; min-height: 48px; padding: 10px 14px; margin: 0 0 6px;
@@ -179,14 +179,6 @@ select {
 .cards.shelf > li { flex: 0 0 min(46vw, 200px); scroll-snap-align: start; display: flex; }
 .cards.shelf .card { width: 100%; }
 .cards.shelf .card-title { font-size: 17px; }
-.ready { max-width: 640px; }
-.ready-meta { color: var(--muted); margin: 4px 0 8px; }
-.ready-diagrams { justify-content: flex-start; flex-wrap: wrap; min-height: 0; }
-.ready-play { display: flex; align-items: center; justify-content: center; text-decoration: none; margin: 14px 0 8px; }
-.stroke-grid { display: grid; gap: 4px; margin: 8px 0 0; }
-.stroke { text-align: center; padding: 8px 0; border-radius: 8px; background: var(--soft); font-weight: 700; font-size: 20px; }
-.stroke.rest { color: var(--muted); font-weight: 400; }
-.stroke-count { text-align: center; font-size: 13px; color: var(--muted); }
 .after-panel { border-color: var(--accent); }
 .after-title { font-size: 22px; margin: 0; }
 .after-panel .row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
@@ -294,18 +286,25 @@ select {
 .chord-list li { break-inside: avoid; padding: 2px 0; }
 .chord-list time { color: var(--muted); font-variant-numeric: tabular-nums; }
 
-/* ---------- strum panel ---------- */
-.strum-head { display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 6px 10px; }
-.strum-head .panel-title { flex: 1 1 auto; min-width: 0; }
-.strokes { display: grid; grid-template-columns: repeat(var(--steps, 4), minmax(0, 1fr)); gap: 4px; margin-top: 8px; }
-.stroke { background: var(--soft); border-radius: 8px; text-align: center; padding: 4px 0; }
-.stroke b { display: block; font-size: 30px; line-height: 1.15; }
-.stroke span { display: block; font-size: 14px; color: var(--muted); }
-.stroke.rest b { color: var(--muted); }
-.stroke.on { background: var(--accent); color: var(--on-accent); }
-.stroke.on span, .stroke.on.rest b { color: inherit; }
-.strum-desc { font-size: 14px; color: var(--muted); margin: 8px 0 0; }
-.strum-panel p { margin: 6px 0 0; }
+/* ---------- chord and strum strip under the video (#53, replaces the get-ready sheet) ---------- */
+.song-strip { padding: 8px var(--gr) 2px var(--gl); }
+.strip-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+.strip-label { flex: 0 0 auto; min-width: 54px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.strip-chips { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; min-width: 0; }
+.chord-chip { font: inherit; font-weight: 700; min-height: 36px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--btn-border); background: var(--panel); color: var(--text); cursor: pointer; }
+.chord-chip[aria-expanded="true"] { box-shadow: 0 0 0 2px var(--btn-border); }
+.chord-chip.next { border-color: var(--accent); border-width: 2px; }
+.chord-chip.now { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.fav-star { flex: 0 0 auto; font-size: 20px; min-width: 44px; }
+.chip-diagram { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 6px; margin: 6px 0; display: flex; justify-content: center; }
+.strip-note { margin: 2px 0 4px; }
+.strip-strokes { display: flex; gap: 3px; flex: 1; min-width: 0; }
+.strip-strokes .stroke { flex: 1 1 0; max-width: 40px; text-align: center; font-size: 22px; font-weight: 700; line-height: 1.5; border-radius: 6px; background: var(--soft); }
+.strip-strokes .stroke.rest { color: var(--muted); font-weight: 400; }
+.strip-strokes .stroke.on { background: var(--accent); color: var(--on-accent); }
+.strip-bpm { flex: 0 0 auto; font-size: 13px; color: var(--muted); }
+.options summary { min-height: 44px; display: flex; align-items: center; font-weight: 600; cursor: pointer; }
+.options > .row:first-of-type, #pattern-opts .row { margin-top: 4px; }
 
 /* ---------- diagrams ---------- */
 .diagrams { display: flex; justify-content: space-around; align-items: flex-start; gap: 12px; min-height: 120px; }
@@ -349,7 +348,7 @@ select {
   .col-cues { grid-column: 2; grid-row: 1 / span 2; }
   .col-cues > .panel:first-child { margin-top: 0; }
   .player-frame { border-radius: 12px; overflow: hidden; }
-  .player-status { padding: 0; }
+  .player-status, .song-strip { padding-left: 0; padding-right: 0; }
   .cue-now { --chord: clamp(56px, 9vw, 110px); }
   .cue-next { --chord: clamp(34px, 5.5vw, 64px); }
   .cards { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
