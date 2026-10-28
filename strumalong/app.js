@@ -111,7 +111,8 @@
     if (match) {
       let id = "";
       try { id = decodeURIComponent(match[2]); } catch (_) { id = ""; }
-      if (match[1] === "ready") showReady(id, gen); else showSong(id, gen);
+      // #/ready/<id> is the old get-ready sheet's address; it now opens the song page, which carries the sheet's contents.
+      showSong(id, gen);
     } else showLibrary(gen);
     try { window.scrollTo(0, 0); } catch (_) { /* ignore */ }
   }
@@ -121,7 +122,7 @@
   let libQuery = ""; // kept while moving between the library and a song
 
   const listedSongs = catalogue => Array.isArray(catalogue && catalogue.songs) ? catalogue.songs.filter(s => s && validSongId(s.id)) : [];
-  const readyHref = id => `#/ready/${encodeURIComponent(id)}`;
+  const songHref = id => `#/song/${encodeURIComponent(id)}`;
 
   async function showLibrary(gen) {
     document.title = "Strum Along";
@@ -174,74 +175,22 @@
     const badges = [];
     if (num(s.capo) && s.capo > 0) badges.push(`<span class="badge capo">Capo ${esc(s.capo)}</span>`);
     if (s.playable_embed === false) badges.push(`<span class="badge warn">${/unchecked/i.test(s.embed_note) ? "timing unchecked" : "alternate video"}</span>`);
-    return `<li><a class="card" href="${readyHref(s.id)}">
+    return `<li><a class="card" href="${songHref(s.id)}">
       <span class="card-main"><span class="card-title">${esc(s.title)}</span><span class="card-artist">${esc(s.artist)}</span></span>
       ${chips ? `<span class="chips" aria-label="Core shapes">${chips}</span>` : ""}
       ${badges.length ? `<span class="card-meta">${badges.join(" ")}</span>` : ""}
     </a></li>`;
   }
 
-  // Surprise me: a song at the learner's level, opened on its get-ready sheet.
+  // Surprise me: a song at the learner's level.
   async function surpriseMe(lastId) {
     let catalogue;
     try { catalogue = await getCatalogue(); } catch (_) { return; }
     const pick = Library.surprise(listedSongs(catalogue), { lastId, plays: store.plays() });
-    if (pick) location.hash = readyHref(pick.id);
+    if (pick) location.hash = songHref(pick.id);
   }
 
   const favouriteLabel = id => store.favourites().includes(id) ? "★ Favourite" : "☆ Favourite";
-
-  // ---------------------------------------------------------------- get-ready sheet
-  // What you need before pressing Play: capo, the core shapes, and the first practice pattern.
-  async function showReady(id, gen) {
-    app.className = "app view-ready";
-    app.innerHTML = `<header class="topbar"><a class="back" href="#/">‹ Songs</a><div class="top-title"><h1>Loading…</h1></div></header>
-      <p class="muted pad">Loading song…</p>`;
-    if (!validSongId(id)) { songError("Song not found.", false); return; }
-    let song;
-    try { song = await getSong(id); }
-    catch (error) {
-      if (gen !== routeGen) return;
-      songError(error && error.status === 404 ? "Song not found." : "Couldn't load this song. Check your connection.", !(error && error.status === 404));
-      return;
-    }
-    if (gen !== routeGen) return;
-    if (!song || !Array.isArray(song.chords)) { songError("This song's chart is missing or damaged.", false); return; }
-    document.title = `${song.title || "Song"} · Strum Along`;
-    const capo = num(song.capo) && song.capo > 0 ? song.capo : 0;
-    const d = song.difficulty || {};
-    const shapes = Array.isArray(d.main_shapes) && d.main_shapes.length ? d.main_shapes : [];
-    const pattern = song.strumming && Array.isArray(song.strumming.patterns) ? song.strumming.patterns.find(p => p && Array.isArray(p.strokes) && p.strokes.length) : null;
-    const bpm = song.rhythm && num(song.rhythm.bpm) ? Math.round(song.rhythm.bpm) : null;
-    const lib = window.StrumShapes;
-    const diagram = label => {
-      let svg = "";
-      try { const shape = lib && lib.getShape(label); svg = shape ? String(lib.renderShapeSVG(shape, { size: 84 }) || "") : ""; } catch (_) { svg = ""; }
-      return `<figure class="diagram"><figcaption><span class="d-name">${esc(label)}</span></figcaption>${svg ? `<div class="d-svg">${svg}</div>` : `<p class="muted d-missing">No diagram</p>`}</figure>`;
-    };
-    app.innerHTML = `<header class="topbar">
-      <a class="back" href="#/" aria-label="Back to songs">‹ Songs</a>
-      <div class="top-title"><h1>${esc(song.title)}</h1><p>${esc(song.artist)}</p></div>
-      <span class="top-badges">${capo ? `<span class="badge capo">Capo ${capo}</span>` : ""}<span class="badge prov" title="Automatic chord chart; not reviewed">Provisional</span></span>
-    </header>
-    <div class="ready">
-      <p class="ready-meta">${esc([capo ? "" : "No capo", bpm ? `~${bpm} BPM` : ""].filter(Boolean).join(" · "))}</p>
-      ${song.setup_note ? `<p class="hint">${esc(song.setup_note)}</p>` : ""}
-      ${shapes.length ? `<section class="panel"><h2 class="panel-title">You'll need</h2><div class="diagrams ready-diagrams">${shapes.map(diagram).join("")}</div></section>` : ""}
-      ${pattern ? `<section class="panel"><h2 class="panel-title">Strum</h2>${strokeGrid(pattern)}
-        <p class="hint">${esc(pattern.name || "")}. A practice suggestion, not the recorded part; switch patterns in the player.</p></section>` : ""}
-      <a class="btn btn-play ready-play" href="#/song/${encodeURIComponent(song.id)}">▶ Play</a>
-      <p class="row"><button type="button" class="btn" data-act="fav" data-id="${esc(song.id)}" aria-pressed="${store.favourites().includes(song.id)}">${favouriteLabel(song.id)}</button></p>
-    </div>`;
-  }
-
-  function strokeGrid(pattern) {
-    const n = pattern.strokes.length;
-    const counts = Array.isArray(pattern.counts) ? pattern.counts : [];
-    return `<div class="stroke-grid" style="grid-template-columns:repeat(${n},1fr)" role="img" aria-label="${esc(pattern.strokes.join(" "))}">
-      ${pattern.strokes.map(x => `<span class="stroke${x === "D" || x === "U" ? "" : " rest"}">${x === "D" || x === "U" ? esc(x) : "·"}</span>`).join("")}
-      ${pattern.strokes.map((_, i) => `<span class="stroke-count">${esc(counts[i] || "")}</span>`).join("")}</div>`;
-  }
 
   // ---------------------------------------------------------------- song page
   async function showSong(id, gen) {
@@ -315,6 +264,7 @@
       <div class="col-video">
         <div class="player-frame"><div id="yt-player"></div></div>
         <div id="player-status" class="player-status" role="status" aria-live="polite"></div>
+        ${songStrip(song)}
       </div>
       <div class="col-cues">
         <section id="after-panel" class="panel after-panel" aria-label="Song finished" hidden></section>
@@ -331,10 +281,6 @@
           <div id="cue-cover" class="cue-cover" hidden></div>
           <div id="count-big" class="count-big" role="status" aria-live="assertive" hidden></div>
         </section>
-        <section id="strum-panel" class="panel strum-panel" aria-label="Suggested practice pattern"></section>
-        <section id="diagram-panel" class="panel diagram-panel" aria-label="Chord diagrams"${settings().diagrams ? "" : " hidden"}>
-          <div id="diagrams" class="diagrams"></div>
-        </section>
       </div>
       <div class="col-controls">
         <section class="panel controls" aria-label="Playback controls">
@@ -343,6 +289,9 @@
             <button type="button" id="btn-back" class="btn" data-act="back10" disabled aria-label="Back 10 seconds">−10 s</button>
             <button type="button" id="btn-restart" class="btn" data-act="restart" disabled aria-label="Restart from the beginning">Restart</button>
           </div>
+        </section>
+        <details class="panel options" id="options"><summary>Options: pattern, sync, speed, view, count-in</summary>
+          <div id="pattern-opts"></div>
           <div class="row">
             <label id="speed-wrap" class="speed" hidden>Speed <select id="sel-speed" aria-label="Playback speed"></select></label>
             <button type="button" id="btn-hide" class="btn" data-act="hide" aria-pressed="false">Hide cues</button>
@@ -369,12 +318,29 @@
             ${capo ? `<span class="seg" role="group" aria-label="Chord names">
               <button type="button" class="btn" data-act="view" data-v="shapes">Capo shapes</button><button type="button" class="btn" data-act="view" data-v="sounding">Sounding</button>
             </span>` : ""}
-            <button type="button" id="btn-diagrams" class="btn" data-act="diagrams" aria-pressed="true">Diagrams</button>
           </div>
-        </section>
+        </details>
         <details class="panel details" id="details"><summary>Details</summary><div id="details-body"></div></details>
       </div>
     </div>`;
+  }
+
+  // Everything the old get-ready sheet showed, kept under the video (#53, founder's pick C on 28 October):
+  // the core shapes as chips that open a diagram and light up with the chord being played, and the strum.
+  function songStrip(song) {
+    const capo = num(song.capo) && song.capo > 0 ? song.capo : 0;
+    const d = song.difficulty || {};
+    const shapes = Array.isArray(d.main_shapes) ? d.main_shapes.filter(x => typeof x === "string" && x) : [];
+    const bpm = song.rhythm && num(song.rhythm.bpm) ? Math.round(song.rhythm.bpm) : null;
+    const fav = store.favourites().includes(song.id);
+    return `<section class="song-strip" aria-label="Chords and strum">
+      <div class="strip-row"><span class="strip-label">${capo ? `Capo ${esc(capo)}` : "Chords"}</span>
+        <span class="strip-chips">${shapes.map(l => `<button type="button" class="chord-chip" data-act="chip" data-chord="${esc(l)}" aria-expanded="false">${esc(l)}</button>`).join("")}</span>
+        <button type="button" class="btn small fav-star" data-act="fav" data-id="${esc(song.id)}" aria-pressed="${fav}" aria-label="Favourite">${fav ? "★" : "☆"}</button></div>
+      <div id="chip-diagram" class="chip-diagram" hidden></div>
+      ${song.setup_note ? `<p class="hint strip-note">${esc(song.setup_note)}</p>` : ""}
+      <div id="strip-strum" class="strip-row" hidden><span class="strip-label">Strum</span><span id="strip-strokes" class="strip-strokes"></span>${bpm ? `<span class="strip-bpm">~${bpm} BPM</span>` : ""}</div>
+    </section>`;
   }
 
   function levelOf(song) {
@@ -749,7 +715,7 @@
     if (S.epoch !== S.session.epoch) { S.epoch = S.session.epoch; S.memo = {}; }
     renderCue(cue);
     renderStrumStep(t);
-    renderDiagrams(cue);
+    renderChips(cue);
   }
 
   function cueMode() {
@@ -912,27 +878,29 @@
       <ol class="chord-list">${items.join("")}</ol>`;
   }
 
-  // ---------------------------------------------------------------- strum panel
+  // ---------------------------------------------------------------- strum
+  // One line of strokes in the strip (the live step lights up); the pattern choice and its notes live in Options.
   function renderStrumPanel() {
-    const panel = $("strum-panel");
-    if (!panel) return;
+    const row = $("strip-strum"), line = $("strip-strokes"), opts = $("pattern-opts");
+    if (!row || !line) return;
     const pattern = S.patterns.find(p => p.id === S.patternId);
-    if (!pattern) { panel.hidden = true; panel.innerHTML = ""; S.strumCells = []; return; }
-    panel.hidden = false;
+    if (!pattern) { row.hidden = true; line.innerHTML = ""; if (opts) opts.innerHTML = ""; S.strumCells = []; return; }
+    row.hidden = false;
+    const counts = Array.isArray(pattern.counts) ? pattern.counts : [];
+    const label = pattern.strokes.map((s, i) => `${counts[i] !== undefined ? counts[i] : i + 1} ${s === "D" ? "down" : s === "U" ? "up" : "skip"}`).join(", ");
+    line.setAttribute("role", "img");
+    line.setAttribute("aria-label", `Suggested practice pattern, not the recorded part: ${label}`);
+    line.innerHTML = pattern.strokes.map((stroke, i) => `<span class="stroke${stroke === "D" || stroke === "U" ? "" : " rest"}" data-i="${i}" aria-hidden="true">${stroke === "D" || stroke === "U" ? Core.strokeGlyph(stroke) : "·"}</span>`).join("");
+    S.strumCells = Array.from(line.querySelectorAll(".stroke"));
+    S.memo.strum = null;
+    if (!opts) return;
     const selector = S.patterns.length > 1 ? `<span class="seg" role="group" aria-label="Practice pattern">${S.patterns.map((p, i) => {
       const short = String(p.name || "").split(":")[0].trim() || (i ? "Next" : "Start");
       return `<button type="button" class="btn small" data-act="pattern" data-p="${esc(p.id)}" aria-pressed="${p.id === pattern.id}">${esc(short)}</button>`;
     }).join("")}</span>` : "";
-    const counts = Array.isArray(pattern.counts) ? pattern.counts : [];
-    const cells = pattern.strokes.map((stroke, i) => `<div class="stroke${stroke === "D" || stroke === "U" ? "" : " rest"}" data-i="${i}">
-      <b aria-hidden="true">${Core.strokeGlyph(stroke)}</b><span>${esc(counts[i] !== undefined ? counts[i] : "")}</span></div>`).join("");
-    const label = pattern.strokes.map((s, i) => `${counts[i] !== undefined ? counts[i] : i + 1} ${s === "D" ? "down" : s === "U" ? "up" : "skip"}`).join(", ");
     const name = String(pattern.name || "").includes(":") ? String(pattern.name).split(":").slice(1).join(":").trim() : String(pattern.name || "");
-    panel.innerHTML = `<div class="strum-head"><h2 class="panel-title">Suggested practice pattern, not the recorded part</h2>${selector}</div>
-      <div class="strokes" style="--steps:${pattern.strokes.length}" role="img" aria-label="${esc(label)}">${cells}</div>
-      <p class="strum-desc">${name ? `<b>${esc(name)}.</b> ` : ""}${esc(pattern.description || "")}</p>`;
-    S.strumCells = Array.from(panel.querySelectorAll(".stroke"));
-    S.memo.strum = null;
+    opts.innerHTML = `<div class="row"><span class="row-label">Pattern</span>${selector}</div>
+      <p class="hint">${name ? `<b>${esc(name)}.</b> ` : ""}${esc(pattern.description || "")} A practice suggestion, not the recorded part.</p>`;
   }
 
   function renderStrumStep(t) {
@@ -946,22 +914,34 @@
     S.strumCells.forEach((cell, i) => cell.classList.toggle("on", i === step));
   }
 
-  // ---------------------------------------------------------------- chord diagrams
-  function renderDiagrams(cue) {
-    if (!settings().diagrams) return;
-    const mode = cueMode();
-    const nowLabel = mode === "live" && cue.now && cue.now.idx >= 0 ? cue.now.label : null;
-    const nextLabel = mode === "live" && cue.next ? cue.next.label : null;
-    // Always draw the capo-shape fingering (what the hand holds); the view only changes the caption.
+  // ---------------------------------------------------------------- chord chips
+  // Light the chips that match the NOW and NEXT grips (the capo-shape fingering, as the chips are named).
+  function renderChips(cue) {
+    const chips = app.querySelectorAll(".chord-chip");
+    if (!chips.length) return;
+    const live = cueMode() === "live" && S.played;
     const capo = num(S.song.capo) && S.song.capo > 0 ? S.song.capo : 0;
-    const grip = p => p && p.idx >= 0 && p.kind === "chord" ? Core.shapeLabel(p.sounding, { capo, view: "shapes", quality: settings().quality }) : null;
-    const nowGrip = nowLabel ? grip(cue.now) : null, nextGrip = nextLabel ? grip(cue.next) : null;
-    const key = `${nowLabel}|${nextLabel}|${nowGrip}|${nextGrip}`;
-    if (S.memo.diag === key) return;
-    S.memo.diag = key;
-    const box = $("diagrams");
+    const grip = p => p && p.idx >= 0 && p.kind === "chord" ? Core.shapeLabel(p.sounding, { capo, view: "shapes", quality: "core" }) : null;
+    const nowGrip = live ? grip(cue.now) : null, nextGrip = live ? grip(cue.next) : null;
+    const key = `${nowGrip}|${nextGrip}`;
+    if (S.memo.chips === key) return;
+    S.memo.chips = key;
+    for (const chip of chips) {
+      chip.classList.toggle("now", chip.dataset.chord === nowGrip);
+      chip.classList.toggle("next", chip.dataset.chord === nextGrip && nextGrip !== nowGrip);
+    }
+  }
+
+  // A tapped chip opens its diagram under the strip; tapping it again closes it.
+  function toggleChipDiagram(chip) {
+    const box = $("chip-diagram");
     if (!box) return;
-    box.innerHTML = diagramHTML(nowLabel, "Now", 132, nowGrip) + diagramHTML(nextLabel, "Next", 104, nextGrip);
+    const label = chip.dataset.chord;
+    const open = box.hidden || box.dataset.chord !== label;
+    for (const c of app.querySelectorAll(".chord-chip")) c.setAttribute("aria-expanded", String(open && c === chip));
+    box.dataset.chord = open ? label : "";
+    box.innerHTML = open ? diagramHTML(label, "", 120, label) : "";
+    box.hidden = !open;
   }
 
   function diagramHTML(label, role, size, gripLabel) {
@@ -999,15 +979,11 @@
   }
 
   function renderViewControls() {
-    const { quality, view, diagrams, countIn } = settings();
+    const { quality, view, countIn } = settings();
     const ci = $("btn-countin");
     if (ci) { ci.setAttribute("aria-pressed", String(countIn)); ci.textContent = countIn ? "Count-in on" : "Count-in off"; }
     for (const b of app.querySelectorAll('[data-act="quality"]')) b.setAttribute("aria-pressed", String(b.dataset.v === quality));
     for (const b of app.querySelectorAll('[data-act="view"]')) b.setAttribute("aria-pressed", String(b.dataset.v === view));
-    const d = $("btn-diagrams");
-    if (d) { d.setAttribute("aria-pressed", String(diagrams)); d.textContent = diagrams ? "Diagrams on" : "Diagrams off"; }
-    const panel = $("diagram-panel");
-    if (panel) panel.hidden = !diagrams;
     const badge = $("capo-badge");
     if (badge && S) badge.textContent = S.session.view() === "shapes" ? `Capo ${S.song.capo}` : `Capo ${S.song.capo} · sounding names`;
   }
@@ -1098,7 +1074,7 @@
     if (act === "fav") {
       const on = store.toggleFavourite(target.dataset.id);
       target.setAttribute("aria-pressed", String(on));
-      target.textContent = on ? "★ Favourite" : "☆ Favourite";
+      target.textContent = target.classList.contains("fav-star") ? (on ? "★" : "☆") : on ? "★ Favourite" : "☆ Favourite";
       return;
     }
     if (act === "resume") {
@@ -1129,8 +1105,7 @@
         S.session.setView(target.dataset.v); renderViewControls(); frame(); break;
       case "countin":
         store.setCountIn(!settings().countIn); renderViewControls(); break;
-      case "diagrams":
-        store.setDiagrams(!settings().diagrams); S.memo.diag = null; renderViewControls(); frame(); break;
+      case "chip": toggleChipDiagram(target); break;
       case "pattern":
         if (S.session.setPattern(target.dataset.p)) { renderStrumPanel(); frame(); }
         break;
