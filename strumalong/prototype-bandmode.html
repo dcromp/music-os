@@ -167,6 +167,32 @@ button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); o
 .D .B-lane-name.lit { color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
 .D .B-cell.cur { box-shadow: inset 0 0 0 2px var(--text); }
 
+/* recording and tone (round 3) */
+.rec-setup .check { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 10px; align-items: start; padding: 10px 0; border-top: 1px solid var(--border); }
+.rec-setup .tick { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border); display: grid; place-items: center; font-size: 12px; font-weight: 800; }
+.rec-setup .check.ok .tick { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.tuner { font-family: var(--font-num); font-size: 13px; } .tuner span { color: var(--accent); letter-spacing: .1em; }
+.meter-h { height: 8px; border-radius: 4px; background: var(--soft); overflow: hidden; } .meter-h i { display: block; height: 100%; background: var(--verse); transition: width .1s; }
+.rec-bar { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; }
+.rec-btn { width: 56px; height: 56px; border-radius: 50%; border: 3px solid var(--solo); background: var(--panel); color: var(--solo); font-size: 26px; line-height: 1; }
+.rec-btn.on { background: var(--solo); color: var(--on-sec); }
+.rec-lane { position: relative; border: 1px solid var(--border); border-radius: 10px; background: var(--soft); overflow: hidden; }
+.rec-lane canvas { display: block; width: 100%; height: 70px; }
+.rec-lbl { position: absolute; left: 8px; top: 4px; font-size: 11px; font-weight: 700; color: var(--muted); }
+.takes { display: grid; gap: 4px; } .take { display: grid; grid-template-columns: minmax(0, 1fr) auto auto auto; gap: 8px; align-items: center; padding: 4px 8px; border-radius: 8px; border: 1px solid var(--border); }
+.take.kept { border-color: var(--accent); }
+.ok-note { color: var(--accent); }
+.chain { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.pedal { min-height: 40px; padding: 0 10px; border-radius: 8px; border: 1px dashed var(--border); background: transparent; color: var(--muted); font-size: 13px; }
+.pedal.on { border-style: solid; border-color: var(--accent); background: var(--panel); color: var(--text); font-weight: 600; }
+.pedal.amp.on { background: var(--accent); color: var(--on-accent); }
+.arrow { color: var(--muted); font-size: 12px; }
+.knobs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.knob { display: grid; gap: 4px; justify-items: start; } .kbar { width: 100%; height: 6px; border-radius: 3px; background: var(--soft); } .kbar i { display: block; height: 100%; border-radius: 3px; background: var(--accent); }
+.sugg button.on { border-color: var(--accent); box-shadow: inset 0 0 0 2px var(--accent); }
+.linkbtn { background: none; border: 0; padding: 0; color: inherit; text-decoration: underline; font: inherit; min-height: 0; }
+.B-cell.has-take { font-weight: 600; }
+
 /* floating prototype switcher: not part of the design */
 .switcher { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 50;
   display: flex; align-items: center; gap: 4px; background: #111; color: #fff; border-radius: 999px; padding: 4px; box-shadow: 0 6px 20px rgba(0,0,0,.35); }
@@ -239,7 +265,7 @@ const BASS = [
 const STEPS = [
   { id: "setup", name: "Set up" }, { id: "structure", name: "Structure" }, { id: "chords", name: "Chords" },
   { id: "band", name: "Drums and bass" }, { id: "lyrics", name: "Lyrics", soon: true }, { id: "melody", name: "Melody and singer", soon: true },
-  { id: "guitar", name: "Your guitar", soon: true }, { id: "mix", name: "Mix and share", soon: true },
+  { id: "guitar", name: "Lead guitar" }, { id: "mix", name: "Mix and share", soon: true },
 ];
 const SOON = {
   lyrics: "Section by section, with a title and hook first, each section's job, syllable and rhyme checks, and AI line ideas on request. You write; the AI suggests.",
@@ -249,14 +275,15 @@ const SOON = {
 };
 
 function newBlock(kind) { return { bars: [null, null, null, null], drums: { mode: "ai", track: "rock8", over: null }, bass: "root", scale: kind === "solo" ? "majpent" : null }; }
+const TONES_ON = id => TONES[id].on.slice();
 function sampleSong() {
-  const s = { title: "Untitled song", key: "G", tempo: 100, feel: "Rock", shape: "vc", order: SHAPES[0].order.slice(), blocks: {} };
+  const s = { title: "Untitled song", key: "G", tempo: 100, feel: "Rock", shape: "vc", order: SHAPES[0].order.slice(), blocks: {}, takes: {}, lead: {}, tone: { rhythm: "crunch", lead: "lead" }, chain: { rhythm: ["tuner", "drive", "reverb", "amp"], lead: ["tuner", "drive", "delay", "reverb", "amp"] } }; // = TONES crunch / lead
   for (const k of Object.keys(BLOCKS)) s.blocks[k] = newBlock(k);
   s.blocks.verse.bars = ["G", "D", "Em", "C"]; // example: the verse is written, the rest is not (yet)
   return s;
 }
 let song = sampleSong();
-const ui = { step: 0, block: "verse", slot: 0, listening: false, sel: null, open: null, coachSkip: 0 };
+const ui = { step: 0, block: "verse", slot: 0, listening: false, sel: null, open: null, coachSkip: 0, introSeen: {}, gtab: { rhythm: "chords", lead: "play" }, checks: {}, rec: null, click: true, detect: false, detected: null };
 
 const kindsInSong = () => [...new Set(song.order)];
 const filledBars = k => song.blocks[k].bars.filter(Boolean).length;
@@ -392,11 +419,11 @@ function fretboard(sc) {
   }
   return `<svg class="fret" viewBox="0 0 ${W} ${H}" role="img" aria-label="${sc.name} in ${song.key}, one position from fret ${start + 1}">${g}</svg>`;
 }
-function scalePanel(k) {
-  const b = song.blocks[k];
+function scalePanel(k, rec) {
+  const b = leadOf(k);
   return `<div class="stack"><div><p class="label">Scales to solo with in ${song.key}</p><p class="small muted">Pick one to practise. The red dots are ${song.key}, the home note.</p></div>
     <div class="scales">${SCALES.map(sc => `<div class="scale${b.scale === sc.id ? " on" : ""}">
-      <div class="row" style="justify-content:space-between"><b>${song.key} ${sc.name.toLowerCase()}</b>
+      <div class="row" style="justify-content:space-between"><b>${song.key} ${sc.name.toLowerCase()}${sc.id === rec ? ' <span class="soon" style="background:var(--soft);color:var(--accent)">For this feel</span>' : ""}</b>
         <span class="row"><button type="button" class="btn small" style="min-height:36px" data-act="scale" data-k="${k}" data-v="${sc.id}">${b.scale === sc.id ? "Chosen" : "Use this"}</button><button type="button" class="btn small" style="min-height:36px" data-act="hearscale" data-v="${sc.id}">▶ Hear</button></span></div>
       <p class="small">${sc.use}</p><p class="notes">${scaleNotes(sc).join(" · ")}</p>${b.scale === sc.id ? fretboard(sc) : ""}</div>`).join("")}</div></div>`;
 }
@@ -443,7 +470,7 @@ function chordEditor(k) {
       <button type="button" class="btn ghost" data-act="clear" data-k="${k}">Clear</button>
       <button type="button" class="btn ghost" data-act="play" data-k="${k}" data-label="▶ Hear ${BLOCKS[k].name.toLowerCase()}">▶ Hear ${BLOCKS[k].name.toLowerCase()}</button></div>
     <p class="fake">Prototype: "Play it in" pretends to listen and fills in chords you can then edit.</p>
-    ${k === "solo" ? `${filledBars("verse") ? `<button type="button" class="btn" data-act="soloverse">Solo over the verse chords (${song.blocks.verse.bars.filter(Boolean).join(" ")})</button>` : ""}${scalePanel(k)}` : ""}
+    ${k === "solo" && filledBars("verse") ? `<button type="button" class="btn" data-act="soloverse">Use the verse chords for the solo (${song.blocks.verse.bars.filter(Boolean).join(" ")})</button><p class="small muted">Scales for the solo are in the Lead guitar step.</p>` : ""}
   </div>`;
 }
 function drumEditor(k) {
@@ -564,49 +591,157 @@ function VariantC() {
 }
 
 // ============================================================ Variant D: B's timeline + A's step guidance
-const STEP_LANES = { setup: [], structure: ["sec"], chords: ["chords"], band: ["drums", "bass"], lyrics: ["lyrics"], melody: ["melody"], guitar: ["guitar"], mix: [] };
-const STEP_HELP = {
-  setup: "Pick a key, tempo and feel. You can change them any time.",
-  structure: "Choose a song shape. Each colour on the timeline is a section you write once.",
-  chords: "Give each section its chords. Tap a bar, then a chord, or try a suggestion.",
-  band: "Choose how the drums and bass play each section.",
-  lyrics: SOON.lyrics, melody: SOON.melody, guitar: SOON.guitar, mix: SOON.mix,
+// Round 3 (#73): each step is a member of the band. The player is the rhythm and the lead guitarist.
+const MEMBERS = {
+  setup: { who: "Set up", intro: "Set the key, tempo and feel the whole band will play in.", tryThis: "Not sure? G, 100 bpm and Rock is a friendly start." },
+  structure: { who: "Songwriter", intro: "Decides the song's shape: which sections, in what order.", tryThis: "Start with verse–chorus. Most songs you know use it." },
+  chords: { who: "Rhythm guitar (you)", intro: "Holds the song together with the chords and the strum. Write the chords, then record yourself playing them to a click.", tryThis: "Pick a suggestion such as G D Em C, then record four bars of steady down-strums." },
+  band: { who: "Drummer and bassist", intro: "The rhythm section. The drummer sets the groove; the bassist locks it to your chords. Root notes on the beat are the foundation.", tryThis: "Leave the AI drummer on and listen, then make the chorus busier than the verse." },
+  lyrics: { who: "Lyricist", intro: SOON.lyrics, tryThis: "" },
+  melody: { who: "Singer", intro: SOON.melody, tryThis: "" },
+  guitar: { who: "Lead guitar (you)", intro: "Plays the solos, riffs and fills over the band. A scale tells you which notes fit; chord tones tell you where to land.", tryThis: "Over a rock feel, start in the minor pentatonic box and land on the chord's root when it changes." },
+  mix: { who: "Producer", intro: SOON.mix, tryThis: "" },
 };
+const STEP_LANES = { setup: [], structure: ["sec"], chords: ["chords"], band: ["drums", "bass"], lyrics: ["lyrics"], melody: ["melody"], guitar: ["guitar"], mix: [] };
 const LANE_STEP = { sec: "structure", chords: "chords", drums: "band", bass: "band", lyrics: "lyrics", melody: "melody", guitar: "guitar" };
+const FEEL_SCALE = {
+  Rock: ["minpent", "For a rock feel, the minor pentatonic gives the gritty, bluesy sound."],
+  Pop: ["majpent", "For a pop feel, the major pentatonic is bright and singable."],
+  Ballad: ["majpent", "For a ballad, the major pentatonic, with long notes. Try the full major scale later."],
+  Shuffle: ["minpent", "For a shuffle, the minor pentatonic is the shuffle-blues sound."],
+};
+const LEAD_PARTS = [["solo", "Solo"], ["riff", "Riff"], ["fills", "Fills"], ["none", "Nothing"]];
+// Foundation tones (#72): BOSS chain order, EQ starting at noon (5 of 10), and gain is tone, volume is loudness.
+const CHAIN = ["tuner", "comp", "drive", "chorus", "delay", "reverb", "amp"];
+const PEDAL = { tuner: "Tuner", comp: "Compressor", drive: "Drive", chorus: "Chorus", delay: "Delay", reverb: "Reverb", amp: "Amp + cab" };
+const TONES = {
+  clean: { role: "rhythm", name: "Clean strum", on: ["tuner", "comp", "reverb", "amp"], amp: { gain: 2, bass: 5, mid: 5, treble: 6 },
+    why: "Low amp gain so every string rings clearly; a compressor evens out loud and soft strums; a little reverb for space. Good for learning chords." },
+  crunch: { role: "rhythm", name: "Classic rock crunch", on: ["tuner", "drive", "reverb", "amp"], amp: { gain: 6, bass: 6, mid: 6, treble: 5 },
+    why: "Gain up until the amp just breaks up: strum hard and it growls, softly and it cleans up. Bass and mids up for weight." },
+  jangle: { role: "rhythm", name: "Indie jangle", on: ["tuner", "comp", "chorus", "reverb", "amp"], amp: { gain: 2, bass: 4, mid: 5, treble: 7 },
+    why: "Clean, treble up, chorus for shimmer. Open chords sparkle." },
+  lead: { role: "lead", name: "Singing lead", on: ["tuner", "drive", "delay", "reverb", "amp"], amp: { gain: 7, bass: 5, mid: 7, treble: 6 },
+    why: "More gain for sustain, mids and treble up so notes cut through the band, delay for space behind them." },
+  blues: { role: "lead", name: "Blues lead", on: ["tuner", "drive", "reverb", "amp"], amp: { gain: 5, bass: 6, mid: 6, treble: 4 },
+    why: "Medium gain so your picking dynamics show; bass and mids up, treble down for a warm, round tone." },
+};
+const recKey = (role, k) => role + ":" + k;
+const takesOf = (role, k) => song.takes[recKey(role, k)] || [];
+function leadOf(k) { if (!song.lead[k]) song.lead[k] = { part: k === "solo" ? "solo" : "none", scale: FEEL_SCALE[song.feel][0] }; return song.lead[k]; }
 function stepDone(id) {
   if (id === "setup" || id === "structure") return true;
-  if (id === "chords") return kindsInSong().every(k => filledBars(k) === 4);
+  if (id === "chords") return kindsInSong().every(k => filledBars(k) === 4 && takesOf("rhythm", k).length);
+  if (id === "guitar") return kindsInSong().some(k => takesOf("lead", k).length);
   return false;
 }
+
+// ---- recording (fake input; the real one follows #67's limits)
+const SETUP_CHECKS = [
+  ["input", "Input", "USB audio interface · Input 1 (mono)"],
+  ["level", "Level", "Strum hard: aim for the green, never the red."],
+  ["tune", "Tune", "Tune each string until the needle sits in the middle."],
+  ["latency", "Latency test", "Hold your phone's mic near the speaker; a click is measured so your takes line up with the band."],
+];
+function setupCheck() {
+  const done = ui.checks;
+  return `<div class="rec-setup stack"><div><h3>Plug in your guitar</h3><p class="small muted">A one-time check. You can redo it from Record settings.</p></div>
+    ${SETUP_CHECKS.map(([id, name, text]) => `<div class="check${done[id] ? " ok" : ""}"><span class="tick" aria-hidden="true">${done[id] ? "✓" : ""}</span>
+      <div><b>${name}</b><p class="small muted">${id === "latency" && done.latency ? "Measured 38 ms. Takes will be shifted to line up." : id === "level" && done.level ? "Peaks in the green. Good." : text}</p>
+      ${id === "level" && !done.level ? `<div class="meter-h" aria-hidden="true"><i style="width:62%"></i></div>` : ""}${id === "tune" && !done.tune ? `<p class="tuner">G <span>· · · ● · · ·</span> in tune</p>` : ""}</div>
+      ${done[id] ? "" : `<button type="button" class="btn small" data-act="check" data-v="${id}">${id === "latency" ? "Measure" : id === "input" ? "Use this" : "Done"}</button>`}</div>`).join("")}
+    <p class="small muted">Listen through your interface's direct-monitor knob while you play. It has no delay.</p>
+    <p class="fake">Prototype: nothing is really connected.</p></div>`;
+}
+function recordPanel(role, k) {
+  if (!SETUP_CHECKS.every(([id]) => ui.checks[id])) return setupCheck();
+  const takes = takesOf(role, k), rec = ui.rec && ui.rec.role === role && ui.rec.k === k;
+  const bars = song.blocks[k].bars.length;
+  return `<div class="stack">
+    <div class="rec-bar">
+      <button type="button" class="rec-btn${rec ? " on" : ""}" data-act="rec" data-k="${k}" data-v="${role}" aria-label="${rec ? "Stop recording" : `Record the ${BLOCKS[k].name.toLowerCase()}`}">${rec ? "■" : "●"}</button>
+      <div style="display:grid;gap:2px;min-width:0"><b id="rec-status">${rec ? "Count-in…" : `Record the ${BLOCKS[k].name.toLowerCase()}`}</b><span class="small muted">${bars} bars at ${song.tempo} bpm · 1-bar count-in</span></div>
+      <button type="button" class="btn small${ui.click ? " on" : ""}" data-act="click" aria-pressed="${ui.click}">Click ${ui.click ? "on" : "off"}</button>
+    </div>
+    <div class="meter-h" aria-label="Input level"><i id="rec-meter" style="width:${rec ? 50 : 8}%"></i></div>
+    <div class="rec-lane"><canvas id="rec-canvas" width="600" height="70" aria-hidden="true"></canvas><span class="rec-lbl">${role === "rhythm" ? "Rhythm guitar" : "Lead guitar"} · ${BLOCKS[k].name}</span></div>
+    ${role === "rhythm" ? `<label class="row small"><input type="checkbox" id="detect" data-act="detect" ${ui.detect ? "checked" : ""}> Write the chords from my take (play it in)</label>` : ""}
+    <div><p class="label">Takes</p>${takes.length ? `<div class="takes">${takes.map((t, i) => `<div class="take${t.kept ? " kept" : ""}"><span>Take ${t.n}</span><span class="small muted">${t.len}</span>
+      <button type="button" class="btn small" data-act="keep" data-k="${k}" data-v="${role}" data-i="${i}">${t.kept ? "★ Kept" : "☆ Keep"}</button><button type="button" class="btn ghost small" data-act="deltake" data-k="${k}" data-v="${role}" data-i="${i}" aria-label="Delete take ${t.n}">✕</button></div>`).join("")}</div>`
+      : `<p class="small muted">No takes yet. Record as many as you like and keep the best.</p>`}</div>
+    ${ui.detected === k && role === "rhythm" ? `<p class="small ok-note">Chords written from your take: ${song.blocks[k].bars.join(" ")}. Check them on the Chords tab.</p>` : ""}
+    <p class="fake">Prototype: no real audio is recorded; the waveform is pretend. The click is real.</p></div>`;
+}
+function tonePanel(role) {
+  const id = song.tone[role], t = TONES[id];
+  const presets = Object.entries(TONES).filter(([, x]) => x.role === role);
+  const on = new Set(song.chain[role]);
+  return `<div class="stack">
+    <div><p class="label">Start from a foundation tone</p><div class="sugg">${presets.map(([pid, x]) => `<button type="button" class="${pid === id ? "on" : ""}" data-act="tone" data-k="${role}" data-v="${pid}"><b>${x.name}</b><span>${role === "rhythm" ? "rhythm" : "lead"}</span></button>`).join("")}</div></div>
+    <p class="small"><b>Why it sounds like this:</b> ${t.why}</p>
+    <div><p class="label">Signal chain, in the order pedals usually go</p><div class="chain">${CHAIN.map(c => `<button type="button" class="pedal${on.has(c) ? " on" : ""}${c === "amp" ? " amp" : ""}" data-act="pedal" data-k="${role}" data-v="${c}" aria-pressed="${on.has(c)}">${PEDAL[c]}</button>`).join('<span class="arrow" aria-hidden="true">→</span>')}</div></div>
+    <div class="knobs">${Object.entries(t.amp).map(([kn, v]) => `<div class="knob"><span class="label">${kn}</span><div class="kbar"><i style="width:${v * 10}%"></i></div><span class="small">${v}</span></div>`).join("")}</div>
+    <p class="small muted">Tip: start the EQ at noon (5) and change one knob at a time. Gain shapes the tone; volume is just loudness.</p>
+    <p class="small muted">Your guitar is recorded clean and the tone is added on playback, so you can change it any time.</p>
+    <p class="fake">Prototype: tone is display only.</p></div>`;
+}
+function chordTones(k) {
+  const bars = song.blocks[k].bars;
+  return `<div><p class="label">Chord tones: land on these when the chord changes</p><div class="bars">${bars.map((c, i) => {
+    if (!c) return `<div class="slot"><small>bar ${i + 1}</small></div>`;
+    const { root, minor } = chordNotes(c), n = [0, minor ? 3 : 4, 7].map(iv => PC[(root + iv) % 12]);
+    return `<div class="slot filled" style="font-size:14px">${c}<small>${n.join(" ")}</small></div>`;
+  }).join("")}</div></div>`;
+}
+function leadEditor(k) {
+  const l = leadOf(k), [rec, why] = FEEL_SCALE[song.feel];
+  return `<div class="stack">
+    <div><p class="label">What lead guitar plays in the ${BLOCKS[k].name.toLowerCase()}</p><div class="seg" role="group">${LEAD_PARTS.map(([id, name]) => `<button type="button" data-act="leadpart" data-k="${k}" data-v="${id}" class="${l.part === id ? "on" : ""}">${name}</button>`).join("")}</div></div>
+    ${l.part === "none" ? `<p class="small muted">Leaving space is part of lead playing. The band carries this section.</p>` : `
+    <p class="small"><b>Play this scale for this feel:</b> ${why}</p>
+    ${scalePanel(k, rec)}${chordTones(k)}`}
+  </div>`;
+}
+function guitarTabs(role, k) {
+  const tabs = role === "rhythm" ? [["chords", "Chords"], ["record", "Record"], ["tone", "Tone"]] : [["play", "What to play"], ["record", "Record"], ["tone", "Tone"]];
+  const cur = ui.gtab[role];
+  const body = cur === "chords" ? chordEditor(k) : cur === "play" ? leadEditor(k) : cur === "record" ? recordPanel(role, k) : tonePanel(role);
+  return `<div class="seg" role="tablist" aria-label="${role} guitar">${tabs.map(([id, n]) => `<button type="button" role="tab" aria-selected="${cur === id}" class="${cur === id ? "on" : ""}" data-act="gtab" data-k="${role}" data-v="${id}">${n}</button>`).join("")}</div>${body}`;
+}
 function VariantD() {
-  const st = STEPS[ui.step], lit = STEP_LANES[st.id];
+  const st = STEPS[ui.step], lit = STEP_LANES[st.id], m = MEMBERS[st.id];
   if (!kindsInSong().includes(ui.block)) ui.block = kindsInSong()[0];
-  const lanes = [["Sections", "sec"], ["Chords", "chords"], ["Drums", "drums"], ["Bass", "bass"], ["Lyrics", "lyrics"], ["Vocal", "melody"], ["Guitar", "guitar"]];
-  const perSection = st.id === "chords" || st.id === "band";
+  const lanes = [["Sections", "sec"], ["Rhythm gtr", "chords"], ["Drums", "drums"], ["Bass", "bass"], ["Lyrics", "lyrics"], ["Vocal", "melody"], ["Lead gtr", "guitar"]];
+  const perSection = st.id === "chords" || st.id === "band" || st.id === "guitar";
   const cell = (k, i, lane) => {
     const w = `flex:${song.blocks[k].bars.length}`, curCell = perSection && lit.includes(lane) && ui.block === k ? " cur" : "";
     const attrs = `data-act="D-cell" data-v="${i}" data-p="${lane}"`;
     if (lane === "sec") return `<button type="button" class="B-cell sec sec-${k}" style="${w}" ${attrs}>${BLOCKS[k].name}</button>`;
-    if (lane === "chords") { const n = filledBars(k); return `<button type="button" class="B-cell part${n ? "" : " empty"}${curCell}" style="${w}" ${attrs}>${n ? song.blocks[k].bars.map(c => c || "·").join(" ") : "+ chords"}</button>`; }
+    if (lane === "chords") { const n = filledBars(k), tk = takesOf("rhythm", k); return `<button type="button" class="B-cell part${n ? "" : " empty"}${tk.length ? " has-take" : ""}${curCell}" style="${w}" ${attrs}>${n ? song.blocks[k].bars.map(c => c || "·").join(" ") : "+ chords"}${tk.length ? " · ●" : ""}</button>`; }
     if (lane === "drums") { const d = drumsFor(k); return `<button type="button" class="B-cell part${curCell}" style="${w}" ${attrs}>${song.blocks[k].drums.mode === "ai" ? "AI · " : ""}${d.style}</button>`; }
     if (lane === "bass") return `<button type="button" class="B-cell part${curCell}" style="${w}" ${attrs}>${BASS.find(b => b.id === song.blocks[k].bass).name}</button>`;
+    if (lane === "guitar") { const l = leadOf(k), tk = takesOf("lead", k); const sc = SCALES.find(x => x.id === l.scale);
+      return `<button type="button" class="B-cell part${l.part === "none" ? " empty" : ""}${tk.length ? " has-take" : ""}${curCell}" style="${w}" ${attrs}>${l.part === "none" ? "+ lead" : `${LEAD_PARTS.find(p => p[0] === l.part)[1]} · ${sc.name.replace("pentatonic", "pent.")}`}${tk.length ? " · ●" : ""}</button>`; }
     return `<button type="button" class="B-cell locked" style="${w}" ${attrs}>later</button>`;
   };
   const dim = lane => lit.length && !lit.includes(lane) ? " dim" : lit.includes(lane) ? " lit" : "";
   let editor;
   if (st.id === "setup") editor = setupEditor();
   else if (st.id === "structure") editor = `${structureEditor()}<details><summary class="small">Change the order</summary><div style="margin-top:8px">${orderEditor()}</div></details>`;
-  else if (st.id === "chords") editor = `${blockTabs("blk")}${chordEditor(ui.block)}`;
+  else if (st.id === "chords") editor = `${blockTabs("blk")}${guitarTabs("rhythm", ui.block)}`;
   else if (st.id === "band") editor = `${blockTabs("blk")}<h3>Drums · ${BLOCKS[ui.block].name}</h3>${drumEditor(ui.block)}<h3>Bass · ${BLOCKS[ui.block].name}</h3>${bassEditor(ui.block)}`;
+  else if (st.id === "guitar") editor = `${blockTabs("blk")}${guitarTabs("lead", ui.block)}`;
   else editor = soonPanel(st.id);
-  const todo = st.id === "chords" ? kindsInSong().filter(k => filledBars(k) < 4).map(k => BLOCKS[k].name) : [];
+  const todo = st.id === "chords" ? kindsInSong().filter(k => filledBars(k) < 4 || !takesOf("rhythm", k).length).map(k => BLOCKS[k].name) : [];
+  const introOpen = !ui.introSeen[st.id];
   return `<section class="D" aria-label="Timeline with steps">
     <div class="B-head"><div><h1>${esc(song.title)}</h1><p class="small muted">${song.key} · ${song.tempo} bpm · ${song.feel}</p></div>
       <button type="button" class="btn primary playbtn" data-act="play" data-label="▶ Play song">▶ Play song</button></div>
-    <nav class="D-steps" aria-label="Steps">${STEPS.map((s, i) => `<button type="button" data-act="goto" data-v="${i}" class="${i === ui.step ? "cur" : stepDone(s.id) ? "done" : s.soon ? "soonstep" : ""}"${i === ui.step ? ' aria-current="step"' : ""}>${i + 1}. ${s.name}${stepDone(s.id) && i !== ui.step ? " ✓" : ""}</button>`).join("")}</nav>
-    <div class="D-guide" role="status"><span class="who">Step ${ui.step + 1} of ${STEPS.length} · ${st.name}${st.soon ? " · later prototype" : ""}</span>
-      <p>${STEP_HELP[st.id]}${todo.length ? ` Still to do: ${todo.join(", ")}.` : ""}</p>
-      <div class="row"><button type="button" class="btn" data-act="back" ${ui.step === 0 ? "disabled" : ""}>Back</button><button type="button" class="btn primary" data-act="next" ${ui.step === STEPS.length - 1 ? "disabled" : ""}>Next: ${STEPS[ui.step + 1] ? STEPS[ui.step + 1].name : "Done"}</button></div></div>
+    <nav class="D-steps" aria-label="Band members">${STEPS.map((s, i) => `<button type="button" data-act="goto" data-v="${i}" class="${i === ui.step ? "cur" : stepDone(s.id) ? "done" : s.soon ? "soonstep" : ""}"${i === ui.step ? ' aria-current="step"' : ""}>${i + 1}. ${MEMBERS[s.id].who}${stepDone(s.id) && i !== ui.step ? " ✓" : ""}</button>`).join("")}</nav>
+    <div class="D-guide" role="status"><span class="who">Step ${ui.step + 1} of ${STEPS.length} · ${m.who}${st.soon ? " · later prototype" : ""}</span>
+      ${introOpen ? `<p>${m.intro}</p>${m.tryThis ? `<p class="small"><b>Try this:</b> ${m.tryThis}</p>` : ""}` : `<p class="small">${m.who}. <button type="button" class="linkbtn" data-act="intro" data-v="${st.id}">What do I do here?</button></p>`}
+      ${todo.length ? `<p class="small">Still to do: ${todo.join(", ")} (chords and a take).</p>` : ""}
+      <div class="row">${introOpen && m.tryThis ? `<button type="button" class="btn" data-act="intro" data-v="${st.id}">Got it</button>` : ""}<button type="button" class="btn" data-act="back" ${ui.step === 0 ? "disabled" : ""}>Back</button><button type="button" class="btn primary" data-act="next" ${ui.step === STEPS.length - 1 ? "disabled" : ""}>Next: ${STEPS[ui.step + 1] ? MEMBERS[STEPS[ui.step + 1].id].who : "Done"}</button></div></div>
     <p class="B-rotate small muted">Tip: turn your phone sideways to see the timeline and the step side by side.</p>
     <div class="D-main">
       <div class="B-tl"><div class="B-grid">
@@ -617,14 +752,68 @@ function VariantD() {
   </section>`;
 }
 
+// ---- fake recording: count-in and click are real; the take is pretend
+function startRec(role, k) {
+  stop();
+  try { if (!audio.ctx) audio.ctx = new (window.AudioContext || window.webkitAudioContext)(); audio.ctx.resume(); } catch (_) { return; }
+  const beat = 60 / song.tempo, bars = song.blocks[k].bars.length, total = 4 + bars * 4;
+  ui.rec = { role, k, n: 0 };
+  render();
+  const canvas = document.getElementById("rec-canvas"), g = canvas && canvas.getContext("2d");
+  const color = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#22543e";
+  if (g) g.clearRect(0, 0, canvas.width, canvas.height);
+  const tickBeat = () => {
+    if (!ui.rec) return;
+    const n = ui.rec.n++;
+    if (ui.click || n < 4) tone(audio.ctx.currentTime + 0.01, n % 4 === 0 ? 1600 : 1000, 0.05, "square", 0.08, audio.ctx.destination);
+    const status = document.getElementById("rec-status"), meter = document.getElementById("rec-meter");
+    if (n < 4) { if (status) status.textContent = `Count-in: ${n + 1}`; }
+    else {
+      const b = n - 4;
+      if (status) status.textContent = `Recording · bar ${Math.floor(b / 4) + 1} of ${bars}`;
+      if (meter) meter.style.width = (45 + Math.random() * 35) + "%";
+      if (g) { g.fillStyle = color; const x0 = b / (bars * 4) * canvas.width, w = canvas.width / (bars * 4);
+        for (let x = 0; x < w; x += 3) { const a = (b % 2 ? 0.9 : 0.6) * Math.exp(-x / w * 1.6) * (0.5 + Math.random() * 0.5) * 32; g.fillRect(x0 + x, 35 - a, 2, a * 2); } }
+    }
+    if (n + 1 >= total) { setTimeout(finishRec, beat * 1000); return; }
+    ui.rec.timer = setTimeout(tickBeat, beat * 1000);
+  };
+  tickBeat();
+}
+function finishRec() {
+  if (!ui.rec) return;
+  const { role, k } = ui.rec, list = song.takes[recKey(role, k)] = takesOf(role, k).slice();
+  const secs = Math.round(song.blocks[k].bars.length * 4 * 60 / song.tempo);
+  list.forEach(t => { t.kept = false; });
+  list.push({ n: list.length + 1, kept: true, len: `0:${String(secs).padStart(2, "0")}` });
+  if (role === "rhythm" && ui.detect && filledBars(k) < 4) { applyProg(k, PROGS[(Object.keys(BLOCKS).indexOf(k) + 1) % PROGS.length].deg); ui.detected = k; }
+  ui.rec = null; render();
+}
+function cancelRec() { if (ui.rec) { clearTimeout(ui.rec.timer); ui.rec = null; } }
+// Draw the kept take (pretend audio, seeded by the take number so it looks the same each time).
+function drawKeptTake() {
+  const canvas = document.getElementById("rec-canvas");
+  if (!canvas || ui.rec) return;
+  const lbl = canvas.parentElement.querySelector(".rec-lbl");
+  const role = /Lead/.test(lbl ? lbl.textContent : "") ? "lead" : "rhythm";
+  const kept = takesOf(role, ui.block).find(t => t.kept);
+  if (!kept) return;
+  const g = canvas.getContext("2d"), color = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#22543e";
+  let seed = kept.n * 9301; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+  const beats = song.blocks[ui.block].bars.length * 4, w = canvas.width / beats;
+  g.clearRect(0, 0, canvas.width, canvas.height); g.fillStyle = color;
+  for (let b = 0; b < beats; b++) for (let x = 0; x < w; x += 3) { const a = (b % 2 ? 0.9 : 0.6) * Math.exp(-x / w * 1.6) * (0.5 + rnd() * 0.5) * 32; g.fillRect(b * w + x, 35 - a, 2, a * 2); }
+}
+
 // ============================================================ switcher, render and events
-const VARIANTS = [["D", "Timeline + steps", VariantD], ["A", "Step by step", VariantA], ["B", "Timeline + coach", VariantB], ["C", "Section cards", VariantC]];
+const VARIANTS = [["D", "Timeline + steps", VariantD]]; // A–C were dropped in #71; their code stays for reference
 const cur = () => { const h = (location.hash || "#D").slice(1).toUpperCase(); return VARIANTS.find(v => v[0] === h) || VARIANTS[0]; };
 function render() {
   const [key, name, View] = cur();
   document.getElementById("app").innerHTML = View();
   document.getElementById("sw-label").textContent = `${key} · ${name}`;
   renderPlay();
+  drawKeptTake();
 }
 function cycle(d) { const i = VARIANTS.indexOf(cur()); location.hash = VARIANTS[(i + d + VARIANTS.length) % VARIANTS.length][0]; }
 window.addEventListener("hashchange", () => { ui.sel = null; ui.open = null; render(); });
@@ -655,7 +844,7 @@ document.addEventListener("click", e => {
       b.bars[ui.slot] = v; ui.slot = Math.min(b.bars.length - 1, ui.slot + 1); break; }
     case "prog": applyProg(k, PROGS[Number(v)].deg); break;
     case "soloverse": song.blocks.solo.bars = song.blocks.verse.bars.slice(); break;
-    case "scale": song.blocks[k].scale = v; break;
+    case "scale": leadOf(k).scale = v; break;
     case "hearscale": hearScale(v); return;
     case "listen": fakeListen(k); return;
     case "clear": song.blocks[k].bars = [null, null, null, null]; ui.block = k; ui.slot = 0; break;
@@ -669,6 +858,17 @@ document.addEventListener("click", e => {
     case "goto": ui.step = Number(v); break;
     case "back": ui.step = Math.max(0, ui.step - 1); break;
     case "next": ui.step = Math.min(STEPS.length - 1, ui.step + 1); window.scrollTo(0, 0); break;
+    case "gtab": ui.gtab[k] = v; break;
+    case "intro": ui.introSeen[v] = !ui.introSeen[v]; break;
+    case "check": ui.checks[v] = true; break;
+    case "click": ui.click = !ui.click; break;
+    case "detect": ui.detect = t.checked; return;
+    case "rec": if (ui.rec) { cancelRec(); break; } startRec(v, k); return;
+    case "keep": { const list = takesOf(v, k); list.forEach((x, i) => { x.kept = i === Number(t.dataset.i); }); break; }
+    case "deltake": { const list = takesOf(v, k); list.splice(Number(t.dataset.i), 1); if (list.length && !list.some(x => x.kept)) list[list.length - 1].kept = true; break; }
+    case "tone": song.tone[k] = v; song.chain[k] = TONES_ON(v); break;
+    case "pedal": { const c = song.chain[k], i = c.indexOf(v); if (i >= 0) c.splice(i, 1); else c.push(v); break; }
+    case "leadpart": leadOf(k).part = v; break;
     case "D-cell": { const k2 = song.order[Number(v)]; ui.block = k2; ui.slot = Math.max(0, song.blocks[k2].bars.findIndex(c => !c));
       ui.step = STEPS.findIndex(s => s.id === LANE_STEP[p]); break; }
     case "B-sel": ui.sel = { i: Number(v), part: p }; ui.open = null; ui.block = song.order[Number(v)]; break;
@@ -682,6 +882,7 @@ document.addEventListener("click", e => {
     default: return;
   }
   if (audio.playing) stop();
+  if (ui.rec && act !== "detect") cancelRec();
   render();
 });
 render();
