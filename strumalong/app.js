@@ -111,7 +111,8 @@
     if (match) {
       let id = "";
       try { id = decodeURIComponent(match[2]); } catch (_) { id = ""; }
-      if (match[1] === "ready") showReady(id, gen); else showSong(id, gen);
+      // PROTOTYPE (merged ready + song screen): with ?variant= the ready route opens the song page.
+      if (match[1] === "ready" && !window.MergeProto) showReady(id, gen); else showSong(id, gen);
     } else showLibrary(gen);
     try { window.scrollTo(0, 0); } catch (_) { /* ignore */ }
   }
@@ -283,6 +284,7 @@
     document.title = `${song.title || "Song"} · Strum Along`;
     app.innerHTML = songSkeleton(song);
     renderStrumPanel();
+    if (window.MergeProto) window.MergeProto.mount(song); // PROTOTYPE
     renderViewControls();
     renderSync();
     renderDetails();
@@ -455,6 +457,7 @@
 
   function onState(code) {
     S.session.stateChange(code);
+    if (window.MergeProto) window.MergeProto.state(code); // PROTOTYPE
     // Pausing or ending the video after the count started it cancels the count.
     if (S.count && (code === 0 || (code === 2 && S.count.sawPlaying))) cancelCountIn();
     if (code === 1) {

@@ -1,0 +1,49 @@
+/* PROTOTYPE, throwaway: styles for prototype-merge.js (merged get-ready + song screen). */
+.mp-hide { display: none !important; }
+body.mp-on .app { padding-bottom: 96px; }
+.mp-meta { margin: 0 0 6px; font-size: 1.05rem; color: var(--muted); }
+
+/* A: ready card inside the cue panel until the first Play */
+.mp-vA .mp-ready { display: none; }
+.mp-vA.mp-pre .mp-ready { display: block; }
+.mp-vA.mp-pre #cue-live .cue-row,
+.mp-vA.mp-pre #diagram-panel,
+.mp-vA.mp-pre #cue-hint { display: none !important; }
+.mp-vA .mp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 8px; }
+.mp-vA .mp-grid .diagram { margin: 0; }
+.mp-vA .mp-ready .row { margin: 4px 0 8px; }
+
+/* B: the ready sheet first, the player after Play */
+.mp-vB .mp-sheet { display: none; }
+.mp-vB.mp-pre .mp-sheet { display: block; margin-bottom: 12px; }
+.mp-vB.mp-pre .col-cues,
+.mp-vB.mp-pre .col-controls { display: none; }
+.mp-vB .mp-under { text-align: center; }
+@media (min-width: 700px) {
+  .mp-vB .mp-sheet { grid-column: 2; grid-row: 1 / span 2; }
+}
+
+/* C: video, then a compact chord-chip strip and one-line strum */
+.mp-strip { padding: 8px var(--gr) 4px var(--gl); }
+.mp-strip-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+.mp-label { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); min-width: 52px; }
+.mp-chips { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
+.mp-chip { font: inherit; font-weight: 700; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--btn-border); background: var(--panel); color: var(--text); cursor: pointer; }
+.mp-chip.mp-next { border-color: var(--accent); }
+.mp-chip.mp-now { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.mp-strum { font-size: 1.3rem; font-weight: 700; letter-spacing: .1em; flex: 1; }
+.mp-bpm { font-size: .85rem; color: var(--muted); }
+.mp-pop { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 6px; display: flex; justify-content: center; }
+.mp-pop .diagram { margin: 0; }
+.mp-options > summary { cursor: pointer; font-weight: 600; }
+.mp-options .col-controls { margin-top: 8px; }
+
+/* Floating variant switcher: deliberately not part of the design */
+#mp-bar { position: fixed; left: 50%; bottom: max(12px, env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 1000;
+  display: flex; align-items: center; gap: 4px; padding: 4px; border-radius: 999px; background: #111; color: #fff;
+  box-shadow: 0 4px 18px rgba(0,0,0,.35); font: 13px/1.2 -apple-system, system-ui, sans-serif; max-width: calc(100vw - 24px); }
+#mp-bar button { background: #333; color: #fff; border: 0; border-radius: 999px; width: 34px; height: 34px; font-size: 20px; cursor: pointer; }
+#mp-label { padding: 0 8px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#mp-label b { color: #ffd54a; }
+#mp-label small { display: block; opacity: .7; font-size: 11px; }
+.mp-vB .mp-sheet-play { display: flex; width: 100%; justify-content: center; }
