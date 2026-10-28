@@ -5,7 +5,7 @@
 "artist":"Natalie Imbruglia",
 "genre":"pop",
 "group":"level-5",
-"order":1,
+"order":2,
 "level":5,
 "recording":{"id":"natalie-imbruglia-torn-youtube-20261025","duration_seconds":244.679,"audio_sha256":"3bae7c093fd63b3ac9610b118fa8176732539142c7ab0cd2be6b0235b5b6f643"},
 "videos":[{"video_id":"rIGAt5yvfmw","uploader":"Natalie Imbruglia","kind":"analysed","duration_seconds":245,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],
@@ -103,5 +103,5 @@
 ],
 "strumming":{"note":"Default practice patterns for Level 5 songs; not checked against the recording.","source":"level-default","patterns":[{"id":"folk-strum","name":"Start: D — D U — U D U","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","—","D","U","—","U","D","U"],"description":"Keep the down-up pendulum going; miss the strings on the \"&\" of 1 and on 3. A common pop and rock strum."},{"id":"anchor-1-3","name":"Next: anchor beats 1 and 3","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","—","D","U","D","—","D","U"],"description":"Down on every count with an up after 2 and 4. Fewer strokes keep the barre hand settled through changes."}]},
 "learning":{"skill_focus":"A steady one-chord-per-bar loop where Bb, an A-shape barre, appears in every verse. A first barre-chord song with an eighth-note strum.","prerequisites":"","sources":[{"title":"Published arrangement tempo marking: Torn","url":"https://www.musicnotes.com/sheetmusic/natalie-imbruglia/torn/MN0043476"}]},
-"provenance":{"pack":"strumalong-additions-v2","manifest_sha256":"55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd","rhythm_sha256":"0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459","practice_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","learning_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","additions_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","catalogue_sha256":"05a5112cb3ec8c6c6ec3c5fd3d4538c38d9fe5a30f9ee3d65630441cce18f0cd"}
+"provenance":{"pack":"strumalong-additions-v2","manifest_sha256":"55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd","rhythm_sha256":"0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459","practice_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","learning_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","additions_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","catalogue_sha256":"88439a612458c6c9f8ff2e9032d9038720e5062e7853dd2eba3d68d3bd878ae6"}
 }

@@ -5,7 +5,7 @@
 "artist":"4 Non Blondes",
 "genre":"rock",
 "group":"level-2",
-"order":3,
+"order":4,
 "level":2,
 "recording":{"id":"4-non-blondes-whats-up-youtube-20261025","duration_seconds":295.554,"audio_sha256":"9c868f4839be48c53a59cf5c751e45ee1df81e9b6b69c3507f683549d8e04732"},
 "videos":[{"video_id":"B6GdsRIbTSk","uploader":"4 Non Blondes","kind":"analysed","duration_seconds":296,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],
@@ -82,5 +82,5 @@
 ],
 "strumming":{"note":"Default practice patterns for Level 2 songs; not checked against the recording.","source":"level-default","patterns":[{"id":"down-up","name":"Start: down-up eighths","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","U","D","U","D","U","D","U"],"description":"Alternate down and up in steady eighth notes: down on the numbers, up on the \"&\". Keep the hand moving through chord changes."},{"id":"folk-strum","name":"Next: D — D U — U D U","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","—","D","U","—","U","D","U"],"description":"Keep the down-up pendulum going; miss the strings on the \"&\" of 1 and on 3. A common pop and rock strum."}]},
 "learning":{"skill_focus":"Three chords, one per bar, under a driving strummed acoustic. Keep the strum steady and change on the bar line.","prerequisites":"","sources":[{"title":"Published arrangement tempo marking: What's Up?","url":"https://www.musicnotes.com/sheetmusic/4-non-blondes/whats-up/MN0027666"}]},
-"provenance":{"pack":"strumalong-additions-v2","manifest_sha256":"55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd","rhythm_sha256":"0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459","practice_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","learning_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","additions_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","catalogue_sha256":"05a5112cb3ec8c6c6ec3c5fd3d4538c38d9fe5a30f9ee3d65630441cce18f0cd"}
+"provenance":{"pack":"strumalong-additions-v2","manifest_sha256":"55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd","rhythm_sha256":"0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459","practice_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","learning_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","additions_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","catalogue_sha256":"88439a612458c6c9f8ff2e9032d9038720e5062e7853dd2eba3d68d3bd878ae6"}
 }

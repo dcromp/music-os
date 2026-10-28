@@ -5,7 +5,7 @@
 "artist":"Bob Marley & The Wailers",
 "genre":"pop",
 "group":"level-1",
-"order":9,
+"order":10,
 "level":1,
 "recording":{"id":"bob-marley-stir-it-up-youtube-20261026","duration_seconds":334.53,"audio_sha256":"c9fe1fba2d4f79db8e52057142ccf5eaae0083b7eb8ba97de6fc6366a80cb187"},
 "videos":[{"video_id":"1hwL3S3Gtzs","uploader":"Bob Marley","kind":"analysed","duration_seconds":335,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],
@@ -161,5 +161,5 @@
 ],
 "strumming":{"note":"Default practice patterns for Level 1 songs; not checked against the recording.","source":"level-default","patterns":[{"id":"steady-down","name":"Start: steady downstrokes","counts":["1","2","3","4"],"strokes":["D","D","D","D"],"description":"Strum down on each count. Keep the motion steady and change shape when the chord cue changes."},{"id":"down-up","name":"Next: down-up eighths","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","U","D","U","D","U","D","U"],"description":"Alternate down and up in steady eighth notes: down on the numbers, up on the \"&\". Keep the hand moving through chord changes."}]},
 "learning":{"skill_focus":"Relaxed reggae pulse with short chops on the off-beats. Start with steady downstrokes, then mute and chop on the 'and' of each beat.","prerequisites":"","sources":[{"title":"SongBPM tempo listing: Stir It Up","url":"https://songbpm.com/@bob-marley-the-wailers/stir-it-up"}]},
-"provenance":{"pack":"strumalong-additions-v3","manifest_sha256":"fd59661fcc37f9590bf5c2bf953b296ada72e016061c7dcc8b3b0a0391d78203","rhythm_sha256":"642ecd5ddaef059d37f9730a73a30170dc563072e1e81bfb6808d1c00937ecdc","practice_sha256":"a7f7ccefb1a2967b4335b33d8a582d935a6a2b42659c56cd2fa184ecf2a6e43a","learning_sha256":"a7f7ccefb1a2967b4335b33d8a582d935a6a2b42659c56cd2fa184ecf2a6e43a","additions_sha256":"a7f7ccefb1a2967b4335b33d8a582d935a6a2b42659c56cd2fa184ecf2a6e43a","catalogue_sha256":"05a5112cb3ec8c6c6ec3c5fd3d4538c38d9fe5a30f9ee3d65630441cce18f0cd"}
+"provenance":{"pack":"strumalong-additions-v3","manifest_sha256":"fd59661fcc37f9590bf5c2bf953b296ada72e016061c7dcc8b3b0a0391d78203","rhythm_sha256":"642ecd5ddaef059d37f9730a73a30170dc563072e1e81bfb6808d1c00937ecdc","practice_sha256":"a7f7ccefb1a2967b4335b33d8a582d935a6a2b42659c56cd2fa184ecf2a6e43a","learning_sha256":"a7f7ccefb1a2967b4335b33d8a582d935a6a2b42659c56cd2fa184ecf2a6e43a","additions_sha256":"a7f7ccefb1a2967b4335b33d8a582d935a6a2b42659c56cd2fa184ecf2a6e43a","catalogue_sha256":"88439a612458c6c9f8ff2e9032d9038720e5062e7853dd2eba3d68d3bd878ae6"}
 }
