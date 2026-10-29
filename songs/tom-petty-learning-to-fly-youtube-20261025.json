@@ -3,8 +3,9 @@
 "id":"tom-petty-learning-to-fly-youtube-20261025",
 "title":"Learning to Fly",
 "artist":"Tom Petty",
+"genre":"rock",
 "group":"level-4",
-"order":6,
+"order":22,
 "level":4,
 "recording":{"id":"tom-petty-learning-to-fly-youtube-20261025","duration_seconds":242.125,"audio_sha256":"7192da6a274aaf1f6d5e914739bd2c95ca2d9d42c39b14786f02fd3cf615881b"},
 "videos":[{"video_id":"Bb5xJN_4Hck","uploader":"Tom Petty & The Heartbreakers","kind":"analysed","duration_seconds":242,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],
@@ -241,5 +242,5 @@
 ],
 "strumming":{"note":"Default practice patterns for Level 4 songs; not checked against the recording.","source":"level-default","patterns":[{"id":"folk-strum","name":"Start: D — D U — U D U","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","—","D","U","—","U","D","U"],"description":"Keep the down-up pendulum going; miss the strings on the \"&\" of 1 and on 3. A common pop and rock strum."},{"id":"anchor-1-3","name":"Next: anchor beats 1 and 3","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","—","D","U","D","—","D","U"],"description":"Down on every count with an up after 2 and 4. Fewer strokes keep the barre hand settled through changes."}]},
 "learning":{"skill_focus":"The same F, C, Am, G loop for most of the song at an easy tempo: an ideal first F-chord song, with one chord per bar and an eighth-note strum.","prerequisites":"","sources":[{"title":"Published arrangement tempo marking: Learning to Fly","url":"https://www.musicnotes.com/sheetmusic/tom-petty/learning-to-fly/MN0086068"}]},
-"provenance":{"pack":"strumalong-additions-v2","manifest_sha256":"55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd","rhythm_sha256":"0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459","practice_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","learning_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","additions_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","catalogue_sha256":"da053fc699c14948dd0dc0f5d76b747d1957d87a1bf7cf45147e78e6b3488d36"}
+"provenance":{"pack":"strumalong-additions-v2","manifest_sha256":"55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd","rhythm_sha256":"0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459","practice_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","learning_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","additions_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","catalogue_sha256":"88439a612458c6c9f8ff2e9032d9038720e5062e7853dd2eba3d68d3bd878ae6"}
 }
