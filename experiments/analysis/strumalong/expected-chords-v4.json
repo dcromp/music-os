@@ -1,0 +1,726 @@
+{
+  "hootie-and-the-blowfish-hold-my-hand-youtube-20261028": {
+    "sounding": [
+      "B",
+      "E",
+      "F#"
+    ],
+    "confidence": "draft: chord-sheet shapes A D E at capo 2 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "ccr-lookin-out-my-back-door-youtube-20261028": {
+    "sounding": [
+      "B",
+      "G#m",
+      "E",
+      "F#"
+    ],
+    "confidence": "draft: chord-sheet shapes G Em C D at capo 4 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "traveling-wilburys-end-of-the-line-youtube-20261028": {
+    "sounding": [
+      "D",
+      "A",
+      "G"
+    ],
+    "confidence": "draft: chord-sheet shapes D A G from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "neil-young-rockin-in-the-free-world-youtube-20261028": {
+    "sounding": [
+      "Em",
+      "D",
+      "C",
+      "G"
+    ],
+    "confidence": "draft: chord-sheet shapes Em D C G from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "matchbox-twenty-3am-youtube-20261028": {
+    "sounding": [
+      "G#",
+      "C#",
+      "D#",
+      "Fm"
+    ],
+    "confidence": "draft: chord-sheet shapes G Cadd9 D Em at capo 1 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "hootie-and-the-blowfish-only-wanna-be-with-you-youtube-20261028": {
+    "sounding": [
+      "F#",
+      "B",
+      "C#",
+      "G#m"
+    ],
+    "confidence": "draft: chord-sheet shapes D G A Em at capo 4 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "pearl-jam-last-kiss-youtube-20261028": {
+    "sounding": [
+      "G",
+      "Em",
+      "C",
+      "D"
+    ],
+    "confidence": "draft: chord-sheet shapes G Em C D from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "john-mellencamp-small-town-youtube-20261028": {
+    "sounding": [
+      "B",
+      "F#sus2",
+      "E",
+      "C#m"
+    ],
+    "confidence": "draft: chord-sheet shapes G Dsus2 Cadd9 Am at capo 4 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "sublime-what-i-got-youtube-20261028": {
+    "sounding": [
+      "D",
+      "G"
+    ],
+    "confidence": "draft: chord-sheet shapes D G from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "james-laid-youtube-20261028": {
+    "sounding": [
+      "C",
+      "F",
+      "G"
+    ],
+    "confidence": "draft: chord-sheet shapes G C D at capo 5 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "jake-bugg-lightning-bolt-youtube-20261028": {
+    "sounding": [
+      "E",
+      "B",
+      "A"
+    ],
+    "confidence": "draft: chord-sheet shapes D A G at capo 2 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "rolling-stones-dead-flowers-youtube-20261028": {
+    "sounding": [
+      "D",
+      "G",
+      "A"
+    ],
+    "confidence": "draft: chord-sheet shapes D G A from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "status-quo-rockin-all-over-the-world-youtube-20261028": {
+    "sounding": [
+      "C",
+      "F",
+      "G"
+    ],
+    "confidence": "draft: chord-sheet shapes G C D at capo 5 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "taylor-swift-you-belong-with-me-youtube-20261028": {
+    "sounding": [
+      "F#",
+      "C#",
+      "B",
+      "G#m"
+    ],
+    "confidence": "draft: chord-sheet shapes D A G Em at capo 4 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "taylor-swift-we-are-never-getting-back-youtube-20261028": {
+    "sounding": [
+      "C",
+      "G",
+      "D",
+      "Em"
+    ],
+    "confidence": "draft: chord-sheet shapes Cadd9 G D Em from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "jimmy-buffett-margaritaville-youtube-20261028": {
+    "sounding": [
+      "D",
+      "A",
+      "G"
+    ],
+    "confidence": "draft: chord-sheet shapes D A G from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "sugar-ray-every-morning-youtube-20261028": {
+    "sounding": [
+      "G#",
+      "D#",
+      "C#"
+    ],
+    "confidence": "draft: chord-sheet shapes G D C at capo 1 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "lumineers-stubborn-love-youtube-20261028": {
+    "sounding": [
+      "F",
+      "Am",
+      "C",
+      "G"
+    ],
+    "confidence": "draft: chord-sheet shapes C Em G D at capo 5 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "shania-twain-youre-still-the-one-youtube-20261028": {
+    "sounding": [
+      "D#",
+      "G#",
+      "A#",
+      "Fm"
+    ],
+    "confidence": "draft: chord-sheet shapes D G A Em at capo 1 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "noah-kahan-stick-season-youtube-20261028": {
+    "sounding": [
+      "A",
+      "E",
+      "F#m",
+      "D"
+    ],
+    "confidence": "draft: chord-sheet shapes G D Em C at capo 2 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "harry-chapin-cats-in-the-cradle-youtube-20261028": {
+    "sounding": [
+      "F",
+      "D#",
+      "G#",
+      "A#"
+    ],
+    "confidence": "draft: chord-sheet shapes E D G A at capo 1 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "barenaked-ladies-if-i-had-1000000-youtube-20261028": {
+    "sounding": [
+      "A",
+      "E",
+      "D",
+      "F#m"
+    ],
+    "confidence": "draft: chord-sheet shapes G D C Em at capo 2 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "uncle-kracker-follow-me-youtube-20261028": {
+    "sounding": [
+      "F",
+      "A#",
+      "C",
+      "Gm"
+    ],
+    "confidence": "draft: chord-sheet shapes D G A Em at capo 3 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "taylor-swift-mine-youtube-20261028": {
+    "sounding": [
+      "C",
+      "G",
+      "D",
+      "Em"
+    ],
+    "confidence": "draft: chord-sheet shapes C G D Em from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "oasis-songbird-youtube-20261028": {
+    "sounding": [
+      "G",
+      "Em"
+    ],
+    "confidence": "draft: chord-sheet shapes G Em7 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "lifehouse-hanging-by-a-moment-youtube-20261028": {
+    "sounding": [
+      "C#",
+      "G#",
+      "A#m",
+      "F#"
+    ],
+    "confidence": "draft: chord-sheet shapes G D Em C at capo 6 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "ccr-wholl-stop-the-rain-youtube-20261028": {
+    "sounding": [
+      "G",
+      "C",
+      "D",
+      "Em",
+      "Am"
+    ],
+    "confidence": "draft: chord-sheet shapes G C D Em Am from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "stereophonics-have-a-nice-day-youtube-20261028": {
+    "sounding": [
+      "B",
+      "A",
+      "E",
+      "F#",
+      "E/G#"
+    ],
+    "confidence": "draft: chord-sheet shapes A G D E D/F# at capo 2 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "counting-crows-accidentally-in-love-youtube-20261028": {
+    "sounding": [
+      "G",
+      "Em",
+      "C",
+      "D",
+      "A",
+      "Am"
+    ],
+    "confidence": "draft: chord-sheet shapes G Em C D A Am from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "phillip-phillips-home-youtube-20261028": {
+    "sounding": [
+      "C",
+      "F",
+      "Am",
+      "G",
+      "G/B"
+    ],
+    "confidence": "draft: chord-sheet shapes G C Em D D/F# at capo 5 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "paul-simon-me-and-julio-down-by-the-schoolyard-youtube-20261028": {
+    "sounding": [
+      "A",
+      "D",
+      "E",
+      "B",
+      "G"
+    ],
+    "confidence": "draft: chord-sheet shapes A D E B7 G from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "magic-rude-youtube-20261028": {
+    "sounding": [
+      "C#",
+      "F#",
+      "G#",
+      "A#m"
+    ],
+    "confidence": "draft: chord-sheet shapes G C D Em at capo 6 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "wallflowers-one-headlight-youtube-20261028": {
+    "sounding": [
+      "D",
+      "G",
+      "F#",
+      "Bm",
+      "A"
+    ],
+    "confidence": "draft: chord-sheet shapes G C B7 Em D at capo 7 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "lisa-loeb-stay-i-missed-you-youtube-20261028": {
+    "sounding": [
+      "C#",
+      "A#m",
+      "D#m",
+      "C#/F",
+      "F#"
+    ],
+    "confidence": "draft: chord-sheet shapes G Em7 Am7 G/B Cadd9 at capo 6 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "beautiful-south-rotterdam-or-anywhere-youtube-20261028": {
+    "sounding": [
+      "F",
+      "C",
+      "Am",
+      "G",
+      "E",
+      "D"
+    ],
+    "confidence": "draft: chord-sheet shapes Fmaj7 C Am G E7 D from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "third-eye-blind-jumper-youtube-20261028": {
+    "sounding": [
+      "F",
+      "C",
+      "G",
+      "Am",
+      "Dsus2"
+    ],
+    "confidence": "draft: chord-sheet shapes Fmaj7 C G Am Dsus2 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "beatles-eight-days-a-week-youtube-20261028": {
+    "sounding": [
+      "D",
+      "E",
+      "G",
+      "Bm",
+      "A"
+    ],
+    "confidence": "draft: chord-sheet shapes G A7 C Em D at capo 7 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "eagles-peaceful-easy-feeling-youtube-20261028": {
+    "sounding": [
+      "E",
+      "A",
+      "B",
+      "F#m",
+      "Esus4"
+    ],
+    "confidence": "draft: chord-sheet shapes E A B7 F#m Esus4 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "rod-stewart-maggie-may-youtube-20261028": {
+    "sounding": [
+      "D",
+      "A",
+      "G",
+      "Em",
+      "F#m"
+    ],
+    "confidence": "draft: chord-sheet shapes D A G Em F#m from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "traveling-wilburys-handle-with-care-youtube-20261028": {
+    "sounding": [
+      "D",
+      "C",
+      "G",
+      "Bm",
+      "B"
+    ],
+    "confidence": "draft: chord-sheet shapes D C G Bm B7 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "crowded-house-weather-with-you-youtube-20261028": {
+    "sounding": [
+      "Em",
+      "A",
+      "D",
+      "G",
+      "F",
+      "C"
+    ],
+    "confidence": "draft: chord-sheet shapes Em7 A D G F C from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "fleetwood-mac-go-your-own-way-youtube-20261028": {
+    "sounding": [
+      "F",
+      "C",
+      "A#",
+      "Dm"
+    ],
+    "confidence": "draft: chord-sheet shapes D A G Bm at capo 3 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "spin-doctors-two-princes-youtube-20261028": {
+    "sounding": [
+      "D",
+      "A",
+      "Bm",
+      "G"
+    ],
+    "confidence": "draft: chord-sheet shapes D A Bm G from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "verve-drugs-dont-work-youtube-20261028": {
+    "sounding": [
+      "C",
+      "Am",
+      "Em",
+      "F",
+      "G"
+    ],
+    "confidence": "draft: chord-sheet shapes C Am Em F G from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "travis-why-does-it-always-rain-on-me-youtube-20261028": {
+    "sounding": [
+      "E",
+      "C#m",
+      "A",
+      "F#m",
+      "B"
+    ],
+    "confidence": "draft: chord-sheet shapes D Bm G Em7 A at capo 2 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "oasis-stand-by-me-youtube-20261028": {
+    "sounding": [
+      "G",
+      "D",
+      "C",
+      "Em",
+      "Am",
+      "F"
+    ],
+    "confidence": "draft: chord-sheet shapes G D C Em Am F from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "beatles-youve-got-to-hide-your-love-away-youtube-20261028": {
+    "sounding": [
+      "G",
+      "D",
+      "F",
+      "C",
+      "Dsus4"
+    ],
+    "confidence": "draft: chord-sheet shapes G D F C Dsus4 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "kooks-she-moves-in-her-own-way-youtube-20261028": {
+    "sounding": [
+      "G",
+      "C",
+      "D",
+      "Am",
+      "Bm",
+      "Em"
+    ],
+    "confidence": "draft: chord-sheet shapes G C D Am Bm Em from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "smash-mouth-all-star-youtube-20261028": {
+    "sounding": [
+      "F#",
+      "C#",
+      "D#m",
+      "B"
+    ],
+    "confidence": "draft: chord-sheet shapes D A Bm G at capo 4 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "del-amitri-roll-to-me-youtube-20261028": {
+    "sounding": [
+      "F#",
+      "B",
+      "C#",
+      "G#m",
+      "D#m"
+    ],
+    "confidence": "draft: chord-sheet shapes D G A Em Bm7 at capo 4 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "jam-thats-entertainment-youtube-20261028": {
+    "sounding": [
+      "A#",
+      "Gm",
+      "Cm",
+      "G#"
+    ],
+    "confidence": "draft: chord-sheet shapes G Em Am F at capo 3 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "george-michael-faith-youtube-20261028": {
+    "sounding": [
+      "B",
+      "E",
+      "A",
+      "F#",
+      "C#m",
+      "G#m"
+    ],
+    "confidence": "draft: chord-sheet shapes A D G E Bm F#m at capo 2 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "amy-macdonald-this-is-the-life-youtube-20261028": {
+    "sounding": [
+      "C#m",
+      "A",
+      "E",
+      "G#m"
+    ],
+    "confidence": "draft: chord-sheet shapes Am F C Em at capo 4 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "sheryl-crow-soak-up-the-sun-youtube-20261028": {
+    "sounding": [
+      "E",
+      "B",
+      "A",
+      "F#m",
+      "G"
+    ],
+    "confidence": "draft: chord-sheet shapes D A G Em F at capo 2 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "mamas-and-the-papas-california-dreamin-youtube-20261028": {
+    "sounding": [
+      "C#m",
+      "B",
+      "A",
+      "G#sus4",
+      "G#",
+      "E"
+    ],
+    "confidence": "draft: chord-sheet shapes Am G F E7sus4 E7 C at capo 4 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "cat-stevens-peace-train-youtube-20261028": {
+    "sounding": [
+      "C",
+      "G",
+      "F",
+      "Am"
+    ],
+    "confidence": "draft: chord-sheet shapes C G F Am from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "avril-lavigne-complicated-youtube-20261028": {
+    "sounding": [
+      "Dm",
+      "A#",
+      "F",
+      "C"
+    ],
+    "confidence": "draft: chord-sheet shapes Am F C G at capo 5 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "alanis-morissette-hand-in-my-pocket-youtube-20261028": {
+    "sounding": [
+      "G",
+      "Em",
+      "C",
+      "F"
+    ],
+    "confidence": "draft: chord-sheet shapes G Em7 Cadd9 F C from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "toad-the-wet-sprocket-all-i-want-youtube-20261028": {
+    "sounding": [
+      "Dm",
+      "F",
+      "C",
+      "Am",
+      "A#",
+      "G"
+    ],
+    "confidence": "draft: chord-sheet shapes Am C G Em F D at capo 5 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "james-blunt-bonfire-heart-youtube-20261028": {
+    "sounding": [
+      "C",
+      "Em",
+      "Am",
+      "G",
+      "F"
+    ],
+    "confidence": "draft: chord-sheet shapes C Em Am G F from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "kinks-lola-youtube-20261028": {
+    "sounding": [
+      "E",
+      "A",
+      "D",
+      "C",
+      "B",
+      "C#m"
+    ],
+    "confidence": "draft: chord-sheet shapes E A D C B C#m from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "oasis-half-the-world-away-youtube-20261028": {
+    "sounding": [
+      "D",
+      "G",
+      "Bm",
+      "E",
+      "F#",
+      "Gm"
+    ],
+    "confidence": "draft: chord-sheet shapes C Fmaj7 Am D E Fm at capo 2 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "beatles-she-loves-you-youtube-20261028": {
+    "sounding": [
+      "G",
+      "Em",
+      "Bm",
+      "D",
+      "C",
+      "Cm"
+    ],
+    "confidence": "draft: chord-sheet shapes G Em Bm D C Cm from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "beatles-all-my-loving-youtube-20261028": {
+    "sounding": [
+      "Em",
+      "A",
+      "D",
+      "Bm",
+      "G",
+      "C#m",
+      "F#"
+    ],
+    "confidence": "draft: chord-sheet shapes Em A7 D Bm G C#m F#7 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "kt-tunstall-suddenly-i-see-youtube-20261028": {
+    "sounding": [
+      "D",
+      "G",
+      "A",
+      "Bm",
+      "F#m",
+      "Gm"
+    ],
+    "confidence": "draft: chord-sheet shapes D G A Bm F#m Gm from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "fratellis-chelsea-dagger-youtube-20261028": {
+    "sounding": [
+      "G",
+      "D",
+      "C",
+      "B",
+      "E"
+    ],
+    "confidence": "draft: chord-sheet shapes G D C B E from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "gin-blossoms-hey-jealousy-youtube-20261028": {
+    "sounding": [
+      "D",
+      "E",
+      "F#m",
+      "A"
+    ],
+    "confidence": "draft: chord-sheet shapes C D Em G at capo 2 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "one-direction-story-of-my-life-youtube-20261028": {
+    "sounding": [
+      "Cm",
+      "G#",
+      "D#",
+      "A#"
+    ],
+    "confidence": "draft: chord-sheet shapes Am F C G at capo 3 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "kooks-naive-youtube-20261028": {
+    "sounding": [
+      "G#m",
+      "E",
+      "B",
+      "F#",
+      "F#/A#"
+    ],
+    "confidence": "draft: chord-sheet shapes Em C G D D/F# at capo 4 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "catfish-and-the-bottlemen-kathleen-youtube-20261028": {
+    "sounding": [
+      "D",
+      "Bm",
+      "Em",
+      "A",
+      "G"
+    ],
+    "confidence": "draft: chord-sheet shapes G Em Am D C at capo 7 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "everly-brothers-wake-up-little-susie-youtube-20261028": {
+    "sounding": [
+      "D",
+      "F",
+      "G",
+      "A"
+    ],
+    "confidence": "draft: chord-sheet shapes D F G A from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "crowded-house-dont-dream-its-over-youtube-20261028": {
+    "sounding": [
+      "D#",
+      "Cm",
+      "G#",
+      "A#",
+      "Fm"
+    ],
+    "confidence": "draft: chord-sheet shapes D Bm G A Em at capo 1 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "jack-johnson-banana-pancakes-youtube-20261028": {
+    "sounding": [
+      "G",
+      "Am",
+      "D",
+      "C",
+      "Bm",
+      "Em"
+    ],
+    "confidence": "draft: chord-sheet shapes G Am D7 C7 Bm Em from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "primal-scream-movin-on-up-youtube-20261028": {
+    "sounding": [
+      "C",
+      "G",
+      "F",
+      "Dm"
+    ],
+    "confidence": "draft: chord-sheet shapes G D C Am at capo 5 from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "ocean-colour-scene-day-we-caught-the-train-youtube-20261028": {
+    "sounding": [
+      "Em",
+      "D",
+      "G",
+      "C",
+      "A",
+      "B"
+    ],
+    "confidence": "draft: chord-sheet shapes Em D G C A B from the v4 research (additions-v4.json); not checked against the audio"
+  },
+  "green-day-when-i-come-around-youtube-20261028": {
+    "sounding": [
+      "G",
+      "D",
+      "Em",
+      "C"
+    ],
+    "confidence": "draft: chord-sheet shapes G D Em C from the v4 research (additions-v4.json); not checked against the audio"
+  }
+}

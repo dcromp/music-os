@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Strum Along app icon. Original artwork: a guitar pick with a down-strum arrow on a
+  green field with faint strings. 512x512, full-bleed (safe for maskable use: all art
+  sits inside the central 80% circle).
+  Rasterise on macOS without installing anything:
+    qlmanage -t -s 1024 -o OUTDIR icons/icon.svg   (WebKit render, 1024px)
+    then downscale + drop alpha with Pillow (see the strumalong report), e.g.
+    Image.open(png).convert('RGB').resize((N, N), Image.LANCZOS).save(out)
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" fill="#22543e"/>
+  <g stroke="#f4f1e8" stroke-opacity="0.16" stroke-width="3">
+    <line x1="116" y1="0" x2="116" y2="512"/>
+    <line x1="168" y1="0" x2="168" y2="512"/>
+    <line x1="220" y1="0" x2="220" y2="512"/>
+    <line x1="292" y1="0" x2="292" y2="512"/>
+    <line x1="344" y1="0" x2="344" y2="512"/>
+    <line x1="396" y1="0" x2="396" y2="512"/>
+  </g>
+  <path d="M256 84C340 84 404 120 404 190C404 285 316 390 256 428C196 390 108 285 108 190C108 120 172 84 256 84Z"
+        fill="#f4f1e8" stroke="#f4f1e8" stroke-width="14" stroke-linejoin="round"/>
+  <path d="M236 138H276V282H318L256 368L194 282H236Z" fill="#22543e" stroke="#22543e" stroke-width="10" stroke-linejoin="round"/>
+</svg>

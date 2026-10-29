@@ -1,0 +1,150 @@
+{
+  "schema_version": "playalong-rhythm-config-1.0",
+  "status": "Curated pulse and meter hypotheses for the third Strum Along additions batch (Level 1 strummed songs), informed by SongBPM tempo listings and chord-sheet sources; not exact-upload timing gold. Prepared before the recordings were analysed, so ranges may need revision after the first grid check.",
+  "recordings": {
+    "plastic-ono-band-give-peace-a-chance-youtube-20261026": {
+      "start_bpm": 84,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 72,
+      "tempo_max_bpm": 96,
+      "source_url": "https://songbpm.com/@the-plastic-ono-band/give-peace-a-chance---2010---remaster",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 84 BPM with a double-time reading of 168, which the range excludes; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://justinguitar.com/songs/john-lennon-give-peace-a-chance-chords-tabs-guitar-lesson-sg-039"
+    },
+    "billy-ray-cyrus-achy-breaky-heart-youtube-20261026": {
+      "start_bpm": 122,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 108,
+      "tempo_max_bpm": 136,
+      "source_url": "https://songbpm.com/@billy-ray-cyrus/achy-breaky-heart",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 122 BPM and published sources agree near 120-122; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://en.wikipedia.org/wiki/Achy_Breaky_Heart"
+    },
+    "everly-brothers-bye-bye-love-youtube-20261026": {
+      "start_bpm": 85,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 72,
+      "tempo_max_bpm": 100,
+      "source_url": "https://songbpm.com/@the-everly-brothers/bye-bye-love",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 170 BPM with a half-time reading of 85; the range uses the half-time quarter-note reading and excludes 170; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://www.musicnotes.com/sheetmusic/mtd.asp?ppn=MN0062698"
+    },
+    "ritchie-valens-la-bamba-youtube-20261026": {
+      "start_bpm": 150,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 128,
+      "tempo_max_bpm": 168,
+      "source_url": "https://songbpm.com/@ritchie-valens/la-bamba",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 75 BPM with a double-time reading of 150; the range uses the 150 quarter-note reading, so a tracker returning 75 is a half-time lock; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://www.chordie.com/chord.pere/www.guitaretab.com/r/ritchie-valens/273388.html"
+    },
+    "creedence-clearwater-revival-down-on-the-corner-youtube-20261026": {
+      "start_bpm": 108,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 92,
+      "tempo_max_bpm": 120,
+      "source_url": "https://songbpm.com/@creedence-clearwater-revival/down-on-the-corner",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 108 BPM and ChordU about 108; the tempo is steady; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://tabs.ultimate-guitar.com/tab/creedence-clearwater-revival/down-on-the-corner-chords-1087227"
+    },
+    "buddy-holly-not-fade-away-youtube-20261026": {
+      "start_bpm": 96,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 84,
+      "tempo_max_bpm": 110,
+      "source_url": "https://songbpm.com/@buddy-holly-the-crickets/not-fade-away---single-version-jptaD1dVdD",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 96 BPM; ChordU pages vary up to 150-190 (double-time readings), which the range excludes; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://www.fender.com/play/lessons/buddy-holly-not-fade-away"
+    },
+    "bob-marley-stir-it-up-youtube-20261026": {
+      "start_bpm": 75,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 64,
+      "tempo_max_bpm": 88,
+      "source_url": "https://songbpm.com/@bob-marley-the-wailers/stir-it-up",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 150 BPM (147 on the album-version page), a double-time reading of a ~75 reggae pulse; the range excludes the double-time reading; off-beat chops may mislead a tracker; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://www.azchords.com/b/bobmarley-tabs-548/stiritup-tabs-448122.html"
+    },
+    "elvis-presley-thats-all-right-youtube-20261026": {
+      "start_bpm": 105,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 92,
+      "tempo_max_bpm": 118,
+      "source_url": "https://songbpm.com/@elvis-presley/that-s-all-right",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 105 BPM (key field blank) with a double-time reading of 210, which the range excludes; swung feel; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://www.musicnotes.com/sheetmusic/elvis-presley/thats-all-right/MN0111174"
+    },
+    "johnny-cash-jackson-youtube-20261026": {
+      "start_bpm": 128,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 112,
+      "tempo_max_bpm": 144,
+      "source_url": "https://songbpm.com/@johnny-cash/jackson---mono-version",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 128 BPM with half-time 64; the range excludes the half-time reading; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://tabs.ultimate-guitar.com/tab/johnny-cash/jackson-chords-662867"
+    },
+    "eric-clapton-lay-down-sally-youtube-20261026": {
+      "start_bpm": 96,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 84,
+      "tempo_max_bpm": 110,
+      "source_url": "https://songbpm.com/@eric-clapton/lay-down-sally",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 192 BPM (190 for the remaster) with a half-time reading of 96, a shuffle feel; the range uses the half-time reading; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://www.licklibrary.com/learn/lessons/eric-clapton/lay-down-sally"
+    },
+    "buddy-holly-peggy-sue-youtube-20261026": {
+      "start_bpm": 148,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 130,
+      "tempo_max_bpm": 165,
+      "source_url": "https://songbpm.com/@buddy-holly/peggy-sue",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 148 BPM (key field blank); audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://www.laurenbateman.com/?p=3893"
+    },
+    "bill-haley-rock-around-the-clock-youtube-20261026": {
+      "start_bpm": 180,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 150,
+      "tempo_max_bpm": 200,
+      "source_url": "https://songbpm.com/@bill-haley-his-comets/rock-around-the-clock",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 180 BPM with a half-time reading of 90; a ~180 swing; the hardest tempo in the set, so practice well below the recording; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://ukutabs.com/b/bill-haley-and-his-comets/rock-around-the-clock/"
+    }
+  }
+}
