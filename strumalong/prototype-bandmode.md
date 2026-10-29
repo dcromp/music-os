@@ -35,3 +35,13 @@ Founder chose B's rhythm-only timeline plus A/C guidance. D now explores section
 Verified in the desktop browser: changing verse length to 12 bars, choosing a progression, simulated auto-start/silence-stop take, dragging a clip two bars, trimming one bar from its end, moving it into Chorus, adding/bypassing/removing a pedal, and starting/stopping the metronome UI. Script syntax passes. iPhone touch behaviour and real audio remain unverified.
 
 Verdict: combined direction selected; the specific Foundation / Record / Edit / Pedals tab layout awaits founder review. Keep this prototype out of production.
+
+## Saved Song Chords reference and helper, 29 October
+
+The founder's complete pasted text is preserved unchanged in `docs/reference/SONG_CHORDS_USER_REFERENCE.md` and in the locally viewable `strumalong/prototype-song-chords-reference.md`. Separate provenance, theory corrections and source links are in `docs/reference/SONG_CHORDS_REFERENCE_NOTES.md`.
+
+Foundation now offers all 15 major-key spellings and all 12 chord columns, grouped as Basic / Rock-blues / More colour. Nine illustrative progressions can populate a section. Every bar can be changed independently, with conventional Roman numerals and a short explanation. Changing the section key transposes the guide, not recorded audio. The bar count expands the existing pattern. Hear section synthesizes major/minor triads at the selected tempo, highlights the current bar and supports cancellation.
+
+Verification: JavaScript syntax; browser change G→C→C♭ with correctly displayed spellings, minor-iv suggestion, individual Dm edit, 8→12-bar expansion, preview start/stop without console errors, and chosen chords carried into Record. Original reference compared byte for byte with the attachment. Real guitar audio and iPhone behaviour remain unverified. Minor-mode teaching and extra alterations are saved reference material, not implemented modes in this revision.
+
+Verdict: requested chord-helper integration is ready for founder review. All prototype state resets on reload.
