@@ -120,8 +120,11 @@
   // ---------------------------------------------------------------- library (Jukebox journey, #53)
   // Search and Surprise me on top, the resume chip, then horizontal shelves: favourites, then one per level.
   let libQuery = ""; // kept while moving between the library and a song
+  let libGenre = "all"; // "all" | "rock" | "pop": filters search, shelves and Surprise me
 
   const listedSongs = catalogue => Array.isArray(catalogue && catalogue.songs) ? catalogue.songs.filter(s => s && validSongId(s.id)) : [];
+  const genreButtons = () => [["all", "All"], ["rock", "Rock"], ["pop", "Pop"]].map(([g, label]) =>
+    `<button type="button" class="btn small" data-act="genre" data-genre="${g}" aria-pressed="${libGenre === g}">${label}</button>`).join("");
   const songHref = id => `#/song/${encodeURIComponent(id)}`;
 
   async function showLibrary(gen) {
@@ -130,7 +133,8 @@
     app.innerHTML = `<header class="lib-head"><div class="lib-title"><h1>Strum Along</h1>
         <button type="button" class="btn" data-act="surprise">🎲 Surprise me</button></div>
       <p class="tagline">Provisional automatic chord charts. For personal practice.</p>
-      <input id="lib-search" class="lib-search" type="search" placeholder="Search songs or artists" aria-label="Search songs or artists" autocomplete="off" autocorrect="off" spellcheck="false" value="${esc(libQuery)}"></header>
+      <input id="lib-search" class="lib-search" type="search" placeholder="Search songs or artists" aria-label="Search songs or artists" autocomplete="off" autocorrect="off" spellcheck="false" value="${esc(libQuery)}">
+      <span class="seg genre-seg" role="group" aria-label="Genre">${genreButtons()}</span></header>
       <div id="lib-body"><p class="muted">Loading songs…</p></div>`;
     let catalogue;
     try { catalogue = await getCatalogue(); }
@@ -147,7 +151,7 @@
   function renderLibrary(catalogue) {
     const body = $("lib-body");
     if (!body) return;
-    const songs = listedSongs(catalogue);
+    const songs = Library.byGenre(listedSongs(catalogue), libGenre);
     let html = "";
     if (libQuery.trim()) {
       const found = Library.search(songs, libQuery);
@@ -164,7 +168,7 @@
         html += `<section class="group shelf-group"><h2>${esc(shelf.title)}</h2>${shelf.note ? `<p class="group-note">${esc(shelf.note)}</p>` : ""}
           <ul class="cards shelf">${shelf.songs.map(songCard).join("")}</ul></section>`;
       }
-      if (!songs.length) html += `<p class="msg">No songs are listed yet.</p>`;
+      if (!songs.length) html += `<p class="msg">${libGenre === "all" ? "No songs are listed yet." : `No ${esc(libGenre)} songs are listed yet.`}</p>`;
     }
     html += `<footer class="lib-foot"><p>Chords are automatic drafts and may be wrong. Strum patterns are practice suggestions, not the recorded parts. Beats are estimated; bars are approximate.</p></footer>`;
     body.innerHTML = html;
@@ -186,7 +190,7 @@
   async function surpriseMe(lastId) {
     let catalogue;
     try { catalogue = await getCatalogue(); } catch (_) { return; }
-    const pick = Library.surprise(listedSongs(catalogue), { lastId, plays: store.plays() });
+    const pick = Library.surprise(Library.byGenre(listedSongs(catalogue), libGenre), { lastId, plays: store.plays() });
     if (pick) location.hash = songHref(pick.id);
   }
 
@@ -1071,6 +1075,12 @@
     const act = target.dataset.act;
     if (act === "reload") { location.reload(); return; }
     if (act === "surprise") { surpriseMe(S ? S.song.id : null); return; }
+    if (act === "genre") {
+      libGenre = target.dataset.genre;
+      target.parentNode.querySelectorAll("[data-act=genre]").forEach(b => b.setAttribute("aria-pressed", String(b === target)));
+      getCatalogue().then(catalogue => { if (!S && $("lib-search")) renderLibrary(catalogue); }).catch(() => {});
+      return;
+    }
     if (act === "fav") {
       const on = store.toggleFavourite(target.dataset.id);
       target.setAttribute("aria-pressed", String(on));

@@ -3,8 +3,9 @@
 "id":"ritchie-valens-la-bamba-youtube-20261026",
 "title":"La Bamba",
 "artist":"Ritchie Valens",
+"genre":"rock",
 "group":"level-3",
-"order":5,
+"order":11,
 "level":3,
 "recording":{"id":"ritchie-valens-la-bamba-youtube-20261026","duration_seconds":126.977,"audio_sha256":"8febd1e050a8716a71ec01cc32c3da8b2326989af8793ed2172717bf6b476881"},
 "videos":[{"video_id":"BycLmWI97Nc","uploader":"Ritchie Valens - Topic","kind":"analysed","duration_seconds":127,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],
@@ -122,5 +123,5 @@
 ],
 "strumming":{"note":"Default practice patterns for Level 3 songs; not checked against the recording.","source":"level-default","patterns":[{"id":"folk-strum","name":"Start: D — D U — U D U","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","—","D","U","—","U","D","U"],"description":"Keep the down-up pendulum going; miss the strings on the \"&\" of 1 and on 3. A common pop and rock strum."},{"id":"ring-3","name":"Next: let count 3 ring","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","U","D","U","—","U","D","U"],"description":"Down-up eighths, but miss the strings on 3 and come back in with the up-strum after it."}]},
 "learning":{"skill_focus":"The same three chords all the way through with a bright, fast strum. Start slow with one strum per beat and speed up gradually.","prerequisites":"","sources":[{"title":"SongBPM tempo listing: La Bamba","url":"https://songbpm.com/@ritchie-valens/la-bamba"}]},
-"provenance":{"pack":"strumalong-additions-v3","manifest_sha256":"fd59661fcc37f9590bf5c2bf953b296ada72e016061c7dcc8b3b0a0391d78203","rhythm_sha256":"642ecd5ddaef059d37f9730a73a30170dc563072e1e81bfb6808d1c00937ecdc","practice_sha256":"a7f7ccefb1a2967b4335b33d8a582d935a6a2b42659c56cd2fa184ecf2a6e43a","learning_sha256":"a7f7ccefb1a2967b4335b33d8a582d935a6a2b42659c56cd2fa184ecf2a6e43a","additions_sha256":"a7f7ccefb1a2967b4335b33d8a582d935a6a2b42659c56cd2fa184ecf2a6e43a","catalogue_sha256":"da053fc699c14948dd0dc0f5d76b747d1957d87a1bf7cf45147e78e6b3488d36"}
+"provenance":{"pack":"strumalong-additions-v3","manifest_sha256":"fd59661fcc37f9590bf5c2bf953b296ada72e016061c7dcc8b3b0a0391d78203","rhythm_sha256":"642ecd5ddaef059d37f9730a73a30170dc563072e1e81bfb6808d1c00937ecdc","practice_sha256":"a7f7ccefb1a2967b4335b33d8a582d935a6a2b42659c56cd2fa184ecf2a6e43a","learning_sha256":"a7f7ccefb1a2967b4335b33d8a582d935a6a2b42659c56cd2fa184ecf2a6e43a","additions_sha256":"a7f7ccefb1a2967b4335b33d8a582d935a6a2b42659c56cd2fa184ecf2a6e43a","catalogue_sha256":"88439a612458c6c9f8ff2e9032d9038720e5062e7853dd2eba3d68d3bd878ae6"}
 }

@@ -53,7 +53,7 @@ strumalong/                 # deployable root (published to gh-pages as-is)
   songs/<id>.json           # one per recording (generated)
   data/catalogue.json       # which recordings ship: packs to read, exclusions with reasons, level overrides
   data/additions.json       # authored metadata for the v1 additions: capo, setup notes, practice patterns
-  data/additions-v2.json    # (future) the same for the v2 additions pack; skipped while missing
+  data/additions-v2.json    # the same for the v2 additions pack (v3, v4 and v4b likewise; additions-v4-fallbacks.json is not read)
   tools/build-songs.js      # node exporter: catalogue.json + packs -> songs/*.json (not deployed logic, harmless if published).
                             # exportSong(draft, metadata, settings) -> {song, card, report} is pure; the rest is its filesystem adapter
   test/*.test.js            # node:assert tests; run: node strumalong/test/run.js
@@ -132,7 +132,9 @@ The single place that says which recordings are in the app. The exporter reads n
   - `kind: "additions"`: the pack `dir`, its `rhythm.json` and an authored `metadata` file (`strumalong-additions-1` schema). `strumalong-additions-v1` uses `data/additions.json`. `strumalong-additions-v2` (pack `experiments/generated/strumalong-additions-v2/`, metadata `strumalong/data/additions-v2.json`) is configured now and skipped with a log line until both exist. An optional pack is skipped gracefully when missing or unusable; a required one stops the build.
 - `exclude`: `{recording_id, title, reason}`. Excluded recordings are skipped before building, so they need no title or metadata.
 - `level_overrides`: `{recording_id, level, reason}`. The song keeps `difficulty.computed_level` and shows `override_reason` in Details. A recording cannot be both excluded and overridden.
-- `timing_fix_off` (optional): `{recording_id, reason}` turns the timing fix off for one song (see "Timing fix"). No song uses it yet.
+- `timing_fix_off` (optional): `{recording_id, reason}` turns the timing fix off for one song (see "Timing fix").
+- `genres`: `{recording_id: "rock" | "pop"}`, one tag per shipped song (28 October 2026, [#75](https://github.com/dcromp/music-os/issues/75)). The exporter writes it as `genre` on each song and index card and warns about an untagged song. An excluded recording cannot have a genre. Country, folk and reggae songs take whichever tag fits best (founder decision). The home page's All / Rock / Pop control (`Library.byGenre`) filters search, the shelves and Surprise me; the choice lasts for the visit and is not stored.
+- The frozen draft builder takes at most 64 recordings per pack, so the 28 October batch is split into packs `strumalong-additions-v4` and `-v4b` of 33 each. Each has its own metadata (`data/additions-v4.json`, `-v4b.json`) and tempo priors (`experiments/fixtures/rhythm-strumalong-additions-v4.json`, `-v4b.json`), because the beat-grid tool needs priors that exactly match its pack.
 - The exporter warns about an override or a `timing_fix_off` entry for a song that is not built, and about a manifest case without metadata.
 
 Dropped on 25 October 2026 (founder feedback), still in their packs:

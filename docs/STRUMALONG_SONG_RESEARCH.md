@@ -311,3 +311,181 @@ Use these if a pick has no usable upload or fails chart review.
   reason.
 - Popularity evidence is partial. Some lists showed only their top entries, and
   Sit Down's evidence is chart and certification data, not a list.
+
+## v4 batch (28 October 2026): towards 100 songs
+
+The founder wants the catalogue grown from 43 to about 100 songs: top rhythm-guitar (strummed) rock and pop hits. This batch applies the same filter as above (strummed chords for most of the studio recording; a widely known hit; steady 4/4 or a clearly strummed 6/8; no key or tempo changes; one well-known studio recording). It nominates 66 first picks and 10 fallbacks, so that about 57 survive the automated chord, instrument and strum checks. Nothing in `songs/index.json`, the catalogue `exclude` list, the rejections above, or candidates v1 to v3 (first picks and fallbacks) is re-proposed. Every row carries `genre` (`rock` or `pop`).
+
+Files: `experiments/fixtures/strumalong-additions-candidates-v4.json` (uploads) and `strumalong/data/additions-v4.json` (metadata, `chart_check` pending). No lyrics are reproduced here.
+
+### Sources used
+
+**Top rock and pop lists**: the lists swept above (Rolling Stone 500, NME 500, Ultimate Classic Rock top 100, UK and US best-sellers, UK and Spotify most-streamed), screened against the catalogue for strummed hits not yet proposed. The chart peaks and certifications in the Popularity column are UK Official Charts and Billboard figures as recalled during research, spot-checked against Wikipedia song pages; they were not all re-fetched, so verify any that matter.
+
+**Guitar-teacher strumming lists and lessons**: Andy Guitar (Have a Nice Day; When I Come Around), JustinGuitar and Guitar Lobby easy-strumming lists (as above), Totally Guitars lessons (You're Still the One, Peace Train, Bonfire Heart, Pink Houses), Lauren Bateman chord charts (End of the Line, Who'll Stop the Rain, Stick Season, Me and Julio, Redemption Song), Guitar Noise easy-song threads (The Drugs Don't Work, Why Does It Always Rain on Me?), Heartwood Guitar, Uberchord, School of Feedback, Richter Guitar and Guitar Player (the Only Wanna Be with You capo story).
+
+**Chord sheets and theory**: Ultimate Guitar (search snippets and the pg.zachmanson.com mirror, since UG returns 403 to direct fetches), guitartabs.cc, Guitar Tabs Explorer, e-chords, chordu, Hooktheory TheoryTabs, Yousician, gitaartabs.nl, ukutabs, Alan W. Pollack's Beatles notes, and Musicnotes listings. The per-song source is in the metadata `sources`.
+
+**Tempo and key**: SongBPM (<https://songbpm.com>) for 75 of the 94 songs first examined, plus GetSongBPM, Hooktheory and Musicnotes markings. These are algorithmic and sometimes half or double time.
+
+**Uploads**: read-only yt-dlp searches (metadata only, no download), oEmbed and the embed-page playability check, at one YouTube request every ~2.5 s.
+
+### Picks by level
+
+Shapes are what the player frets at the stated capo; the level is the expected level from the chord sheets. Tempo is the studio pulse from the cited source (some are half or double time).
+
+#### Level 1 · First chords (1)
+
+| Artist | Title | Year | Genre | Shapes (capo) | Tempo | Why it fits | Popularity |
+|---|---|---|---|---|---|---|---|
+| Hootie & the Blowfish | Hold My Hand | 1994 | pop | A D E (2) | ~86 (songbpm 171, half time) | Mostly A and D with E in the chorus; strummed acoustic and electric. Bm or F#m may appear briefly, which would make it L4. | US #10 (1995); Cracked Rear View, 21x Platinum |
+
+#### Level 2 · Open chords (25)
+
+| Artist | Title | Year | Genre | Shapes (capo) | Tempo | Why it fits | Popularity |
+|---|---|---|---|---|---|---|---|
+| Creedence Clearwater Revival | Lookin' Out My Back Door | 1970 | rock | G Em C D (4) | ~120 (Hooktheory) | Chugging country-rock rhythm guitar on open shapes; record in B, so capo 4 G shapes. | US #2 (1970) |
+| Traveling Wilburys | End of the Line | 1988 | rock | D A G (0) | ~167 (songbpm) | Acoustic train-beat strum on three open chords; the whole band strums. | UK #52, US Mainstream Rock #2 (1989); Traveling Wilburys Vol. 1, 3x Platinum |
+| Neil Young | Rockin' in the Free World | 1989 | rock | Em D C G (0) | ~132 (songbpm) | Distorted electric chord strum on Em-D-C throughout; no riff hook. | US Mainstream Rock #2 (1989); Rolling Stone 500 (2004) #216 |
+| Matchbox Twenty | 3AM | 1997 | rock | G Cadd9 D Em (1) | ~108 (songbpm) | Acoustic strum carries the song after a short picked intro; record in Ab, capo 1. | Yourself or Someone Like You, 12x Platinum album |
+| Hootie & the Blowfish | Only Wanna Be with You | 1995 | pop | D G A Em (4) | ~103 (songbpm) | Capo-up jangly acoustic strum; record in F#. Mandolin colours it but the guitar strum leads. | US #6 (1995) |
+| Pearl Jam | Last Kiss | 1999 | rock | G Em C D (0) | ~112 (songbpm) | Simple I-vi-IV-V strum with a shuffle feel. Some charts add a late Gm/A, which needs a listen. | US #2 (1999), Pearl Jam's highest-charting US single |
+| John Mellencamp | Small Town | 1985 | rock | G Dsus2 Cadd9 Am (4) | ~123 (songbpm) | Driving acoustic strum on capo-4 open shapes; record in B. | US #6 (1985) |
+| Sublime | What I Got | 1996 | rock | D G (0) | ~96 (songbpm) | Two-chord acoustic strum over a beat for the whole song. | US Modern Rock #1 (1996) |
+| James | Laid | 1993 | rock | G C D (5) | fast; songbpm 116 | Frantic acoustic strum the whole way. Record in C; capo 5 swaps C, F and G for G, C and D shapes (open it is L4). | UK #25, US Modern Rock #3 (1993) |
+| Jake Bugg | Lightning Bolt | 2012 | rock | D A G (2) | ~113 (Musicnotes) | Fast skiffle-style acoustic strum throughout; record in E, capo 2. | UK #26 (2012); Jake Bugg UK #1 album |
+| The Rolling Stones | Dead Flowers | 1971 | rock | D G A (0) | ~125 | Country acoustic strum on three chords throughout. | Sticky Fingers (UK and US #1 album, 1971) |
+| Status Quo | Rockin' All Over the World | 1977 | rock | G C D (5) | ~131 (songbpm) | Band chord strum; record in C, capo 5 gives G, C, D shapes (open it needs F, L4). A passing diminished chord is brief. | UK #3 (1977) |
+| Taylor Swift | You Belong with Me | 2008 | pop | D A G Em (4) | ~130 (songbpm) | Steady acoustic eighths strum; record in F#, capo 4. Original Fearless recording, not the re-recording. Bridge Bm unconfirmed. | US #2 (2009) |
+| Taylor Swift | We Are Never Ever Getting Back Together | 2012 | pop | Cadd9 G D Em (0) | ~86 (songbpm 172, double time) | Acoustic strum with muted chops on a simple loop; spoken bridge only. | US #1 (2012), UK #4 |
+| Jimmy Buffett | Margaritaville | 1977 | pop | D A G (0) | ~124 (Hooktheory; songbpm 125) | Acoustic strum carries it; steel drums and harmonica are colour only. | US #8 (1977) |
+| Sugar Ray | Every Morning | 1999 | pop | G D C (1) | ~110 (Hooktheory; songbpm 110) | Acoustic strum loop under a lead lick; record in Ab, capo 1. | US Airplay #1 (1999), UK #10 |
+| The Lumineers | Stubborn Love | 2012 | pop | C Em G D (5) | ~115 (songbpm) | Acoustic strumming with cello and strings; capo 5. | The Lumineers (2012), multi-Platinum debut album |
+| Shania Twain | You're Still the One | 1997 | pop | D G A Em (1) | ~68 | Slow acoustic strum; steel guitar fills on top. Record in Eb, capo 1. | US #2, UK #10 (1998) |
+| Noah Kahan | Stick Season | 2022 | pop | G D Em C (2) | ~117 | Fast driving strum after a picked first verse; record in A, capo 2. Could compute L3 on pace. | UK #1 (2023), US #9 |
+| Harry Chapin | Cat's in the Cradle | 1974 | pop | E D G A (1) | ~78 (songbpm) | Picked intro, strummed verses; Bm may appear. | US #1 (1974) |
+| Barenaked Ladies | If I Had $1000000 | 1992 | pop | G D C Em (2) | ~ | Acoustic strumming leads; spoken and stop-time breakdowns may break the grid. | Canada top 40 (1992); signature song |
+| Uncle Kracker | Follow Me | 2000 | pop | D G A Em (3) | 105 (songbpm) | Acoustic strum throughout; record in F, capo 3 gives D shapes (the common capo-1 chart needs B, L5). | US #5 (2001) |
+| Taylor Swift | Mine | 2010 | pop | C G D Em (0) | ~121 (songbpm) | Acoustic strum with banjo colour; original Speak Now recording, not the re-recording. | US #3 (2010) |
+| Oasis | Songbird | 2003 | rock | G Em7 (0) | ~135 (songbpm) | Acoustic strum through the whole song; irregular phrase lengths in the instrumental need a check. | UK #3 (2003) |
+| Lifehouse | Hanging by a Moment | 2000 | rock | G D Em C (6) | ~124 (Hooktheory) | Driving distorted eighth-note chord strumming. The record is tuned down (drop D a half step lower); capo 6 in standard tuning matches its pitch. | US Billboard Hot 100 #1 song of 2001 (peak #2) |
+
+#### Level 3 · More changes (11)
+
+| Artist | Title | Year | Genre | Shapes (capo) | Tempo | Why it fits | Popularity |
+|---|---|---|---|---|---|---|---|
+| Creedence Clearwater Revival | Who'll Stop the Rain | 1970 | rock | G C D Em Am (0) | ~120 | Acoustic strum drives the whole song. Charts that keep the Bm make it L4. | US #2 (1970, double A-side) |
+| Stereophonics | Have a Nice Day | 2001 | rock | A G D E D/F# (2) | ~121 (songbpm) | Acoustic strum throughout; record in B, capo 2. Taught by Andy Guitar. | UK #5 (2001) |
+| Counting Crows | Accidentally in Love | 2004 | pop | G Em C D A Am (0) | ~138 (Hooktheory; songbpm 138) | Bright band strum through six open shapes after a short intro hook. | Shrek 2 single; Oscar-nominated (2005); UK #28 |
+| Phillip Phillips | Home | 2012 | pop | G C Em D D/F# (5) | ~121 (Hooktheory; songbpm 121) | Acoustic strum throughout; record in C, capo 5 (open shapes would need F). | US #6 (2012), 5x Platinum |
+| Paul Simon | Me and Julio Down by the Schoolyard | 1972 | pop | A D E B7 G (0) | ~103 (getsongbpm; songbpm 105) | Percussive syncopated acoustic strum on open shapes; the strum is the skill. | US #22, UK #15 (1972) |
+| MAGIC! | Rude | 2014 | pop | G C D Em (6) | ~144 (songbpm) | Off-beat reggae chord chops; record in Db, capo 6. Borderline: chops rather than a full strum, like Three Little Birds. | US #1 (2014), UK #1 |
+| The Wallflowers | One Headlight | 1996 | rock | G C B7 Em D (7) | ~104-108 | Acoustic strum under organ and slide. Record key D or C across sources, so the capo is 7 or 5; check against the upload. | Two Grammys (1998); Bringing Down the Horse, 6x Platinum |
+| Lisa Loeb | Stay (I Missed You) | 1994 | pop | G Em7 Am7 G/B Cadd9 (6) | ~161 (songbpm) | Acoustic strum throughout; wordy phrasing may give irregular bars. | US #1 (1994) |
+| The Beautiful South | Rotterdam (Or Anywhere) | 1996 | pop | Fmaj7 C Am G E7 D (0) | ~108 (Hooktheory) | Strummed acoustic, but sources disagree on 4/4 versus 6/8. | UK #5 (1996) |
+| Third Eye Blind | Jumper | 1998 | rock | Fmaj7 C G Am Dsus2 (0) | ~91 (songbpm) | Acoustic strum through most of the song; Fmaj7 rather than F. | Third Eye Blind (1997), 6x Platinum album; single 1998 |
+| The Beatles | Eight Days a Week | 1964 | rock | G A7 C Em D (7) | ~138 | Acoustic and electric chord strumming; capo 7 avoids the Bm of the open D version (L4). | US #1 (1965) |
+
+#### Level 4 · First barre (F / Bm) (23)
+
+| Artist | Title | Year | Genre | Shapes (capo) | Tempo | Why it fits | Popularity |
+|---|---|---|---|---|---|---|---|
+| Eagles | Peaceful Easy Feeling | 1972 | rock | E A B7 F#m Esus4 (0) | ~143 (songbpm) | Open acoustic strum throughout; F#m in the chorus. | US #22 (1972); Their Greatest Hits, 38x Platinum |
+| Rod Stewart | Maggie May | 1971 | rock | D A G Em F#m (0) | ~129 (songbpm) | 12-string acoustic strum through the verses; picked intro and mandolin outro are short. | UK #1 and US #1 (1971); Rolling Stone 500 |
+| Traveling Wilburys | Handle with Care | 1988 | rock | D C G Bm B7 (0) | ~115 (songbpm) | Whole-band acoustic strum; harmonica fills only. A full B in the bridge would make it L5. | UK #21, US Mainstream Rock #2 (1988) |
+| Crowded House | Weather with You | 1992 | rock | Em7 A D G F C (0) | ~94 (songbpm) | Acoustic Em7-Asus4 strum figure throughout; the F is in the bridge only. | UK #7 (1992) |
+| Fleetwood Mac | Go Your Own Way | 1976 | rock | D A G Bm (3) | ~136 (songbpm) | Driving strummed guitars; record in F, so capo 3 gives D shapes. Lead solo at the end. | US #10 (1977); Rumours; Rolling Stone 500 |
+| Spin Doctors | Two Princes | 1991 | rock | D A Bm G (0) | ~104-108 (Musicnotes 108) | Funky, syncopated electric chord strum on a four-chord loop. | US #7, UK #3 (1993) |
+| The Verve | The Drugs Don't Work | 1997 | rock | C Am Em F G (0) | ~78 | Laid-back acoustic strum with strings throughout. | UK #1 (1997) |
+| Travis | Why Does It Always Rain on Me? | 1999 | rock | D Bm G Em7 A (2) | ~108 (songbpm) | Acoustic strum after a short cello intro; record in E, capo 2. | UK #10 (1999); The Man Who, UK #1 |
+| Oasis | Stand by Me | 1997 | rock | G D C Em Am F (0) | ~86-88 (Musicnotes) | Acoustic and electric strummed wall in G throughout. | UK #2 (1997) |
+| The Beatles | You've Got to Hide Your Love Away | 1965 | rock | G D F C Dsus4 (0) | ~ (6/8 waltz feel) | Lennon's strummed 12-string acoustic in a clear triple feel. | Help! (UK and US #1 album, 1965) |
+| The Kooks | She Moves in Her Own Way | 2006 | rock | G C D Am Bm Em (0) | ~154 (songbpm 77, double time) | Bouncy acoustic strum, with short picked licks between sections. | UK #7 (2006) |
+| Smash Mouth | All Star | 1999 | pop | D A Bm G (4) | ~104 (Hooktheory; songbpm 104) | Electric chord strum on a four-chord loop; record in F#, capo 4 (capo 2 gives L5 shapes). | US #4 (1999); Shrek |
+| Del Amitri | Roll to Me | 1995 | pop | D G A Em Bm7 (4) | ~150 (songbpm 75, double time) | Jangly chord strum; 2:13 long. Key inferred from charts (F#), capo 4. | US #10 (1995), UK #22 |
+| The Jam | That's Entertainment | 1980 | rock | G Em Am F (3) | ~ | Acoustic strum carries the whole track; record in Bb, capo 3. | UK #21 (1981, import single) |
+| George Michael | Faith | 1987 | pop | A D G E Bm F#m (2) | ~96 (songbpm) | Syncopated acoustic strum is the record's hook after a free-time organ intro; record in B, capo 2. | US #1 (1987), UK #2 |
+| Amy Macdonald | This Is the Life | 2007 | pop | Am F C Em (4) | ~95 | Acoustic strum is the core part; record in C#m, capo 4. | UK #28 (2007); a number one in several European countries |
+| Sheryl Crow | Soak Up the Sun | 2002 | pop | D A G Em F (2) | ~120 (songbpm) | Acoustic strum with band; record in E, capo 2. Sheets disagree on some chords. | US #17 (2002), US Adult Top 40 #1 |
+| The Mamas & the Papas | California Dreamin' | 1965 | pop | Am G F E7sus4 E7 C (4) | ~112 (songbpm) | 12-string acoustic strumming throughout after a short picked figure; flute solo. Record in C#m, capo 4. | US #4 (1966); Rolling Stone 500 |
+| Cat Stevens | Peace Train | 1971 | pop | C G F Am (0) | ~80-83 (sheet music) | Driving acoustic strum with fast changes; Cat Stevens' Wild World is already in. | US #7 (1971) |
+| Avril Lavigne | Complicated | 2002 | pop | Am F C G (5) | ~78 (Hooktheory) | Acoustic strumming leads, with electric layers; record in F, capo 5. | US #2, UK #3 (2002) |
+| Alanis Morissette | Hand in My Pocket | 1995 | pop | G Em7 Cadd9 F C (0) | 92 (Wikipedia) | Jangly strum over a G drone; harmonica only in the solo. | Canada #1, US Airplay #15 (1995); Jagged Little Pill |
+| Toad the Wet Sprocket | All I Want | 1991 | pop | Am C G Em F D (5) | ~124 (songbpm) | Jangly strum with electric arpeggio layers; record in C, capo 5 (no capo needs Bb, L5). | US #15 (1992) |
+| James Blunt | Bonfire Heart | 2013 | pop | C Em Am G F (0) | ~117 (songbpm) | Acoustic strum throughout. | UK #4 (2013) |
+
+#### Level 5 · Barre chords (6)
+
+| Artist | Title | Year | Genre | Shapes (capo) | Tempo | Why it fits | Popularity |
+|---|---|---|---|---|---|---|---|
+| The Kinks | Lola | 1970 | rock | E A D C B C#m (0) | ~ | Strummed acoustic throughout; the intro C-D-E is a strummed chord figure. Bridge has B and C#m. | UK #2, US #9 (1970); Rolling Stone 500 |
+| Oasis | Half the World Away | 1994 | rock | C Fmaj7 Am D E Fm (2) | ~116 | Acoustic strum with keys; the Fm is T4. Royle Family theme. | B-side of Whatever (UK #3, 1994); The Royle Family theme |
+| The Beatles | She Loves You | 1963 | rock | G Em Bm D C Cm (0) | ~150 | Fast electric chord strum; Cm is T4. | UK #1 (1963), US #1 (1964); UK best-selling single of the 1960s |
+| The Beatles | All My Loving | 1963 | rock | Em A7 D Bm G C#m F#7 (0) | ~155 | The defining part is Lennon's fast triplet rhythm strum; C#m and F#7 are T4. | With the Beatles (UK #1 album, 1963) |
+| KT Tunstall | Suddenly I See | 2005 | pop | D G A Bm F#m Gm (0) | ~100 (songbpm) | Driving acoustic strum throughout; Gm is T4 and no capo removes it. | UK #12 (2005); The Devil Wears Prada |
+| The Fratellis | Chelsea Dagger | 2006 | rock | G D C B E (0) | ~155 (songbpm) | Driving full-band chord strum; sheets disagree on the verse B and E. | UK #5 (2006) |
+
+#### Counts
+
+| Level | Rock | Pop | v4 picks | In the app now | If all picks pass |
+|---|---|---|---|---|---|
+| 1 | 0 | 1 | 1 | 11 | 12 |
+| 2 | 13 | 12 | 25 | 14 | 39 |
+| 3 | 5 | 6 | 11 | 6 | 17 |
+| 4 | 12 | 11 | 23 | 7 | 30 |
+| 5 | 5 | 1 | 6 | 5 | 11 |
+| All | 35 | 31 | 66 | 43 | 109 |
+
+Over half the picks (36 of 66) sit at Levels 2–3, as asked. Level 4 is also large: many hits use one F, Bm or F#m, and a passing barre chord under 4% of chord time will compute lower. Level 1 gets only one pick: the app already has 11 songs there, and few hits use only A, D, E, Em and Am.
+
+### Fallbacks, in order
+
+| # | Artist | Title | Genre | Shapes (capo) | Level | Why it is a fallback |
+|---|---|---|---|---|---|---|
+| 1 | Gin Blossoms | Hey Jealousy | rock | C D Em G (2) | 2 | Jangly strum, but a signature lead riff is the hook. |
+| 2 | One Direction | Story of My Life | pop | Am F C G (3) | 4 | Picked acoustic verses, strummed choruses. |
+| 3 | The Kooks | Naive | rock | Em C G D D/F# (4) | 3 | Staccato, muted chord picking in the verse; strummed chorus. |
+| 4 | Catfish and the Bottlemen | Kathleen | rock | G Em Am D C (7) | 3 | Fast electric strum, but riff hooks; capo 7 keeps it open. |
+| 5 | The Everly Brothers | Wake Up Little Susie | rock | D F G A (0) | 4 | Strummed chordal intro figure; stop bars may unsettle the bar grid. |
+| 6 | Crowded House | Don't Dream It's Over | rock | D Bm G A Em (1) | 4 | Organ is prominent and the intro is picked; strummed verses. |
+| 7 | Jack Johnson | Banana Pancakes | pop | G Am D7 C7 Bm Em (0) | 4 | Syncopated chord strum with riff fills; a third Jack Johnson song. |
+| 8 | Primal Scream | Movin' on Up | rock | G D C Am (5) | 4 | Stones-style acoustic strum; chart sources conflict on capo and the Bb/Ab passing chords. |
+| 9 | Ocean Colour Scene | The Day We Caught the Train | rock | Em D G C A B (0) | 5 | Strummed, but riff and lead lines and many chord colours; charts disagree on the key. |
+| 10 | Green Day | When I Come Around | rock | G D Em C (0) | 2 | Palm-muted power-chord strum with a picked lead line; needs half-step-down tuning (capo gives L4). |
+
+### Notable rejections
+
+| Song | Reason |
+|---|---|
+| Mr. Big, To Be with You | The last chorus modulates from E to G. |
+| Neil Diamond, Cracklin' Rosie | Key changes; players slide the capo up mid-song. |
+| The Cranberries, Dreams | The chorus lead-out moves key, and the chiming effects part is only borderline strumming. |
+| R.E.M., It's the End of the World as We Know It | A fast, arpeggiated jangle, not a strum. |
+| The Doobie Brothers, Listen to the Music | A syncopated hammer-on chord riff, and the bridge is unclear. |
+| Sheryl Crow, All I Wanna Do | A slide- and groove-led record with spoken verses. |
+| Sam Fender, Seventeen Going Under | A lead-guitar riff defines it. |
+| America, Sister Golden Hair | The slide-guitar intro riff is the hook. |
+| The Rembrandts, I'll Be There for You | The 12-string jangle riff is the hook. |
+| John Mellencamp, Pink Houses | A signature riff opens it, and the record may be in open G. |
+| Bob Marley, Redemption Song | Built around a single-note bass riff between lines. |
+| Of Monsters and Men, Little Talks | The horn riff is the hook. |
+| Bruno Mars, The Lazy Song | A reggae skank with whistling; MAGIC!'s Rude was kept as the one off-beat chop song. |
+| Shawn Mendes, Treat You Better; Ed Sheeran, Lego House; Simon & Garfunkel, Homeward Bound | Picked or hybrid picked-and-strummed parts. |
+| Corinne Bailey Rae, Put Your Records On; The Lovin' Spoonful, Daydream | The guitar is light and not the lead part (strings or piano). |
+| James Bay, Hold Back the River; Train, Drive By; Paolo Nutini, New Shoes | Riffy or palm-muted 16th parts, or the guitar part could not be confirmed. |
+| Wheatus, Teenage Dirtbag | A picked verse and a power-chord chorus. |
+| The Waterboys, Fisherman's Blues | Fiddle and mandolin lead the arrangement. |
+| Oasis, Whatever | A 6:21 string-led record whose later section may move key. |
+| Blur, Tender | 7:42 long, and the only upload found was unofficial. |
+| Jack Johnson, Upside Down; Michelle Branch, Everywhere; Jack Johnson, Sitting, Waiting, Wishing | No Topic or album-length official upload was found (video edits or unofficial channels only). |
+| Third Eye Blind, Semi-Charmed Life; Goo Goo Dolls, Slide; Snow Patrol, Run; Kings of Leon, Sex on Fire | Not researched further: picked riffs, alternate tunings or delay arpeggios on the record. |
+
+### Uploads and doubts
+
+- **Check method.** Every row passed oEmbed (200) and the embed-page playability check with a github.io Referer (so it is neither age-restricted nor embed-blocked), and is under 600 s. Unlike v3, the upload descriptions were not read: the installed yt-dlp (2025.08.11) cannot fetch full metadata for these videos ("not available on this app"), and a direct watch-page read was not used. Topic uploads are label deliveries of the studio recording; titles and durations were compared with the album track instead.
+- **Non-Topic uploads (official artist or label channels).** Handle with Care and End of the Line (official visualizers), 3AM, Laid (one of several video versions), Small Town, You Belong with Me, Mine, You're Still the One (single edit), Home, Rude, Hanging by a Moment and Don't Dream It's Over (music videos), Stick Season, We Are Never Ever Getting Back Together and Complicated (lyric videos), Last Kiss and Me and Julio (official audio), What I Got (music video), and Stubborn Love. A music video can carry a different intro or edit, so check the grid on these first.
+- **Versions rejected.** Taylor's Version re-recordings; the J. Frank Wilson original of Last Kiss; Topic commentary tracks (Taylor Swift), the "POP Mix" of Mine, "The Matrix Mix" of Complicated, the 2004 remix of You're Still the One, the 2022 Mix of Small Town, and the 1988 re-recording of Rockin' All Over the World.
+- **Duration doubts.** All Star (230 s against a ~3:20 album track; the 204 s Topic copy is not embeddable), This Is the Life (188 s video against ~3:04), and 3AM (227 s video).
+- **Strum doubts.** Rude (off-beat chops, like Three Little Birds), Me and Julio (percussive, syncopated), Stick Season (first verse picked), Cat's in the Cradle (picked intro), Faith (syncopated strum after a free-time organ intro), One Headlight (organ and slide on top), Lola (the intro is a strummed chord figure), Hanging by a Moment (distorted eighth-note strumming on a tuned-down record).
+- **Chord or capo doubts.** Hold My Hand (Bm or F#m may appear, which would make it L4), Who'll Stop the Rain (Bm in some charts), Handle with Care (B or B7 in the bridge), One Headlight (record key D or C, so capo 7 or 5), Roll to Me (key inferred from charts), Soak Up the Sun (sheets disagree), Chelsea Dagger (the verse B is in one sheet only), and the Songbird instrumental bar counts.
+- Expected levels are chord-sheet drafts; the app computes its own from the automatic chart.

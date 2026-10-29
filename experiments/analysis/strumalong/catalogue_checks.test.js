@@ -783,8 +783,8 @@ else {
       assert.ok(["pass", "flag", "fail"].includes(s.verdict), s.recording_id);
       assert.ok(typeof s.shipped === "boolean");
     }
-    assert.equal(real.songs.length, 56);   // 44 + the 12 recordings of strumalong-additions-v3 (26 Oct): 43 shipped, 13 excluded
-    assert.equal(real.summary.shipped, 43);
+    assert.equal(real.songs.length, 122);  // 56 + the 66 recordings of strumalong-additions-v4/-v4b (28 Oct): 100 shipped, 22 excluded
+    assert.equal(real.summary.shipped, 100);
   });
 }
 

@@ -3,8 +3,9 @@
 "id":"tom-petty-free-fallin-youtube-20261024",
 "title":"Free Fallin'",
 "artist":"Tom Petty",
+"genre":"rock",
 "group":"level-2",
-"order":11,
+"order":34,
 "level":2,
 "recording":{"id":"tom-petty-free-fallin-youtube-20261024","duration_seconds":254.723,"audio_sha256":"2dc5eb0ddfc7d2c0dc3119c9f57b23d95f23718dc402d3345bc325c13780f829"},
 "videos":[{"video_id":"1lWJXDG2i0A","uploader":"Tom Petty & The Heartbreakers","kind":"analysed","duration_seconds":255,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],
@@ -149,5 +150,5 @@
 ],
 "strumming":{"note":"A starting rhythm exercise. The recording may use a different pattern or picking.","source":"authored","patterns":[{"id":"steady-down","name":"Start: steady downstrokes","counts":["1","2","3","4"],"strokes":["D","D","D","D"],"description":"Strum down on each count. Keep the motion steady and change shape when the chord cue changes."},{"id":"folk-strum","name":"Next: folk strum (D — D U — U D U)","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","—","D","U","—","U","D","U"],"description":"Keep your hand swinging down and up in steady eighth notes. Touch the strings on the arrows and miss them on the dashes. Start slowly, and keep moving through the chord changes."}]},
 "learning":{"skill_focus":"Slow changes between three capo shapes, a gentle steady strum, and keeping a chord ringing until the cue changes.","prerequisites":"","sources":[{"title":"Capo 3, D/G/A shapes sounding in F major","url":"https://richterguitar.com/free-fallin-tom-petty/"},{"title":"Published arrangement tempo marking: Free Fallin' (F major, 4/4, quarter = 84)","url":"https://www.musicnotes.com/sheetmusic/tom-petty/free-fallin/MN0046438"}]},
-"provenance":{"pack":"strumalong-additions-v1","manifest_sha256":"5e7b39cc4d0a11cac44ad47d30ab10a565562361a7b57e841bdcf5eec8847d2c","rhythm_sha256":"d1842590a152a42d486ab9a53581af3edc247faff3a7f833729a244f619ff5e9","practice_sha256":"084e250f67ca51fe57a15bbfac5788761ca165609402e6e8285fb760eacdd214","learning_sha256":"084e250f67ca51fe57a15bbfac5788761ca165609402e6e8285fb760eacdd214","additions_sha256":"084e250f67ca51fe57a15bbfac5788761ca165609402e6e8285fb760eacdd214","catalogue_sha256":"da053fc699c14948dd0dc0f5d76b747d1957d87a1bf7cf45147e78e6b3488d36"}
+"provenance":{"pack":"strumalong-additions-v1","manifest_sha256":"5e7b39cc4d0a11cac44ad47d30ab10a565562361a7b57e841bdcf5eec8847d2c","rhythm_sha256":"d1842590a152a42d486ab9a53581af3edc247faff3a7f833729a244f619ff5e9","practice_sha256":"084e250f67ca51fe57a15bbfac5788761ca165609402e6e8285fb760eacdd214","learning_sha256":"084e250f67ca51fe57a15bbfac5788761ca165609402e6e8285fb760eacdd214","additions_sha256":"084e250f67ca51fe57a15bbfac5788761ca165609402e6e8285fb760eacdd214","catalogue_sha256":"88439a612458c6c9f8ff2e9032d9038720e5062e7853dd2eba3d68d3bd878ae6"}
 }

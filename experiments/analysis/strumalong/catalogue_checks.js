@@ -665,7 +665,7 @@ function loadInputs(repo = REPO, options = {}) {
 
   // expected chord files (curated, additions)
   const expectedDir = options.expectedDir || abs("experiments/analysis/strumalong");
-  const expectedFiles = ["expected-chords.json", "expected-chords-v2.json", "expected-chords-v3.json"].map(f => path.join(expectedDir, f));
+  const expectedFiles = ["expected-chords.json", "expected-chords-v2.json", "expected-chords-v3.json", "expected-chords-v4.json"].map(f => path.join(expectedDir, f));
   const expected = new Map();
   for (const f of expectedFiles) {
     const d = tryJSON(f); if (!d) continue;
@@ -705,7 +705,7 @@ function loadInputs(repo = REPO, options = {}) {
   // candidate fixtures (titles, artists, embed)
   const candidates = new Map();
   const fixtureChecked = [];
-  for (const name of ["strumalong-additions-candidates-v1.json", "strumalong-additions-candidates-v2.json"]) {
+  for (const name of ["strumalong-additions-candidates-v1.json", "strumalong-additions-candidates-v2.json", "strumalong-additions-candidates-v4.json"]) {
     const f = options.fixturesDir ? path.join(options.fixturesDir, name) : abs("experiments/fixtures/" + name);
     const d = tryJSON(f); if (!d) continue;
     note(f);
@@ -719,7 +719,7 @@ function loadInputs(repo = REPO, options = {}) {
 
   // rhythm configs (tempo priors)
   const rhythmConfig = new Map();
-  for (const name of ["rhythm-first-ten.json", "rhythm-strumalong-additions-v1.json", "rhythm-strumalong-additions-v2.json"]) {
+  for (const name of ["rhythm-first-ten.json", "rhythm-strumalong-additions-v1.json", "rhythm-strumalong-additions-v2.json", "rhythm-strumalong-additions-v4.json", "rhythm-strumalong-additions-v4b.json"]) {
     const f = options.fixturesDir ? path.join(options.fixturesDir, name) : abs("experiments/fixtures/" + name);
     const d = tryJSON(f); if (!d) continue;
     note(f);

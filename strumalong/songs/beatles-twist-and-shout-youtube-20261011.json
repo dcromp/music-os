@@ -3,8 +3,9 @@
 "id":"beatles-twist-and-shout-youtube-20261011",
 "title":"Twist and Shout",
 "artist":"The Beatles",
+"genre":"rock",
 "group":"level-3",
-"order":4,
+"order":9,
 "level":3,
 "recording":{"id":"beatles-twist-and-shout-youtube-20261011","duration_seconds":155.236,"audio_sha256":"4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c"},
 "videos":[{"video_id":"2RicaUqd9Hg","uploader":"The Beatles","kind":"analysed","duration_seconds":155,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],
@@ -121,5 +122,5 @@
 ],
 "strumming":{"note":"A starting rhythm exercise. The recording may use a different pattern or picking.","beats_description":"Count four beats; & is halfway between beats","source":"authored","patterns":[{"id":"steady-down","name":"Start: steady downstrokes","counts":["1","2","3","4"],"strokes":["D","D","D","D"],"description":"Strum down on each count. Keep the motion steady and change shape when the chord cue changes."},{"id":"down-up","name":"Next: down and up","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","U","D","U","D","U","D","U"],"description":"Add an upstroke between counts. Begin slowly; keep moving through chord changes."}]},
 "learning":{"skill_focus":"Keep D/G/A changes moving at a quicker feel; the all-down build-up is later work.","prerequisites":"D/G/A changes at a quicker feel","sources":[{"title":"Andy Guitar: Twist And Shout","url":"https://www.andyguitar.co.uk/videos/beatles-guitar-day-02-twist-and-shout"},{"title":"Jon MacLennan: Twist And Shout","url":"https://www.jonmaclennan.com/blog/twist-and-shout-chords"}]},
-"provenance":{"pack":"automatic-first-ten-v1","manifest_sha256":"556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671","rhythm_sha256":"09c5c68dc1dc44f8380871744c59d00043e1c6ea42650f3911353f84a78962f7","practice_sha256":"da5c40283594ac871243b0e56e651b887b5fbcddcb9285e61acf95839e64f181","learning_sha256":"3c6b61546aa89b32b17e3bbe9c048c9c3c5ea492ac24d8affc8496e409e280f4","catalogue_sha256":"da053fc699c14948dd0dc0f5d76b747d1957d87a1bf7cf45147e78e6b3488d36"}
+"provenance":{"pack":"automatic-first-ten-v1","manifest_sha256":"556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671","rhythm_sha256":"09c5c68dc1dc44f8380871744c59d00043e1c6ea42650f3911353f84a78962f7","practice_sha256":"da5c40283594ac871243b0e56e651b887b5fbcddcb9285e61acf95839e64f181","learning_sha256":"3c6b61546aa89b32b17e3bbe9c048c9c3c5ea492ac24d8affc8496e409e280f4","catalogue_sha256":"88439a612458c6c9f8ff2e9032d9038720e5062e7853dd2eba3d68d3bd878ae6"}
 }

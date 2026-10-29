@@ -3,8 +3,9 @@
 "id":"bob-marley-three-little-birds-youtube-20261025",
 "title":"Three Little Birds",
 "artist":"Bob Marley & The Wailers",
+"genre":"pop",
 "group":"level-1",
-"order":6,
+"order":5,
 "level":1,
 "recording":{"id":"bob-marley-three-little-birds-youtube-20261025","duration_seconds":180.267,"audio_sha256":"e2e90c4b17009652c3f4156ec6a8959d5c4d544d14635f65eb4a17908599ae6a"},
 "videos":[{"video_id":"MUNNRAdizz0","uploader":"Bob Marley","kind":"analysed","duration_seconds":180,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],
@@ -53,5 +54,5 @@
 ],
 "strumming":{"note":"Default practice patterns for Level 1 songs; not checked against the recording.","source":"level-default","patterns":[{"id":"steady-down","name":"Start: steady downstrokes","counts":["1","2","3","4"],"strokes":["D","D","D","D"],"description":"Strum down on each count. Keep the motion steady and change shape when the chord cue changes."},{"id":"down-up","name":"Next: down-up eighths","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","U","D","U","D","U","D","U"],"description":"Alternate down and up in steady eighth notes: down on the numbers, up on the \"&\". Keep the hand moving through chord changes."}]},
 "learning":{"skill_focus":"Three easy open chords (A, D, E) with long holds and a relaxed reggae pulse. The recording's guitar plays short chops on the off-beats; start with four steady downstrokes per bar and learn the changes first.","prerequisites":"","sources":[{"title":"Published arrangement tempo marking: Three Little Birds","url":"https://www.musicnotes.com/sheetmusic/bob-marley/three-little-birds/MN0092983"}]},
-"provenance":{"pack":"strumalong-additions-v2","manifest_sha256":"55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd","rhythm_sha256":"0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459","practice_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","learning_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","additions_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","catalogue_sha256":"da053fc699c14948dd0dc0f5d76b747d1957d87a1bf7cf45147e78e6b3488d36"}
+"provenance":{"pack":"strumalong-additions-v2","manifest_sha256":"55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd","rhythm_sha256":"0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459","practice_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","learning_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","additions_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","catalogue_sha256":"88439a612458c6c9f8ff2e9032d9038720e5062e7853dd2eba3d68d3bd878ae6"}
 }

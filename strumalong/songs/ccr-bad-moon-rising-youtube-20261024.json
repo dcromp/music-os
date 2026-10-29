@@ -3,8 +3,9 @@
 "id":"ccr-bad-moon-rising-youtube-20261024",
 "title":"Bad Moon Rising",
 "artist":"Creedence Clearwater Revival",
+"genre":"rock",
 "group":"level-2",
-"order":9,
+"order":30,
 "level":2,
 "recording":{"id":"ccr-bad-moon-rising-youtube-20261024","duration_seconds":139.516,"audio_sha256":"686e1d37582327ed087dea603d47bd339e55e7db2ff5ac5f63ced13714229885"},
 "videos":[{"video_id":"tKJwvQfraY8","uploader":"Creedence Clearwater Revival","kind":"analysed","duration_seconds":140,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],
@@ -87,5 +88,5 @@
 ],
 "strumming":{"note":"A starting rhythm exercise. The recording may use a different pattern or picking.","source":"authored","patterns":[{"id":"steady-down","name":"Start: steady downstrokes","counts":["1","2","3","4"],"strokes":["D","D","D","D"],"description":"Strum down on each of the four counts in a bar (two cue beats). At this tempo it is quick: if it is too fast, use the slower pattern. Change shape when the chord cue changes."},{"id":"half-time","name":"Slower: counts 1 and 3 only","counts":["1","2","3","4"],"strokes":["D","—","D","—"],"description":"Strum down on counts 1 and 3 and let the chord ring on 2 and 4. A relaxed way to learn the changes at this tempo; this is a suggested exercise, not a transcription."}]},
 "learning":{"skill_focus":"Quick changes between D, A and G in a bouncy rock-and-roll rhythm. The recording is fast (about 180 quarter-note beats a minute), so start with the slower pattern.","prerequisites":"","sources":[{"title":"Published arrangement tempo marking (half note = 90, 2/2): Bad Moon Rising","url":"https://api.musicnotes.com/sheetmusic/creedence-clearwater-revival/bad-moon-rising/MN0107302"}]},
-"provenance":{"pack":"strumalong-additions-v1","manifest_sha256":"5e7b39cc4d0a11cac44ad47d30ab10a565562361a7b57e841bdcf5eec8847d2c","rhythm_sha256":"d1842590a152a42d486ab9a53581af3edc247faff3a7f833729a244f619ff5e9","practice_sha256":"084e250f67ca51fe57a15bbfac5788761ca165609402e6e8285fb760eacdd214","learning_sha256":"084e250f67ca51fe57a15bbfac5788761ca165609402e6e8285fb760eacdd214","additions_sha256":"084e250f67ca51fe57a15bbfac5788761ca165609402e6e8285fb760eacdd214","catalogue_sha256":"da053fc699c14948dd0dc0f5d76b747d1957d87a1bf7cf45147e78e6b3488d36"}
+"provenance":{"pack":"strumalong-additions-v1","manifest_sha256":"5e7b39cc4d0a11cac44ad47d30ab10a565562361a7b57e841bdcf5eec8847d2c","rhythm_sha256":"d1842590a152a42d486ab9a53581af3edc247faff3a7f833729a244f619ff5e9","practice_sha256":"084e250f67ca51fe57a15bbfac5788761ca165609402e6e8285fb760eacdd214","learning_sha256":"084e250f67ca51fe57a15bbfac5788761ca165609402e6e8285fb760eacdd214","additions_sha256":"084e250f67ca51fe57a15bbfac5788761ca165609402e6e8285fb760eacdd214","catalogue_sha256":"88439a612458c6c9f8ff2e9032d9038720e5062e7853dd2eba3d68d3bd878ae6"}
 }

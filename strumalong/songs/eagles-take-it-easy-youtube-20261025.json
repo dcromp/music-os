@@ -3,8 +3,9 @@
 "id":"eagles-take-it-easy-youtube-20261025",
 "title":"Take It Easy",
 "artist":"Eagles",
+"genre":"rock",
 "group":"level-3",
-"order":2,
+"order":4,
 "level":3,
 "recording":{"id":"eagles-take-it-easy-youtube-20261025","duration_seconds":211.59,"audio_sha256":"47f266da241d0fa28865b9d3966dd0d4bfa98fed078572009aa3f19a62ecebf5"},
 "videos":[{"video_id":"32Oc2d_3yEk","uploader":"Eagles","kind":"analysed","duration_seconds":212,"offset_seconds":0,"timing_checked":true,"note":"Chart computed from this upload's audio."}],
@@ -107,5 +108,5 @@
 ],
 "strumming":{"note":"Default practice patterns for Level 3 songs; not checked against the recording.","source":"level-default","patterns":[{"id":"folk-strum","name":"Start: D — D U — U D U","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","—","D","U","—","U","D","U"],"description":"Keep the down-up pendulum going; miss the strings on the \"&\" of 1 and on 3. A common pop and rock strum."},{"id":"ring-3","name":"Next: let count 3 ring","counts":["1","&","2","&","3","&","4","&"],"strokes":["D","U","D","U","—","U","D","U"],"description":"Down-up eighths, but miss the strings on 3 and come back in with the up-strum after it."}]},
 "learning":{"skill_focus":"Five open chords in a bright country-rock strum with quick changes. The banjo and lead guitar colour the record, but the strummed acoustic drives it.","prerequisites":"","sources":[{"title":"Published arrangement tempo marking: Take It Easy","url":"https://www.musicnotes.com/sheetmusic/the-eagles/take-it-easy/MN0039080"}]},
-"provenance":{"pack":"strumalong-additions-v2","manifest_sha256":"55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd","rhythm_sha256":"0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459","practice_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","learning_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","additions_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","catalogue_sha256":"da053fc699c14948dd0dc0f5d76b747d1957d87a1bf7cf45147e78e6b3488d36"}
+"provenance":{"pack":"strumalong-additions-v2","manifest_sha256":"55f39b41b8c04fe768c35d9ec31555384e188a23a2b5f793a8308a0e8df1c1cd","rhythm_sha256":"0c027b82dac5d5128919b0bf96d2c5561aa181a2bb4728cf62fe5993b58ed459","practice_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","learning_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","additions_sha256":"de46297599f39a510e7c59be296d73b023818df321b20102ed6156a1f4110882","catalogue_sha256":"88439a612458c6c9f8ff2e9032d9038720e5062e7853dd2eba3d68d3bd878ae6"}
 }

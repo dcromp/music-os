@@ -1,0 +1,126 @@
+{
+  "schema_version": "playalong-rhythm-config-1.0",
+  "status": "Curated pulse and meter hypotheses for the fourth Strum Along additions batch (rock/pop strummed songs towards ~100, 28 October 2026), covering every first pick and fallback, informed by SongBPM tempo listings checked against Karaoke Version, chord-sheet, sheet-music and tempo-database sources; not exact-upload timing gold. Prepared before the recordings were analysed, so ranges may need revision after the first grid check; where sources disagree on metrical level the status says so and the range is widened. This file holds the the fallbacks (not imported) of the v4 batch: the frozen draft builder takes at most 64 recordings per pack, so the batch is split into packs strumalong-additions-v4 and -v4b.",
+  "recordings": {
+    "gin-blossoms-hey-jealousy-youtube-20261028": {
+      "start_bpm": 153,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 132,
+      "tempo_max_bpm": 174,
+      "source_url": "https://songbpm.com/@gin-blossoms/hey-jealousy-b832f120-c973-4dd8-acdc-63104bbeb64c",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 153 BPM and Mixmeister 152.8; a Traktor reading of 76.4 (half time) is excluded by the range; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://www.cs.ubc.ca/~davet/music/track/POWERTRK_162/POWERTRK_162-17.html"
+    },
+    "one-direction-story-of-my-life-youtube-20261028": {
+      "start_bpm": 121,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 104,
+      "tempo_max_bpm": 138,
+      "source_url": "https://songbpm.com/@one-direction/story-of-my-life",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 121 BPM and ChordU 121; the range excludes the half-time (61) and double-time (242) readings; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://chordu.com/chords-tabs-story-of-my-life-id_8M3Vlnu_i3c"
+    },
+    "kooks-naive-youtube-20261028": {
+      "start_bpm": 103,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 89,
+      "tempo_max_bpm": 117,
+      "source_url": "https://songbpm.com/@the-kooks/naive-nojzv",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 101 BPM for the version matching this upload (105 on another page); Klang, AcousticBrainz and Karaoke Version give 103; the range excludes the half-time and double-time readings; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://songs.klang.io/en/s/The%20Kooks/Naive/jkaMiaRLgvY"
+    },
+    "catfish-and-the-bottlemen-kathleen-youtube-20261028": {
+      "start_bpm": 138,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 113,
+      "tempo_max_bpm": 163,
+      "source_url": "https://songbpm.com/@catfish-and-the-bottlemen/kathleen",
+      "pulse_prior_status": "Tempo uncertain: SongBPM lists 138 BPM and no independent published tempo for the studio recording was found (a ChordU page for the Live Lounge version gives 150); the range is widened to cover both and excludes the half-time (69) and double-time (276) readings; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://chordu.com/chords-tabs-catfish-and-the-bottlemen-kathleen-in-the-live-lounge-id_A__o7YSnFxA"
+    },
+    "everly-brothers-wake-up-little-susie-youtube-20261028": {
+      "start_bpm": 93,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 80,
+      "tempo_max_bpm": 106,
+      "source_url": "https://songbpm.com/@the-everly-brothers/wake-up-little-susie-6cb7dad2-8b62-4c31-9d12-efd061753cfa",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 91-94 BPM and DJ-software readings 91-94, while Karaoke Version gives about 186 (double time); as with Bye Bye Love in v3, the range uses the slower quarter-note reading and excludes 186; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://www.karaoke-version.com/mp3-backingtrack/the-everly-brothers/wake-up-little-susie.html"
+    },
+    "crowded-house-dont-dream-its-over-youtube-20261028": {
+      "start_bpm": 81,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 66,
+      "tempo_max_bpm": 96,
+      "source_url": "https://songbpm.com/@crowded-house/dont-dream-its-over-yld4v",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 81-82 BPM with a double-time reading of 162-164 and Karaoke Version about 81; DJ-software and AcousticBrainz readings scatter between 122 and 172; the range excludes the double-time readings; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://karaoke-version.com/custombackingtrack/crowded-house/don-t-dream-it-s-over.html"
+    },
+    "jack-johnson-banana-pancakes-youtube-20261028": {
+      "start_bpm": 115,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 99,
+      "tempo_max_bpm": 131,
+      "source_url": "https://songbpm.com/@jack-johnson/banana-pancakes-vezbp",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 114-115 BPM and Yousician 114; the range excludes the half-time (58) and double-time (230) readings; laid-back swung feel; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://yousician.com/songs/guitar/banana-pancakes/5bcfd198e8dec37b474ea4c9"
+    },
+    "primal-scream-movin-on-up-youtube-20261028": {
+      "start_bpm": 94,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 81,
+      "tempo_max_bpm": 107,
+      "source_url": "https://songbpm.com/@primal-scream/movin-on-up-0202de0a-3afd-4995-806f-ef8309358cbf",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 94 BPM with a double-time reading of 188, which the range excludes; Karaoke Version and AcousticBrainz agree near 94; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://www.karaoke-version.com/guitar-backing-track/primal-scream/movin-on-up.html"
+    },
+    "ocean-colour-scene-day-we-caught-the-train-youtube-20261028": {
+      "start_bpm": 89,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 77,
+      "tempo_max_bpm": 101,
+      "source_url": "https://songbpm.com/@ocean-colour-scene/the-day-we-caught-the-train-f38ud",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 89 BPM with a double-time reading of 178, which the range excludes; Karaoke Version about 89; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://www.karaoke-version.com/custombackingtrack/ocean-colour-scene/the-day-we-caught-the-train.html"
+    },
+    "green-day-when-i-come-around-youtube-20261028": {
+      "start_bpm": 98,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 84,
+      "tempo_max_bpm": 112,
+      "source_url": "https://songbpm.com/@green-day/when-i-come-around-3cb97dfa-ec5a-439d-ac3d-db1359d455d5",
+      "pulse_prior_status": "Source-informed range: SongBPM lists 98 BPM with a double-time reading of 196, which the range excludes; Klang, AcousticBrainz and Karaoke Version agree near 98; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://songs.klang.io/en/s/Green%20Day/When%20I%20Come%20Around/i8dh9gDzmz8"
+    }
+  }
+}
