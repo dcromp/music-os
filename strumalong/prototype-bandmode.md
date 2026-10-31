@@ -45,3 +45,15 @@ Foundation now offers all 15 major-key spellings and all 12 chord columns, group
 Verification: JavaScript syntax; browser change G→C→C♭ with correctly displayed spellings, minor-iv suggestion, individual Dm edit, 8→12-bar expansion, preview start/stop without console errors, and chosen chords carried into Record. Original reference compared byte for byte with the attachment. Real guitar audio and iPhone behaviour remain unverified. Minor-mode teaching and extra alterations are saved reference material, not implemented modes in this revision.
 
 Verdict: requested chord-helper integration is ready for founder review. All prototype state resets on reload.
+
+## Feel-first follow-up, 30 October (#77 → #73)
+
+Implements the research's proposed flow: feel → compare two starts → practical starting key → small palette → editable progression. Initial invitations are Happy/uplifting, Sad/reflective and Heavy/aggressive, with Explore and Neither exits. Six recipes use the research's chords, tempos, standard-tuning voicings and contrasting rhythm/articulation specifications. Choosing a recipe changes the project tempo and current section guide; audio clips are not retimed/transposed. Four bars load unless existing clips require a longer section.
+
+Major, minor (including B7) and third-free power-chord palettes are explicit. Key changes are tucked under details, along with singing-fit guidance. Hear individual chords; swap, repeat or return home; Undo and reset; use an easier heavy practice tempo; adjust rhythm and preview tone separately. Full chord controls remain accessible.
+
+Renderer: deterministic-plucked-string-v1, Web Audio, no samples/network/microphone. Uses the specified guitar voicings where available, alternating strokes/plucks, short damping for muted strokes and a moderate waveshaper for drive. Uses fixed gain with driven-output compensation, not perceptually validated loudness matching. The last playback manifest is exposed in Prototype state: recipe ID, notes, exact onset/duration times, BPM, pattern, tone, sample rate and core/tail duration. A 2.5-second render tail follows four-bar timing. No claim of recorded-guitar realism or accepted emotional effect.
+
+Validation: syntax and interactive desktop browser checks for minor B7 preview/application, unchanged example clip, power-chord preview/application, easier 84-BPM practice, guide editing/Undo and preview cancellation. Remaining: founder listening judgment, real iPhone interaction and credible-guitar/palm-mute comparison. All recording and input remain simulated. Research source: `research/feel-to-musical-choices:docs/FEEL_TO_MUSICAL_CHOICES_RESEARCH.md` (82972ad).
+
+The research's three practical starts are implemented for review; no founder choice among the six examples is recorded yet. All UI edits reset on reload.
