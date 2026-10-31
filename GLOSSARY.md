@@ -1,8 +1,19 @@
 # music-os
 
-Language for a curated guitar play-along catalogue and its learning path.
+Language for a curated guitar play-along catalogue, its learning path and Band mode songwriting.
 
 ## Language
+
+**Band mode**:
+The mode for creating your own music in a saved project with editable contributions from band members.
+
+**Band member**:
+A musical role in a Band mode project: Singer, Rhythm guitarist, Drummer, Bassist, Lead guitarist or Producer.
+_Avoid_: Step (when implying a mandatory sequence).
+
+**Singer**:
+The band member responsible for songwriting, lyrics, vocal melody and voice.
+_Avoid_: Separate Songwriter or Lyricist members.
 
 **Song**:
 A musical work that can have multiple performances, recordings and guitar arrangements.
