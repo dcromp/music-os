@@ -9,8 +9,8 @@ const guide={selectedBar:0,playing:false,playingBar:-1};
 const degrees=['I','ii','iii','IV','V','vi','♭VII','♭VI','♭III','II','III','iv'];
 let audioCtx=null,previewTimers=[],previewNodes=[];
 function stopClick(){}
-function stopGuidePreview(){previewTimers.forEach(clearTimeout);previewTimers=[];previewNodes.forEach(n=>{try{n.stop()}catch{}});previewNodes=[];guide.playing=false;guide.playingBar=-1;feelUI.playingRecipe=null}
-function render(){const root=document.querySelector('#recommender'),open=root.dataset?.screen===feelUI.screen?[...root.querySelectorAll('details')].map((d,i)=>d.open?i:-1).filter(i=>i>=0):[];root.innerHTML=foundation();if(root.dataset)root.dataset.screen=feelUI.screen;const details=root.querySelectorAll('details');open.forEach(i=>{if(details[i])details[i].open=true})}
+function stopGuidePreview(){previewTimers.forEach(clearTimeout);previewTimers=[];previewNodes.forEach(n=>{try{n.stop()}catch{}});previewNodes=[];guide.playing=false;guide.playingBar=-1;feelUI.playingRecipe=null;bassState.playing=null}
+function render(){const root=document.querySelector('#recommender'),open=root.dataset?.screen===bassState.tab+feelUI.screen?[...root.querySelectorAll('details')].map((d,i)=>d.open?i:-1).filter(i=>i>=0):[];root.innerHTML=bassState.tab==='bass'?bassView():foundation();document.querySelectorAll('.member-tabs [data-action]').forEach(b=>{const active=b.dataset.action==='member:'+bassState.tab;b.setAttribute('aria-pressed',String(active));b.classList.toggle('active',active)});if(root.dataset)root.dataset.screen=bassState.tab+feelUI.screen;const details=root.querySelectorAll('details');open.forEach(i=>{if(details[i])details[i].open=true})}
 const chordRows={"C♯": ["C♯", "D♯m", "E♯m", "F♯", "G♯", "A♯m", "B", "A", "E", "D♯", "E♯", "F♯m"], "F♯": ["F♯", "G♯m", "A♯m", "B", "C♯", "D♯m", "E", "D", "A", "G♯", "A♯", "Bm"], "B": ["B", "C♯m", "D♯m", "E", "F♯", "G♯m", "A", "G", "D", "C♯", "D♯", "Em"], "E": ["E", "F♯m", "G♯m", "A", "B", "C♯m", "D", "C", "G", "F♯", "G♯", "Am"], "A": ["A", "Bm", "C♯m", "D", "E", "F♯m", "G", "F", "C", "B", "C♯", "Dm"], "D": ["D", "Em", "F♯m", "G", "A", "Bm", "C", "B♭", "F", "E", "F♯", "Gm"], "G": ["G", "Am", "Bm", "C", "D", "Em", "F", "E♭", "B♭", "A", "B", "Cm"], "C": ["C", "Dm", "Em", "F", "G", "Am", "B♭", "A♭", "E♭", "D", "E", "Fm"], "F": ["F", "Gm", "Am", "B♭", "C", "Dm", "E♭", "D♭", "A♭", "G", "A", "B♭m"], "B♭": ["B♭", "Cm", "Dm", "E♭", "F", "Gm", "A♭", "G♭", "D♭", "C", "D", "E♭m"], "E♭": ["E♭", "Fm", "Gm", "A♭", "B♭", "Cm", "D♭", "C♭", "G♭", "F", "G", "A♭m"], "A♭": ["A♭", "B♭m", "Cm", "D♭", "E♭", "Fm", "G♭", "F♭", "C♭", "B♭", "C", "D♭m"], "D♭": ["D♭", "E♭m", "Fm", "G♭", "A♭", "B♭m", "C♭", "B♭♭", "F♭", "E♭", "F", "G♭m"], "G♭": ["G♭", "A♭m", "B♭m", "C♭", "D♭", "E♭m", "F♭", "E♭♭", "B♭♭", "A♭", "B♭", "C♭m"], "C♭": ["C♭", "D♭m", "E♭m", "F♭", "G♭", "A♭m", "B♭♭", "A♭♭", "E♭♭", "D♭", "E♭", "F♭m"]};
 const feelRecipes=[
 {id:'H1',feel:'happy',name:'Open and buoyant',key:'G',mode:'major',chords:['G','C','D','G'],bpm:108,pattern:'quarters',tone:'clean',why:'Three familiar open shapes give you movement and a return to G.',easy:'One downstroke per beat. Let the chords ring.'},
@@ -71,6 +71,7 @@ document.addEventListener('click',e=>{
  const el=e.target.closest('[data-action]');if(!el)return;
  const [raw,...rest]=el.dataset.action.split(':');const action=raw.replace(/^r-/,''),value=rest.join(':');
  try {
+  if(bassAction(action,value))return;
   if(feelAction(action,value))return;
   if(action==='guide-hear'){if(guide.playing){stopGuidePreview();render()}else playGuide();return}
   stopGuidePreview();const s=currentSection();
