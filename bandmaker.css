@@ -13,3 +13,7 @@ body{padding-bottom:env(safe-area-inset-bottom)}main{padding-bottom:50px}.site-n
 .member-tabs{display:flex;gap:10px;margin:0 0 24px}.member-tabs button{flex:1}.member-tabs .active{background:#22543e;color:white}.bass-selected{outline:2px solid #22543e}.bass-bars{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.bass-bar{display:grid;gap:6px;background:#fff;padding:10px;border-radius:8px;overflow-wrap:anywhere}.bass-bar small{font-size:12px}.bass-sounding{background:#f1dfb6}
 
 .sound-settings{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:20px}.sound-settings label{display:flex;gap:8px;align-items:center}.sound-settings small{color:#526056}
+
+.tab-bars{display:grid;gap:14px}.bass-tab{width:100%;table-layout:fixed;border-collapse:collapse;font-size:13px}.bass-tab caption{text-align:left;font-weight:700;padding:8px 0}.bass-tab th,.bass-tab td{padding:7px 2px;text-align:center;border-bottom:1px solid #ccd5c8;overflow-wrap:anywhere}.bass-tab th:first-child{width:42px}.bass-tab .fret{font-family:monospace;font-size:16px}.bass-tab .tab-now{background:#f1dfb6;color:#173c2b}.playable-tab p{font-size:13px;line-height:1.5;margin:12px 0}.playable-tab summary{cursor:pointer;font-weight:700}
+
+.recipe-pair{align-items:start}
