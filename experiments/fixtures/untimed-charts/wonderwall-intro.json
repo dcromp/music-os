@@ -1,0 +1,39 @@
+{
+  "schema_version": "untimed-chart-1.0",
+  "start_policy": "first",
+  "recording": {
+    "id": "oasis-wonderwall-intro-candidate",
+    "title": "Oasis - Wonderwall / candidate intro only"
+  },
+  "sequence": [
+    "F#m7",
+    "A",
+    "Esus4",
+    "B7sus4"
+  ],
+  "mode": "finite",
+  "metadata": {
+    "key": "F# minor",
+    "capo": 2,
+    "played_shapes": [
+      "Em7",
+      "G",
+      "Dsus4",
+      "A7sus4"
+    ],
+    "label_convention": "sounding pitches; capo already applied",
+    "video_id": "bx1Bh8ZvH84",
+    "scope": "One intro progression only; choose and review a matching excerpt before running. Full song has different sections.",
+    "source_references": [
+      {
+        "author": "Carl Brown / GuitarLessons365",
+        "url": "https://guitarlessons365.com/wonderwall-guitar-lesson-oasis/"
+      },
+      {
+        "author": "Greg Shute",
+        "url": "https://www.gregshuteguitar.co.uk/_files/ugd/4079b4_0a1b39a89c1a4776a5c8f553f259cb08.pdf"
+      }
+    ],
+    "review_status": "Candidate hypothesis, not full-song consensus or timing gold; preserve suspensions"
+  }
+}

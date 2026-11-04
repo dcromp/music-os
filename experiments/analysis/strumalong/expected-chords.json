@@ -1,0 +1,14 @@
+{
+  "troggs-wild-thing-youtube-20261011": {"sounding": ["A", "D", "E"], "confidence": "high (dry-run control)"},
+  "van-morrison-brown-eyed-girl-youtube-20261011": {"sounding": ["G", "C", "D", "Em"], "confidence": "high (dry-run control)"},
+  "cranberries-zombie-youtube-20261024": {"sounding": ["Em", "C", "G", "D"], "confidence": "high"},
+  "green-day-good-riddance-youtube-20261024": {"sounding": ["G", "C", "D", "Em"], "confidence": "high (C is usually Cadd9)"},
+  "oasis-dont-look-back-in-anger-youtube-20261024": {"sounding": ["C", "G", "Am", "E", "F", "Em", "Dm"], "confidence": "medium"},
+  "ccr-have-you-ever-seen-the-rain-youtube-20261024": {"sounding": ["C", "G", "F", "Am", "Dm", "E"], "confidence": "medium (C G F core)"},
+  "ccr-bad-moon-rising-youtube-20261024": {"sounding": ["D", "A", "G"], "confidence": "high"},
+  "tom-petty-free-fallin-youtube-20261024": {"sounding": ["F", "A#", "C"], "confidence": "high (Bb sus2 / C sus4 colour)"},
+  "weezer-island-in-the-sun-youtube-20261024": {"sounding": ["G", "C", "D", "Em"], "confidence": "low: key listed as G major (arrangement) or E minor (chord sheets); verify against a fetched chord sheet"},
+  "john-denver-country-roads-youtube-20261024": {"sounding": ["A", "E", "F#m", "D"], "confidence": "high"},
+  "lynyrd-skynyrd-sweet-home-alabama-youtube-20261024": {"sounding": ["D", "C", "G"], "confidence": "high"},
+  "vance-joy-riptide-youtube-20261024": {"sounding": ["A#m", "G#", "C#"], "confidence": "medium (published key Db major; capo-1 Am G C shapes)"}
+}

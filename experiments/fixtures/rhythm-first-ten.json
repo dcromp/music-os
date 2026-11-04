@@ -1,0 +1,111 @@
+{
+  "schema_version": "playalong-rhythm-config-1.0",
+  "status": "Curated pulse and meter hypotheses, not exact-upload timing gold",
+  "recordings": {
+    "troggs-wild-thing-youtube-20261011": {
+      "start_bpm": 120,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "pulse_prior_status": "Default tracker prior; metrical level unverified"
+    },
+    "bob-dylan-knockin-heavens-door-youtube-20261011": {
+      "start_bpm": 70,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 50,
+      "tempo_max_bpm": 100,
+      "source_url": "https://www.jonmaclennan.com/blog/knockin-on-heaven%27s-door-chords",
+      "pulse_prior_status": "Project slow-ballad pulse proposal informed by teacher setup; exact BPM unverified"
+    },
+    "van-morrison-brown-eyed-girl-youtube-20261011": {
+      "start_bpm": 151,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 130,
+      "tempo_max_bpm": 175,
+      "source_url": "https://drumscore.com/sheet-music/browse-by-artist/score/14285-van-morrison-brown-eyed-girl-drum-sheet-music-tab",
+      "pulse_prior_status": "Source-informed range; audio chooses tempo within it; not timing gold"
+    },
+    "beatles-love-me-do-youtube-20261011": {
+      "start_bpm": 120,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "pulse_prior_status": "Default tracker prior; metrical level unverified"
+    },
+    "beatles-twist-and-shout-youtube-20261011": {
+      "start_bpm": 123,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 105,
+      "tempo_max_bpm": 145,
+      "source_url": "https://www.drumscore.com/sheet-music/browse-by-artist/score/14622-the-beatles-twist-and-shout",
+      "pulse_prior_status": "Source-informed range; audio chooses tempo within it; not timing gold"
+    },
+    "white-stripes-seven-nation-army-youtube-20261011": {
+      "start_bpm": 124,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 105,
+      "tempo_max_bpm": 145,
+      "source_url": "https://bypass.drumscore.com/sheet-music/browse-by-artist/score/12768-the-white-stripes-7-nation-army-drum-sheet-music-tab",
+      "pulse_prior_status": "Source-informed range; audio chooses tempo within it; not timing gold"
+    },
+    "nirvana-come-as-you-are-youtube-20261011": {
+      "start_bpm": 120,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 100,
+      "tempo_max_bpm": 140,
+      "source_url": "https://www.musicnotes.com/sheetmusic/nirvana/come-as-you-are/MN0069767",
+      "pulse_prior_status": "Source-informed range; audio chooses tempo within it; not timing gold"
+    },
+    "radiohead-creep-youtube-20261010": {
+      "start_bpm": 93,
+      "beats_per_bar": 4,
+      "meter_label": "4/4 assumed",
+      "meter_status": "Four-quarter practice convention; recording bar structure unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 80,
+      "tempo_max_bpm": 105,
+      "source_url": "https://drumeoblog.s3.amazonaws.com/beat/wp-content/uploads/2021/11/08134434/15.-Creep.pdf",
+      "pulse_prior_status": "Source-informed range; audio chooses tempo within it; not timing gold"
+    },
+    "animals-house-rising-sun-official-20261011": {
+      "start_bpm": 78,
+      "beats_per_bar": 2,
+      "meter_label": "6/8 · 2 dotted-quarter beats per bar",
+      "meter_status": "Source 6/8; two dotted-quarter pulse convention is a project hypothesis",
+      "pulse_unit": "dotted quarter (proposed)",
+      "tempo_min_bpm": 65,
+      "tempo_max_bpm": 90,
+      "source_url": "https://www.jonmaclennan.com/blog/house-of-the-rising-sun-guitar-lesson",
+      "pulse_prior_status": "Project-selected dotted-quarter level from meter plus acoustic diagnostic; source does not establish BPM"
+    },
+    "oasis-wonderwall-youtube-20261010": {
+      "start_bpm": 88,
+      "beats_per_bar": null,
+      "meter_label": "Beat count; meter varies",
+      "meter_status": "Sources describe 4/4 and 2/4; local meter transitions unverified",
+      "pulse_unit": "quarter note (proposed)",
+      "tempo_min_bpm": 78,
+      "tempo_max_bpm": 98,
+      "source_url": "https://www.musicnotes.com/sheetmusic/oasis/wonderwall/MN0053372",
+      "pulse_prior_status": "Source-informed range; audio chooses tempo within it; not timing gold",
+      "additional_source_url": "https://bypass.drumscore.com/sheet-music/browse-by-artist/score/952-oasis-wonderwall-drum-sheet-music-tab"
+    }
+  }
+}

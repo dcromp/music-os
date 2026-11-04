@@ -1,0 +1,305 @@
+{
+  "schema": "strumalong-additions-1",
+  "note": "Level 1 strumming-first additions (26 Oct 2026): strummed chords for most of the recording, three or fewer shapes from A, D, E once a capo of 0-4 is applied. Capo, setup and skill notes are authored suggestions from chord sheets; not checked against the recordings beyond the automatic chart sanity check.",
+  "songs": [
+    {
+      "recording_id": "plastic-ono-band-give-peace-a-chance-youtube-20261026",
+      "title": "Give Peace a Chance",
+      "artist": "Plastic Ono Band",
+      "order": 1,
+      "expected_level": 1,
+      "capo": 4,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 4 suggested: the record is about a semitone below D/A, so it sounds in C# with G#; with the capo on the 4th fret the open A and E shapes match.",
+      "skill_focus": "Two shapes, A and E, alternating in a loose, steady strum under a singalong. The easiest first change in the set; keep the strum even and relaxed.",
+      "sources": [
+        {
+          "title": "SongBPM tempo listing: Give Peace A Chance (2010 remaster)",
+          "url": "https://songbpm.com/@the-plastic-ono-band/give-peace-a-chance---2010---remaster"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "E"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "billy-ray-cyrus-achy-breaky-heart-youtube-20261026",
+      "title": "Achy Breaky Heart",
+      "artist": "Billy Ray Cyrus",
+      "order": 2,
+      "expected_level": 1,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open A, E and D shapes.",
+      "skill_focus": "A steady country two-step strum on A and E with a D in the chorus. Mostly strummed acoustic and electric rhythm; count four even beats per bar.",
+      "sources": [
+        {
+          "title": "SongBPM tempo listing: Achy Breaky Heart",
+          "url": "https://songbpm.com/@billy-ray-cyrus/achy-breaky-heart"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "everly-brothers-bye-bye-love-youtube-20261026",
+      "title": "Bye Bye Love",
+      "artist": "The Everly Brothers",
+      "order": 3,
+      "expected_level": 1,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open A, D and E shapes.",
+      "skill_focus": "Driving acoustic strum on three open chords with a quick, stop-start feel. Start with a steady down-strum on each beat and learn the changes first.",
+      "sources": [
+        {
+          "title": "SongBPM tempo listing: Bye Bye Love",
+          "url": "https://songbpm.com/@the-everly-brothers/bye-bye-love"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "ritchie-valens-la-bamba-youtube-20261026",
+      "title": "La Bamba",
+      "artist": "Ritchie Valens",
+      "order": 4,
+      "expected_level": 1,
+      "capo": 3,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 3 suggested: the record is in C with C, F and G, and with the capo on the 3rd fret the open A, D and E shapes sound the same chords.",
+      "skill_focus": "The same three chords all the way through with a bright, fast strum. Start slow with one strum per beat and speed up gradually.",
+      "sources": [
+        {
+          "title": "SongBPM tempo listing: La Bamba",
+          "url": "https://songbpm.com/@ritchie-valens/la-bamba"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "creedence-clearwater-revival-down-on-the-corner-youtube-20261026",
+      "title": "Down on the Corner",
+      "artist": "Creedence Clearwater Revival",
+      "order": 5,
+      "expected_level": 1,
+      "capo": 3,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 3 suggested: the record is in C with C, G and F, and with the capo on the 3rd fret the open A, E and D shapes sound the same chords.",
+      "skill_focus": "Chunky rhythm guitar on three chords at a relaxed mid-tempo. Strum down-down-up-up-down-up and keep the changes on the bar line.",
+      "sources": [
+        {
+          "title": "SongBPM tempo listing: Down On The Corner",
+          "url": "https://songbpm.com/@creedence-clearwater-revival/down-on-the-corner"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "buddy-holly-not-fade-away-youtube-20261026",
+      "title": "Not Fade Away",
+      "artist": "Buddy Holly",
+      "order": 6,
+      "expected_level": 1,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open E, A and D shapes.",
+      "skill_focus": "The Bo Diddley rhythm: a pulsing strum on mostly E and A, with a D at the turnaround. Feel the accent pattern and keep the strum steady.",
+      "sources": [
+        {
+          "title": "SongBPM tempo listing: Not Fade Away (single version)",
+          "url": "https://songbpm.com/@buddy-holly-the-crickets/not-fade-away---single-version-jptaD1dVdD"
+        }
+      ],
+      "expected_shapes": [
+        "E",
+        "A",
+        "D"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "bob-marley-stir-it-up-youtube-20261026",
+      "title": "Stir It Up",
+      "artist": "Bob Marley & The Wailers",
+      "order": 7,
+      "expected_level": 1,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open A, D and E shapes.",
+      "skill_focus": "Relaxed reggae pulse with short chops on the off-beats. Start with steady downstrokes, then mute and chop on the 'and' of each beat.",
+      "sources": [
+        {
+          "title": "SongBPM tempo listing: Stir It Up",
+          "url": "https://songbpm.com/@bob-marley-the-wailers/stir-it-up"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "elvis-presley-thats-all-right-youtube-20261026",
+      "title": "That's All Right",
+      "artist": "Elvis Presley",
+      "order": 8,
+      "expected_level": 1,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open A, D and E shapes (7th versions optional).",
+      "skill_focus": "A swung, driving rockabilly strum on a 12-bar-style A, D and E sequence; the recording is acoustic rhythm guitar with slap bass.",
+      "sources": [
+        {
+          "title": "SongBPM tempo listing: That's All Right",
+          "url": "https://songbpm.com/@elvis-presley/that-s-all-right"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "johnny-cash-jackson-youtube-20261026",
+      "title": "Jackson",
+      "artist": "Johnny Cash & June Carter",
+      "order": 9,
+      "expected_level": 1,
+      "capo": 3,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 3 suggested: the record is in C with C, F and G7, and with the capo on the 3rd fret the open A, D and E shapes sound the same chords.",
+      "skill_focus": "A boom-chick country strum on three chords. Alternate a low bass note with a strum on beats 2 and 4; ignore the picked intro riff at first.",
+      "sources": [
+        {
+          "title": "SongBPM tempo listing: Jackson (mono version)",
+          "url": "https://songbpm.com/@johnny-cash/jackson---mono-version"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "eric-clapton-lay-down-sally-youtube-20261026",
+      "title": "Lay Down Sally",
+      "artist": "Eric Clapton",
+      "order": 10,
+      "expected_level": 1,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open A, D and E shapes; the G and F#m passing chords are optional.",
+      "skill_focus": "A relaxed country shuffle on A, D and E. Lay back on the beat and let the strum swing; leave out the passing chords at first.",
+      "sources": [
+        {
+          "title": "SongBPM tempo listing: Lay Down Sally",
+          "url": "https://songbpm.com/@eric-clapton/lay-down-sally"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "buddy-holly-peggy-sue-youtube-20261026",
+      "title": "Peggy Sue",
+      "artist": "Buddy Holly",
+      "order": 11,
+      "expected_level": 1,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open A, D and E shapes; the single F in the bridge can be Fmaj7.",
+      "skill_focus": "Fast, tremolo-style strumming with tom drums; the quickest tempo in this set, so start well below the recording.",
+      "sources": [
+        {
+          "title": "SongBPM tempo listing: Peggy Sue",
+          "url": "https://songbpm.com/@buddy-holly/peggy-sue"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "bill-haley-rock-around-the-clock-youtube-20261026",
+      "title": "Rock Around the Clock",
+      "artist": "Bill Haley & His Comets",
+      "order": 12,
+      "expected_level": 1,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open A, D and E shapes (7th versions optional).",
+      "skill_focus": "A fast 12-bar swing on A, D and E. Use it as a stretch goal: practise slowly with the speed control and keep the strum light.",
+      "sources": [
+        {
+          "title": "SongBPM tempo listing: Rock Around the Clock",
+          "url": "https://songbpm.com/@bill-haley-his-comets/rock-around-the-clock"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    }
+  ]
+}

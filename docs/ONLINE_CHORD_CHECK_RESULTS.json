@@ -1,0 +1,340 @@
+{
+  "schema_version": "online-chord-check-verification-1.0",
+  "date": "2026-10-18",
+  "timezone": "Europe/Oslo",
+  "issue": "https://github.com/dcromp/music-os/issues/16",
+  "implementation_commits": [
+    "edf1880",
+    "4f127e3"
+  ],
+  "report": {
+    "path": "experiments/generated/online-chord-checks-20261017-final/report.json",
+    "sha256": "e53c05c3283190890b3b81a04899f889bf0b995aa8fa9074eaf01db05cc76e2e",
+    "inputs": {
+      "pack_manifest_sha256": "556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671",
+      "targets_sha256": "721be3e0f874e66c52765c7940f248d14ce35cfffeae8162b6fc2e770bdd9d35",
+      "checker_sha256": "e0feb3981080a59e525c504b23290402647441c48c9e252a8762d960aa626c74",
+      "source_module_sha256": "8cc6fe7b5e004b3e3b84f0e8567b984e94fe1b2cc1060f750a5dd952760cca67",
+      "source_parser_version": "online-source-facts-1.2"
+    },
+    "cases": 10,
+    "source_comparable_cases": 4,
+    "insufficient_source_cases": 4,
+    "riff_exclusions": 2,
+    "findings": 5,
+    "confirmed_errors": null
+  },
+  "cases": [
+    {
+      "recording_id": "troggs-wild-thing-youtube-20261011",
+      "status": "source-checks",
+      "source_groups": 2,
+      "sources": 3,
+      "findings": 0,
+      "search_status": "blocked",
+      "finding_spans": []
+    },
+    {
+      "recording_id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+      "status": "source-checks",
+      "source_groups": 2,
+      "sources": 3,
+      "findings": 0,
+      "search_status": "blocked",
+      "finding_spans": []
+    },
+    {
+      "recording_id": "van-morrison-brown-eyed-girl-youtube-20261011",
+      "status": "insufficient-sources",
+      "source_groups": 1,
+      "sources": 1,
+      "findings": 0,
+      "search_status": "blocked",
+      "finding_spans": []
+    },
+    {
+      "recording_id": "beatles-love-me-do-youtube-20261011",
+      "status": "insufficient-sources",
+      "source_groups": 1,
+      "sources": 3,
+      "findings": 0,
+      "search_status": "blocked",
+      "finding_spans": []
+    },
+    {
+      "recording_id": "beatles-twist-and-shout-youtube-20261011",
+      "status": "source-checks",
+      "source_groups": 2,
+      "sources": 2,
+      "findings": 0,
+      "search_status": "blocked",
+      "finding_spans": []
+    },
+    {
+      "recording_id": "white-stripes-seven-nation-army-youtube-20261011",
+      "status": "not-harmony-task",
+      "source_groups": 0,
+      "sources": 0,
+      "findings": 0,
+      "search_status": null,
+      "finding_spans": []
+    },
+    {
+      "recording_id": "nirvana-come-as-you-are-youtube-20261011",
+      "status": "not-harmony-task",
+      "source_groups": 0,
+      "sources": 0,
+      "findings": 0,
+      "search_status": null,
+      "finding_spans": []
+    },
+    {
+      "recording_id": "radiohead-creep-youtube-20261010",
+      "status": "insufficient-sources",
+      "source_groups": 1,
+      "sources": 2,
+      "findings": 0,
+      "search_status": "blocked",
+      "finding_spans": []
+    },
+    {
+      "recording_id": "animals-house-rising-sun-official-20261011",
+      "status": "source-checks",
+      "source_groups": 2,
+      "sources": 2,
+      "findings": 5,
+      "search_status": "blocked",
+      "finding_spans": [
+        {
+          "kind": "source-order-conflict",
+          "native_label": "Em",
+          "start_seconds": 6.408707482993197,
+          "end_seconds": 15.696689342403628
+        },
+        {
+          "kind": "quality-conflict",
+          "native_label": "Em",
+          "start_seconds": 11.145578231292516,
+          "end_seconds": 12.538775510204081
+        },
+        {
+          "kind": "quality-conflict",
+          "native_label": "Em",
+          "start_seconds": 90.09342403628118,
+          "end_seconds": 93.06557823129252
+        },
+        {
+          "kind": "quality-conflict",
+          "native_label": "Em",
+          "start_seconds": 123.62303854875283,
+          "end_seconds": 126.50231292517007
+        },
+        {
+          "kind": "quality-conflict",
+          "native_label": "Em",
+          "start_seconds": 210.37278911564627,
+          "end_seconds": 211.58022675736962
+        }
+      ]
+    },
+    {
+      "recording_id": "oasis-wonderwall-youtube-20261010",
+      "status": "insufficient-sources",
+      "source_groups": 0,
+      "sources": 1,
+      "findings": 0,
+      "search_status": "blocked",
+      "finding_spans": []
+    }
+  ],
+  "discovery_validation": {
+    "initial_probe": [
+      {
+        "query": "The Troggs Wild Thing guitar chords lesson",
+        "status": "ok",
+        "results": 10,
+        "response_sha256": "67ebb60490813603cce1c8907c3bdd977303f2d638184c838221214f4ee581a5",
+        "retrieved_at_utc": "2026-10-17T20:04:30+00:00"
+      },
+      {
+        "query": "The Animals House of the Rising Sun guitar chords lesson",
+        "status": "ok",
+        "results": 10,
+        "response_sha256": "6a1d846b152cd651c781638dabfbb6ef32d9580e5f19b07b959bd1947a1b6daf",
+        "retrieved_at_utc": "2026-10-17T20:04:31+00:00"
+      },
+      {
+        "query": "Bob Dylan Knockin on Heavens Door guitar chords lesson",
+        "status": "blocked",
+        "results": 0,
+        "response_sha256": "892b57f2733f2afb210163cc0be70cb8aa6e711bcc6152975e8cb6c094d8ca97",
+        "retrieved_at_utc": "2026-10-17T20:04:32+00:00"
+      },
+      {
+        "query": "Oasis Wonderwall guitar chords lesson capo",
+        "status": "blocked",
+        "results": 0,
+        "response_sha256": "64e8b194605ae97cee86cda00cdfd9bcfa6dce850d607ca775c44fcfb926fd54",
+        "retrieved_at_utc": "2026-10-17T20:04:33+00:00"
+      }
+    ],
+    "final_harmony_queries": 8,
+    "final_blocked_queries": 8,
+    "final_search_outcomes_cached": true,
+    "challenge_bypass": false,
+    "seed_source_fallback_used": true
+  },
+  "cached_replay": {
+    "network_run": "experiments/generated/online-chord-checks-20261017-v3/report.json",
+    "offline_run": "experiments/generated/online-chord-checks-20261017-offline/report.json",
+    "deployed_final_report": "experiments/generated/online-chord-checks-20261017-final/report.json",
+    "all_case_findings_identical": true,
+    "final_report_uses_no_network": true
+  },
+  "tests": {
+    "python_discovered": 500,
+    "python_passed": 480,
+    "python_optional_skips": 20,
+    "javascript_player": 91,
+    "javascript_bench": 48,
+    "javascript_curation": 14,
+    "javascript_passed": 153,
+    "source_extraction_tests": 41,
+    "core_source_check_tests": 12,
+    "automatic_drafts_tests": 24
+  },
+  "review": {
+    "fixed_point": "2aeb4f7a76a8d585fe1b972d1f842f9302580015",
+    "standards_actionable_findings": 0,
+    "spec_initial_findings": 2,
+    "spec_resolved_findings": 2,
+    "spec_remaining_findings": 0,
+    "resolved": [
+      "Optional invalid/missing/stale report no longer prevents native player startup.",
+      "Repeated equivalent source bars are collapsed before intro comparison."
+    ]
+  },
+  "integrity": {
+    "raw_learner_artifacts_byte_identical": 41,
+    "current_policy": "experiments/fixtures/selected-workflow-player-v4.json",
+    "verified_pins": 39,
+    "selected_cases": 10,
+    "prior_v3_pins_unchanged": 38,
+    "native_build_comparison_functions_unchanged": true,
+    "historical_policies_unchanged": true,
+    "guide_or_storage_key_changes": false
+  },
+  "browser": {
+    "cases": [
+      {
+        "playbackReady": true,
+        "song": "The Troggs - Wild Thing",
+        "summary": "0 potential conflicts flagged. 2 distinct source groups \u00b7 3 pages checked \u00b7 2026-10-17. No flags does not establish that a chart is correct."
+      },
+      {
+        "playbackReady": true,
+        "song": "Bob Dylan - Knockin' On Heaven's Door",
+        "summary": "0 potential conflicts flagged. 2 distinct source groups \u00b7 3 pages checked \u00b7 2026-10-17. No flags does not establish that a chart is correct."
+      },
+      {
+        "playbackReady": true,
+        "song": "Van Morrison - Brown Eyed Girl",
+        "summary": "Insufficient comparable sources; no chord assessment made. 1 distinct source group \u00b7 1 page checked \u00b7 2026-10-17."
+      },
+      {
+        "playbackReady": true,
+        "song": "The Beatles - Love Me Do",
+        "summary": "Insufficient comparable sources; no chord assessment made. 1 distinct source group \u00b7 3 pages checked \u00b7 2026-10-17."
+      },
+      {
+        "playbackReady": true,
+        "song": "The Beatles - Twist And Shout",
+        "summary": "0 potential conflicts flagged. 2 distinct source groups \u00b7 2 pages checked \u00b7 2026-10-17. No flags does not establish that a chart is correct."
+      },
+      {
+        "playbackReady": true,
+        "song": "The White Stripes - Seven Nation Army",
+        "summary": "Riff or setup lesson; chord-palette checks do not apply. 0 distinct source groups \u00b7 0 pages checked \u00b7 2026-10-17."
+      },
+      {
+        "playbackReady": true,
+        "song": "Nirvana - Come As You Are",
+        "summary": "Riff or setup lesson; chord-palette checks do not apply. 0 distinct source groups \u00b7 0 pages checked \u00b7 2026-10-17."
+      },
+      {
+        "playbackReady": true,
+        "song": "Radiohead - Creep",
+        "summary": "Insufficient comparable sources; no chord assessment made. 1 distinct source group \u00b7 2 pages checked \u00b7 2026-10-17."
+      },
+      {
+        "playbackReady": true,
+        "song": "Oasis - Wonderwall",
+        "summary": "Insufficient comparable sources; no chord assessment made. 0 distinct source groups \u00b7 1 page checked \u00b7 2026-10-17."
+      }
+    ],
+    "house": {
+      "findings": 5,
+      "playbackReady": true,
+      "song": "The Animals - The House Of The Rising Sun",
+      "summary": "5 potential conflicts flagged. 2 distinct source groups \u00b7 2 pages checked \u00b7 2026-10-17. No flags does not establish that a chart is correct."
+    },
+    "normal": {
+      "feedback": "No issues saved for this song yet.",
+      "paused": true,
+      "progress": "0/7 available steps marked practised. This is your own record of trying a step, not a skill assessment.",
+      "seconds": 16.65078,
+      "song": "The Troggs - Wild Thing"
+    },
+    "qaConsole": [],
+    "normalConsole": [],
+    "intro_replay_started_before_flagged_window": true,
+    "house_8_seconds_display_E_preserved": true,
+    "normal_player_feedback_or_progress_edited": false,
+    "all_ten_case_states_checked": true
+  },
+  "http": {
+    "live_checks": [
+      {
+        "path": "/online-chords.json",
+        "status": 200,
+        "cache_control": "no-store",
+        "sha256": "e53c05c3283190890b3b81a04899f889bf0b995aa8fa9074eaf01db05cc76e2e"
+      },
+      {
+        "path": "/manifest.json",
+        "status": 200,
+        "cache_control": "no-store",
+        "sha256": "556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671"
+      },
+      {
+        "path": "/app.js",
+        "status": 200,
+        "cache_control": "no-store",
+        "sha256": "127ab693a49861ea39fb233d39b9112a289b9910d3f2d2e861036b4483004a8f"
+      }
+    ],
+    "native_json_routes_identical": 30
+  },
+  "deployment": {
+    "player": "http://127.0.0.1:8070/",
+    "pack": "experiments/generated/automatic-first-ten-v1",
+    "report": "experiments/generated/online-chord-checks-20261017-final/report.json",
+    "temporary_8071_stopped": true,
+    "public_hosting": false
+  },
+  "proof": {
+    "path": "experiments/generated/player-proof-20261018/house-online-checks.png",
+    "sha256": "f25066b2aa68fd9cc5948affc3b01297aebbb6fded7ddc0b6bb7034f317a5e92",
+    "git_ignored": true
+  },
+  "limits": [
+    "Teaching-source coverage is not chord accuracy or an accepted arrangement. Missing chords may belong to another section or variant.",
+    "Two different source groups need not be independent transcriptions. Identical content and shared publisher groups are counted once.",
+    "Unknown source setup abstains unless an explicitly recorded seed-specific teaching hypothesis supplies the missing fields.",
+    "Replay windows retain native cue boundaries; untimed source order supplies no physical chord-change timestamps.",
+    "No native chord, timing, lesson guide, model setting or practice/feedback storage is changed.",
+    "Only four songs meet the two-group comparison gate in this batch. No flags on a song do not establish correctness.",
+    "All eight final discovery requests were challenge-blocked; no reliable production search API is established.",
+    "House flags compare native cues even where an existing founder display correction already shows E. They are not five newly confirmed mistakes."
+  ]
+}

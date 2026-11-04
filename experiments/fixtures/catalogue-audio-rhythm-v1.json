@@ -1,0 +1,41 @@
+{
+  "schema_version": "catalogue-audio-rhythm-spec-1.0",
+  "policy": {
+    "sample_rate_hz": 22050,
+    "frame_samples": 512,
+    "hop_samples": 128,
+    "log_magnitude_gain": 20.0,
+    "local_baseline_seconds": 0.25,
+    "local_mad_multiplier": 2.5,
+    "global_peak_floor_fraction": 0.05,
+    "minimum_attack_separation_seconds": 0.08,
+    "synthetic_match_tolerance_seconds": 0.04,
+    "phase_histogram_bins": 12,
+    "minimum_harmonic_hold_seconds": 5.0,
+    "boundary_energy_gap_seconds": 0.04,
+    "boundary_energy_window_seconds": 0.12,
+    "uses_source_separation": false,
+    "snaps_or_refines_events": false,
+    "infers_guitar_or_stroke_direction": false,
+    "accepts_arrangements": false
+  },
+  "pack_manifest_sha256": "64d67f29f6ff1ce91aeae6309e7102c2c2629e5c0fdcd061035de2a2e22f3fb5",
+  "pulse_grid_sha256": "09c5c68dc1dc44f8380871744c59d00043e1c6ea42650f3911353f84a78962f7",
+  "learner_manifest_sha256": "556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671",
+  "rhythm_config_sha256": "ae9159b391b25ebe2b481efd8ef4e3595afe4e5c38a211586560e0718877e71c",
+  "practice_sha256": "0de69b0756570a7083d9796ddba181d70b80444965eacf382531909c0666c4ea",
+  "native_timing_review_sha256": "c6c4d4d0161d5b2d77cc36aa7bd3e5500a5f9b3c34b8578e64560ef14efbe5c9",
+  "case_ids": [
+    "troggs-wild-thing-youtube-20261011",
+    "bob-dylan-knockin-heavens-door-youtube-20261011",
+    "van-morrison-brown-eyed-girl-youtube-20261011",
+    "beatles-love-me-do-youtube-20261011",
+    "beatles-twist-and-shout-youtube-20261011",
+    "white-stripes-seven-nation-army-youtube-20261011",
+    "nirvana-come-as-you-are-youtube-20261011",
+    "radiohead-creep-youtube-20261010",
+    "animals-house-rising-sun-official-20261011",
+    "oasis-wonderwall-youtube-20261010"
+  ],
+  "scope": "Retrospective exact-audio diagnostics; no knob tuning against recording outcomes or auto acceptance"
+}

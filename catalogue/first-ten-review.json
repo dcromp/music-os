@@ -1,0 +1,730 @@
+{
+  "schema_version": "first-ten-review-1.0",
+  "checked_date": "2026-10-11",
+  "status": "Source-reviewed recording choices and proposed practice ladder; automatic preparation next",
+  "song_count": 10,
+  "new_recordings_to_prepare": 8,
+  "cached_recordings_to_reuse": 2,
+  "publisher_artist_match_claimed": false,
+  "recording_identity_status": "Explicit project-selected uploads; none claimed equivalent to another master from duration alone",
+  "timed_gold": false,
+  "raw_models_conditioned_on_teacher_chords": false,
+  "placement_definition": "Two practice tracks, with a simple entry exercise and a richer progression. Order is a project proposal based on skills, not popularity, chord-name count or a validated universal difficulty score.",
+  "metadata_inspection_sha256": "836d3c2c74fb0582faf9c28ffc69cebcf06328b150c474eb49470def29153e03",
+  "songs": [
+    {
+      "id": "wild-thing",
+      "title": "Wild Thing",
+      "artist": "The Troggs",
+      "selected_recording": {
+        "recording_id": "troggs-wild-thing-youtube-20261011",
+        "url": "https://www.youtube.com/watch?v=bLJkrOYHNw8",
+        "video_id": "bLJkrOYHNw8",
+        "expected_uploader": "The Troggs - Topic",
+        "edition": "From Nowhere",
+        "selection_basis": "The distributed From Nowhere album recording; no remaster or live designation in the observed title/description. Selected instead of the official music-video upload.",
+        "metadata_status": "verified public, non-live; no media acquired",
+        "public_metadata": {
+          "video_id": "bLJkrOYHNw8",
+          "url": "https://www.youtube.com/watch?v=bLJkrOYHNw8",
+          "title": "Wild Thing",
+          "uploader": "The Troggs - Topic",
+          "duration_seconds": 155.0,
+          "availability": "public",
+          "live_status": "not_live",
+          "format_id": "140",
+          "extension": "m4a",
+          "audio_codec": "mp4a.40.2",
+          "upload_date": "20190815",
+          "extractor_warning_count": 0
+        }
+      },
+      "cached_example": null,
+      "teaching": {
+        "chord_set": [
+          "A",
+          "D",
+          "E"
+        ],
+        "label_convention": "Teacher played-shape names; recording pitch not yet checked",
+        "tuning": "standard",
+        "tuning_status": "Explicit primary lesson support",
+        "capo": null,
+        "proposed_capo": 0,
+        "capo_status": "No explicit source assertion; zero is a practice proposal",
+        "optional_shapes": [],
+        "rhythm_focus": "Start with the teacher's two-strums-per-chord riff practice, then include the contrasting open-string figure.",
+        "whole_arrangement_verified": false
+      },
+      "sources": [
+        {
+          "role": "recording identity",
+          "url": "https://www.youtube.com/watch?v=bLJkrOYHNw8"
+        },
+        {
+          "role": "teaching variant",
+          "url": "https://www.andyguitar.co.uk/videos/electric-guitar-day-7-wild-thing"
+        }
+      ],
+      "version_notes": [
+        "The page summary says the main loop forms the entire song, but its own transcript teaches another figure. Use its chord vocabulary as a practice proposal, not verified complete arrangement or timed reference."
+      ],
+      "review_status": "Sources reviewed; practice placement proposed, recording-specific arrangement unverified",
+      "practice_placement": {
+        "track": "open-chord-rhythm",
+        "proposed_order": 1,
+        "prerequisites": "A/D/E changes",
+        "rationale": "Short repeated shapes; add the contrasting figure after the main groove",
+        "status": "Project proposal from sourced tasks; not a measured player difficulty grade"
+      }
+    },
+    {
+      "id": "knockin-on-heaven-s-door",
+      "title": "Knockin' On Heaven's Door",
+      "artist": "Bob Dylan",
+      "selected_recording": {
+        "recording_id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+        "url": "https://www.youtube.com/watch?v=z4R5crZylQ0",
+        "video_id": "z4R5crZylQ0",
+        "expected_uploader": "Bob Dylan",
+        "edition": "Pat Garrett & Billy The Kid",
+        "selection_basis": "Project-selected label-provided album upload; not a live performance or another performer",
+        "metadata_status": "verified public, non-live; no media acquired",
+        "public_metadata": {
+          "video_id": "z4R5crZylQ0",
+          "url": "https://www.youtube.com/watch?v=z4R5crZylQ0",
+          "title": "Knockin' On Heaven's Door",
+          "uploader": "Bob Dylan",
+          "duration_seconds": 150.0,
+          "availability": "public",
+          "live_status": "not_live",
+          "format_id": "140",
+          "extension": "m4a",
+          "audio_codec": "mp4a.40.2",
+          "upload_date": "20150812",
+          "extractor_warning_count": 0
+        }
+      },
+      "cached_example": null,
+      "teaching": {
+        "label_convention": "Teacher setup, kept separate from sounding labels",
+        "capo": null,
+        "capo_status": "Not explicitly verified in inspected source text",
+        "whole_arrangement_verified": false,
+        "chord_set": [
+          "G",
+          "D",
+          "Am",
+          "C"
+        ],
+        "tuning": "EADGBE standard",
+        "tuning_status": "Explicit teacher text",
+        "rhythm_focus": "Steady slow 4/4 strums, then subdivision and optional picking",
+        "teacher_key": "G major"
+      },
+      "sources": [
+        {
+          "role": "recording identity",
+          "url": "https://www.youtube.com/watch?v=z4R5crZylQ0"
+        },
+        {
+          "role": "teaching variant",
+          "url": "https://www.youtube.com/watch?v=pWIL4N6QZ-Y"
+        },
+        {
+          "role": "teaching variant",
+          "url": "https://www.jonmaclennan.com/blog/knockin-on-heaven%27s-door-chords"
+        }
+      ],
+      "version_notes": [
+        "The Guns N' Roses Use Your Illusion II recording is a different performance; its label upload f8OHybVhQwc explicitly identifies Guns N' Roses and 1991, not Dylan.",
+        "No source chart repeat counts or lesson demo times are recording-specific timing gold."
+      ],
+      "review_status": "Sources reviewed; practice placement proposed, recording-specific arrangement unverified",
+      "practice_placement": {
+        "track": "open-chord-rhythm",
+        "proposed_order": 3,
+        "prerequisites": "Add Am and steady changes",
+        "rationale": "Slow ballad practice before denser subdivision",
+        "status": "Project proposal from sourced tasks; not a measured player difficulty grade"
+      }
+    },
+    {
+      "id": "brown-eyed-girl",
+      "title": "Brown Eyed Girl",
+      "artist": "Van Morrison",
+      "selected_recording": {
+        "recording_id": "van-morrison-brown-eyed-girl-youtube-20261011",
+        "url": "https://www.youtube.com/watch?v=nEQmbFWnQeE",
+        "video_id": "nEQmbFWnQeE",
+        "expected_uploader": "Van Morrison",
+        "edition": "Blowin' Your Mind!",
+        "selection_basis": "Distributed Blowin' Your Mind! album recording, represented as the 1967 release; no remaster designation in the observed title. Artist-channel status alone is insufficient: another artist-channel upload is explicitly re-recorded.",
+        "metadata_status": "verified public, non-live; no media acquired",
+        "public_metadata": {
+          "video_id": "nEQmbFWnQeE",
+          "url": "https://www.youtube.com/watch?v=nEQmbFWnQeE",
+          "title": "Brown Eyed Girl",
+          "uploader": "Van Morrison",
+          "duration_seconds": 187.0,
+          "availability": "public",
+          "live_status": "not_live",
+          "format_id": "140",
+          "extension": "m4a",
+          "audio_codec": "mp4a.40.2",
+          "upload_date": "20250724",
+          "extractor_warning_count": 0
+        }
+      },
+      "cached_example": null,
+      "teaching": {
+        "chord_set": [
+          "G",
+          "C",
+          "D",
+          "Em"
+        ],
+        "label_convention": "Teacher played-shape names; recording pitch not yet checked",
+        "tuning": "standard",
+        "tuning_status": "Proposed standard setup; not explicitly stated in inspected lesson text",
+        "capo": null,
+        "proposed_capo": 0,
+        "capo_status": "No explicit source assertion; zero is a practice proposal",
+        "optional_shapes": [],
+        "rhythm_focus": "Progress from steady strums to the linked eighth-note pattern with an omitted beat; keep intro/lead as optional later work.",
+        "whole_arrangement_verified": false
+      },
+      "sources": [
+        {
+          "role": "recording identity",
+          "url": "https://www.youtube.com/watch?v=nEQmbFWnQeE"
+        },
+        {
+          "role": "teaching variant",
+          "url": "https://www.andyguitar.co.uk/videos/brown-eyed-girl-by-van-morrison"
+        }
+      ],
+      "version_notes": [
+        "Rejected alternate upload zolNC1704x8 explicitly identifies a re-recorded compilation; selected nEQmbFWnQeE identifies Blowin' Your Mind! instead"
+      ],
+      "review_status": "Sources reviewed; practice placement proposed, recording-specific arrangement unverified",
+      "practice_placement": {
+        "track": "open-chord-rhythm",
+        "proposed_order": 4,
+        "prerequisites": "Four open shapes and down/up movement",
+        "rationale": "Keep intro/lead optional while developing the accompaniment groove",
+        "status": "Project proposal from sourced tasks; not a measured player difficulty grade"
+      }
+    },
+    {
+      "id": "love-me-do",
+      "title": "Love Me Do",
+      "artist": "The Beatles",
+      "selected_recording": {
+        "recording_id": "beatles-love-me-do-youtube-20261011",
+        "url": "https://www.youtube.com/watch?v=0pGOFX1D_jg",
+        "video_id": "0pGOFX1D_jg",
+        "expected_uploader": "The Beatles",
+        "edition": "Please Please Me / 2009 remaster",
+        "selection_basis": "Please Please Me album version as remastered in 2009. Do not call it the original UK single take or interchange it with the 2023 true-stereo remix.",
+        "metadata_status": "verified public, non-live; no media acquired",
+        "public_metadata": {
+          "video_id": "0pGOFX1D_jg",
+          "url": "https://www.youtube.com/watch?v=0pGOFX1D_jg",
+          "title": "Love Me Do (Remastered 2009)",
+          "uploader": "The Beatles",
+          "duration_seconds": 142.0,
+          "availability": "public",
+          "live_status": "not_live",
+          "format_id": "140",
+          "extension": "m4a",
+          "audio_codec": "mp4a.40.2",
+          "upload_date": "20180617",
+          "extractor_warning_count": 0
+        }
+      },
+      "cached_example": null,
+      "teaching": {
+        "chord_set": [
+          "G",
+          "C",
+          "D"
+        ],
+        "label_convention": "Teacher played-shape names; recording pitch not yet checked",
+        "tuning": "standard",
+        "tuning_status": "Proposed standard setup; not explicitly stated in inspected lesson text",
+        "capo": null,
+        "proposed_capo": 0,
+        "capo_status": "No explicit source assertion; zero is a practice proposal",
+        "optional_shapes": [
+          "Cadd9"
+        ],
+        "rhythm_focus": "Begin on the beat, preserve intentional muted stops, progress to swing feel.",
+        "whole_arrangement_verified": false
+      },
+      "sources": [
+        {
+          "role": "recording identity",
+          "url": "https://www.youtube.com/watch?v=0pGOFX1D_jg"
+        },
+        {
+          "role": "teaching variant",
+          "url": "https://www.andyguitar.co.uk/videos/beatles-guitar-day-01-love-me-do"
+        },
+        {
+          "role": "album take identity",
+          "url": "https://ukstore.thebeatles.com/collections/cd/products/please-please-me-remastered-cd"
+        }
+      ],
+      "version_notes": [
+        "Quick G/C changes, clean C fingering, deliberate muting and swing feel are learning tasks beyond recognizing three chord names."
+      ],
+      "review_status": "Sources reviewed; practice placement proposed, recording-specific arrangement unverified",
+      "practice_placement": {
+        "track": "open-chord-rhythm",
+        "proposed_order": 2,
+        "prerequisites": "G/C/D changes and muting",
+        "rationale": "Three taught shapes, but changing harmony and deliberate stops still matter",
+        "status": "Project proposal from sourced tasks; not a measured player difficulty grade"
+      }
+    },
+    {
+      "id": "twist-and-shout",
+      "title": "Twist And Shout",
+      "artist": "The Beatles",
+      "selected_recording": {
+        "recording_id": "beatles-twist-and-shout-youtube-20261011",
+        "url": "https://www.youtube.com/watch?v=2RicaUqd9Hg",
+        "video_id": "2RicaUqd9Hg",
+        "expected_uploader": "The Beatles",
+        "edition": "Please Please Me / 2009 remaster",
+        "selection_basis": "The Please Please Me studio album recording as remastered in 2009; not a live performance, teacher band jam or another artist's cover.",
+        "metadata_status": "verified public, non-live; no media acquired",
+        "public_metadata": {
+          "video_id": "2RicaUqd9Hg",
+          "url": "https://www.youtube.com/watch?v=2RicaUqd9Hg",
+          "title": "Twist And Shout (Remastered 2009)",
+          "uploader": "The Beatles",
+          "duration_seconds": 155.0,
+          "availability": "public",
+          "live_status": "not_live",
+          "format_id": "140",
+          "extension": "m4a",
+          "audio_codec": "mp4a.40.2",
+          "upload_date": "20180617",
+          "extractor_warning_count": 0
+        }
+      },
+      "cached_example": null,
+      "teaching": {
+        "chord_set": [
+          "D",
+          "G",
+          "A"
+        ],
+        "label_convention": "Teacher played-shape names; recording pitch not yet checked",
+        "tuning": "standard",
+        "tuning_status": "Explicit primary lesson support",
+        "capo": null,
+        "proposed_capo": 0,
+        "capo_status": "No explicit source assertion; zero is a practice proposal",
+        "optional_shapes": [],
+        "rhythm_focus": "Learn the accompaniment response rhythm, then eighth-note build-up; riff, dual-lead solo and chromatic/D9 ending are later options.",
+        "whole_arrangement_verified": false
+      },
+      "sources": [
+        {
+          "role": "recording identity",
+          "url": "https://www.youtube.com/watch?v=2RicaUqd9Hg"
+        },
+        {
+          "role": "teaching variant",
+          "url": "https://www.andyguitar.co.uk/videos/beatles-guitar-day-02-twist-and-shout"
+        }
+      ],
+      "version_notes": [
+        "Accompaniment chords, melody, solo and ending are distinct tasks. Teacher play-through section counts are not verified timings for the selected upload."
+      ],
+      "review_status": "Sources reviewed; practice placement proposed, recording-specific arrangement unverified",
+      "practice_placement": {
+        "track": "open-chord-rhythm",
+        "proposed_order": 5,
+        "prerequisites": "D/G/A changes at a quicker feel",
+        "rationale": "Eighth-note build-up and response rhythm add difficulty beyond three shapes",
+        "status": "Project proposal from sourced tasks; not a measured player difficulty grade"
+      }
+    },
+    {
+      "id": "seven-nation-army",
+      "title": "Seven Nation Army",
+      "artist": "The White Stripes",
+      "selected_recording": {
+        "recording_id": "white-stripes-seven-nation-army-youtube-20261011",
+        "url": "https://www.youtube.com/watch?v=D_QLxj8jCF0",
+        "video_id": "D_QLxj8jCF0",
+        "expected_uploader": "The White Stripes",
+        "edition": "Elephant",
+        "selection_basis": "Project-selected label-provided album upload; not a live performance or another performer",
+        "metadata_status": "verified public, non-live; no media acquired",
+        "public_metadata": {
+          "video_id": "D_QLxj8jCF0",
+          "url": "https://www.youtube.com/watch?v=D_QLxj8jCF0",
+          "title": "Seven Nation Army",
+          "uploader": "The White Stripes",
+          "duration_seconds": 232.0,
+          "availability": "public",
+          "live_status": "not_live",
+          "format_id": "140",
+          "extension": "m4a",
+          "audio_codec": "mp4a.40.2",
+          "upload_date": "20200930",
+          "extractor_warning_count": 0
+        }
+      },
+      "cached_example": null,
+      "teaching": {
+        "label_convention": "Teacher setup, kept separate from sounding labels",
+        "capo": null,
+        "capo_status": "Not explicitly verified in inspected source text",
+        "whole_arrangement_verified": false,
+        "chord_set": null,
+        "fuller_power_chord_inventory": [
+          "E5",
+          "G5",
+          "D5",
+          "C5",
+          "B5",
+          "A5"
+        ],
+        "original_tuning": "Open A",
+        "beginner_tuning": "EADGBE standard",
+        "tuning_status": "Teacher explicitly distinguishes original and adapted setup",
+        "rhythm_focus": "Single-note groove and muting; add power shapes later",
+        "task": "Riff-first exercise; chord-name streaming alone does not teach its main part"
+      },
+      "sources": [
+        {
+          "role": "recording identity",
+          "url": "https://www.youtube.com/watch?v=D_QLxj8jCF0"
+        },
+        {
+          "role": "teaching variant",
+          "url": "https://www.andyguitar.co.uk/videos/electric-guitar-song-1-seven-nation-army-by-the-white-stripes"
+        },
+        {
+          "role": "power/riff teaching inventory",
+          "url": "https://www.justinguitar.com/songs/the-white-stripes-seven-nation-army-chords-tabs-guitar-lesson-bs-824"
+        }
+      ],
+      "version_notes": [
+        "Standard-tuning lesson arrangement and authentic Open A performance must be labelled separately.",
+        "Exclude Bonnaroo/live performances and the Glitch Mob remix from the selected album-recording identity."
+      ],
+      "review_status": "Sources reviewed; practice placement proposed, recording-specific arrangement unverified",
+      "practice_placement": {
+        "track": "electric-riffs-and-power-chords",
+        "proposed_order": 1,
+        "prerequisites": "One-string riff timing and muting",
+        "rationale": "Start with a riff exercise; fuller power/slide work comes later",
+        "status": "Project proposal from sourced tasks; not a measured player difficulty grade"
+      }
+    },
+    {
+      "id": "come-as-you-are",
+      "title": "Come As You Are",
+      "artist": "Nirvana",
+      "selected_recording": {
+        "recording_id": "nirvana-come-as-you-are-youtube-20261011",
+        "url": "https://www.youtube.com/watch?v=f1IdyrhOrGs",
+        "video_id": "f1IdyrhOrGs",
+        "expected_uploader": "Nirvana",
+        "edition": "Nevermind",
+        "selection_basis": "Project-selected label-provided album upload; not a live performance or another performer",
+        "metadata_status": "verified public, non-live; no media acquired",
+        "public_metadata": {
+          "video_id": "f1IdyrhOrGs",
+          "url": "https://www.youtube.com/watch?v=f1IdyrhOrGs",
+          "title": "Come As You Are",
+          "uploader": "Nirvana",
+          "duration_seconds": 219.0,
+          "availability": "public",
+          "live_status": "not_live",
+          "format_id": "140",
+          "extension": "m4a",
+          "audio_codec": "mp4a.40.2",
+          "upload_date": "20181212",
+          "extractor_warning_count": 0
+        }
+      },
+      "cached_example": null,
+      "teaching": {
+        "label_convention": "Teacher setup, kept separate from sounding labels",
+        "capo": null,
+        "capo_status": "Not explicitly verified in inspected source text",
+        "whole_arrangement_verified": false,
+        "chord_set": null,
+        "tuning": "DGCFAD (D standard)",
+        "tuning_status": "Explicit original-recording teacher setup",
+        "rhythm_focus": "Repeated single-note riff, then chord sections; keep suspended fourths",
+        "task": "Match the studio tuning for the taught original riff",
+        "shape_pitch_relation": "In D standard a conventional shape sounds two semitones below its E-standard label; theory inference, not a capo-only transform"
+      },
+      "sources": [
+        {
+          "role": "recording identity",
+          "url": "https://www.youtube.com/watch?v=f1IdyrhOrGs"
+        },
+        {
+          "role": "teaching variant",
+          "url": "https://guitarlessons365.com/come-as-you-are-guitar-lesson-nirvana/"
+        }
+      ],
+      "version_notes": [
+        "Nevermind studio, MTV Unplugged, Reading and other live versions are different recording identities and may use different tuning.",
+        "A beginner can practise a riff shape in another tuning, but it will not necessarily match the selected recording pitch."
+      ],
+      "review_status": "Sources reviewed; practice placement proposed, recording-specific arrangement unverified",
+      "practice_placement": {
+        "track": "electric-riffs-and-power-chords",
+        "proposed_order": 2,
+        "prerequisites": "Repeated riff and original-tuning setup",
+        "rationale": "Verify tuning before matching the studio track; fuller chord sections are a later task",
+        "status": "Project proposal from sourced tasks; not a measured player difficulty grade"
+      }
+    },
+    {
+      "id": "creep",
+      "title": "Creep",
+      "artist": "Radiohead",
+      "selected_recording": {
+        "recording_id": "radiohead-creep-youtube-20261010",
+        "url": "https://www.youtube.com/watch?v=XFkzRNyygfk",
+        "video_id": "XFkzRNyygfk",
+        "expected_uploader": "Radiohead",
+        "edition": "Existing official artist music-video upload; retain exact cached WAV",
+        "selection_basis": "Reuse the byte-paired imported recording and raw detector outputs",
+        "metadata_status": "Cached successful acquisition on 10 October 2026",
+        "public_metadata": {
+          "video_id": "XFkzRNyygfk",
+          "url": "https://www.youtube.com/watch?v=XFkzRNyygfk",
+          "title": "Radiohead - Creep",
+          "uploader": "Radiohead",
+          "duration_seconds": 237.0,
+          "availability": "public",
+          "live_status": "not_live",
+          "format_id": "140",
+          "extension": "m4a",
+          "audio_codec": "mp4a.40.2",
+          "upload_date": "20080718",
+          "extractor_warning_count": 0
+        }
+      },
+      "cached_example": {
+        "recording_id": "radiohead-creep-youtube-20261010",
+        "audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10",
+        "duration_seconds": 236.63455782312926
+      },
+      "teaching": {
+        "chord_set": [
+          "G",
+          "B",
+          "C",
+          "Cm"
+        ],
+        "label_convention": "Teacher standard-tuning barre shapes; chord inventory is not a complete timed chart",
+        "tuning": "EADGBE standard",
+        "tuning_status": "Standard barre setup proposed from teacher chord/fret description; recording pitch not measured",
+        "capo": null,
+        "proposed_capo": 0,
+        "capo_status": "Zero-capo barre setup proposed",
+        "rhythm_focus": "Barre changes, controlled verse arpeggios, then chorus dynamics",
+        "whole_arrangement_verified": false
+      },
+      "sources": [
+        {
+          "role": "recording identity",
+          "url": "https://www.youtube.com/watch?v=XFkzRNyygfk"
+        },
+        {
+          "role": "teaching variant",
+          "url": "https://www.andyguitar.co.uk/videos/radiohead-creep"
+        },
+        {
+          "role": "detailed arrangement teaching",
+          "url": "https://guitarlessons365.com/creep-guitar-lesson-radiohead/"
+        }
+      ],
+      "version_notes": [
+        "Preserve exact audio/time origin; music-video edits need not match an album upload",
+        "No complete recording-specific timing gold is available for this cached example"
+      ],
+      "review_status": "Existing raw draft and sourced teaching setup; guided arrangement remains unaccepted",
+      "practice_placement": {
+        "track": "open-chord-rhythm",
+        "proposed_order": 8,
+        "prerequisites": "Reliable full barre shapes",
+        "rationale": "Four names still require barre strength and major-to-minor changes",
+        "status": "Project proposal from sourced tasks; not a measured player difficulty grade"
+      }
+    },
+    {
+      "id": "the-house-of-the-rising-sun",
+      "title": "The House Of The Rising Sun",
+      "artist": "The Animals",
+      "selected_recording": {
+        "recording_id": "animals-house-rising-sun-official-20261011",
+        "url": "https://www.youtube.com/watch?v=VixdIglCZXk",
+        "video_id": "VixdIglCZXk",
+        "expected_uploader": "The Animals",
+        "edition": "Most of the Animals / Parlophone UK studio compilation upload",
+        "selection_basis": "Official label-provided studio candidate replacing the tribute example for this new research batch",
+        "metadata_status": "Metadata-only wrapper verified public/non-live,270 seconds,zero warnings",
+        "public_metadata": {
+          "video_id": "VixdIglCZXk",
+          "url": "https://www.youtube.com/watch?v=VixdIglCZXk",
+          "title": "House of the Rising Sun",
+          "uploader": "The Animals",
+          "duration_seconds": 270.0,
+          "availability": "public",
+          "live_status": "not_live",
+          "upload_date": "20170220",
+          "extractor_warning_count": 0
+        }
+      },
+      "cached_example": null,
+      "legacy_example": {
+        "recording_id": "animals-house-rising-sun-youtube-20261010",
+        "audio_sha256": "7724e708da432a588e2faeb3aa025b7e37128c3a440b39077e0370e472c55035",
+        "duration_seconds": 248.54639455782313,
+        "status": "Unchanged prior tribute-upload example; not reused as the selected studio case"
+      },
+      "teaching": {
+        "chord_set": [
+          "Am",
+          "C",
+          "D",
+          "F",
+          "E",
+          "Dm"
+        ],
+        "optional_shapes": [
+          "E7"
+        ],
+        "label_convention": "Played-shape vocabulary; outro Dm and optional organ-inspired E7 remain distinct",
+        "tuning": "EADGBE standard",
+        "tuning_status": "Primary teacher setup",
+        "capo": 0,
+        "capo_status": "Primary Richter lesson states no capo",
+        "rhythm_focus": "Count six eighth-note subdivisions in two groups; steady strums before arpeggios, then raked flat-pick attack",
+        "fingering_option": "Small F instead of full six-string barre; actual grip still needs practice",
+        "whole_arrangement_verified": false
+      },
+      "sources": [
+        {
+          "role": "recording identity",
+          "url": "https://www.youtube.com/watch?v=VixdIglCZXk"
+        },
+        {
+          "role": "teaching variant",
+          "url": "https://www.jonmaclennan.com/blog/house-of-the-rising-sun-guitar-lesson"
+        },
+        {
+          "role": "detailed picking and sections",
+          "url": "https://guitarlessons365.com/how-to-play-the-house-of-the-rising-sun-the-animals/"
+        },
+        {
+          "role": "setup and optional E7",
+          "url": "https://richterguitar.com/house-of-the-rising-sun-the-animals/"
+        }
+      ],
+      "version_notes": [
+        "New 270s metadata does not prove equivalence to the Rock Corpus CD; its last annotated barline is 262.942811791s, not a complete audio-duration assertion",
+        "Do not infer an offset or scale from endpoints; independently compare recording landmarks before transferring any reference"
+      ],
+      "review_status": "Sources reviewed; new studio candidate queued; recording-specific arrangement unverified",
+      "practice_placement": {
+        "track": "open-chord-rhythm",
+        "proposed_order": 6,
+        "prerequisites": "Small F and 6/8 subdivision",
+        "rationale": "Strum first; picking accuracy is a separate progression",
+        "status": "Project proposal from sourced tasks; not a measured player difficulty grade"
+      }
+    },
+    {
+      "id": "wonderwall",
+      "title": "Wonderwall",
+      "artist": "Oasis",
+      "selected_recording": {
+        "recording_id": "oasis-wonderwall-youtube-20261010",
+        "url": "https://www.youtube.com/watch?v=bx1Bh8ZvH84",
+        "video_id": "bx1Bh8ZvH84",
+        "expected_uploader": "Oasis",
+        "edition": "Existing official artist music-video upload; retain exact cached WAV",
+        "selection_basis": "Reuse the byte-paired imported recording and raw detector outputs",
+        "metadata_status": "Cached successful acquisition on 10 October 2026",
+        "public_metadata": {
+          "video_id": "bx1Bh8ZvH84",
+          "url": "https://www.youtube.com/watch?v=bx1Bh8ZvH84",
+          "title": "Oasis - Wonderwall (Official Video)",
+          "uploader": "Oasis",
+          "duration_seconds": 278.0,
+          "availability": "public",
+          "live_status": "not_live",
+          "format_id": "140",
+          "extension": "m4a",
+          "audio_codec": "mp4a.40.2",
+          "upload_date": "20131121",
+          "extractor_warning_count": 0
+        }
+      },
+      "cached_example": {
+        "recording_id": "oasis-wonderwall-youtube-20261010",
+        "audio_sha256": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462",
+        "duration_seconds": 277.78031746031746
+      },
+      "teaching": {
+        "chord_set": [
+          "Em7",
+          "G",
+          "Dsus4",
+          "A7sus4",
+          "Cadd9"
+        ],
+        "label_convention": "Teacher capo-2 played shapes; main vocabulary, not a complete section chart",
+        "tuning": "EADGBE standard",
+        "tuning_status": "Carl Brown explicitly specifies EADGBE standard tuning and capo2",
+        "capo": 2,
+        "proposed_capo": 2,
+        "capo_status": "Teacher verified capo 2",
+        "rhythm_focus": "Continuous strumming motion, syncopated gaps and section variations",
+        "whole_arrangement_verified": false
+      },
+      "sources": [
+        {
+          "role": "recording identity",
+          "url": "https://www.youtube.com/watch?v=bx1Bh8ZvH84"
+        },
+        {
+          "role": "teaching variant",
+          "url": "https://guitarlessons365.com/wonderwall-guitar-lesson-oasis/"
+        },
+        {
+          "role": "detailed arrangement teaching",
+          "url": "https://www.gregshuteguitar.co.uk/_files/ugd/4079b4_0a1b39a89c1a4776a5c8f553f259cb08.pdf"
+        }
+      ],
+      "version_notes": [
+        "Preserve exact audio/time origin; music-video edits need not match an album upload",
+        "No complete recording-specific timing gold is available for this cached example"
+      ],
+      "review_status": "Existing raw draft and sourced teaching setup; guided arrangement remains unaccepted",
+      "practice_placement": {
+        "track": "open-chord-rhythm",
+        "proposed_order": 7,
+        "prerequisites": "Capo setup, shared-finger shapes and syncopation",
+        "rationale": "Richer anchored shapes can reduce movement; core names do not ensure easier fingering",
+        "status": "Project proposal from sourced tasks; not a measured player difficulty grade"
+      }
+    }
+  ]
+}

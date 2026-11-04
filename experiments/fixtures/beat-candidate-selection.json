@@ -1,0 +1,156 @@
+{
+  "schema_version": "beat-candidate-screen-selection-1.0",
+  "date": "2026-10-12",
+  "frozen_before": "New selected audio acquisition and candidate inference",
+  "scope": "Five new externally authored controlled challenges; previous thirteen cases are retrospective diagnostics",
+  "archive_url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/ARTBeaT_Dataset.zip",
+  "archive_size_bytes": 57496054,
+  "source_central_directory_sha256": "b6be469bb240988104251e28ecfae72ec8636ccda23ecac14faedd1ae24a0a6e",
+  "license": "CC BY 4.0; Rico Rosenbusch, ARTBeaT Dataset, 2024",
+  "reference_semantics": "Source-provided beat ground-truth CSV events. Not the separately collected listener taps. Beat attack annotation procedure is not established by the distributed README. No beat-position or bar-number labels.",
+  "conditions": [
+    {
+      "id": "librosa-default-120",
+      "tempo_hints": false,
+      "settings": "Existing frozen extractor, native default120, no bar convention"
+    },
+    {
+      "id": "beat-this-final0",
+      "package": "beat-this==1.1.0",
+      "checkpoint": "final0",
+      "device": "cpu",
+      "threads": 1,
+      "float16": false,
+      "dbn": false
+    },
+    {
+      "id": "beat-this-small0",
+      "package": "beat-this==1.1.0",
+      "checkpoint": "small0",
+      "device": "cpu",
+      "threads": 1,
+      "float16": false,
+      "dbn": false
+    }
+  ],
+  "cases": [
+    {
+      "id": "03_artbeat_deception_arp2",
+      "name": "03_ARTBeaT_Deception_arp2",
+      "purpose": "Rhythmic deception when layers enter off the original pulse",
+      "split": "holdout",
+      "audio_entry": {
+        "path": "ARTBeaT_Dataset/Audio/03_ARTBeaT_Deception_arp2.wav",
+        "method": 8,
+        "crc32": 1126254232,
+        "compressed_size": 2869373,
+        "size": 3197984,
+        "offset": 33709076
+      },
+      "reference_entry": {
+        "path": "ARTBeaT_Dataset/Annotations/gt_csv/03_ARTBeaT_Deception_arp2_gt.csv",
+        "method": 8,
+        "crc32": 2808809562,
+        "compressed_size": 290,
+        "size": 780,
+        "offset": 57469740
+      }
+    },
+    {
+      "id": "05_artbeat_tempoa_75to150",
+      "name": "05_ARTBeaT_TempoA_75to150",
+      "purpose": "Abrupt 75 to 150 BPM change",
+      "split": "holdout",
+      "audio_entry": {
+        "path": "ARTBeaT_Dataset/Audio/05_ARTBeaT_TempoA_75to150.wav",
+        "method": 8,
+        "crc32": 2056347154,
+        "compressed_size": 1891307,
+        "size": 2399776,
+        "offset": 21189119
+      },
+      "reference_entry": {
+        "path": "ARTBeaT_Dataset/Annotations/gt_csv/05_ARTBeaT_TempoA_75to150_gt.csv",
+        "method": 8,
+        "crc32": 1630535599,
+        "compressed_size": 134,
+        "size": 398,
+        "offset": 57468883
+      }
+    },
+    {
+      "id": "19_artbeat_tempoc_80to200",
+      "name": "19_ARTBeaT_TempoC_80to200",
+      "purpose": "Continuous 80 to 200 BPM change",
+      "split": "holdout",
+      "audio_entry": {
+        "path": "ARTBeaT_Dataset/Audio/19_ARTBeaT_TempoC_80to200.wav",
+        "method": 8,
+        "crc32": 821937017,
+        "compressed_size": 613620,
+        "size": 3043496,
+        "offset": 10361
+      },
+      "reference_entry": {
+        "path": "ARTBeaT_Dataset/Annotations/gt_csv/19_ARTBeaT_TempoC_80to200_gt.csv",
+        "method": 8,
+        "crc32": 1883966005,
+        "compressed_size": 277,
+        "size": 655,
+        "offset": 57467306
+      }
+    },
+    {
+      "id": "24_artbeat_syncopated_94",
+      "name": "24_ARTBeaT_Syncopated_94",
+      "purpose": "Irregular syncopation",
+      "split": "holdout",
+      "audio_entry": {
+        "path": "ARTBeaT_Dataset/Audio/24_ARTBeaT_Syncopated_94.wav",
+        "method": 8,
+        "crc32": 399392241,
+        "compressed_size": 3313485,
+        "size": 3866196,
+        "offset": 9021788
+      },
+      "reference_entry": {
+        "path": "ARTBeaT_Dataset/Annotations/gt_csv/24_ARTBeaT_Syncopated_94_gt.csv",
+        "method": 8,
+        "crc32": 1015442541,
+        "compressed_size": 220,
+        "size": 762,
+        "offset": 57466223
+      }
+    },
+    {
+      "id": "25_artbeat_odd_metal11",
+      "name": "25_ARTBeaT_Odd_metal11",
+      "purpose": "Distorted guitar and drums in 11/8",
+      "split": "holdout",
+      "audio_entry": {
+        "path": "ARTBeaT_Dataset/Audio/25_ARTBeaT_Odd_metal11.wav",
+        "method": 8,
+        "crc32": 2422207923,
+        "compressed_size": 3899829,
+        "size": 4203204,
+        "offset": 47506112
+      },
+      "reference_entry": {
+        "path": "ARTBeaT_Dataset/Annotations/gt_csv/25_ARTBeaT_Odd_metal11_gt.csv",
+        "method": 8,
+        "crc32": 36215827,
+        "compressed_size": 733,
+        "size": 2013,
+        "offset": 57470996
+      }
+    }
+  ],
+  "prior_exposed_control_packets": [
+    "guitarset-rhythm-reference-v1",
+    "mixed-rhythm-reference-v1"
+  ],
+  "retuning_allowed": false,
+  "downbeat_accuracy_measured": false,
+  "beatthis_primary_source": "https://github.com/CPJKU/beat_this",
+  "training_overlap_status": "Not established from exact checkpoint training track lists; experiment holdout only"
+}

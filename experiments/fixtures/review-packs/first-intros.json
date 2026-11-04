@@ -1,0 +1,56 @@
+{
+  "schema_version": "listening-review-1.0",
+  "pack_id": "famous-song-intros-v1",
+  "bounds_status": "frozen-listening-windows",
+  "cases": [
+    {
+      "id": "creep-listening-00-20",
+      "title": "Creep \u00b7 first 20 seconds",
+      "source_recording_id": "radiohead-creep-youtube-20261010",
+      "audio": "experiments/generated/youtube-pilot/cases/radiohead-creep-youtube-20261010/audio.wav",
+      "source_audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10",
+      "start_seconds": 0,
+      "end_seconds": 20,
+      "bounds_description": "Frozen first-20-second listening window; section and chord changes are unverified",
+      "split": "development",
+      "candidates": [
+        "experiments/generated/youtube-pilot/cases/radiohead-creep-youtube-20261010/baseline.json",
+        "experiments/generated/youtube-pilot/cases/radiohead-creep-youtube-20261010/crema.json",
+        "experiments/generated/youtube-pilot/cases/radiohead-creep-youtube-20261010/chordino.json"
+      ]
+    },
+    {
+      "id": "wonderwall-listening-00-20",
+      "title": "Wonderwall \u00b7 first 20 seconds",
+      "source_recording_id": "oasis-wonderwall-youtube-20261010",
+      "audio": "experiments/generated/youtube-pilot/cases/oasis-wonderwall-youtube-20261010/audio.wav",
+      "source_audio_sha256": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462",
+      "start_seconds": 0,
+      "end_seconds": 20,
+      "bounds_description": "Frozen first-20-second listening window; section and chord changes are unverified",
+      "split": "development",
+      "candidates": [
+        "experiments/generated/youtube-pilot/cases/oasis-wonderwall-youtube-20261010/baseline.json",
+        "experiments/generated/youtube-pilot/cases/oasis-wonderwall-youtube-20261010/crema.json",
+        "experiments/generated/youtube-pilot/cases/oasis-wonderwall-youtube-20261010/chordino.json"
+      ]
+    },
+    {
+      "id": "house-listening-00-20",
+      "title": "House of the Rising Sun \u00b7 first 20 seconds",
+      "source_recording_id": "animals-house-rising-sun-youtube-20261010",
+      "audio": "experiments/generated/youtube-pilot/cases/animals-house-rising-sun-youtube-20261010/audio.wav",
+      "source_audio_sha256": "7724e708da432a588e2faeb3aa025b7e37128c3a440b39077e0370e472c55035",
+      "start_seconds": 0,
+      "end_seconds": 20,
+      "bounds_description": "Frozen first-20-second listening window; section and chord changes are unverified",
+      "split": "development",
+      "candidates": [
+        "experiments/generated/youtube-pilot/cases/animals-house-rising-sun-youtube-20261010/baseline.json",
+        "experiments/generated/youtube-pilot/cases/animals-house-rising-sun-youtube-20261010/crema.json",
+        "experiments/generated/youtube-pilot/cases/animals-house-rising-sun-youtube-20261010/chordino.json"
+      ]
+    }
+  ],
+  "limitations": "Arbitrary frozen listening windows. All three are development cases; none is held-out or timing gold. Candidate review does not establish chart correctness."
+}

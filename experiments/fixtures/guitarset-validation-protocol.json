@@ -1,0 +1,36 @@
+{
+  "schema_version": "guitarset-chord-protocol-1.0",
+  "date": "2026-10-12",
+  "status": "Frozen before new chord inference; reuse the prior frozen ten-input selection",
+  "selection_sha256": "597f4c82625a82cddebd67f9d5523b7afd4c36d5ed7be798347f6ae25b6a7c12",
+  "candidates": [
+    "baseline",
+    "btc",
+    "crema",
+    "chordmini",
+    "chordino"
+  ],
+  "condition": "Each adapter existing defaults unchanged; no key/tempo/chart guidance, separation, smoothing additions or timing fitting",
+  "scoring": "Existing guitarset_pilot native label conversion and duration-weighted root/majmin; intended/performed and comp/solo reported separately by development/holdout",
+  "training_overlap": "Unknown; experiment holdout is not proven held out from pretrained checkpoints",
+  "frozen_files": {
+    "experiments/analysis/lab.py": "4e48a730dae86e99972d28f53714dc6a2d56badb1c38df99f8171ba711c02949",
+    "experiments/analysis/guitarset_pilot.py": "a6b8b9bbb27e88969520f7d9f2be92ffc1d71bc4c7d20026fe04c56bba42288f",
+    "experiments/analysis/candidates/btc_adapter.py": "c84dbed07e0ce2d6eeceb0c8d565d6d2c8eb5c92f82853fbf7171957f0cdfa05",
+    "experiments/analysis/candidates/crema_adapter.py": "bda2bae264eb6f3217e66f44c66838fdd0845742972f7e2ab59fba9f901aa02c",
+    "experiments/analysis/candidates/chordmini_adapter.py": "101f2aefd037f1a52b88f2a6af935cd161efef01fd0c43464872f6aa96608ea9",
+    "experiments/analysis/candidates/chordino_adapter.py": "a0477738e7a524c1ab5432179b0af66df5e7cbf3eb82fdb206e377a39571b0e9",
+    "experiments/candidate-assets/btc-ismir19/run_config.yaml": "47ee1db8753d5e3cd2fceea1204c87e4d050ff54b59276f966ef4834962a8756",
+    "experiments/candidate-assets/btc-ismir19/test/btc_model.pt": "71c2c5db17e8c43b8a9a9da5db36ef2d667158c07a214eba16344c154c00bf54",
+    "experiments/candidate-assets/chordmini/config/ChordMini.yaml": "79fe67e764e6e8ddb1dc7bf88efecff0363d8ab25c4ad25e0b4ed429a9ad2535",
+    "experiments/candidate-assets/chordmini/checkpoints/2e1d_model_best.pth": "ecc3de5e7b5b4affdd8e903106e11c24440631e5f43cf22d2a5975b3f160229a",
+    "experiments/candidate-assets/chordino-native/chordino-host": "43239048c70e7fd44eba32dca1eafeb861ef259e47bee44b20e91075ba08ad1c",
+    "experiments/candidate-assets/chordino-native/nnls-chroma.dylib": "1931ae144335ce192742509184b657d8cd7815f139b23f7d43df63d08acb5896",
+    "experiments/candidate-assets/chordino-native/buildinfo.json": "e89ea26d9189ef842c00de24b8f2754b1adc8c161c0fd962df165332938feb02",
+    ".venv-crema/lib/python3.11/site-packages/crema/models/chord/model.h5": "08b80e5b648e743c89284e9bc0b12b993dad1129157a75e0de70e076b0b8a235",
+    ".venv-crema/lib/python3.11/site-packages/crema/models/chord/model_spec.pkl": "3769565e5d3f4d3c590a15d92755b8633b0c5fc280c3e76847f875dd5959374c",
+    ".venv-crema/lib/python3.11/site-packages/crema/models/chord/pump.pkl": "73034e05996ed1f5979a2bfbd63c5061f074f57a0670e26b8a71808181845ec6",
+    ".venv-crema/lib/python3.11/site-packages/crema/models/chord/muda.pkl": "5e125a7a9687057c508b4b92bbcbcd06ab886cbdd95f0b2e69f97abd60bdb567",
+    ".venv-crema/lib/python3.11/site-packages/crema/models/chord/version.txt": "b465539b0d547cc7ff40e7120607c2375eb8145d1e661bc180495e02d651f337"
+  }
+}

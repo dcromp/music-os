@@ -1,0 +1,694 @@
+{
+  "schema": "strumalong-additions-1",
+  "note": "Authored practice suggestions for new automatic charts; not checked against the recordings.",
+  "songs": [
+    {
+      "recording_id": "cranberries-zombie-youtube-20261024",
+      "title": "Zombie",
+      "artist": "The Cranberries",
+      "order": 1,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: the four-chord loop uses open Em, C, G and D shapes.",
+      "skill_focus": "A four-chord loop (Em, C, G, D) with a steady beat and clean changes. The recording's guitar is heavily distorted and the chorus is louder; this app teaches the chord loop, not the guitar sound.",
+      "strumming": {
+        "note": "A starting rhythm exercise. The recording may use a different pattern or picking.",
+        "patterns": [
+          {
+            "id": "steady-down",
+            "name": "Start: steady downstrokes",
+            "counts": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "strokes": [
+              "D",
+              "D",
+              "D",
+              "D"
+            ],
+            "description": "Strum down on each count. Keep the motion steady and change shape when the chord cue changes."
+          },
+          {
+            "id": "down-up",
+            "name": "Next: driving down-ups",
+            "counts": [
+              "1",
+              "&",
+              "2",
+              "&",
+              "3",
+              "&",
+              "4",
+              "&"
+            ],
+            "strokes": [
+              "D",
+              "U",
+              "D",
+              "U",
+              "D",
+              "U",
+              "D",
+              "U"
+            ],
+            "description": "Alternate down and up in steady eighth notes, as in a driving rock strum. Begin slowly; keep moving through chord changes."
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Zombie",
+          "url": "https://www.musicnotes.com/sheetmusic/the-cranberries/zombie/MN0150458"
+        }
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-24",
+        "note": "Chart main chords Em/G/C/D (with brief maj7 colourings); capo 0 confirmed. Pulse ~83 BPM. Automatic chart sanity check against the well-known progression and published tempo; not a musical review of timing or arrangement."
+      }
+    },
+    {
+      "recording_id": "green-day-good-riddance-youtube-20261024",
+      "title": "Good Riddance (Time of Your Life)",
+      "artist": "Green Day",
+      "order": 2,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open G, C (often played as Cadd9), D and Em shapes.",
+      "skill_focus": "Slower changes between G, C, D and Em, with a relaxed folk strum. The recording's guitar is picked rather than strummed, so treat the strum as a way to learn the changes first.",
+      "strumming": {
+        "note": "A starting rhythm exercise. The recording may use a different pattern or picking.",
+        "patterns": [
+          {
+            "id": "steady-down",
+            "name": "Start: steady downstrokes",
+            "counts": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "strokes": [
+              "D",
+              "D",
+              "D",
+              "D"
+            ],
+            "description": "Strum down on each count. Keep the motion steady and change shape when the chord cue changes."
+          },
+          {
+            "id": "folk-strum",
+            "name": "Next: folk strum (D — D U — U D U)",
+            "counts": [
+              "1",
+              "&",
+              "2",
+              "&",
+              "3",
+              "&",
+              "4",
+              "&"
+            ],
+            "strokes": [
+              "D",
+              "—",
+              "D",
+              "U",
+              "—",
+              "U",
+              "D",
+              "U"
+            ],
+            "description": "Keep your hand swinging down and up in steady eighth notes. Touch the strings on the arrows and miss them on the dashes. Start slowly, and keep moving through the chord changes."
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "Chord-site listing: key G, 90 BPM, chords G C D Em",
+          "url": "https://appsnemo.com/chord/good-riddance-time-of-your-life-green-day"
+        },
+        {
+          "title": "Published arrangement tempo marking: Good Riddance (Time of Your Life)",
+          "url": "https://www.musicnotes.com/sheetmusic/green-day/good-riddance-time-of-your-life/MN0047011"
+        }
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-24",
+        "note": "Chart main chords G/D/C/Em; capo 0 confirmed. Pulse ~96 BPM. Automatic chart sanity check against the well-known progression and published tempo; not a musical review of timing or arrangement."
+      }
+    },
+    {
+      "recording_id": "oasis-dont-look-back-in-anger-youtube-20261024",
+      "title": "Don't Look Back in Anger",
+      "artist": "Oasis",
+      "order": 3,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested if the automatic chart shows open C, G, Am, F and Em shapes.",
+      "skill_focus": "Moving between C, G, Am and F at a moderate tempo; adding an E and a short F-to-minor change later in the song.",
+      "strumming": {
+        "note": "A starting rhythm exercise. The recording may use a different pattern or picking.",
+        "patterns": [
+          {
+            "id": "steady-down",
+            "name": "Start: steady downstrokes",
+            "counts": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "strokes": [
+              "D",
+              "D",
+              "D",
+              "D"
+            ],
+            "description": "Strum down on each count. Keep the motion steady and change shape when the chord cue changes."
+          },
+          {
+            "id": "folk-strum",
+            "name": "Next: folk strum (D — D U — U D U)",
+            "counts": [
+              "1",
+              "&",
+              "2",
+              "&",
+              "3",
+              "&",
+              "4",
+              "&"
+            ],
+            "strokes": [
+              "D",
+              "—",
+              "D",
+              "U",
+              "—",
+              "U",
+              "D",
+              "U"
+            ],
+            "description": "Keep your hand swinging down and up in steady eighth notes. Touch the strings on the arrows and miss them on the dashes. Start slowly, and keep moving through the chord changes."
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Don't Look Back in Anger",
+          "url": "https://api.musicnotes.com/sheetmusic/oasis/dont-look-back-in-anger/MN0143432"
+        }
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-24",
+        "note": "Chart main chords C/G/F/Am/Em plus short Fm7 and a passing diminished chord; capo 0 kept (open shapes already cover ~86% of seconds). Pulse ~81 BPM. Automatic chart sanity check against the well-known progression and published tempo; not a musical review of timing or arrangement."
+      }
+    },
+    {
+      "recording_id": "ccr-have-you-ever-seen-the-rain-youtube-20261024",
+      "title": "Have You Ever Seen the Rain",
+      "artist": "Creedence Clearwater Revival",
+      "order": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open C, G and F shapes (F can be a small four-string version).",
+      "skill_focus": "A three-chord rock-and-roll groove (C, G, F) with a steady chug. Learn the changes before adding upstrokes.",
+      "strumming": {
+        "note": "A starting rhythm exercise. The recording may use a different pattern or picking.",
+        "patterns": [
+          {
+            "id": "steady-down",
+            "name": "Start: steady downstrokes",
+            "counts": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "strokes": [
+              "D",
+              "D",
+              "D",
+              "D"
+            ],
+            "description": "Strum down on each count. Keep the motion steady and change shape when the chord cue changes."
+          },
+          {
+            "id": "folk-strum",
+            "name": "Next: folk strum (D — D U — U D U)",
+            "counts": [
+              "1",
+              "&",
+              "2",
+              "&",
+              "3",
+              "&",
+              "4",
+              "&"
+            ],
+            "strokes": [
+              "D",
+              "—",
+              "D",
+              "U",
+              "—",
+              "U",
+              "D",
+              "U"
+            ],
+            "description": "Keep your hand swinging down and up in steady eighth notes. Touch the strings on the arrows and miss them on the dashes. Start slowly, and keep moving through the chord changes."
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Have You Ever Seen the Rain",
+          "url": "https://www.musicnotes.com/sheetmusic/creedence-clearwater-revival/have-you-ever-seen-the-rain/MN0268278"
+        }
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-24",
+        "note": "Chart main chords C/G/F/Am; capo 0 kept (open shapes cover ~93%). Pulse ~117 BPM. Automatic chart sanity check against the well-known progression and published tempo; not a musical review of timing or arrangement."
+      }
+    },
+    {
+      "recording_id": "ccr-bad-moon-rising-youtube-20261024",
+      "title": "Bad Moon Rising",
+      "artist": "Creedence Clearwater Revival",
+      "order": 5,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open D, A and G shapes. The beat grid is counted in two half-note beats per bar (cut time), so one bar is two cue dots and four counts.",
+      "skill_focus": "Quick changes between D, A and G in a bouncy rock-and-roll rhythm. The recording is fast (about 180 quarter-note beats a minute), so start with the slower pattern.",
+      "strumming": {
+        "note": "A starting rhythm exercise. The recording may use a different pattern or picking.",
+        "patterns": [
+          {
+            "id": "steady-down",
+            "name": "Start: steady downstrokes",
+            "counts": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "strokes": [
+              "D",
+              "D",
+              "D",
+              "D"
+            ],
+            "description": "Strum down on each of the four counts in a bar (two cue beats). At this tempo it is quick: if it is too fast, use the slower pattern. Change shape when the chord cue changes."
+          },
+          {
+            "id": "half-time",
+            "name": "Slower: counts 1 and 3 only",
+            "counts": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "strokes": [
+              "D",
+              "—",
+              "D",
+              "—"
+            ],
+            "description": "Strum down on counts 1 and 3 and let the chord ring on 2 and 4. A relaxed way to learn the changes at this tempo; this is a suggested exercise, not a transcription."
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking (half note = 90, 2/2): Bad Moon Rising",
+          "url": "https://api.musicnotes.com/sheetmusic/creedence-clearwater-revival/bad-moon-rising/MN0107302"
+        }
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-24",
+        "note": "Chart chords D/G/A only; capo 0 confirmed. Pulse ~89 half-note beats (cut time). Automatic chart sanity check against the well-known progression and published tempo; not a musical review of timing or arrangement."
+      }
+    },
+    {
+      "recording_id": "tom-petty-free-fallin-youtube-20261024",
+      "title": "Free Fallin'",
+      "artist": "Tom Petty",
+      "order": 6,
+      "capo": 3,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 3 suggested: play D-shape, G-shape and A-shape chords; they sound as F, Bb and C. Gsus2 and Asus4 are optional colour.",
+      "skill_focus": "Slow changes between three capo shapes, a gentle steady strum, and keeping a chord ringing until the cue changes.",
+      "strumming": {
+        "note": "A starting rhythm exercise. The recording may use a different pattern or picking.",
+        "patterns": [
+          {
+            "id": "steady-down",
+            "name": "Start: steady downstrokes",
+            "counts": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "strokes": [
+              "D",
+              "D",
+              "D",
+              "D"
+            ],
+            "description": "Strum down on each count. Keep the motion steady and change shape when the chord cue changes."
+          },
+          {
+            "id": "folk-strum",
+            "name": "Next: folk strum (D — D U — U D U)",
+            "counts": [
+              "1",
+              "&",
+              "2",
+              "&",
+              "3",
+              "&",
+              "4",
+              "&"
+            ],
+            "strokes": [
+              "D",
+              "—",
+              "D",
+              "U",
+              "—",
+              "U",
+              "D",
+              "U"
+            ],
+            "description": "Keep your hand swinging down and up in steady eighth notes. Touch the strings on the arrows and miss them on the dashes. Start slowly, and keep moving through the chord changes."
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "Capo 3, D/G/A shapes sounding in F major",
+          "url": "https://richterguitar.com/free-fallin-tom-petty/"
+        },
+        {
+          "title": "Published arrangement tempo marking: Free Fallin' (F major, 4/4, quarter = 84)",
+          "url": "https://www.musicnotes.com/sheetmusic/tom-petty/free-fallin/MN0046438"
+        }
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-24",
+        "note": "Chart sounding chords F/A#(Bb)/C with brief Csus4; capo 3 turns them into D/G/A shapes (score 0.99). Pulse ~83 BPM. Analysed upload is the official video, so its intro is part of the timeline. Automatic chart sanity check against the well-known progression and published tempo; not a musical review of timing or arrangement."
+      }
+    },
+    {
+      "recording_id": "weezer-island-in-the-sun-youtube-20261024",
+      "title": "Island in the Sun",
+      "artist": "Weezer",
+      "order": 7,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo to be confirmed from the automatic chart; no capo is suggested until the sounding chords are checked.",
+      "skill_focus": "A steady pop-rock strum over a short repeating chord loop; keep the hand moving at a medium tempo.",
+      "strumming": {
+        "note": "A starting rhythm exercise. The recording may use a different pattern or picking.",
+        "patterns": [
+          {
+            "id": "steady-down",
+            "name": "Start: steady downstrokes",
+            "counts": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "strokes": [
+              "D",
+              "D",
+              "D",
+              "D"
+            ],
+            "description": "Strum down on each count. Keep the motion steady and change shape when the chord cue changes."
+          },
+          {
+            "id": "down-up",
+            "name": "Next: steady down-ups",
+            "counts": [
+              "1",
+              "&",
+              "2",
+              "&",
+              "3",
+              "&",
+              "4",
+              "&"
+            ],
+            "strokes": [
+              "D",
+              "U",
+              "D",
+              "U",
+              "D",
+              "U",
+              "D",
+              "U"
+            ],
+            "description": "Alternate down and up in steady eighth notes. Begin slowly; keep moving through chord changes."
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Island in the Sun",
+          "url": "https://www.musicnotes.com/sheetmusic/weezer/island-in-the-sun/MN0156208"
+        }
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-24",
+        "note": "Chart main chords Em/Am/D/G (the remembered expectation of C was wrong; the loop is Em-Am-D-G); capo 0 confirmed. Pulse ~112 BPM. Analysed upload is the official video. Automatic chart sanity check against the well-known progression and published tempo; not a musical review of timing or arrangement."
+      }
+    },
+    {
+      "recording_id": "john-denver-country-roads-youtube-20261024",
+      "title": "Take Me Home, Country Roads",
+      "artist": "John Denver",
+      "order": 8,
+      "capo": 2,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 2 suggested: play G, D, Em and C shapes; they sound as A, E, F#m and D.",
+      "skill_focus": "A four-shape loop (G, D, Em, C with capo 2) played with a relaxed folk strum.",
+      "strumming": {
+        "note": "A starting rhythm exercise. The recording may use a different pattern or picking.",
+        "patterns": [
+          {
+            "id": "steady-down",
+            "name": "Start: steady downstrokes",
+            "counts": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "strokes": [
+              "D",
+              "D",
+              "D",
+              "D"
+            ],
+            "description": "Strum down on each count. Keep the motion steady and change shape when the chord cue changes."
+          },
+          {
+            "id": "folk-strum",
+            "name": "Next: folk strum (D — D U — U D U)",
+            "counts": [
+              "1",
+              "&",
+              "2",
+              "&",
+              "3",
+              "&",
+              "4",
+              "&"
+            ],
+            "strokes": [
+              "D",
+              "—",
+              "D",
+              "U",
+              "—",
+              "U",
+              "D",
+              "U"
+            ],
+            "description": "Keep your hand swinging down and up in steady eighth notes. Touch the strings on the arrows and miss them on the dashes. Start slowly, and keep moving through the chord changes."
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "Capo 2 lesson",
+          "url": "https://www.andyguitar.co.uk/lessons/john-denver-take-me-home-country-roads"
+        },
+        {
+          "title": "Published arrangement tempo marking: Take Me Home, Country Roads",
+          "url": "https://www.musicnotes.com/sheetmusic/john-denver/take-me-home-country-roads/MN0042930_U5"
+        }
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-24",
+        "note": "Chart sounding chords A/E/D/F#m (E7 colourings); capo 2 turns them into G/D/C/Em shapes (score 1.00). Pulse ~83 BPM. Automatic chart sanity check against the well-known progression and published tempo; not a musical review of timing or arrangement."
+      }
+    },
+    {
+      "recording_id": "lynyrd-skynyrd-sweet-home-alabama-youtube-20261024",
+      "title": "Sweet Home Alabama",
+      "artist": "Lynyrd Skynyrd",
+      "order": 9,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open D, C and G shapes. The famous guitar riff is not taught by the chord display or strum arrows.",
+      "skill_focus": "Three-chord changes (D, C, G) with a steady rock strum. The recording layers several guitars and a signature riff; this is the chord skeleton only.",
+      "strumming": {
+        "note": "A starting rhythm exercise. The recording may use a different pattern or picking.",
+        "patterns": [
+          {
+            "id": "steady-down",
+            "name": "Start: steady downstrokes",
+            "counts": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "strokes": [
+              "D",
+              "D",
+              "D",
+              "D"
+            ],
+            "description": "Strum down on each count. Keep the motion steady and change shape when the chord cue changes."
+          },
+          {
+            "id": "down-up",
+            "name": "Next: steady down-ups",
+            "counts": [
+              "1",
+              "&",
+              "2",
+              "&",
+              "3",
+              "&",
+              "4",
+              "&"
+            ],
+            "strokes": [
+              "D",
+              "U",
+              "D",
+              "U",
+              "D",
+              "U",
+              "D",
+              "U"
+            ],
+            "description": "Alternate down and up in steady eighth notes. Begin slowly; keep moving through chord changes."
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "Published arrangement tempo marking: Sweet Home Alabama",
+          "url": "https://www.musicnotes.com/sheetmusic/lynyrd-skynyrd/sweet-home-alabama/MN0044823"
+        }
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-24",
+        "note": "Chart chords D/C/G; capo 0 confirmed. Pulse ~99 BPM. Automatic chart sanity check against the well-known progression and published tempo; not a musical review of timing or arrangement."
+      }
+    },
+    {
+      "recording_id": "vance-joy-riptide-youtube-20261024",
+      "title": "Riptide",
+      "artist": "Vance Joy",
+      "order": 10,
+      "capo": 1,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 1 suggested: play Am, G and C shapes; they sound a semitone higher (Bbm, Ab, Db). Fmaj7 appears once near the end of the song.",
+      "skill_focus": "A three-shape loop (Am, G, C with capo 1) with an off-beat strum and quick, clean changes.",
+      "strumming": {
+        "note": "A starting rhythm exercise. The recording may use a different pattern or picking.",
+        "patterns": [
+          {
+            "id": "steady-down",
+            "name": "Start: steady downstrokes",
+            "counts": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "strokes": [
+              "D",
+              "D",
+              "D",
+              "D"
+            ],
+            "description": "Strum down on each count. Keep the motion steady and change shape when the chord cue changes."
+          },
+          {
+            "id": "folk-strum",
+            "name": "Next: folk strum (D — D U — U D U)",
+            "counts": [
+              "1",
+              "&",
+              "2",
+              "&",
+              "3",
+              "&",
+              "4",
+              "&"
+            ],
+            "strokes": [
+              "D",
+              "—",
+              "D",
+              "U",
+              "—",
+              "U",
+              "D",
+              "U"
+            ],
+            "description": "Keep your hand swinging down and up in steady eighth notes. Touch the strings on the arrows and miss them on the dashes. Start slowly, and keep moving through the chord changes."
+          }
+        ]
+      },
+      "sources": [
+        {
+          "title": "Capo 1, Am G C, Fmaj7 in the bridge",
+          "url": "https://guitargearfinder.com/?p=3209"
+        },
+        {
+          "title": "Published arrangement tempo marking: Riptide (guitar tab, quarter = 97)",
+          "url": "https://www.musicnotes.com/sheetmusic/vance-joy/riptide/MN0143768"
+        }
+      ],
+      "chart_check": {
+        "status": "chords-and-capo-plausible",
+        "checked": "2026-10-24",
+        "note": "Chart sounding chords C#/A#m/G# with some F#; capo 1 turns them into C/Am/G/F shapes (score 0.99). Pulse ~103 BPM. Automatic chart sanity check against the well-known progression and published tempo; not a musical review of timing or arrangement."
+      }
+    }
+  ]
+}

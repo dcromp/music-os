@@ -1,0 +1,318 @@
+{
+  "schema_version": "player-feedback-verification-1.0",
+  "date": "2026-10-17",
+  "issue": "https://github.com/dcromp/music-os/issues/12",
+  "semantics": "Implementation, storage and rendering verification only; no audible acceptance or accuracy measurement.",
+  "tests": {
+    "javascript": {
+      "player": 74,
+      "bench": 48,
+      "curation": 14,
+      "passed": 136
+    },
+    "python": {
+      "discovered": 440,
+      "passed": 420,
+      "optional_dependency_skips": 20
+    }
+  },
+  "workflow": {
+    "policy": "experiments/fixtures/selected-workflow-player-v2.json",
+    "frozen_files_verified": 39,
+    "successful_selected_cases": 10,
+    "unchanged_v1_pins": 37,
+    "versioned_guide_pins": [
+      "experiments/review/learning.json",
+      "experiments/review/practice.json"
+    ]
+  },
+  "unchanged_cached_files": {
+    "experiments/generated/automatic-first-ten-v1/manifest.json": "556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671",
+    "experiments/generated/automatic-first-ten-v1/cases/animals-house-rising-sun-official-20261011/evidence.json": "617433094dc7b62c9bffa4192537c63cc4a97db6816925d95b73befaa53d9a09",
+    "experiments/generated/automatic-first-ten-v1/cases/animals-house-rising-sun-official-20261011/primary.json": "71eb918cc9ef3662d5c6d75b49814f700b89a2fc15b73c1ce92d9bdb18dd6037",
+    "experiments/generated/automatic-first-ten-v1/cases/animals-house-rising-sun-official-20261011/audio.wav": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708",
+    "experiments/generated/automatic-first-ten-v1/cases/animals-house-rising-sun-official-20261011/chordino.json": "519748e12a7612c4965339f13d09e733192f2dba9e8de1209ef685a8086e1c13",
+    "experiments/generated/automatic-first-ten-v1/cases/beatles-twist-and-shout-youtube-20261011/evidence.json": "e886b06c671149bb1d1c72beea36f5f84b8aa16b62a7dd490608f889a79dd9f6",
+    "experiments/generated/automatic-first-ten-v1/cases/beatles-twist-and-shout-youtube-20261011/primary.json": "09f64db9a6563e2256c528576bd9776b13c84128ce3b982810b8dfbe6145bb59",
+    "experiments/generated/automatic-first-ten-v1/cases/beatles-twist-and-shout-youtube-20261011/audio.wav": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c",
+    "experiments/generated/automatic-first-ten-v1/cases/beatles-twist-and-shout-youtube-20261011/chordino.json": "fb968ff8ce30627a37712348de39f520f46c7395b2b7085dad0212a3e8b6e5d6",
+    "experiments/generated/automatic-first-ten-v1/cases/beatles-love-me-do-youtube-20261011/evidence.json": "5e03e3c77965e46c72a4138e0c42ec5acf5e17cdce40e65f9d7edaf1d072a4ca",
+    "experiments/generated/automatic-first-ten-v1/cases/beatles-love-me-do-youtube-20261011/primary.json": "a12394c6654f761febee240b95d60c45b7c55e33a6fb287225d181976e6531c4",
+    "experiments/generated/automatic-first-ten-v1/cases/beatles-love-me-do-youtube-20261011/audio.wav": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea",
+    "experiments/generated/automatic-first-ten-v1/cases/beatles-love-me-do-youtube-20261011/chordino.json": "a20662914898b0507ca37cc8510e73e3d41d9207077bc798ff150c49ede4af8e",
+    "experiments/generated/automatic-first-ten-v1/cases/troggs-wild-thing-youtube-20261011/evidence.json": "7eee3ae7ea7b659f175880308759ae35726529b7f7bc6b1a0fbe487248ac68dc",
+    "experiments/generated/automatic-first-ten-v1/cases/troggs-wild-thing-youtube-20261011/primary.json": "13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81",
+    "experiments/generated/automatic-first-ten-v1/cases/troggs-wild-thing-youtube-20261011/audio.wav": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf",
+    "experiments/generated/automatic-first-ten-v1/cases/troggs-wild-thing-youtube-20261011/chordino.json": "f8045c178233cfe6a02e5e5831357df0c3e18752ac79400f50518663185c9a46",
+    "experiments/generated/automatic-first-ten-v1/cases/bob-dylan-knockin-heavens-door-youtube-20261011/evidence.json": "2b54140c107aaedfa72bdede2765a27550997c951a21b13b30c1490bb4f5afc8",
+    "experiments/generated/automatic-first-ten-v1/cases/bob-dylan-knockin-heavens-door-youtube-20261011/primary.json": "022405eadb0d332a34ca66b74989e72cc5e597e57417c1a289178e0a7a084082",
+    "experiments/generated/automatic-first-ten-v1/cases/bob-dylan-knockin-heavens-door-youtube-20261011/audio.wav": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f",
+    "experiments/generated/automatic-first-ten-v1/cases/bob-dylan-knockin-heavens-door-youtube-20261011/chordino.json": "d3e838dac71c2a824814268290936ccd053a0f975f0af17ced49de882defcc2d",
+    "experiments/generated/automatic-first-ten-v1/cases/oasis-wonderwall-youtube-20261010/evidence.json": "5c167ef27d0a04f94a618147f504711eacf1aa82f802ef6db646e0c9ca07bb78",
+    "experiments/generated/automatic-first-ten-v1/cases/oasis-wonderwall-youtube-20261010/primary.json": "1d696977fe56f91126f3e838903939a6670a335d7079fc297b45e6573a3c3e83",
+    "experiments/generated/automatic-first-ten-v1/cases/oasis-wonderwall-youtube-20261010/audio.wav": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462",
+    "experiments/generated/automatic-first-ten-v1/cases/oasis-wonderwall-youtube-20261010/chordino.json": "bcaec761a32f62eae070962e47e4b7cdc33394d84d8e707eb7756be48ad7ecba",
+    "experiments/generated/automatic-first-ten-v1/cases/radiohead-creep-youtube-20261010/evidence.json": "b506b76f2d3b5ed06e00866c8b8a158d5510856d0513564ffb820ed47561bcd1",
+    "experiments/generated/automatic-first-ten-v1/cases/radiohead-creep-youtube-20261010/primary.json": "9ab5ce1f02b7ba127554937009f1747112e7fc3df583ddcd3b8abcfa9cdc191c",
+    "experiments/generated/automatic-first-ten-v1/cases/radiohead-creep-youtube-20261010/audio.wav": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10",
+    "experiments/generated/automatic-first-ten-v1/cases/radiohead-creep-youtube-20261010/chordino.json": "e2af0e0f30f235cbd0c90f4afd009678312013c4c75b365049159d39770cf474",
+    "experiments/generated/automatic-first-ten-v1/cases/white-stripes-seven-nation-army-youtube-20261011/evidence.json": "d278e9297643d484866631caee3a771ba21166a079cf87abf06318233f0d77df",
+    "experiments/generated/automatic-first-ten-v1/cases/white-stripes-seven-nation-army-youtube-20261011/primary.json": "b7deadf0f4f816c2da6c91e1f8c807ceebc543c6b106e728d1e54bbedf2f0f9b",
+    "experiments/generated/automatic-first-ten-v1/cases/white-stripes-seven-nation-army-youtube-20261011/audio.wav": "394c791d799d7ff7ece36c1b93a434c1f600afe0265f5dfe1d6ad328626a6854",
+    "experiments/generated/automatic-first-ten-v1/cases/white-stripes-seven-nation-army-youtube-20261011/chordino.json": "b5561d083c417ea4eeef425534a59f76c9e27e144afa4e5640181fee1eb9906f",
+    "experiments/generated/automatic-first-ten-v1/cases/nirvana-come-as-you-are-youtube-20261011/evidence.json": "44310bcc63ba9465677aca753de2ceb9bc647dbb4e624943da7595c0e7bf72de",
+    "experiments/generated/automatic-first-ten-v1/cases/nirvana-come-as-you-are-youtube-20261011/primary.json": "86371063c859a1b412d39a8ef4a87436863690d181838600946ce207f960bee1",
+    "experiments/generated/automatic-first-ten-v1/cases/nirvana-come-as-you-are-youtube-20261011/audio.wav": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7",
+    "experiments/generated/automatic-first-ten-v1/cases/nirvana-come-as-you-are-youtube-20261011/chordino.json": "7e775151d29d1a829d336bb701c04981205a48970974257db4d2368d86e024a1",
+    "experiments/generated/automatic-first-ten-v1/cases/van-morrison-brown-eyed-girl-youtube-20261011/evidence.json": "269568e1c5670680ffcd38908228ea976c5c42487245ef9b59f195510f64203d",
+    "experiments/generated/automatic-first-ten-v1/cases/van-morrison-brown-eyed-girl-youtube-20261011/primary.json": "1bc1f1c9467a8bea0aab8e8ae9ea4ccbd3f71ce47c52a1376f591528bcb1170d",
+    "experiments/generated/automatic-first-ten-v1/cases/van-morrison-brown-eyed-girl-youtube-20261011/audio.wav": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf",
+    "experiments/generated/automatic-first-ten-v1/cases/van-morrison-brown-eyed-girl-youtube-20261011/chordino.json": "a9b647dd9e4c5af426d4672d95210fb64ceeba636c624b9d022292860d3e8ee1"
+  },
+  "public_learner_routes": [
+    {
+      "url": "/",
+      "sha256": "bdc8825879f26b35bbee70182bb7ead9ed9634932ea82c305d19bbb07f489c34"
+    },
+    {
+      "url": "/index.html",
+      "sha256": "bdc8825879f26b35bbee70182bb7ead9ed9634932ea82c305d19bbb07f489c34"
+    },
+    {
+      "url": "/app.js",
+      "sha256": "1eb7f17d34483dda9c39c9376a06b8935f16102f7ed7182608fd7daa75c92729"
+    },
+    {
+      "url": "/style.css",
+      "sha256": "fb543c6dbe304b47a91df3151d0c22b85e032dee4c791f5f4a3f025564ccd6f7"
+    },
+    {
+      "url": "/manifest.json",
+      "sha256": "556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671"
+    },
+    {
+      "url": "/rhythm.json",
+      "sha256": "09c5c68dc1dc44f8380871744c59d00043e1c6ea42650f3911353f84a78962f7"
+    },
+    {
+      "url": "/practice.json",
+      "sha256": "18500b64d5a91570dd212ca6786793bd9a2d50444c92cced0a13629c51b16b06"
+    },
+    {
+      "url": "/learning.json",
+      "sha256": "72ab91db9a027669d660a2258165518214f61004a87a9d33919c496f75e23a87"
+    },
+    {
+      "url": "/cases/troggs-wild-thing-youtube-20261011/audio.wav",
+      "sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf"
+    },
+    {
+      "url": "/cases/troggs-wild-thing-youtube-20261011/primary.json",
+      "sha256": "13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81"
+    },
+    {
+      "url": "/cases/troggs-wild-thing-youtube-20261011/evidence.json",
+      "sha256": "7eee3ae7ea7b659f175880308759ae35726529b7f7bc6b1a0fbe487248ac68dc"
+    },
+    {
+      "url": "/cases/troggs-wild-thing-youtube-20261011/chordino.json",
+      "sha256": "f8045c178233cfe6a02e5e5831357df0c3e18752ac79400f50518663185c9a46"
+    },
+    {
+      "url": "/cases/bob-dylan-knockin-heavens-door-youtube-20261011/audio.wav",
+      "sha256": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f"
+    },
+    {
+      "url": "/cases/bob-dylan-knockin-heavens-door-youtube-20261011/primary.json",
+      "sha256": "022405eadb0d332a34ca66b74989e72cc5e597e57417c1a289178e0a7a084082"
+    },
+    {
+      "url": "/cases/bob-dylan-knockin-heavens-door-youtube-20261011/evidence.json",
+      "sha256": "2b54140c107aaedfa72bdede2765a27550997c951a21b13b30c1490bb4f5afc8"
+    },
+    {
+      "url": "/cases/bob-dylan-knockin-heavens-door-youtube-20261011/chordino.json",
+      "sha256": "d3e838dac71c2a824814268290936ccd053a0f975f0af17ced49de882defcc2d"
+    },
+    {
+      "url": "/cases/van-morrison-brown-eyed-girl-youtube-20261011/audio.wav",
+      "sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf"
+    },
+    {
+      "url": "/cases/van-morrison-brown-eyed-girl-youtube-20261011/primary.json",
+      "sha256": "1bc1f1c9467a8bea0aab8e8ae9ea4ccbd3f71ce47c52a1376f591528bcb1170d"
+    },
+    {
+      "url": "/cases/van-morrison-brown-eyed-girl-youtube-20261011/evidence.json",
+      "sha256": "269568e1c5670680ffcd38908228ea976c5c42487245ef9b59f195510f64203d"
+    },
+    {
+      "url": "/cases/van-morrison-brown-eyed-girl-youtube-20261011/chordino.json",
+      "sha256": "a9b647dd9e4c5af426d4672d95210fb64ceeba636c624b9d022292860d3e8ee1"
+    },
+    {
+      "url": "/cases/beatles-love-me-do-youtube-20261011/audio.wav",
+      "sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea"
+    },
+    {
+      "url": "/cases/beatles-love-me-do-youtube-20261011/primary.json",
+      "sha256": "a12394c6654f761febee240b95d60c45b7c55e33a6fb287225d181976e6531c4"
+    },
+    {
+      "url": "/cases/beatles-love-me-do-youtube-20261011/evidence.json",
+      "sha256": "5e03e3c77965e46c72a4138e0c42ec5acf5e17cdce40e65f9d7edaf1d072a4ca"
+    },
+    {
+      "url": "/cases/beatles-love-me-do-youtube-20261011/chordino.json",
+      "sha256": "a20662914898b0507ca37cc8510e73e3d41d9207077bc798ff150c49ede4af8e"
+    },
+    {
+      "url": "/cases/beatles-twist-and-shout-youtube-20261011/audio.wav",
+      "sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c"
+    },
+    {
+      "url": "/cases/beatles-twist-and-shout-youtube-20261011/primary.json",
+      "sha256": "09f64db9a6563e2256c528576bd9776b13c84128ce3b982810b8dfbe6145bb59"
+    },
+    {
+      "url": "/cases/beatles-twist-and-shout-youtube-20261011/evidence.json",
+      "sha256": "e886b06c671149bb1d1c72beea36f5f84b8aa16b62a7dd490608f889a79dd9f6"
+    },
+    {
+      "url": "/cases/beatles-twist-and-shout-youtube-20261011/chordino.json",
+      "sha256": "fb968ff8ce30627a37712348de39f520f46c7395b2b7085dad0212a3e8b6e5d6"
+    },
+    {
+      "url": "/cases/white-stripes-seven-nation-army-youtube-20261011/audio.wav",
+      "sha256": "394c791d799d7ff7ece36c1b93a434c1f600afe0265f5dfe1d6ad328626a6854"
+    },
+    {
+      "url": "/cases/white-stripes-seven-nation-army-youtube-20261011/primary.json",
+      "sha256": "b7deadf0f4f816c2da6c91e1f8c807ceebc543c6b106e728d1e54bbedf2f0f9b"
+    },
+    {
+      "url": "/cases/white-stripes-seven-nation-army-youtube-20261011/evidence.json",
+      "sha256": "d278e9297643d484866631caee3a771ba21166a079cf87abf06318233f0d77df"
+    },
+    {
+      "url": "/cases/white-stripes-seven-nation-army-youtube-20261011/chordino.json",
+      "sha256": "b5561d083c417ea4eeef425534a59f76c9e27e144afa4e5640181fee1eb9906f"
+    },
+    {
+      "url": "/cases/nirvana-come-as-you-are-youtube-20261011/audio.wav",
+      "sha256": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7"
+    },
+    {
+      "url": "/cases/nirvana-come-as-you-are-youtube-20261011/primary.json",
+      "sha256": "86371063c859a1b412d39a8ef4a87436863690d181838600946ce207f960bee1"
+    },
+    {
+      "url": "/cases/nirvana-come-as-you-are-youtube-20261011/evidence.json",
+      "sha256": "44310bcc63ba9465677aca753de2ceb9bc647dbb4e624943da7595c0e7bf72de"
+    },
+    {
+      "url": "/cases/nirvana-come-as-you-are-youtube-20261011/chordino.json",
+      "sha256": "7e775151d29d1a829d336bb701c04981205a48970974257db4d2368d86e024a1"
+    },
+    {
+      "url": "/cases/radiohead-creep-youtube-20261010/audio.wav",
+      "sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10"
+    },
+    {
+      "url": "/cases/radiohead-creep-youtube-20261010/primary.json",
+      "sha256": "9ab5ce1f02b7ba127554937009f1747112e7fc3df583ddcd3b8abcfa9cdc191c"
+    },
+    {
+      "url": "/cases/radiohead-creep-youtube-20261010/evidence.json",
+      "sha256": "b506b76f2d3b5ed06e00866c8b8a158d5510856d0513564ffb820ed47561bcd1"
+    },
+    {
+      "url": "/cases/radiohead-creep-youtube-20261010/chordino.json",
+      "sha256": "e2af0e0f30f235cbd0c90f4afd009678312013c4c75b365049159d39770cf474"
+    },
+    {
+      "url": "/cases/animals-house-rising-sun-official-20261011/audio.wav",
+      "sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708"
+    },
+    {
+      "url": "/cases/animals-house-rising-sun-official-20261011/primary.json",
+      "sha256": "71eb918cc9ef3662d5c6d75b49814f700b89a2fc15b73c1ce92d9bdb18dd6037"
+    },
+    {
+      "url": "/cases/animals-house-rising-sun-official-20261011/evidence.json",
+      "sha256": "617433094dc7b62c9bffa4192537c63cc4a97db6816925d95b73befaa53d9a09"
+    },
+    {
+      "url": "/cases/animals-house-rising-sun-official-20261011/chordino.json",
+      "sha256": "519748e12a7612c4965339f13d09e733192f2dba9e8de1209ef685a8086e1c13"
+    },
+    {
+      "url": "/cases/oasis-wonderwall-youtube-20261010/audio.wav",
+      "sha256": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462"
+    },
+    {
+      "url": "/cases/oasis-wonderwall-youtube-20261010/primary.json",
+      "sha256": "1d696977fe56f91126f3e838903939a6670a335d7079fc297b45e6573a3c3e83"
+    },
+    {
+      "url": "/cases/oasis-wonderwall-youtube-20261010/evidence.json",
+      "sha256": "5c167ef27d0a04f94a618147f504711eacf1aa82f802ef6db646e0c9ca07bb78"
+    },
+    {
+      "url": "/cases/oasis-wonderwall-youtube-20261010/chordino.json",
+      "sha256": "bcaec761a32f62eae070962e47e4b7cdc33394d84d8e707eb7756be48ad7ecba"
+    }
+  ],
+  "private_samples_404": [
+    "/README.md",
+    "/build-spec.json",
+    "/private-drafts/session.json",
+    "/cases/troggs-wild-thing-youtube-20261011/../origin.json"
+  ],
+  "browser_qa": {
+    "origin": "http://127.0.0.1:8071/",
+    "pack_id": "automatic-first-ten-v1",
+    "default_viewport_width_css_px": 737,
+    "narrow_override": {
+      "width": 390,
+      "height": 844
+    },
+    "narrow_document_client_and_scroll_width_css_px": 375,
+    "track_width_css_px": 960,
+    "observations": [
+      "Wild Thing at25s: displayed A and provisional report note; native E span unchanged.",
+      "Default/narrow: blocks share vertical position, later onsets lie farther right; ordinary short numeric duration labels fit. Clipped leftmost fragment retains full title/ARIA.",
+      "Horizontal strip keyboard scrolling changes scrollLeft; document has no horizontal overflow.",
+      "Seconds mode displays2.3s for the corrected native cue.",
+      "Dylan at47s: Core Am with full Am7 hint; no correction overlay.",
+      "Ten song options; Love Me Do playable with learning card hidden.",
+      "QA-only issue at25s survives reload; only that newly created issue then removed. Normal8070 feedback/progress untouched.",
+      "Existing cached QA manifest with different pack_id rejected correction; fresh no-store requests restore exact paired pack. Missing WebCrypto uses exact-response server digest."
+    ],
+    "auditory_review": false,
+    "temporary_qa_service_stopped_on_completion": true
+  },
+  "proofs": [
+    {
+      "path": "experiments/generated/player-proof-20261017/wild-thing-bars-desktop.jpg",
+      "sha256": "14e5ab13cd8429762fd7a5ec5400cc14f0fa619c3524569f3dc0218a0ace6dd0",
+      "git_ignored": true
+    },
+    {
+      "path": "experiments/generated/player-proof-20261017/wild-thing-bars-narrow.jpg",
+      "sha256": "5465bc0dcdd59e813eaa5388c49739fbc4eb17b32ef257a67ba25e76f07c171a",
+      "git_ignored": true
+    }
+  ],
+  "deployment": {
+    "learner": "http://127.0.0.1:8070/",
+    "pack_id": "automatic-first-ten-v1",
+    "public_service": false
+  },
+  "limitations": [
+    "Reported A does not establish the full physical extent of its native23.777\u201326.099s interval.",
+    "Bar lengths/divisions remain estimated and hold-relative; no verified downbeats.",
+    "Seven E-standard teaching setups do not independently prove exact recording tuning.",
+    "Ticket3 musical acceptance remains open and ticket7 remains blocked."
+  ]
+}

@@ -1,0 +1,1004 @@
+{
+  "schema": "strumalong-additions-1",
+  "note": "Strummed rock and pop additions towards ~100 songs (28 Oct 2026), from docs/STRUMALONG_SONG_RESEARCH.md (v4 batch). Each entry carries genre (rock or pop). Capo, setup and skill notes are authored suggestions from chord sheets; practice patterns come from the level defaults. Not checked against the recordings beyond the automatic chart sanity check.",
+  "songs": [
+    {
+      "recording_id": "hootie-and-the-blowfish-hold-my-hand-youtube-20261028",
+      "title": "Hold My Hand",
+      "artist": "Hootie & the Blowfish",
+      "genre": "pop",
+      "order": 1,
+      "expected_level": 1,
+      "capo": 2,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 2 suggested: play A, D and E shapes; they sound as B, E and F#.",
+      "skill_focus": "Mostly A to D with E in the chorus, on a steady band strum. Keep the strum loose and change on the bar.",
+      "sources": [
+        {
+          "title": "Hold My Hand chords (zachmanson mirror of Ultimate Guitar)",
+          "url": "https://pg.zachmanson.com/tab/hootie-the-blowfish/hold-my-hand-chords-1752544"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "ccr-lookin-out-my-back-door-youtube-20261028",
+      "title": "Lookin' Out My Back Door",
+      "artist": "Creedence Clearwater Revival",
+      "genre": "rock",
+      "order": 2,
+      "expected_level": 2,
+      "capo": 4,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 4 suggested: play G, Em, C and D shapes; they sound as B, G#m, E and F#.",
+      "skill_focus": "A bouncy country-rock strum on four open shapes. Keep the eighths steady and land the changes on the beat.",
+      "sources": [
+        {
+          "title": "Hooktheory TheoryTab: Lookin' Out My Back Door",
+          "url": "https://hooktheory.com/theorytab/view/creedence-clearwater-revival/lookin-out-my-back-door"
+        },
+        {
+          "title": "guitartabs.cc chords",
+          "url": "https://www.guitartabs.cc/tabs/c/creedence_clearwater_revival/lookin_out_my_back_door_crd.html"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "Em",
+        "C",
+        "D"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "traveling-wilburys-end-of-the-line-youtube-20261028",
+      "title": "End of the Line",
+      "artist": "Traveling Wilburys",
+      "genre": "rock",
+      "order": 3,
+      "expected_level": 2,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open D, A and G shapes.",
+      "skill_focus": "A train-beat acoustic strum on D, A and G. Fast, so start slow and keep the right hand moving.",
+      "sources": [
+        {
+          "title": "Lauren Bateman: End of the Line chords",
+          "url": "https://www.laurenbateman.com/?p=5786"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "A",
+        "G"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "neil-young-rockin-in-the-free-world-youtube-20261028",
+      "title": "Rockin' in the Free World",
+      "artist": "Neil Young",
+      "genre": "rock",
+      "order": 4,
+      "expected_level": 2,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open Em, D, C and G shapes.",
+      "skill_focus": "A loud electric strum on Em, D and C. Keep the eighths driving and hit the changes together with the drums.",
+      "sources": [
+        {
+          "title": "SongBPM: Rockin' in the Free World",
+          "url": "https://songbpm.com/@neil-young/rockin-in-the-free-world"
+        }
+      ],
+      "expected_shapes": [
+        "Em",
+        "D",
+        "C",
+        "G"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "matchbox-twenty-3am-youtube-20261028",
+      "title": "3AM",
+      "artist": "Matchbox Twenty",
+      "genre": "rock",
+      "order": 5,
+      "expected_level": 2,
+      "capo": 1,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 1 suggested: play G, Cadd9, D and Em shapes; they sound as Ab, Dbadd9, Eb and Fm.",
+      "skill_focus": "Four open shapes on a steady acoustic strum. Cadd9 and G share fingers, so keep the third and fourth fingers anchored.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar 3AM chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/matchbox-twenty/3am-chords-1063467"
+        },
+        {
+          "title": "guitartabs.cc 3AM chords",
+          "url": "https://www.guitartabs.cc/tabs/m/matchbox_twenty/3_am_crd.html"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "Cadd9",
+        "D",
+        "Em"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "hootie-and-the-blowfish-only-wanna-be-with-you-youtube-20261028",
+      "title": "Only Wanna Be with You",
+      "artist": "Hootie & the Blowfish",
+      "genre": "pop",
+      "order": 6,
+      "expected_level": 2,
+      "capo": 4,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 4 suggested: play D, G, A and Em shapes; they sound as F#, B, C# and G#m.",
+      "skill_focus": "A jangly capo strum on D, G, A and Em. Some changes come mid-bar, so count the half-bar moves.",
+      "sources": [
+        {
+          "title": "Only Wanna Be with You chords (zachmanson mirror)",
+          "url": "https://pg.zachmanson.com/tab/hootie-the-blowfish/only-wanna-be-with-you-chords-1782418"
+        },
+        {
+          "title": "Guitar Player: the capo story behind the song",
+          "url": "https://guitarplayer.com/music/one-of-the-first-things-i-did-was-throw-a-capo-on-the-2nd-fret-and-come-up-with-different-chord-patterns-and-that-turned-into-a-hit-how-a-guitar-accessory-and-a-rejection-of-grunge-created-one-of-the-1990s-defining-songs"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "G",
+        "A",
+        "Em"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "pearl-jam-last-kiss-youtube-20261028",
+      "title": "Last Kiss",
+      "artist": "Pearl Jam",
+      "genre": "rock",
+      "order": 7,
+      "expected_level": 2,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open G, Em, C and D shapes.",
+      "skill_focus": "The doo-wop G-Em-C-D loop with a shuffle feel. Swing the eighths and keep each chord for a bar.",
+      "sources": [
+        {
+          "title": "guitartabs.cc Last Kiss chords",
+          "url": "https://guitartabs.cc/tabs/p/pearl_jam/last_kiss_crd.html"
+        },
+        {
+          "title": "SongBPM: Last Kiss",
+          "url": "https://songbpm.com/@pearl-jam/last-kiss"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "Em",
+        "C",
+        "D"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "john-mellencamp-small-town-youtube-20261028",
+      "title": "Small Town",
+      "artist": "John Mellencamp",
+      "genre": "rock",
+      "order": 8,
+      "expected_level": 2,
+      "capo": 4,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 4 suggested: play G, Dsus2, Cadd9 and Am shapes; they sound as B, F#sus2, Eadd9 and C#m.",
+      "skill_focus": "A driving heartland strum on capo-4 open shapes. Keep the eighths even and ring out the sus chords.",
+      "sources": [
+        {
+          "title": "guitartabs.cc Small Town chords",
+          "url": "https://www.guitartabs.cc/tabs/j/john_cougar_mellencamp/small_town_crd.html"
+        },
+        {
+          "title": "SongBPM: Small Town",
+          "url": "https://songbpm.com/@john-mellencamp/small-town"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "Dsus2",
+        "Cadd9",
+        "Am"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "sublime-what-i-got-youtube-20261028",
+      "title": "What I Got",
+      "artist": "Sublime",
+      "genre": "rock",
+      "order": 9,
+      "expected_level": 2,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open D and G shapes.",
+      "skill_focus": "Two chords, D and G, on a relaxed acoustic strum over a hip-hop beat. A good first two-chord groove.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar What I Got chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/sublime/what-i-got-chords-2553"
+        },
+        {
+          "title": "Musicnotes: What I Got",
+          "url": "https://www.musicnotes.com/sheetmusic/sublime/what-i-got/MN0087215_D2"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "G"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "james-laid-youtube-20261028",
+      "title": "Laid",
+      "artist": "James",
+      "genre": "rock",
+      "order": 10,
+      "expected_level": 2,
+      "capo": 5,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 5 suggested: play G, C and D shapes; they sound as C, F and G.",
+      "skill_focus": "A frantic acoustic strum on G, C and D shapes. Fast and short: build speed in stages.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar Laid chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/james/laid-chords-34947"
+        },
+        {
+          "title": "SongBPM: Laid",
+          "url": "https://songbpm.com/@james/laid"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "C",
+        "D"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "jake-bugg-lightning-bolt-youtube-20261028",
+      "title": "Lightning Bolt",
+      "artist": "Jake Bugg",
+      "genre": "rock",
+      "order": 11,
+      "expected_level": 2,
+      "capo": 2,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 2 suggested: play D, A and G shapes; they sound as E, B and A.",
+      "skill_focus": "A fast train-beat acoustic strum on D, A and G. Keep the right hand moving and change without stopping.",
+      "sources": [
+        {
+          "title": "Musicnotes: Lightning Bolt",
+          "url": "https://origin03-www.musicnotes.com/sheetmusic/jake-bugg/lightning-bolt/MN0119148"
+        },
+        {
+          "title": "Ultimate Guitar Lightning Bolt chords",
+          "url": "https://pt.ultimate-guitar.com/tab/jake-bugg/lightning-bolt-chords-1208295"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "A",
+        "G"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "rolling-stones-dead-flowers-youtube-20261028",
+      "title": "Dead Flowers",
+      "artist": "The Rolling Stones",
+      "genre": "rock",
+      "order": 12,
+      "expected_level": 2,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open D, G and A shapes.",
+      "skill_focus": "A country acoustic strum on D, G and A. Watch the phrase that runs into the chorus.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar Dead Flowers chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/the-rolling-stones/dead-flowers-chords-29889"
+        },
+        {
+          "title": "School of Feedback: Dead Flowers lesson",
+          "url": "https://schooloffeedbackguitar.squarespace.com/blog/song-lessons/learn-dead-flowers-by-the-rolling-stones-on-guitar"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "G",
+        "A"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "status-quo-rockin-all-over-the-world-youtube-20261028",
+      "title": "Rockin' All Over the World",
+      "artist": "Status Quo",
+      "genre": "rock",
+      "order": 13,
+      "expected_level": 2,
+      "capo": 5,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 5 suggested: play G, C and D shapes; they sound as C, F and G.",
+      "skill_focus": "A rock strum on G, C and D shapes with a boogie push. Keep the eighths tight with the drums.",
+      "sources": [
+        {
+          "title": "guitartabs.cc Rockin' All Over the World chords",
+          "url": "https://guitartabs.cc/tabs/s/status_quo/rockin_all_over_the_world_crd.html"
+        },
+        {
+          "title": "SongBPM: Rockin' All Over the World",
+          "url": "https://songbpm.com/@status-quo/rockin-all-over-the-world"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "C",
+        "D"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "taylor-swift-you-belong-with-me-youtube-20261028",
+      "title": "You Belong with Me",
+      "artist": "Taylor Swift",
+      "genre": "pop",
+      "order": 14,
+      "expected_level": 2,
+      "capo": 4,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 4 suggested: play D, A, G and Em shapes; they sound as F#, C#, B and G#m.",
+      "skill_focus": "Steady down-up eighths on four capo shapes; banjo colours the record, but the acoustic strum drives it.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar You Belong with Me chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/taylor-swift/you-belong-with-me-chords-752550"
+        },
+        {
+          "title": "SongBPM: You Belong with Me",
+          "url": "https://songbpm.com/@taylor-swift/you-belong-with-me"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "A",
+        "G",
+        "Em"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "taylor-swift-we-are-never-getting-back-youtube-20261028",
+      "title": "We Are Never Ever Getting Back Together",
+      "artist": "Taylor Swift",
+      "genre": "pop",
+      "order": 15,
+      "expected_level": 2,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open Cadd9, G, D and Em shapes.",
+      "skill_focus": "A four-chord loop with muted chops on the backbeat. Start with plain eighths, then add the chop.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar We Are Never Ever chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/taylor-swift/we-are-never-ever-getting-back-together-chords-1175300"
+        },
+        {
+          "title": "SongBPM: We Are Never Ever Getting Back Together",
+          "url": "https://songbpm.com/@taylor-swift/we-are-never-ever-getting-back-together"
+        }
+      ],
+      "expected_shapes": [
+        "Cadd9",
+        "G",
+        "D",
+        "Em"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "jimmy-buffett-margaritaville-youtube-20261028",
+      "title": "Margaritaville",
+      "artist": "Jimmy Buffett",
+      "genre": "pop",
+      "order": 16,
+      "expected_level": 2,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open D, A and G shapes.",
+      "skill_focus": "A relaxed acoustic strum on D, A and G. Long holds: keep the strum easy and even.",
+      "sources": [
+        {
+          "title": "Hooktheory TheoryTab: Margaritaville",
+          "url": "https://www.hooktheory.com/theorytab/view/jimmy-buffett/margaritaville"
+        },
+        {
+          "title": "Ultimate Guitar Margaritaville chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/jimmy-buffett/margaritaville-chords-344491"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "A",
+        "G"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "sugar-ray-every-morning-youtube-20261028",
+      "title": "Every Morning",
+      "artist": "Sugar Ray",
+      "genre": "pop",
+      "order": 17,
+      "expected_level": 2,
+      "capo": 1,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 1 suggested: play G, D and C shapes; they sound as Ab, Eb and Db.",
+      "skill_focus": "A three-chord acoustic loop with a light Latin bounce. Keep the strum relaxed and steady.",
+      "sources": [
+        {
+          "title": "Hooktheory TheoryTab: Every Morning",
+          "url": "https://hooktheory.com/theorytab/view/sugar-ray/every-morning"
+        },
+        {
+          "title": "SongBPM: Every Morning",
+          "url": "https://songbpm.com/@sugar-ray/every-morning"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "D",
+        "C"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "lumineers-stubborn-love-youtube-20261028",
+      "title": "Stubborn Love",
+      "artist": "The Lumineers",
+      "genre": "pop",
+      "order": 18,
+      "expected_level": 2,
+      "capo": 5,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 5 suggested: play C, Em, G and D shapes; they sound as F, Am, C and G.",
+      "skill_focus": "An acoustic strum that builds with the band and cello. Hold the tempo when it gets louder.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar Stubborn Love chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/the-lumineers/stubborn-love-chords-1144923"
+        },
+        {
+          "title": "SongBPM: Stubborn Love",
+          "url": "https://songbpm.com/@the-lumineers/stubborn-love"
+        }
+      ],
+      "expected_shapes": [
+        "C",
+        "Em",
+        "G",
+        "D"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "shania-twain-youre-still-the-one-youtube-20261028",
+      "title": "You're Still the One",
+      "artist": "Shania Twain",
+      "genre": "pop",
+      "order": 19,
+      "expected_level": 2,
+      "capo": 1,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 1 suggested: play D, G, A and Em shapes; they sound as Eb, Ab, Bb and Fm.",
+      "skill_focus": "A slow acoustic strum on four open shapes. Let the chords ring and keep the slow pulse steady.",
+      "sources": [
+        {
+          "title": "Totally Guitars: You're Still the One lesson",
+          "url": "https://totallyguitars.com/lessons/1765-youre-still-the-one-shania-twain-guitar-lesson"
+        },
+        {
+          "title": "guitartabs.cc You're Still the One chords",
+          "url": "https://guitartabs.cc/tabs/t/twain_shania/youre_still_the_one_crd.html"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "G",
+        "A",
+        "Em"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "noah-kahan-stick-season-youtube-20261028",
+      "title": "Stick Season",
+      "artist": "Noah Kahan",
+      "genre": "pop",
+      "order": 20,
+      "expected_level": 2,
+      "capo": 2,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 2 suggested: play G, D, Em and C shapes; they sound as A, E, F#m and D.",
+      "skill_focus": "Four open shapes on a fast, driving strum. The first verse is picked on the record; strum along from the first chorus.",
+      "sources": [
+        {
+          "title": "Lauren Bateman: Stick Season chords",
+          "url": "https://www.laurenbateman.com/?p=5680"
+        },
+        {
+          "title": "Ultimate Guitar Stick Season chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/noah-kahan/stick-season-chords-4271572"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "D",
+        "Em",
+        "C"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "harry-chapin-cats-in-the-cradle-youtube-20261028",
+      "title": "Cat's in the Cradle",
+      "artist": "Harry Chapin",
+      "genre": "pop",
+      "order": 21,
+      "expected_level": 2,
+      "capo": 1,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 1 suggested: play E, D, G and A shapes; they sound as F, Eb, Ab and Bb.",
+      "skill_focus": "A strummed 12-string verse and chorus after a picked intro.",
+      "sources": [
+        {
+          "title": "Songnotes: Cat's in the Cradle",
+          "url": "https://songnotes.net/lessons/341"
+        }
+      ],
+      "expected_shapes": [
+        "E",
+        "D",
+        "G",
+        "A"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "barenaked-ladies-if-i-had-1000000-youtube-20261028",
+      "title": "If I Had $1000000",
+      "artist": "Barenaked Ladies",
+      "genre": "pop",
+      "order": 22,
+      "expected_level": 2,
+      "capo": 2,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 2 suggested: play G, D, C and Em shapes; they sound as A, E, D and F#m.",
+      "skill_focus": "A bright acoustic strum on four open shapes.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar If I Had $1000000 chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/barenaked-ladies/if-i-had-a-million-dollars-chords-60571"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "D",
+        "C",
+        "Em"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "uncle-kracker-follow-me-youtube-20261028",
+      "title": "Follow Me",
+      "artist": "Uncle Kracker",
+      "genre": "pop",
+      "order": 23,
+      "expected_level": 2,
+      "capo": 3,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 3 suggested: play D, G, A and Em shapes; they sound as F, Bb, C and Gm.",
+      "skill_focus": "A relaxed acoustic strum on D, G and A, with Em in the bridge. Keep the strum light and even.",
+      "sources": [
+        {
+          "title": "Hooktheory TheoryTab: Follow Me",
+          "url": "https://www.hooktheory.com/theorytab/view/uncle-kracker/follow-me"
+        },
+        {
+          "title": "SongBPM: Follow Me",
+          "url": "https://songbpm.com/@uncle-kracker/follow-me"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "G",
+        "A",
+        "Em"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "taylor-swift-mine-youtube-20261028",
+      "title": "Mine",
+      "artist": "Taylor Swift",
+      "genre": "pop",
+      "order": 24,
+      "expected_level": 2,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open C, G, D and Em shapes.",
+      "skill_focus": "Four open shapes on a bright acoustic strum, with banjo on top. Keep the eighths steady through the build.",
+      "sources": [
+        {
+          "title": "SongBPM: Mine",
+          "url": "https://songbpm.com/@taylor-swift/mine"
+        },
+        {
+          "title": "Ultimate Guitar Mine chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/taylor-swift/mine-chords-975214"
+        }
+      ],
+      "expected_shapes": [
+        "C",
+        "G",
+        "D",
+        "Em"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "oasis-songbird-youtube-20261028",
+      "title": "Songbird",
+      "artist": "Oasis",
+      "genre": "rock",
+      "order": 25,
+      "expected_level": 2,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open G and Em7 shapes.",
+      "skill_focus": "A short acoustic strum on G and Em7 with an F# bass passing note. Check the instrumental bar counts.",
+      "sources": [
+        {
+          "title": "guitartabs.cc Songbird chords",
+          "url": "https://www.guitartabs.cc/tabs/o/oasis/songbird_crd_ver_6.html"
+        },
+        {
+          "title": "SongBPM: Songbird",
+          "url": "https://songbpm.com/@oasis/songbird"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "Em7"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "lifehouse-hanging-by-a-moment-youtube-20261028",
+      "title": "Hanging by a Moment",
+      "artist": "Lifehouse",
+      "genre": "rock",
+      "order": 26,
+      "expected_level": 2,
+      "capo": 6,
+      "capo_source": "suggested",
+      "setup_note": "Capo 6 suggested in standard tuning (EADGBE): play G, D, Em and C shapes; they sound as Db, Ab, Bbm and Gb. The record is tuned down (drop D a half step lower), so capo 6 matches its pitch without retuning.",
+      "skill_focus": "Driving eighth-note strumming on G, D, Em and C shapes. Keep the right hand constant through the chorus.",
+      "sources": [
+        {
+          "title": "Hooktheory TheoryTab: Hanging by a Moment",
+          "url": "https://www.hooktheory.com/theorytab/view/lifehouse/hanging-by-a-moment"
+        },
+        {
+          "title": "guitartabs.cc Hanging by a Moment chords",
+          "url": "https://www.guitartabs.cc/tabs/l/lifehouse/hanging_by_a_moment_crd_ver_7.html"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "D",
+        "Em",
+        "C"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "ccr-wholl-stop-the-rain-youtube-20261028",
+      "title": "Who'll Stop the Rain",
+      "artist": "Creedence Clearwater Revival",
+      "genre": "rock",
+      "order": 27,
+      "expected_level": 3,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open G, C, D, Em and Am shapes.",
+      "skill_focus": "Five open shapes on a steady acoustic strum. Some charts add Bm; play D in its place if it is too quick.",
+      "sources": [
+        {
+          "title": "Lauren Bateman: Who'll Stop the Rain chords",
+          "url": "https://laurenbateman.com/?p=3997"
+        },
+        {
+          "title": "Classic Song of the Day: Who'll Stop the Rain",
+          "url": "https://classicsongoftheday.com/wholl-stop-the-rain-creedence-clearwater-revival/"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "C",
+        "D",
+        "Em",
+        "Am"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "stereophonics-have-a-nice-day-youtube-20261028",
+      "title": "Have a Nice Day",
+      "artist": "Stereophonics",
+      "genre": "rock",
+      "order": 28,
+      "expected_level": 3,
+      "capo": 2,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 2 suggested: play A, G, D, E and D/F# shapes; they sound as B, A, E, F# and E/G#.",
+      "skill_focus": "A bright acoustic strum through several open shapes with sus colours. Practise the A to G to D moves.",
+      "sources": [
+        {
+          "title": "Andy Guitar: Have a Nice Day lesson",
+          "url": "https://andyguitar.co.uk/songs/song-11-have-a-nice-day-by-stereophonics"
+        },
+        {
+          "title": "guitartabs.cc Have a Nice Day chords",
+          "url": "https://guitartabs.cc/tabs/s/stereophonics/have_a_nice_day_crd_ver_2.html"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "G",
+        "D",
+        "E",
+        "D/F#"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "counting-crows-accidentally-in-love-youtube-20261028",
+      "title": "Accidentally in Love",
+      "artist": "Counting Crows",
+      "genre": "pop",
+      "order": 29,
+      "expected_level": 3,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open G, Em, C, D, A and Am shapes.",
+      "skill_focus": "A bright, quick strum through six open shapes. Keep the eighths light and pre-plan the A and Am changes.",
+      "sources": [
+        {
+          "title": "Hooktheory TheoryTab: Accidentally in Love",
+          "url": "https://www.hooktheory.com/theorytab/view/counting-crows/accidentally-in-love"
+        },
+        {
+          "title": "gitaartabs: Accidentally in Love",
+          "url": "https://www.gitaartabs.nl/song/chords/counting-crows/accidentally-in-love"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "Em",
+        "C",
+        "D",
+        "A",
+        "Am"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "phillip-phillips-home-youtube-20261028",
+      "title": "Home",
+      "artist": "Phillip Phillips",
+      "genre": "pop",
+      "order": 30,
+      "expected_level": 3,
+      "capo": 5,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 5 suggested: play G, C, Em, D and D/F# shapes; they sound as C, F, Am, G and G/B.",
+      "skill_focus": "An acoustic strum with a D/F# walk-down into Em. Practise the walk-down slowly first.",
+      "sources": [
+        {
+          "title": "guitartabs.cc Home chords",
+          "url": "https://guitartabs.cc/tabs/p/phillip_phillips/home_crd.html"
+        },
+        {
+          "title": "Hooktheory TheoryTab: Home",
+          "url": "https://hooktheory.com/theorytab/view/phillip-phillips/home"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "C",
+        "Em",
+        "D",
+        "D/F#"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "paul-simon-me-and-julio-down-by-the-schoolyard-youtube-20261028",
+      "title": "Me and Julio Down by the Schoolyard",
+      "artist": "Paul Simon",
+      "genre": "pop",
+      "order": 31,
+      "expected_level": 3,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open A, D, E, B7 and G shapes.",
+      "skill_focus": "A percussive, syncopated acoustic strum with cut-off accents. Learn the chords on plain eighths, then add the accents.",
+      "sources": [
+        {
+          "title": "Lauren Bateman: Me and Julio chords",
+          "url": "https://www.laurenbateman.com/me-and-julio-down-by-the-schoolyard-chords/"
+        },
+        {
+          "title": "GetSongBPM: Me and Julio",
+          "url": "https://getsongbpm.com/song/me-and-julio-down-by-the-schoolyard/wVPl8"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "D",
+        "E",
+        "B7",
+        "G"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "magic-rude-youtube-20261028",
+      "title": "Rude",
+      "artist": "MAGIC!",
+      "genre": "pop",
+      "order": 32,
+      "expected_level": 3,
+      "capo": 6,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 6 suggested: play G, C, D and Em shapes; they sound as Db, Gb, Ab and Bbm.",
+      "skill_focus": "Reggae off-beat chops on four open shapes. Mute between the chops and keep the beat in your foot.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar Rude chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/magic/rude-chords-1493018"
+        },
+        {
+          "title": "SongBPM: Rude",
+          "url": "https://songbpm.com/@magic/rude"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "C",
+        "D",
+        "Em"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "wallflowers-one-headlight-youtube-20261028",
+      "title": "One Headlight",
+      "artist": "The Wallflowers",
+      "genre": "rock",
+      "order": 33,
+      "expected_level": 3,
+      "capo": 7,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 7 suggested: play G, C, B7, Em and D shapes; they sound as D, G, F#7, Bm and A.",
+      "skill_focus": "An acoustic strum under organ and slide. Five shapes including B7; practise the Em to B7 move.",
+      "sources": [
+        {
+          "title": "guitartabs.cc One Headlight chords",
+          "url": "https://www.guitartabs.cc/tabs/w/wallflowers/one_headlight_crd_ver_4.html"
+        },
+        {
+          "title": "Musicnotes: One Headlight",
+          "url": "https://www.musicnotes.com/sheetmusic/the-wallflowers/one-headlight/MN0150712"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "C",
+        "B7",
+        "Em",
+        "D"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    }
+  ]
+}

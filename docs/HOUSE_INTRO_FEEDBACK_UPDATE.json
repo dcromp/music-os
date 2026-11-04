@@ -1,0 +1,135 @@
+{
+  "schema_version": "house-intro-update-verification-1.0",
+  "date": "2026-10-17",
+  "issue": "https://github.com/dcromp/music-os/issues/14",
+  "source_record": "catalogue/house-intro-feedback-20261017.json",
+  "semantics": "Founder-confirmed and teacher-supported chord order with provisional detector-derived timing; not independent auditory acceptance.",
+  "actual_chart_checks": [
+    {
+      "recording_id": "animals-house-rising-sun-official-20261011",
+      "primary_sha256": "71eb918cc9ef3662d5c6d75b49814f700b89a2fc15b73c1ce92d9bdb18dd6037",
+      "points": [
+        {
+          "seconds": 7,
+          "raw": "Am",
+          "displayed": "Am"
+        },
+        {
+          "seconds": 8,
+          "raw": "Am",
+          "displayed": "E"
+        },
+        {
+          "seconds": 10,
+          "raw": "Am",
+          "displayed": "Am"
+        },
+        {
+          "seconds": 12,
+          "raw": "Em",
+          "displayed": "E"
+        }
+      ],
+      "intro_display": [
+        {
+          "start_seconds": 5.015510204081632,
+          "end_seconds": 6.408707482993197,
+          "label": "F"
+        },
+        {
+          "start_seconds": 6.408707482993197,
+          "end_seconds": 7.987664399,
+          "label": "Am"
+        },
+        {
+          "start_seconds": 7.987664399,
+          "end_seconds": 9.473741497,
+          "label": "E"
+        },
+        {
+          "start_seconds": 9.473741497,
+          "end_seconds": 11.145578231292516,
+          "label": "Am"
+        },
+        {
+          "start_seconds": 11.145578231292516,
+          "end_seconds": 12.538775510204081,
+          "label": "E"
+        },
+        {
+          "start_seconds": 12.538775510204081,
+          "end_seconds": 14.210612244897959,
+          "label": "Am"
+        }
+      ]
+    },
+    {
+      "recording_id": "troggs-wild-thing-youtube-20261011",
+      "primary_sha256": "13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81",
+      "points": [
+        {
+          "seconds": 25,
+          "raw": "E",
+          "displayed": "A"
+        }
+      ]
+    }
+  ],
+  "tests": {
+    "javascript": {
+      "player": 79,
+      "bench": 48,
+      "curation": 14,
+      "passed": 141
+    },
+    "python": {
+      "discovered": 441,
+      "passed": 421,
+      "optional_skips": 20
+    }
+  },
+  "workflow": {
+    "policy": "experiments/fixtures/selected-workflow-player-v3.json",
+    "verified_pins": 39,
+    "selected_cases": 10,
+    "unchanged_from_v2": 37,
+    "versioned_guides": [
+      "experiments/review/learning.json",
+      "experiments/review/practice.json"
+    ],
+    "historical_v1_and_v2_preserved": true
+  },
+  "integrity": {
+    "cached_artifacts_unchanged": 41,
+    "public_learner_routes_match_disk": 48,
+    "path_revision_and_step_ids_unchanged": true,
+    "feedback_and_progress_key_changes": false
+  },
+  "browser": {
+    "url": "http://127.0.0.1:8070/",
+    "house_full_checks": {
+      "7": "Am",
+      "8": "E",
+      "10": "Am",
+      "12": "E"
+    },
+    "house_core_at8": "E",
+    "wild_at25": "A",
+    "later_intro_note": "Reported intro correction: E. Cue timing is still estimated.",
+    "fresh_tab_left_at_song": "House of the Rising Sun",
+    "fresh_tab_left_at_seconds": 8,
+    "learner_feedback_or_progress_edited": false
+  },
+  "proof": {
+    "path": "experiments/generated/player-proof-20261017/house-intro-e.jpg",
+    "sha256": "b4fae901e723e6b922d86396c799c66cbc57b0dae790433bb9c3d566a2ca5a1e",
+    "git_ignored": true
+  },
+  "online_lookup_status": "Two primary teaching pages were checked by the agent. Automated search/discovery/consensus is not integrated into app or preparation code.",
+  "limitations": [
+    "No whole-song chart rewrite or fresh inference.",
+    "Secondary E interval7.988\u20139.474s is a provisional split inside nativeAm6.409\u201311.146s.",
+    "LaterEm\u2192E uses native11.146\u201312.539s;12s metadataanchor is explicitly representative, not supplied by founder.",
+    "Source chord order does not verify exact master, capo setup or physical boundaries."
+  ]
+}

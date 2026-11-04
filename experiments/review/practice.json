@@ -1,0 +1,665 @@
+{
+  "schema_version": "playalong-practice-1.0",
+  "status": "Original project practice suggestions; not transcriptions of recorded strumming",
+  "cases": [
+    {
+      "recording": {
+        "id": "troggs-wild-thing-youtube-20261011",
+        "title": "The Troggs - Wild Thing",
+        "duration_seconds": 155.3516553287982,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf"
+      },
+      "meter_label": "4/4 practice",
+      "beats_description": "Count four beats; & is halfway between beats",
+      "patterns": [
+        {
+          "id": "steady-down",
+          "name": "Start: steady downstrokes",
+          "counts": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "strokes": [
+            "D",
+            "D",
+            "D",
+            "D"
+          ],
+          "description": "Strum down on each count. Keep the motion steady and change shape when the chord cue changes."
+        },
+        {
+          "id": "down-up",
+          "name": "Next: down and up",
+          "counts": [
+            "1",
+            "&",
+            "2",
+            "&",
+            "3",
+            "&",
+            "4",
+            "&"
+          ],
+          "strokes": [
+            "D",
+            "U",
+            "D",
+            "U",
+            "D",
+            "U",
+            "D",
+            "U"
+          ],
+          "description": "Add an upstroke between counts. Begin slowly; keep moving through chord changes."
+        }
+      ],
+      "status": "practice-suggestion",
+      "note": "A starting rhythm exercise. The recording may use a different pattern or picking.",
+      "display_corrections": {
+        "schema_version": "reported-chord-corrections-1.0",
+        "pack_id": "automatic-first-ten-v1",
+        "recording": {
+          "id": "troggs-wild-thing-youtube-20261011",
+          "title": "The Troggs - Wild Thing",
+          "duration_seconds": 155.3516553287982,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf"
+        },
+        "primary_sha256": "13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81",
+        "analysis_id": "troggs-wild-thing-youtube-20261011-crema",
+        "status": "user-reported-provisional",
+        "gold": false,
+        "corrections": [
+          {
+            "id": "wild-thing-a-near-25s-20261017",
+            "expected_event": {
+              "start_seconds": 23.777233560090703,
+              "end_seconds": 26.09922902494331,
+              "label": "E"
+            },
+            "replacement_label": "A",
+            "reported_seconds": 25,
+            "timing_status": "native-boundaries-unverified",
+            "source": "Founder play-along feedback in chat, 17 October 2026",
+            "note": "Founder reports A around 25 seconds. The containing native E cue is provisionally relabelled for display; the report did not establish its full extent or physical change boundaries."
+          }
+        ]
+      }
+    },
+    {
+      "recording": {
+        "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+        "title": "Bob Dylan - Knockin' On Heaven's Door",
+        "duration_seconds": 149.89496598639457,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f"
+      },
+      "meter_label": "4/4 practice",
+      "beats_description": "Count four beats; & is halfway between beats",
+      "patterns": [
+        {
+          "id": "steady-down",
+          "name": "Start: steady downstrokes",
+          "counts": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "strokes": [
+            "D",
+            "D",
+            "D",
+            "D"
+          ],
+          "description": "Strum down on each count. Keep the motion steady and change shape when the chord cue changes."
+        },
+        {
+          "id": "down-up",
+          "name": "Next: down and up",
+          "counts": [
+            "1",
+            "&",
+            "2",
+            "&",
+            "3",
+            "&",
+            "4",
+            "&"
+          ],
+          "strokes": [
+            "D",
+            "U",
+            "D",
+            "U",
+            "D",
+            "U",
+            "D",
+            "U"
+          ],
+          "description": "Add an upstroke between counts. Begin slowly; keep moving through chord changes."
+        }
+      ],
+      "status": "practice-suggestion",
+      "note": "A starting rhythm exercise. The recording may use a different pattern or picking."
+    },
+    {
+      "recording": {
+        "id": "van-morrison-brown-eyed-girl-youtube-20261011",
+        "title": "Van Morrison - Brown Eyed Girl",
+        "duration_seconds": 186.55927437641722,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf"
+      },
+      "meter_label": "4/4 practice",
+      "beats_description": "Count four beats; & is halfway between beats",
+      "patterns": [
+        {
+          "id": "steady-down",
+          "name": "Start: steady downstrokes",
+          "counts": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "strokes": [
+            "D",
+            "D",
+            "D",
+            "D"
+          ],
+          "description": "Strum down on each count. Keep the motion steady and change shape when the chord cue changes."
+        },
+        {
+          "id": "down-up",
+          "name": "Next: let count 3 ring",
+          "counts": [
+            "1",
+            "&",
+            "2",
+            "&",
+            "3",
+            "&",
+            "4",
+            "&"
+          ],
+          "strokes": [
+            "D",
+            "U",
+            "D",
+            "U",
+            "—",
+            "U",
+            "D",
+            "U"
+          ],
+          "description": "Keep your hand moving down/up. Miss the strings on the downstroke of count 3 and let the previous sound ring; return with the upstroke on &. Do not damp the strings. This is a suggested exercise, not a transcription."
+        }
+      ],
+      "status": "practice-suggestion",
+      "note": "A ringing-gap practice option: skip the contact on 3 while the hand keeps moving in eighth notes. Let the previous sound continue; skipping a contact is different from damping the strings. The selected recording's exact contacts are still unchecked."
+    },
+    {
+      "recording": {
+        "id": "beatles-love-me-do-youtube-20261011",
+        "title": "The Beatles - Love Me Do",
+        "duration_seconds": 141.69832199546485,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea"
+      },
+      "meter_label": "4/4 practice",
+      "beats_description": "Count four beats; & is halfway between beats",
+      "patterns": [
+        {
+          "id": "steady-down",
+          "name": "Start: steady downstrokes",
+          "counts": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "strokes": [
+            "D",
+            "D",
+            "D",
+            "D"
+          ],
+          "description": "Strum down on each count. Keep the motion steady and change shape when the chord cue changes."
+        },
+        {
+          "id": "down-up",
+          "name": "Next: down and up",
+          "counts": [
+            "1",
+            "&",
+            "2",
+            "&",
+            "3",
+            "&",
+            "4",
+            "&"
+          ],
+          "strokes": [
+            "D",
+            "U",
+            "D",
+            "U",
+            "D",
+            "U",
+            "D",
+            "U"
+          ],
+          "description": "Add an upstroke between counts. Begin slowly; keep moving through chord changes."
+        }
+      ],
+      "status": "practice-suggestion",
+      "note": "A starting rhythm exercise. The recording may use a different pattern or picking."
+    },
+    {
+      "recording": {
+        "id": "beatles-twist-and-shout-youtube-20261011",
+        "title": "The Beatles - Twist And Shout",
+        "duration_seconds": 155.23555555555555,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c"
+      },
+      "meter_label": "4/4 practice",
+      "beats_description": "Count four beats; & is halfway between beats",
+      "patterns": [
+        {
+          "id": "steady-down",
+          "name": "Start: steady downstrokes",
+          "counts": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "strokes": [
+            "D",
+            "D",
+            "D",
+            "D"
+          ],
+          "description": "Strum down on each count. Keep the motion steady and change shape when the chord cue changes."
+        },
+        {
+          "id": "down-up",
+          "name": "Next: down and up",
+          "counts": [
+            "1",
+            "&",
+            "2",
+            "&",
+            "3",
+            "&",
+            "4",
+            "&"
+          ],
+          "strokes": [
+            "D",
+            "U",
+            "D",
+            "U",
+            "D",
+            "U",
+            "D",
+            "U"
+          ],
+          "description": "Add an upstroke between counts. Begin slowly; keep moving through chord changes."
+        }
+      ],
+      "status": "practice-suggestion",
+      "note": "A starting rhythm exercise. The recording may use a different pattern or picking."
+    },
+    {
+      "recording": {
+        "id": "white-stripes-seven-nation-army-youtube-20261011",
+        "title": "The White Stripes - Seven Nation Army",
+        "duration_seconds": 232.1168253968254,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "394c791d799d7ff7ece36c1b93a434c1f600afe0265f5dfe1d6ad328626a6854"
+      },
+      "meter_label": "4/4 practice",
+      "beats_description": "Count four beats; & is halfway between beats",
+      "patterns": [
+        {
+          "id": "steady-down",
+          "name": "Start: steady downstrokes",
+          "counts": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "strokes": [
+            "D",
+            "D",
+            "D",
+            "D"
+          ],
+          "description": "Strum down on each count. Keep the motion steady and change shape when the chord cue changes."
+        },
+        {
+          "id": "down-up",
+          "name": "Next: down and up",
+          "counts": [
+            "1",
+            "&",
+            "2",
+            "&",
+            "3",
+            "&",
+            "4",
+            "&"
+          ],
+          "strokes": [
+            "D",
+            "U",
+            "D",
+            "U",
+            "D",
+            "U",
+            "D",
+            "U"
+          ],
+          "description": "Add an upstroke between counts. Begin slowly; keep moving through chord changes."
+        }
+      ],
+      "status": "practice-suggestion",
+      "note": "A strumming exercise for chord practice. The recorded part is mainly a riff; these arrows do not teach that riff."
+    },
+    {
+      "recording": {
+        "id": "nirvana-come-as-you-are-youtube-20261011",
+        "title": "Nirvana - Come As You Are",
+        "duration_seconds": 218.92789115646258,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7"
+      },
+      "meter_label": "4/4 practice",
+      "beats_description": "Count four beats; & is halfway between beats",
+      "patterns": [
+        {
+          "id": "steady-down",
+          "name": "Start: steady downstrokes",
+          "counts": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "strokes": [
+            "D",
+            "D",
+            "D",
+            "D"
+          ],
+          "description": "Strum down on each count. Keep the motion steady and change shape when the chord cue changes."
+        },
+        {
+          "id": "down-up",
+          "name": "Next: down and up",
+          "counts": [
+            "1",
+            "&",
+            "2",
+            "&",
+            "3",
+            "&",
+            "4",
+            "&"
+          ],
+          "strokes": [
+            "D",
+            "U",
+            "D",
+            "U",
+            "D",
+            "U",
+            "D",
+            "U"
+          ],
+          "description": "Add an upstroke between counts. Begin slowly; keep moving through chord changes."
+        }
+      ],
+      "status": "practice-suggestion",
+      "note": "A strumming exercise for chord practice. The recorded part is mainly a riff; these arrows do not teach that riff."
+    },
+    {
+      "recording": {
+        "id": "radiohead-creep-youtube-20261010",
+        "title": "Radiohead - Creep",
+        "duration_seconds": 236.63455782312926,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10"
+      },
+      "meter_label": "4/4 practice",
+      "beats_description": "Count four beats; & is halfway between beats",
+      "patterns": [
+        {
+          "id": "steady-down",
+          "name": "Start: steady downstrokes",
+          "counts": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "strokes": [
+            "D",
+            "D",
+            "D",
+            "D"
+          ],
+          "description": "Strum down on each count. Keep the motion steady and change shape when the chord cue changes."
+        },
+        {
+          "id": "down-up",
+          "name": "Next: fuller down/up strums",
+          "counts": [
+            "1",
+            "&",
+            "2",
+            "&",
+            "3",
+            "&",
+            "4",
+            "&"
+          ],
+          "strokes": [
+            "D",
+            "U",
+            "D",
+            "U",
+            "D",
+            "U",
+            "D",
+            "U"
+          ],
+          "description": "Keep the down/up motion steady and try fuller strums for a louder practice contrast. The recorded picking varies; these arrows do not prescribe one fixed verse arpeggio."
+        }
+      ],
+      "status": "practice-suggestion",
+      "note": "Preserve B major and C minor. Start with light steady chord strokes, then try fuller strums. Recorded verse picking varies and louder sections use layered parts; these drills do not transcribe their notes or exact section changes."
+    },
+    {
+      "recording": {
+        "id": "animals-house-rising-sun-official-20261011",
+        "title": "The Animals - The House Of The Rising Sun",
+        "duration_seconds": 269.91891156462583,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708"
+      },
+      "meter_label": "6/8",
+      "beats_description": "Count six eighth notes",
+      "patterns": [
+        {
+          "id": "six-anchor",
+          "name": "Start: two gentle strums",
+          "counts": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "strokes": [
+            "D",
+            "—",
+            "—",
+            "D",
+            "—",
+            "—"
+          ],
+          "description": "Count six eighth notes. Strum gently on 1 and 4, then let the chord ring."
+        },
+        {
+          "id": "six-motion",
+          "name": "Next: six-count motion",
+          "counts": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "strokes": [
+            "D",
+            "U",
+            "D",
+            "U",
+            "D",
+            "U"
+          ],
+          "description": "Keep six even strokes, gently stressing 1 and 4. The recorded arpeggio is a later exercise."
+        }
+      ],
+      "status": "practice-suggestion",
+      "note": "6/8 practice: six eighth notes grouped 3+3, with two dotted-quarter beats per bar. Begin with gentle strums on 1 and 4. Root-led picking/raking is a later exercise; fingerstyle is an optional adaptation. Exact recorded contacts remain unchecked.",
+      "display_corrections": {
+        "schema_version": "reported-chord-corrections-1.0",
+        "pack_id": "automatic-first-ten-v1",
+        "recording": {
+          "id": "animals-house-rising-sun-official-20261011",
+          "title": "The Animals - The House Of The Rising Sun",
+          "duration_seconds": 269.91891156462583,
+          "sample_rate_hz": 22050,
+          "audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708"
+        },
+        "primary_sha256": "71eb918cc9ef3662d5c6d75b49814f700b89a2fc15b73c1ce92d9bdb18dd6037",
+        "analysis_id": "animals-house-rising-sun-official-20261011-crema",
+        "status": "user-reported-provisional",
+        "gold": false,
+        "corrections": [
+          {
+            "id": "house-intro-e-near-8s-20261017",
+            "expected_event": {
+              "start_seconds": 6.408707482993197,
+              "end_seconds": 11.145578231292516,
+              "label": "Am"
+            },
+            "replacement_span": {
+              "start_seconds": 7.987664399,
+              "end_seconds": 9.473741497
+            },
+            "replacement_label": "E",
+            "reported_seconds": 8,
+            "time_basis": "founder-approximate-point",
+            "timing_status": "secondary-boundaries-unverified",
+            "source": "Founder play-along report and E-major clarification in chat, 17 October 2026",
+            "note": "Founder identifies E major around 8 seconds and confirms the intro order Am–E–Am–E. The paired Chordino E cue supplies provisional split boundaries inside the native CREMA Am hold; neither physical boundary was independently verified. Retain Am before and after this proposed E span.",
+            "timing_evidence": {
+              "chart_sha256": "519748e12a7612c4965339f13d09e733192f2dba9e8de1209ef685a8086e1c13",
+              "analysis_id": "chordino-nnls-hmm-v1",
+              "native_event": {
+                "start_seconds": 7.987664399,
+                "end_seconds": 9.473741497,
+                "label": "E"
+              },
+              "status": "detector-candidate-not-independent-timing-gold"
+            }
+          },
+          {
+            "id": "house-intro-second-e-quality-20261017",
+            "expected_event": {
+              "start_seconds": 11.145578231292516,
+              "end_seconds": 12.538775510204081,
+              "label": "Em"
+            },
+            "replacement_label": "E",
+            "reported_seconds": 12,
+            "time_basis": "representative-native-cue-point-not-user-timestamp",
+            "timing_status": "native-boundaries-unverified",
+            "source": "Founder-confirmed intro order and E-major clarification in chat, 17 October 2026",
+            "note": "Founder confirms Am–E–Am–E in the intro and clarifies E major rather than Em. Apply E to the second native E-root cue, retaining its CREMA bounds. Twelve seconds is only a representative point in this native cue for the display schema; the founder did not report a second exact timestamp. This contextual label proposal is not an independently verified transcription."
+          }
+        ]
+      }
+    },
+    {
+      "recording": {
+        "id": "oasis-wonderwall-youtube-20261010",
+        "title": "Oasis - Wonderwall",
+        "duration_seconds": 277.78031746031746,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462"
+      },
+      "meter_label": "4/4 practice",
+      "beats_description": "Count four beats; & is halfway between beats",
+      "patterns": [
+        {
+          "id": "steady-down",
+          "name": "Start: steady downstrokes",
+          "counts": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "strokes": [
+            "D",
+            "D",
+            "D",
+            "D"
+          ],
+          "description": "Strum down on each count. Keep the motion steady and change shape when the chord cue changes."
+        },
+        {
+          "id": "syncopated",
+          "name": "Next: try syncopation",
+          "counts": [
+            "1",
+            "&",
+            "2",
+            "&",
+            "3",
+            "&",
+            "4",
+            "&"
+          ],
+          "strokes": [
+            "D",
+            "—",
+            "D",
+            "U",
+            "—",
+            "U",
+            "D",
+            "U"
+          ],
+          "description": "Keep your hand moving down and up; skip the marked strokes. This is a four-count exercise, not the complete recorded pattern."
+        }
+      ],
+      "status": "practice-suggestion",
+      "note": "Four-count practice suggestion; the song has section and meter changes. Its exact strumming lesson still needs review."
+    }
+  ]
+}

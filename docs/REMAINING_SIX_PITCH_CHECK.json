@@ -1,0 +1,302 @@
+{
+  "schema_version": "remaining-six-pitch-summary-1.0",
+  "checked_date": "2026-10-16",
+  "report_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/report.json",
+  "report_sha256": "9427d542ea365134b064bbf388039674bd1c88be6df0addc31252e98fe3fa6ff",
+  "spec_sha256": "4a3c3f6148966aa03a44499029234591bb5ba5b9887f84e452eca887e155093b",
+  "method_code_sha256": {
+    "experiments/analysis/catalogue_remaining_pitch_check.py": "faa1d129d32882d749770aba81fe958d562a555fce437ed0bbc153c51745d4f8",
+    "experiments/analysis/catalogue_pitch_check.py": "8873ae929e8b8de360cf5bbb4b38d1c705c6e12fd165d216581a9ea0c5783681",
+    "experiments/analysis/chart_aligner.py": "e21dc021cc8c508fea583ca4e11d293e6cfaf443535c4c370532cd9ff6a8a3e9",
+    "experiments/analysis/candidates/nnls_chroma_adapter.py": "6e0970496adb5d20c42dc3400d9a87db3d7b991463740d39813c5e621cd8a7a5",
+    "experiments/analysis/curation.py": "d25c461ccb76a62d245d78e7cfe088801013a8d77c562ebc18c8443a870bfb8b",
+    "experiments/analysis/lab.py": "4e48a730dae86e99972d28f53714dc6a2d56badb1c38df99f8171ba711c02949",
+    "experiments/analysis/core_chord_screen.py": "b5ffb671c437d28da7bbd4cec305e989d5b323ad5615931d477641ac5b2c2577",
+    "experiments/analysis/rich_quality_suite.py": "09d001c9144304373f898a6df4336bcfcd980b32ecfb192da621c1d3c3ba7c12",
+    "experiments/analysis/automatic_drafts.py": "529e221ab927ad6c684b6154f2d57fac36335a870692b5ae0cff6ddd4ad5e616",
+    "experiments/analysis/review_pack.py": "964ba60dd94d876578600dde078d3e3ea6a8089c17efdbae3262063fe77ee2e7",
+    "experiments/analysis/candidates/nnls-chroma-host.cpp": "068bca2fc42386e44277a03d67cc33602d0778d46d01ff5bd665b44fc455064f"
+  },
+  "native_assets_sha256": {
+    "experiments/candidate-assets/nnls-chroma-evidence-native/nnls-chroma-host": "c8342cf2dd20691b18744cd821b735a6c397247a7598cb68f5e344cbc83bb550",
+    "experiments/candidate-assets/nnls-chroma-evidence-native/buildinfo.json": "9fe86880de3c64a1fc3e4414aa31b84082888307a0f2f4015d0aad1d26ef8e6f",
+    "experiments/candidate-assets/chordino-native/nnls-chroma.dylib": "1931ae144335ce192742509184b657d8cd7815f139b23f7d43df63d08acb5896"
+  },
+  "runtime_seconds": 8.756908292882144,
+  "audio_seconds": 1421.9377777777777,
+  "completed_cases": 6,
+  "fixed_coverage_samples_per_case": 4,
+  "gold": false,
+  "accepted_arrangements": 0,
+  "human_correction_seconds": null,
+  "cases": [
+    {
+      "id": "van-morrison-brown-eyed-girl-youtube-20261011",
+      "recording": {
+        "id": "van-morrison-brown-eyed-girl-youtube-20261011",
+        "title": "Van Morrison - Brown Eyed Girl",
+        "duration_seconds": 186.55927437641722,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "case_report_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/van-morrison-brown-eyed-girl-youtube-20261011/report.json",
+      "case_report_sha256": "024b9b557ec59cb34870fd826d7a8e29fd9e088c724538a594c026768c859f3c",
+      "nnls_evidence_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/van-morrison-brown-eyed-girl-youtube-20261011/nnls-evidence.json",
+      "nnls_evidence_sha256": "c1d7c8d567d0b6c8a48381ac3df83cd6e437a039cd4e391714a744d08c2ea720",
+      "analysis_runtime_seconds": 1.1162289576604962,
+      "finding": "G/C/D/Em expected-zero palette ranks first globally, in all four fixed samples, and in every active 20-second window for both methods. No inferred correction. Final 180\u2013186.559s has no active evidence at the fixed RMS threshold and is unscored.",
+      "unresolved": "Exact muted/skipped contacts, ties, intro/lead versus accompaniment, pulse/downbeat phase and teacher tempo140 versus existing ~152 estimate still require recording-specific rhythm evidence.",
+      "expected_sounding_shift_semitones": 0,
+      "methods": {
+        "spectral": {
+          "best_shifts_semitones": [
+            0
+          ],
+          "expected_shift_cosine": 0.6689826987085786,
+          "best_minus_expected_score": 0.0,
+          "best_minus_next_distinct_score": 0.0436616499239072
+        },
+        "nnls": {
+          "best_shifts_semitones": [
+            0
+          ],
+          "expected_shift_cosine": 0.7844988297568074,
+          "best_minus_expected_score": 0.0,
+          "best_minus_next_distinct_score": 0.0543593482824164
+        }
+      },
+      "native_family_membership_not_accuracy": {
+        "btc": 0.9775077144436979,
+        "crema": 1.0
+      }
+    },
+    {
+      "id": "white-stripes-seven-nation-army-youtube-20261011",
+      "recording": {
+        "id": "white-stripes-seven-nation-army-youtube-20261011",
+        "title": "The White Stripes - Seven Nation Army",
+        "duration_seconds": 232.1168253968254,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "394c791d799d7ff7ece36c1b93a434c1f600afe0265f5dfe1d6ad328626a6854",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "case_report_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/white-stripes-seven-nation-army-youtube-20261011/report.json",
+      "case_report_sha256": "ca1a8c6a6682f3486bd2fb69ddbeef1ff72ca2bd3b532175a8a72084b906235d",
+      "nnls_evidence_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/white-stripes-seven-nation-army-youtube-20261011/nnls-evidence.json",
+      "nnls_evidence_sha256": "ede5c692de2190ef5b7b223754894580c564c181c05f812fb348a0af1f27f433",
+      "analysis_runtime_seconds": 1.2730466667562723,
+      "finding": "No harmonic palette imposed. NNLS full-mix activity led by E/B/C, while simple spectral ranks E/C#/F. The disagreement illustrates harmonic/noise sensitivity rather than establishing the riff melody or a tuning choice. Native E/Em and B/Bm labels retained.",
+      "unresolved": "Single-note onsets, muted articulation, power/slide variation and original Open A versus standard adaptation remain separate tasks; no key/quality/setup recognition is claimed.",
+      "methods": {
+        "spectral": {
+          "top_pitch_class_activity": [
+            {
+              "pitch_class": "E",
+              "mean_l2_chroma": 0.4072734283091896
+            },
+            {
+              "pitch_class": "C#",
+              "mean_l2_chroma": 0.2890590714299547
+            },
+            {
+              "pitch_class": "F",
+              "mean_l2_chroma": 0.21777632333230265
+            }
+          ]
+        },
+        "nnls": {
+          "top_pitch_class_activity": [
+            {
+              "pitch_class": "E",
+              "mean_l2_chroma": 0.500896413182503
+            },
+            {
+              "pitch_class": "B",
+              "mean_l2_chroma": 0.3374606202970919
+            },
+            {
+              "pitch_class": "C",
+              "mean_l2_chroma": 0.2553971787673109
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "nirvana-come-as-you-are-youtube-20261011",
+      "recording": {
+        "id": "nirvana-come-as-you-are-youtube-20261011",
+        "title": "Nirvana - Come As You Are",
+        "duration_seconds": 218.92789115646258,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "case_report_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/nirvana-come-as-you-are-youtube-20261011/report.json",
+      "case_report_sha256": "19f32a6ffafbc1a35532a0f48ba5b10df855df88407e3719fd8823dc58bec403",
+      "nnls_evidence_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/nirvana-come-as-you-are-youtube-20261011/nnls-evidence.json",
+      "nnls_evidence_sha256": "42082e68054d589f9ab5066832bc664c476db7da17b0344eda4b7633203aa94c",
+      "analysis_runtime_seconds": 1.5277567924931645,
+      "finding": "No harmonic palette imposed. NNLS activity led by D/E/G, spectral by E/D/G. Descriptive pitch classes cannot establish D-standard physically. Native Em/D/G/etc retained. Teacher D-standard mapping remains shape root=sounding root+2, opposite to Wonderwall capo2 direction.",
+      "unresolved": "Validate riff note sequence/onsets and power/sus4 sections on selected studio audio; do not replace studio setup with common live E-flat setup or infer grips directly from sounding roots.",
+      "methods": {
+        "spectral": {
+          "top_pitch_class_activity": [
+            {
+              "pitch_class": "E",
+              "mean_l2_chroma": 0.37461791626533464
+            },
+            {
+              "pitch_class": "D",
+              "mean_l2_chroma": 0.3318853223022151
+            },
+            {
+              "pitch_class": "G",
+              "mean_l2_chroma": 0.26165012415380107
+            }
+          ]
+        },
+        "nnls": {
+          "top_pitch_class_activity": [
+            {
+              "pitch_class": "D",
+              "mean_l2_chroma": 0.39545396545143585
+            },
+            {
+              "pitch_class": "E",
+              "mean_l2_chroma": 0.3839902115701305
+            },
+            {
+              "pitch_class": "G",
+              "mean_l2_chroma": 0.33182352550941924
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "radiohead-creep-youtube-20261010",
+      "recording": {
+        "id": "radiohead-creep-youtube-20261010",
+        "title": "Radiohead - Creep",
+        "duration_seconds": 236.63455782312926,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "case_report_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/radiohead-creep-youtube-20261010/report.json",
+      "case_report_sha256": "1b914d12657016b35e248a4af8e4b2e174117ddcd6291033b495f008ff9bd7f9",
+      "nnls_evidence_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/radiohead-creep-youtube-20261010/nnls-evidence.json",
+      "nnls_evidence_sha256": "e5e64059870a87bf7c09f02b88259363225ba2b15ebf5d58707357dc93bfa2eb",
+      "analysis_runtime_seconds": 1.5420155422762036,
+      "finding": "G/B/C/Cm expected-zero palette ranks first globally in both methods. NNLS all fixed samples/windows favour0; spectral sample198.139\u2013204.139s favours+1 by0.00838 and tail220\u2013236.635s favours+5 by0.00199. Do not relabel the recording based on these local mixed-content scores. Native Bm alternatives remain unresolved rather than globally changed toB.",
+      "unresolved": "B-major/C-minor contrast, variable verse arpeggios and final chorus extent/attack/dynamics require local checks; source vocabulary membership is not accuracy.",
+      "expected_sounding_shift_semitones": 0,
+      "methods": {
+        "spectral": {
+          "best_shifts_semitones": [
+            0
+          ],
+          "expected_shift_cosine": 0.6406182671981525,
+          "best_minus_expected_score": 0.0,
+          "best_minus_next_distinct_score": 0.07171106544576777
+        },
+        "nnls": {
+          "best_shifts_semitones": [
+            0
+          ],
+          "expected_shift_cosine": 0.8132038034081001,
+          "best_minus_expected_score": 0.0,
+          "best_minus_next_distinct_score": 0.13596492411336336
+        }
+      },
+      "native_family_membership_not_accuracy": {
+        "btc": 0.8654230148737674,
+        "crema": 0.9401952807160294
+      }
+    },
+    {
+      "id": "animals-house-rising-sun-official-20261011",
+      "recording": {
+        "id": "animals-house-rising-sun-official-20261011",
+        "title": "The Animals - The House Of The Rising Sun",
+        "duration_seconds": 269.91891156462583,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "case_report_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/animals-house-rising-sun-official-20261011/report.json",
+      "case_report_sha256": "9ae5ed92519047ba401f38e4d3c298007b867cb42477231c517f106b48ecacec",
+      "nnls_evidence_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/animals-house-rising-sun-official-20261011/nnls-evidence.json",
+      "nnls_evidence_sha256": "3bc4d72e421ccd08aec21d86218b245df0a2a4d5ca3400b0cf523b84ce0c658b",
+      "analysis_runtime_seconds": 1.4738527908921242,
+      "finding": "Am/C/D/F/E/Dm expected-zero palette ranks first globally, at all four fixed samples and every20swindow in both methods. Preserves selected269.919s label-distributed recording instead of legacy248.546s tribute. Native major/minor alternatives retained.",
+      "unresolved": "Physical6/8 phase/two-pulse bar length, rake order, later dynamics and within-bar Am/Dm outro changes remain unaccepted; no corpus-CD reference transfer from duration alone.",
+      "expected_sounding_shift_semitones": 0,
+      "methods": {
+        "spectral": {
+          "best_shifts_semitones": [
+            0
+          ],
+          "expected_shift_cosine": 0.7114129044961952,
+          "best_minus_expected_score": 0.0,
+          "best_minus_next_distinct_score": 0.07318614449160865
+        },
+        "nnls": {
+          "best_shifts_semitones": [
+            0
+          ],
+          "expected_shift_cosine": 0.8959115190622724,
+          "best_minus_expected_score": 0.0,
+          "best_minus_next_distinct_score": 0.11720650463417026
+        }
+      },
+      "native_family_membership_not_accuracy": {
+        "btc": 0.9962853220906678,
+        "crema": 0.9683037269244167
+      }
+    },
+    {
+      "id": "oasis-wonderwall-youtube-20261010",
+      "recording": {
+        "id": "oasis-wonderwall-youtube-20261010",
+        "title": "Oasis - Wonderwall",
+        "duration_seconds": 277.78031746031746,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "case_report_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/oasis-wonderwall-youtube-20261010/report.json",
+      "case_report_sha256": "ff7393e075f3109a7383891ffadc5c5f68596c3b042b3567dc32672a24bf0d97",
+      "nnls_evidence_path": "experiments/generated/catalogue-remaining-six-pitch-20261016/oasis-wonderwall-youtube-20261010/nnls-evidence.json",
+      "nnls_evidence_sha256": "51fb4487284b07abdf76e918e440180c162204101dd8a5d59858f2eb5a6fe676",
+      "analysis_runtime_seconds": 1.7319540418684483,
+      "finding": "All12relative shifts scored against intact capo2shape paletteEm7/G/Dsus4/A7sus4/Cadd9. Expected+2 ranks first globally/bothmethods and all8fixedsamples. Sounding proposalF#m7/A/Esus4/B7sus4/Dadd9 is explicit; simple E/B-major detector labels remain distinct from sus4. NNLS260\u2013277.780s prefers+11 over+2 by0.01460 with9.584sactive evidence; original charts unchanged.",
+      "unresolved": "Shared-finger voicing, section-specific syncopation, muted versus omitted contacts, local meter and exact change times still need checking. Primary teacher text does not establish 4/4-to-2/4 changes.",
+      "expected_sounding_shift_semitones": 2,
+      "methods": {
+        "spectral": {
+          "best_shifts_semitones": [
+            2
+          ],
+          "expected_shift_cosine": 0.7431457958693699,
+          "best_minus_expected_score": 0.0,
+          "best_minus_next_distinct_score": 0.06392549096567168
+        },
+        "nnls": {
+          "best_shifts_semitones": [
+            2
+          ],
+          "expected_shift_cosine": 0.8709088295782124,
+          "best_minus_expected_score": 0.0,
+          "best_minus_next_distinct_score": 0.11327384737379109
+        }
+      },
+      "native_family_membership_not_accuracy": {
+        "btc": 0.7914201097697385,
+        "crema": 0.8841554559043348
+      }
+    }
+  ]
+}

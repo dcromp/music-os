@@ -1,0 +1,66 @@
+{
+  "schema_version": "untimed-chart-1.1",
+  "recording": {
+    "id": "house-listening-00-20",
+    "title": "House of the Rising Sun / bounded listening-window hypothesis",
+    "audio_sha256": "943f3488d5c201c424e73f9145f0b64f5f6976abf11c4328a247a1e54ef82aa6"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "name": "Candidate instrumental intro",
+      "sequence": [
+        "Am",
+        "C",
+        "D",
+        "F",
+        "Am",
+        "E",
+        "Am",
+        "E"
+      ]
+    },
+    {
+      "id": "verse-prefix",
+      "name": "Candidate first verse prefix",
+      "sequence": [
+        "Am",
+        "C",
+        "D",
+        "F"
+      ]
+    }
+  ],
+  "order": [
+    {
+      "section_id": "intro",
+      "repeat": 1
+    },
+    {
+      "section_id": "verse-prefix",
+      "repeat": 1
+    }
+  ],
+  "mode": "finite",
+  "start_policy": "first",
+  "end_policy": "any",
+  "metadata": {
+    "key": "A minor",
+    "capo": 0,
+    "label_convention": "sounding pitches",
+    "video_id": "4-43lLKaqBQ",
+    "scope": "First20seconds listening window, not verified section bounds",
+    "source_references": [
+      {
+        "author": "Jonathan Richter",
+        "url": "https://richterguitar.com/house-of-the-rising-sun-the-animals/"
+      },
+      {
+        "author": "Carl Brown / GuitarLessons365",
+        "url": "https://guitarlessons365.com/how-to-play-the-house-of-the-rising-sun-the-animals/"
+      }
+    ],
+    "review_status": "Unaccepted development candidate; human listening and independent timing marks required",
+    "repeat_count_status": "Declared bounded prefix hypothesis, not reviewed recording structure"
+  }
+}

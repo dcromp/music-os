@@ -1,0 +1,296 @@
+{
+  "schema": "strumalong-catalogue-config-1",
+  "note": "The single place that says which recordings Strum Along ships. strumalong/tools/build-songs.js reads it; paths are relative to the repo root. Founder direction (25 Oct 2026): strumming songs only, ordered by difficulty level. Quick-change line is 40 changes a minute (25 Oct 2026; one chord per bar at 120 BPM is 30 a minute, which is not a quick-change pace).",
+  "packs": [
+    {
+      "id": "automatic-first-ten-v1",
+      "kind": "prepared",
+      "dir": "experiments/generated/automatic-first-ten-v1",
+      "rhythm": "experiments/review/rhythm.json",
+      "practice": "experiments/review/practice.json",
+      "learning": "experiments/review/learning.json",
+      "required": true,
+      "note": "The ten prepared recordings. Every input here is frozen and read only."
+    },
+    {
+      "id": "strumalong-additions-v1",
+      "kind": "additions",
+      "dir": "experiments/generated/strumalong-additions-v1",
+      "rhythm": "experiments/generated/strumalong-additions-v1/rhythm.json",
+      "metadata": "strumalong/data/additions.json",
+      "required": false,
+      "note": "Rock/pop additions imported 24 Oct 2026 (gitignored pack)."
+    },
+    {
+      "id": "strumalong-additions-v2",
+      "kind": "additions",
+      "dir": "experiments/generated/strumalong-additions-v2",
+      "rhythm": "experiments/generated/strumalong-additions-v2/rhythm.json",
+      "metadata": "strumalong/data/additions-v2.json",
+      "required": false,
+      "note": "Strumming-first additions imported 25 Oct 2026 from docs/STRUMALONG_SONG_RESEARCH.md (gitignored pack; rebuild with experiments/analysis/strumalong/additions_pipeline.py and the v2 fixtures)."
+    },
+    {
+      "id": "strumalong-additions-v3",
+      "kind": "additions",
+      "dir": "experiments/generated/strumalong-additions-v3",
+      "rhythm": "experiments/generated/strumalong-additions-v3/rhythm.json",
+      "metadata": "strumalong/data/additions-v3.json",
+      "required": false,
+      "note": "Level 1 additions (A/D/E/Em/Am shapes) imported 26 Oct 2026 (gitignored pack)."
+    },
+    {
+      "id": "strumalong-additions-v4",
+      "kind": "additions",
+      "dir": "experiments/generated/strumalong-additions-v4",
+      "rhythm": "experiments/generated/strumalong-additions-v4/rhythm.json",
+      "metadata": "strumalong/data/additions-v4.json",
+      "required": false,
+      "note": "Rock/pop strummed additions towards ~100 songs, first 33 of the v4 batch, imported 28 Oct 2026 with paced downloads (gitignored pack; #75)."
+    },
+    {
+      "id": "strumalong-additions-v4b",
+      "kind": "additions",
+      "dir": "experiments/generated/strumalong-additions-v4b",
+      "rhythm": "experiments/generated/strumalong-additions-v4b/rhythm.json",
+      "metadata": "strumalong/data/additions-v4b.json",
+      "required": false,
+      "note": "Second 33 of the v4 batch (the frozen draft builder takes at most 64 recordings per pack); metadata in additions-v4b.json (gitignored pack; #75)."
+    }
+  ],
+  "exclude": [
+    {
+      "recording_id": "radiohead-creep-youtube-20261010",
+      "title": "Creep",
+      "reason": "Needs barre chords (B, Cm) and the verse is picked, not strummed."
+    },
+    {
+      "recording_id": "animals-house-rising-sun-official-20261011",
+      "title": "The House of the Rising Sun",
+      "reason": "Arpeggiated picking, not strumming."
+    },
+    {
+      "recording_id": "white-stripes-seven-nation-army-youtube-20261011",
+      "title": "Seven Nation Army",
+      "reason": "Riff song; no strummed chord part."
+    },
+    {
+      "recording_id": "nirvana-come-as-you-are-youtube-20261011",
+      "title": "Come as You Are",
+      "reason": "Riff song; no strummed chord part."
+    },
+    {
+      "recording_id": "beatles-love-me-do-youtube-20261011",
+      "title": "Love Me Do",
+      "reason": "Harmonica-led; not a guitar song."
+    },
+    {
+      "recording_id": "green-day-good-riddance-youtube-20261024",
+      "title": "Good Riddance (Time of Your Life)",
+      "reason": "The recorded guitar is picked, not strummed."
+    },
+    {
+      "recording_id": "lynyrd-skynyrd-sweet-home-alabama-youtube-20261024",
+      "title": "Sweet Home Alabama",
+      "reason": "Picked riff, not strumming."
+    },
+    {
+      "recording_id": "america-a-horse-with-no-name-youtube-20261025",
+      "title": "A Horse with No Name",
+      "reason": "The automatic chart cannot tell its two chords apart (Em and the D6add9/F# grip share notes), so it shows Em for up to 46 beats while the song alternates every bar. Needs a hand-checked chart before it can return."
+    },
+    {
+      "recording_id": "vance-joy-riptide-youtube-20261024",
+      "title": "Riptide",
+      "reason": "Founder (25 Oct): more a ukulele song than a guitar song."
+    },
+    {
+      "recording_id": "james-sit-down-youtube-20261025",
+      "title": "Sit Down",
+      "reason": "Automated check (25 Oct): strum score restrike_onbeat 0.592, below 5 of the 6 founder-labelled picked/riff songs and low across the whole song, plus chart plausibility and timing flags. Listen-check before restoring."
+    },
+    {
+      "recording_id": "plastic-ono-band-give-peace-a-chance-youtube-20261026",
+      "title": "Give Peace a Chance",
+      "reason": "Automated check (26 Oct): not guitar-led (guitar 6% of the harmonic stems; YAMNet hears no guitar)."
+    },
+    {
+      "recording_id": "creedence-clearwater-revival-down-on-the-corner-youtube-20261026",
+      "title": "Down on the Corner",
+      "reason": "Automated check (26 Oct): not guitar-led (guitar 4% of the harmonic stems; YAMNet guitar tag 0.13)."
+    },
+    {
+      "recording_id": "buddy-holly-not-fade-away-youtube-20261026",
+      "title": "Not Fade Away",
+      "reason": "Automated check (26 Oct): 8 of 34 repeated chord changes sit about a beat off their repeats, and long single-chord holds; chart timing unreliable."
+    },
+    {
+      "recording_id": "beatles-youve-got-to-hide-your-love-away-youtube-20261028",
+      "title": "The Beatles – You've Got to Hide Your Love Away",
+      "reason": "3/4 waltz: the beat-grid tool and the app's bar lines support only 2 or 4 beats per bar."
+    },
+    {
+      "recording_id": "bill-haley-rock-around-the-clock-youtube-20261026",
+      "title": "Bill Haley & His Comets – Rock Around the Clock",
+      "reason": "Catalogue checks (28 Oct 2026, first hold-check run on the v3 songs): the chart merges alternating chords into long A holds; another main chord fits 25 of 46 bars inside them."
+    },
+    {
+      "recording_id": "ccr-lookin-out-my-back-door-youtube-20261028",
+      "title": "Creedence Clearwater Revival – Lookin' Out My Back Door",
+      "reason": "Catalogue checks: 0% of chord time is in the researched key (capo 4 G/Em/C/D); the chart reads Bb/F/Gm/C, so the key, capo advice or chart is wrong."
+    },
+    {
+      "recording_id": "hootie-and-the-blowfish-only-wanna-be-with-you-youtube-20261028",
+      "title": "Hootie & the Blowfish – Only Wanna Be with You",
+      "reason": "Catalogue checks: the chart merges alternating chords into long holds (17 of 50 bars fit another main chord better)."
+    },
+    {
+      "recording_id": "third-eye-blind-jumper-youtube-20261028",
+      "title": "Third Eye Blind – Jumper",
+      "reason": "Catalogue checks: only 70% of repeated chord changes sit where the same change usually falls (played timing)."
+    },
+    {
+      "recording_id": "oasis-half-the-world-away-youtube-20261028",
+      "title": "Oasis – Half the World Away",
+      "reason": "Catalogue checks: only 14% of chord time is in the researched key (capo 2); the chart reads F/C/Am."
+    },
+    {
+      "recording_id": "beatles-all-my-loving-youtube-20261028",
+      "title": "The Beatles – All My Loving",
+      "reason": "Catalogue checks: only 33% of chord time is in the researched chords (Em A D Bm ...); the chart reads E/B/F#m."
+    },
+    {
+      "recording_id": "kt-tunstall-suddenly-i-see-youtube-20261028",
+      "title": "KT Tunstall – Suddenly I See",
+      "reason": "Catalogue checks: the chart merges alternating chords into long holds (21 of 26 bars fit another main chord better)."
+    },
+    {
+      "recording_id": "matchbox-twenty-3am-youtube-20261028",
+      "title": "Matchbox Twenty – 3AM",
+      "reason": "Anchored bars put fewer chord changes on a bar or half-bar than one song-wide phase (bar-model invariant), and the instrument check flags the guitar as possibly picked (restrike 0.635)."
+    }
+  ],
+  "level_overrides": [
+    {
+      "recording_id": "oasis-wonderwall-youtube-20261010",
+      "level": 3,
+      "reason": "Syncopated strum (the founder's 'trickiest song') and capo-2 sus/add9 shapes; its change rate alone would compute Level 2."
+    }
+  ],
+  "timing_fix_off": [
+    {
+      "recording_id": "tom-petty-free-fallin-youtube-20261024",
+      "reason": "Pushed changes: the fix followed an off-beat majority and lowered on-bar/half-bar changes from 58% to 51%."
+    },
+    {
+      "recording_id": "tom-petty-learning-to-fly-youtube-20261025",
+      "reason": "Pushed changes: the fix followed an off-beat majority and lowered on-bar/half-bar changes from 68% to 61%."
+    },
+    {
+      "recording_id": "lifehouse-hanging-by-a-moment-youtube-20261028",
+      "reason": "The fix added a one-beat-off bar line (weird 13 -> 14) on this down-tuned, distorted strum; the raw chart is kept."
+    }
+  ],
+  "genres": {
+    "elvis-presley-thats-all-right-youtube-20261026": "rock",
+    "billy-ray-cyrus-achy-breaky-heart-youtube-20261026": "pop",
+    "johnny-cash-jackson-youtube-20261026": "pop",
+    "eric-clapton-lay-down-sally-youtube-20261026": "rock",
+    "bob-marley-three-little-birds-youtube-20261025": "pop",
+    "neil-diamond-sweet-caroline-youtube-20261025": "pop",
+    "everly-brothers-bye-bye-love-youtube-20261026": "pop",
+    "bob-marley-stir-it-up-youtube-20261026": "pop",
+    "troggs-wild-thing-youtube-20261011": "rock",
+    "buddy-holly-peggy-sue-youtube-20261026": "rock",
+    "stealers-wheel-stuck-in-the-middle-with-you-youtube-20261025": "rock",
+    "coldplay-yellow-youtube-20261025": "rock",
+    "4-non-blondes-whats-up-youtube-20261025": "rock",
+    "george-ezra-budapest-youtube-20261025": "pop",
+    "cranberries-zombie-youtube-20261024": "rock",
+    "john-denver-country-roads-youtube-20261024": "pop",
+    "verve-lucky-man-youtube-20261025": "rock",
+    "bob-dylan-knockin-heavens-door-youtube-20261011": "rock",
+    "ccr-bad-moon-rising-youtube-20261024": "rock",
+    "neil-young-heart-of-gold-youtube-20261025": "rock",
+    "tom-petty-free-fallin-youtube-20261024": "rock",
+    "old-crow-medicine-show-wagon-wheel-youtube-20261025": "rock",
+    "van-morrison-brown-eyed-girl-youtube-20261011": "pop",
+    "deep-blue-something-breakfast-at-tiffanys-youtube-20261025": "rock",
+    "jason-mraz-im-yours-youtube-20261025": "pop",
+    "eagles-take-it-easy-youtube-20261025": "rock",
+    "oasis-wonderwall-youtube-20261010": "rock",
+    "beatles-twist-and-shout-youtube-20261011": "rock",
+    "ritchie-valens-la-bamba-youtube-20261026": "rock",
+    "weezer-island-in-the-sun-youtube-20261024": "rock",
+    "lumineers-ho-hey-youtube-20261025": "pop",
+    "ccr-have-you-ever-seen-the-rain-youtube-20261024": "rock",
+    "oasis-dont-look-back-in-anger-youtube-20261024": "rock",
+    "cat-stevens-wild-world-youtube-20261025": "pop",
+    "beatles-i-want-to-hold-your-hand-youtube-20261025": "pop",
+    "tom-petty-learning-to-fly-youtube-20261025": "rock",
+    "eagle-eye-cherry-save-tonight-youtube-20261025": "pop",
+    "natalie-imbruglia-torn-youtube-20261025": "pop",
+    "beatles-help-youtube-20261025": "rock",
+    "proclaimers-im-gonna-be-500-miles-youtube-20261025": "pop",
+    "queen-crazy-little-thing-called-love-youtube-20261025": "rock",
+    "green-day-boulevard-of-broken-dreams-youtube-20261025": "rock",
+    "hootie-and-the-blowfish-hold-my-hand-youtube-20261028": "pop",
+    "traveling-wilburys-end-of-the-line-youtube-20261028": "rock",
+    "neil-young-rockin-in-the-free-world-youtube-20261028": "rock",
+    "pearl-jam-last-kiss-youtube-20261028": "rock",
+    "john-mellencamp-small-town-youtube-20261028": "rock",
+    "sublime-what-i-got-youtube-20261028": "rock",
+    "james-laid-youtube-20261028": "rock",
+    "jake-bugg-lightning-bolt-youtube-20261028": "rock",
+    "rolling-stones-dead-flowers-youtube-20261028": "rock",
+    "status-quo-rockin-all-over-the-world-youtube-20261028": "rock",
+    "taylor-swift-you-belong-with-me-youtube-20261028": "pop",
+    "taylor-swift-we-are-never-getting-back-youtube-20261028": "pop",
+    "jimmy-buffett-margaritaville-youtube-20261028": "pop",
+    "sugar-ray-every-morning-youtube-20261028": "pop",
+    "lumineers-stubborn-love-youtube-20261028": "pop",
+    "shania-twain-youre-still-the-one-youtube-20261028": "pop",
+    "noah-kahan-stick-season-youtube-20261028": "pop",
+    "harry-chapin-cats-in-the-cradle-youtube-20261028": "pop",
+    "barenaked-ladies-if-i-had-1000000-youtube-20261028": "pop",
+    "uncle-kracker-follow-me-youtube-20261028": "pop",
+    "taylor-swift-mine-youtube-20261028": "pop",
+    "oasis-songbird-youtube-20261028": "rock",
+    "lifehouse-hanging-by-a-moment-youtube-20261028": "rock",
+    "ccr-wholl-stop-the-rain-youtube-20261028": "rock",
+    "stereophonics-have-a-nice-day-youtube-20261028": "rock",
+    "counting-crows-accidentally-in-love-youtube-20261028": "pop",
+    "phillip-phillips-home-youtube-20261028": "pop",
+    "paul-simon-me-and-julio-down-by-the-schoolyard-youtube-20261028": "pop",
+    "magic-rude-youtube-20261028": "pop",
+    "wallflowers-one-headlight-youtube-20261028": "rock",
+    "lisa-loeb-stay-i-missed-you-youtube-20261028": "pop",
+    "beautiful-south-rotterdam-or-anywhere-youtube-20261028": "pop",
+    "beatles-eight-days-a-week-youtube-20261028": "rock",
+    "eagles-peaceful-easy-feeling-youtube-20261028": "rock",
+    "rod-stewart-maggie-may-youtube-20261028": "rock",
+    "traveling-wilburys-handle-with-care-youtube-20261028": "rock",
+    "crowded-house-weather-with-you-youtube-20261028": "rock",
+    "fleetwood-mac-go-your-own-way-youtube-20261028": "rock",
+    "spin-doctors-two-princes-youtube-20261028": "rock",
+    "verve-drugs-dont-work-youtube-20261028": "rock",
+    "travis-why-does-it-always-rain-on-me-youtube-20261028": "rock",
+    "oasis-stand-by-me-youtube-20261028": "rock",
+    "kooks-she-moves-in-her-own-way-youtube-20261028": "rock",
+    "smash-mouth-all-star-youtube-20261028": "pop",
+    "del-amitri-roll-to-me-youtube-20261028": "pop",
+    "jam-thats-entertainment-youtube-20261028": "rock",
+    "george-michael-faith-youtube-20261028": "pop",
+    "amy-macdonald-this-is-the-life-youtube-20261028": "pop",
+    "sheryl-crow-soak-up-the-sun-youtube-20261028": "pop",
+    "mamas-and-the-papas-california-dreamin-youtube-20261028": "pop",
+    "cat-stevens-peace-train-youtube-20261028": "pop",
+    "avril-lavigne-complicated-youtube-20261028": "pop",
+    "alanis-morissette-hand-in-my-pocket-youtube-20261028": "pop",
+    "toad-the-wet-sprocket-all-i-want-youtube-20261028": "pop",
+    "james-blunt-bonfire-heart-youtube-20261028": "pop",
+    "kinks-lola-youtube-20261028": "rock",
+    "beatles-she-loves-you-youtube-20261028": "rock",
+    "fratellis-chelsea-dagger-youtube-20261028": "rock"
+  }
+}

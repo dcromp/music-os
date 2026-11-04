@@ -1,0 +1,1555 @@
+{
+  "schema_version": "starter-four-catalogue-check-1.0",
+  "checked_at_utc": "2026-10-14T10:37:50.038147+00:00",
+  "status": "four main-palette diagnostics and teaching proposals complete; two provisional label edits, full acceptance pending",
+  "input_spec_sha256": "c718236e5cde24083022ad4d891d5944789d7f029bb15c32d90b75527957e078",
+  "source_review_sha256": "564b33066eec4f9e1258a6d0168671fb9f27f470c3cd2e396b6124876f6f25ce",
+  "research_report": {
+    "path": "experiments/generated/catalogue-starter-four-pitch-v3-20261014/report.json",
+    "sha256": "d95efb7c2b0c677555abbc6ce4b6d8b9afbef7336b74dec1fca1689767ecf43f",
+    "runtime_seconds": 4.074889042414725
+  },
+  "controls_report": {
+    "path": "experiments/generated/catalogue-palette-controls-v3-20261014/report.json",
+    "sha256": "6167c5133a1da8a2d2c55d344cf7183f9554f9f1085c8844064021d6629b5165",
+    "cases": 4,
+    "method_checks": 8,
+    "all_expected_behaviors_passed": true
+  },
+  "targeted_separation": {
+    "report_path": "experiments/generated/catalogue-dylan-separation-v2-20261014/report.json",
+    "report_sha256": "da2c512702aad0ee7c334e1c227cad98de0e4af420258c9b8a700150d620921e",
+    "protocol_sha256": "c441763972fb591b8a7c4dc7f065445519c217eb3c3315cd60af6f679aa2b9e2",
+    "model_inference_seconds": 135.90239279158413,
+    "runtime_seconds": 144.03081016708165,
+    "common_pcm_scale": 1.0,
+    "pcm_conversion": {
+      "resampling-control": {
+        "frames": 3305184,
+        "pre_scale_peak_abs": 0.7810477614402771,
+        "common_scale": 1.0,
+        "clipped_samples": 0,
+        "quantization_error_rms": 8.757332829683442e-06,
+        "max_quantization_error": 1.52587890625e-05
+      },
+      "minus-vocals": {
+        "frames": 3305184,
+        "pre_scale_peak_abs": 0.735070526599884,
+        "common_scale": 1.0,
+        "clipped_samples": 0,
+        "quantization_error_rms": 8.80736440577714e-06,
+        "max_quantization_error": 1.52587890625e-05
+      },
+      "other": {
+        "frames": 3305184,
+        "pre_scale_peak_abs": 0.43421801924705505,
+        "common_scale": 1.0,
+        "clipped_samples": 0,
+        "quantization_error_rms": 8.79535335242603e-06,
+        "max_quantization_error": 1.52587890625e-05
+      }
+    },
+    "cue_comparisons": [
+      {
+        "native_btc_interval": {
+          "start_seconds": 50.185759637188205,
+          "end_seconds": 51.02167800453515,
+          "label": "Gm"
+        },
+        "comparisons": [
+          {
+            "condition": "original-cache",
+            "method": "spectral",
+            "own_support": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.38753898202305986,
+              "Gm_cosine": 0.5392984992752523,
+              "G_minus_Gm_cosine": -0.15175951725219244
+            },
+            "original_own_support": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.38753898202305986,
+              "Gm_cosine": 0.5392984992752523,
+              "G_minus_Gm_cosine": -0.15175951725219244
+            },
+            "original_active_seconds_outside_matched_support": 0.0,
+            "matched_original": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.38753898202305986,
+              "Gm_cosine": 0.5392984992752523,
+              "G_minus_Gm_cosine": -0.15175951725219244
+            },
+            "matched_condition": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.38753898202305986,
+              "Gm_cosine": 0.5392984992752523,
+              "G_minus_Gm_cosine": -0.15175951725219244
+            }
+          },
+          {
+            "condition": "original-cache",
+            "method": "nnls",
+            "own_support": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.46093844494434655,
+              "Gm_cosine": 0.8190638653471616,
+              "G_minus_Gm_cosine": -0.35812542040281503
+            },
+            "original_own_support": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.46093844494434655,
+              "Gm_cosine": 0.8190638653471616,
+              "G_minus_Gm_cosine": -0.35812542040281503
+            },
+            "original_active_seconds_outside_matched_support": 0.0,
+            "matched_original": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.46093844494434655,
+              "Gm_cosine": 0.8190638653471616,
+              "G_minus_Gm_cosine": -0.35812542040281503
+            },
+            "matched_condition": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.46093844494434655,
+              "Gm_cosine": 0.8190638653471616,
+              "G_minus_Gm_cosine": -0.35812542040281503
+            }
+          },
+          {
+            "condition": "resampling-control",
+            "method": "spectral",
+            "own_support": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.3875402616482049,
+              "Gm_cosine": 0.5392991162710472,
+              "G_minus_Gm_cosine": -0.15175885462284233
+            },
+            "original_own_support": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.38753898202305986,
+              "Gm_cosine": 0.5392984992752523,
+              "G_minus_Gm_cosine": -0.15175951725219244
+            },
+            "original_active_seconds_outside_matched_support": 0.0,
+            "matched_original": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.38753898202305986,
+              "Gm_cosine": 0.5392984992752523,
+              "G_minus_Gm_cosine": -0.15175951725219244
+            },
+            "matched_condition": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.3875402616482049,
+              "Gm_cosine": 0.5392991162710472,
+              "G_minus_Gm_cosine": -0.15175885462284233
+            }
+          },
+          {
+            "condition": "resampling-control",
+            "method": "nnls",
+            "own_support": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.46093900559863943,
+              "Gm_cosine": 0.8190634920381326,
+              "G_minus_Gm_cosine": -0.35812448643949313
+            },
+            "original_own_support": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.46093844494434655,
+              "Gm_cosine": 0.8190638653471616,
+              "G_minus_Gm_cosine": -0.35812542040281503
+            },
+            "original_active_seconds_outside_matched_support": 0.0,
+            "matched_original": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.46093844494434655,
+              "Gm_cosine": 0.8190638653471616,
+              "G_minus_Gm_cosine": -0.35812542040281503
+            },
+            "matched_condition": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.46093900559863943,
+              "Gm_cosine": 0.8190634920381326,
+              "G_minus_Gm_cosine": -0.35812448643949313
+            }
+          },
+          {
+            "condition": "minus-vocals",
+            "method": "spectral",
+            "own_support": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.6460951419758924,
+              "Gm_cosine": 0.6338026977168485,
+              "G_minus_Gm_cosine": 0.012292444259043855
+            },
+            "original_own_support": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.38753898202305986,
+              "Gm_cosine": 0.5392984992752523,
+              "G_minus_Gm_cosine": -0.15175951725219244
+            },
+            "original_active_seconds_outside_matched_support": 0.0,
+            "matched_original": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.38753898202305986,
+              "Gm_cosine": 0.5392984992752523,
+              "G_minus_Gm_cosine": -0.15175951725219244
+            },
+            "matched_condition": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.6460951419758924,
+              "Gm_cosine": 0.6338026977168485,
+              "G_minus_Gm_cosine": 0.012292444259043855
+            }
+          },
+          {
+            "condition": "minus-vocals",
+            "method": "nnls",
+            "own_support": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.9463435724293128,
+              "Gm_cosine": 0.7115082876168527,
+              "G_minus_Gm_cosine": 0.23483528481246008
+            },
+            "original_own_support": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.46093844494434655,
+              "Gm_cosine": 0.8190638653471616,
+              "G_minus_Gm_cosine": -0.35812542040281503
+            },
+            "original_active_seconds_outside_matched_support": 0.0,
+            "matched_original": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.46093844494434655,
+              "Gm_cosine": 0.8190638653471616,
+              "G_minus_Gm_cosine": -0.35812542040281503
+            },
+            "matched_condition": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.9463435724293128,
+              "Gm_cosine": 0.7115082876168527,
+              "G_minus_Gm_cosine": 0.23483528481246008
+            }
+          },
+          {
+            "condition": "other",
+            "method": "spectral",
+            "own_support": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.672473756308905,
+              "Gm_cosine": 0.6496585513191575,
+              "G_minus_Gm_cosine": 0.02281520498974754
+            },
+            "original_own_support": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.38753898202305986,
+              "Gm_cosine": 0.5392984992752523,
+              "G_minus_Gm_cosine": -0.15175951725219244
+            },
+            "original_active_seconds_outside_matched_support": 0.0,
+            "matched_original": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.38753898202305986,
+              "Gm_cosine": 0.5392984992752523,
+              "G_minus_Gm_cosine": -0.15175951725219244
+            },
+            "matched_condition": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.672473756308905,
+              "Gm_cosine": 0.6496585513191575,
+              "G_minus_Gm_cosine": 0.02281520498974754
+            }
+          },
+          {
+            "condition": "other",
+            "method": "nnls",
+            "own_support": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.9556497594394318,
+              "Gm_cosine": 0.7056489571765495,
+              "G_minus_Gm_cosine": 0.25000080226288224
+            },
+            "original_own_support": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.46093844494434655,
+              "Gm_cosine": 0.8190638653471616,
+              "G_minus_Gm_cosine": -0.35812542040281503
+            },
+            "original_active_seconds_outside_matched_support": 0.0,
+            "matched_original": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.46093844494434655,
+              "Gm_cosine": 0.8190638653471616,
+              "G_minus_Gm_cosine": -0.35812542040281503
+            },
+            "matched_condition": {
+              "active_evidence_seconds": 0.8359183673469417,
+              "G_cosine": 0.9556497594394318,
+              "Gm_cosine": 0.7056489571765495,
+              "G_minus_Gm_cosine": 0.25000080226288224
+            }
+          }
+        ]
+      },
+      {
+        "native_btc_interval": {
+          "start_seconds": 29.473741496598638,
+          "end_seconds": 30.27863945578231,
+          "label": "Gm"
+        },
+        "comparisons": [
+          {
+            "condition": "original-cache",
+            "method": "spectral",
+            "own_support": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.47791651928762874,
+              "Gm_cosine": 0.6824460764968263,
+              "G_minus_Gm_cosine": -0.20452955720919758
+            },
+            "original_own_support": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.47791651928762874,
+              "Gm_cosine": 0.6824460764968263,
+              "G_minus_Gm_cosine": -0.20452955720919758
+            },
+            "original_active_seconds_outside_matched_support": 0.0,
+            "matched_original": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.47791651928762874,
+              "Gm_cosine": 0.6824460764968263,
+              "G_minus_Gm_cosine": -0.20452955720919758
+            },
+            "matched_condition": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.47791651928762874,
+              "Gm_cosine": 0.6824460764968263,
+              "G_minus_Gm_cosine": -0.20452955720919758
+            }
+          },
+          {
+            "condition": "original-cache",
+            "method": "nnls",
+            "own_support": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.5737207795113138,
+              "Gm_cosine": 0.8867604870184114,
+              "G_minus_Gm_cosine": -0.31303970750709753
+            },
+            "original_own_support": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.5737207795113138,
+              "Gm_cosine": 0.8867604870184114,
+              "G_minus_Gm_cosine": -0.31303970750709753
+            },
+            "original_active_seconds_outside_matched_support": 0.0,
+            "matched_original": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.5737207795113138,
+              "Gm_cosine": 0.8867604870184114,
+              "G_minus_Gm_cosine": -0.31303970750709753
+            },
+            "matched_condition": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.5737207795113138,
+              "Gm_cosine": 0.8867604870184114,
+              "G_minus_Gm_cosine": -0.31303970750709753
+            }
+          },
+          {
+            "condition": "resampling-control",
+            "method": "spectral",
+            "own_support": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.477917617606885,
+              "Gm_cosine": 0.6824465889324958,
+              "G_minus_Gm_cosine": -0.20452897132561076
+            },
+            "original_own_support": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.47791651928762874,
+              "Gm_cosine": 0.6824460764968263,
+              "G_minus_Gm_cosine": -0.20452955720919758
+            },
+            "original_active_seconds_outside_matched_support": 0.0,
+            "matched_original": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.47791651928762874,
+              "Gm_cosine": 0.6824460764968263,
+              "G_minus_Gm_cosine": -0.20452955720919758
+            },
+            "matched_condition": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.477917617606885,
+              "Gm_cosine": 0.6824465889324958,
+              "G_minus_Gm_cosine": -0.20452897132561076
+            }
+          },
+          {
+            "condition": "resampling-control",
+            "method": "nnls",
+            "own_support": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.5737234780620413,
+              "Gm_cosine": 0.8867611424431948,
+              "G_minus_Gm_cosine": -0.31303766438115355
+            },
+            "original_own_support": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.5737207795113138,
+              "Gm_cosine": 0.8867604870184114,
+              "G_minus_Gm_cosine": -0.31303970750709753
+            },
+            "original_active_seconds_outside_matched_support": 0.0,
+            "matched_original": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.5737207795113138,
+              "Gm_cosine": 0.8867604870184114,
+              "G_minus_Gm_cosine": -0.31303970750709753
+            },
+            "matched_condition": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.5737234780620413,
+              "Gm_cosine": 0.8867611424431948,
+              "G_minus_Gm_cosine": -0.31303766438115355
+            }
+          },
+          {
+            "condition": "minus-vocals",
+            "method": "spectral",
+            "own_support": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.6104927453189811,
+              "Gm_cosine": 0.594260245939368,
+              "G_minus_Gm_cosine": 0.01623249937961313
+            },
+            "original_own_support": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.47791651928762874,
+              "Gm_cosine": 0.6824460764968263,
+              "G_minus_Gm_cosine": -0.20452955720919758
+            },
+            "original_active_seconds_outside_matched_support": 0.0,
+            "matched_original": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.47791651928762874,
+              "Gm_cosine": 0.6824460764968263,
+              "G_minus_Gm_cosine": -0.20452955720919758
+            },
+            "matched_condition": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.6104927453189811,
+              "Gm_cosine": 0.594260245939368,
+              "G_minus_Gm_cosine": 0.01623249937961313
+            }
+          },
+          {
+            "condition": "minus-vocals",
+            "method": "nnls",
+            "own_support": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.9262415968122941,
+              "Gm_cosine": 0.7510981850859474,
+              "G_minus_Gm_cosine": 0.17514341172634673
+            },
+            "original_own_support": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.5737207795113138,
+              "Gm_cosine": 0.8867604870184114,
+              "G_minus_Gm_cosine": -0.31303970750709753
+            },
+            "original_active_seconds_outside_matched_support": 0.0,
+            "matched_original": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.5737207795113138,
+              "Gm_cosine": 0.8867604870184114,
+              "G_minus_Gm_cosine": -0.31303970750709753
+            },
+            "matched_condition": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.9262415968122941,
+              "Gm_cosine": 0.7510981850859474,
+              "G_minus_Gm_cosine": 0.17514341172634673
+            }
+          },
+          {
+            "condition": "other",
+            "method": "spectral",
+            "own_support": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.7532730488571575,
+              "Gm_cosine": 0.7181574404760308,
+              "G_minus_Gm_cosine": 0.035115608381126706
+            },
+            "original_own_support": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.47791651928762874,
+              "Gm_cosine": 0.6824460764968263,
+              "G_minus_Gm_cosine": -0.20452955720919758
+            },
+            "original_active_seconds_outside_matched_support": 0.0,
+            "matched_original": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.47791651928762874,
+              "Gm_cosine": 0.6824460764968263,
+              "G_minus_Gm_cosine": -0.20452955720919758
+            },
+            "matched_condition": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.7532730488571575,
+              "Gm_cosine": 0.7181574404760308,
+              "G_minus_Gm_cosine": 0.035115608381126706
+            }
+          },
+          {
+            "condition": "other",
+            "method": "nnls",
+            "own_support": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.9283329917137679,
+              "Gm_cosine": 0.7498034430499023,
+              "G_minus_Gm_cosine": 0.1785295486638656
+            },
+            "original_own_support": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.5737207795113138,
+              "Gm_cosine": 0.8867604870184114,
+              "G_minus_Gm_cosine": -0.31303970750709753
+            },
+            "original_active_seconds_outside_matched_support": 0.0,
+            "matched_original": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.5737207795113138,
+              "Gm_cosine": 0.8867604870184114,
+              "G_minus_Gm_cosine": -0.31303970750709753
+            },
+            "matched_condition": {
+              "active_evidence_seconds": 0.8048979591836734,
+              "G_cosine": 0.9283329917137679,
+              "Gm_cosine": 0.7498034430499023,
+              "G_minus_Gm_cosine": 0.1785295486638656
+            }
+          }
+        ]
+      }
+    ],
+    "default_workflow_changed": false,
+    "accuracy_score": null,
+    "first_attempt_status": "stopped before publishing results to correct inherited storage/condition protocol metadata; original protocol retained"
+  },
+  "regression_checks": {
+    "python_discovered": 388,
+    "python_passed": 368,
+    "python_optional_skipped": 20,
+    "javascript_passed": 124,
+    "stage1_frozen_files_verified": 39
+  },
+  "deployment_checks": {
+    "reviewer_assets_verified": 45,
+    "retained_learner_assets_verified": 48,
+    "learner_manifest_sha256": "556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671",
+    "private_source_note_drafts": 4,
+    "provisional_chord_edits": 2,
+    "timed_section_edits": 0
+  },
+  "versioned_editorial_proposals": {
+    "path": "catalogue/starter-four-curation-proposals-v1.json",
+    "sha256": "42cc93e09dc3d3cbd1866ff1af357dd0cedff0447d89a0e6cbb252ed43b36ec5",
+    "gold": false
+  },
+  "independent_audit": {
+    "targeted_output_hashes_verified": 17,
+    "score_scalars_recomputed": 256,
+    "maximum_absolute_score_difference": 3.3306690738754696e-16,
+    "cue_active_support_lost_seconds": 0
+  },
+  "human_correction_seconds": null,
+  "accepted_arrangements": 0,
+  "cost_scope": "Recorded agent sessions measure UI draft entry only; research, preparation, inference and musical validation are excluded. No total correction-cost estimate.",
+  "limits": [
+    "Scores are uncalibrated cosine compatibility, not confidence or accuracy.",
+    "No chord order, section boundaries, physical change timings or strumming are inferred.",
+    "Pitch-class matches cannot prove octave, guitar voicing, tuning or physical capo position.",
+    "NNLS uses global tuning compensation; no cents or concert-pitch result is claimed.",
+    "Source palettes may omit real contrasting material; vocals/bass/harmonics can affect full-mix chroma.",
+    "No shift is used to relabel raw charts or approve an arrangement.",
+    "other is a residual mixture, not an isolated guitar stem",
+    "G/Gm cue timestamps are exposed BTC predictions, not physical chord boundaries",
+    "No accuracy, causal vocal-contamination or improved transcription conclusion follows from template scores",
+    "Scores use full-mix/source estimates, not a performed chord reference.",
+    "Matched-support scores exclude inactive/zero evidence in either condition; report coverage separately.",
+    "Research outputs do not replace the original learner audio or charts."
+  ],
+  "cases": [
+    {
+      "id": "troggs-wild-thing-youtube-20261011",
+      "title": "The Troggs - Wild Thing",
+      "recording": {
+        "id": "troggs-wild-thing-youtube-20261011",
+        "title": "The Troggs - Wild Thing",
+        "duration_seconds": 155.3516553287982,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "main_shapes": [
+        "A",
+        "D",
+        "E"
+      ],
+      "whole_recording_compatibility": {
+        "spectral": {
+          "active_evidence_seconds": 139.93650793650795,
+          "best_shifts_semitones": [
+            0
+          ],
+          "proposed_zero_shift_cosine": 0.659292017662011,
+          "best_minus_next_distinct_score": 0.028973689364182098,
+          "unrestricted_minus_zero_shift": 0.07030607169146208
+        },
+        "nnls": {
+          "active_evidence_seconds": 142.98848072600003,
+          "best_shifts_semitones": [
+            0
+          ],
+          "proposed_zero_shift_cosine": 0.7770058896344479,
+          "best_minus_next_distinct_score": 0.07062328827415332,
+          "unrestricted_minus_zero_shift": 0.047877631523766895
+        }
+      },
+      "local_windows": {
+        "spectral": [
+          {
+            "start_seconds": 0.0,
+            "end_seconds": 20.0,
+            "active_evidence_seconds": 19.825079365079365,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 20.0,
+            "end_seconds": 40.0,
+            "active_evidence_seconds": 17.95092970521542,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 40.0,
+            "end_seconds": 60.0,
+            "active_evidence_seconds": 17.00136054421769,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 60.0,
+            "end_seconds": 80.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              5
+            ]
+          },
+          {
+            "start_seconds": 80.0,
+            "end_seconds": 100.0,
+            "active_evidence_seconds": 18.90049886621314,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 100.0,
+            "end_seconds": 120.0,
+            "active_evidence_seconds": 15.851882086167791,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 120.0,
+            "end_seconds": 140.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 140.0,
+            "end_seconds": 155.3516553287982,
+            "active_evidence_seconds": 10.406757369614525,
+            "best_shifts_semitones": [
+              0
+            ]
+          }
+        ],
+        "nnls": [
+          {
+            "start_seconds": 0.0,
+            "end_seconds": 20.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 20.0,
+            "end_seconds": 40.0,
+            "active_evidence_seconds": 19.34984127,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 40.0,
+            "end_seconds": 60.0,
+            "active_evidence_seconds": 17.1207256235,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 60.0,
+            "end_seconds": 80.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 80.0,
+            "end_seconds": 100.0,
+            "active_evidence_seconds": 19.349841270000013,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 100.0,
+            "end_seconds": 120.0,
+            "active_evidence_seconds": 16.749206349500014,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 120.0,
+            "end_seconds": 140.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 140.0,
+            "end_seconds": 155.3516553287982,
+            "active_evidence_seconds": 10.418866213000001,
+            "best_shifts_semitones": [
+              0
+            ]
+          }
+        ]
+      },
+      "model_palette_membership": {
+        "btc": {
+          "ledger": {
+            "in_palette_seconds": 145.97532879818593,
+            "outside_palette_seconds": 4.396190476190494,
+            "no_chord_seconds": 4.980136054421772,
+            "unknown_seconds": 0.0,
+            "unsupported_seconds": 0.0,
+            "uncovered_seconds": 0.0,
+            "extension_reduced_seconds": 0.0,
+            "explicit_slash_bass_seconds": 0.0
+          },
+          "harmonic_family_seconds": 150.37151927437642,
+          "fraction_of_harmonic_families_in_palette": 0.9707644739016771,
+          "outside_palette_intervals": 10,
+          "outside_examples": [
+            {
+              "start_seconds": 33.99383219954648,
+              "end_seconds": 35.29414965986395,
+              "label": "C"
+            },
+            {
+              "start_seconds": 38.91646258503401,
+              "end_seconds": 39.47374149659864,
+              "label": "C"
+            },
+            {
+              "start_seconds": 25.57278911564626,
+              "end_seconds": 26.130068027210886,
+              "label": "Em"
+            },
+            {
+              "start_seconds": 30.0,
+              "end_seconds": 30.46439909297052,
+              "label": "C"
+            },
+            {
+              "start_seconds": 91.39319727891156,
+              "end_seconds": 91.67183673469388,
+              "label": "G"
+            },
+            {
+              "start_seconds": 30.46439909297052,
+              "end_seconds": 30.743038548752835,
+              "label": "Em"
+            },
+            {
+              "start_seconds": 39.47374149659864,
+              "end_seconds": 39.75238095238095,
+              "label": "Em"
+            },
+            {
+              "start_seconds": 99.75238095238095,
+              "end_seconds": 100.0,
+              "label": "C"
+            }
+          ],
+          "semantics": "Core family membership ignores inversion and selected extensions; no reference harmony is present. Unsupported qualities, N/X and gaps remain separate."
+        },
+        "crema": {
+          "ledger": {
+            "in_palette_seconds": 150.8368253968254,
+            "outside_palette_seconds": 0.0,
+            "no_chord_seconds": 4.514829931972791,
+            "unknown_seconds": 0.0,
+            "unsupported_seconds": 0.0,
+            "uncovered_seconds": 0.0,
+            "extension_reduced_seconds": 1.8575963718820958,
+            "explicit_slash_bass_seconds": 0.0
+          },
+          "harmonic_family_seconds": 150.8368253968254,
+          "fraction_of_harmonic_families_in_palette": 1.0,
+          "outside_palette_intervals": 0,
+          "outside_examples": [],
+          "semantics": "Core family membership ignores inversion and selected extensions; no reference harmony is present. Unsupported qualities, N/X and gaps remain separate."
+        }
+      },
+      "private_draft_sha256": "cab2f7f43573bfb7697cdb5880417124646ebe1f38822d2df0328586e8795e9a",
+      "private_draft_revision": 1,
+      "provisional_chord_edits": [],
+      "agent_draft_entry_seconds": 0.30719999980926516,
+      "human_correction_seconds": null,
+      "accepted_arrangement": false,
+      "accuracy_score": null
+    },
+    {
+      "id": "beatles-love-me-do-youtube-20261011",
+      "title": "The Beatles - Love Me Do",
+      "recording": {
+        "id": "beatles-love-me-do-youtube-20261011",
+        "title": "The Beatles - Love Me Do",
+        "duration_seconds": 141.69832199546485,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "main_shapes": [
+        "G",
+        "C",
+        "D"
+      ],
+      "whole_recording_compatibility": {
+        "spectral": {
+          "active_evidence_seconds": 135.48852607709753,
+          "best_shifts_semitones": [
+            0
+          ],
+          "proposed_zero_shift_cosine": 0.6322846765624104,
+          "best_minus_next_distinct_score": 0.007134211419606462,
+          "unrestricted_minus_zero_shift": 0.07800114714608619
+        },
+        "nnls": {
+          "active_evidence_seconds": 136.5333333335,
+          "best_shifts_semitones": [
+            0
+          ],
+          "proposed_zero_shift_cosine": 0.7391618830632076,
+          "best_minus_next_distinct_score": 0.0168834086718489,
+          "unrestricted_minus_zero_shift": 0.05647981200451602
+        }
+      },
+      "local_windows": {
+        "spectral": [
+          {
+            "start_seconds": 0.0,
+            "end_seconds": 20.0,
+            "active_evidence_seconds": 19.625170068027213,
+            "best_shifts_semitones": [
+              5
+            ]
+          },
+          {
+            "start_seconds": 20.0,
+            "end_seconds": 40.0,
+            "active_evidence_seconds": 19.900045351473924,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 40.0,
+            "end_seconds": 60.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              7
+            ]
+          },
+          {
+            "start_seconds": 60.0,
+            "end_seconds": 80.0,
+            "active_evidence_seconds": 19.700136054421776,
+            "best_shifts_semitones": [
+              7
+            ]
+          },
+          {
+            "start_seconds": 80.0,
+            "end_seconds": 100.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              7
+            ]
+          },
+          {
+            "start_seconds": 100.0,
+            "end_seconds": 120.0,
+            "active_evidence_seconds": 19.750113378684816,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 120.0,
+            "end_seconds": 140.0,
+            "active_evidence_seconds": 16.513061224489803,
+            "best_shifts_semitones": [
+              5
+            ]
+          },
+          {
+            "start_seconds": 140.0,
+            "end_seconds": 141.69832199546485,
+            "active_evidence_seconds": 0.0,
+            "best_shifts_semitones": []
+          }
+        ],
+        "nnls": [
+          {
+            "start_seconds": 0.0,
+            "end_seconds": 20.0,
+            "active_evidence_seconds": 19.860680272,
+            "best_shifts_semitones": [
+              5
+            ]
+          },
+          {
+            "start_seconds": 20.0,
+            "end_seconds": 40.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              5
+            ]
+          },
+          {
+            "start_seconds": 40.0,
+            "end_seconds": 60.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 60.0,
+            "end_seconds": 80.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 80.0,
+            "end_seconds": 100.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 100.0,
+            "end_seconds": 120.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 120.0,
+            "end_seconds": 140.0,
+            "active_evidence_seconds": 16.6726530615,
+            "best_shifts_semitones": [
+              5
+            ]
+          },
+          {
+            "start_seconds": 140.0,
+            "end_seconds": 141.69832199546485,
+            "active_evidence_seconds": 0.0,
+            "best_shifts_semitones": []
+          }
+        ]
+      },
+      "model_palette_membership": {
+        "btc": {
+          "ledger": {
+            "in_palette_seconds": 135.01551020408164,
+            "outside_palette_seconds": 2.600634920634917,
+            "no_chord_seconds": 4.0821768707483015,
+            "unknown_seconds": 0.0,
+            "unsupported_seconds": 0.0,
+            "uncovered_seconds": 0.0,
+            "extension_reduced_seconds": 0.0,
+            "explicit_slash_bass_seconds": 0.0
+          },
+          "harmonic_family_seconds": 137.61614512471655,
+          "fraction_of_harmonic_families_in_palette": 0.9811022542574633,
+          "outside_palette_intervals": 5,
+          "outside_examples": [
+            {
+              "start_seconds": 108.91646258503401,
+              "end_seconds": 109.75238095238095,
+              "label": "A"
+            },
+            {
+              "start_seconds": 91.20743764172336,
+              "end_seconds": 91.85759637188208,
+              "label": "A"
+            },
+            {
+              "start_seconds": 97.70902494331065,
+              "end_seconds": 98.26630385487529,
+              "label": "A"
+            },
+            {
+              "start_seconds": 90.0,
+              "end_seconds": 90.37151927437641,
+              "label": "Em"
+            },
+            {
+              "start_seconds": 52.41487528344671,
+              "end_seconds": 52.600634920634924,
+              "label": "Cm"
+            }
+          ],
+          "semantics": "Core family membership ignores inversion and selected extensions; no reference harmony is present. Unsupported qualities, N/X and gaps remain separate."
+        },
+        "crema": {
+          "ledger": {
+            "in_palette_seconds": 138.2051700680272,
+            "outside_palette_seconds": 0.0,
+            "no_chord_seconds": 3.4931519274376512,
+            "unknown_seconds": 0.0,
+            "unsupported_seconds": 0.0,
+            "uncovered_seconds": 0.0,
+            "extension_reduced_seconds": 30.37170068027209,
+            "explicit_slash_bass_seconds": 0.0
+          },
+          "harmonic_family_seconds": 138.2051700680272,
+          "fraction_of_harmonic_families_in_palette": 1.0,
+          "outside_palette_intervals": 0,
+          "outside_examples": [],
+          "semantics": "Core family membership ignores inversion and selected extensions; no reference harmony is present. Unsupported qualities, N/X and gaps remain separate."
+        }
+      },
+      "private_draft_sha256": "483595986c7344b6062fc28104aeff38ee22d99cdddc75ea1d7a41774514744f",
+      "private_draft_revision": 1,
+      "provisional_chord_edits": [],
+      "agent_draft_entry_seconds": 0.304,
+      "human_correction_seconds": null,
+      "accepted_arrangement": false,
+      "accuracy_score": null
+    },
+    {
+      "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+      "title": "Bob Dylan - Knockin' On Heaven's Door",
+      "recording": {
+        "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+        "title": "Bob Dylan - Knockin' On Heaven's Door",
+        "duration_seconds": 149.89496598639457,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "main_shapes": [
+        "G",
+        "D",
+        "Am",
+        "C"
+      ],
+      "whole_recording_compatibility": {
+        "spectral": {
+          "active_evidence_seconds": 141.58575963718823,
+          "best_shifts_semitones": [
+            0
+          ],
+          "proposed_zero_shift_cosine": 0.7372976463765708,
+          "best_minus_next_distinct_score": 0.0640763955151078,
+          "unrestricted_minus_zero_shift": 0.019971659439241396
+        },
+        "nnls": {
+          "active_evidence_seconds": 142.47764172350003,
+          "best_shifts_semitones": [
+            0
+          ],
+          "proposed_zero_shift_cosine": 0.8750461539939365,
+          "best_minus_next_distinct_score": 0.08786821521824217,
+          "unrestricted_minus_zero_shift": 0.014340459926465154
+        }
+      },
+      "local_windows": {
+        "spectral": [
+          {
+            "start_seconds": 0.0,
+            "end_seconds": 20.0,
+            "active_evidence_seconds": 18.92548752834467,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 20.0,
+            "end_seconds": 40.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 40.0,
+            "end_seconds": 60.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 60.0,
+            "end_seconds": 80.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 80.0,
+            "end_seconds": 100.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 100.0,
+            "end_seconds": 120.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 120.0,
+            "end_seconds": 140.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 140.0,
+            "end_seconds": 149.89496598639457,
+            "active_evidence_seconds": 2.6602721088435715,
+            "best_shifts_semitones": [
+              0
+            ]
+          }
+        ],
+        "nnls": [
+          {
+            "start_seconds": 0.0,
+            "end_seconds": 20.0,
+            "active_evidence_seconds": 19.7678004535,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 20.0,
+            "end_seconds": 40.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 40.0,
+            "end_seconds": 60.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 60.0,
+            "end_seconds": 80.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 80.0,
+            "end_seconds": 100.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 100.0,
+            "end_seconds": 120.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 120.0,
+            "end_seconds": 140.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 140.0,
+            "end_seconds": 149.89496598639457,
+            "active_evidence_seconds": 2.7098412700000267,
+            "best_shifts_semitones": [
+              0
+            ]
+          }
+        ]
+      },
+      "model_palette_membership": {
+        "btc": {
+          "ledger": {
+            "in_palette_seconds": 146.16108843537413,
+            "outside_palette_seconds": 1.640816326530615,
+            "no_chord_seconds": 2.0930612244898184,
+            "unknown_seconds": 0.0,
+            "unsupported_seconds": 0.0,
+            "uncovered_seconds": 0.0,
+            "extension_reduced_seconds": 0.0,
+            "explicit_slash_bass_seconds": 0.0
+          },
+          "harmonic_family_seconds": 147.80190476190475,
+          "fraction_of_harmonic_families_in_palette": 0.9888985441075754,
+          "outside_palette_intervals": 2,
+          "outside_examples": [
+            {
+              "start_seconds": 50.185759637188205,
+              "end_seconds": 51.02167800453515,
+              "label": "Gm"
+            },
+            {
+              "start_seconds": 29.473741496598638,
+              "end_seconds": 30.27863945578231,
+              "label": "Gm"
+            }
+          ],
+          "semantics": "Core family membership ignores inversion and selected extensions; no reference harmony is present. Unsupported qualities, N/X and gaps remain separate."
+        },
+        "crema": {
+          "ledger": {
+            "in_palette_seconds": 144.89251700680273,
+            "outside_palette_seconds": 0.0,
+            "no_chord_seconds": 5.002448979591833,
+            "unknown_seconds": 0.0,
+            "unsupported_seconds": 0.0,
+            "uncovered_seconds": 0.0,
+            "extension_reduced_seconds": 3.1579138321995472,
+            "explicit_slash_bass_seconds": 0.0
+          },
+          "harmonic_family_seconds": 144.89251700680273,
+          "fraction_of_harmonic_families_in_palette": 1.0,
+          "outside_palette_intervals": 0,
+          "outside_examples": [],
+          "semantics": "Core family membership ignores inversion and selected extensions; no reference harmony is present. Unsupported qualities, N/X and gaps remain separate."
+        }
+      },
+      "private_draft_sha256": "4c674d44319e1d61f5b016a6d5b4d31895a3fd996213c0f666972813a7f73e35",
+      "private_draft_revision": 2,
+      "provisional_chord_edits": [
+        {
+          "start_seconds": 29.473741496598638,
+          "end_seconds": 30.27863945578231,
+          "label": "G",
+          "note": "Provisional source-guided label edit. Teacher palette and CREMA support G; minus-vocals/other tests favour G over Gm in both acoustic methods with full cue support. Bounds are unchanged BTC predictions, not verified physical timing. Targeted protocol c4417639; no automatic lesson approval."
+        },
+        {
+          "start_seconds": 50.185759637188205,
+          "end_seconds": 51.02167800453515,
+          "label": "G",
+          "note": "Provisional source-guided label edit. Teacher palette and CREMA support G; minus-vocals/other tests favour G over Gm in both acoustic methods with full cue support. Bounds are unchanged BTC predictions, not verified physical timing. Targeted protocol c4417639; no automatic lesson approval."
+        }
+      ],
+      "agent_draft_entry_seconds": 1.6513999996185302,
+      "human_correction_seconds": null,
+      "accepted_arrangement": false,
+      "accuracy_score": null
+    },
+    {
+      "id": "beatles-twist-and-shout-youtube-20261011",
+      "title": "The Beatles - Twist And Shout",
+      "recording": {
+        "id": "beatles-twist-and-shout-youtube-20261011",
+        "title": "The Beatles - Twist And Shout",
+        "duration_seconds": 155.23555555555555,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "main_shapes": [
+        "D",
+        "G",
+        "A"
+      ],
+      "whole_recording_compatibility": {
+        "spectral": {
+          "active_evidence_seconds": 151.08145124716552,
+          "best_shifts_semitones": [
+            0
+          ],
+          "proposed_zero_shift_cosine": 0.6568805123320857,
+          "best_minus_next_distinct_score": 0.003058332952644238,
+          "unrestricted_minus_zero_shift": 0.08274880829755127
+        },
+        "nnls": {
+          "active_evidence_seconds": 151.30122448950002,
+          "best_shifts_semitones": [
+            0
+          ],
+          "proposed_zero_shift_cosine": 0.810207229924436,
+          "best_minus_next_distinct_score": 0.06268433448079813,
+          "unrestricted_minus_zero_shift": 0.03385496965097956
+        }
+      },
+      "local_windows": {
+        "spectral": [
+          {
+            "start_seconds": 0.0,
+            "end_seconds": 20.0,
+            "active_evidence_seconds": 19.67514739229025,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 20.0,
+            "end_seconds": 40.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 40.0,
+            "end_seconds": 60.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 60.0,
+            "end_seconds": 80.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 80.0,
+            "end_seconds": 100.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              7
+            ]
+          },
+          {
+            "start_seconds": 100.0,
+            "end_seconds": 120.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 120.0,
+            "end_seconds": 140.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 140.0,
+            "end_seconds": 155.23555555555555,
+            "active_evidence_seconds": 11.406303854875262,
+            "best_shifts_semitones": [
+              7
+            ]
+          }
+        ],
+        "nnls": [
+          {
+            "start_seconds": 0.0,
+            "end_seconds": 20.0,
+            "active_evidence_seconds": 19.860680272,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 20.0,
+            "end_seconds": 40.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 40.0,
+            "end_seconds": 60.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 60.0,
+            "end_seconds": 80.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 80.0,
+            "end_seconds": 100.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 100.0,
+            "end_seconds": 120.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 120.0,
+            "end_seconds": 140.0,
+            "active_evidence_seconds": 20.0,
+            "best_shifts_semitones": [
+              0
+            ]
+          },
+          {
+            "start_seconds": 140.0,
+            "end_seconds": 155.23555555555555,
+            "active_evidence_seconds": 11.440544217500019,
+            "best_shifts_semitones": [
+              7
+            ]
+          }
+        ]
+      },
+      "model_palette_membership": {
+        "btc": {
+          "ledger": {
+            "in_palette_seconds": 149.75238095238097,
+            "outside_palette_seconds": 2.1980952380952203,
+            "no_chord_seconds": 3.28507936507936,
+            "unknown_seconds": 0.0,
+            "unsupported_seconds": 0.0,
+            "uncovered_seconds": 0.0,
+            "extension_reduced_seconds": 0.0,
+            "explicit_slash_bass_seconds": 0.0
+          },
+          "harmonic_family_seconds": 151.9504761904762,
+          "fraction_of_harmonic_families_in_palette": 0.9855341339283477,
+          "outside_palette_intervals": 5,
+          "outside_examples": [
+            {
+              "start_seconds": 111.85759637188208,
+              "end_seconds": 112.50775510204082,
+              "label": "Dm"
+            },
+            {
+              "start_seconds": 100.0,
+              "end_seconds": 100.46439909297052,
+              "label": "F#m"
+            },
+            {
+              "start_seconds": 120.0,
+              "end_seconds": 120.37151927437641,
+              "label": "F#m"
+            },
+            {
+              "start_seconds": 145.85142857142858,
+              "end_seconds": 146.22294784580498,
+              "label": "Bm"
+            },
+            {
+              "start_seconds": 19.659501133786847,
+              "end_seconds": 20.0,
+              "label": "F#m"
+            }
+          ],
+          "semantics": "Core family membership ignores inversion and selected extensions; no reference harmony is present. Unsupported qualities, N/X and gaps remain separate."
+        },
+        "crema": {
+          "ledger": {
+            "in_palette_seconds": 149.35074829931972,
+            "outside_palette_seconds": 0.0,
+            "no_chord_seconds": 5.884807256235831,
+            "unknown_seconds": 0.0,
+            "unsupported_seconds": 0.0,
+            "uncovered_seconds": 0.0,
+            "extension_reduced_seconds": 0.0,
+            "explicit_slash_bass_seconds": 0.0
+          },
+          "harmonic_family_seconds": 149.35074829931972,
+          "fraction_of_harmonic_families_in_palette": 1.0,
+          "outside_palette_intervals": 0,
+          "outside_examples": [],
+          "semantics": "Core family membership ignores inversion and selected extensions; no reference harmony is present. Unsupported qualities, N/X and gaps remain separate."
+        }
+      },
+      "private_draft_sha256": "dabe85b04588cd1fd62df4cd4408f2ec23556e712f3d58f544f6fc19ddf86250",
+      "private_draft_revision": 1,
+      "provisional_chord_edits": [],
+      "agent_draft_entry_seconds": 0.3053000001907349,
+      "human_correction_seconds": null,
+      "accepted_arrangement": false,
+      "accuracy_score": null
+    }
+  ]
+}
