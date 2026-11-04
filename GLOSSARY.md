@@ -15,6 +15,10 @@ _Avoid_: Step (when implying a mandatory sequence).
 The band member responsible for songwriting, lyrics, vocal melody and voice.
 _Avoid_: Separate Songwriter or Lyricist members.
 
+**Preview**:
+A short listening example of a musical idea in Band mode. Starting another preview replaces the current one.
+_Avoid_: Recording (when referring to a generated listening example).
+
 **Song**:
 A musical work that can have multiple performances, recordings and guitar arrangements.
 _Avoid_: Recording, video (when referring to the musical work).
