@@ -1,0 +1,1940 @@
+{
+  "schema_version": "starter-four-recording-assessment-1.0",
+  "checked_at_utc": "2026-10-16T21:09:06.541395+00:00",
+  "issue": "https://github.com/dcromp/music-os/issues/3",
+  "source_commit": "60aed15c7e7772732789d5870395037eecd5440c",
+  "scope": "Bounded desk assessment and replay-input verification, not a performed listening review.",
+  "status": "inconclusive; ticket 3 remains open; ticket 7 remains blocked",
+  "gold": false,
+  "state_vocabulary": {
+    "accepted": "Requires actual independent musical evidence; no entries in this assessment.",
+    "provisional": "Candidate retained; audio interpretation has not been independently verified.",
+    "rejected": "A promotion decision is rejected for lack of evidence; does not mean the music was audibly disproven."
+  },
+  "policy": {
+    "timestamp_units": "seconds; half-open ranges",
+    "replay_frame_rule": "Nearest sample using Python round (ties to even); frame ranges are only replay extraction, not refined musical boundaries.",
+    "native_times_modified": false,
+    "retunes_models": false,
+    "treats_model_agreement_as_reference": false,
+    "teacher_prose_is_exact_recording_reference": false,
+    "founder_transcription_required": false
+  },
+  "independent_review_capability": {
+    "capable_audio_review_available_to_this_session": false,
+    "auditory_review_performed": false,
+    "exact_recording_reference_mapping_available_in_saved_evidence": false,
+    "next_route": "Capable reviewer of the saved audio, or permitted canonical audio plus a validated audio-only time mapping; no vendor contact performed."
+  },
+  "sources": {
+    "wild-andy": {
+      "url": "https://www.andyguitar.co.uk/videos/electric-guitar-day-7-wild-thing",
+      "checked_date": "2026-10-16",
+      "scope": "Primary teacher/annotation documentation; no exact cached-audio hash/time-origin pairing supplied."
+    },
+    "wild-lauren": {
+      "url": "https://www.laurenbateman.com/wild-thing-chord-chart/",
+      "checked_date": "2026-10-16",
+      "scope": "Primary teacher/annotation documentation; no exact cached-audio hash/time-origin pairing supplied."
+    },
+    "wild-carl": {
+      "url": "https://guitarlessons365.com/wild-thing-guitar-lesson-the-troggs/",
+      "checked_date": "2026-10-16",
+      "scope": "Primary teacher/annotation documentation; no exact cached-audio hash/time-origin pairing supplied."
+    },
+    "love-andy": {
+      "url": "https://www.andyguitar.co.uk/videos/beatles-guitar-day-01-love-me-do",
+      "checked_date": "2026-10-16",
+      "scope": "Primary teacher/annotation documentation; no exact cached-audio hash/time-origin pairing supplied."
+    },
+    "love-brad": {
+      "url": "https://www.simpleguitar.com/blog/howtoplaylovemedo",
+      "checked_date": "2026-10-16",
+      "scope": "Primary teacher/annotation documentation; no exact cached-audio hash/time-origin pairing supplied."
+    },
+    "dylan-songnotes": {
+      "url": "https://songnotes.net/lessons/88/",
+      "checked_date": "2026-10-16",
+      "scope": "Primary teacher/annotation documentation; no exact cached-audio hash/time-origin pairing supplied."
+    },
+    "dylan-jon": {
+      "url": "https://www.jonmaclennan.com/blog/knockin-on-heaven%27s-door-chords",
+      "checked_date": "2026-10-16",
+      "scope": "Primary teacher/annotation documentation; no exact cached-audio hash/time-origin pairing supplied."
+    },
+    "twist-andy": {
+      "url": "https://www.andyguitar.co.uk/videos/beatles-guitar-day-02-twist-and-shout",
+      "checked_date": "2026-10-16",
+      "scope": "Primary teacher/annotation documentation; no exact cached-audio hash/time-origin pairing supplied."
+    },
+    "twist-jon": {
+      "url": "https://www.jonmaclennan.com/blog/twist-and-shout-chords",
+      "checked_date": "2026-10-16",
+      "scope": "Primary teacher/annotation documentation; no exact cached-audio hash/time-origin pairing supplied."
+    },
+    "isophonics": {
+      "url": "https://isophonics.net/content/reference-annotations.html",
+      "checked_date": "2026-10-16",
+      "scope": "Primary teacher/annotation documentation; no exact cached-audio hash/time-origin pairing supplied."
+    },
+    "rock-corpus": {
+      "url": "https://rockcorpus.midside.com/timing_data.html",
+      "checked_date": "2026-10-16",
+      "scope": "Primary teacher/annotation documentation; no exact cached-audio hash/time-origin pairing supplied."
+    }
+  },
+  "inputs": [
+    {
+      "path": "experiments/generated/catalogue-change-check-20261016/report.json",
+      "sha256": "c6c4d4d0161d5b2d77cc36aa7bd3e5500a5f9b3c34b8578e64560ef14efbe5c9"
+    },
+    {
+      "path": "experiments/generated/catalogue-starter-timing-v2-20261016/report.json",
+      "sha256": "9cbf0d2e388b340fee5835c7a0e0084780a9ee01c43d9c4c60ff33cd3c89c6a6"
+    },
+    {
+      "path": "docs/FIRST_TEN_REFERENCE_MATCHING.json",
+      "sha256": "d68938df3719892d5b426898b81d2285d4c3651cff7be3a16f731273f766d5a6"
+    },
+    {
+      "path": "docs/CATALOGUE_TIMING_RHYTHM_CHECK.json",
+      "sha256": "24e71041b450f84eeec539ca0cbba5ee91e6ae8a004f2d973588c4839ed07dc8"
+    },
+    {
+      "path": "catalogue/starter-four-teaching-review.json",
+      "sha256": "564b33066eec4f9e1258a6d0168671fb9f27f470c3cd2e396b6124876f6f25ce"
+    },
+    {
+      "path": "catalogue/starter-four-curation-proposals-v2.json",
+      "sha256": "b4f1618333abd4c1a7075fd2ec926ecaf8f18811f93129a3f391985a55304867"
+    },
+    {
+      "path": "catalogue/first-ten-curation-proposals-v1.json",
+      "sha256": "c456fe320ac36b3bdb8c2b8657231cb15c04795076a627605d65fd9304a342ad"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/manifest.json",
+      "sha256": "64d67f29f6ff1ce91aeae6309e7102c2c2629e5c0fdcd061035de2a2e22f3fb5"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/troggs-wild-thing-youtube-20261011/audio.wav",
+      "sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/troggs-wild-thing-youtube-20261011/primary.json",
+      "sha256": "aecee2605813eb56acd62971619080f8af1906b6f1319a2c737386d7f449a7c4"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/troggs-wild-thing-youtube-20261011/crema.json",
+      "sha256": "13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/troggs-wild-thing-youtube-20261011/review.json",
+      "sha256": "5bd9033994ef3ed0c9e3ecc9342f3e5483b68145634515926cf6cc29689fa91c"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/private-drafts/troggs-wild-thing-youtube-20261011.json",
+      "sha256": "8093be9866323bee104ce994d14dd61292053e3fb75035a33aa4d19b395e8587"
+    },
+    {
+      "path": "experiments/generated/catalogue-audio-rhythm-v2-20261016/troggs-wild-thing-youtube-20261011.json",
+      "sha256": "b22561e09a0d1e55062d367342fdf671e02fbeed1a626b42048b0fd82d6fcabf"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/beatles-love-me-do-youtube-20261011/audio.wav",
+      "sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/beatles-love-me-do-youtube-20261011/primary.json",
+      "sha256": "833d826283e403fc5edccd5720b6afe784a94bd6f900cc5fac70a3f877405d6b"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/beatles-love-me-do-youtube-20261011/crema.json",
+      "sha256": "a12394c6654f761febee240b95d60c45b7c55e33a6fb287225d181976e6531c4"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/beatles-love-me-do-youtube-20261011/review.json",
+      "sha256": "4c78d2384d87b9442a76143707ddc4a336453c4a12e9c0f0d51d6070bcccc50d"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/private-drafts/beatles-love-me-do-youtube-20261011.json",
+      "sha256": "a8060caa85e938214050e2ed006f285d3d3e6874478eb49bf9911a0bcb735272"
+    },
+    {
+      "path": "experiments/generated/catalogue-audio-rhythm-v2-20261016/beatles-love-me-do-youtube-20261011.json",
+      "sha256": "6cbcd025c732e155c9e5666c0d6d304803a5c7067b55259880cc71fda82aae11"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/bob-dylan-knockin-heavens-door-youtube-20261011/audio.wav",
+      "sha256": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/bob-dylan-knockin-heavens-door-youtube-20261011/primary.json",
+      "sha256": "018dc316af89e4678d9a9718b26553d3f048e8f80deaedf8e5ea31c14303b78e"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/bob-dylan-knockin-heavens-door-youtube-20261011/crema.json",
+      "sha256": "022405eadb0d332a34ca66b74989e72cc5e597e57417c1a289178e0a7a084082"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/bob-dylan-knockin-heavens-door-youtube-20261011/review.json",
+      "sha256": "e0b6c81da35a05fb088183a138969b89a537e66b38e050fdd47d1eeefd810c37"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/private-drafts/bob-dylan-knockin-heavens-door-youtube-20261011.json",
+      "sha256": "c1abaf3ceb131ffcd5c0f6ae7b264178fc31d1f189686d7f5d27fb995f31fdbb"
+    },
+    {
+      "path": "experiments/generated/catalogue-audio-rhythm-v2-20261016/bob-dylan-knockin-heavens-door-youtube-20261011.json",
+      "sha256": "617cb3834672c12e94e637f67194706fdf6ab0748fb69daae31d9355d11bc9fd"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/beatles-twist-and-shout-youtube-20261011/audio.wav",
+      "sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/beatles-twist-and-shout-youtube-20261011/primary.json",
+      "sha256": "e7ce805072c42e3ef39c15eadf8b3522534cc1274c5380b0553e52a1807b935c"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/beatles-twist-and-shout-youtube-20261011/crema.json",
+      "sha256": "09f64db9a6563e2256c528576bd9776b13c84128ce3b982810b8dfbe6145bb59"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/cases/beatles-twist-and-shout-youtube-20261011/review.json",
+      "sha256": "b571630752c74442bd5f63f6f04ce71cac1b784cc832ac8744dfce6715c0b96c"
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/private-drafts/beatles-twist-and-shout-youtube-20261011.json",
+      "sha256": "f2e5846c668b6d472e8db05eda480b37e50187071104979cb7e52f3343862cf9"
+    },
+    {
+      "path": "experiments/generated/catalogue-audio-rhythm-v2-20261016/beatles-twist-and-shout-youtube-20261011.json",
+      "sha256": "83c924d2424c050e0d862389fa0f2ef1e05ecd95bb0bf196402e898e8a17fc6b"
+    }
+  ],
+  "cases": [
+    {
+      "id": "troggs-wild-thing-youtube-20261011",
+      "name": "Wild Thing",
+      "recording": {
+        "id": "troggs-wild-thing-youtube-20261011",
+        "title": "audio",
+        "duration_seconds": 155.3516553287982,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "audio_path": "experiments/generated/catalogue-curation-20261014/cases/troggs-wild-thing-youtube-20261011/audio.wav",
+      "native_report_case_index": 0,
+      "draft_snapshot": {
+        "path": "experiments/generated/catalogue-curation-20261014/private-drafts/troggs-wild-thing-youtube-20261011.json",
+        "sha256": "8093be9866323bee104ce994d14dd61292053e3fb75035a33aa4d19b395e8587",
+        "revision": 2
+      },
+      "coverage": {
+        "selected_windows": 12,
+        "fixed_samples": 4,
+        "queued_window_union_seconds": 57.005260770975056,
+        "queue_plus_claim_targets_union_seconds": 91.87798639455782,
+        "auditioned_windows": 0
+      },
+      "windows": [
+        {
+          "id": "selected-disagreement-1",
+          "selection": "selected-disagreement",
+          "source_index": 0,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 149.80031746031747,
+          "end_seconds": 153.07986394557824,
+          "replay_frame_interval": [
+            3303097,
+            3375411
+          ],
+          "replay_pcm_sha256": "8eb78ff5e3935b32abbe6451b9cbd13855b7ea33d11013015c031c9ea69490bb",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-2",
+          "selection": "selected-disagreement",
+          "source_index": 1,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 61.100634920634924,
+          "end_seconds": 64.37963718820862,
+          "replay_frame_interval": [
+            1347269,
+            1419571
+          ],
+          "replay_pcm_sha256": "bd1c2147fda2996184605c66431a54a8f43d7a7f5ce62cdebd7b68a691f9e09d",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-3",
+          "selection": "selected-disagreement",
+          "source_index": 2,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 0.9148752834467122,
+          "end_seconds": 4.193514739229025,
+          "replay_frame_interval": [
+            20173,
+            92467
+          ],
+          "replay_pcm_sha256": "696f31ada7bddb805f67ca6b7676ce5c67e26b91fbbd2fbcf73bbed34203aca0",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-4",
+          "selection": "selected-disagreement",
+          "source_index": 3,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 79.98607709750567,
+          "end_seconds": 83.23424036281179,
+          "replay_frame_interval": [
+            1763693,
+            1835315
+          ],
+          "replay_pcm_sha256": "efea1cbd9faf58495b6f3569d5066d3501b18cc667f02ae7ce562fafa8c09d0d",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-5",
+          "selection": "selected-disagreement",
+          "source_index": 4,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 84.722947845805,
+          "end_seconds": 87.97111111111111,
+          "replay_frame_interval": [
+            1868141,
+            1939763
+          ],
+          "replay_pcm_sha256": "8c105c6e3784357a618445d7883f3252b9de24dcb738960d69aee8eb6b505edb",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-6",
+          "selection": "selected-disagreement",
+          "source_index": 5,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 132.7724716553288,
+          "end_seconds": 135.98997732426304,
+          "replay_frame_interval": [
+            2927633,
+            2998579
+          ],
+          "replay_pcm_sha256": "2411932b270f32d73eb9da7975b125cb10039b81aee19fd5f0ee0a66ccf5c4bc",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-7",
+          "selection": "selected-disagreement",
+          "source_index": 6,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 137.41646258503403,
+          "end_seconds": 140.63396825396825,
+          "replay_frame_interval": [
+            3030033,
+            3100979
+          ],
+          "replay_pcm_sha256": "b4c9b0b210f8b0fa09058685114371939a7a82af510b4ee45fcea7fdd9d66035",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-8",
+          "selection": "selected-disagreement",
+          "source_index": 7,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 11.936553287981859,
+          "end_seconds": 15.153333333333334,
+          "replay_frame_interval": [
+            263201,
+            334131
+          ],
+          "replay_pcm_sha256": "3cb448243f06e22d62c5d9a573be671af254af7d9aad3aaef81d18adf47affc9",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-9",
+          "selection": "selected-disagreement",
+          "source_index": 8,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 67.97374149659863,
+          "end_seconds": 71.15986394557824,
+          "replay_frame_interval": [
+            1498821,
+            1569075
+          ],
+          "replay_pcm_sha256": "0c83df22481e836a624ce654ed0af45ef3670ec649419060d41a7ebde00371b8",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-10",
+          "selection": "selected-disagreement",
+          "source_index": 9,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 58.5,
+          "end_seconds": 61.68612244897959,
+          "replay_frame_interval": [
+            1289925,
+            1360179
+          ],
+          "replay_pcm_sha256": "4732f5a2ab8f4566e253dd511bd4cd73194fc99b47ac2dab430ce09de94e2abf",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-11",
+          "selection": "selected-disagreement",
+          "source_index": 10,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 145.2802267573696,
+          "end_seconds": 148.43587301587303,
+          "replay_frame_interval": [
+            3203429,
+            3273011
+          ],
+          "replay_pcm_sha256": "5ee136e52dfadb5a1da06531a13e57fef493d18ead0a8bf54cd74c857d80610e",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-12",
+          "selection": "selected-disagreement",
+          "source_index": 11,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 142.3080725623583,
+          "end_seconds": 145.4637188208617,
+          "replay_frame_interval": [
+            3137893,
+            3207475
+          ],
+          "replay_pcm_sha256": "996db195f5fa69c4188569097d900e38eb74d595d584a7dc7707969bab7a303c",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "fixed-coverage-1",
+          "selection": "fixed-coverage",
+          "source_index": 0,
+          "source_reason": "Fixed sample, including possible shared model errors",
+          "source_sample_id": "sample-1",
+          "start_seconds": 12.53516553287982,
+          "end_seconds": 18.53516553287982,
+          "replay_frame_interval": [
+            276400,
+            408700
+          ],
+          "replay_pcm_sha256": "5d0d7b8abb953a7aca5bdd9ccf41aa154e7691b3861873e1d6ab769d8f01ec34",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "fixed-coverage-2",
+          "selection": "fixed-coverage",
+          "source_index": 1,
+          "source_reason": "Fixed sample, including possible shared model errors",
+          "source_sample_id": "sample-2",
+          "start_seconds": 51.37307936507936,
+          "end_seconds": 57.37307936507936,
+          "replay_frame_interval": [
+            1132776,
+            1265076
+          ],
+          "replay_pcm_sha256": "0df33e2620b394a384a090d60feef6077fab1df51808fc5519540f9dc9e66e41",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "fixed-coverage-3",
+          "selection": "fixed-coverage",
+          "source_index": 2,
+          "source_reason": "Fixed sample, including possible shared model errors",
+          "source_sample_id": "sample-3",
+          "start_seconds": 90.21099319727891,
+          "end_seconds": 96.21099319727891,
+          "replay_frame_interval": [
+            1989152,
+            2121452
+          ],
+          "replay_pcm_sha256": "a6a26a5abd880bc75b0335e3fcdf7449b5639f3e826f1d91d08a37cc3c099fe5",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "fixed-coverage-4",
+          "selection": "fixed-coverage",
+          "source_index": 3,
+          "source_reason": "Fixed sample, including possible shared model errors",
+          "source_sample_id": "sample-4",
+          "start_seconds": 129.04890702947844,
+          "end_seconds": 135.04890702947844,
+          "replay_frame_interval": [
+            2845528,
+            2977828
+          ],
+          "replay_pcm_sha256": "f6271a696a83f6094442654c88c70dd79b962b99fb57659761948bcaeafec5c0",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        }
+      ],
+      "claims": [
+        {
+          "id": "contrast-and-contacts",
+          "question": "Locate the G/A contrast and paired physical guitar contacts within the native A search regions.",
+          "status": "provisional",
+          "check_outcome": "inconclusive",
+          "method": "Desk assessment of exact native evidence and rechecked primary teaching sources; no auditory observation.",
+          "target_origin": "native-contrast-holds",
+          "spans": [
+            {
+              "start_seconds": 104.64399092970521,
+              "end_seconds": 111.20743764172336,
+              "replay_frame_interval": [
+                2307400,
+                2452124
+              ],
+              "replay_pcm_sha256": "05e090fbbb51397c38254212ef25c9dfe1eced3883648951127f20aeb5c92280",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 26.09922902494331,
+              "end_seconds": 45.97551020408163,
+              "replay_frame_interval": [
+                575488,
+                1013760
+              ],
+              "replay_pcm_sha256": "162f037e53412337156ad759081a147b17516a67c2338f15f71a406fe7be2984",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 91.67238095238095,
+              "end_seconds": 111.17714285714285,
+              "replay_frame_interval": [
+                2021376,
+                2451456
+              ],
+              "replay_pcm_sha256": "5073421ca71f2ad1d5adb1f8710ca583d90a6bd008c70ad7ef2a875cc674d7bc",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            }
+          ],
+          "reason": "A held harmonic label and full-mix transients cannot identify the contrasting notes, guitar contacts or rests.",
+          "accepted_boundaries_seconds": [],
+          "needed_evidence": "Capable exact-audio review with recorded observations and independently chosen boundaries, or a verified reference-audio time transform checked on reserved windows."
+        },
+        {
+          "id": "common-hold",
+          "question": "Determine what actually happens within the saved common A search window.",
+          "status": "provisional",
+          "check_outcome": "inconclusive",
+          "method": "Desk assessment of exact native evidence and rechecked primary teaching sources; no auditory observation.",
+          "target_origin": "private-sections",
+          "spans": [
+            {
+              "start_seconds": 104.64399092970521,
+              "end_seconds": 111.17714285714285,
+              "replay_frame_interval": [
+                2307400,
+                2451456
+              ],
+              "replay_pcm_sha256": "c38dd0dbd6b97757c9061658b41380592d1c64a7605b5139155c8929a7c5624c",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            }
+          ],
+          "reason": "The saved range is a model intersection, not an independently observed formal section or continuous sound.",
+          "accepted_boundaries_seconds": [],
+          "needed_evidence": "Capable exact-audio review with recorded observations and independently chosen boundaries, or a verified reference-audio time transform checked on reserved windows."
+        }
+      ],
+      "practice_proposal": {
+        "source_ids": [
+          "wild-andy",
+          "wild-lauren",
+          "wild-carl"
+        ],
+        "summary": "Paired contacts/holds and a separate G/A note figure are teacher-supported proposals. A simplified A/D/E loop is not a verified complete recording arrangement.",
+        "recorded_rhythm_verified": false
+      },
+      "promotion_decision": {
+        "status": "rejected",
+        "scope": "Promotion to reviewed learner content only; not an audible rejection of the musical hypothesis.",
+        "reason": "No independently checked boundary, recorded rhythm or usable reviewed excerpt is evidenced."
+      },
+      "assessment_outcome": "inconclusive",
+      "blocker": "The actual G/A contrast, repeated guitar contacts, rests and musical section extents have not been independently heard or matched to this audio hash.",
+      "accepted_spans": [],
+      "accepted_boundaries_seconds": [],
+      "usable_for_reviewed_pack": false
+    },
+    {
+      "id": "beatles-love-me-do-youtube-20261011",
+      "name": "Love Me Do",
+      "recording": {
+        "id": "beatles-love-me-do-youtube-20261011",
+        "title": "audio",
+        "duration_seconds": 141.69832199546485,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "audio_path": "experiments/generated/catalogue-curation-20261014/cases/beatles-love-me-do-youtube-20261011/audio.wav",
+      "native_report_case_index": 3,
+      "draft_snapshot": {
+        "path": "experiments/generated/catalogue-curation-20261014/private-drafts/beatles-love-me-do-youtube-20261011.json",
+        "sha256": "a8060caa85e938214050e2ed006f285d3d3e6874478eb49bf9911a0bcb735272",
+        "revision": 2
+      },
+      "coverage": {
+        "selected_windows": 12,
+        "fixed_samples": 4,
+        "queued_window_union_seconds": 60.12426303854875,
+        "queue_plus_claim_targets_union_seconds": 81.96842630385487,
+        "auditioned_windows": 0
+      },
+      "windows": [
+        {
+          "id": "selected-disagreement-1",
+          "selection": "selected-disagreement",
+          "source_index": 0,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 110.91487528344672,
+          "end_seconds": 114.34897959183674,
+          "replay_frame_interval": [
+            2445673,
+            2521395
+          ],
+          "replay_pcm_sha256": "ddf17a3cd91ba3bd082878494536e8ec73fc25cd02a33cafc76d13710ce9b9a4",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-2",
+          "selection": "selected-disagreement",
+          "source_index": 1,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 51.56503401360544,
+          "end_seconds": 54.998775510204084,
+          "replay_frame_interval": [
+            1137009,
+            1212723
+          ],
+          "replay_pcm_sha256": "fcab40f792580698b6a9471a527b02c2c8776643b0f013fa08e246fe673a976d",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-3",
+          "selection": "selected-disagreement",
+          "source_index": 2,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 5.001587301587302,
+          "end_seconds": 8.373106575963718,
+          "replay_frame_interval": [
+            110285,
+            184627
+          ],
+          "replay_pcm_sha256": "2d3c0d3d12cc6055ac37d6fefb5486aa60a95d566bbf6ab09f02e8ae6b78c372",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-4",
+          "selection": "selected-disagreement",
+          "source_index": 3,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 114.25854875283447,
+          "end_seconds": 117.59977324263039,
+          "replay_frame_interval": [
+            2519401,
+            2593075
+          ],
+          "replay_pcm_sha256": "65cac4f613039e7866d3198a4944a0249c16660cfd6f7fd19c27ebc295d4829b",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-5",
+          "selection": "selected-disagreement",
+          "source_index": 4,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 135.1873469387755,
+          "end_seconds": 138.49773242630386,
+          "replay_frame_interval": [
+            2980881,
+            3053875
+          ],
+          "replay_pcm_sha256": "26353a6be11043154707bb10098b046bb70b64cfc1a0abe3282c6cea2ba87a04",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-6",
+          "selection": "selected-disagreement",
+          "source_index": 5,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 128.77863945578233,
+          "end_seconds": 132.08902494331065,
+          "replay_frame_interval": [
+            2839569,
+            2912563
+          ],
+          "replay_pcm_sha256": "0dd3a223a961fc321ef0ea165b55a6015980600b90ac24ebb7f073bf2d5fe291",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-7",
+          "selection": "selected-disagreement",
+          "source_index": 6,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 28.22154195011338,
+          "end_seconds": 31.5,
+          "replay_frame_interval": [
+            622285,
+            694575
+          ],
+          "replay_pcm_sha256": "19b8bac3633fb2c34e2ed5816bc9f923435256e1206001ded02ad6905b0f06d7",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-8",
+          "selection": "selected-disagreement",
+          "source_index": 7,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 1.9365532879818592,
+          "end_seconds": 5.122312925170068,
+          "replay_frame_interval": [
+            42701,
+            112947
+          ],
+          "replay_pcm_sha256": "2060a8a9df49b9379bc116ada96a7bf08e2bf83ed542f66c037094e85722a1b4",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-9",
+          "selection": "selected-disagreement",
+          "source_index": 8,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 95.09501133786848,
+          "end_seconds": 98.28022675736962,
+          "replay_frame_interval": [
+            2096845,
+            2167079
+          ],
+          "replay_pcm_sha256": "b4c1d203a5dc6e2b660c0425922180d1949d82eb40266f120119e1c1f397bfdb",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-10",
+          "selection": "selected-disagreement",
+          "source_index": 9,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 127.41718820861678,
+          "end_seconds": 130.60222222222222,
+          "replay_frame_interval": [
+            2809549,
+            2879779
+          ],
+          "replay_pcm_sha256": "32f58639b56df6a22855ac6c6e3d08cd89ca3af32f23bec4a5d0fb653c7c2af7",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-11",
+          "selection": "selected-disagreement",
+          "source_index": 10,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 70.01746031746032,
+          "end_seconds": 73.17183673469388,
+          "replay_frame_interval": [
+            1543885,
+            1613439
+          ],
+          "replay_pcm_sha256": "0afd32c52f22adc387047ef72189bfbf9cc216b421ada46dc270aa8ad6166bd3",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-12",
+          "selection": "selected-disagreement",
+          "source_index": 11,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 75.59024943310658,
+          "end_seconds": 78.74462585034014,
+          "replay_frame_interval": [
+            1666765,
+            1736319
+          ],
+          "replay_pcm_sha256": "5836aaa4180ecaa1366c5df038c4941a7b55cdbd12039725f3edfb11779b233c",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "fixed-coverage-1",
+          "selection": "fixed-coverage",
+          "source_index": 0,
+          "source_reason": "Fixed sample, including possible shared model errors",
+          "source_sample_id": "sample-1",
+          "start_seconds": 11.169832199546486,
+          "end_seconds": 17.169832199546484,
+          "replay_frame_interval": [
+            246295,
+            378595
+          ],
+          "replay_pcm_sha256": "9e7a24515aba330743eebe3092ad5bd00e37c99cdaf01d109c4b1fbe5fe80f21",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "fixed-coverage-2",
+          "selection": "fixed-coverage",
+          "source_index": 1,
+          "source_reason": "Fixed sample, including possible shared model errors",
+          "source_sample_id": "sample-2",
+          "start_seconds": 46.5944126984127,
+          "end_seconds": 52.5944126984127,
+          "replay_frame_interval": [
+            1027407,
+            1159707
+          ],
+          "replay_pcm_sha256": "f3b23bba85919d25010290c845cf26e4a46c61a258a0b7b638f5ec30eedb5690",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "fixed-coverage-3",
+          "selection": "fixed-coverage",
+          "source_index": 2,
+          "source_reason": "Fixed sample, including possible shared model errors",
+          "source_sample_id": "sample-3",
+          "start_seconds": 82.0189931972789,
+          "end_seconds": 88.0189931972789,
+          "replay_frame_interval": [
+            1808519,
+            1940819
+          ],
+          "replay_pcm_sha256": "48e600c074223d714792caaa286291bbd1f4600a548e8979dd3e8d341282850b",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "fixed-coverage-4",
+          "selection": "fixed-coverage",
+          "source_index": 3,
+          "source_reason": "Fixed sample, including possible shared model errors",
+          "source_sample_id": "sample-4",
+          "start_seconds": 117.44357369614512,
+          "end_seconds": 123.44357369614512,
+          "replay_frame_interval": [
+            2589631,
+            2721931
+          ],
+          "replay_pcm_sha256": "903ba414d33dd3108836e4c6f5555d0d2f114696b54580de93386860c4161a23",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        }
+      ],
+      "claims": [
+        {
+          "id": "damp-versus-skip",
+          "question": "Distinguish deliberate guitar damping from a skipped/ringing contact at the saved C-hold searches.",
+          "status": "provisional",
+          "check_outcome": "inconclusive",
+          "method": "Desk assessment of exact native evidence and rechecked primary teaching sources; no auditory observation.",
+          "target_origin": "private-sections",
+          "spans": [
+            {
+              "start_seconds": 21.578956916099774,
+              "end_seconds": 28.142585034013607,
+              "replay_frame_interval": [
+                475816,
+                620544
+              ],
+              "replay_pcm_sha256": "ef581240d675561f818dce4842e4492eb065777587c6352e5cd4eb38b9d6a5e1",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 42.879274376417236,
+              "end_seconds": 49.47374149659864,
+              "replay_frame_interval": [
+                945488,
+                1090896
+              ],
+              "replay_pcm_sha256": "ef24b8b55a03f2f6fd96ded5f9267627839906b5a71f6c576bf7412a53da85c7",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            }
+          ],
+          "reason": "Low full-mix energy can be caused by several instruments; neither it nor a held C label establishes physical guitar damping.",
+          "accepted_boundaries_seconds": [],
+          "needed_evidence": "Capable exact-audio review with recorded observations and independently chosen boundaries, or a verified reference-audio time transform checked on reserved windows."
+        },
+        {
+          "id": "d-contrast",
+          "question": "Identify the musical extent and contacts of D-led contrast candidates.",
+          "status": "provisional",
+          "check_outcome": "inconclusive",
+          "method": "Desk assessment of exact native evidence and rechecked primary teaching sources; no auditory observation.",
+          "target_origin": "native-d-holds",
+          "spans": [
+            {
+              "start_seconds": 56.03718820861678,
+              "end_seconds": 59.28798185941043,
+              "replay_frame_interval": [
+                1235620,
+                1307300
+              ],
+              "replay_pcm_sha256": "96b03e6f5d60b9416945272e0729d1fd7152224c13c65861cbd0c2240594a984",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 62.50775510204082,
+              "end_seconds": 65.75854875283447,
+              "replay_frame_interval": [
+                1378296,
+                1449976
+              ],
+              "replay_pcm_sha256": "171045844deb205c915d774fd424d39fc3e37cece7a13deec8b72302b46c727e",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 91.85759637188208,
+              "end_seconds": 93.52943310657596,
+              "replay_frame_interval": [
+                2025460,
+                2062324
+              ],
+              "replay_pcm_sha256": "0db801d073ff31e7ff1ef8f888181601b004a9bb38e25101e49c7c03ed797fc7",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 98.26630385487529,
+              "end_seconds": 100.0,
+              "replay_frame_interval": [
+                2166772,
+                2205000
+              ],
+              "replay_pcm_sha256": "b3f109b0c54cafaba7aa6bab7c2c447376b46d58bc84436f0a46d29d41d4857d",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 56.006530612244894,
+              "end_seconds": 59.350204081632654,
+              "replay_frame_interval": [
+                1234944,
+                1308672
+              ],
+              "replay_pcm_sha256": "c23fa0b032a64c317d739a32e0b4d0eee4a411a56ac2de93721d09db2d246493",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 62.5081179138322,
+              "end_seconds": 65.75891156462585,
+              "replay_frame_interval": [
+                1378304,
+                1449984
+              ],
+              "replay_pcm_sha256": "bb758b9311a8734387174999ba8a0448a1ad6c150ea714f9a302d94b18721cbc",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 90.27918367346939,
+              "end_seconds": 93.52997732426304,
+              "replay_frame_interval": [
+                1990656,
+                2062336
+              ],
+              "replay_pcm_sha256": "3e8020e3c33ab1588e0ccff55103e12bab8872b1b46777654476700070a61e3c",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 96.59501133786848,
+              "end_seconds": 99.93868480725624,
+              "replay_frame_interval": [
+                2129920,
+                2203648
+              ],
+              "replay_pcm_sha256": "1778eb962cf7028f0148e0f443f7f09bf148bf4c591bf42c1d3683eb9efcc56d",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            }
+          ],
+          "reason": "Native D spans supply search coordinates, not accepted section boundaries.",
+          "accepted_boundaries_seconds": [],
+          "needed_evidence": "Capable exact-audio review with recorded observations and independently chosen boundaries, or a verified reference-audio time transform checked on reserved windows."
+        },
+        {
+          "id": "swing",
+          "question": "Verify the recorded accompaniment swing and contact pattern.",
+          "status": "provisional",
+          "check_outcome": "inconclusive",
+          "method": "Desk assessment of exact native evidence and rechecked primary teaching sources; no auditory observation.",
+          "target_origin": "fixed-samples",
+          "spans": [
+            {
+              "start_seconds": 11.169832199546486,
+              "end_seconds": 17.169832199546484,
+              "replay_frame_interval": [
+                246295,
+                378595
+              ],
+              "replay_pcm_sha256": "9e7a24515aba330743eebe3092ad5bd00e37c99cdaf01d109c4b1fbe5fe80f21",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 46.5944126984127,
+              "end_seconds": 52.5944126984127,
+              "replay_frame_interval": [
+                1027407,
+                1159707
+              ],
+              "replay_pcm_sha256": "f3b23bba85919d25010290c845cf26e4a46c61a258a0b7b638f5ec30eedb5690",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 82.0189931972789,
+              "end_seconds": 88.0189931972789,
+              "replay_frame_interval": [
+                1808519,
+                1940819
+              ],
+              "replay_pcm_sha256": "48e600c074223d714792caaa286291bbd1f4600a548e8979dd3e8d341282850b",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 117.44357369614512,
+              "end_seconds": 123.44357369614512,
+              "replay_frame_interval": [
+                2589631,
+                2721931
+              ],
+              "replay_pcm_sha256": "903ba414d33dd3108836e4c6f5555d0d2f114696b54580de93386860c4161a23",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            }
+          ],
+          "reason": "Teacher prose supports a practice version; no exact-file swing ratio, stroke sequence or damping times are available.",
+          "accepted_boundaries_seconds": [],
+          "needed_evidence": "Capable exact-audio review with recorded observations and independently chosen boundaries, or a verified reference-audio time transform checked on reserved windows."
+        }
+      ],
+      "practice_proposal": {
+        "source_ids": [
+          "love-andy",
+          "love-brad",
+          "isophonics"
+        ],
+        "summary": "Deliberate hand damping, a D-led contrast and qualitative swing are teacher-supported practice ideas. Teacher counting conventions describe separate arrangements.",
+        "recorded_rhythm_verified": false
+      },
+      "promotion_decision": {
+        "status": "rejected",
+        "scope": "Promotion to reviewed learner content only; not an audible rejection of the musical hypothesis.",
+        "reason": "No independently checked boundary, recorded rhythm or usable reviewed excerpt is evidenced."
+      },
+      "assessment_outcome": "inconclusive",
+      "blocker": "No capable audition or transfer from the annotated CD to this cached edition/time zero is available. Damping, swing and section timing remain unverified.",
+      "accepted_spans": [],
+      "accepted_boundaries_seconds": [],
+      "usable_for_reviewed_pack": false
+    },
+    {
+      "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+      "name": "Knockin' on Heaven's Door \u2014 Dylan",
+      "recording": {
+        "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+        "title": "audio",
+        "duration_seconds": 149.89496598639457,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "audio_path": "experiments/generated/catalogue-curation-20261014/cases/bob-dylan-knockin-heavens-door-youtube-20261011/audio.wav",
+      "native_report_case_index": 1,
+      "draft_snapshot": {
+        "path": "experiments/generated/catalogue-curation-20261014/private-drafts/bob-dylan-knockin-heavens-door-youtube-20261011.json",
+        "sha256": "c1abaf3ceb131ffcd5c0f6ae7b264178fc31d1f189686d7f5d27fb995f31fdbb",
+        "revision": 3
+      },
+      "coverage": {
+        "selected_windows": 12,
+        "fixed_samples": 4,
+        "queued_window_union_seconds": 39.30190476190474,
+        "queue_plus_claim_targets_union_seconds": 43.95389569160995,
+        "auditioned_windows": 0
+      },
+      "windows": [
+        {
+          "id": "selected-disagreement-1",
+          "selection": "selected-disagreement",
+          "source_index": 0,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 54.35142857142857,
+          "end_seconds": 57.599410430839,
+          "replay_frame_interval": [
+            1198449,
+            1270067
+          ],
+          "replay_pcm_sha256": "f71000cb9f71712a042a53c705e78594f899608aa480abdd9e4027278b2499c8",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-2",
+          "selection": "selected-disagreement",
+          "source_index": 1,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 74.75433106575964,
+          "end_seconds": 77.9087074829932,
+          "replay_frame_interval": [
+            1648333,
+            1717887
+          ],
+          "replay_pcm_sha256": "98846c5ce230ccfa65c96b0f4cef3ea48b1bb7e50ca034a141dd28177c8c0c78",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-3",
+          "selection": "selected-disagreement",
+          "source_index": 2,
+          "source_reason": "unpaired-primary",
+          "source_sample_id": null,
+          "start_seconds": 0.0,
+          "end_seconds": 2.0572789115646257,
+          "replay_frame_interval": [
+            0,
+            45363
+          ],
+          "replay_pcm_sha256": "08314f24c09fde484f7ca3af9e08c9de1d7c23eb7f0e6e9c912b447c8d572ef6",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-4",
+          "selection": "selected-disagreement",
+          "source_index": 3,
+          "source_reason": "unpaired-primary",
+          "source_sample_id": null,
+          "start_seconds": 19.707437641723356,
+          "end_seconds": 22.707437641723356,
+          "replay_frame_interval": [
+            434549,
+            500699
+          ],
+          "replay_pcm_sha256": "47d708d2ecddf4691e9ab9b4e1ab4847bad580bb2d939c417f37c0f368888844",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-5",
+          "selection": "selected-disagreement",
+          "source_index": 4,
+          "source_reason": "unpaired-secondary",
+          "source_sample_id": null,
+          "start_seconds": 20.0481179138322,
+          "end_seconds": 23.0481179138322,
+          "replay_frame_interval": [
+            442061,
+            508211
+          ],
+          "replay_pcm_sha256": "b0a4b6a9fdbb0913b5422b9915a5f6459b39cff9fe3de2918982d5da2094dbc3",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-6",
+          "selection": "selected-disagreement",
+          "source_index": 5,
+          "source_reason": "unpaired-primary",
+          "source_sample_id": null,
+          "start_seconds": 20.078956916099774,
+          "end_seconds": 23.078956916099774,
+          "replay_frame_interval": [
+            442741,
+            508891
+          ],
+          "replay_pcm_sha256": "cd0142a1b9ed992918d0abd00f392631c927e29cb8dc2fca09ccfd7ca858edea",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-7",
+          "selection": "selected-disagreement",
+          "source_index": 6,
+          "source_reason": "unpaired-primary",
+          "source_sample_id": null,
+          "start_seconds": 27.973741496598638,
+          "end_seconds": 30.973741496598638,
+          "replay_frame_interval": [
+            616821,
+            682971
+          ],
+          "replay_pcm_sha256": "d0bd3ed5477ac1145b447fe93ec253e33209846acad979eaedc77939f211b25f",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-8",
+          "selection": "selected-disagreement",
+          "source_index": 7,
+          "source_reason": "unpaired-primary",
+          "source_sample_id": null,
+          "start_seconds": 28.77863945578231,
+          "end_seconds": 31.77863945578231,
+          "replay_frame_interval": [
+            634569,
+            700719
+          ],
+          "replay_pcm_sha256": "1fd582812f69311991a7ace5ea79ef7817ab1b26eb33276ba36d613aaa03b66c",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-9",
+          "selection": "selected-disagreement",
+          "source_index": 8,
+          "source_reason": "unpaired-secondary",
+          "source_sample_id": null,
+          "start_seconds": 28.778820861678003,
+          "end_seconds": 31.778820861678003,
+          "replay_frame_interval": [
+            634573,
+            700723
+          ],
+          "replay_pcm_sha256": "0d87da3f662e8fb9676597a4b8bb3a74ef256182961eb220b98487f9f43b6aa8",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-10",
+          "selection": "selected-disagreement",
+          "source_index": 9,
+          "source_reason": "unpaired-primary",
+          "source_sample_id": null,
+          "start_seconds": 48.685759637188205,
+          "end_seconds": 51.685759637188205,
+          "replay_frame_interval": [
+            1073521,
+            1139671
+          ],
+          "replay_pcm_sha256": "199a696e73a9909273502f59166bc912dbbd763cac24c25836c2fcf948e756c2",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-11",
+          "selection": "selected-disagreement",
+          "source_index": 10,
+          "source_reason": "unpaired-secondary",
+          "source_sample_id": null,
+          "start_seconds": 49.39814058956916,
+          "end_seconds": 52.39814058956916,
+          "replay_frame_interval": [
+            1089229,
+            1155379
+          ],
+          "replay_pcm_sha256": "2be696b3af139d6ac53d63bd098e74dbaad4683b208f48b009890026945821a3",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-12",
+          "selection": "selected-disagreement",
+          "source_index": 11,
+          "source_reason": "unpaired-primary",
+          "source_sample_id": null,
+          "start_seconds": 49.52167800453515,
+          "end_seconds": 52.52167800453515,
+          "replay_frame_interval": [
+            1091953,
+            1158103
+          ],
+          "replay_pcm_sha256": "0de1d94c9ee7105a0117fc11d43f841c15ff8ca516698f2ac0ad21228afca771",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "fixed-coverage-1",
+          "selection": "fixed-coverage",
+          "source_index": 0,
+          "source_reason": "Fixed sample, including possible shared model errors",
+          "source_sample_id": "sample-1",
+          "start_seconds": 11.989496598639457,
+          "end_seconds": 17.989496598639455,
+          "replay_frame_interval": [
+            264368,
+            396668
+          ],
+          "replay_pcm_sha256": "718322ba4e45701d98dab6579a7db5c6c024e555c408a6d5a4f0e074cf6f33ec",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "fixed-coverage-2",
+          "selection": "fixed-coverage",
+          "source_index": 1,
+          "source_reason": "Fixed sample, including possible shared model errors",
+          "source_sample_id": "sample-2",
+          "start_seconds": 49.4632380952381,
+          "end_seconds": 55.4632380952381,
+          "replay_frame_interval": [
+            1090664,
+            1222964
+          ],
+          "replay_pcm_sha256": "4f4a705a193aed52461da84300dcce0556460f1f854bab005939bdfc720c80ae",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "fixed-coverage-3",
+          "selection": "fixed-coverage",
+          "source_index": 2,
+          "source_reason": "Fixed sample, including possible shared model errors",
+          "source_sample_id": "sample-3",
+          "start_seconds": 86.93697959183673,
+          "end_seconds": 92.93697959183673,
+          "replay_frame_interval": [
+            1916960,
+            2049260
+          ],
+          "replay_pcm_sha256": "de4f80ec504b93f7f61a6fb0559369eb5151b9c0f322d49d69e5f6e2668b3b14",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "fixed-coverage-4",
+          "selection": "fixed-coverage",
+          "source_index": 3,
+          "source_reason": "Fixed sample, including possible shared model errors",
+          "source_sample_id": "sample-4",
+          "start_seconds": 124.41072108843538,
+          "end_seconds": 130.41072108843537,
+          "replay_frame_interval": [
+            2743256,
+            2875556
+          ],
+          "replay_pcm_sha256": "4c2b111f3dcd81ef312bb106b32506b422596b80e8567b155423e65f509b0602",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        }
+      ],
+      "claims": [
+        {
+          "id": "am-c-responses",
+          "question": "Check alternating Am/C responses and actual physical changes in the two saved response searches.",
+          "status": "provisional",
+          "check_outcome": "inconclusive",
+          "method": "Desk assessment of exact native evidence and rechecked primary teaching sources; no auditory observation.",
+          "target_origin": "private-sections",
+          "spans": [
+            {
+              "start_seconds": 4.08671201814059,
+              "end_seconds": 7.337505668934241,
+              "replay_frame_interval": [
+                90112,
+                161792
+              ],
+              "replay_pcm_sha256": "a9c05c06989c69d9cff7d79039856b8e964cb6bd8a3ad0bae1f6e3abdcb24d53",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 11.145578231292516,
+              "end_seconds": 14.551111111111112,
+              "replay_frame_interval": [
+                245760,
+                320852
+              ],
+              "replay_pcm_sha256": "9fcac859edbc98d42af8c7988e55af13811e17915300fd5da324c72b578e04bd",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            }
+          ],
+          "reason": "Filtered native response runs omit intervening harmony and cannot establish repeat count or performed voicings.",
+          "accepted_boundaries_seconds": [],
+          "needed_evidence": "Capable exact-audio review with recorded observations and independently chosen boundaries, or a verified reference-audio time transform checked on reserved windows."
+        },
+        {
+          "id": "g-replacements",
+          "question": "Check both provisional G replacements at the unchanged BTC Gm bounds.",
+          "status": "provisional",
+          "check_outcome": "inconclusive",
+          "method": "Desk assessment of exact native evidence and rechecked primary teaching sources; no auditory observation.",
+          "target_origin": "private-chord-edits",
+          "spans": [
+            {
+              "start_seconds": 29.473741496598638,
+              "end_seconds": 30.27863945578231,
+              "replay_frame_interval": [
+                649896,
+                667644
+              ],
+              "replay_pcm_sha256": "03e38dccda21daad43d2b1a36a2fc34e0f70caa0e451920fd71826b7cf8ae5b4",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 50.185759637188205,
+              "end_seconds": 51.02167800453515,
+              "replay_frame_interval": [
+                1106596,
+                1125028
+              ],
+              "replay_pcm_sha256": "e09ed19372b2d468aad4c1405a4059a8023b9cf637ad4f1f62f06b3487920f51",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            }
+          ],
+          "reason": "Vocal-removal template changes support investigation, not an independently heard G chord or verified contact time.",
+          "accepted_boundaries_seconds": [],
+          "needed_evidence": "Capable exact-audio review with recorded observations and independently chosen boundaries, or a verified reference-audio time transform checked on reserved windows."
+        },
+        {
+          "id": "extra-am",
+          "question": "Resolve the extra short native BTC Am cue.",
+          "status": "provisional",
+          "check_outcome": "inconclusive",
+          "method": "Desk assessment of exact native evidence and rechecked primary teaching sources; no auditory observation.",
+          "target_origin": "extra-am",
+          "spans": [
+            {
+              "start_seconds": 82.50775510204082,
+              "end_seconds": 83.06503401360544,
+              "replay_frame_interval": [
+                1819296,
+                1831584
+              ],
+              "replay_pcm_sha256": "fbd8b55e3aeb2f9cc5a89e4f807476390227a2557f5e2addb75c4f050391e132",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            }
+          ],
+          "reason": "The exact cue remains unmatched and unverified; a short prediction is not sufficient reason to delete it.",
+          "accepted_boundaries_seconds": [],
+          "needed_evidence": "Capable exact-audio review with recorded observations and independently chosen boundaries, or a verified reference-audio time transform checked on reserved windows."
+        }
+      ],
+      "practice_proposal": {
+        "source_ids": [
+          "dylan-songnotes",
+          "dylan-jon"
+        ],
+        "summary": "Alternating Am/C responses, optional Am7 and gradual addition of attacks are teaching proposals. The displayed Am/ii7 theory mismatch in one source is excluded.",
+        "recorded_rhythm_verified": false
+      },
+      "promotion_decision": {
+        "status": "rejected",
+        "scope": "Promotion to reviewed learner content only; not an audible rejection of the musical hypothesis.",
+        "reason": "No independently checked boundary, recorded rhythm or usable reviewed excerpt is evidenced."
+      },
+      "assessment_outcome": "inconclusive",
+      "blocker": "No independent hearing/reference verifies the response placement, two G edits or extra Am fragment on this exact recording.",
+      "accepted_spans": [],
+      "accepted_boundaries_seconds": [],
+      "usable_for_reviewed_pack": false
+    },
+    {
+      "id": "beatles-twist-and-shout-youtube-20261011",
+      "name": "Twist and Shout",
+      "recording": {
+        "id": "beatles-twist-and-shout-youtube-20261011",
+        "title": "audio",
+        "duration_seconds": 155.23555555555555,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "audio_path": "experiments/generated/catalogue-curation-20261014/cases/beatles-twist-and-shout-youtube-20261011/audio.wav",
+      "native_report_case_index": 4,
+      "draft_snapshot": {
+        "path": "experiments/generated/catalogue-curation-20261014/private-drafts/beatles-twist-and-shout-youtube-20261011.json",
+        "sha256": "f2e5846c668b6d472e8db05eda480b37e50187071104979cb7e52f3343862cf9",
+        "revision": 3
+      },
+      "coverage": {
+        "selected_windows": 12,
+        "fixed_samples": 4,
+        "queued_window_union_seconds": 42.625414965986394,
+        "queue_plus_claim_targets_union_seconds": 59.645142857142844,
+        "auditioned_windows": 0
+      },
+      "windows": [
+        {
+          "id": "selected-disagreement-1",
+          "selection": "selected-disagreement",
+          "source_index": 0,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 125.28022675736962,
+          "end_seconds": 128.7453514739229,
+          "replay_frame_interval": [
+            2762429,
+            2838835
+          ],
+          "replay_pcm_sha256": "a3a062744a48faa83da6fdd69e0bf8cea9ceb46c6a39a49c452a5356b454b3df",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-2",
+          "selection": "selected-disagreement",
+          "source_index": 1,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 50.419818594104306,
+          "end_seconds": 53.6362358276644,
+          "replay_frame_interval": [
+            1111757,
+            1182679
+          ],
+          "replay_pcm_sha256": "ab3f585a46f05a9d0bd723a29768c5ff10a5bae4797ba1fa55b6e969bbc5aa18",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-3",
+          "selection": "selected-disagreement",
+          "source_index": 2,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 63.42263038548752,
+          "end_seconds": 66.60875283446713,
+          "replay_frame_interval": [
+            1398469,
+            1468723
+          ],
+          "replay_pcm_sha256": "50cd6fe2e79e3d8ae7a606a9d3c307404ac4f70c9f7eb52a8160cab023845e1f",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-4",
+          "selection": "selected-disagreement",
+          "source_index": 3,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 64.53718820861678,
+          "end_seconds": 67.72331065759637,
+          "replay_frame_interval": [
+            1423045,
+            1493299
+          ],
+          "replay_pcm_sha256": "328d7f1a91374a818bbb109660da55dc4095d24c62eb8607207844c29f9cbe19",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-5",
+          "selection": "selected-disagreement",
+          "source_index": 4,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 113.97990929705216,
+          "end_seconds": 117.13537414965987,
+          "replay_frame_interval": [
+            2513257,
+            2582835
+          ],
+          "replay_pcm_sha256": "94460c6cf1bc88109ad6235a247c3d5f38da603e010e85a9081346f45291386d",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-6",
+          "selection": "selected-disagreement",
+          "source_index": 5,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 115.0015873015873,
+          "end_seconds": 118.15705215419501,
+          "replay_frame_interval": [
+            2535785,
+            2605363
+          ],
+          "replay_pcm_sha256": "09ad4a75696e4ad94b4d66b18e79923ef47bc88ae9e1465944e7a65d7b34d0f9",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-7",
+          "selection": "selected-disagreement",
+          "source_index": 6,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 80.26471655328798,
+          "end_seconds": 83.42,
+          "replay_frame_interval": [
+            1769837,
+            1839411
+          ],
+          "replay_pcm_sha256": "2565f16cb73685568cf3b5b0786dd56966bdc866abe885ae5386dc917f40d4de",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-8",
+          "selection": "selected-disagreement",
+          "source_index": 7,
+          "source_reason": "model-time-disagreement",
+          "source_sample_id": null,
+          "start_seconds": 51.93655328798186,
+          "end_seconds": 55.09165532879818,
+          "replay_frame_interval": [
+            1145201,
+            1214771
+          ],
+          "replay_pcm_sha256": "3da1549f4e0695a2c4ab37e37e741b48b9ccd2ddbd5023381c5888c9be96aea7",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-9",
+          "selection": "selected-disagreement",
+          "source_index": 8,
+          "source_reason": "unpaired-primary",
+          "source_sample_id": null,
+          "start_seconds": 0.0,
+          "end_seconds": 2.6145578231292514,
+          "replay_frame_interval": [
+            0,
+            57651
+          ],
+          "replay_pcm_sha256": "58cba084929a95734debf284472b4ebedb2449d936f354ca1bd344a492777bbc",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-10",
+          "selection": "selected-disagreement",
+          "source_index": 9,
+          "source_reason": "unpaired-secondary",
+          "source_sample_id": null,
+          "start_seconds": 0.0,
+          "end_seconds": 2.5216780045351475,
+          "replay_frame_interval": [
+            0,
+            55603
+          ],
+          "replay_pcm_sha256": "65d46efbc4f02480b6f9dbd3a66950e20772127f0edfff06f5c5a7f46856975a",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-11",
+          "selection": "selected-disagreement",
+          "source_index": 10,
+          "source_reason": "unpaired-primary",
+          "source_sample_id": null,
+          "start_seconds": 14.258548752834468,
+          "end_seconds": 17.258548752834468,
+          "replay_frame_interval": [
+            314401,
+            380551
+          ],
+          "replay_pcm_sha256": "76caca55a62f8ecd1801dbbf96667054000106a2c24deebc7a714e2cf13daf48",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "selected-disagreement-12",
+          "selection": "selected-disagreement",
+          "source_index": 11,
+          "source_reason": "unpaired-primary",
+          "source_sample_id": null,
+          "start_seconds": 14.53718820861678,
+          "end_seconds": 17.53718820861678,
+          "replay_frame_interval": [
+            320545,
+            386695
+          ],
+          "replay_pcm_sha256": "358857ddc7277fb4b204c55282739ef0eba576754d7cd89e20e1ffb57cb5d643",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "fixed-coverage-1",
+          "selection": "fixed-coverage",
+          "source_index": 0,
+          "source_reason": "Fixed sample, including possible shared model errors",
+          "source_sample_id": "sample-1",
+          "start_seconds": 12.523555555555555,
+          "end_seconds": 18.523555555555554,
+          "replay_frame_interval": [
+            276144,
+            408444
+          ],
+          "replay_pcm_sha256": "40ca7d32d19ac1bff1ae851e29a1b203c0e4a185f4ddfbfe40dc1836577dc94b",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "fixed-coverage-2",
+          "selection": "fixed-coverage",
+          "source_index": 1,
+          "source_reason": "Fixed sample, including possible shared model errors",
+          "source_sample_id": "sample-2",
+          "start_seconds": 51.33244444444444,
+          "end_seconds": 57.33244444444444,
+          "replay_frame_interval": [
+            1131880,
+            1264180
+          ],
+          "replay_pcm_sha256": "cd0a27e166f8ea7c16bed7429d35fd5dafa99ef4de1586f4cbdc9f8cc95e9d9d",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "fixed-coverage-3",
+          "selection": "fixed-coverage",
+          "source_index": 2,
+          "source_reason": "Fixed sample, including possible shared model errors",
+          "source_sample_id": "sample-3",
+          "start_seconds": 90.14133333333332,
+          "end_seconds": 96.14133333333332,
+          "replay_frame_interval": [
+            1987616,
+            2119916
+          ],
+          "replay_pcm_sha256": "45a2f2cc4c43751a01ae8663bfc587c1c86dc39ec0d3f6d3a7c5665588c4af65",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        },
+        {
+          "id": "fixed-coverage-4",
+          "selection": "fixed-coverage",
+          "source_index": 3,
+          "source_reason": "Fixed sample, including possible shared model errors",
+          "source_sample_id": "sample-4",
+          "start_seconds": 128.9502222222222,
+          "end_seconds": 134.9502222222222,
+          "replay_frame_interval": [
+            2843352,
+            2975652
+          ],
+          "replay_pcm_sha256": "5a342ca983b6690234c2898501657593c37a58b47e4b8ba80fc875b618208f86",
+          "status": "provisional",
+          "independent_check": "not_performed"
+        }
+      ],
+      "claims": [
+        {
+          "id": "a-holds-as-sections",
+          "question": "Check whether each saved A search corresponds to the proposed musical build-up and locate its physical boundaries.",
+          "status": "provisional",
+          "check_outcome": "inconclusive",
+          "method": "Desk assessment of exact native evidence and rechecked primary teaching sources; no auditory observation.",
+          "target_origin": "private-sections",
+          "spans": [
+            {
+              "start_seconds": 82.87927437641723,
+              "end_seconds": 96.5944671201814,
+              "replay_frame_interval": [
+                1827488,
+                2129908
+              ],
+              "replay_pcm_sha256": "736c238ac6ed460d7e224ee58a295415c01a73dafacb4ad19c87a9bc3521e423",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 136.90485260770976,
+              "end_seconds": 145.85142857142858,
+              "replay_frame_interval": [
+                3018752,
+                3216024
+              ],
+              "replay_pcm_sha256": "e7287ec1004dcb790a9c64fc5d9b177d83a2abd33c83e9de664a734bdfe2e6f0",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            }
+          ],
+          "reason": "A harmonic hold/intersection cannot by itself establish musical form or guitar contacts.",
+          "accepted_boundaries_seconds": [],
+          "needed_evidence": "Capable exact-audio review with recorded observations and independently chosen boundaries, or a verified reference-audio time transform checked on reserved windows."
+        },
+        {
+          "id": "second-ending",
+          "question": "Resolve the second A ending, including both native candidate times.",
+          "status": "provisional",
+          "check_outcome": "inconclusive",
+          "method": "Desk assessment of exact native evidence and rechecked primary teaching sources; no auditory observation.",
+          "target_origin": "second-ending",
+          "spans": [
+            {
+              "start_seconds": 145.85142857142858,
+              "end_seconds": 146.7501133786848,
+              "replay_frame_interval": [
+                3216024,
+                3235840
+              ],
+              "replay_pcm_sha256": "f6453aecd9dafeacbcac2ef5aaa69a8ab92c6a92195d79a897fea6fe81727213",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            }
+          ],
+          "reason": "BTC and CREMA differ by 0.8986848072562137 seconds; their intersection does not adjudicate the true ending.",
+          "accepted_boundaries_seconds": [],
+          "needed_evidence": "Capable exact-audio review with recorded observations and independently chosen boundaries, or a verified reference-audio time transform checked on reserved windows."
+        },
+        {
+          "id": "recorded-strokes",
+          "question": "Check actual guitar contacts, solo/ending coverage and the relationship to the all-down eighth practice option.",
+          "status": "provisional",
+          "check_outcome": "inconclusive",
+          "method": "Desk assessment of exact native evidence and rechecked primary teaching sources; no auditory observation.",
+          "target_origin": "fixed-samples",
+          "spans": [
+            {
+              "start_seconds": 12.523555555555555,
+              "end_seconds": 18.523555555555554,
+              "replay_frame_interval": [
+                276144,
+                408444
+              ],
+              "replay_pcm_sha256": "40ca7d32d19ac1bff1ae851e29a1b203c0e4a185f4ddfbfe40dc1836577dc94b",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 51.33244444444444,
+              "end_seconds": 57.33244444444444,
+              "replay_frame_interval": [
+                1131880,
+                1264180
+              ],
+              "replay_pcm_sha256": "cd0a27e166f8ea7c16bed7429d35fd5dafa99ef4de1586f4cbdc9f8cc95e9d9d",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 90.14133333333332,
+              "end_seconds": 96.14133333333332,
+              "replay_frame_interval": [
+                1987616,
+                2119916
+              ],
+              "replay_pcm_sha256": "45a2f2cc4c43751a01ae8663bfc587c1c86dc39ec0d3f6d3a7c5665588c4af65",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            },
+            {
+              "start_seconds": 128.9502222222222,
+              "end_seconds": 134.9502222222222,
+              "replay_frame_interval": [
+                2843352,
+                2975652
+              ],
+              "replay_pcm_sha256": "5a342ca983b6690234c2898501657593c37a58b47e4b8ba80fc875b618208f86",
+              "status": "provisional",
+              "independent_check": "not_performed"
+            }
+          ],
+          "reason": "Full-mix attack counts cannot be interpreted as guitar stroke counts or down/up directions.",
+          "accepted_boundaries_seconds": [],
+          "needed_evidence": "Capable exact-audio review with recorded observations and independently chosen boundaries, or a verified reference-audio time transform checked on reserved windows."
+        }
+      ],
+      "practice_proposal": {
+        "source_ids": [
+          "twist-andy",
+          "twist-jon",
+          "isophonics"
+        ],
+        "summary": "A-only contrast, a separate solo/ending and repeated downstroke eighths are source-supported teaching choices. They are not a transcription of recorded strokes.",
+        "recorded_rhythm_verified": false
+      },
+      "promotion_decision": {
+        "status": "rejected",
+        "scope": "Promotion to reviewed learner content only; not an audible rejection of the musical hypothesis.",
+        "reason": "No independently checked boundary, recorded rhythm or usable reviewed excerpt is evidenced."
+      },
+      "assessment_outcome": "inconclusive",
+      "blocker": "A capable exact-file review or a validated source-CD mapping is needed to resolve A extents, ending disagreement, contacts and musical sections.",
+      "accepted_spans": [],
+      "accepted_boundaries_seconds": [],
+      "usable_for_reviewed_pack": false
+    }
+  ],
+  "effort": {
+    "agent_technical_execution_seconds": 0.4205944584682584,
+    "agent_research_wall_seconds": null,
+    "agent_arrangement_edit_seconds": null,
+    "human_musical_review_seconds": null,
+    "human_correction_seconds": null,
+    "semantics": "Only evidence-assembly execution is measured. Research was not timed; no new arrangement edits, listening, or human correction occurred."
+  },
+  "downstream_gate": {
+    "issue": "https://github.com/dcromp/music-os/issues/7",
+    "usable_reviewed_excerpts": 0,
+    "can_publish_reviewed_pack": false,
+    "keep_ticket_3_open": true
+  },
+  "verification": {
+    "audio_and_native_chart_identity": true,
+    "current_drafts_validated": true,
+    "selected_windows_preserved": 48,
+    "fixed_samples_preserved": 16,
+    "replay_pcm_ranges_verified": 64,
+    "reviewer_public_routes_protected": 45,
+    "learner_public_routes_protected": 48,
+    "protected_asset_paths_unchanged": 91,
+    "frozen_workflow_files_verified_separately": 39,
+    "fresh_inference": false,
+    "private_drafts_modified": false,
+    "learner_identity_modified": false,
+    "full_regression_rerun": false,
+    "new_auditory_observations": 0
+  }
+}

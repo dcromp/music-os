@@ -1,0 +1,274 @@
+{
+  "schema_version": "learning-path-verification-1.0",
+  "date": "2026-10-13",
+  "learning_sha256": "d83abb55378ea4a6ace6deb97a8987518e4e10ff823c065558742fdef9543fc9",
+  "manifest_sha256": "556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671",
+  "served_asset_count": 48,
+  "served_assets": [
+    {
+      "url": "/",
+      "sha256": "a738e5cba7bfd5f2b5c5d995266fad307a9e1f41dde8ba109cf381b3cfc003f6",
+      "bytes": 8191
+    },
+    {
+      "url": "/index.html",
+      "sha256": "a738e5cba7bfd5f2b5c5d995266fad307a9e1f41dde8ba109cf381b3cfc003f6",
+      "bytes": 8191
+    },
+    {
+      "url": "/app.js",
+      "sha256": "d3e712d59d4e7c1c0adb5e7d7ec016c0f8d0c917e94b9e6948acfcf58e1eb8ed",
+      "bytes": 58950
+    },
+    {
+      "url": "/style.css",
+      "sha256": "c5eba369402acc530c9b4bc5121a68c8ad4e7d6b5a094175c30e2aa2357049cc",
+      "bytes": 6282
+    },
+    {
+      "url": "/manifest.json",
+      "sha256": "556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671",
+      "bytes": 41364
+    },
+    {
+      "url": "/rhythm.json",
+      "sha256": "09c5c68dc1dc44f8380871744c59d00043e1c6ea42650f3911353f84a78962f7",
+      "bytes": 119439
+    },
+    {
+      "url": "/practice.json",
+      "sha256": "0de69b0756570a7083d9796ddba181d70b80444965eacf382531909c0666c4ea",
+      "bytes": 15973
+    },
+    {
+      "url": "/learning.json",
+      "sha256": "d83abb55378ea4a6ace6deb97a8987518e4e10ff823c065558742fdef9543fc9",
+      "bytes": 12526
+    },
+    {
+      "url": "/cases/troggs-wild-thing-youtube-20261011/audio.wav",
+      "sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf",
+      "bytes": 6851086
+    },
+    {
+      "url": "/cases/troggs-wild-thing-youtube-20261011/primary.json",
+      "sha256": "13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81",
+      "bytes": 15792
+    },
+    {
+      "url": "/cases/troggs-wild-thing-youtube-20261011/evidence.json",
+      "sha256": "7eee3ae7ea7b659f175880308759ae35726529b7f7bc6b1a0fbe487248ac68dc",
+      "bytes": 61153
+    },
+    {
+      "url": "/cases/troggs-wild-thing-youtube-20261011/chordino.json",
+      "sha256": "f8045c178233cfe6a02e5e5831357df0c3e18752ac79400f50518663185c9a46",
+      "bytes": 15465
+    },
+    {
+      "url": "/cases/bob-dylan-knockin-heavens-door-youtube-20261011/audio.wav",
+      "sha256": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f",
+      "bytes": 6610446
+    },
+    {
+      "url": "/cases/bob-dylan-knockin-heavens-door-youtube-20261011/primary.json",
+      "sha256": "022405eadb0d332a34ca66b74989e72cc5e597e57417c1a289178e0a7a084082",
+      "bytes": 13051
+    },
+    {
+      "url": "/cases/bob-dylan-knockin-heavens-door-youtube-20261011/evidence.json",
+      "sha256": "2b54140c107aaedfa72bdede2765a27550997c951a21b13b30c1490bb4f5afc8",
+      "bytes": 37907
+    },
+    {
+      "url": "/cases/bob-dylan-knockin-heavens-door-youtube-20261011/chordino.json",
+      "sha256": "d3e838dac71c2a824814268290936ccd053a0f975f0af17ced49de882defcc2d",
+      "bytes": 14596
+    },
+    {
+      "url": "/cases/van-morrison-brown-eyed-girl-youtube-20261011/audio.wav",
+      "sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf",
+      "bytes": 8227342
+    },
+    {
+      "url": "/cases/van-morrison-brown-eyed-girl-youtube-20261011/primary.json",
+      "sha256": "1bc1f1c9467a8bea0aab8e8ae9ea4ccbd3f71ce47c52a1376f591528bcb1170d",
+      "bytes": 20840
+    },
+    {
+      "url": "/cases/van-morrison-brown-eyed-girl-youtube-20261011/evidence.json",
+      "sha256": "269568e1c5670680ffcd38908228ea976c5c42487245ef9b59f195510f64203d",
+      "bytes": 64756
+    },
+    {
+      "url": "/cases/van-morrison-brown-eyed-girl-youtube-20261011/chordino.json",
+      "sha256": "a9b647dd9e4c5af426d4672d95210fb64ceeba636c624b9d022292860d3e8ee1",
+      "bytes": 16364
+    },
+    {
+      "url": "/cases/beatles-love-me-do-youtube-20261011/audio.wav",
+      "sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea",
+      "bytes": 6248974
+    },
+    {
+      "url": "/cases/beatles-love-me-do-youtube-20261011/primary.json",
+      "sha256": "a12394c6654f761febee240b95d60c45b7c55e33a6fb287225d181976e6531c4",
+      "bytes": 11524
+    },
+    {
+      "url": "/cases/beatles-love-me-do-youtube-20261011/evidence.json",
+      "sha256": "5e03e3c77965e46c72a4138e0c42ec5acf5e17cdce40e65f9d7edaf1d072a4ca",
+      "bytes": 43683
+    },
+    {
+      "url": "/cases/beatles-love-me-do-youtube-20261011/chordino.json",
+      "sha256": "a20662914898b0507ca37cc8510e73e3d41d9207077bc798ff150c49ede4af8e",
+      "bytes": 8234
+    },
+    {
+      "url": "/cases/beatles-twist-and-shout-youtube-20261011/audio.wav",
+      "sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c",
+      "bytes": 6845966
+    },
+    {
+      "url": "/cases/beatles-twist-and-shout-youtube-20261011/primary.json",
+      "sha256": "09f64db9a6563e2256c528576bd9776b13c84128ce3b982810b8dfbe6145bb59",
+      "bytes": 19891
+    },
+    {
+      "url": "/cases/beatles-twist-and-shout-youtube-20261011/evidence.json",
+      "sha256": "e886b06c671149bb1d1c72beea36f5f84b8aa16b62a7dd490608f889a79dd9f6",
+      "bytes": 47670
+    },
+    {
+      "url": "/cases/beatles-twist-and-shout-youtube-20261011/chordino.json",
+      "sha256": "fb968ff8ce30627a37712348de39f520f46c7395b2b7085dad0212a3e8b6e5d6",
+      "bytes": 19164
+    },
+    {
+      "url": "/cases/white-stripes-seven-nation-army-youtube-20261011/audio.wav",
+      "sha256": "394c791d799d7ff7ece36c1b93a434c1f600afe0265f5dfe1d6ad328626a6854",
+      "bytes": 10236430
+    },
+    {
+      "url": "/cases/white-stripes-seven-nation-army-youtube-20261011/primary.json",
+      "sha256": "b7deadf0f4f816c2da6c91e1f8c807ceebc543c6b106e728d1e54bbedf2f0f9b",
+      "bytes": 24834
+    },
+    {
+      "url": "/cases/white-stripes-seven-nation-army-youtube-20261011/evidence.json",
+      "sha256": "d278e9297643d484866631caee3a771ba21166a079cf87abf06318233f0d77df",
+      "bytes": 93483
+    },
+    {
+      "url": "/cases/white-stripes-seven-nation-army-youtube-20261011/chordino.json",
+      "sha256": "b5561d083c417ea4eeef425534a59f76c9e27e144afa4e5640181fee1eb9906f",
+      "bytes": 15689
+    },
+    {
+      "url": "/cases/nirvana-come-as-you-are-youtube-20261011/audio.wav",
+      "sha256": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7",
+      "bytes": 9654798
+    },
+    {
+      "url": "/cases/nirvana-come-as-you-are-youtube-20261011/primary.json",
+      "sha256": "86371063c859a1b412d39a8ef4a87436863690d181838600946ce207f960bee1",
+      "bytes": 20897
+    },
+    {
+      "url": "/cases/nirvana-come-as-you-are-youtube-20261011/evidence.json",
+      "sha256": "44310bcc63ba9465677aca753de2ceb9bc647dbb4e624943da7595c0e7bf72de",
+      "bytes": 68696
+    },
+    {
+      "url": "/cases/nirvana-come-as-you-are-youtube-20261011/chordino.json",
+      "sha256": "7e775151d29d1a829d336bb701c04981205a48970974257db4d2368d86e024a1",
+      "bytes": 16982
+    },
+    {
+      "url": "/cases/radiohead-creep-youtube-20261010/audio.wav",
+      "sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10",
+      "bytes": 10435662
+    },
+    {
+      "url": "/cases/radiohead-creep-youtube-20261010/primary.json",
+      "sha256": "9ab5ce1f02b7ba127554937009f1747112e7fc3df583ddcd3b8abcfa9cdc191c",
+      "bytes": 10600
+    },
+    {
+      "url": "/cases/radiohead-creep-youtube-20261010/evidence.json",
+      "sha256": "b506b76f2d3b5ed06e00866c8b8a158d5510856d0513564ffb820ed47561bcd1",
+      "bytes": 43008
+    },
+    {
+      "url": "/cases/radiohead-creep-youtube-20261010/chordino.json",
+      "sha256": "e2af0e0f30f235cbd0c90f4afd009678312013c4c75b365049159d39770cf474",
+      "bytes": 12761
+    },
+    {
+      "url": "/cases/animals-house-rising-sun-official-20261011/audio.wav",
+      "sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708",
+      "bytes": 11903502
+    },
+    {
+      "url": "/cases/animals-house-rising-sun-official-20261011/primary.json",
+      "sha256": "71eb918cc9ef3662d5c6d75b49814f700b89a2fc15b73c1ce92d9bdb18dd6037",
+      "bytes": 31172
+    },
+    {
+      "url": "/cases/animals-house-rising-sun-official-20261011/evidence.json",
+      "sha256": "617433094dc7b62c9bffa4192537c63cc4a97db6816925d95b73befaa53d9a09",
+      "bytes": 81743
+    },
+    {
+      "url": "/cases/animals-house-rising-sun-official-20261011/chordino.json",
+      "sha256": "519748e12a7612c4965339f13d09e733192f2dba9e8de1209ef685a8086e1c13",
+      "bytes": 25734
+    },
+    {
+      "url": "/cases/oasis-wonderwall-youtube-20261010/audio.wav",
+      "sha256": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462",
+      "bytes": 12250190
+    },
+    {
+      "url": "/cases/oasis-wonderwall-youtube-20261010/primary.json",
+      "sha256": "1d696977fe56f91126f3e838903939a6670a335d7079fc297b45e6573a3c3e83",
+      "bytes": 27967
+    },
+    {
+      "url": "/cases/oasis-wonderwall-youtube-20261010/evidence.json",
+      "sha256": "5c167ef27d0a04f94a618147f504711eacf1aa82f802ef6db646e0c9ca07bb78",
+      "bytes": 100325
+    },
+    {
+      "url": "/cases/oasis-wonderwall-youtube-20261010/chordino.json",
+      "sha256": "bcaec761a32f62eae070962e47e4b7cdc33394d84d8e707eb7756be48ad7ecba",
+      "bytes": 17982
+    }
+  ],
+  "private_samples_return_404": true,
+  "javascript_checks": 62,
+  "python_checks": 324,
+  "browser_checks": [
+    "starting drill selects existing pattern and brings counts/arrows into view",
+    "next-song selection changes to next available unpractised step",
+    "marking survives reload and initial resume picks the next unpractised step",
+    "unmarking is reversible",
+    "riff guidance stays separate from path completion",
+    "playback, seeking and Core chords still work",
+    "practice progress and issue feedback survive independently in isolated QA origin/pack",
+    "normal8070 shows zero QA progress/issues",
+    "original8068 filters path to its two matching recordings"
+  ],
+  "qa_pack_id": "automatic-first-ten-learning-qa-20261013",
+  "qa_origin": "http://127.0.0.1:8071",
+  "normal_origin": "http://127.0.0.1:8070",
+  "screenshot": "experiments/generated/player-proof-20261013/practice-path.jpg",
+  "does_not_establish": [
+    "beginner learning outcomes",
+    "verified original strumming",
+    "popular-song chord/timing accuracy",
+    "mastery"
+  ],
+  "original_input_assets_byte_identical": 30
+}

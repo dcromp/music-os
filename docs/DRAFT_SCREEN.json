@@ -1,0 +1,1102 @@
+{
+  "schema_version": "draft-screen-1.0",
+  "comparison": "CREMA primary; Chordino disagreement evidence; no vote or label replacement",
+  "environment": {
+    "python": "3.11.13",
+    "numpy": "1.26.4",
+    "mir_eval": "0.8.2"
+  },
+  "gates": {
+    "all_six_exact_inputs_verified": true,
+    "all_twelve_reference_comparisons_completed": true,
+    "original_primary_scores_reproduced": true,
+    "semantic_edge_cases": 3,
+    "manual_annotations_required_to_complete_screen": false,
+    "production_accuracy_gate_passed": false
+  },
+  "comparison_parameters": {
+    "boundary_tolerance_seconds": 0.5,
+    "merge_gap_seconds": 0.4,
+    "min_flag_seconds": 0.4,
+    "max_review_points": 8,
+    "root_policy": "enharmonic root; ignore inversion; exclude N/unknown from denominator",
+    "majmin_policy": "supported major/minor families only; sus/dim/aug/unknown excluded; extensions and inversions preserved in charts",
+    "review_point_policy": "kind priority, then longest merged spans; separated by at least 8 seconds; at most six seconds per spot"
+  },
+  "automatic_drafts_module_sha256": "399fe8727b2d462126f3818fe8aa951a9610e7015cc45e2aa94a41b58646f29c",
+  "evaluation_module_sha256": "f1129479354e93e06c50673046c1b62dd8335a40ed1651c8f765349ec1f391fd",
+  "manifest_sha256": "289e34c4c2f18684827e3c719340e3ad6849a197b2bf44ee335f2c27d5e6759d",
+  "summary": [
+    {
+      "reference_kind": "intended",
+      "successful_cases": 6,
+      "duration_seconds": 182.3620408163265,
+      "flagged_seconds": 33.6659183692449,
+      "flagged_fraction": 0.18461034006058819,
+      "root": {
+        "eligible_seconds": 182.36198911564625,
+        "primary_error_seconds": 10.15065915872136,
+        "raw_pair_compared_seconds_on_reference_eligible": 182.36198911564625,
+        "raw_disagreement_seconds_on_reference_eligible": 20.028888896993188,
+        "raw_disagreement_error_seconds": 5.34406665430337,
+        "raw_disagreement_correct_primary_seconds": 14.684822242689823,
+        "shared_agreement_wrong_seconds": 4.80659250441799,
+        "flagged_reference_eligible_seconds": 33.6659183692449,
+        "flagged_primary_error_seconds": 4.576466071595648,
+        "flagged_primary_correct_seconds": 29.089452297649252,
+        "primary_accuracy": 0.944337856765292,
+        "reference_coverage_fraction": 0.9999997164942879,
+        "raw_disagreement_error_capture_fraction": 0.5264748397853348,
+        "raw_disagreement_error_precision": 0.266817928931926,
+        "shared_agreement_wrong_fraction_of_primary_errors": 0.4735251602146651,
+        "flagged_label_error_capture_fraction": 0.45085407755648926,
+        "flagged_label_error_enrichment_fraction": 0.13593765722952697
+      },
+      "majmin": {
+        "eligible_seconds": 178.98170742550542,
+        "primary_error_seconds": 10.975069749248656,
+        "raw_pair_compared_seconds_on_reference_eligible": 177.0170049248934,
+        "raw_disagreement_seconds_on_reference_eligible": 27.180634928056683,
+        "raw_disagreement_error_seconds": 5.215225007095508,
+        "raw_disagreement_correct_primary_seconds": 21.965409920961175,
+        "shared_agreement_wrong_seconds": 5.488022060316634,
+        "flagged_reference_eligible_seconds": 32.213730959069565,
+        "flagged_primary_error_seconds": 4.576466071595648,
+        "flagged_primary_correct_seconds": 27.63726488747391,
+        "primary_accuracy": 0.9386804947437625,
+        "reference_coverage_fraction": 0.9814636128456924,
+        "raw_disagreement_error_capture_fraction": 0.47518832465301997,
+        "raw_disagreement_error_precision": 0.19187281757396304,
+        "shared_agreement_wrong_fraction_of_primary_errors": 0.5000443902137697,
+        "flagged_label_error_capture_fraction": 0.4169874247868857,
+        "flagged_label_error_enrichment_fraction": 0.1420656948246839
+      }
+    },
+    {
+      "reference_kind": "performed",
+      "successful_cases": 6,
+      "duration_seconds": 182.3620408163265,
+      "flagged_seconds": 33.6659183692449,
+      "flagged_fraction": 0.18461034006058819,
+      "root": {
+        "eligible_seconds": 182.36198911564625,
+        "primary_error_seconds": 10.15065915872136,
+        "raw_pair_compared_seconds_on_reference_eligible": 182.36198911564625,
+        "raw_disagreement_seconds_on_reference_eligible": 20.028888896993188,
+        "raw_disagreement_error_seconds": 5.34406665430337,
+        "raw_disagreement_correct_primary_seconds": 14.684822242689823,
+        "shared_agreement_wrong_seconds": 4.80659250441799,
+        "flagged_reference_eligible_seconds": 33.6659183692449,
+        "flagged_primary_error_seconds": 4.576466071595648,
+        "flagged_primary_correct_seconds": 29.089452297649252,
+        "primary_accuracy": 0.944337856765292,
+        "reference_coverage_fraction": 0.9999997164942879,
+        "raw_disagreement_error_capture_fraction": 0.5264748397853348,
+        "raw_disagreement_error_precision": 0.266817928931926,
+        "shared_agreement_wrong_fraction_of_primary_errors": 0.4735251602146651,
+        "flagged_label_error_capture_fraction": 0.45085407755648926,
+        "flagged_label_error_enrichment_fraction": 0.13593765722952697
+      },
+      "majmin": {
+        "eligible_seconds": 142.95163016600668,
+        "primary_error_seconds": 10.505304339575758,
+        "raw_pair_compared_seconds_on_reference_eligible": 142.58692766539468,
+        "raw_disagreement_seconds_on_reference_eligible": 12.92570494181328,
+        "raw_disagreement_error_seconds": 3.703945581206339,
+        "raw_disagreement_correct_primary_seconds": 9.22175936060694,
+        "shared_agreement_wrong_seconds": 6.5295360765329065,
+        "flagged_reference_eligible_seconds": 15.949241162836001,
+        "flagged_primary_error_seconds": 3.5467014787929028,
+        "flagged_primary_correct_seconds": 12.402539684043099,
+        "primary_accuracy": 0.9265114757531889,
+        "reference_coverage_fraction": 0.7838891774082872,
+        "raw_disagreement_error_capture_fraction": 0.35257860805162716,
+        "raw_disagreement_error_precision": 0.28655656290160775,
+        "shared_agreement_wrong_fraction_of_primary_errors": 0.62154658879655,
+        "flagged_label_error_capture_fraction": 0.3376105407467073,
+        "flagged_label_error_enrichment_fraction": 0.22237430875753647
+      }
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "guitarset-00-ss3-84-bb-comp",
+      "reference_kind": "intended",
+      "status": "ok",
+      "warning_count": 6,
+      "review_point_count": 3,
+      "metrics": {
+        "duration_seconds": 45.70761904761905,
+        "flagged_seconds": 6.350634921000001,
+        "flagged_fraction": 0.13894040103869318,
+        "flag_union": [
+          [
+            0.0,
+            0.842879819
+          ],
+          [
+            20.154920635,
+            22.662675737
+          ],
+          [
+            28.135623583,
+            29.635623583
+          ],
+          [
+            42.531995465,
+            44.031995465
+          ]
+        ],
+        "root": {
+          "primary_accuracy": 0.9777586519647545,
+          "eligible_seconds": 45.70760000000001,
+          "reference_coverage_fraction": 0.9999995832725609,
+          "primary_error_seconds": 1.0165986394557844,
+          "raw_pair_compared_seconds_on_reference_eligible": 45.70760000000001,
+          "raw_disagreement_seconds_on_reference_eligible": 2.879274378022669,
+          "raw_disagreement_error_seconds": 0.19918367346938304,
+          "raw_disagreement_error_capture_fraction": 0.1959314775160549,
+          "raw_disagreement_error_precision": 0.06917842738078046,
+          "raw_disagreement_correct_primary_seconds": 2.680090704553286,
+          "shared_agreement_wrong_seconds": 0.8174149659864014,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.8040685224839451,
+          "flagged_reference_eligible_seconds": 6.350634921000001,
+          "flagged_primary_error_seconds": 0.08888888888888147,
+          "flagged_primary_correct_seconds": 6.26174603211112,
+          "flagged_label_error_capture_fraction": 0.08743754461098467,
+          "flagged_label_error_enrichment_fraction": 0.013996850707784758
+        },
+        "majmin": {
+          "primary_accuracy": 0.9777586519647545,
+          "eligible_seconds": 45.70760000000001,
+          "reference_coverage_fraction": 0.9999995832725609,
+          "primary_error_seconds": 1.0165986394557844,
+          "raw_pair_compared_seconds_on_reference_eligible": 45.70760000000001,
+          "raw_disagreement_seconds_on_reference_eligible": 5.38702948002267,
+          "raw_disagreement_error_seconds": 0.19918367346938304,
+          "raw_disagreement_error_capture_fraction": 0.1959314775160549,
+          "raw_disagreement_error_precision": 0.036974676713398054,
+          "raw_disagreement_correct_primary_seconds": 5.187845806553287,
+          "shared_agreement_wrong_seconds": 0.8174149659864014,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.8040685224839451,
+          "flagged_reference_eligible_seconds": 6.350634921000001,
+          "flagged_primary_error_seconds": 0.08888888888888147,
+          "flagged_primary_correct_seconds": 6.26174603211112,
+          "flagged_label_error_capture_fraction": 0.08743754461098467,
+          "flagged_label_error_enrichment_fraction": 0.013996850707784758
+        }
+      }
+    },
+    {
+      "case_id": "guitarset-00-ss3-84-bb-comp",
+      "reference_kind": "performed",
+      "status": "ok",
+      "warning_count": 6,
+      "review_point_count": 3,
+      "metrics": {
+        "duration_seconds": 45.70761904761905,
+        "flagged_seconds": 6.350634921000001,
+        "flagged_fraction": 0.13894040103869318,
+        "flag_union": [
+          [
+            0.0,
+            0.842879819
+          ],
+          [
+            20.154920635,
+            22.662675737
+          ],
+          [
+            28.135623583,
+            29.635623583
+          ],
+          [
+            42.531995465,
+            44.031995465
+          ]
+        ],
+        "root": {
+          "primary_accuracy": 0.9777586519647545,
+          "eligible_seconds": 45.70760000000001,
+          "reference_coverage_fraction": 0.9999995832725609,
+          "primary_error_seconds": 1.0165986394557844,
+          "raw_pair_compared_seconds_on_reference_eligible": 45.70760000000001,
+          "raw_disagreement_seconds_on_reference_eligible": 2.879274378022669,
+          "raw_disagreement_error_seconds": 0.19918367346938304,
+          "raw_disagreement_error_capture_fraction": 0.1959314775160549,
+          "raw_disagreement_error_precision": 0.06917842738078046,
+          "raw_disagreement_correct_primary_seconds": 2.680090704553286,
+          "shared_agreement_wrong_seconds": 0.8174149659864014,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.8040685224839451,
+          "flagged_reference_eligible_seconds": 6.350634921000001,
+          "flagged_primary_error_seconds": 0.08888888888888147,
+          "flagged_primary_correct_seconds": 6.26174603211112,
+          "flagged_label_error_capture_fraction": 0.08743754461098467,
+          "flagged_label_error_enrichment_fraction": 0.013996850707784758
+        },
+        "majmin": {
+          "primary_accuracy": 0.9152495100027425,
+          "eligible_seconds": 45.70760000000001,
+          "reference_coverage_fraction": 0.9999995832725609,
+          "primary_error_seconds": 3.873741496598642,
+          "raw_pair_compared_seconds_on_reference_eligible": 45.70760000000001,
+          "raw_disagreement_seconds_on_reference_eligible": 5.38702948002267,
+          "raw_disagreement_error_seconds": 0.19918367346938304,
+          "raw_disagreement_error_capture_fraction": 0.05141893790390434,
+          "raw_disagreement_error_precision": 0.036974676713398054,
+          "raw_disagreement_correct_primary_seconds": 5.187845806553287,
+          "shared_agreement_wrong_seconds": 3.674557823129259,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.9485810620960956,
+          "flagged_reference_eligible_seconds": 6.350634921000001,
+          "flagged_primary_error_seconds": 0.08888888888888147,
+          "flagged_primary_correct_seconds": 6.26174603211112,
+          "flagged_label_error_capture_fraction": 0.022946520558207305,
+          "flagged_label_error_enrichment_fraction": 0.013996850707784758
+        }
+      }
+    },
+    {
+      "case_id": "guitarset-01-rock1-90-csharp-comp",
+      "reference_kind": "intended",
+      "status": "ok",
+      "warning_count": 1,
+      "review_point_count": 1,
+      "metrics": {
+        "duration_seconds": 32.0,
+        "flagged_seconds": 0.842879819,
+        "flagged_fraction": 0.02633999434375,
+        "flag_union": [
+          [
+            0.0,
+            0.842879819
+          ]
+        ],
+        "root": {
+          "primary_accuracy": 0.9846031746031748,
+          "eligible_seconds": 31.999999999999993,
+          "reference_coverage_fraction": 0.9999999999999998,
+          "primary_error_seconds": 0.49269841269840775,
+          "raw_pair_compared_seconds_on_reference_eligible": 31.999999999999993,
+          "raw_disagreement_seconds_on_reference_eligible": 0.18575963795691644,
+          "raw_disagreement_error_seconds": 4.943299103388199e-10,
+          "raw_disagreement_error_capture_fraction": 1.003311351525321e-09,
+          "raw_disagreement_error_precision": 2.6611265815099764e-09,
+          "raw_disagreement_correct_primary_seconds": 0.18575963746258653,
+          "shared_agreement_wrong_seconds": 0.49269841220407784,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.9999999989966887,
+          "flagged_reference_eligible_seconds": 0.842879819,
+          "flagged_primary_error_seconds": 0.0,
+          "flagged_primary_correct_seconds": 0.842879819,
+          "flagged_label_error_capture_fraction": 0.0,
+          "flagged_label_error_enrichment_fraction": 0.0
+        },
+        "majmin": {
+          "primary_accuracy": 0.9846031746031748,
+          "eligible_seconds": 31.999999999999993,
+          "reference_coverage_fraction": 0.9999999999999998,
+          "primary_error_seconds": 0.49269841269840775,
+          "raw_pair_compared_seconds_on_reference_eligible": 31.999999999999993,
+          "raw_disagreement_seconds_on_reference_eligible": 0.18575963795691644,
+          "raw_disagreement_error_seconds": 4.943299103388199e-10,
+          "raw_disagreement_error_capture_fraction": 1.003311351525321e-09,
+          "raw_disagreement_error_precision": 2.6611265815099764e-09,
+          "raw_disagreement_correct_primary_seconds": 0.18575963746258653,
+          "shared_agreement_wrong_seconds": 0.49269841220407784,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.9999999989966887,
+          "flagged_reference_eligible_seconds": 0.842879819,
+          "flagged_primary_error_seconds": 0.0,
+          "flagged_primary_correct_seconds": 0.842879819,
+          "flagged_label_error_capture_fraction": 0.0,
+          "flagged_label_error_enrichment_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "guitarset-01-rock1-90-csharp-comp",
+      "reference_kind": "performed",
+      "status": "ok",
+      "warning_count": 1,
+      "review_point_count": 1,
+      "metrics": {
+        "duration_seconds": 32.0,
+        "flagged_seconds": 0.842879819,
+        "flagged_fraction": 0.02633999434375,
+        "flag_union": [
+          [
+            0.0,
+            0.842879819
+          ]
+        ],
+        "root": {
+          "primary_accuracy": 0.9846031746031748,
+          "eligible_seconds": 31.999999999999993,
+          "reference_coverage_fraction": 0.9999999999999998,
+          "primary_error_seconds": 0.49269841269840775,
+          "raw_pair_compared_seconds_on_reference_eligible": 31.999999999999993,
+          "raw_disagreement_seconds_on_reference_eligible": 0.18575963795691644,
+          "raw_disagreement_error_seconds": 4.943299103388199e-10,
+          "raw_disagreement_error_capture_fraction": 1.003311351525321e-09,
+          "raw_disagreement_error_precision": 2.6611265815099764e-09,
+          "raw_disagreement_correct_primary_seconds": 0.18575963746258653,
+          "shared_agreement_wrong_seconds": 0.49269841220407784,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.9999999989966887,
+          "flagged_reference_eligible_seconds": 0.842879819,
+          "flagged_primary_error_seconds": 0.0,
+          "flagged_primary_correct_seconds": 0.842879819,
+          "flagged_label_error_capture_fraction": 0.0,
+          "flagged_label_error_enrichment_fraction": 0.0
+        },
+        "majmin": {
+          "primary_accuracy": 0.9846031746031748,
+          "eligible_seconds": 31.999999999999993,
+          "reference_coverage_fraction": 0.9999999999999998,
+          "primary_error_seconds": 0.49269841269840775,
+          "raw_pair_compared_seconds_on_reference_eligible": 31.999999999999993,
+          "raw_disagreement_seconds_on_reference_eligible": 0.18575963795691644,
+          "raw_disagreement_error_seconds": 4.943299103388199e-10,
+          "raw_disagreement_error_capture_fraction": 1.003311351525321e-09,
+          "raw_disagreement_error_precision": 2.6611265815099764e-09,
+          "raw_disagreement_correct_primary_seconds": 0.18575963746258653,
+          "shared_agreement_wrong_seconds": 0.49269841220407784,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.9999999989966887,
+          "flagged_reference_eligible_seconds": 0.842879819,
+          "flagged_primary_error_seconds": 0.0,
+          "flagged_primary_correct_seconds": 0.842879819,
+          "flagged_label_error_capture_fraction": 0.0,
+          "flagged_label_error_enrichment_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "guitarset-02-funk1-97-c-comp",
+      "reference_kind": "intended",
+      "status": "ok",
+      "warning_count": 5,
+      "review_point_count": 3,
+      "metrics": {
+        "duration_seconds": 29.688390022675737,
+        "flagged_seconds": 11.033469388390023,
+        "flagged_fraction": 0.371642563977459,
+        "flag_union": [
+          [
+            0.0,
+            0.842879819
+          ],
+          [
+            10.12390022675737,
+            14.767891156462586
+          ],
+          [
+            22.19827664399093,
+            24.241632653
+          ],
+          [
+            26.185147392,
+            29.688390022675737
+          ]
+        ],
+        "root": {
+          "primary_accuracy": 0.9795665485383213,
+          "eligible_seconds": 29.688390022675737,
+          "reference_coverage_fraction": 1.0,
+          "primary_error_seconds": 0.6066362765037301,
+          "raw_pair_compared_seconds_on_reference_eligible": 29.688390022675737,
+          "raw_disagreement_seconds_on_reference_eligible": 3.867800454448979,
+          "raw_disagreement_error_seconds": 0.30446267859209364,
+          "raw_disagreement_error_capture_fraction": 0.501886699468131,
+          "raw_disagreement_error_precision": 0.0787172663579069,
+          "raw_disagreement_correct_primary_seconds": 3.563337775856885,
+          "shared_agreement_wrong_seconds": 0.30217359791163645,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.4981133005318689,
+          "flagged_reference_eligible_seconds": 11.033469388390023,
+          "flagged_primary_error_seconds": 0.0697645931224713,
+          "flagged_primary_correct_seconds": 10.963704795267551,
+          "flagged_label_error_capture_fraction": 0.11500234296001968,
+          "flagged_label_error_enrichment_fraction": 0.006322996934752105
+        },
+        "majmin": {
+          "primary_accuracy": 0.9795665485383213,
+          "eligible_seconds": 29.688390022675737,
+          "reference_coverage_fraction": 1.0,
+          "primary_error_seconds": 0.6066362765037301,
+          "raw_pair_compared_seconds_on_reference_eligible": 29.688390022675737,
+          "raw_disagreement_seconds_on_reference_eligible": 10.555147393163265,
+          "raw_disagreement_error_seconds": 0.37422727171456494,
+          "raw_disagreement_error_capture_fraction": 0.6168890424281508,
+          "raw_disagreement_error_precision": 0.03545448090634507,
+          "raw_disagreement_correct_primary_seconds": 10.1809201214487,
+          "shared_agreement_wrong_seconds": 0.23240900478916515,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.38311095757184926,
+          "flagged_reference_eligible_seconds": 11.033469388390023,
+          "flagged_primary_error_seconds": 0.0697645931224713,
+          "flagged_primary_correct_seconds": 10.963704795267551,
+          "flagged_label_error_capture_fraction": 0.11500234296001968,
+          "flagged_label_error_enrichment_fraction": 0.006322996934752105
+        }
+      }
+    },
+    {
+      "case_id": "guitarset-02-funk1-97-c-comp",
+      "reference_kind": "performed",
+      "status": "ok",
+      "warning_count": 5,
+      "review_point_count": 3,
+      "metrics": {
+        "duration_seconds": 29.688390022675737,
+        "flagged_seconds": 11.033469388390023,
+        "flagged_fraction": 0.371642563977459,
+        "flag_union": [
+          [
+            0.0,
+            0.842879819
+          ],
+          [
+            10.12390022675737,
+            14.767891156462586
+          ],
+          [
+            22.19827664399093,
+            24.241632653
+          ],
+          [
+            26.185147392,
+            29.688390022675737
+          ]
+        ],
+        "root": {
+          "primary_accuracy": 0.9795665485383213,
+          "eligible_seconds": 29.688390022675737,
+          "reference_coverage_fraction": 1.0,
+          "primary_error_seconds": 0.6066362765037301,
+          "raw_pair_compared_seconds_on_reference_eligible": 29.688390022675737,
+          "raw_disagreement_seconds_on_reference_eligible": 3.867800454448979,
+          "raw_disagreement_error_seconds": 0.30446267859209364,
+          "raw_disagreement_error_capture_fraction": 0.501886699468131,
+          "raw_disagreement_error_precision": 0.0787172663579069,
+          "raw_disagreement_correct_primary_seconds": 3.563337775856885,
+          "shared_agreement_wrong_seconds": 0.30217359791163645,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.4981133005318689,
+          "flagged_reference_eligible_seconds": 11.033469388390023,
+          "flagged_primary_error_seconds": 0.0697645931224713,
+          "flagged_primary_correct_seconds": 10.963704795267551,
+          "flagged_label_error_capture_fraction": 0.11500234296001968,
+          "flagged_label_error_enrichment_fraction": 0.006322996934752105
+        },
+        "majmin": {
+          "primary_accuracy": 0.9791262282690849,
+          "eligible_seconds": 4.948453608247423,
+          "reference_coverage_fraction": 0.16667975610896504,
+          "primary_error_seconds": 0.10329289103957962,
+          "raw_pair_compared_seconds_on_reference_eligible": 4.948453608247423,
+          "raw_disagreement_seconds_on_reference_eligible": 0.10828996930761825,
+          "raw_disagreement_error_seconds": 4.9887205477716634e-11,
+          "raw_disagreement_error_capture_fraction": 4.829684306018788e-10,
+          "raw_disagreement_error_precision": 4.606816845242844e-10,
+          "raw_disagreement_correct_primary_seconds": 0.10828996925773104,
+          "shared_agreement_wrong_seconds": 0.10329289098969241,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.9999999995170316,
+          "flagged_reference_eligible_seconds": 0.0,
+          "flagged_primary_error_seconds": 0.0,
+          "flagged_primary_correct_seconds": 0.0,
+          "flagged_label_error_capture_fraction": 0.0,
+          "flagged_label_error_enrichment_fraction": null
+        }
+      }
+    },
+    {
+      "case_id": "guitarset-03-bn1-129-eb-comp",
+      "reference_kind": "intended",
+      "status": "ok",
+      "warning_count": 1,
+      "review_point_count": 1,
+      "metrics": {
+        "duration_seconds": 22.32439909297052,
+        "flagged_seconds": 0.842879819,
+        "flagged_fraction": 0.037755991347843486,
+        "flag_union": [
+          [
+            0.0,
+            0.842879819
+          ]
+        ],
+        "root": {
+          "primary_accuracy": 0.9786035532210487,
+          "eligible_seconds": 22.32439909297052,
+          "reference_coverage_fraction": 1.0,
+          "primary_error_seconds": 0.47766281706481095,
+          "raw_pair_compared_seconds_on_reference_eligible": 22.32439909297052,
+          "raw_disagreement_seconds_on_reference_eligible": 0.46439909386394596,
+          "raw_disagreement_error_seconds": 3.015863114796957e-10,
+          "raw_disagreement_error_capture_fraction": 6.313790831216729e-10,
+          "raw_disagreement_error_precision": 6.494119292318233e-10,
+          "raw_disagreement_correct_primary_seconds": 0.46439909356235964,
+          "shared_agreement_wrong_seconds": 0.47766281676322464,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.9999999993686209,
+          "flagged_reference_eligible_seconds": 0.842879819,
+          "flagged_primary_error_seconds": 0.0,
+          "flagged_primary_correct_seconds": 0.842879819,
+          "flagged_label_error_capture_fraction": 0.0,
+          "flagged_label_error_enrichment_fraction": 0.0
+        },
+        "majmin": {
+          "primary_accuracy": 0.9786035532210487,
+          "eligible_seconds": 22.32439909297052,
+          "reference_coverage_fraction": 1.0,
+          "primary_error_seconds": 0.47766281706481095,
+          "raw_pair_compared_seconds_on_reference_eligible": 22.32439909297052,
+          "raw_disagreement_seconds_on_reference_eligible": 0.46439909386394596,
+          "raw_disagreement_error_seconds": 3.015863114796957e-10,
+          "raw_disagreement_error_capture_fraction": 6.313790831216729e-10,
+          "raw_disagreement_error_precision": 6.494119292318233e-10,
+          "raw_disagreement_correct_primary_seconds": 0.46439909356235964,
+          "shared_agreement_wrong_seconds": 0.47766281676322464,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.9999999993686209,
+          "flagged_reference_eligible_seconds": 0.842879819,
+          "flagged_primary_error_seconds": 0.0,
+          "flagged_primary_correct_seconds": 0.842879819,
+          "flagged_label_error_capture_fraction": 0.0,
+          "flagged_label_error_enrichment_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "guitarset-03-bn1-129-eb-comp",
+      "reference_kind": "performed",
+      "status": "ok",
+      "warning_count": 1,
+      "review_point_count": 1,
+      "metrics": {
+        "duration_seconds": 22.32439909297052,
+        "flagged_seconds": 0.842879819,
+        "flagged_fraction": 0.037755991347843486,
+        "flag_union": [
+          [
+            0.0,
+            0.842879819
+          ]
+        ],
+        "root": {
+          "primary_accuracy": 0.9786035532210487,
+          "eligible_seconds": 22.32439909297052,
+          "reference_coverage_fraction": 1.0,
+          "primary_error_seconds": 0.47766281706481095,
+          "raw_pair_compared_seconds_on_reference_eligible": 22.32439909297052,
+          "raw_disagreement_seconds_on_reference_eligible": 0.46439909386394596,
+          "raw_disagreement_error_seconds": 3.015863114796957e-10,
+          "raw_disagreement_error_capture_fraction": 6.313790831216729e-10,
+          "raw_disagreement_error_precision": 6.494119292318233e-10,
+          "raw_disagreement_correct_primary_seconds": 0.46439909356235964,
+          "shared_agreement_wrong_seconds": 0.47766281676322464,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.9999999993686209,
+          "flagged_reference_eligible_seconds": 0.842879819,
+          "flagged_primary_error_seconds": 0.0,
+          "flagged_primary_correct_seconds": 0.842879819,
+          "flagged_label_error_capture_fraction": 0.0,
+          "flagged_label_error_enrichment_fraction": 0.0
+        },
+        "majmin": {
+          "primary_accuracy": 0.9786035532210487,
+          "eligible_seconds": 22.32439909297052,
+          "reference_coverage_fraction": 1.0,
+          "primary_error_seconds": 0.47766281706481095,
+          "raw_pair_compared_seconds_on_reference_eligible": 22.32439909297052,
+          "raw_disagreement_seconds_on_reference_eligible": 0.46439909386394596,
+          "raw_disagreement_error_seconds": 3.015863114796957e-10,
+          "raw_disagreement_error_capture_fraction": 6.313790831216729e-10,
+          "raw_disagreement_error_precision": 6.494119292318233e-10,
+          "raw_disagreement_correct_primary_seconds": 0.46439909356235964,
+          "shared_agreement_wrong_seconds": 0.47766281676322464,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.9999999993686209,
+          "flagged_reference_eligible_seconds": 0.842879819,
+          "flagged_primary_error_seconds": 0.0,
+          "flagged_primary_correct_seconds": 0.842879819,
+          "flagged_label_error_capture_fraction": 0.0,
+          "flagged_label_error_enrichment_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "guitarset-04-rock2-142-d-comp",
+      "reference_kind": "intended",
+      "status": "ok",
+      "warning_count": 3,
+      "review_point_count": 2,
+      "metrics": {
+        "duration_seconds": 27.041632653061225,
+        "flagged_seconds": 2.9721541949319743,
+        "flagged_fraction": 0.10991030878438895,
+        "flag_union": [
+          [
+            0.0,
+            1.3931972789115645
+          ],
+          [
+            20.154920635,
+            21.73387755102041
+          ]
+        ],
+        "root": {
+          "primary_accuracy": 0.9197251953241175,
+          "eligible_seconds": 27.041600000000003,
+          "reference_coverage_fraction": 0.9999987924892835,
+          "primary_error_seconds": 2.170759158123346,
+          "raw_pair_compared_seconds_on_reference_eligible": 27.041600000000003,
+          "raw_disagreement_seconds_on_reference_eligible": 2.1362358297392254,
+          "raw_disagreement_error_seconds": 0.21964932577250695,
+          "raw_disagreement_error_capture_fraction": 0.10118548847325703,
+          "raw_disagreement_error_precision": 0.10282072920728044,
+          "raw_disagreement_correct_primary_seconds": 1.9165865039667185,
+          "shared_agreement_wrong_seconds": 1.9511098323508387,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.8988145115267429,
+          "flagged_reference_eligible_seconds": 2.9721541949319743,
+          "flagged_primary_error_seconds": 0.03388968733033337,
+          "flagged_primary_correct_seconds": 2.938264507601641,
+          "flagged_label_error_capture_fraction": 0.015611905725935769,
+          "flagged_label_error_enrichment_fraction": 0.011402398767910838
+        },
+        "majmin": {
+          "primary_accuracy": 0.873414925177579,
+          "eligible_seconds": 23.661318309859162,
+          "reference_coverage_fraction": 0.8749959225254323,
+          "primary_error_seconds": 2.995169748650641,
+          "raw_pair_compared_seconds_on_reference_eligible": 23.461332362247134,
+          "raw_disagreement_seconds_on_reference_eligible": 1.857596373088429,
+          "raw_disagreement_error_seconds": 0.18575963844217358,
+          "raw_disagreement_error_capture_fraction": 0.06201973645262025,
+          "raw_disagreement_error_precision": 0.10000000061010599,
+          "raw_disagreement_correct_primary_seconds": 1.6718367346462555,
+          "shared_agreement_wrong_seconds": 2.702303981371954,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.9022206446193488,
+          "flagged_reference_eligible_seconds": 1.5199667847566365,
+          "flagged_primary_error_seconds": 0.03388968733033337,
+          "flagged_primary_correct_seconds": 1.4860770974263031,
+          "flagged_label_error_capture_fraction": 0.011314780187533971,
+          "flagged_label_error_enrichment_fraction": 0.022296334150327824
+        }
+      }
+    },
+    {
+      "case_id": "guitarset-04-rock2-142-d-comp",
+      "reference_kind": "performed",
+      "status": "ok",
+      "warning_count": 3,
+      "review_point_count": 2,
+      "metrics": {
+        "duration_seconds": 27.041632653061225,
+        "flagged_seconds": 2.9721541949319743,
+        "flagged_fraction": 0.10991030878438895,
+        "flag_union": [
+          [
+            0.0,
+            1.3931972789115645
+          ],
+          [
+            20.154920635,
+            21.73387755102041
+          ]
+        ],
+        "root": {
+          "primary_accuracy": 0.9197251953241175,
+          "eligible_seconds": 27.041600000000003,
+          "reference_coverage_fraction": 0.9999987924892835,
+          "primary_error_seconds": 2.170759158123346,
+          "raw_pair_compared_seconds_on_reference_eligible": 27.041600000000003,
+          "raw_disagreement_seconds_on_reference_eligible": 2.1362358297392254,
+          "raw_disagreement_error_seconds": 0.21964932577250695,
+          "raw_disagreement_error_capture_fraction": 0.10118548847325703,
+          "raw_disagreement_error_precision": 0.10282072920728044,
+          "raw_disagreement_correct_primary_seconds": 1.9165865039667185,
+          "shared_agreement_wrong_seconds": 1.9511098323508387,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.8988145115267429,
+          "flagged_reference_eligible_seconds": 2.9721541949319743,
+          "flagged_primary_error_seconds": 0.03388968733033337,
+          "flagged_primary_correct_seconds": 2.938264507601641,
+          "flagged_label_error_capture_fraction": 0.015611905725935769,
+          "flagged_label_error_enrichment_fraction": 0.011402398767910838
+        },
+        "majmin": {
+          "primary_accuracy": 0.9406026870580025,
+          "eligible_seconds": 21.971177464788738,
+          "reference_coverage_fraction": 0.8124944875435067,
+          "primary_error_seconds": 1.3050289035802185,
+          "raw_pair_compared_seconds_on_reference_eligible": 21.771191517176714,
+          "raw_disagreement_seconds_on_reference_eligible": 1.7647165541451195,
+          "raw_disagreement_error_seconds": 0.09287981949886404,
+          "raw_disagreement_error_capture_fraction": 0.07117069916540344,
+          "raw_disagreement_error_precision": 0.0526315794344989,
+          "raw_disagreement_correct_primary_seconds": 1.6718367346462555,
+          "shared_agreement_wrong_seconds": 1.1050429552448415,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.846757456645799,
+          "flagged_reference_eligible_seconds": 1.5199667847566365,
+          "flagged_primary_error_seconds": 0.03388968733033337,
+          "flagged_primary_correct_seconds": 1.4860770974263031,
+          "flagged_label_error_capture_fraction": 0.025968533905540596,
+          "flagged_label_error_enrichment_fraction": 0.022296334150327824
+        }
+      }
+    },
+    {
+      "case_id": "guitarset-05-jazz3-150-c-comp",
+      "reference_kind": "intended",
+      "status": "ok",
+      "warning_count": 5,
+      "review_point_count": 2,
+      "metrics": {
+        "duration_seconds": 25.6,
+        "flagged_seconds": 11.623900226922903,
+        "flagged_fraction": 0.45405860261417585,
+        "flag_union": [
+          [
+            0.0,
+            0.842879819
+          ],
+          [
+            10.866938775510205,
+            13.096054421768708
+          ],
+          [
+            14.489251701,
+            19.325963718820862
+          ],
+          [
+            20.805079365,
+            24.52027210884354
+          ]
+        ],
+        "root": {
+          "primary_accuracy": 0.7895975056689343,
+          "eligible_seconds": 25.600000000000005,
+          "reference_coverage_fraction": 1.0000000000000002,
+          "primary_error_seconds": 5.3863038548752815,
+          "raw_pair_compared_seconds_on_reference_eligible": 25.600000000000005,
+          "raw_disagreement_seconds_on_reference_eligible": 10.495419502961454,
+          "raw_disagreement_error_seconds": 4.62077097567347,
+          "raw_disagreement_error_capture_fraction": 0.8578741749764252,
+          "raw_disagreement_error_precision": 0.4402654867077628,
+          "raw_disagreement_correct_primary_seconds": 5.874648527287985,
+          "shared_agreement_wrong_seconds": 0.7655328792018112,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.1421258250235749,
+          "flagged_reference_eligible_seconds": 11.623900226922903,
+          "flagged_primary_error_seconds": 4.383922902253962,
+          "flagged_primary_correct_seconds": 7.23997732466894,
+          "flagged_label_error_capture_fraction": 0.8139018927211025,
+          "flagged_label_error_enrichment_fraction": 0.3771473272026253
+        },
+        "majmin": {
+          "primary_accuracy": 0.7895975056689343,
+          "eligible_seconds": 25.600000000000005,
+          "reference_coverage_fraction": 1.0000000000000002,
+          "primary_error_seconds": 5.3863038548752815,
+          "raw_pair_compared_seconds_on_reference_eligible": 23.835283447000002,
+          "raw_disagreement_seconds_on_reference_eligible": 8.730702949961456,
+          "raw_disagreement_error_seconds": 4.45605442267347,
+          "raw_disagreement_error_capture_fraction": 0.8272935472513645,
+          "raw_disagreement_error_precision": 0.5103889627459084,
+          "raw_disagreement_correct_primary_seconds": 4.274648527287986,
+          "shared_agreement_wrong_seconds": 0.7655328792018112,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.1421258250235749,
+          "flagged_reference_eligible_seconds": 11.623900226922903,
+          "flagged_primary_error_seconds": 4.383922902253962,
+          "flagged_primary_correct_seconds": 7.23997732466894,
+          "flagged_label_error_capture_fraction": 0.8139018927211025,
+          "flagged_label_error_enrichment_fraction": 0.3771473272026253
+        }
+      }
+    },
+    {
+      "case_id": "guitarset-05-jazz3-150-c-comp",
+      "reference_kind": "performed",
+      "status": "ok",
+      "warning_count": 5,
+      "review_point_count": 2,
+      "metrics": {
+        "duration_seconds": 25.6,
+        "flagged_seconds": 11.623900226922903,
+        "flagged_fraction": 0.45405860261417585,
+        "flag_union": [
+          [
+            0.0,
+            0.842879819
+          ],
+          [
+            10.866938775510205,
+            13.096054421768708
+          ],
+          [
+            14.489251701,
+            19.325963718820862
+          ],
+          [
+            20.805079365,
+            24.52027210884354
+          ]
+        ],
+        "root": {
+          "primary_accuracy": 0.7895975056689343,
+          "eligible_seconds": 25.600000000000005,
+          "reference_coverage_fraction": 1.0000000000000002,
+          "primary_error_seconds": 5.3863038548752815,
+          "raw_pair_compared_seconds_on_reference_eligible": 25.600000000000005,
+          "raw_disagreement_seconds_on_reference_eligible": 10.495419502961454,
+          "raw_disagreement_error_seconds": 4.62077097567347,
+          "raw_disagreement_error_capture_fraction": 0.8578741749764252,
+          "raw_disagreement_error_precision": 0.4402654867077628,
+          "raw_disagreement_correct_primary_seconds": 5.874648527287985,
+          "shared_agreement_wrong_seconds": 0.7655328792018112,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.1421258250235749,
+          "flagged_reference_eligible_seconds": 11.623900226922903,
+          "flagged_primary_error_seconds": 4.383922902253962,
+          "flagged_primary_correct_seconds": 7.23997732466894,
+          "flagged_label_error_capture_fraction": 0.8139018927211025,
+          "flagged_label_error_enrichment_fraction": 0.3771473272026253
+        },
+        "majmin": {
+          "primary_accuracy": 0.7341950113378688,
+          "eligible_seconds": 16.0,
+          "reference_coverage_fraction": 0.625,
+          "primary_error_seconds": 4.252879818594099,
+          "raw_pair_compared_seconds_on_reference_eligible": 15.835283447,
+          "raw_disagreement_seconds_on_reference_eligible": 5.015510206517009,
+          "raw_disagreement_error_seconds": 3.4118820873922884,
+          "raw_disagreement_error_capture_fraction": 0.8022521756846106,
+          "raw_disagreement_error_precision": 0.6802662036175278,
+          "raw_disagreement_correct_primary_seconds": 1.6036281191247201,
+          "shared_agreement_wrong_seconds": 0.676281178201811,
+          "shared_agreement_wrong_fraction_of_primary_errors": 0.1590172323339655,
+          "flagged_reference_eligible_seconds": 6.392879819079363,
+          "flagged_primary_error_seconds": 3.423922902573688,
+          "flagged_primary_correct_seconds": 2.9689569165056753,
+          "flagged_label_error_capture_fraction": 0.8050833902251099,
+          "flagged_label_error_enrichment_fraction": 0.5355838056512637
+        }
+      }
+    }
+  ],
+  "synthetic_semantic_checks": [
+    {
+      "id": "same-root-major-minor-disagreement",
+      "status": "pass",
+      "known_reference": "C:maj",
+      "primary": "C:maj",
+      "secondary": "C:min",
+      "pair_triads_agree": false,
+      "primary_sevenths_correct": true,
+      "warning_count": 1,
+      "metrics": {
+        "duration_seconds": 10,
+        "flagged_seconds": 10.0,
+        "flagged_fraction": 1.0,
+        "flag_union": [
+          [
+            0.0,
+            10.0
+          ]
+        ],
+        "root": {
+          "primary_accuracy": 1.0,
+          "eligible_seconds": 10.0,
+          "reference_coverage_fraction": 1.0,
+          "primary_error_seconds": 0.0,
+          "raw_pair_compared_seconds_on_reference_eligible": 10.0,
+          "raw_disagreement_seconds_on_reference_eligible": 0.0,
+          "raw_disagreement_error_seconds": 0.0,
+          "raw_disagreement_error_capture_fraction": null,
+          "raw_disagreement_error_precision": null,
+          "raw_disagreement_correct_primary_seconds": 0.0,
+          "shared_agreement_wrong_seconds": 0.0,
+          "shared_agreement_wrong_fraction_of_primary_errors": null,
+          "flagged_reference_eligible_seconds": 10.0,
+          "flagged_primary_error_seconds": 0.0,
+          "flagged_primary_correct_seconds": 10.0,
+          "flagged_label_error_capture_fraction": null,
+          "flagged_label_error_enrichment_fraction": 0.0
+        },
+        "majmin": {
+          "primary_accuracy": 1.0,
+          "eligible_seconds": 10.0,
+          "reference_coverage_fraction": 1.0,
+          "primary_error_seconds": 0.0,
+          "raw_pair_compared_seconds_on_reference_eligible": 10.0,
+          "raw_disagreement_seconds_on_reference_eligible": 10.0,
+          "raw_disagreement_error_seconds": 0.0,
+          "raw_disagreement_error_capture_fraction": null,
+          "raw_disagreement_error_precision": 0.0,
+          "raw_disagreement_correct_primary_seconds": 10.0,
+          "shared_agreement_wrong_seconds": 0.0,
+          "shared_agreement_wrong_fraction_of_primary_errors": null,
+          "flagged_reference_eligible_seconds": 10.0,
+          "flagged_primary_error_seconds": 0.0,
+          "flagged_primary_correct_seconds": 10.0,
+          "flagged_label_error_capture_fraction": null,
+          "flagged_label_error_enrichment_fraction": 0.0
+        }
+      }
+    },
+    {
+      "id": "seventh-extension-hidden-by-triad-agreement",
+      "status": "pass",
+      "known_reference": "C:7",
+      "primary": "C:maj",
+      "secondary": "C:7",
+      "pair_triads_agree": true,
+      "primary_sevenths_correct": false,
+      "warning_count": 0,
+      "metrics": {
+        "duration_seconds": 10,
+        "flagged_seconds": 0.0,
+        "flagged_fraction": 0.0,
+        "flag_union": [],
+        "root": {
+          "primary_accuracy": 1.0,
+          "eligible_seconds": 10.0,
+          "reference_coverage_fraction": 1.0,
+          "primary_error_seconds": 0.0,
+          "raw_pair_compared_seconds_on_reference_eligible": 10.0,
+          "raw_disagreement_seconds_on_reference_eligible": 0.0,
+          "raw_disagreement_error_seconds": 0.0,
+          "raw_disagreement_error_capture_fraction": null,
+          "raw_disagreement_error_precision": null,
+          "raw_disagreement_correct_primary_seconds": 0.0,
+          "shared_agreement_wrong_seconds": 0.0,
+          "shared_agreement_wrong_fraction_of_primary_errors": null,
+          "flagged_reference_eligible_seconds": 0.0,
+          "flagged_primary_error_seconds": 0.0,
+          "flagged_primary_correct_seconds": 0.0,
+          "flagged_label_error_capture_fraction": null,
+          "flagged_label_error_enrichment_fraction": null
+        },
+        "majmin": {
+          "primary_accuracy": 1.0,
+          "eligible_seconds": 10.0,
+          "reference_coverage_fraction": 1.0,
+          "primary_error_seconds": 0.0,
+          "raw_pair_compared_seconds_on_reference_eligible": 10.0,
+          "raw_disagreement_seconds_on_reference_eligible": 0.0,
+          "raw_disagreement_error_seconds": 0.0,
+          "raw_disagreement_error_capture_fraction": null,
+          "raw_disagreement_error_precision": null,
+          "raw_disagreement_correct_primary_seconds": 0.0,
+          "shared_agreement_wrong_seconds": 0.0,
+          "shared_agreement_wrong_fraction_of_primary_errors": null,
+          "flagged_reference_eligible_seconds": 0.0,
+          "flagged_primary_error_seconds": 0.0,
+          "flagged_primary_correct_seconds": 0.0,
+          "flagged_label_error_capture_fraction": null,
+          "flagged_label_error_enrichment_fraction": null
+        }
+      }
+    },
+    {
+      "id": "shared-wrong-consensus",
+      "status": "pass",
+      "known_reference": "F:maj",
+      "primary": "C:maj",
+      "secondary": "C:maj",
+      "pair_triads_agree": true,
+      "primary_sevenths_correct": false,
+      "warning_count": 0,
+      "metrics": {
+        "duration_seconds": 10,
+        "flagged_seconds": 0.0,
+        "flagged_fraction": 0.0,
+        "flag_union": [],
+        "root": {
+          "primary_accuracy": 0.0,
+          "eligible_seconds": 10.0,
+          "reference_coverage_fraction": 1.0,
+          "primary_error_seconds": 10.0,
+          "raw_pair_compared_seconds_on_reference_eligible": 10.0,
+          "raw_disagreement_seconds_on_reference_eligible": 0.0,
+          "raw_disagreement_error_seconds": 0.0,
+          "raw_disagreement_error_capture_fraction": 0.0,
+          "raw_disagreement_error_precision": null,
+          "raw_disagreement_correct_primary_seconds": 0.0,
+          "shared_agreement_wrong_seconds": 10.0,
+          "shared_agreement_wrong_fraction_of_primary_errors": 1.0,
+          "flagged_reference_eligible_seconds": 0.0,
+          "flagged_primary_error_seconds": 0.0,
+          "flagged_primary_correct_seconds": 0.0,
+          "flagged_label_error_capture_fraction": 0.0,
+          "flagged_label_error_enrichment_fraction": null
+        },
+        "majmin": {
+          "primary_accuracy": 0.0,
+          "eligible_seconds": 10.0,
+          "reference_coverage_fraction": 1.0,
+          "primary_error_seconds": 10.0,
+          "raw_pair_compared_seconds_on_reference_eligible": 10.0,
+          "raw_disagreement_seconds_on_reference_eligible": 0.0,
+          "raw_disagreement_error_seconds": 0.0,
+          "raw_disagreement_error_capture_fraction": 0.0,
+          "raw_disagreement_error_precision": null,
+          "raw_disagreement_correct_primary_seconds": 0.0,
+          "shared_agreement_wrong_seconds": 10.0,
+          "shared_agreement_wrong_fraction_of_primary_errors": 1.0,
+          "flagged_reference_eligible_seconds": 0.0,
+          "flagged_primary_error_seconds": 0.0,
+          "flagged_primary_correct_seconds": 0.0,
+          "flagged_label_error_capture_fraction": 0.0,
+          "flagged_label_error_enrichment_fraction": null
+        }
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "case_id": "guitarset-00-ss3-84-bb-comp",
+      "audio_sha256": "0d1e9f6f605a49782eeccbb4ad0021a72087d0f9a5f7cb45db867a862c5393cc",
+      "primary_sha256": "00fdac896e2c1f2836f69e519ec2ea57f0ec8a259db7bd04a579d762a6e4086b",
+      "secondary_sha256": "9d4491b052b510e321e3fa2bfd8ac9d14f0faaf958d3107437a382dcffd747ef",
+      "intended_reference_sha256": "01e19e538a73d8c14cdff03e9507466408e8cb907219888446e89e44f1770960",
+      "performed_reference_sha256": "74588a39b2f40dc70e2468849960ee6a2c6d12904425b598b4a20edcf463821f"
+    },
+    {
+      "case_id": "guitarset-01-rock1-90-csharp-comp",
+      "audio_sha256": "a9449020afa7ce9f45d94acb413c5e857f370c069bc60821d8e8e137c249cb37",
+      "primary_sha256": "680d159252c750a97e23b19e9dd14ed3ba9d38250a9b808596a9a355fcc36ed7",
+      "secondary_sha256": "1df8257befbd66cdcafcf4fc15e61c217889d5d972fd9aa3ddc908bddd23fcbe",
+      "intended_reference_sha256": "413e1c991a2d933267be85c47e68c711a863216e6dd5a7adc64e6fcd64a962a2",
+      "performed_reference_sha256": "dd0372a48c7faab06753e24c3870091536d3260a71ef9fab30a54279c8a16362"
+    },
+    {
+      "case_id": "guitarset-02-funk1-97-c-comp",
+      "audio_sha256": "52f2e0b1042bc51e3ca3c28160f2d5f4184f6386521c2a191b16c116fdd9141e",
+      "primary_sha256": "129d2ddd010b60cc35b7af99b24c2d8f5d65520d1437dadb754a52a2a0a8beb4",
+      "secondary_sha256": "295a1c83a0807688fad6c6f1a92f4cfc3f5282486894a7801fda1bca4ea9f38a",
+      "intended_reference_sha256": "4815c8edff2155f606382d9dd5d8da833f132fc9763702ae8fca0d05b31e0eb8",
+      "performed_reference_sha256": "fb83d9df6c5218901ac52e266033b281b2db92a8122b5e8d1924bfb4c0dff284"
+    },
+    {
+      "case_id": "guitarset-03-bn1-129-eb-comp",
+      "audio_sha256": "51f6bf50ddc33597163de3b4d4e39e9da9b4efb5dc2fce25224765e9a5b021ce",
+      "primary_sha256": "b35c4949607141f9d90e1dd1e5f304290fc35dd354a6adbf25c9901d68740fb9",
+      "secondary_sha256": "ba02fbaae36a8c4a11aae9a26b8a64d37e6f343278dc686251e1195b7b086a97",
+      "intended_reference_sha256": "19f6a51bd2b322c71602b6c5ff4a7dc7a3c94b41fc163200dfc22d019a3a5f01",
+      "performed_reference_sha256": "db6a70b1adc82af571845e9a93d0b82dc43e3400b52c8a56a369811a363d0569"
+    },
+    {
+      "case_id": "guitarset-04-rock2-142-d-comp",
+      "audio_sha256": "c7a08ba03e61f520d77107b66188849306f79f754b991c55ea9452a8f0c0039a",
+      "primary_sha256": "73469462ec41d33aec2c4cb155676dbb6b29105e4e5606db4891433293f799f4",
+      "secondary_sha256": "1884321209dfaf67e7752987af909bc66eb44d86b7897f02c48c38fde2e1682a",
+      "intended_reference_sha256": "23549e67f77ddd3e047167fda974a0307b9ddf6deebbc73df346a18f9b59477b",
+      "performed_reference_sha256": "8026a78a36f10bd145591bd163a7fd05bbf21e4f2ed77f78d9bba7212cede54d"
+    },
+    {
+      "case_id": "guitarset-05-jazz3-150-c-comp",
+      "audio_sha256": "dd4c1c04f42d9fdec17ef96c181a0129dd0af6d644397c535294ee1f77fae39b",
+      "primary_sha256": "9ff0f95cbff7bee7d314d96e5e25bec059bbf9511ba6e91ef8760c9744cf3046",
+      "secondary_sha256": "206221b17e8ff49f562b148091850a7e889011b6936b58c8cf5bd040d28bdadd",
+      "intended_reference_sha256": "22b1a2b585240d01e8132ea01d8789f919a5d4ed4717e21908cec9f7b03e39c7",
+      "performed_reference_sha256": "31bf1fe4fa57659b3446f1467e0985da2185efacbb32d88babea3c0f0bf9a8ae"
+    }
+  ],
+  "previous_report_sha256": "20df1c85979d85c9686e22f5a59249edb1404354a4a1fc6c520cc74c60555753",
+  "limitations": [
+    "Six acoustic guitar recordings from one dataset; not commercial full-band mix accuracy.",
+    "Performed roots and segmentation inherit the instructed lead sheet; no physical onset accuracy tested.",
+    "Warning enrichment compares labels only. Timing flags on correct-label spans are not proven false positives.",
+    "Model agreement is not ground truth; major/minor agreement does not certify sevenths, suspensions or basses.",
+    "Cached predictions reused; no new model training, tuning, inference or source separation."
+  ]
+}

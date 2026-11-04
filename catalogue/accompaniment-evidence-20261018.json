@@ -1,0 +1,5130 @@
+{
+  "schema_version": "accompaniment-evidence-assessment-1.0",
+  "date": "2026-10-18",
+  "issue": "https://github.com/dcromp/music-os/issues/4",
+  "status": "provisional evidence assessment; independent recording acceptance pending",
+  "gold": false,
+  "candidate_exposure": "model-exposed",
+  "actor": "agent",
+  "audio_audition_performed": false,
+  "accepted_excerpt_boundaries": [],
+  "quality_report": {
+    "path": "experiments/generated/accompaniment-review-20261018/quality-report-v2.json",
+    "sha256": "9c6c28541f6bba35eaafe1dc099056830ce04bdcaf118345c1974739c9cdec48",
+    "implementation_sha256": "caf0b4f6f4f5be86cd4d705466c53f943bd7e41bc8073efb8e290b7863a0ea12",
+    "spec": {
+      "path": "catalogue/accompaniment-quality-spec-20261018.json",
+      "sha256": "2faa287ba96db8ffb8f23ce3de0288b42d12d9ac9682249ab979928ba94fa77a"
+    },
+    "regions": 44,
+    "scored_windows": 176,
+    "fixed_coverage_samples": 12
+  },
+  "source_recheck": {
+    "path": "catalogue/accompaniment-source-review-20261018.json",
+    "sha256": "3f4a59e010496275c3d8b98885efc446f05bfb9f2cdc78e723c529644d90fc0d"
+  },
+  "method": {
+    "weighting": "non-silent nonzero frames, clipped adjacent-center-midpoint duration cells",
+    "templates": "existing equal-weight L2-normalized chord pitch classes; slash bass omitted",
+    "interior_only": "entire centered analysis window must fit within requested region",
+    "automatic_corrections": false,
+    "acceptance_threshold": null
+  },
+  "cases": [
+    {
+      "recording": {
+        "id": "animals-house-rising-sun-official-20261011",
+        "title": "The Animals - The House Of The Rising Sun",
+        "duration_seconds": 269.91891156462583,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708"
+      },
+      "primary_sha256": "71eb918cc9ef3662d5c6d75b49814f700b89a2fc15b73c1ce92d9bdb18dd6037",
+      "analysis_id": "animals-house-rising-sun-official-20261011-crema",
+      "status": "independent-recording-review-deferred",
+      "accepted_excerpt_boundaries": [],
+      "inputs": {
+        "audio": {
+          "path": "experiments/generated/automatic-first-ten-v1/cases/animals-house-rising-sun-official-20261011/audio.wav",
+          "sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708"
+        },
+        "primary": {
+          "path": "experiments/generated/automatic-first-ten-v1/cases/animals-house-rising-sun-official-20261011/primary.json",
+          "sha256": "71eb918cc9ef3662d5c6d75b49814f700b89a2fc15b73c1ce92d9bdb18dd6037"
+        },
+        "btc": {
+          "path": "experiments/generated/automatic-first-ten-selected-v1/cases/animals-house-rising-sun-official-20261011/primary.json",
+          "sha256": "7ee27e5ecc662a1bd838663fdb89cc1e18736d8cf60b4f7cf059d6a6208edd31"
+        },
+        "chordino": {
+          "path": "experiments/generated/automatic-first-ten-v1/cases/animals-house-rising-sun-official-20261011/chordino.json",
+          "sha256": "519748e12a7612c4965339f13d09e733192f2dba9e8de1209ef685a8086e1c13"
+        },
+        "nnls": {
+          "path": "experiments/generated/catalogue-remaining-six-pitch-20261016/animals-house-rising-sun-official-20261011/nnls-evidence.json",
+          "sha256": "3bc4d72e421ccd08aec21d86218b245df0a2a4d5ca3400b0cf523b84ce0c658b"
+        }
+      },
+      "arrangement_practice_proposal": "Keep 6/8 with six eighth notes grouped 3+3 and two dotted-quarter pulses; start with gentle anchors on 1 and 4. Small F is an easier choice. Introduce root-led picking/raking separately; optional fingerstyle should be labelled an adaptation. Retain D major and E major in the main vocabulary and Dm as an outro task.",
+      "local_findings": [
+        "Two existing intro E overlays remain locally supported and provisional; neither physical boundary is verified.",
+        "90.093\u201393.066 s: spectral and NNLS favour E-family/E7 over Em; save a basic E proposal, with exact voicing and physical timing unverified.",
+        "123.623\u2013126.502 s: NNLS favours E while spectral favours Em; unresolved.",
+        "210.373\u2013211.580 s: NNLS favours Am, with E/Em close; no blanket Em-to-E change.",
+        "Five late Dm cues retain Dm support in both methods; preserve Am/Dm contrast without transferring teacher timestamps."
+      ],
+      "deferred_checks": [
+        "The four Em quality warnings plus missing intro change need local recording evidence; palette disagreement alone does not prove a particular cue is wrong.",
+        "The intro warning and Em cue near 11.146 seconds overlap existing provisional display corrections; do not double-count them as new errors.",
+        "Physical 6/8 phase, inferred two-pulse bar length, local change times, Am/Dm outro extent and contacts remain unverified.",
+        "No newly inspected source explicitly establishes EADGBE on the selected recording; project standard-tuning teaching setup remains a proposal."
+      ],
+      "windows": [
+        {
+          "id": "intro_native_long_Am",
+          "start_seconds": 6.408707482993197,
+          "end_seconds": 11.145578231292516,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 4.736870748299319,
+                "active_frame_count": 96,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "E": 0.46199688484423584,
+                  "Em": 0.4102023495695939,
+                  "E7": 0.4431660279806475,
+                  "Am": 0.5869093701294663,
+                  "Dm": 0.46056241303362666
+                },
+                "top_three_triads": [
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.5902327818317145
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.5869093701294663
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.46199688484423584
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 4.547936507936509,
+                "active_frame_count": 91,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "E": 0.45967170332838847,
+                  "Em": 0.40241148302387675,
+                  "E7": 0.43327145365883446,
+                  "Am": 0.6013628945990963,
+                  "Dm": 0.45759983104641827
+                },
+                "top_three_triads": [
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.6044387942776974
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6013628945990963
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.45967170332838847
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 4.736870748299319,
+                "active_frame_count": 52,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "E": 0.5874075154551315,
+                  "Em": 0.5482585642361233,
+                  "E7": 0.5501183223831101,
+                  "Am": 0.6695367260175282,
+                  "Dm": 0.3326036592071448
+                },
+                "top_three_triads": [
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.7238568482058063
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6695367260175282
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.5874075154551315
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 3.9009523809999997,
+                "active_frame_count": 42,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "E": 0.6216660530962481,
+                  "Em": 0.5510245344686997,
+                  "E7": 0.5689741949006903,
+                  "Am": 0.6690831145937419,
+                  "Dm": 0.3021862039330245
+                },
+                "top_three_triads": [
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.7190226626211125
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6690831145937419
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.6216660530962481
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "existing_intro_E_overlay",
+          "start_seconds": 7.987664399,
+          "end_seconds": 9.473741497,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 1.4860770980000009,
+                "active_frame_count": 31,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "E": 0.8017281193875215,
+                  "Em": 0.6513078019900045,
+                  "E7": 0.7395288497424769,
+                  "Am": 0.4754273809069493,
+                  "Dm": 0.2533732472497938
+                },
+                "top_three_triads": [
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.8017281193875215
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.6513078019900045
+                  },
+                  {
+                    "label": "C#m",
+                    "mean_cosine": 0.5678040099835586
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 1.2994104308390035,
+                "active_frame_count": 26,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "E": 0.8441884225666543,
+                  "Em": 0.6703365473847964,
+                  "E7": 0.7665530546749489,
+                  "Am": 0.48414431528455176,
+                  "Dm": 0.22531559202493354
+                },
+                "top_three_triads": [
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.8441884225666543
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.6703365473847964
+                  },
+                  {
+                    "label": "C#m",
+                    "mean_cosine": 0.6130285226851591
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 1.4860770980000009,
+                "active_frame_count": 17,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "E": 0.920955231433511,
+                  "Em": 0.6969863757139051,
+                  "E7": 0.8535757466503526,
+                  "Am": 0.4340522085149557,
+                  "Dm": 0.10986891887928553
+                },
+                "top_three_triads": [
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.920955231433511
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.6969863757139051
+                  },
+                  {
+                    "label": "C#m",
+                    "mean_cosine": 0.6802873253009303
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 0.7430385489999995,
+                "active_frame_count": 8,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "E": 0.9778886820051975,
+                  "Em": 0.6575584522304944,
+                  "E7": 0.8590289774483129,
+                  "Am": 0.408291894498985,
+                  "Dm": 0.02216574466484098
+                },
+                "top_three_triads": [
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.9778886820051975
+                  },
+                  {
+                    "label": "C#m",
+                    "mean_cosine": 0.7131016037495949
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.6575584522304944
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "Em_native_7",
+          "start_seconds": 11.145578231292516,
+          "end_seconds": 12.538775510204081,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 1.3931972789115648,
+                "active_frame_count": 29,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "E": 0.7077480605809781,
+                  "Em": 0.6516305222293861,
+                  "E7": 0.6677669260694529,
+                  "Am": 0.49320224677033203,
+                  "Dm": 0.31366249819879266
+                },
+                "top_three_triads": [
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.7077480605809781
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.6516305222293861
+                  },
+                  {
+                    "label": "C#m",
+                    "mean_cosine": 0.5373225349059189
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 1.2494331065759638,
+                "active_frame_count": 25,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "E": 0.7113542170776167,
+                  "Em": 0.6484273384714437,
+                  "E7": 0.6605328671720309,
+                  "Am": 0.5007577061289676,
+                  "Dm": 0.298579890152778
+                },
+                "top_three_triads": [
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.7113542170776167
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.6484273384714437
+                  },
+                  {
+                    "label": "C#m",
+                    "mean_cosine": 0.5466981559569877
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 1.3931972789115648,
+                "active_frame_count": 16,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "E": 0.8841702604133037,
+                  "Em": 0.7200615455768475,
+                  "E7": 0.8091191488105117,
+                  "Am": 0.3989234419487584,
+                  "Dm": 0.08854686227439824
+                },
+                "top_three_triads": [
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.8841702604133037
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.7200615455768475
+                  },
+                  {
+                    "label": "C#m",
+                    "mean_cosine": 0.6194873755763333
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 0.6501587299999994,
+                "active_frame_count": 7,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "E": 0.9775055514923722,
+                  "Em": 0.6672561692135509,
+                  "E7": 0.8520542760295753,
+                  "Am": 0.37173249620241267,
+                  "Dm": 0.008179930471440805
+                },
+                "top_three_triads": [
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.9775055514923722
+                  },
+                  {
+                    "label": "G#m",
+                    "mean_cosine": 0.6860803002263361
+                  },
+                  {
+                    "label": "C#m",
+                    "mean_cosine": 0.68047189632685
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "Em_native_56",
+          "start_seconds": 90.09342403628118,
+          "end_seconds": 93.06557823129252,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 2.972154195011342,
+                "active_frame_count": 60,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "E": 0.6737754309552977,
+                  "Em": 0.6316979688085212,
+                  "E7": 0.6785361703866701,
+                  "Am": 0.5737742367594781,
+                  "Dm": 0.3331293894350887
+                },
+                "top_three_triads": [
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.6737754309552977
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.6316979688085212
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.5737742367594781
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 2.798730158730166,
+                "active_frame_count": 56,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "E": 0.6724408209916288,
+                  "Em": 0.6350188399571728,
+                  "E7": 0.68022173171545,
+                  "Am": 0.5770234962530715,
+                  "Dm": 0.3435363418163344
+                },
+                "top_three_triads": [
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.6724408209916288
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.6350188399571728
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.5770234962530715
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 2.972154195011342,
+                "active_frame_count": 33,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "E": 0.8660613346932039,
+                  "Em": 0.7077866357941973,
+                  "E7": 0.8884166776012582,
+                  "Am": 0.5351942441427466,
+                  "Dm": 0.2444306656231518
+                },
+                "top_three_triads": [
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.8660613346932039
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.7077866357941973
+                  },
+                  {
+                    "label": "C#m",
+                    "mean_cosine": 0.6077316689037965
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 2.229115645999997,
+                "active_frame_count": 24,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "E": 0.8789212032433061,
+                  "Em": 0.7072598859164916,
+                  "E7": 0.9101994182727795,
+                  "Am": 0.5239851966783384,
+                  "Dm": 0.2676929856837158
+                },
+                "top_three_triads": [
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.8789212032433061
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.7072598859164916
+                  },
+                  {
+                    "label": "C#m",
+                    "mean_cosine": 0.5964106423211086
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "Em_native_77",
+          "start_seconds": 123.62303854875283,
+          "end_seconds": 126.50231292517007,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 2.879274376417243,
+                "active_frame_count": 58,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "E": 0.6366510064776002,
+                  "Em": 0.6649531724326422,
+                  "E7": 0.6305906979231425,
+                  "Am": 0.5440663003100029,
+                  "Dm": 0.3896457871863033
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.6649531724326422
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.6366510064776002
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.5440663003100029
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 2.6987755102040865,
+                "active_frame_count": 54,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "E": 0.6369815863289787,
+                  "Em": 0.6650981212975295,
+                  "E7": 0.62595492020209,
+                  "Am": 0.5365831301653197,
+                  "Dm": 0.3847919053083524
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.6650981212975295
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.6369815863289787
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5408908783699261
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 2.879274376417243,
+                "active_frame_count": 32,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "E": 0.8437727813474802,
+                  "Em": 0.7341336275142585,
+                  "E7": 0.8194080041268136,
+                  "Am": 0.5168386122849097,
+                  "Dm": 0.2062360825243018
+                },
+                "top_three_triads": [
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.8437727813474802
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.7341336275142585
+                  },
+                  {
+                    "label": "C#m",
+                    "mean_cosine": 0.5625650451023411
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 2.043356009000007,
+                "active_frame_count": 22,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "E": 0.9043118909889174,
+                  "Em": 0.7722826471031521,
+                  "E7": 0.8767130713250345,
+                  "Am": 0.4559186291296696,
+                  "Dm": 0.1556329087508468
+                },
+                "top_three_triads": [
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.9043118909889174
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.7722826471031521
+                  },
+                  {
+                    "label": "C#m",
+                    "mean_cosine": 0.6040182164525468
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "Em_native_131",
+          "start_seconds": 210.37278911564627,
+          "end_seconds": 211.58022675736962,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 1.2074376417233452,
+                "active_frame_count": 26,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "E": 0.5712639956512809,
+                  "Em": 0.5644974673381145,
+                  "E7": 0.5432768917465621,
+                  "Am": 0.5721766344630446,
+                  "Dm": 0.40596931999120145
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.5721766344630446
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.5712639956512809
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.5644974673381145
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 0.999546485260737,
+                "active_frame_count": 20,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "E": 0.5829812111829071,
+                  "Em": 0.5725344402002586,
+                  "E7": 0.5552692007098324,
+                  "Am": 0.5789714073498918,
+                  "Dm": 0.398685686680736
+                },
+                "top_three_triads": [
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.5829812111829071
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.5789714073498918
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.5725344402002586
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 1.2074376417233452,
+                "active_frame_count": 14,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "E": 0.6504960887397907,
+                  "Em": 0.6640339913373325,
+                  "E7": 0.5968821936935376,
+                  "Am": 0.764332090955777,
+                  "Dm": 0.3729197493128281
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.764332090955777
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.7344490017207206
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.6640339913373325
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 0.3715192740000077,
+                "active_frame_count": 4,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "E": 0.6580252828435227,
+                  "Em": 0.6640663808712248,
+                  "E7": 0.5971802555737566,
+                  "Am": 0.7683143126332712,
+                  "Dm": 0.38147552721392
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.7683143126332712
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.731332090917636
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.6640663808712248
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "outro_native_Am_244.645",
+          "start_seconds": 244.64544217687074,
+          "end_seconds": 246.22439909297051,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 1.57895691609977,
+                "active_frame_count": 33,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.7592954074961833,
+                  "Dm": 0.5572112944302804,
+                  "D": 0.54037848940597,
+                  "E": 0.19541067584861252
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.7592954074961833
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.6733500264267906
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.6402274325724963
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 1.3993650793651113,
+                "active_frame_count": 28,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.7565791126473358,
+                  "Dm": 0.5620866623125578,
+                  "D": 0.5475249496919843,
+                  "E": 0.17548540438702237
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.7565791126473358
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.6739764336075804
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.6489321609833046
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 1.57895691609977,
+                "active_frame_count": 18,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.9468622716909627,
+                  "Dm": 0.43971858528127167,
+                  "D": 0.4402745873801003,
+                  "E": 0.3121045206016758
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.9468622716909627
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.7661169973474807
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.6715407322637219
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 0.7430385490000049,
+                "active_frame_count": 8,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.9683587520366356,
+                  "Dm": 0.4291130090596532,
+                  "D": 0.4284150592765103,
+                  "E": 0.286020107467864
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.9683587520366356
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.7477610753187245
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.7028089182358668
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "outro_native_Dm_246.224",
+          "start_seconds": 246.22439909297051,
+          "end_seconds": 247.8962358276644,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 1.6718367346938976,
+                "active_frame_count": 34,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.4306912011547963,
+                  "Dm": 0.7550094245381136,
+                  "D": 0.622527781860332,
+                  "E": 0.11858023204776473
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.7550094245381136
+                  },
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.622527781860332
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.6001083600497124
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 1.4993197278911339,
+                "active_frame_count": 30,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.39071712284164517,
+                  "Dm": 0.7777839243797643,
+                  "D": 0.6325600001439627,
+                  "E": 0.1102546567241248
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.7777839243797643
+                  },
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.6325600001439627
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.6002237875854559
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 1.6718367346938976,
+                "active_frame_count": 19,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.7717439355951934,
+                  "Dm": 0.8087855199625391,
+                  "D": 0.5860731756364395,
+                  "E": 0.2364239647883837
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.8087855199625391
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.7736778531160958
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.7717439355951934
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 0.9287981859999945,
+                "active_frame_count": 10,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.7446129816897883,
+                  "Dm": 0.8511382221898834,
+                  "D": 0.6039362907981233,
+                  "E": 0.22654429862864486
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.8511382221898834
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.7767327514309209
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.7446129816897883
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "outro_native_Am_247.896",
+          "start_seconds": 247.8962358276644,
+          "end_seconds": 249.47519274376418,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 1.57895691609977,
+                "active_frame_count": 33,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.6752850614385852,
+                  "Dm": 0.5756938075423372,
+                  "D": 0.5647988774200502,
+                  "E": 0.15779749811904242
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6752850614385852
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.6720276505909689
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.5764389386182304
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 1.3493877551020432,
+                "active_frame_count": 27,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.6724528778295514,
+                  "Dm": 0.5716796955497171,
+                  "D": 0.5612975234721544,
+                  "E": 0.15278561184524303
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6724528778295514
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.6697692163374747
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.5740870731345804
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 1.57895691609977,
+                "active_frame_count": 18,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.8687388715690667,
+                  "Dm": 0.5036754264013783,
+                  "D": 0.4748057074433038,
+                  "E": 0.3365833972313246
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.8687388715690667
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.8341320776467505
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.5774862307351861
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 0.835918367000005,
+                "active_frame_count": 9,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.8658543898562112,
+                  "Dm": 0.4767485691313788,
+                  "D": 0.46959690242069047,
+                  "E": 0.33208310996318197
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.8658543898562112
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.8521735759160027
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.5530572068965613
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "outro_native_Dm_249.475",
+          "start_seconds": 249.47519274376418,
+          "end_seconds": 250.96126984126985,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 1.486077097505671,
+                "active_frame_count": 31,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.4333510705508805,
+                  "Dm": 0.8324550998588025,
+                  "D": 0.6316548685587138,
+                  "E": 0.10605345512428554
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.8324550998588025
+                  },
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.6316548685587138
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.5943629068632817
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 1.2994104308389751,
+                "active_frame_count": 26,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.41284462727661375,
+                  "Dm": 0.8421949111608188,
+                  "D": 0.6245305125265864,
+                  "E": 0.0980008919007755
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.8421949111608188
+                  },
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.6245305125265864
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.5832616347214716
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 1.486077097505671,
+                "active_frame_count": 17,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.7030715788355365,
+                  "Dm": 0.8606502065886986,
+                  "D": 0.5783038311487013,
+                  "E": 0.19263536861726852
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.8606502065886986
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.8051634533330847
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.7030715788355365
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 0.6501587299999869,
+                "active_frame_count": 7,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.6952251154707931,
+                  "Dm": 0.8744297248228039,
+                  "D": 0.5677673561665516,
+                  "E": 0.17620519796024173
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.8744297248228039
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.8309935458056689
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6952251154707931
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "outro_native_Am_250.961",
+          "start_seconds": 250.96126984126985,
+          "end_seconds": 252.63310657596372,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 1.6718367346938692,
+                "active_frame_count": 34,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.6538214773260771,
+                  "Dm": 0.5832431941454672,
+                  "D": 0.5808325014773305,
+                  "E": 0.11660126202767893
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6538214773260771
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.6528960810926792
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.5838436749072332
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 1.4993197278911907,
+                "active_frame_count": 30,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.6425416328661131,
+                  "Dm": 0.580241039574514,
+                  "D": 0.5773428225011877,
+                  "E": 0.10161290723171618
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6425416328661131
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.6406043774847955
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.5834018815565837
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 1.6718367346938692,
+                "active_frame_count": 19,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.8772510286988483,
+                  "Dm": 0.5088633791441449,
+                  "D": 0.4893414625178524,
+                  "E": 0.3110490130761121
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.8772510286988483
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.8243827641507596
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.5992852298840851
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 0.9287981859999945,
+                "active_frame_count": 10,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.8920210334499944,
+                  "Dm": 0.47894031877093374,
+                  "D": 0.4744365119827278,
+                  "E": 0.3171483774956818
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.8920210334499944
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.8358117847886021
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.5935131577171813
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "outro_native_Dm_252.633",
+          "start_seconds": 252.63310657596372,
+          "end_seconds": 254.2120634920635,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 1.57895691609977,
+                "active_frame_count": 33,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.48205496203821474,
+                  "Dm": 0.8368769086245917,
+                  "D": 0.6485296758881515,
+                  "E": 0.1499913858649275
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.8368769086245917
+                  },
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.6485296758881515
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.625022526962326
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 1.3993650793651113,
+                "active_frame_count": 28,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.45792739790620046,
+                  "Dm": 0.8510021424645058,
+                  "D": 0.6429874398354649,
+                  "E": 0.14181578490480745
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.8510021424645058
+                  },
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.6429874398354649
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.6168496740847642
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 1.57895691609977,
+                "active_frame_count": 18,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.7321360160258026,
+                  "Dm": 0.8023057097468345,
+                  "D": 0.5923342355934458,
+                  "E": 0.21161488027768108
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.8023057097468345
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.7505178321263462
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.7321360160258026
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 0.7430385490000049,
+                "active_frame_count": 8,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.7251151483476908,
+                  "Dm": 0.8121827623884641,
+                  "D": 0.5893209145695114,
+                  "E": 0.19084031254355954
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.8121827623884641
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.7647842256004392
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.7251151483476908
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "outro_native_Am_254.212",
+          "start_seconds": 254.2120634920635,
+          "end_seconds": 255.88390022675736,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 1.6718367346938692,
+                "active_frame_count": 34,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.6571141318444543,
+                  "Dm": 0.580587797615614,
+                  "D": 0.5804881790459684,
+                  "E": 0.12454102705639823
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6571141318444543
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.6505672716091246
+                  },
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.580587797615614
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 1.4993197278911339,
+                "active_frame_count": 30,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.6566866720794099,
+                  "Dm": 0.5760324922171658,
+                  "D": 0.5750022674744674,
+                  "E": 0.105693091415691
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6566866720794099
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.6470912354410603
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.5853473386127463
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 1.6718367346938692,
+                "active_frame_count": 19,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.9122054370370634,
+                  "Dm": 0.5076171284130007,
+                  "D": 0.4891229292798788,
+                  "E": 0.332093171897458
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.9122054370370634
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.7957113106238973
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.6338780525343038
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 0.9287981859999945,
+                "active_frame_count": 10,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.9217231842726137,
+                  "Dm": 0.4902610690066465,
+                  "D": 0.47630362401556586,
+                  "E": 0.35976732241015774
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.9217231842726137
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.8065068906305807
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.6199506688986366
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "outro_native_Dm_255.884",
+          "start_seconds": 255.88390022675736,
+          "end_seconds": 257.64861678004536,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 1.7647165532879967,
+                "active_frame_count": 36,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.5471243631165628,
+                  "Dm": 0.8067744958938252,
+                  "D": 0.636082537035906,
+                  "E": 0.13397881342950238
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.8067744958938252
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.6366271930649253
+                  },
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.636082537035906
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 1.5992743764172133,
+                "active_frame_count": 32,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.547338777849246,
+                  "Dm": 0.8210714165062065,
+                  "D": 0.634919866406946,
+                  "E": 0.12381379663159701
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.8210714165062065
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.6521245382529579
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.6378355019366085
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 1.7647165532879967,
+                "active_frame_count": 20,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.7439718019903354,
+                  "Dm": 0.7918023135673737,
+                  "D": 0.5415049500414152,
+                  "E": 0.19911792132292538
+                },
+                "top_three_triads": [
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.810759969980555
+                  },
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.7918023135673737
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.7439718019903354
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 0.9287981859999945,
+                "active_frame_count": 10,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.711332203862131,
+                  "Dm": 0.8345407709116063,
+                  "D": 0.5425947970246111,
+                  "E": 0.16784933799140017
+                },
+                "top_three_triads": [
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.8482689306584267
+                  },
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.8345407709116063
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.711332203862131
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "outro_native_Am_257.649",
+          "start_seconds": 257.64861678004536,
+          "end_seconds": 259.41333333333336,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 1.7647165532879967,
+                "active_frame_count": 37,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.6703897372748819,
+                  "Dm": 0.47089452214544425,
+                  "D": 0.5161120202775847,
+                  "E": 0.3669626233274275
+                },
+                "top_three_triads": [
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.6948707878761438
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6703897372748819
+                  },
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.5161120202775847
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 1.549297052154202,
+                "active_frame_count": 31,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.6649279527722856,
+                  "Dm": 0.45278442597059815,
+                  "D": 0.5075633926322878,
+                  "E": 0.3942032107225596
+                },
+                "top_three_triads": [
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.6866774299972582
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6649279527722856
+                  },
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.5075633926322878
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 1.7647165532879967,
+                "active_frame_count": 20,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.8683304694606209,
+                  "Dm": 0.510296959259617,
+                  "D": 0.5210728586898384,
+                  "E": 0.35455753609085716
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.8683304694606209
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.7922504242086237
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.5601775990828837
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 0.9287981859999945,
+                "active_frame_count": 10,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.8633410019765348,
+                  "Dm": 0.5227639646093438,
+                  "D": 0.5656649497484084,
+                  "E": 0.37263635600800443
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.8633410019765348
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.7800669780808217
+                  },
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.5656649497484084
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "outro_native_Dm_259.413",
+          "start_seconds": 259.41333333333336,
+          "end_seconds": 261.2709297052154,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 1.857596371882039,
+                "active_frame_count": 38,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.6135641382187838,
+                  "Dm": 0.6749983614285253,
+                  "D": 0.5029563469196136,
+                  "E": 0.2692364980588349
+                },
+                "top_three_triads": [
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.6819884608742945
+                  },
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.6749983614285253
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6135641382187838
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 1.6492517006803382,
+                "active_frame_count": 33,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.6019720294551513,
+                  "Dm": 0.6693394754253391,
+                  "D": 0.5069228372350452,
+                  "E": 0.28668606799305996
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.6693394754253391
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.6570043161444197
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6019720294551513
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 1.857596371882039,
+                "active_frame_count": 21,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.686582475901345,
+                  "Dm": 0.7899551230713004,
+                  "D": 0.5472995835570134,
+                  "E": 0.16347628022523286
+                },
+                "top_three_triads": [
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.8095013392008789
+                  },
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.7899551230713004
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.686582475901345
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 1.1145578229999842,
+                "active_frame_count": 12,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.6713056009652425,
+                  "Dm": 0.80251837916866,
+                  "D": 0.5787146281345854,
+                  "E": 0.17096942028383738
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.80251837916866
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.7780734012924437
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6713056009652425
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "outro_native_Am7_261.271",
+          "start_seconds": 261.2709297052154,
+          "end_seconds": 267.2152380952381,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 5.632970521542006,
+                "active_frame_count": 113,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.8639594165998686,
+                  "Dm": 0.2985239449094388,
+                  "D": 0.3057217425573598,
+                  "E": 0.429976925209298
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.8639594165998686
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.7293347918359632
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.6036200016938632
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.54748299319732,
+                "active_frame_count": 111,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.8644044182222657,
+                  "Dm": 0.2946667234733437,
+                  "D": 0.3027601841408374,
+                  "E": 0.43465475777836116
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.8644044182222657
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.7344352723857158
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.6048994695233231
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 5.897868480784609,
+                "active_frame_count": 64,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.8888216171193467,
+                  "Dm": 0.2520627067526827,
+                  "D": 0.2522766225862872,
+                  "E": 0.4066567932940795
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.8888216171193467
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.8526352804470874
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.6069498001612798
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.2012698409999985,
+                "active_frame_count": 56,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.8859691673774736,
+                  "Dm": 0.2406276054061968,
+                  "D": 0.24609199117341207,
+                  "E": 0.4182890211905078
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.8859691673774736
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.8694233322101319
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.63343060693049
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "sample-1",
+          "start_seconds": 23.991891156462586,
+          "end_seconds": 29.991891156462586,
+          "window_basis": "fixed-coverage-replay",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 121,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.5362378468533291,
+                  "C": 0.3807401036575791,
+                  "D": 0.3794514472554109,
+                  "F": 0.4538045660423162,
+                  "E": 0.34390865464278475,
+                  "Dm": 0.39114738179764114
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.5362378468533291
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.4538045660423162
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.4273851634324146
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.847346938775512,
+                "active_frame_count": 117,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.5402903545632085,
+                  "C": 0.3814077941094209,
+                  "D": 0.3846342057340898,
+                  "F": 0.45123766015037614,
+                  "E": 0.34303945167781713,
+                  "Dm": 0.3897426719577031
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.5402903545632085
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.45123766015037614
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.4318481180963285
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 66,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.6148783428910127,
+                  "C": 0.498038404771065,
+                  "D": 0.39244611711863175,
+                  "F": 0.43168634142319573,
+                  "E": 0.38614611240358615,
+                  "Dm": 0.3733987165379779
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6148783428910127
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.5095421629328438
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.498038404771065
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.2012698415,
+                "active_frame_count": 56,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.6530858458749147,
+                  "C": 0.5275372928005065,
+                  "D": 0.41515389190604834,
+                  "F": 0.43240802846824067,
+                  "E": 0.3701424834300673,
+                  "Dm": 0.36529423718095977
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6530858458749147
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.5407749372123175
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5275372928005065
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "sample-2",
+          "start_seconds": 91.47161904761903,
+          "end_seconds": 97.47161904761903,
+          "window_basis": "fixed-coverage-replay",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 121,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.5468596296494922,
+                  "C": 0.44229965105339536,
+                  "D": 0.39313848074337887,
+                  "F": 0.35862596487263954,
+                  "E": 0.38046086376067223,
+                  "Dm": 0.39942484714532955
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.5468596296494922
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.5027017285870148
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.44229965105339536
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.797369614512462,
+                "active_frame_count": 116,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.5507896102040578,
+                  "C": 0.44781377581122167,
+                  "D": 0.38772702315334107,
+                  "F": 0.36127373349886194,
+                  "E": 0.3787691626864389,
+                  "Dm": 0.3934442180219665
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.5507896102040578
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.5030002119888379
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.44781377581122167
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 65,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.6528002828488618,
+                  "C": 0.5347685759740456,
+                  "D": 0.4267128923171897,
+                  "F": 0.3825694967081107,
+                  "E": 0.42669347023235205,
+                  "Dm": 0.36727215484885223
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6528002828488618
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5347685759740456
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.5068012571243422
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.2941496595000075,
+                "active_frame_count": 57,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.6787163518871013,
+                  "C": 0.5641528668564608,
+                  "D": 0.40267355414848904,
+                  "F": 0.40429664267462373,
+                  "E": 0.42355150101415995,
+                  "Dm": 0.3501662497857065
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6787163518871013
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5641528668564608
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.5145621937158575
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "sample-3",
+          "start_seconds": 158.9513469387755,
+          "end_seconds": 164.9513469387755,
+          "window_basis": "fixed-coverage-replay",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 122,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.5280192447426054,
+                  "C": 0.38976041031617503,
+                  "D": 0.41632946073944294,
+                  "F": 0.4095210221860424,
+                  "E": 0.34894233038373973,
+                  "Dm": 0.4189784469998957
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.5280192447426054
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.4704391189251471
+                  },
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.4189784469998957
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.797369614512434,
+                "active_frame_count": 116,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.5303024147143699,
+                  "C": 0.39339829165112605,
+                  "D": 0.41483439866877014,
+                  "F": 0.40818398606255196,
+                  "E": 0.3442902867175744,
+                  "Dm": 0.4138209357343408
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.5303024147143699
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.47094643973549505
+                  },
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.41483439866877014
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 66,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.65042824356989,
+                  "C": 0.5313169749479248,
+                  "D": 0.45762513419366385,
+                  "F": 0.4285345691436547,
+                  "E": 0.40986454629878055,
+                  "Dm": 0.3908711165669468
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.65042824356989
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5313169749479248
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.5101265485870271
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.201269841500022,
+                "active_frame_count": 56,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.674928678682825,
+                  "C": 0.5586159488737995,
+                  "D": 0.44457322082776024,
+                  "F": 0.4343588945568341,
+                  "E": 0.3985495561120733,
+                  "Dm": 0.3751714352151786
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.674928678682825
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5586159488737995
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.5331247139984829
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "sample-4",
+          "start_seconds": 226.43107482993196,
+          "end_seconds": 232.43107482993196,
+          "window_basis": "fixed-coverage-replay",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 121,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.48800205526264506,
+                  "C": 0.32248763416100135,
+                  "D": 0.4582514098127658,
+                  "F": 0.4847971611704315,
+                  "E": 0.2061179678904862,
+                  "Dm": 0.4839285711004554
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.48800205526264506
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.4847971611704315
+                  },
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.4839285711004554
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.797369614512434,
+                "active_frame_count": 116,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Am": 0.4921726908152876,
+                  "C": 0.3255198889029846,
+                  "D": 0.4633446593512398,
+                  "F": 0.47779683400658,
+                  "E": 0.20505575123856687,
+                  "Dm": 0.47837048061266574
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.4921726908152876
+                  },
+                  {
+                    "label": "Dm",
+                    "mean_cosine": 0.47837048061266574
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.47779683400658
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 65,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.6870880955502331,
+                  "C": 0.4751158028397243,
+                  "D": 0.5129298922259549,
+                  "F": 0.553566923274134,
+                  "E": 0.2859211275641813,
+                  "Dm": 0.5159216002072585
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6870880955502331
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.553566923274134
+                  },
+                  {
+                    "label": "A",
+                    "mean_cosine": 0.539910825234746
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.294149660000016,
+                "active_frame_count": 57,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Am": 0.6868662835067392,
+                  "C": 0.4862500642319328,
+                  "D": 0.5350496957059642,
+                  "F": 0.5356842652400439,
+                  "E": 0.27795375628608454,
+                  "Dm": 0.5112946816567425
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.6868662835067392
+                  },
+                  {
+                    "label": "F",
+                    "mean_cosine": 0.5356842652400439
+                  },
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.5350496957059642
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "recording": {
+        "id": "van-morrison-brown-eyed-girl-youtube-20261011",
+        "title": "Van Morrison - Brown Eyed Girl",
+        "duration_seconds": 186.55927437641722,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf"
+      },
+      "primary_sha256": "1bc1f1c9467a8bea0aab8e8ae9ea4ccbd3f71ce47c52a1376f591528bcb1170d",
+      "analysis_id": "van-morrison-brown-eyed-girl-youtube-20261011-crema",
+      "status": "independent-recording-review-deferred",
+      "accepted_excerpt_boundaries": [],
+      "inputs": {
+        "audio": {
+          "path": "experiments/generated/automatic-first-ten-v1/cases/van-morrison-brown-eyed-girl-youtube-20261011/audio.wav",
+          "sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf"
+        },
+        "primary": {
+          "path": "experiments/generated/automatic-first-ten-v1/cases/van-morrison-brown-eyed-girl-youtube-20261011/primary.json",
+          "sha256": "1bc1f1c9467a8bea0aab8e8ae9ea4ccbd3f71ce47c52a1376f591528bcb1170d"
+        },
+        "btc": {
+          "path": "experiments/generated/automatic-first-ten-selected-v1/cases/van-morrison-brown-eyed-girl-youtube-20261011/primary.json",
+          "sha256": "3047f46334a44dfeb0ae5fe0ae235ab33afea06d435db40c221a3e72def6d47b"
+        },
+        "chordino": {
+          "path": "experiments/generated/automatic-first-ten-v1/cases/van-morrison-brown-eyed-girl-youtube-20261011/chordino.json",
+          "sha256": "a9b647dd9e4c5af426d4672d95210fb64ceeba636c624b9d022292860d3e8ee1"
+        },
+        "nnls": {
+          "path": "experiments/generated/catalogue-remaining-six-pitch-20261016/van-morrison-brown-eyed-girl-youtube-20261011/nnls-evidence.json",
+          "sha256": "c1d7c8d567d0b6c8a48381ac3df83cd6e437a039cd4e391714a744d08c2ea720"
+        }
+      },
+      "arrangement_practice_proposal": "Keep G/C/D/Em as the main accompaniment task. Progress from steady strokes to an omitted attack while keeping the strings ringing and hand moving. Leave intro/lead optional; distinguish ringing gaps from deliberate mutes.",
+      "local_findings": [
+        "All three selected native Em cues favour Em over E in both interior methods; preserve Em.",
+        "Ringing skipped contact differs from damping. The revised next drill is a practice option, not recorded-stroke transcription.",
+        "The separate 140 BPM teaching arrangement cannot replace the cached approximate152 BPM grid; that difference is not a half/double pulse ambiguity."
+      ],
+      "deferred_checks": [
+        "Selected-upload Em placement/quality, pulse/downbeat phase and physical attack/contact timing remain unaccepted.",
+        "Teacher tempo 140 versus cached approximately 152 BPM is a recording/version or tracker discrepancy, not a simple half/double pulse-level conversion. Do not replace the cached beat grid from this source number.",
+        "The online report has only one source group with an extracted chord palette; zero warnings means insufficient source coverage, not an accepted chart.",
+        "Explicit standard tuning belongs to Stanley's separate easy adaptation. Capo zero and the exact recording's physical setup remain unverified."
+      ],
+      "windows": [
+        {
+          "id": "van-morrison-brown-eyed-girl-youtube-20261011-Em-longest-1",
+          "start_seconds": 148.42195011337867,
+          "end_seconds": 150.09378684807257,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 1.6718367346938976,
+                "active_frame_count": 34,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Em": 0.7303728132440084,
+                  "E": 0.5978473039871062,
+                  "G": 0.623592286675135
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.7303728132440084
+                  },
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.623592286675135
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.5978473039871062
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 1.4993197278911339,
+                "active_frame_count": 30,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Em": 0.7374716973416433,
+                  "E": 0.6161941257922046,
+                  "G": 0.6247166951808676
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.7374716973416433
+                  },
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.6247166951808676
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.6161941257922046
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 1.6718367346938976,
+                "active_frame_count": 19,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Em": 0.9081487834859691,
+                  "E": 0.6764185840469275,
+                  "G": 0.600182190021132
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.9081487834859691
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.6764185840469275
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.6397222684297545
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 0.9287981859999945,
+                "active_frame_count": 10,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Em": 0.9470593887309287,
+                  "E": 0.682229194916312,
+                  "G": 0.6045054036824349
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.9470593887309287
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.682229194916312
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.6442631518435852
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "van-morrison-brown-eyed-girl-youtube-20261011-Em-longest-2",
+          "start_seconds": 82.57015873015872,
+          "end_seconds": 84.24199546485261,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 1.6718367346938834,
+                "active_frame_count": 35,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Em": 0.6821992777564101,
+                  "E": 0.5952299950141307,
+                  "G": 0.5414915937331901
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.6821992777564101
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.5952299950141307
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.5493744382415287
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 1.4493424036281226,
+                "active_frame_count": 29,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Em": 0.7042030307729467,
+                  "E": 0.6417879943001958,
+                  "G": 0.5360816055035345
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.7042030307729467
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.6417879943001958
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.5574178463420091
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 1.6718367346938834,
+                "active_frame_count": 19,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Em": 0.8700207832170704,
+                  "E": 0.7383262303285756,
+                  "G": 0.5354008830747871
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.8700207832170704
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.7383262303285756
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.6328671095409739
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 1.0216780040000089,
+                "active_frame_count": 11,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Em": 0.8749187729168144,
+                  "E": 0.7828242751109415,
+                  "G": 0.5207157738537134
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.8749187729168144
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.7828242751109415
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5961754360295549
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "van-morrison-brown-eyed-girl-youtube-20261011-Em-longest-3",
+          "start_seconds": 44.210793650793654,
+          "end_seconds": 45.789750566893424,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 1.57895691609977,
+                "active_frame_count": 32,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Em": 0.7551906078797143,
+                  "E": 0.6371808201503775,
+                  "G": 0.6098915420864761
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.7551906078797143
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.6371808201503775
+                  },
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.6098915420864761
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 1.3993650793650758,
+                "active_frame_count": 28,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Em": 0.7935733928912864,
+                  "E": 0.6611472102348049,
+                  "G": 0.6171390833865391
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.7935733928912864
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.6611472102348049
+                  },
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.6171390833865391
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 1.57895691609977,
+                "active_frame_count": 18,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Em": 0.9203910698941025,
+                  "E": 0.7457810425524322,
+                  "G": 0.5899307087343244
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.9203910698941025
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.7457810425524322
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.6129560798677172
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 0.7430385489999978,
+                "active_frame_count": 8,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Em": 0.9441084941071376,
+                  "E": 0.706639400168369,
+                  "G": 0.5928966795971179
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.9441084941071376
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.706639400168369
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.6584095979374831
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "sample-1",
+          "start_seconds": 15.655927437641722,
+          "end_seconds": 21.655927437641722,
+          "window_basis": "fixed-coverage-replay",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 121,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "G": 0.46235424409523973,
+                  "C": 0.38773409598519404,
+                  "D": 0.39922632694245835,
+                  "Em": 0.41520544025310596
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.46235424409523973
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.41520544025310596
+                  },
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.40951790559044077
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.797369614512471,
+                "active_frame_count": 116,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "G": 0.4603756788411988,
+                  "C": 0.38412581299297666,
+                  "D": 0.39844023769010906,
+                  "Em": 0.4145740199506324
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.4603756788411988
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.4145740199506324
+                  },
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.40967918512885454
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 65,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "G": 0.6434676985040778,
+                  "C": 0.5030036892361632,
+                  "D": 0.40570195704840495,
+                  "Em": 0.5503710266097844
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.6434676985040778
+                  },
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.5841709100150767
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.5503710266097844
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.294149659999995,
+                "active_frame_count": 57,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "G": 0.627614951533743,
+                  "C": 0.49352279228213225,
+                  "D": 0.4071028034646655,
+                  "Em": 0.5503756918128755
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.627614951533743
+                  },
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.579834419001716
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.5503756918128755
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "sample-2",
+          "start_seconds": 62.29574603174602,
+          "end_seconds": 68.29574603174602,
+          "window_basis": "fixed-coverage-replay",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 122,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "G": 0.5021802692109457,
+                  "C": 0.4145877565409613,
+                  "D": 0.43967637974527496,
+                  "Em": 0.42665973194311974
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.5021802692109457
+                  },
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.43967637974527496
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.4378601125353344
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.797369614512469,
+                "active_frame_count": 116,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "G": 0.5063536911952118,
+                  "C": 0.41569863583748656,
+                  "D": 0.4383516220026822,
+                  "Em": 0.4272976253831932
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.5063536911952118
+                  },
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.4383516220026822
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.4367107868169483
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 65,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "G": 0.6552515984313954,
+                  "C": 0.5257632426593577,
+                  "D": 0.44557263682531023,
+                  "Em": 0.5046476504522429
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.6552515984313954
+                  },
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.5371986877410964
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5257632426593577
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.294149659999988,
+                "active_frame_count": 57,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "G": 0.6606395462066933,
+                  "C": 0.5151860489406659,
+                  "D": 0.4379569409380759,
+                  "Em": 0.5006437775471551
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.6606395462066933
+                  },
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.5299684402560116
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5151860489406659
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "sample-3",
+          "start_seconds": 108.93556462585033,
+          "end_seconds": 114.93556462585033,
+          "window_basis": "fixed-coverage-replay",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 121,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "G": 0.5419040290315948,
+                  "C": 0.48496353558122235,
+                  "D": 0.29442434923735766,
+                  "Em": 0.42561023951910043
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.5419040290315948
+                  },
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.5116441158564543
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.48496353558122235
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.797369614512462,
+                "active_frame_count": 116,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "G": 0.5456889406005568,
+                  "C": 0.4810396166183702,
+                  "D": 0.30011745572547244,
+                  "Em": 0.42603249905175733
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.5456889406005568
+                  },
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.515201944464722
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.4810396166183702
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 65,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "G": 0.6493842148390045,
+                  "C": 0.5849756839823026,
+                  "D": 0.3303091868695887,
+                  "Em": 0.531567527826635
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.6493842148390045
+                  },
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.6017728134618311
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5849756839823026
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.294149660000002,
+                "active_frame_count": 57,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "G": 0.6661731336442633,
+                  "C": 0.5782936288633403,
+                  "D": 0.3301032970020569,
+                  "Em": 0.5451185692419582
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.6661731336442633
+                  },
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.6063994064277463
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5782936288633403
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "sample-4",
+          "start_seconds": 155.57538321995463,
+          "end_seconds": 161.57538321995463,
+          "window_basis": "fixed-coverage-replay",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 121,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "G": 0.5186649209992301,
+                  "C": 0.33479644138534487,
+                  "D": 0.5791231161402236,
+                  "Em": 0.32589247723969694
+                },
+                "top_three_triads": [
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.5791231161402236
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.5380159082622062
+                  },
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.5186649209992301
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.847346938775502,
+                "active_frame_count": 117,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "G": 0.5237657153911561,
+                  "C": 0.33186191186878594,
+                  "D": 0.5825405232529517,
+                  "Em": 0.32722734536382353
+                },
+                "top_three_triads": [
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.5825405232529517
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.5467191113852756
+                  },
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.5237657153911561
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 66,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "G": 0.575286468839521,
+                  "C": 0.43845443435091697,
+                  "D": 0.5711682598874112,
+                  "Em": 0.3941435222815637
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.5998221219958921
+                  },
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.575286468839521
+                  },
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.5711682598874112
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.2012698409999985,
+                "active_frame_count": 56,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "G": 0.6020505756871131,
+                  "C": 0.4270593505331075,
+                  "D": 0.5847949070593279,
+                  "Em": 0.4008889820362652
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.6359946581302187
+                  },
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.6020505756871131
+                  },
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.5847949070593279
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "recording": {
+        "id": "radiohead-creep-youtube-20261010",
+        "title": "Radiohead - Creep",
+        "duration_seconds": 236.63455782312926,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10"
+      },
+      "primary_sha256": "9ab5ce1f02b7ba127554937009f1747112e7fc3df583ddcd3b8abcfa9cdc191c",
+      "analysis_id": "radiohead-creep-youtube-20261010-crema",
+      "status": "independent-recording-review-deferred",
+      "accepted_excerpt_boundaries": [],
+      "inputs": {
+        "audio": {
+          "path": "experiments/generated/automatic-first-ten-v1/cases/radiohead-creep-youtube-20261010/audio.wav",
+          "sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10"
+        },
+        "primary": {
+          "path": "experiments/generated/automatic-first-ten-v1/cases/radiohead-creep-youtube-20261010/primary.json",
+          "sha256": "9ab5ce1f02b7ba127554937009f1747112e7fc3df583ddcd3b8abcfa9cdc191c"
+        },
+        "btc": {
+          "path": "experiments/generated/automatic-first-ten-selected-v1/cases/radiohead-creep-youtube-20261010/primary.json",
+          "sha256": "31ab2f236db594ee83f3223ac168601435ba0ce83e7aea3f1a54d207ca9f2ec2"
+        },
+        "chordino": {
+          "path": "experiments/generated/automatic-first-ten-v1/cases/radiohead-creep-youtube-20261010/chordino.json",
+          "sha256": "e2af0e0f30f235cbd0c90f4afd009678312013c4c75b365049159d39770cf474"
+        },
+        "nnls": {
+          "path": "experiments/generated/catalogue-remaining-six-pitch-20261016/radiohead-creep-youtube-20261010/nnls-evidence.json",
+          "sha256": "e5e64059870a87bf7c09f02b88259363225ba2b15ebf5d58707357dc93bfa2eb"
+        }
+      },
+      "arrangement_practice_proposal": "Preserve B major and C minor rather than constraining the song to a diatonic G-major palette. Start with deliberate barre changes, then flexible quieter verse picking and fuller chorus attacks. Treat octave lead and acoustic sus4 as separate options.",
+      "local_findings": [
+        "Preserve source-supported B major/C minor and verify their contrast independently.",
+        "87.679\u201392.880 s native Bm: spectral favours Bm, NNLS favours B; unresolved.",
+        "171.270\u2013172.756 s native Bm: both methods favour B; save a provisional B-family proposal, without applying it.",
+        "172.756\u2013176.379 s native Bm7: spectral favours Bm7 while NNLS favours B7 under direct richer-candidate comparison; unresolved.",
+        "Long C near197\u2013206 s is locally mixed; a whole-span C-to-Cm replacement is unsupported."
+      ],
+      "deferred_checks": [
+        "Local B/Bm and C/Cm sounding quality, precise physical boundaries, variable picking contacts and final chorus extent/dynamics remain recording-specific checks.",
+        "Four chord labels do not make this a beginner open-chord song; root-six barres and B-major/C-minor contrast are substantial technique tasks.",
+        "The online report has one extracted palette. No warnings must not be reported as accepted harmony or independent source consensus.",
+        "Teacher descriptions are consistent with conventional standard-tuning shapes, but no explicit new tuning or capo sentence certifies the selected recording's setup."
+      ],
+      "windows": [
+        {
+          "id": "radiohead-creep-youtube-20261010-B-longest-1",
+          "start_seconds": 129.75310657596373,
+          "end_seconds": 135.04725623582766,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 5.294149659863933,
+                "active_frame_count": 107,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "B": 0.6560581526938984,
+                  "Bm": 0.6081785117102754
+                },
+                "top_three_triads": [
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.6560581526938984
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.6081785117102754
+                  },
+                  {
+                    "label": "G#m",
+                    "mean_cosine": 0.513191410635404
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.097687074829906,
+                "active_frame_count": 102,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "B": 0.6616052473072626,
+                  "Bm": 0.6108409228134536
+                },
+                "top_three_triads": [
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.6616052473072626
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.6108409228134536
+                  },
+                  {
+                    "label": "G#m",
+                    "mean_cosine": 0.516037589127979
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 5.294149659863933,
+                "active_frame_count": 58,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "B": 0.8586798688121451,
+                  "Bm": 0.705427517412814
+                },
+                "top_three_triads": [
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.8586798688121451
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.705427517412814
+                  },
+                  {
+                    "label": "G#m",
+                    "mean_cosine": 0.6131549107966106
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 4.5511111110000115,
+                "active_frame_count": 49,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "B": 0.892126897558838,
+                  "Bm": 0.7324153803440907
+                },
+                "top_three_triads": [
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.892126897558838
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.7324153803440907
+                  },
+                  {
+                    "label": "G#m",
+                    "mean_cosine": 0.6276501004115136
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-B-longest-2",
+          "start_seconds": 45.97551020408163,
+          "end_seconds": 51.17678004535147,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 5.201269841269841,
+                "active_frame_count": 105,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "B": 0.5995022347664289,
+                  "Bm": 0.6237505389018141
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.6237505389018141
+                  },
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.5995022347664289
+                  },
+                  {
+                    "label": "F#m",
+                    "mean_cosine": 0.44289964219317024
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.047709750566895,
+                "active_frame_count": 101,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "B": 0.6070411888526426,
+                  "Bm": 0.6281494405948693
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.6281494405948693
+                  },
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.6070411888526426
+                  },
+                  {
+                    "label": "F#m",
+                    "mean_cosine": 0.4401751094650694
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 5.201269841269841,
+                "active_frame_count": 57,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "B": 0.8060340320773822,
+                  "Bm": 0.5992842622002013
+                },
+                "top_three_triads": [
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.8060340320773822
+                  },
+                  {
+                    "label": "G#m",
+                    "mean_cosine": 0.6551889797244437
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.5992842622002013
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 4.3653514739999935,
+                "active_frame_count": 47,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "B": 0.8268621078181139,
+                  "Bm": 0.5992868133797298
+                },
+                "top_three_triads": [
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.8268621078181139
+                  },
+                  {
+                    "label": "G#m",
+                    "mean_cosine": 0.7016558361513996
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.5992868133797298
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-B-longest-3",
+          "start_seconds": 66.87346938775511,
+          "end_seconds": 72.07473922902494,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 5.201269841269834,
+                "active_frame_count": 105,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "B": 0.6961123634251828,
+                  "Bm": 0.6668348132083516
+                },
+                "top_three_triads": [
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.6961123634251828
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.6668348132083516
+                  },
+                  {
+                    "label": "G#m",
+                    "mean_cosine": 0.5100777048586044
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.047709750566895,
+                "active_frame_count": 101,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "B": 0.7031408210454315,
+                  "Bm": 0.6715377417176944
+                },
+                "top_three_triads": [
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.7031408210454315
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.6715377417176944
+                  },
+                  {
+                    "label": "G#m",
+                    "mean_cosine": 0.5143598343171113
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 5.201269841269834,
+                "active_frame_count": 57,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "B": 0.854715519417599,
+                  "Bm": 0.7170860747712936
+                },
+                "top_three_triads": [
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.854715519417599
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.7170860747712936
+                  },
+                  {
+                    "label": "G#m",
+                    "mean_cosine": 0.6123639389547824
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 4.3653514739999935,
+                "active_frame_count": 47,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "B": 0.8825475180139115,
+                  "Bm": 0.7308264277285577
+                },
+                "top_three_triads": [
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.8825475180139115
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.7308264277285577
+                  },
+                  {
+                    "label": "G#m",
+                    "mean_cosine": 0.6300319282043166
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-Cm-longest-1",
+          "start_seconds": 35.66585034013605,
+          "end_seconds": 40.68136054421769,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 5.015510204081636,
+                "active_frame_count": 101,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Cm": 0.4659330687381603,
+                  "C": 0.4973969414844912
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.4973969414844912
+                  },
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.47777454407045794
+                  },
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.4738216695649813
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 4.847800453514736,
+                "active_frame_count": 97,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Cm": 0.4680158687881556,
+                  "C": 0.49827823932686344
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.49827823932686344
+                  },
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.4710114591495086
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.4680158687881556
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 5.015510204081636,
+                "active_frame_count": 55,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Cm": 0.7454166829762305,
+                  "C": 0.5708309068135899
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.7454166829762305
+                  },
+                  {
+                    "label": "G#",
+                    "mean_cosine": 0.617514544869818
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5708309068135899
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 4.272471654999997,
+                "active_frame_count": 46,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Cm": 0.7527683460749579,
+                  "C": 0.5532804073486353
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.7527683460749579
+                  },
+                  {
+                    "label": "G#",
+                    "mean_cosine": 0.6606833503998648
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5532804073486353
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-Cm-longest-2",
+          "start_seconds": 15.139410430839002,
+          "end_seconds": 20.154920634920636,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 5.015510204081634,
+                "active_frame_count": 101,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Cm": 0.4634171679875322,
+                  "C": 0.4797459005832727
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.4797459005832727
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.4634171679875322
+                  },
+                  {
+                    "label": "Fm",
+                    "mean_cosine": 0.37326639471463785
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 4.84780045351474,
+                "active_frame_count": 97,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Cm": 0.46975698959997814,
+                  "C": 0.4834652526182841
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.4834652526182841
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.46975698959997814
+                  },
+                  {
+                    "label": "Fm",
+                    "mean_cosine": 0.3783576913461806
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 5.015510204081634,
+                "active_frame_count": 55,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Cm": 0.7062391900208858,
+                  "C": 0.5720662378972371
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.7062391900208858
+                  },
+                  {
+                    "label": "G#",
+                    "mean_cosine": 0.6069800854706093
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5720662378972371
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 4.179591837,
+                "active_frame_count": 45,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Cm": 0.700364409064325,
+                  "C": 0.5440782477377293
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.700364409064325
+                  },
+                  {
+                    "label": "G#",
+                    "mean_cosine": 0.6319505124666559
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5440782477377293
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-Cm-longest-3",
+          "start_seconds": 119.16480725623583,
+          "end_seconds": 123.53015873015873,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 4.3653514739229,
+                "active_frame_count": 89,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Cm": 0.47913860557685395,
+                  "C": 0.49672626657279784
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.5257975186569156
+                  },
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.5226938711755046
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.49672626657279784
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 4.148117913832209,
+                "active_frame_count": 83,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Cm": 0.4964801307271206,
+                  "C": 0.5126220937114038
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.5392668226029562
+                  },
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.5335182121772541
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5126220937114038
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 4.3653514739229,
+                "active_frame_count": 48,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Cm": 0.6373416407173177,
+                  "C": 0.5330284651734318
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.6373416407173177
+                  },
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.5418606009659779
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5330284651734318
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 3.6223129249999886,
+                "active_frame_count": 39,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Cm": 0.6582517515053868,
+                  "C": 0.5651486369663292
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.6582517515053868
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5651486369663292
+                  },
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.5455302519333571
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-Bm-longest-1",
+          "start_seconds": 87.67854875283447,
+          "end_seconds": 92.87981859410431,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 5.201269841269834,
+                "active_frame_count": 105,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "B": 0.592131511811947,
+                  "Bm": 0.6327203258824168
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.6327203258824168
+                  },
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.592131511811947
+                  },
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.48514344021485634
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 4.997732426303855,
+                "active_frame_count": 100,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "B": 0.5982936731341315,
+                  "Bm": 0.632997455602885
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.632997455602885
+                  },
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.5982936731341315
+                  },
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.48282700626068664
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 5.201269841269834,
+                "active_frame_count": 57,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "B": 0.7376311249969144,
+                  "Bm": 0.6476569856154903
+                },
+                "top_three_triads": [
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.7376311249969144
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.6476569856154903
+                  },
+                  {
+                    "label": "G#m",
+                    "mean_cosine": 0.6258722716503096
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 4.365351474000022,
+                "active_frame_count": 47,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "B": 0.7448507475107805,
+                  "Bm": 0.6421169643277819
+                },
+                "top_three_triads": [
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.7448507475107805
+                  },
+                  {
+                    "label": "G#m",
+                    "mean_cosine": 0.657217341215055
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.6421169643277819
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-Bm-longest-2",
+          "start_seconds": 171.27038548752836,
+          "end_seconds": 172.756462585034,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 1.4860770975056425,
+                "active_frame_count": 31,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "B": 0.7331692369963472,
+                  "Bm": 0.7110336924080776
+                },
+                "top_three_triads": [
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.7331692369963472
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.7110336924080776
+                  },
+                  {
+                    "label": "F#",
+                    "mean_cosine": 0.536263753528941
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 1.2994104308389751,
+                "active_frame_count": 26,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "B": 0.7222285801501107,
+                  "Bm": 0.7082534869692878
+                },
+                "top_three_triads": [
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.7222285801501107
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.7082534869692878
+                  },
+                  {
+                    "label": "G#m",
+                    "mean_cosine": 0.5252572733421397
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 1.4860770975056425,
+                "active_frame_count": 17,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "B": 0.8697538316432099,
+                  "Bm": 0.7479586647987826
+                },
+                "top_three_triads": [
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.8697538316432099
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.7479586647987826
+                  },
+                  {
+                    "label": "F#",
+                    "mean_cosine": 0.5966477540517917
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 0.7430385490000049,
+                "active_frame_count": 8,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "B": 0.8572087002555662,
+                  "Bm": 0.7644146320694196
+                },
+                "top_three_triads": [
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.8572087002555662
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.7644146320694196
+                  },
+                  {
+                    "label": "F#",
+                    "mean_cosine": 0.595392592452973
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-Bm7-longest-1",
+          "start_seconds": 172.756462585034,
+          "end_seconds": 176.3787755102041,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 3.6223129251700925,
+                "active_frame_count": 73,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Bm7": 0.700900603451118,
+                  "B7": 0.6866483318602128,
+                  "B": 0.6191234530302275,
+                  "Bm": 0.635580558709373
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.635580558709373
+                  },
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.6191234530302275
+                  },
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.5415066605656573
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 3.4484353741496534,
+                "active_frame_count": 69,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Bm7": 0.7072814677800953,
+                  "B7": 0.698692545091217,
+                  "B": 0.627452196239623,
+                  "Bm": 0.6373698298925684
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.6373698298925684
+                  },
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.627452196239623
+                  },
+                  {
+                    "label": "E",
+                    "mean_cosine": 0.5437909912373433
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 3.6223129251700925,
+                "active_frame_count": 40,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Bm7": 0.7395495708311195,
+                  "B7": 0.7999829783935786,
+                  "B": 0.6663196813283568,
+                  "Bm": 0.5965371930798924
+                },
+                "top_three_triads": [
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.6663196813283568
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.5965371930798924
+                  },
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.5586656068742166
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 2.7863945579999836,
+                "active_frame_count": 30,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Bm7": 0.7683361482694464,
+                  "B7": 0.8629455177204454,
+                  "B": 0.6743085305304227,
+                  "Bm": 0.5650630406896326
+                },
+                "top_three_triads": [
+                  {
+                    "label": "B",
+                    "mean_cosine": 0.6743085305304227
+                  },
+                  {
+                    "label": "F#m",
+                    "mean_cosine": 0.59687904843949
+                  },
+                  {
+                    "label": "D",
+                    "mean_cosine": 0.5929496684342704
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-C-longest-1",
+          "start_seconds": 51.17678004535147,
+          "end_seconds": 60.18612244897959,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 9.009342403628118,
+                "active_frame_count": 181,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Cm": 0.48642473841709893,
+                  "C": 0.5472675169845257
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5472675169845257
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.48642473841709893
+                  },
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.45794934549429034
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 8.845986394557826,
+                "active_frame_count": 177,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Cm": 0.49157831212808206,
+                  "C": 0.5520022436593583
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5520022436593583
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.49157831212808206
+                  },
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.4571796139413326
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 9.009342403628118,
+                "active_frame_count": 98,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Cm": 0.558590266819398,
+                  "C": 0.7265650524825824
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.7265650524825824
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.558590266819398
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.5374809425403076
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 8.266303854999997,
+                "active_frame_count": 89,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Cm": 0.5677999654329904,
+                  "C": 0.7513693396278455
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.7513693396278455
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.5677999654329904
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.5575453892208831
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-C-longest-2",
+          "start_seconds": 197.09097505668933,
+          "end_seconds": 205.63591836734693,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 8.544943310657601,
+                "active_frame_count": 172,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Cm": 0.5759288056011916,
+                  "C": 0.5995743587796738
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5995743587796738
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.5759288056011916
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.4053922538120027
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 8.34621315192743,
+                "active_frame_count": 167,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Cm": 0.5759762081154585,
+                  "C": 0.5985160980726953
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5985160980726953
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.5759762081154585
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.40461111719401494
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 8.544943310657601,
+                "active_frame_count": 93,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Cm": 0.7119643790499612,
+                  "C": 0.788058542348664
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.788058542348664
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.7119643790499612
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.5614924923708176
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 7.709024943000003,
+                "active_frame_count": 83,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Cm": 0.7115240615954406,
+                  "C": 0.7821486631046639
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.7821486631046639
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.7115240615954406
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.5644498629474975
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "radiohead-creep-youtube-20261010-C-longest-3",
+          "start_seconds": 92.87981859410431,
+          "end_seconds": 99.38140589569161,
+          "window_basis": "native-or-existing-provisional-cue",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 6.501587301587307,
+                "active_frame_count": 132,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Cm": 0.5099622524198684,
+                  "C": 0.6104778467855358
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.6104778467855358
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.5099622524198684
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.4752731716445235
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 6.297142857142845,
+                "active_frame_count": 126,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "Cm": 0.5103694093580744,
+                  "C": 0.6129335531557858
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.6129335531557858
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.5103694093580744
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.473674687529569
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 6.501587301587307,
+                "active_frame_count": 71,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Cm": 0.6279892486313511,
+                  "C": 0.8134680453719811
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.8134680453719811
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.6279892486313511
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.6076581459167097
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.758548753000014,
+                "active_frame_count": 62,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "Cm": 0.6153798684736573,
+                  "C": 0.8175859914228629
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.8175859914228629
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.6153798684736573
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.6066036374517333
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "sample-1",
+          "start_seconds": 20.663455782312926,
+          "end_seconds": 26.663455782312926,
+          "window_basis": "fixed-coverage-replay",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 122,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "G": 0.5101300602618158,
+                  "B": 0.26427069720970453,
+                  "C": 0.4300692003886357,
+                  "Cm": 0.40202512081336245
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.5101300602618158
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.4723463449088283
+                  },
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.45230461831458313
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.797369614512473,
+                "active_frame_count": 116,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "G": 0.5111104932214794,
+                  "B": 0.26679212134788277,
+                  "C": 0.4278532069929611,
+                  "Cm": 0.401512399667584
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.5111104932214794
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.4712924963290725
+                  },
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.45215064905777164
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 66,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "G": 0.6426502094971777,
+                  "B": 0.5386560028561935,
+                  "C": 0.39699656434194214,
+                  "Cm": 0.4135857941817573
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.6426502094971777
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.6028576606117233
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.5618593219018326
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.294149659999995,
+                "active_frame_count": 57,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "G": 0.6590551523534247,
+                  "B": 0.5348836196111937,
+                  "C": 0.404974276205861,
+                  "Cm": 0.4218721523607064
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.6590551523534247
+                  },
+                  {
+                    "label": "Bm",
+                    "mean_cosine": 0.6044805845511467
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.5725603112586263
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "sample-2",
+          "start_seconds": 79.82209523809523,
+          "end_seconds": 85.82209523809523,
+          "window_basis": "fixed-coverage-replay",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 121,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "G": 0.5455190321936462,
+                  "B": 0.15388597470250986,
+                  "C": 0.5284887819492302,
+                  "Cm": 0.5171463016970209
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.5455190321936462
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5284887819492302
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.5171463016970209
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.797369614512476,
+                "active_frame_count": 116,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "G": 0.5439171357408658,
+                  "B": 0.15105563357474475,
+                  "C": 0.526761407108319,
+                  "Cm": 0.5165697646148333
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.5439171357408658
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.526761407108319
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.5165697646148333
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 66,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "G": 0.5854359836459088,
+                  "B": 0.22602956891620732,
+                  "C": 0.5113034386000221,
+                  "Cm": 0.531105431490094
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.5854359836459088
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.531105431490094
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5113034386000221
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.294149660000002,
+                "active_frame_count": 57,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "G": 0.6061094377862621,
+                  "B": 0.22101250634250907,
+                  "C": 0.5112484124940229,
+                  "Cm": 0.5211543818402316
+                },
+                "top_three_triads": [
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.6061094377862621
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.5211543818402316
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5112484124940229
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "sample-3",
+          "start_seconds": 138.98073469387754,
+          "end_seconds": 144.98073469387754,
+          "window_basis": "fixed-coverage-replay",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 121,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "G": 0.4982438024399043,
+                  "B": 0.24725034179101935,
+                  "C": 0.49108575504904695,
+                  "Cm": 0.4793602394697944
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.5081977271032248
+                  },
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.4982438024399043
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.49108575504904695
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.847346938775502,
+                "active_frame_count": 117,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "G": 0.4984077779919128,
+                  "B": 0.24645957649124833,
+                  "C": 0.4899675938090816,
+                  "Cm": 0.4795509212729179
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Gm",
+                    "mean_cosine": 0.5102492007515084
+                  },
+                  {
+                    "label": "G",
+                    "mean_cosine": 0.4984077779919128
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.4899675938090816
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 66,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "G": 0.37300130816079785,
+                  "B": 0.3186878894895815,
+                  "C": 0.5698841068609048,
+                  "Cm": 0.7079619824018136
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.7079619824018136
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5698841068609048
+                  },
+                  {
+                    "label": "G#",
+                    "mean_cosine": 0.555941344272445
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.2012698409999985,
+                "active_frame_count": 56,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "G": 0.38060529425778283,
+                  "B": 0.3170140514175671,
+                  "C": 0.5719031115843506,
+                  "Cm": 0.7327352741037834
+                },
+                "top_three_triads": [
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.7327352741037834
+                  },
+                  {
+                    "label": "G#",
+                    "mean_cosine": 0.5745300563100721
+                  },
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5719031115843506
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "sample-4",
+          "start_seconds": 198.13937414965986,
+          "end_seconds": 204.13937414965986,
+          "window_basis": "fixed-coverage-replay",
+          "timing_verified": false,
+          "scores": {
+            "spectral": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 121,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "G": 0.379870053190217,
+                  "B": 0.12071893931421943,
+                  "C": 0.5627005878621821,
+                  "Cm": 0.5374442256587934
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5627005878621821
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.5374442256587934
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.39820812200947014
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.79736961451249,
+                "active_frame_count": 116,
+                "analysis_half_window_seconds": 0.09287981859410431,
+                "candidate_scores": {
+                  "G": 0.37999281961167514,
+                  "B": 0.12101148161000218,
+                  "C": 0.5627342024833729,
+                  "Cm": 0.5337681380829327
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.5627342024833729
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.5337681380829327
+                  },
+                  {
+                    "label": "Em",
+                    "mean_cosine": 0.3990463767404941
+                  }
+                ]
+              }
+            },
+            "nnls": {
+              "whole_region": {
+                "active_evidence_seconds": 6.0,
+                "active_frame_count": 66,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "G": 0.32047321394288875,
+                  "B": 0.20699371480978979,
+                  "C": 0.7713965948211516,
+                  "Cm": 0.6634230613599885
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.7713965948211516
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.6634230613599885
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.5799610651753154
+                  }
+                ]
+              },
+              "interior_only": {
+                "active_evidence_seconds": 5.2012698409999985,
+                "active_frame_count": 56,
+                "analysis_half_window_seconds": 0.37151927437641724,
+                "candidate_scores": {
+                  "G": 0.3258078508063441,
+                  "B": 0.2053137447619504,
+                  "C": 0.7746453988342419,
+                  "Cm": 0.6325176534523962
+                },
+                "top_three_triads": [
+                  {
+                    "label": "C",
+                    "mean_cosine": 0.7746453988342419
+                  },
+                  {
+                    "label": "Cm",
+                    "mean_cosine": 0.6325176534523962
+                  },
+                  {
+                    "label": "Am",
+                    "mean_cosine": 0.5975014794515919
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "effort": {
+    "agent_compute_seconds": 0.7584025831893086,
+    "human_review_seconds": null,
+    "human_correction_seconds": null,
+    "agent_source_research_seconds": null,
+    "semantics": "Only batch compute runtime is measured. No audio audition occurred. Source research, note preparation and UI interaction are not human musical review or correction effort."
+  },
+  "limits": [
+    "Uncalibrated full-mix compatibility, not chord accuracy or confidence.",
+    "Voice, organ, bass and harmonics can affect the evidence; no isolated guitar or played grip is identified.",
+    "Centered analysis windows and native chart boundaries are not verified physical chord-change times.",
+    "Model agreement is not an independent reference. No thresholds, automatic corrections or accepted arrangements are produced.",
+    "No tuning, capo, downbeat, numbered bar, attack direction or recorded strumming is verified.",
+    "Agent processing seconds are compute runtime, not human review or correction time."
+  ]
+}

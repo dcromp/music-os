@@ -4,9 +4,9 @@
 
 ## Decision
 
-Keep the Expo/React Native project and adapt its song-selection and playback UI. It is an early YouTube play-along prototype, with enough structure to extend. It does not contain the founder's audio-separation/chord-recognition pipeline. Build that experiment tooling separately in this repository and feed its outputs into the app.
+Keep the Expo/React Native project and adapt its song-selection and playback UI later. It is an early YouTube play-along prototype, with enough structure to extend. It does not contain an audio-separation/chord-recognition pipeline. The founder subsequently confirmed the previous analysis code was deleted; build a fresh baseline separately in this repository. This audit describes source revision 0083861; new experiments and their live status are documented in the root README.
 
-The first implementation should connect one verified song timeline to an authoritative playback clock. The current chord animation is unsuitable for judging recognition algorithms: it displays unrelated sample chords and ignores the supplied chord timestamps.
+The current chord animation is unsuitable for judging recognition algorithms: it displays unrelated sample chords and ignores the supplied chord timestamps. The founder's sequencing decision is to evaluate algorithms on Mac first. Use an independent local-audio browser bench with a verified playback clock for guitar comparisons; repair and integrate the Expo player after selecting an initial pipeline. Existing app defects do not block offline analysis experiments.
 
 ## Scope and evidence
 
@@ -15,6 +15,8 @@ Inspected the tracked source, configuration, lockfile, tests and application his
 Installed locked dependencies in a temporary checkout without lifecycle scripts. Ran TypeScript, the existing Jest suite, and Android/web bundle exports. No application source or dependency versions were changed for this audit. No simulator, device, browser playback or guitar session was run: native bundling success is not proof that playback works on a device. No local audio/model assets or analysis commands exist to exercise an audio import → recognition pipeline.
 
 Environment: macOS arm64, Node `v25.8.1`, npm `11.11.0`. This is the audit environment, not a recommended or pinned deployment runtime.
+
+**Mac availability:** this checkout configures iOS, Android and web, with no native macOS target. Running build tools on Mac does not establish a Mac app. Browser access is a potential route, but the recorded web build fails; live Mac playback has not been verified. Phase A's local browser bench will be new experiment tooling.
 
 | Command | Result | What it establishes |
 |---|---|---|
@@ -68,12 +70,12 @@ File links below refer to the audited source; later refactoring may move them.
 
 ## Ordered implementation backlog
 
-1. **Establish one player flow and a bounded run guide.** Keep the current Expo shell; move helpers/data/types outside routes, bypass simulated auth for founder testing, and choose browser or native after checking playback support. For web, repair the missing WebView support or supply a platform-specific official iframe adapter and verify static rendering. An added dependency alone is not evidence of a complete fix.
-2. **Define and validate the interchange format.** Use versioned JSON with explicit units and recording/arrangement IDs. Preserve source analysis and reviewed arrangements independently. Create a synthetic timeline with known expectations and one permitted recording with a manually checked chart; do not use the current sample as reference truth.
-3. **Replace the free-running display clock.** Map numeric playback position to chord intervals/beats, with bounded interpolation where needed. Handle pause/resume, seeks, replay, buffering, source change and supported speed changes. Preview future chords separately. Add focused tests for boundaries, gaps, end-of-song and stale playback updates during this implementation.
-4. **Connect one end-to-end practice session.** The selected recording and chart must agree. Validate on the founder's actual screen/audio setup; record timing offset and whether he can follow the chart. Device/browser testing is still outstanding.
-5. **Recover the founder's external analysis workflow, if available.** It is absent from the inspected repository. Put offline analysis scripts behind adapters producing the shared JSON format, rather than embedding Python/ML in the React Native UI. Start with a simple baseline if the old workflow cannot be recovered.
-6. **Run Phase A's staged algorithm comparisons.** Compare BTC/CREMA/baseline, then separation inputs, then smoothing and simplification. Preserve original outputs and processing measurements; import candidate charts into the same verified player for anonymous guitar comparisons.
-7. **Add progress logging, practice rhythms and arrangement difficulty.** These are new capabilities. Follow with recommendations and the fixed-tempo MIDI-band experiment after the chart/player baseline succeeds.
+1. **Build a fresh baseline on Mac.** The previous analysis workflow was deleted. Use an isolated environment and command-line adapters; record hardware, tool/model versions, output and runtime. Begin offline comparisons without repairing Expo or developing iOS.
+2. **Define and validate the interchange format.** Use versioned JSON with explicit units and recording/arrangement IDs. Preserve source analysis and reviewed arrangements independently. Create a synthetic timing fixture and a manually checked excerpt; the old sample is not reference truth.
+3. **Run staged algorithm experiments and guitar comparisons.** Compare BTC/CREMA/baseline, then separation inputs, then smoothing and simplification. Build a small local-audio browser bench independent of Expo, using the audio element's playback clock. Validate pause/resume, seek and replay with known timings before interpreting guitar ratings.
+4. **Choose an initial analysis pipeline.** Record held-out quality, Mac runtime/memory, correction effort, setup difficulties and guitar ratings. The founder should be able to repeat the run and explain why the chosen output is more useful.
+5. **Choose the first product platform and integrate outputs.** After Phase A, adapt the preserved Expo shell or continue with a browser product. For Expo, move helpers/data/types outside routes, resolve stable IDs, consolidate the hooks and replace the free-running display clock. For its web target, fix the WebView dependency or add a platform-specific official iframe adapter and verify static rendering. Check current device/build compatibility before starting iOS work.
+6. **Validate the integrated product player.** Check the selected recording/chart, pause/resume, forward/backward seek, replay, buffering, source changes and supported speeds on the chosen target. Add focused timing/state tests as part of implementation. Native bundling alone is insufficient evidence.
+7. **Add practice guidance and progression.** Progress logging, strumming guidance, arrangement difficulty, recommendations and the fixed-tempo MIDI band remain new capabilities.
 
-**First acceptance gate:** one verified recording/chart pair remains aligned through start, pause/resume, a forward and backward seek, and replay on the chosen target. The founder can complete a short guitar session without manually resetting the chart. This audit establishes the implementation path; it does not claim that gate has passed.
+**First acceptance gate:** an initial algorithm choice with reproducible Mac commands, measured quality/runtime and guitar play-test evidence from a verified local bench. **Later integration gate:** the product player stays aligned through state changes and supports a complete session without manual chart resets. Neither gate is claimed as passed by this audit.

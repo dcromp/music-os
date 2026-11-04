@@ -1,0 +1,579 @@
+{
+  "schema_version": "first-ten-reference-matching-1.0",
+  "checked_date": "2026-10-13",
+  "status": "Bounded source and input-integrity check complete; zero of five recording/reference pairs promoted to timed gold",
+  "scope": "Five previously selected recordings; official annotation/index metadata and existing cached recording metadata only. No new media imports, large archives, model inference, human transcription or playback changes.",
+  "timed_gold": false,
+  "exact_master_verified_count": 0,
+  "annotation_time_origin_verified_count": 0,
+  "accuracy_scored": false,
+  "input_integrity_passed_count": 5,
+  "official_annotation_pin_matches": 9,
+  "new_official_metadata_objects": 16,
+  "official_bytes_acquired": 519592,
+  "inputs": {
+    "prior_candidates_file": "docs/FIRST_TEN_REFERENCE_CANDIDATES.json",
+    "prior_candidates_sha256": "0731623404c181570df4f75d6061cdac1fc1aa7689676c38cb2da5ce4a180558",
+    "catalogue_review_file": "catalogue/first-ten-review.json",
+    "catalogue_review_sha256": "d1bbcd7618e0aeaf4af954c6b2bc7307d1ea4b3378af55ed172e53c0b18d7bda",
+    "player_manifest_file": "experiments/generated/automatic-first-ten-v1/manifest.json",
+    "player_manifest_sha256": "556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671",
+    "youtube_importer_file": "experiments/analysis/youtube_import.py",
+    "youtube_importer_sha256": "5b7c7e16f84e5139fd597b3eefe2d158c88764f6423012626bf43503654b7e21",
+    "local_input_check_file": "experiments/candidate-assets/first-ten-reference-matching-20261013/local-input-check.json",
+    "local_input_check_sha256": "72c5960b3e11bc9a6c47aec80b30951f23ee6f9573e12daf64b3187efcca73fd"
+  },
+  "cases": [
+    {
+      "catalogue_song": "love-me-do",
+      "reference_family": "Isophonics Beatles v1.2",
+      "recording_id": "beatles-love-me-do-youtube-20261011",
+      "corpus_audio_source": "Please Please Me, CDP 7 46435 2",
+      "source_page": "https://isophonics.net/content/reference-annotations.html",
+      "prepared_audio_duration_seconds": 141.69832199546485,
+      "prepared_audio_sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea",
+      "timed_gold_ready": false,
+      "selected_recording_edition": "Please Please Me / 2009 remaster",
+      "selected_upload_url": "https://www.youtube.com/watch?v=0pGOFX1D_jg",
+      "cached_source_metadata_origin": "catalogue/first-ten-review.json and original preparation manifest, acquired 2026-10-11; not newly verified public YouTube description",
+      "input_integrity": {
+        "recording_id": "beatles-love-me-do-youtube-20261011",
+        "prepared_path": "experiments/generated/automatic-first-ten-v1/cases/beatles-love-me-do-youtube-20261011/audio.wav",
+        "prepared_sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea",
+        "prepared_sha_matches_candidate_and_manifest": true,
+        "wave": {
+          "frames": 3124448,
+          "sample_rate_hz": 22050,
+          "channels": 1,
+          "sample_width_bytes": 2,
+          "duration_seconds": 141.69832199546485
+        },
+        "compressed_source_path": "experiments/generated/repertoire-first-ten-v2/cases/beatles-love-me-do-youtube-20261011/source.m4a",
+        "compressed_source_sha256": "138075231b13e02f81a20edde660fdacee9a9f33d188e43af09791425d557128",
+        "compressed_sha_matches_manifest": true,
+        "ffprobe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "aac",
+              "sample_rate": "44100",
+              "channels": 2,
+              "time_base": "1/44100",
+              "start_time": "0.000000",
+              "duration": "141.692993"
+            }
+          ],
+          "format": {
+            "start_time": "0.000000",
+            "duration": "141.692993"
+          }
+        },
+        "pack_origin": {
+          "source_recording_id": "beatles-love-me-do-youtube-20261011",
+          "source_audio_sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea",
+          "source_offset_seconds": 0
+        }
+      },
+      "exact_master_verified": false,
+      "same_performance_verified": false,
+      "annotation_time_origin_verified": false,
+      "accuracy_scored": false,
+      "timing_transform_applied": false,
+      "status": "reference_available_identity_and_origin_unverified",
+      "gap": "Corpus CD issue CDP 7 46435 2 is named; selected upload is explicitly the 2009 remaster. Same album/take does not prove sample-zero alignment or exact master.",
+      "priority": 3
+    },
+    {
+      "catalogue_song": "twist-and-shout",
+      "reference_family": "Isophonics Beatles v1.2",
+      "recording_id": "beatles-twist-and-shout-youtube-20261011",
+      "corpus_audio_source": "Please Please Me, CDP 7 46435 2",
+      "source_page": "https://isophonics.net/content/reference-annotations.html",
+      "prepared_audio_duration_seconds": 155.23555555555555,
+      "prepared_audio_sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c",
+      "timed_gold_ready": false,
+      "selected_recording_edition": "Please Please Me / 2009 remaster",
+      "selected_upload_url": "https://www.youtube.com/watch?v=2RicaUqd9Hg",
+      "cached_source_metadata_origin": "catalogue/first-ten-review.json and original preparation manifest, acquired 2026-10-11; not newly verified public YouTube description",
+      "input_integrity": {
+        "recording_id": "beatles-twist-and-shout-youtube-20261011",
+        "prepared_path": "experiments/generated/automatic-first-ten-v1/cases/beatles-twist-and-shout-youtube-20261011/audio.wav",
+        "prepared_sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c",
+        "prepared_sha_matches_candidate_and_manifest": true,
+        "wave": {
+          "frames": 3422944,
+          "sample_rate_hz": 22050,
+          "channels": 1,
+          "sample_width_bytes": 2,
+          "duration_seconds": 155.23555555555555
+        },
+        "compressed_source_path": "experiments/generated/repertoire-first-ten-v2/cases/beatles-twist-and-shout-youtube-20261011/source.m4a",
+        "compressed_source_sha256": "81ac91aec045da3264d1c82d187fadfb1cdcfc633c12da4e368f653656843258",
+        "compressed_sha_matches_manifest": true,
+        "ffprobe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "aac",
+              "sample_rate": "44100",
+              "channels": 2,
+              "time_base": "1/44100",
+              "start_time": "0.000000",
+              "duration": "155.226009"
+            }
+          ],
+          "format": {
+            "start_time": "0.000000",
+            "duration": "155.226009"
+          }
+        },
+        "pack_origin": {
+          "source_recording_id": "beatles-twist-and-shout-youtube-20261011",
+          "source_audio_sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c",
+          "source_offset_seconds": 0
+        }
+      },
+      "exact_master_verified": false,
+      "same_performance_verified": false,
+      "annotation_time_origin_verified": false,
+      "accuracy_scored": false,
+      "timing_transform_applied": false,
+      "status": "reference_available_identity_and_origin_unverified",
+      "gap": "Corpus CD issue CDP 7 46435 2 is named; selected upload is explicitly the 2009 remaster. Different annotation and prepared endpoints are a warning, not a proof of a particular offset or tempo drift.",
+      "priority": 4
+    },
+    {
+      "catalogue_song": "brown-eyed-girl",
+      "reference_family": "Rock Corpus RS200",
+      "recording_id": "van-morrison-brown-eyed-girl-youtube-20261011",
+      "corpus_audio_source": "Bang Masters, Epic 1991",
+      "source_page": "https://rockcorpus.midside.com/timing_data/audio_sources.txt",
+      "prepared_audio_duration_seconds": 186.55927437641722,
+      "prepared_audio_sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf",
+      "timed_gold_ready": false,
+      "selected_recording_edition": "Blowin' Your Mind!",
+      "selected_upload_url": "https://www.youtube.com/watch?v=nEQmbFWnQeE",
+      "cached_source_metadata_origin": "catalogue/first-ten-review.json and original preparation manifest, acquired 2026-10-11; not newly verified public YouTube description",
+      "input_integrity": {
+        "recording_id": "van-morrison-brown-eyed-girl-youtube-20261011",
+        "prepared_path": "experiments/generated/automatic-first-ten-v1/cases/van-morrison-brown-eyed-girl-youtube-20261011/audio.wav",
+        "prepared_sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf",
+        "prepared_sha_matches_candidate_and_manifest": true,
+        "wave": {
+          "frames": 4113632,
+          "sample_rate_hz": 22050,
+          "channels": 1,
+          "sample_width_bytes": 2,
+          "duration_seconds": 186.55927437641722
+        },
+        "compressed_source_path": "experiments/generated/repertoire-first-ten-v2/cases/van-morrison-brown-eyed-girl-youtube-20261011/source.m4a",
+        "compressed_source_sha256": "53c639a7be65c04392d521cb26ff83fd8261223e5479e28c4fa216d3f628a9e4",
+        "compressed_sha_matches_manifest": true,
+        "ffprobe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "aac",
+              "sample_rate": "44100",
+              "channels": 2,
+              "time_base": "1/44100",
+              "start_time": "0.000000",
+              "duration": "186.559002"
+            }
+          ],
+          "format": {
+            "start_time": "0.000000",
+            "duration": "186.559002"
+          }
+        },
+        "pack_origin": {
+          "source_recording_id": "van-morrison-brown-eyed-girl-youtube-20261011",
+          "source_audio_sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf",
+          "source_offset_seconds": 0
+        }
+      },
+      "exact_master_verified": false,
+      "same_performance_verified": false,
+      "annotation_time_origin_verified": false,
+      "accuracy_scored": false,
+      "timing_transform_applied": false,
+      "status": "reference_available_identity_and_origin_unverified",
+      "gap": "Corpus names Bang Masters, Epic 1991; project selection names Blowin' Your Mind!. They may reuse a performance, but source metadata does not prove the same master or time origin.",
+      "priority": 5
+    },
+    {
+      "catalogue_song": "come-as-you-are",
+      "reference_family": "Rock Corpus RS200",
+      "recording_id": "nirvana-come-as-you-are-youtube-20261011",
+      "corpus_audio_source": "Nevermind",
+      "source_page": "https://rockcorpus.midside.com/timing_data/audio_sources.txt",
+      "prepared_audio_duration_seconds": 218.92789115646258,
+      "prepared_audio_sha256": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7",
+      "timed_gold_ready": false,
+      "selected_recording_edition": "Nevermind",
+      "selected_upload_url": "https://www.youtube.com/watch?v=f1IdyrhOrGs",
+      "cached_source_metadata_origin": "catalogue/first-ten-review.json and original preparation manifest, acquired 2026-10-11; not newly verified public YouTube description",
+      "input_integrity": {
+        "recording_id": "nirvana-come-as-you-are-youtube-20261011",
+        "prepared_path": "experiments/generated/automatic-first-ten-v1/cases/nirvana-come-as-you-are-youtube-20261011/audio.wav",
+        "prepared_sha256": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7",
+        "prepared_sha_matches_candidate_and_manifest": true,
+        "wave": {
+          "frames": 4827360,
+          "sample_rate_hz": 22050,
+          "channels": 1,
+          "sample_width_bytes": 2,
+          "duration_seconds": 218.92789115646258
+        },
+        "compressed_source_path": "experiments/generated/repertoire-first-ten-v2/cases/nirvana-come-as-you-are-youtube-20261011/source.m4a",
+        "compressed_source_sha256": "15278f2e8ee7f6ab54d26bd74cc5a80ba4952dfcfcd1124c4c2fc4d40a4d84b9",
+        "compressed_sha_matches_manifest": true,
+        "ffprobe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "aac",
+              "sample_rate": "44100",
+              "channels": 2,
+              "time_base": "1/44100",
+              "start_time": "0.000000",
+              "duration": "218.920000"
+            }
+          ],
+          "format": {
+            "start_time": "0.000000",
+            "duration": "218.920000"
+          }
+        },
+        "pack_origin": {
+          "source_recording_id": "nirvana-come-as-you-are-youtube-20261011",
+          "source_audio_sha256": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7",
+          "source_offset_seconds": 0
+        }
+      },
+      "exact_master_verified": false,
+      "same_performance_verified": false,
+      "annotation_time_origin_verified": false,
+      "accuracy_scored": false,
+      "timing_transform_applied": false,
+      "status": "reference_available_identity_and_origin_unverified",
+      "gap": "Both metadata sources name Nevermind. Corpus list gives no catalogue number/master fingerprint; selected release metadata also does not establish mastering edition or original CD sample-zero mapping.",
+      "priority": 1
+    },
+    {
+      "catalogue_song": "the-house-of-the-rising-sun",
+      "reference_family": "Rock Corpus RS200",
+      "recording_id": "animals-house-rising-sun-official-20261011",
+      "corpus_audio_source": "The Best of the Animals, ABKCO 1966 CD",
+      "source_page": "https://rockcorpus.midside.com/timing_data/audio_sources.txt",
+      "prepared_audio_duration_seconds": 269.91891156462583,
+      "prepared_audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708",
+      "timed_gold_ready": false,
+      "selected_recording_edition": "Most of the Animals / Parlophone UK studio compilation upload",
+      "selected_upload_url": "https://www.youtube.com/watch?v=VixdIglCZXk",
+      "cached_source_metadata_origin": "catalogue/first-ten-review.json and original preparation manifest, acquired 2026-10-11; not newly verified public YouTube description",
+      "input_integrity": {
+        "recording_id": "animals-house-rising-sun-official-20261011",
+        "prepared_path": "experiments/generated/automatic-first-ten-v1/cases/animals-house-rising-sun-official-20261011/audio.wav",
+        "prepared_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708",
+        "prepared_sha_matches_candidate_and_manifest": true,
+        "wave": {
+          "frames": 5951712,
+          "sample_rate_hz": 22050,
+          "channels": 1,
+          "sample_width_bytes": 2,
+          "duration_seconds": 269.91891156462583
+        },
+        "compressed_source_path": "experiments/generated/repertoire-first-ten-v2/cases/animals-house-rising-sun-official-20261011/source.m4a",
+        "compressed_source_sha256": "592e1bf9d4839808cf975b786e84b4e2992f11c4b149517d2b49f30a6b56bc9a",
+        "compressed_sha_matches_manifest": true,
+        "ffprobe": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "aac",
+              "sample_rate": "44100",
+              "channels": 2,
+              "time_base": "1/44100",
+              "start_time": "0.000000",
+              "duration": "269.906009"
+            }
+          ],
+          "format": {
+            "start_time": "0.000000",
+            "duration": "269.906009"
+          }
+        },
+        "pack_origin": {
+          "source_recording_id": "animals-house-rising-sun-official-20261011",
+          "source_audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708",
+          "source_offset_seconds": 0
+        }
+      },
+      "exact_master_verified": false,
+      "same_performance_verified": false,
+      "annotation_time_origin_verified": false,
+      "accuracy_scored": false,
+      "timing_transform_applied": false,
+      "status": "reference_available_identity_and_origin_unverified",
+      "gap": "Corpus names The Best of the Animals, ABKCO 1966 CD; selected project metadata names Most of the Animals / Parlophone UK. Current file is an Animals recording, but compilation/channel/duration evidence does not establish corpus master identity.",
+      "priority": 2
+    }
+  ],
+  "objects": [
+    {
+      "url": "https://isophonics.net/files/annotations/chordlab/The%20Beatles/01_-_Please_Please_Me/08_-_Love_Me_Do.lab",
+      "status": "acquired",
+      "http_status": 200,
+      "final_url": "https://isophonics.net/files/annotations/chordlab/The%20Beatles/01_-_Please_Please_Me/08_-_Love_Me_Do.lab",
+      "content_type": "application/octet-stream",
+      "bytes": 1634,
+      "sha256": "d5f21ff2ade5e44203e54ca333894b4c202ffcc2f96af147afb279ca3392cba8",
+      "local_file": "experiments/candidate-assets/first-ten-reference-matching-20261013/e800d7f7fd70-08_-_Love_Me_Do.lab",
+      "prior_annotation_pin_match": true
+    },
+    {
+      "url": "https://isophonics.net/files/annotations/beat/The%20Beatles/01_-_Please_Please_Me/08_-_Love_Me_Do.txt",
+      "status": "acquired",
+      "http_status": 200,
+      "final_url": "https://isophonics.net/files/annotations/beat/The%20Beatles/01_-_Please_Please_Me/08_-_Love_Me_Do.txt",
+      "content_type": "text/plain; charset=utf-8",
+      "bytes": 3439,
+      "sha256": "2d63e6db50b99531297ab8f87a4545c2120caa471676c0211f0cc15c11b17348",
+      "local_file": "experiments/candidate-assets/first-ten-reference-matching-20261013/611830c07828-08_-_Love_Me_Do.txt",
+      "prior_annotation_pin_match": true
+    },
+    {
+      "url": "https://isophonics.net/files/annotations/seglab/The%20Beatles/01_-_Please_Please_Me/08_-_Love_Me_Do.lab",
+      "status": "acquired",
+      "http_status": 200,
+      "final_url": "https://isophonics.net/files/annotations/seglab/The%20Beatles/01_-_Please_Please_Me/08_-_Love_Me_Do.lab",
+      "content_type": "application/octet-stream",
+      "bytes": 216,
+      "sha256": "4be2574c70287b6fbf8739df3a1c21214b4a6559805488bade47c4bcbc15387f",
+      "local_file": "experiments/candidate-assets/first-ten-reference-matching-20261013/f5451609b305-08_-_Love_Me_Do.lab",
+      "prior_annotation_pin_match": true
+    },
+    {
+      "url": "https://isophonics.net/files/annotations/chordlab/The%20Beatles/01_-_Please_Please_Me/14_-_Twist_And_Shout.lab",
+      "status": "acquired",
+      "http_status": 200,
+      "final_url": "https://isophonics.net/files/annotations/chordlab/The%20Beatles/01_-_Please_Please_Me/14_-_Twist_And_Shout.lab",
+      "content_type": "application/octet-stream",
+      "bytes": 2606,
+      "sha256": "0a22a67d99ae671f43f905d157cb7f331fb8b0cb294678520e9dd82c2513d04f",
+      "local_file": "experiments/candidate-assets/first-ten-reference-matching-20261013/9d62d3a4847f-14_-_Twist_And_Shout.lab",
+      "prior_annotation_pin_match": true
+    },
+    {
+      "url": "https://isophonics.net/files/annotations/beat/The%20Beatles/01_-_Please_Please_Me/14_-_Twist_And_Shout.txt",
+      "status": "acquired",
+      "http_status": 200,
+      "final_url": "https://isophonics.net/files/annotations/beat/The%20Beatles/01_-_Please_Please_Me/14_-_Twist_And_Shout.txt",
+      "content_type": "text/plain; charset=utf-8",
+      "bytes": 3149,
+      "sha256": "28823d88053c1e7ea17e9498220d2d2e62281686da0abfb756802a009f6f6f28",
+      "local_file": "experiments/candidate-assets/first-ten-reference-matching-20261013/f70f6f2c1664-14_-_Twist_And_Shout.txt",
+      "prior_annotation_pin_match": true
+    },
+    {
+      "url": "https://isophonics.net/files/annotations/seglab/The%20Beatles/01_-_Please_Please_Me/14_-_Twist_And_Shout.lab",
+      "status": "acquired",
+      "http_status": 200,
+      "final_url": "https://isophonics.net/files/annotations/seglab/The%20Beatles/01_-_Please_Please_Me/14_-_Twist_And_Shout.lab",
+      "content_type": "application/octet-stream",
+      "bytes": 186,
+      "sha256": "4760adc8e802cf0e484ceb5ce686bef25bd53b45f778e0c2661ccd543bb6ee9f",
+      "local_file": "experiments/candidate-assets/first-ten-reference-matching-20261013/b5d9ff4ed5ac-14_-_Twist_And_Shout.lab",
+      "prior_annotation_pin_match": true
+    },
+    {
+      "url": "https://rockcorpus.midside.com/timing_data/timing_data/brown_eyed_girl.tim",
+      "status": "acquired",
+      "http_status": 200,
+      "final_url": "https://rockcorpus.midside.com/timing_data/timing_data/brown_eyed_girl.tim",
+      "content_type": null,
+      "bytes": 1856,
+      "sha256": "b327e880b4ebbc6e4b9ec60437473ccb08ad85490895213be880296d67511fa4",
+      "local_file": "experiments/candidate-assets/first-ten-reference-matching-20261013/ab934ea9e33f-brown_eyed_girl.tim",
+      "prior_annotation_pin_match": true
+    },
+    {
+      "url": "https://rockcorpus.midside.com/timing_data/timing_data/come_as_you_are.tim",
+      "status": "acquired",
+      "http_status": 200,
+      "final_url": "https://rockcorpus.midside.com/timing_data/timing_data/come_as_you_are.tim",
+      "content_type": null,
+      "bytes": 1789,
+      "sha256": "0d9fff3f4ed222b231e5d46efdba5ea23a3aa1a09ffcef05d58fba7495355138",
+      "local_file": "experiments/candidate-assets/first-ten-reference-matching-20261013/5053f89e8630-come_as_you_are.tim",
+      "prior_annotation_pin_match": true
+    },
+    {
+      "url": "https://rockcorpus.midside.com/timing_data/timing_data/house_of_the_rising_sun.tim",
+      "status": "acquired",
+      "http_status": 200,
+      "final_url": "https://rockcorpus.midside.com/timing_data/timing_data/house_of_the_rising_sun.tim",
+      "content_type": null,
+      "bytes": 2914,
+      "sha256": "23f4ceef5cacbd708b3d28171f71ec19cb5813b324fcdf331a766f7359bcaba0",
+      "local_file": "experiments/candidate-assets/first-ten-reference-matching-20261013/fb972d98455b-house_of_the_rising_sun.tim",
+      "prior_annotation_pin_match": true
+    },
+    {
+      "url": "https://isophonics.net/content/reference-annotations.html",
+      "status": "acquired",
+      "http_status": 200,
+      "final_url": "https://isophonics.net/content/reference-annotations.html",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 42657,
+      "sha256": "4d8661001b2e42d0c7deefca3c5884818612d45b7248138bcad070050b916e5b",
+      "local_file": "experiments/candidate-assets/first-ten-reference-matching-20261013/62ae7ac2889e-reference-annotations.html"
+    },
+    {
+      "url": "https://isophonics.net/content/reference-annotations-beatles.html",
+      "status": "acquired",
+      "http_status": 200,
+      "final_url": "https://isophonics.net/content/reference-annotations-beatles.html",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 260189,
+      "sha256": "5872dc310228bc72f899fedc1033f203efd9a903309b238e4c1781c626092c48",
+      "local_file": "experiments/candidate-assets/first-ten-reference-matching-20261013/77ed33a0155a-reference-annotations-beatles.html"
+    },
+    {
+      "url": "https://rockcorpus.midside.com/",
+      "status": "acquired",
+      "http_status": 200,
+      "final_url": "https://rockcorpus.midside.com/",
+      "content_type": "text/html",
+      "bytes": 7012,
+      "sha256": "520d22b69b8943bb672e0a20447081efa516751e1899dac290eb2c45d815a9b7",
+      "local_file": "experiments/candidate-assets/first-ten-reference-matching-20261013/15ea654bd8cb-"
+    },
+    {
+      "url": "https://rockcorpus.midside.com/timing_data.html",
+      "status": "acquired",
+      "http_status": 200,
+      "final_url": "https://rockcorpus.midside.com/timing_data.html",
+      "content_type": "text/html",
+      "bytes": 5444,
+      "sha256": "301e8bec53295ce58de83dd57f0b222ebe71fb9b12e8ddb9f79c34ee5df3deab",
+      "local_file": "experiments/candidate-assets/first-ten-reference-matching-20261013/77743fe1e080-timing_data.html"
+    },
+    {
+      "url": "https://rockcorpus.midside.com/timing_data/audio_sources.txt",
+      "status": "acquired",
+      "http_status": 200,
+      "final_url": "https://rockcorpus.midside.com/timing_data/audio_sources.txt",
+      "content_type": "text/plain",
+      "bytes": 11490,
+      "sha256": "8054606bc5e26500a6a6748ecaeb177884e65ef41d34b679fe54be04c648a6d6",
+      "local_file": "experiments/candidate-assets/first-ten-reference-matching-20261013/1e8190432e0e-audio_sources.txt"
+    },
+    {
+      "url": "https://isophonics.net/files/annotations/all/The%20Beatles/01_-_Please_Please_Me/08_-_Love_Me_Do.ttl",
+      "status": "acquired",
+      "http_status": 200,
+      "final_url": "https://isophonics.net/files/annotations/all/The%20Beatles/01_-_Please_Please_Me/08_-_Love_Me_Do.ttl",
+      "content_type": "text/turtle; charset=utf-8",
+      "bytes": 85054,
+      "sha256": "7bf5d418b06a835a5041b7b3f52ad1e9dc35ba4daa4a0c230a80318245c6d2f7",
+      "local_file": "experiments/candidate-assets/first-ten-reference-matching-20261013/488f4bc158ba-08_-_Love_Me_Do.ttl"
+    },
+    {
+      "url": "https://isophonics.net/files/annotations/all/The%20Beatles/01_-_Please_Please_Me/14_-_Twist_And_Shout.ttl",
+      "status": "acquired",
+      "http_status": 200,
+      "final_url": "https://isophonics.net/files/annotations/all/The%20Beatles/01_-_Please_Please_Me/14_-_Twist_And_Shout.ttl",
+      "content_type": "text/turtle; charset=utf-8",
+      "bytes": 89957,
+      "sha256": "eee668ad07ba6ba6437729afe1b34909347c5018cf6701dd00d552d32c31dcc5",
+      "local_file": "experiments/candidate-assets/first-ten-reference-matching-20261013/ccb9efdb1d05-14_-_Twist_And_Shout.ttl"
+    }
+  ],
+  "rdf_audio_identity_metadata": [
+    {
+      "source_url": "https://isophonics.net/files/annotations/all/The%20Beatles/01_-_Please_Please_Me/08_-_Love_Me_Do.ttl",
+      "sha256": "7bf5d418b06a835a5041b7b3f52ad1e9dc35ba4daa4a0c230a80318245c6d2f7",
+      "local_audio_uri": "file:The%20Beatles/Please%20Please%20Me/08_-_Love_Me_Do.wav",
+      "document_created": "2009-10-20",
+      "timeline_id": ":timeline_068d81b4e1a1",
+      "published_audio_pcm_checksum": null,
+      "published_audio_fingerprint": null,
+      "published_audio_sample_rate": null,
+      "published_time_origin_transform": null,
+      "identifier_semantics": "Opaque RDF node IDs identify graph resources; their hexadecimal suffixes are not asserted to be an audio checksum. mo:available_as points to a local file URI, not a downloadable canonical master."
+    },
+    {
+      "source_url": "https://isophonics.net/files/annotations/all/The%20Beatles/01_-_Please_Please_Me/14_-_Twist_And_Shout.ttl",
+      "sha256": "eee668ad07ba6ba6437729afe1b34909347c5018cf6701dd00d552d32c31dcc5",
+      "local_audio_uri": "file:The%20Beatles/Please%20Please%20Me/14_-_Twist_And_Shout.wav",
+      "document_created": "2009-10-20",
+      "timeline_id": ":timeline_fd58a01c2144",
+      "published_audio_pcm_checksum": null,
+      "published_audio_fingerprint": null,
+      "published_audio_sample_rate": null,
+      "published_time_origin_transform": null,
+      "identifier_semantics": "Opaque RDF node IDs identify graph resources; their hexadecimal suffixes are not asserted to be an audio checksum. mo:available_as points to a local file URI, not a downloadable canonical master."
+    }
+  ],
+  "annotation_semantics": {
+    "Isophonics": "Chord .lab contains onset, offset and Harte label; beat .txt has time and metrical position, with position 1 denoting a barline. Beatles chords are repeatedly checked; beats have moderate confidence. Timings belong to original named CD audio.",
+    "Rock Corpus": "Timing .tim contains seconds from original CD file beginning and measure number, beginning with measure 0 unless an unavailable pickup changes the first numbered point. Bar positions were tapped then manually refined; within-bar chord timing is interpolated, so it is not uniformly hand-marked physical attack truth."
+  },
+  "source_use": {
+    "Rock Corpus": "Official portal explicitly licenses its posted data, transcriptions, scripts and programs CC BY 4.0; attribute Trevor de Clercq and David Temperley and the 2011 Popular Music paper. This notice does not grant rights to external commercial sound recordings.",
+    "Isophonics": "No annotation licence statement identified on the inspected official reference and Beatles index pages or two complete RDF documents. Full downloaded annotations remain local Git-ignored research assets; compact provenance and findings only are published."
+  },
+  "public_video_metadata_attempts": [
+    {
+      "url": "https://www.youtube.com/watch?v=0pGOFX1D_jg",
+      "outcome": "Web fetch HTTP 429; no retry"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=2RicaUqd9Hg",
+      "outcome": "Fetched title and generic page, no release/master/time-origin evidence"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nEQmbFWnQeE",
+      "outcome": "Web cache miss; no retry"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=f1IdyrhOrGs",
+      "outcome": "Web fetch error; no retry"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=VixdIglCZXk",
+      "outcome": "Web fetch error; no retry"
+    }
+  ],
+  "automatic_next_steps": [
+    {
+      "step": 1,
+      "action": "Build a recording/reference compatibility manifest from the pinned sources; enforce exact recording hash, explicit reference origin and transform provenance before a scorer can accept a pair. Keep unverified candidates out of accuracy denominators.",
+      "depends_on_founder_transcription": false
+    },
+    {
+      "step": 2,
+      "action": "Seek an authorized corpus-source audio pair with a publisher checksum or an existing local rip identified by the listed CD release; prioritize Come As You Are, then House. Metadata-only release lookup may refine eligibility but cannot supply a time-origin proof.",
+      "depends_on_founder_transcription": false
+    },
+    {
+      "step": 3,
+      "action": "If paired canonical audio becomes available, compare audio to audio using a frozen preparation and predeclared widely separated windows. Estimate offset/drift from audio only, reserve independent windows for mapping checks, pin both files and the resulting transform before chord/beat scoring. A remaster with verified transfer remains a mapped same-performance comparison, not an identical-master claim.",
+      "depends_on_founder_transcription": false
+    },
+    {
+      "step": 4,
+      "action": "If canonical audio remains unavailable after a bounded acquisition check, use separately released exact-paired audio/annotations for algorithm selection, and keep these first-ten songs as unreviewed usefulness trials. Do not choose offsets/scaling from gold chord boundaries or detector agreement.",
+      "depends_on_founder_transcription": false
+    }
+  ],
+  "local_preparation_finding": "All five existing compressed sources and prepared WAVs match saved SHA-256 identities. Source AAC format/stream starts at 0; preparation uses only decoding, mono downmix and resampling to PCM16 at 22050 Hz, without an explicit seek/trim/pad. Player origin is zero relative to that prepared file. These internal facts do not map corpus CD sample zero to the selected upload.",
+  "preservation": "Player charts, audio, feedback, frozen algorithm code and settings were not changed."
+}

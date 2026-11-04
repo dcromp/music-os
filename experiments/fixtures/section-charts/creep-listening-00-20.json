@@ -1,0 +1,53 @@
+{
+  "schema_version": "untimed-chart-1.1",
+  "recording": {
+    "id": "creep-listening-00-20",
+    "title": "Creep / bounded listening-window hypothesis",
+    "audio_sha256": "eed98c153e766509d226196d8a57abb35ba04668e6a4e456f0aaaef36b47572e"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "name": "Candidate intro pass",
+      "sequence": [
+        "G",
+        "B",
+        "C",
+        "Cm"
+      ]
+    }
+  ],
+  "order": [
+    {
+      "section_id": "intro",
+      "repeat": 1
+    }
+  ],
+  "mode": "finite",
+  "start_policy": "first",
+  "end_policy": "any",
+  "metadata": {
+    "key": "G major",
+    "capo": 0,
+    "label_convention": "sounding pitches",
+    "video_id": "XFkzRNyygfk",
+    "scope": "First20seconds listening window, not verified section bounds",
+    "source_references": [
+      {
+        "author": "Andy Guitar",
+        "url": "https://www.andyguitar.co.uk/videos/radiohead-creep"
+      },
+      {
+        "author": "Tom Fontana / TheGuitarLesson",
+        "url": "https://www.theguitarlesson.com/guitar-lessons/creep-guitar-lesson-radiohead/"
+      },
+      {
+        "author": "Carl Brown / GuitarLessons365",
+        "url": "https://guitarlessons365.com/creep-guitar-lesson-radiohead/"
+      }
+    ],
+    "source_consensus": "Separate authored presentations agree on the four-label basis; source independence is not proven",
+    "review_status": "Unaccepted development candidate; human listening and independent timing marks required",
+    "repeat_count_status": "Declared bounded prefix hypothesis, not reviewed recording structure"
+  }
+}

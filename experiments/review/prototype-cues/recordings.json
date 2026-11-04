@@ -1,0 +1,2105 @@
+{
+  "wild-thing": {
+    "title": "The Troggs - Wild Thing",
+    "videoId": "bLJkrOYHNw8",
+    "recording": {
+      "id": "troggs-wild-thing-youtube-20261011",
+      "title": "The Troggs - Wild Thing",
+      "duration_seconds": 155.3516553287982,
+      "sample_rate_hz": 22050,
+      "audio_sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf"
+    },
+    "chartSha256": "13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81",
+    "status": "Provisional cached CREMA chart; embedded timeline match and musical timing unverified",
+    "chords": [
+      {
+        "start_seconds": 0.0,
+        "end_seconds": 2.414875283446712,
+        "label": "N",
+        "native_label": "N",
+        "confidence": 0.4673178493976593
+      },
+      {
+        "start_seconds": 2.414875283446712,
+        "end_seconds": 4.08671201814059,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.8306003212928772
+      },
+      {
+        "start_seconds": 4.08671201814059,
+        "end_seconds": 4.829750566893424,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.6310836672782898
+      },
+      {
+        "start_seconds": 4.829750566893424,
+        "end_seconds": 7.337505668934241,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.8765954375267029
+      },
+      {
+        "start_seconds": 7.337505668934241,
+        "end_seconds": 8.823582766439909,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.8919066786766052
+      },
+      {
+        "start_seconds": 8.823582766439909,
+        "end_seconds": 9.659501133786849,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.6086955666542053
+      },
+      {
+        "start_seconds": 9.659501133786849,
+        "end_seconds": 11.331337868480725,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.8666614890098572
+      },
+      {
+        "start_seconds": 11.331337868480725,
+        "end_seconds": 11.981496598639456,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.7871047854423523
+      },
+      {
+        "start_seconds": 11.981496598639456,
+        "end_seconds": 13.653333333333334,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.8877741098403931
+      },
+      {
+        "start_seconds": 13.653333333333334,
+        "end_seconds": 14.303492063492063,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.6660369634628296
+      },
+      {
+        "start_seconds": 14.303492063492063,
+        "end_seconds": 15.789569160997733,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.8742769956588745
+      },
+      {
+        "start_seconds": 15.789569160997733,
+        "end_seconds": 16.62548752834467,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.6712884902954102
+      },
+      {
+        "start_seconds": 16.62548752834467,
+        "end_seconds": 18.204444444444444,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.8781734108924866
+      },
+      {
+        "start_seconds": 18.204444444444444,
+        "end_seconds": 19.040362811791383,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.6810910105705261
+      },
+      {
+        "start_seconds": 19.040362811791383,
+        "end_seconds": 20.526439909297054,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.835464358329773
+      },
+      {
+        "start_seconds": 20.526439909297054,
+        "end_seconds": 21.36235827664399,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.7643958330154419
+      },
+      {
+        "start_seconds": 21.36235827664399,
+        "end_seconds": 22.84843537414966,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.8598666191101074
+      },
+      {
+        "start_seconds": 22.84843537414966,
+        "end_seconds": 23.777233560090703,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.7221364974975586
+      },
+      {
+        "start_seconds": 23.777233560090703,
+        "end_seconds": 26.09922902494331,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.6432155966758728
+      },
+      {
+        "start_seconds": 26.09922902494331,
+        "end_seconds": 45.97551020408163,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.7462846040725708
+      },
+      {
+        "start_seconds": 45.97551020408163,
+        "end_seconds": 46.81142857142857,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.7580597400665283
+      },
+      {
+        "start_seconds": 46.81142857142857,
+        "end_seconds": 48.576145124716554,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.7647684216499329
+      },
+      {
+        "start_seconds": 48.576145124716554,
+        "end_seconds": 49.22630385487528,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8020029067993164
+      },
+      {
+        "start_seconds": 49.22630385487528,
+        "end_seconds": 50.80526077097505,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.90395188331604
+      },
+      {
+        "start_seconds": 50.80526077097505,
+        "end_seconds": 51.54829931972789,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.7413000464439392
+      },
+      {
+        "start_seconds": 51.54829931972789,
+        "end_seconds": 53.127256235827666,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.8742603063583374
+      },
+      {
+        "start_seconds": 53.127256235827666,
+        "end_seconds": 53.9631746031746,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8245746493339539
+      },
+      {
+        "start_seconds": 53.9631746031746,
+        "end_seconds": 55.356371882086165,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.888859748840332
+      },
+      {
+        "start_seconds": 55.356371882086165,
+        "end_seconds": 56.37804988662131,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8119753003120422
+      },
+      {
+        "start_seconds": 56.37804988662131,
+        "end_seconds": 58.142766439909295,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.7469499111175537
+      },
+      {
+        "start_seconds": 58.142766439909295,
+        "end_seconds": 58.700045351473925,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8371419906616211
+      },
+      {
+        "start_seconds": 58.700045351473925,
+        "end_seconds": 60.18612244897959,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.8593840599060059
+      },
+      {
+        "start_seconds": 60.18612244897959,
+        "end_seconds": 61.11492063492064,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.7103907465934753
+      },
+      {
+        "start_seconds": 61.11492063492064,
+        "end_seconds": 62.87963718820862,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.7835204005241394
+      },
+      {
+        "start_seconds": 62.87963718820862,
+        "end_seconds": 63.43691609977324,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8187076449394226
+      },
+      {
+        "start_seconds": 63.43691609977324,
+        "end_seconds": 64.6443537414966,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.864908754825592
+      },
+      {
+        "start_seconds": 64.6443537414966,
+        "end_seconds": 65.75891156462585,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8682105541229248
+      },
+      {
+        "start_seconds": 65.75891156462585,
+        "end_seconds": 67.24498866213152,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.7945548892021179
+      },
+      {
+        "start_seconds": 67.24498866213152,
+        "end_seconds": 68.17378684807257,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.7470788359642029
+      },
+      {
+        "start_seconds": 68.17378684807257,
+        "end_seconds": 69.65986394557824,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.9266667366027832
+      },
+      {
+        "start_seconds": 69.65986394557824,
+        "end_seconds": 70.58866213151927,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.6303477883338928
+      },
+      {
+        "start_seconds": 70.58866213151927,
+        "end_seconds": 72.91065759637188,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.6930771470069885
+      },
+      {
+        "start_seconds": 72.91065759637188,
+        "end_seconds": 75.13977324263038,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.566911518573761
+      },
+      {
+        "start_seconds": 75.13977324263038,
+        "end_seconds": 76.71873015873015,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.5672809481620789
+      },
+      {
+        "start_seconds": 76.71873015873015,
+        "end_seconds": 77.5546485260771,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.7072702050209045
+      },
+      {
+        "start_seconds": 77.5546485260771,
+        "end_seconds": 79.87664399092971,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.4613972306251526
+      },
+      {
+        "start_seconds": 79.87664399092971,
+        "end_seconds": 81.73424036281179,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.4918879568576813
+      },
+      {
+        "start_seconds": 81.73424036281179,
+        "end_seconds": 82.29151927437641,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.7583379149436951
+      },
+      {
+        "start_seconds": 82.29151927437641,
+        "end_seconds": 84.61351473922902,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.5054546594619751
+      },
+      {
+        "start_seconds": 84.61351473922902,
+        "end_seconds": 86.47111111111111,
+        "label": "E7",
+        "native_label": "E:7",
+        "confidence": 0.606685996055603
+      },
+      {
+        "start_seconds": 86.47111111111111,
+        "end_seconds": 87.02839002267574,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.7130870819091797
+      },
+      {
+        "start_seconds": 87.02839002267574,
+        "end_seconds": 88.51446712018141,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.7593409419059753
+      },
+      {
+        "start_seconds": 88.51446712018141,
+        "end_seconds": 89.35038548752834,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.6957888603210449
+      },
+      {
+        "start_seconds": 89.35038548752834,
+        "end_seconds": 91.67238095238095,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.5367149710655212
+      },
+      {
+        "start_seconds": 91.67238095238095,
+        "end_seconds": 111.17714285714285,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.6602100729942322
+      },
+      {
+        "start_seconds": 111.17714285714285,
+        "end_seconds": 112.1059410430839,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.7127895951271057
+      },
+      {
+        "start_seconds": 112.1059410430839,
+        "end_seconds": 113.59201814058957,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.7764981985092163
+      },
+      {
+        "start_seconds": 113.59201814058957,
+        "end_seconds": 114.42793650793651,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8082900047302246
+      },
+      {
+        "start_seconds": 114.42793650793651,
+        "end_seconds": 115.91401360544218,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.8807700276374817
+      },
+      {
+        "start_seconds": 115.91401360544218,
+        "end_seconds": 116.74993197278911,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.7949957251548767
+      },
+      {
+        "start_seconds": 116.74993197278911,
+        "end_seconds": 125.85215419501134,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.8867705464363098
+      },
+      {
+        "start_seconds": 125.85215419501134,
+        "end_seconds": 128.08126984126983,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.745649516582489
+      },
+      {
+        "start_seconds": 128.08126984126983,
+        "end_seconds": 129.66022675736963,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.7375989556312561
+      },
+      {
+        "start_seconds": 129.66022675736963,
+        "end_seconds": 130.49614512471655,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.738750696182251
+      },
+      {
+        "start_seconds": 130.49614512471655,
+        "end_seconds": 132.81814058956917,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.8349952101707458
+      },
+      {
+        "start_seconds": 132.81814058956917,
+        "end_seconds": 134.48997732426304,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.632429301738739
+      },
+      {
+        "start_seconds": 134.48997732426304,
+        "end_seconds": 135.2330158730159,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.7393410801887512
+      },
+      {
+        "start_seconds": 135.2330158730159,
+        "end_seconds": 137.55501133786848,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.7306041717529297
+      },
+      {
+        "start_seconds": 137.55501133786848,
+        "end_seconds": 139.13396825396825,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.6935620307922363
+      },
+      {
+        "start_seconds": 139.13396825396825,
+        "end_seconds": 139.9698866213152,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.7733957171440125
+      },
+      {
+        "start_seconds": 139.9698866213152,
+        "end_seconds": 141.36308390022677,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.8222464919090271
+      },
+      {
+        "start_seconds": 141.36308390022677,
+        "end_seconds": 142.2918820861678,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8388204574584961
+      },
+      {
+        "start_seconds": 142.2918820861678,
+        "end_seconds": 143.9637188208617,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.6238796710968018
+      },
+      {
+        "start_seconds": 143.9637188208617,
+        "end_seconds": 144.6138775510204,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.800084114074707
+      },
+      {
+        "start_seconds": 144.6138775510204,
+        "end_seconds": 146.09995464852608,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.795294463634491
+      },
+      {
+        "start_seconds": 146.09995464852608,
+        "end_seconds": 146.93587301587303,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.7618973255157471
+      },
+      {
+        "start_seconds": 146.93587301587303,
+        "end_seconds": 149.25786848072562,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.4944298565387726
+      },
+      {
+        "start_seconds": 149.25786848072562,
+        "end_seconds": 151.57986394557824,
+        "label": "A",
+        "native_label": "A:maj",
+        "confidence": 0.6645132899284363
+      },
+      {
+        "start_seconds": 151.57986394557824,
+        "end_seconds": 153.2517006802721,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.5962414145469666
+      },
+      {
+        "start_seconds": 153.2517006802721,
+        "end_seconds": 155.3516553287982,
+        "label": "N",
+        "native_label": "N",
+        "confidence": 0.8806394934654236
+      }
+    ]
+  },
+  "creep": {
+    "title": "Radiohead - Creep",
+    "videoId": "XFkzRNyygfk",
+    "recording": {
+      "id": "radiohead-creep-youtube-20261010",
+      "title": "Radiohead - Creep",
+      "duration_seconds": 236.63455782312926,
+      "sample_rate_hz": 22050,
+      "audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10"
+    },
+    "chartSha256": "9ab5ce1f02b7ba127554937009f1747112e7fc3df583ddcd3b8abcfa9cdc191c",
+    "status": "Provisional cached CREMA chart; embedded timeline match and musical timing unverified",
+    "chords": [
+      {
+        "start_seconds": 0.0,
+        "end_seconds": 5.108390022675737,
+        "label": "G",
+        "native_label": "G:maj",
+        "confidence": 0.8965021371841431
+      },
+      {
+        "start_seconds": 5.108390022675737,
+        "end_seconds": 10.031020408163265,
+        "label": "B",
+        "native_label": "B:maj",
+        "confidence": 0.8597630858421326
+      },
+      {
+        "start_seconds": 10.031020408163265,
+        "end_seconds": 15.139410430839002,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.7825291752815247
+      },
+      {
+        "start_seconds": 15.139410430839002,
+        "end_seconds": 20.154920634920636,
+        "label": "Cm",
+        "native_label": "C:min",
+        "confidence": 0.8067405223846436
+      },
+      {
+        "start_seconds": 20.154920634920636,
+        "end_seconds": 25.356190476190477,
+        "label": "G",
+        "native_label": "G:maj",
+        "confidence": 0.9408721923828125
+      },
+      {
+        "start_seconds": 25.356190476190477,
+        "end_seconds": 30.464580498866212,
+        "label": "B",
+        "native_label": "B:maj",
+        "confidence": 0.7488430738449097
+      },
+      {
+        "start_seconds": 30.464580498866212,
+        "end_seconds": 35.66585034013605,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.6957160830497742
+      },
+      {
+        "start_seconds": 35.66585034013605,
+        "end_seconds": 40.68136054421769,
+        "label": "Cm",
+        "native_label": "C:min",
+        "confidence": 0.7278520464897156
+      },
+      {
+        "start_seconds": 40.68136054421769,
+        "end_seconds": 45.97551020408163,
+        "label": "G",
+        "native_label": "G:maj",
+        "confidence": 0.9544724822044373
+      },
+      {
+        "start_seconds": 45.97551020408163,
+        "end_seconds": 51.17678004535147,
+        "label": "B",
+        "native_label": "B:maj",
+        "confidence": 0.808892011642456
+      },
+      {
+        "start_seconds": 51.17678004535147,
+        "end_seconds": 60.18612244897959,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.7556350827217102
+      },
+      {
+        "start_seconds": 60.18612244897959,
+        "end_seconds": 61.486439909297054,
+        "label": "Cm/D#",
+        "native_label": "C:min/b3",
+        "confidence": 0.25640803575515747
+      },
+      {
+        "start_seconds": 61.486439909297054,
+        "end_seconds": 66.87346938775511,
+        "label": "G",
+        "native_label": "G:maj",
+        "confidence": 0.8052443861961365
+      },
+      {
+        "start_seconds": 66.87346938775511,
+        "end_seconds": 72.07473922902494,
+        "label": "B",
+        "native_label": "B:maj",
+        "confidence": 0.8184188008308411
+      },
+      {
+        "start_seconds": 72.07473922902494,
+        "end_seconds": 76.90448979591837,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.6455855369567871
+      },
+      {
+        "start_seconds": 76.90448979591837,
+        "end_seconds": 80.06240362811792,
+        "label": "Cm",
+        "native_label": "C:min",
+        "confidence": 0.6683259606361389
+      },
+      {
+        "start_seconds": 80.06240362811792,
+        "end_seconds": 82.38439909297053,
+        "label": "F/C",
+        "native_label": "F:maj/5",
+        "confidence": 0.4480648338794708
+      },
+      {
+        "start_seconds": 82.38439909297053,
+        "end_seconds": 87.67854875283447,
+        "label": "G",
+        "native_label": "G:maj",
+        "confidence": 0.9416190981864929
+      },
+      {
+        "start_seconds": 87.67854875283447,
+        "end_seconds": 92.87981859410431,
+        "label": "Bm",
+        "native_label": "B:min",
+        "confidence": 0.4233625531196594
+      },
+      {
+        "start_seconds": 92.87981859410431,
+        "end_seconds": 99.38140589569161,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8887938857078552
+      },
+      {
+        "start_seconds": 99.38140589569161,
+        "end_seconds": 103.28235827664399,
+        "label": "Cm",
+        "native_label": "C:min",
+        "confidence": 0.7020390629768372
+      },
+      {
+        "start_seconds": 103.28235827664399,
+        "end_seconds": 108.76226757369615,
+        "label": "G",
+        "native_label": "G:maj",
+        "confidence": 0.9393437504768372
+      },
+      {
+        "start_seconds": 108.76226757369615,
+        "end_seconds": 111.27002267573697,
+        "label": "B",
+        "native_label": "B:maj",
+        "confidence": 0.772254467010498
+      },
+      {
+        "start_seconds": 111.27002267573697,
+        "end_seconds": 113.96353741496598,
+        "label": "B7",
+        "native_label": "B:7",
+        "confidence": 0.6579142808914185
+      },
+      {
+        "start_seconds": 113.96353741496598,
+        "end_seconds": 119.16480725623583,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.6377087831497192
+      },
+      {
+        "start_seconds": 119.16480725623583,
+        "end_seconds": 123.53015873015873,
+        "label": "Cm",
+        "native_label": "C:min",
+        "confidence": 0.6671361923217773
+      },
+      {
+        "start_seconds": 123.53015873015873,
+        "end_seconds": 129.75310657596373,
+        "label": "G",
+        "native_label": "G:maj",
+        "confidence": 0.9103149175643921
+      },
+      {
+        "start_seconds": 129.75310657596373,
+        "end_seconds": 135.04725623582766,
+        "label": "B",
+        "native_label": "B:maj",
+        "confidence": 0.7393969893455505
+      },
+      {
+        "start_seconds": 135.04725623582766,
+        "end_seconds": 140.2485260770975,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.7259997129440308
+      },
+      {
+        "start_seconds": 140.2485260770975,
+        "end_seconds": 144.33523809523808,
+        "label": "Cm",
+        "native_label": "C:min",
+        "confidence": 0.5139281153678894
+      },
+      {
+        "start_seconds": 144.33523809523808,
+        "end_seconds": 145.35691609977323,
+        "label": "F/C",
+        "native_label": "F:maj/5",
+        "confidence": 0.2552398443222046
+      },
+      {
+        "start_seconds": 145.35691609977323,
+        "end_seconds": 150.7439455782313,
+        "label": "G",
+        "native_label": "G:maj",
+        "confidence": 0.9441968202590942
+      },
+      {
+        "start_seconds": 150.7439455782313,
+        "end_seconds": 154.92353741496598,
+        "label": "B",
+        "native_label": "B:maj",
+        "confidence": 0.8681380152702332
+      },
+      {
+        "start_seconds": 154.92353741496598,
+        "end_seconds": 155.85233560090703,
+        "label": "G/B",
+        "native_label": "G:maj/3",
+        "confidence": 0.6131575107574463
+      },
+      {
+        "start_seconds": 155.85233560090703,
+        "end_seconds": 161.2393650793651,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8961435556411743
+      },
+      {
+        "start_seconds": 161.2393650793651,
+        "end_seconds": 164.76879818594105,
+        "label": "Cm",
+        "native_label": "C:min",
+        "confidence": 0.7200728058815002
+      },
+      {
+        "start_seconds": 164.76879818594105,
+        "end_seconds": 171.27038548752836,
+        "label": "G",
+        "native_label": "G:maj",
+        "confidence": 0.8328873515129089
+      },
+      {
+        "start_seconds": 171.27038548752836,
+        "end_seconds": 172.756462585034,
+        "label": "Bm",
+        "native_label": "B:min",
+        "confidence": 0.5214260816574097
+      },
+      {
+        "start_seconds": 172.756462585034,
+        "end_seconds": 176.3787755102041,
+        "label": "Bm7",
+        "native_label": "B:min7",
+        "confidence": 0.752466082572937
+      },
+      {
+        "start_seconds": 176.3787755102041,
+        "end_seconds": 181.67292517006803,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8047722578048706
+      },
+      {
+        "start_seconds": 181.67292517006803,
+        "end_seconds": 183.99492063492065,
+        "label": "Cm",
+        "native_label": "C:min",
+        "confidence": 0.5902045965194702
+      },
+      {
+        "start_seconds": 183.99492063492065,
+        "end_seconds": 186.68843537414966,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.5980645418167114
+      },
+      {
+        "start_seconds": 186.68843537414966,
+        "end_seconds": 191.7968253968254,
+        "label": "G",
+        "native_label": "G:maj",
+        "confidence": 0.8258348703384399
+      },
+      {
+        "start_seconds": 191.7968253968254,
+        "end_seconds": 197.09097505668933,
+        "label": "B7",
+        "native_label": "B:7",
+        "confidence": 0.7309097647666931
+      },
+      {
+        "start_seconds": 197.09097505668933,
+        "end_seconds": 205.63591836734693,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.5543359518051147
+      },
+      {
+        "start_seconds": 205.63591836734693,
+        "end_seconds": 207.30775510204083,
+        "label": "Cmaj7",
+        "native_label": "C:maj7",
+        "confidence": 0.6018624901771545
+      },
+      {
+        "start_seconds": 207.30775510204083,
+        "end_seconds": 212.69478458049886,
+        "label": "G",
+        "native_label": "G:maj",
+        "confidence": 0.8982447385787964
+      },
+      {
+        "start_seconds": 212.69478458049886,
+        "end_seconds": 217.8031746031746,
+        "label": "B",
+        "native_label": "B:maj",
+        "confidence": 0.7178040146827698
+      },
+      {
+        "start_seconds": 217.8031746031746,
+        "end_seconds": 223.00444444444443,
+        "label": "Cmaj7",
+        "native_label": "C:maj7",
+        "confidence": 0.5784671306610107
+      },
+      {
+        "start_seconds": 223.00444444444443,
+        "end_seconds": 226.5338775510204,
+        "label": "Cm",
+        "native_label": "C:min",
+        "confidence": 0.5032857656478882
+      },
+      {
+        "start_seconds": 226.5338775510204,
+        "end_seconds": 228.2985941043084,
+        "label": "Cmaj7",
+        "native_label": "C:maj7",
+        "confidence": 0.3912510275840759
+      },
+      {
+        "start_seconds": 228.2985941043084,
+        "end_seconds": 236.63455782312926,
+        "label": "N",
+        "native_label": "N",
+        "confidence": 0.6445712447166443
+      }
+    ]
+  },
+  "house": {
+    "title": "The Animals - The House Of The Rising Sun",
+    "videoId": "VixdIglCZXk",
+    "recording": {
+      "id": "animals-house-rising-sun-official-20261011",
+      "title": "The Animals - The House Of The Rising Sun",
+      "duration_seconds": 269.91891156462583,
+      "sample_rate_hz": 22050,
+      "audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708"
+    },
+    "chartSha256": "71eb918cc9ef3662d5c6d75b49814f700b89a2fc15b73c1ce92d9bdb18dd6037",
+    "status": "Provisional cached CREMA chart; embedded timeline match and musical timing unverified",
+    "chords": [
+      {
+        "start_seconds": 0.0,
+        "end_seconds": 0.5572789115646258,
+        "label": "N",
+        "native_label": "N",
+        "confidence": 0.5750970244407654
+      },
+      {
+        "start_seconds": 0.5572789115646258,
+        "end_seconds": 2.043356009070295,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.7694578766822815
+      },
+      {
+        "start_seconds": 2.043356009070295,
+        "end_seconds": 3.5294331065759637,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8166489005088806
+      },
+      {
+        "start_seconds": 3.5294331065759637,
+        "end_seconds": 5.015510204081632,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.39836087822914124
+      },
+      {
+        "start_seconds": 5.015510204081632,
+        "end_seconds": 6.408707482993197,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.7485118508338928
+      },
+      {
+        "start_seconds": 6.408707482993197,
+        "end_seconds": 11.145578231292516,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.7785846590995789
+      },
+      {
+        "start_seconds": 11.145578231292516,
+        "end_seconds": 12.538775510204081,
+        "label": "Em",
+        "native_label": "E:min",
+        "confidence": 0.44161105155944824
+      },
+      {
+        "start_seconds": 12.538775510204081,
+        "end_seconds": 14.210612244897959,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.8729389309883118
+      },
+      {
+        "start_seconds": 14.210612244897959,
+        "end_seconds": 15.696689342403628,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8082354664802551
+      },
+      {
+        "start_seconds": 15.696689342403628,
+        "end_seconds": 17.2756462585034,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.6216700077056885
+      },
+      {
+        "start_seconds": 17.2756462585034,
+        "end_seconds": 18.76172335600907,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.7846510410308838
+      },
+      {
+        "start_seconds": 18.76172335600907,
+        "end_seconds": 20.340680272108845,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9323723316192627
+      },
+      {
+        "start_seconds": 20.340680272108845,
+        "end_seconds": 21.91963718820862,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.5367215275764465
+      },
+      {
+        "start_seconds": 21.91963718820862,
+        "end_seconds": 24.98467120181406,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.8353209495544434
+      },
+      {
+        "start_seconds": 24.98467120181406,
+        "end_seconds": 26.563628117913833,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.8340654969215393
+      },
+      {
+        "start_seconds": 26.563628117913833,
+        "end_seconds": 28.142585034013607,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8929303288459778
+      },
+      {
+        "start_seconds": 28.142585034013607,
+        "end_seconds": 29.72154195011338,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.7048035860061646
+      },
+      {
+        "start_seconds": 29.72154195011338,
+        "end_seconds": 31.207619047619048,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.8795356154441833
+      },
+      {
+        "start_seconds": 31.207619047619048,
+        "end_seconds": 32.78657596371882,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9393599033355713
+      },
+      {
+        "start_seconds": 32.78657596371882,
+        "end_seconds": 34.365532879818595,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.7582199573516846
+      },
+      {
+        "start_seconds": 34.365532879818595,
+        "end_seconds": 35.944489795918365,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.7908253073692322
+      },
+      {
+        "start_seconds": 35.944489795918365,
+        "end_seconds": 37.52344671201814,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.9206721186637878
+      },
+      {
+        "start_seconds": 37.52344671201814,
+        "end_seconds": 39.00952380952381,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8889158964157104
+      },
+      {
+        "start_seconds": 39.00952380952381,
+        "end_seconds": 40.49560090702948,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.8120560646057129
+      },
+      {
+        "start_seconds": 40.49560090702948,
+        "end_seconds": 42.16743764172335,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9721095561981201
+      },
+      {
+        "start_seconds": 42.16743764172335,
+        "end_seconds": 43.653514739229024,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.7696501612663269
+      },
+      {
+        "start_seconds": 43.653514739229024,
+        "end_seconds": 45.2324716553288,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9018864035606384
+      },
+      {
+        "start_seconds": 45.2324716553288,
+        "end_seconds": 46.718548752834465,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.647554874420166
+      },
+      {
+        "start_seconds": 46.718548752834465,
+        "end_seconds": 48.39038548752834,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9164435863494873
+      },
+      {
+        "start_seconds": 48.39038548752834,
+        "end_seconds": 49.783582766439906,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8143314719200134
+      },
+      {
+        "start_seconds": 49.783582766439906,
+        "end_seconds": 51.36253968253968,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.33884483575820923
+      },
+      {
+        "start_seconds": 51.36253968253968,
+        "end_seconds": 52.94149659863945,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.5903165340423584
+      },
+      {
+        "start_seconds": 52.94149659863945,
+        "end_seconds": 54.52045351473923,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.8433808088302612
+      },
+      {
+        "start_seconds": 54.52045351473923,
+        "end_seconds": 56.006530612244894,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8533264398574829
+      },
+      {
+        "start_seconds": 56.006530612244894,
+        "end_seconds": 59.07156462585034,
+        "label": "E7",
+        "native_label": "E:7",
+        "confidence": 0.7016457915306091
+      },
+      {
+        "start_seconds": 59.07156462585034,
+        "end_seconds": 60.65052154195011,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.8746278285980225
+      },
+      {
+        "start_seconds": 60.65052154195011,
+        "end_seconds": 62.22947845804989,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8627257943153381
+      },
+      {
+        "start_seconds": 62.22947845804989,
+        "end_seconds": 63.715555555555554,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8645839095115662
+      },
+      {
+        "start_seconds": 63.715555555555554,
+        "end_seconds": 65.29451247165532,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.822024941444397
+      },
+      {
+        "start_seconds": 65.29451247165532,
+        "end_seconds": 66.96634920634921,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9012159109115601
+      },
+      {
+        "start_seconds": 66.96634920634921,
+        "end_seconds": 68.45242630385488,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.4884974956512451
+      },
+      {
+        "start_seconds": 68.45242630385488,
+        "end_seconds": 69.93850340136055,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.8820168375968933
+      },
+      {
+        "start_seconds": 69.93850340136055,
+        "end_seconds": 71.51746031746032,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.9350274205207825
+      },
+      {
+        "start_seconds": 71.51746031746032,
+        "end_seconds": 73.09641723356009,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8630372285842896
+      },
+      {
+        "start_seconds": 73.09641723356009,
+        "end_seconds": 74.48961451247166,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.835939884185791
+      },
+      {
+        "start_seconds": 74.48961451247166,
+        "end_seconds": 76.16145124716553,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9129734039306641
+      },
+      {
+        "start_seconds": 76.16145124716553,
+        "end_seconds": 77.6475283446712,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.8355907797813416
+      },
+      {
+        "start_seconds": 77.6475283446712,
+        "end_seconds": 79.22648526077097,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.8852944374084473
+      },
+      {
+        "start_seconds": 79.22648526077097,
+        "end_seconds": 80.71256235827664,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.4821128249168396
+      },
+      {
+        "start_seconds": 80.71256235827664,
+        "end_seconds": 82.38439909297053,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.8821384906768799
+      },
+      {
+        "start_seconds": 82.38439909297053,
+        "end_seconds": 83.8704761904762,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8961788415908813
+      },
+      {
+        "start_seconds": 83.8704761904762,
+        "end_seconds": 85.44943310657597,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.7872928380966187
+      },
+      {
+        "start_seconds": 85.44943310657597,
+        "end_seconds": 86.93551020408164,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.7082686424255371
+      },
+      {
+        "start_seconds": 86.93551020408164,
+        "end_seconds": 88.51446712018141,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.879660427570343
+      },
+      {
+        "start_seconds": 88.51446712018141,
+        "end_seconds": 90.09342403628118,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8767980933189392
+      },
+      {
+        "start_seconds": 90.09342403628118,
+        "end_seconds": 93.06557823129252,
+        "label": "Em",
+        "native_label": "E:min",
+        "confidence": 0.7961695790290833
+      },
+      {
+        "start_seconds": 93.06557823129252,
+        "end_seconds": 94.73741496598639,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9350221157073975
+      },
+      {
+        "start_seconds": 94.73741496598639,
+        "end_seconds": 96.31637188208617,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8455594778060913
+      },
+      {
+        "start_seconds": 96.31637188208617,
+        "end_seconds": 97.80244897959183,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8315038681030273
+      },
+      {
+        "start_seconds": 97.80244897959183,
+        "end_seconds": 99.2885260770975,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.8805047273635864
+      },
+      {
+        "start_seconds": 99.2885260770975,
+        "end_seconds": 100.96036281179138,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.913293719291687
+      },
+      {
+        "start_seconds": 100.96036281179138,
+        "end_seconds": 102.44643990929706,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.7497740983963013
+      },
+      {
+        "start_seconds": 102.44643990929706,
+        "end_seconds": 103.93251700680273,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9044217467308044
+      },
+      {
+        "start_seconds": 103.93251700680273,
+        "end_seconds": 105.5114739229025,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.9449577331542969
+      },
+      {
+        "start_seconds": 105.5114739229025,
+        "end_seconds": 106.99755102040817,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8721742033958435
+      },
+      {
+        "start_seconds": 106.99755102040817,
+        "end_seconds": 108.48362811791384,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.8927264213562012
+      },
+      {
+        "start_seconds": 108.48362811791384,
+        "end_seconds": 110.06258503401361,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9225848317146301
+      },
+      {
+        "start_seconds": 110.06258503401361,
+        "end_seconds": 111.54866213151928,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.5462812781333923
+      },
+      {
+        "start_seconds": 111.54866213151928,
+        "end_seconds": 113.12761904761905,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.936906099319458
+      },
+      {
+        "start_seconds": 113.12761904761905,
+        "end_seconds": 114.61369614512472,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.8471089005470276
+      },
+      {
+        "start_seconds": 114.61369614512472,
+        "end_seconds": 116.09977324263039,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9245769381523132
+      },
+      {
+        "start_seconds": 116.09977324263039,
+        "end_seconds": 117.58585034013605,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.9371447563171387
+      },
+      {
+        "start_seconds": 117.58585034013605,
+        "end_seconds": 119.16480725623583,
+        "label": "Dm",
+        "native_label": "D:min",
+        "confidence": 0.5913804173469543
+      },
+      {
+        "start_seconds": 119.16480725623583,
+        "end_seconds": 120.55800453514739,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.8836039900779724
+      },
+      {
+        "start_seconds": 120.55800453514739,
+        "end_seconds": 122.13696145124716,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.8857170343399048
+      },
+      {
+        "start_seconds": 122.13696145124716,
+        "end_seconds": 123.62303854875283,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8951308131217957
+      },
+      {
+        "start_seconds": 123.62303854875283,
+        "end_seconds": 126.50231292517007,
+        "label": "Em",
+        "native_label": "E:min",
+        "confidence": 0.5085224509239197
+      },
+      {
+        "start_seconds": 126.50231292517007,
+        "end_seconds": 128.17414965986396,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.8906618356704712
+      },
+      {
+        "start_seconds": 128.17414965986396,
+        "end_seconds": 129.66022675736963,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8212091326713562
+      },
+      {
+        "start_seconds": 129.66022675736963,
+        "end_seconds": 131.05342403628117,
+        "label": "Dm",
+        "native_label": "D:min",
+        "confidence": 0.5491533279418945
+      },
+      {
+        "start_seconds": 131.05342403628117,
+        "end_seconds": 132.53950113378684,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.759982705116272
+      },
+      {
+        "start_seconds": 132.53950113378684,
+        "end_seconds": 134.1184580498866,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9554656147956848
+      },
+      {
+        "start_seconds": 134.1184580498866,
+        "end_seconds": 135.51165532879818,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.8371276259422302
+      },
+      {
+        "start_seconds": 135.51165532879818,
+        "end_seconds": 137.09061224489795,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9269531965255737
+      },
+      {
+        "start_seconds": 137.09061224489795,
+        "end_seconds": 138.57668934240363,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8732507228851318
+      },
+      {
+        "start_seconds": 138.57668934240363,
+        "end_seconds": 140.0627664399093,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8654008507728577
+      },
+      {
+        "start_seconds": 140.0627664399093,
+        "end_seconds": 141.54884353741497,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.7920610308647156
+      },
+      {
+        "start_seconds": 141.54884353741497,
+        "end_seconds": 143.12780045351474,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9352943897247314
+      },
+      {
+        "start_seconds": 143.12780045351474,
+        "end_seconds": 144.5209977324263,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.6637743711471558
+      },
+      {
+        "start_seconds": 144.5209977324263,
+        "end_seconds": 146.19283446712018,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9471497535705566
+      },
+      {
+        "start_seconds": 146.19283446712018,
+        "end_seconds": 147.67891156462585,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.8472971320152283
+      },
+      {
+        "start_seconds": 147.67891156462585,
+        "end_seconds": 149.35074829931972,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9289034008979797
+      },
+      {
+        "start_seconds": 149.35074829931972,
+        "end_seconds": 150.8368253968254,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.7872264385223389
+      },
+      {
+        "start_seconds": 150.8368253968254,
+        "end_seconds": 152.41578231292516,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.6831871271133423
+      },
+      {
+        "start_seconds": 152.41578231292516,
+        "end_seconds": 153.99473922902493,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.7275405526161194
+      },
+      {
+        "start_seconds": 153.99473922902493,
+        "end_seconds": 155.66657596371883,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.899389922618866
+      },
+      {
+        "start_seconds": 155.66657596371883,
+        "end_seconds": 157.1526530612245,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8420252799987793
+      },
+      {
+        "start_seconds": 157.1526530612245,
+        "end_seconds": 160.12480725623584,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.43735647201538086
+      },
+      {
+        "start_seconds": 160.12480725623584,
+        "end_seconds": 161.7966439909297,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9147735238075256
+      },
+      {
+        "start_seconds": 161.7966439909297,
+        "end_seconds": 163.37560090702948,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8132030963897705
+      },
+      {
+        "start_seconds": 163.37560090702948,
+        "end_seconds": 164.86167800453515,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.7267651557922363
+      },
+      {
+        "start_seconds": 164.86167800453515,
+        "end_seconds": 166.34775510204082,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.893694281578064
+      },
+      {
+        "start_seconds": 166.34775510204082,
+        "end_seconds": 168.0195918367347,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9313452839851379
+      },
+      {
+        "start_seconds": 168.0195918367347,
+        "end_seconds": 169.50566893424036,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.6702406406402588
+      },
+      {
+        "start_seconds": 169.50566893424036,
+        "end_seconds": 170.99174603174603,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.8870564103126526
+      },
+      {
+        "start_seconds": 170.99174603174603,
+        "end_seconds": 172.6635827664399,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.9106529355049133
+      },
+      {
+        "start_seconds": 172.6635827664399,
+        "end_seconds": 174.05678004535147,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8711708188056946
+      },
+      {
+        "start_seconds": 174.05678004535147,
+        "end_seconds": 175.63573696145124,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.8704578876495361
+      },
+      {
+        "start_seconds": 175.63573696145124,
+        "end_seconds": 177.214693877551,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.895273745059967
+      },
+      {
+        "start_seconds": 177.214693877551,
+        "end_seconds": 178.60789115646259,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.6153690218925476
+      },
+      {
+        "start_seconds": 178.60789115646259,
+        "end_seconds": 180.37260770975055,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9410142302513123
+      },
+      {
+        "start_seconds": 180.37260770975055,
+        "end_seconds": 181.67292517006803,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.5039189457893372
+      },
+      {
+        "start_seconds": 181.67292517006803,
+        "end_seconds": 183.1590022675737,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9479966759681702
+      },
+      {
+        "start_seconds": 183.1590022675737,
+        "end_seconds": 184.73795918367347,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.9024775624275208
+      },
+      {
+        "start_seconds": 184.73795918367347,
+        "end_seconds": 186.13115646258504,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8927468061447144
+      },
+      {
+        "start_seconds": 186.13115646258504,
+        "end_seconds": 187.6172335600907,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.8813005685806274
+      },
+      {
+        "start_seconds": 187.6172335600907,
+        "end_seconds": 189.19619047619048,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.8982815146446228
+      },
+      {
+        "start_seconds": 189.19619047619048,
+        "end_seconds": 190.58938775510205,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.9313361048698425
+      },
+      {
+        "start_seconds": 190.58938775510205,
+        "end_seconds": 193.6544217687075,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.7120971083641052
+      },
+      {
+        "start_seconds": 193.6544217687075,
+        "end_seconds": 195.14049886621316,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9468012452125549
+      },
+      {
+        "start_seconds": 195.14049886621316,
+        "end_seconds": 196.71945578231293,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8952859044075012
+      },
+      {
+        "start_seconds": 196.71945578231293,
+        "end_seconds": 198.2055328798186,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8852379322052002
+      },
+      {
+        "start_seconds": 198.2055328798186,
+        "end_seconds": 199.69160997732428,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.9044817090034485
+      },
+      {
+        "start_seconds": 199.69160997732428,
+        "end_seconds": 201.27056689342405,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.8967447280883789
+      },
+      {
+        "start_seconds": 201.27056689342405,
+        "end_seconds": 202.6637641723356,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.4247317314147949
+      },
+      {
+        "start_seconds": 202.6637641723356,
+        "end_seconds": 204.2427210884354,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9306221008300781
+      },
+      {
+        "start_seconds": 204.2427210884354,
+        "end_seconds": 205.72879818594103,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.9319359064102173
+      },
+      {
+        "start_seconds": 205.72879818594103,
+        "end_seconds": 207.30775510204083,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8699936270713806
+      },
+      {
+        "start_seconds": 207.30775510204083,
+        "end_seconds": 208.70095238095237,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.8729255795478821
+      },
+      {
+        "start_seconds": 208.70095238095237,
+        "end_seconds": 210.37278911564627,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.8926199674606323
+      },
+      {
+        "start_seconds": 210.37278911564627,
+        "end_seconds": 211.58022675736962,
+        "label": "Em",
+        "native_label": "E:min",
+        "confidence": 0.48293423652648926
+      },
+      {
+        "start_seconds": 211.58022675736962,
+        "end_seconds": 216.13133786848073,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.7530118823051453
+      },
+      {
+        "start_seconds": 216.13133786848073,
+        "end_seconds": 217.7102947845805,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.9446060657501221
+      },
+      {
+        "start_seconds": 217.7102947845805,
+        "end_seconds": 219.19637188208617,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8704724311828613
+      },
+      {
+        "start_seconds": 219.19637188208617,
+        "end_seconds": 220.68244897959184,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.9059658050537109
+      },
+      {
+        "start_seconds": 220.68244897959184,
+        "end_seconds": 222.1685260770975,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9501185417175293
+      },
+      {
+        "start_seconds": 222.1685260770975,
+        "end_seconds": 223.65460317460318,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.8651679754257202
+      },
+      {
+        "start_seconds": 223.65460317460318,
+        "end_seconds": 226.62675736961452,
+        "label": "E",
+        "native_label": "E:maj",
+        "confidence": 0.730031430721283
+      },
+      {
+        "start_seconds": 226.62675736961452,
+        "end_seconds": 228.1128344671202,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.9301984310150146
+      },
+      {
+        "start_seconds": 228.1128344671202,
+        "end_seconds": 229.69179138321996,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.926345944404602
+      },
+      {
+        "start_seconds": 229.69179138321996,
+        "end_seconds": 231.17786848072564,
+        "label": "D",
+        "native_label": "D:maj",
+        "confidence": 0.8877667188644409
+      },
+      {
+        "start_seconds": 231.17786848072564,
+        "end_seconds": 232.6639455782313,
+        "label": "F",
+        "native_label": "F:maj",
+        "confidence": 0.7914448976516724
+      },
+      {
+        "start_seconds": 232.6639455782313,
+        "end_seconds": 234.15002267573695,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.924858570098877
+      },
+      {
+        "start_seconds": 234.15002267573695,
+        "end_seconds": 235.63609977324262,
+        "label": "E7",
+        "native_label": "E:7",
+        "confidence": 0.6201626658439636
+      },
+      {
+        "start_seconds": 235.63609977324262,
+        "end_seconds": 237.30793650793652,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.8686573505401611
+      },
+      {
+        "start_seconds": 237.30793650793652,
+        "end_seconds": 238.70113378684806,
+        "label": "C",
+        "native_label": "C:maj",
+        "confidence": 0.7616746425628662
+      },
+      {
+        "start_seconds": 238.70113378684806,
+        "end_seconds": 240.18721088435373,
+        "label": "D7",
+        "native_label": "D:7",
+        "confidence": 0.4416830837726593
+      },
+      {
+        "start_seconds": 240.18721088435373,
+        "end_seconds": 241.6732879818594,
+        "label": "Fmaj7",
+        "native_label": "F:maj7",
+        "confidence": 0.4411088824272156
+      },
+      {
+        "start_seconds": 241.6732879818594,
+        "end_seconds": 243.15936507936507,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.8445876836776733
+      },
+      {
+        "start_seconds": 243.15936507936507,
+        "end_seconds": 244.64544217687074,
+        "label": "E7",
+        "native_label": "E:7",
+        "confidence": 0.6344505548477173
+      },
+      {
+        "start_seconds": 244.64544217687074,
+        "end_seconds": 246.22439909297051,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.905994176864624
+      },
+      {
+        "start_seconds": 246.22439909297051,
+        "end_seconds": 247.8962358276644,
+        "label": "Dm",
+        "native_label": "D:min",
+        "confidence": 0.6805752515792847
+      },
+      {
+        "start_seconds": 247.8962358276644,
+        "end_seconds": 249.47519274376418,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.8640117645263672
+      },
+      {
+        "start_seconds": 249.47519274376418,
+        "end_seconds": 250.96126984126985,
+        "label": "Dm",
+        "native_label": "D:min",
+        "confidence": 0.7124338746070862
+      },
+      {
+        "start_seconds": 250.96126984126985,
+        "end_seconds": 252.63310657596372,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.8480553030967712
+      },
+      {
+        "start_seconds": 252.63310657596372,
+        "end_seconds": 254.2120634920635,
+        "label": "Dm",
+        "native_label": "D:min",
+        "confidence": 0.6928618550300598
+      },
+      {
+        "start_seconds": 254.2120634920635,
+        "end_seconds": 255.88390022675736,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.7798920273780823
+      },
+      {
+        "start_seconds": 255.88390022675736,
+        "end_seconds": 257.64861678004536,
+        "label": "Dm",
+        "native_label": "D:min",
+        "confidence": 0.5270721912384033
+      },
+      {
+        "start_seconds": 257.64861678004536,
+        "end_seconds": 259.41333333333336,
+        "label": "Am",
+        "native_label": "A:min",
+        "confidence": 0.3181536793708801
+      },
+      {
+        "start_seconds": 259.41333333333336,
+        "end_seconds": 261.2709297052154,
+        "label": "Dm",
+        "native_label": "D:min",
+        "confidence": 0.27755704522132874
+      },
+      {
+        "start_seconds": 261.2709297052154,
+        "end_seconds": 267.2152380952381,
+        "label": "Am7",
+        "native_label": "A:min7",
+        "confidence": 0.5692164301872253
+      },
+      {
+        "start_seconds": 267.2152380952381,
+        "end_seconds": 269.91891156462583,
+        "label": "N",
+        "native_label": "N",
+        "confidence": 0.9243550300598145
+      }
+    ]
+  }
+}

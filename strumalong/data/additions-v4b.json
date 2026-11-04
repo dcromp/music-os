@@ -1,0 +1,1036 @@
+{
+  "schema": "strumalong-additions-1",
+  "note": "Strummed rock and pop additions towards ~100 songs (28 Oct 2026), from docs/STRUMALONG_SONG_RESEARCH.md (v4 batch). Each entry carries genre (rock or pop). Capo, setup and skill notes are authored suggestions from chord sheets; practice patterns come from the level defaults. Not checked against the recordings beyond the automatic chart sanity check.",
+  "songs": [
+    {
+      "recording_id": "lisa-loeb-stay-i-missed-you-youtube-20261028",
+      "title": "Stay (I Missed You)",
+      "artist": "Lisa Loeb",
+      "genre": "pop",
+      "order": 34,
+      "expected_level": 3,
+      "capo": 6,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 6 suggested: play G, Em7, Am7, G/B and Cadd9 shapes; they sound as Db, Bbm7, Ebm7, Db/F and Gbadd9.",
+      "skill_focus": "A wordy acoustic strum on five open shapes.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar Stay chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/lisa_loeb/stay_chords_591987"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "Em7",
+        "Am7",
+        "G/B",
+        "Cadd9"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "beautiful-south-rotterdam-or-anywhere-youtube-20261028",
+      "title": "Rotterdam (Or Anywhere)",
+      "artist": "The Beautiful South",
+      "genre": "pop",
+      "order": 35,
+      "expected_level": 3,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open Fmaj7, C, Am, G, E7 and D shapes.",
+      "skill_focus": "An acoustic strum with a swung feel.",
+      "sources": [
+        {
+          "title": "Guitar Tabs Explorer: Rotterdam chords",
+          "url": "https://www.guitartabsexplorer.com/beautiful-south/rotterdam-or-anywhere-chords"
+        }
+      ],
+      "expected_shapes": [
+        "Fmaj7",
+        "C",
+        "Am",
+        "G",
+        "E7",
+        "D"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "third-eye-blind-jumper-youtube-20261028",
+      "title": "Jumper",
+      "artist": "Third Eye Blind",
+      "genre": "rock",
+      "order": 36,
+      "expected_level": 3,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open Fmaj7, C, G, Am and Dsus2 shapes.",
+      "skill_focus": "An acoustic strum through five shapes; Fmaj7 stands in for F, so no barre is needed.",
+      "sources": [
+        {
+          "title": "SongBPM: Jumper",
+          "url": "https://songbpm.com/@third-eye-blind/jumper"
+        },
+        {
+          "title": "Guitar Tabs Explorer: Jumper chords",
+          "url": "https://www.guitartabsexplorer.com/third-eye-blind/jumper-chords"
+        }
+      ],
+      "expected_shapes": [
+        "Fmaj7",
+        "C",
+        "G",
+        "Am",
+        "Dsus2"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "beatles-eight-days-a-week-youtube-20261028",
+      "title": "Eight Days a Week",
+      "artist": "The Beatles",
+      "genre": "rock",
+      "order": 37,
+      "expected_level": 3,
+      "capo": 7,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 7 suggested: play G, A7, C, Em and D shapes; they sound as D, E7, G, Bm and A.",
+      "skill_focus": "A brisk chord strum on capo-7 shapes. The record fades in on chords, so count in from the first full bar.",
+      "sources": [
+        {
+          "title": "Musicnotes: Eight Days a Week",
+          "url": "https://www.musicnotes.com/sheetmusic/the-beatles/eight-days-a-week/MN0214048"
+        },
+        {
+          "title": "ukutabs: Eight Days a Week",
+          "url": "https://ukutabs.com/id/t/the-beatles/eight-days-a-week/"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "A7",
+        "C",
+        "Em",
+        "D"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "eagles-peaceful-easy-feeling-youtube-20261028",
+      "title": "Peaceful Easy Feeling",
+      "artist": "Eagles",
+      "genre": "rock",
+      "order": 38,
+      "expected_level": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open E, A, B7, F#m and Esus4 shapes.",
+      "skill_focus": "An open-E country-rock strum with a short F#m in the chorus. Good first F#m.",
+      "sources": [
+        {
+          "title": "SongBPM: Peaceful Easy Feeling",
+          "url": "https://songbpm.com/@eagles/peaceful-easy-feeling"
+        }
+      ],
+      "expected_shapes": [
+        "E",
+        "A",
+        "B7",
+        "F#m",
+        "Esus4"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "rod-stewart-maggie-may-youtube-20261028",
+      "title": "Maggie May",
+      "artist": "Rod Stewart",
+      "genre": "rock",
+      "order": 39,
+      "expected_level": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open D, A, G, Em and F#m shapes.",
+      "skill_focus": "A 12-string acoustic strum with Em to F#m moves. Skip the picked guitar intro and the mandolin outro.",
+      "sources": [
+        {
+          "title": "SongBPM: Maggie May",
+          "url": "https://songbpm.com/@rod-stewart/maggie-may"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "A",
+        "G",
+        "Em",
+        "F#m"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "traveling-wilburys-handle-with-care-youtube-20261028",
+      "title": "Handle with Care",
+      "artist": "Traveling Wilburys",
+      "genre": "rock",
+      "order": 40,
+      "expected_level": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open D, C, G, Bm and B7 shapes.",
+      "skill_focus": "A band acoustic strum with a D-C-G verse and a Bm. Charts differ on B or B7 in the bridge; B7 keeps it at L4.",
+      "sources": [
+        {
+          "title": "Wikipedia: Handle with Care",
+          "url": "https://en.wikipedia.org/wiki/Handle_with_Care_(song)"
+        },
+        {
+          "title": "Ultimate Guitar Handle with Care chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/traveling-wilburys/handle-with-care-chords-1087327"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "C",
+        "G",
+        "Bm",
+        "B7"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "crowded-house-weather-with-you-youtube-20261028",
+      "title": "Weather with You",
+      "artist": "Crowded House",
+      "genre": "rock",
+      "order": 41,
+      "expected_level": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open Em7, A, D, G, F and C shapes.",
+      "skill_focus": "The Em7 to A strum figure, a D-G chorus and an F in the bridge. Lock in the Em7-A groove first.",
+      "sources": [
+        {
+          "title": "Yousician: Weather with You chords",
+          "url": "https://yousician.com/chords/weather-with-you/61d46001043bf534786dd05f"
+        },
+        {
+          "title": "guitartabs.cc Weather with You chords",
+          "url": "https://www.guitartabs.cc/tabs/c/crowded_house/weather_with_you_crd.html"
+        }
+      ],
+      "expected_shapes": [
+        "Em7",
+        "A",
+        "D",
+        "G",
+        "F",
+        "C"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "fleetwood-mac-go-your-own-way-youtube-20261028",
+      "title": "Go Your Own Way",
+      "artist": "Fleetwood Mac",
+      "genre": "rock",
+      "order": 42,
+      "expected_level": 4,
+      "capo": 3,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 3 suggested: play D, A, G and Bm shapes; they sound as F, C, Bb and Dm.",
+      "skill_focus": "A driving strum on capo-3 shapes against syncopated drums. Keep the eighths steady while the drums push.",
+      "sources": [
+        {
+          "title": "SongBPM: Go Your Own Way",
+          "url": "https://songbpm.com/@fleetwood-mac/go-your-own-way"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "A",
+        "G",
+        "Bm"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "spin-doctors-two-princes-youtube-20261028",
+      "title": "Two Princes",
+      "artist": "Spin Doctors",
+      "genre": "rock",
+      "order": 43,
+      "expected_level": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open D, A, Bm and G shapes.",
+      "skill_focus": "A funky electric strum on D, A, Bm and G. Keep the Bm grip ready; it comes every cycle.",
+      "sources": [
+        {
+          "title": "Musicnotes: Two Princes",
+          "url": "https://www.musicnotes.com/sheetmusic/spin-doctors/two-princes/MN0127675"
+        },
+        {
+          "title": "SongBPM: Two Princes",
+          "url": "https://songbpm.com/@spin-doctors/two-princes"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "A",
+        "Bm",
+        "G"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "verve-drugs-dont-work-youtube-20261028",
+      "title": "The Drugs Don't Work",
+      "artist": "The Verve",
+      "genre": "rock",
+      "order": 44,
+      "expected_level": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open C, Am, Em, F and G shapes.",
+      "skill_focus": "A laid-back acoustic strum with strings; F is the only barre-type shape.",
+      "sources": [
+        {
+          "title": "guitartabs.cc The Drugs Don't Work chords",
+          "url": "https://www.guitartabs.cc/tabs/t/the_verve/the_drugs_dont_work_crd.html"
+        },
+        {
+          "title": "Guitar Noise: The Drugs Don't Work",
+          "url": "https://www.guitarnoise.com/community/easy-songs/the-verve-the-drugs-dont-work/"
+        }
+      ],
+      "expected_shapes": [
+        "C",
+        "Am",
+        "Em",
+        "F",
+        "G"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "travis-why-does-it-always-rain-on-me-youtube-20261028",
+      "title": "Why Does It Always Rain on Me?",
+      "artist": "Travis",
+      "genre": "rock",
+      "order": 45,
+      "expected_level": 4,
+      "capo": 2,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 2 suggested: play D, Bm, G, Em7 and A shapes; they sound as E, C#m, A, F#m7 and B.",
+      "skill_focus": "An acoustic strum on capo-2 shapes with D to Bm moves. A short cello intro precedes the guitar.",
+      "sources": [
+        {
+          "title": "guitartabs.cc Why Does It Always Rain on Me? chords",
+          "url": "https://www.guitartabs.cc/tabs/t/travis/why_does_it_always_rain_on_me_crd_ver_7.html"
+        },
+        {
+          "title": "Guitar Noise: Why Does It Always Rain on Me?",
+          "url": "https://www.guitarnoise.com/community/easy-songs/travis-why-does-it-always-rain-on-me/"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "Bm",
+        "G",
+        "Em7",
+        "A"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "oasis-stand-by-me-youtube-20261028",
+      "title": "Stand by Me",
+      "artist": "Oasis",
+      "genre": "rock",
+      "order": 46,
+      "expected_level": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open G, D, C, Em, Am and F shapes.",
+      "skill_focus": "A big strummed wall of guitars through six shapes, with an F passing chord.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar Stand by Me chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/oasis/stand-by-me-chords-963685"
+        },
+        {
+          "title": "Musicnotes: Stand by Me",
+          "url": "https://www.musicnotes.com/sheetmusic/oasis/stand-by-me/MN0117617_D2"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "D",
+        "C",
+        "Em",
+        "Am",
+        "F"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "beatles-youve-got-to-hide-your-love-away-youtube-20261028",
+      "title": "You've Got to Hide Your Love Away",
+      "artist": "The Beatles",
+      "genre": "rock",
+      "order": 47,
+      "expected_level": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open G, D, F, C and Dsus4 shapes.",
+      "skill_focus": "A 12-string acoustic strum in a lilting 6/8. Count six and strum on one and four; F is the stretch.",
+      "sources": [
+        {
+          "title": "Alan W. Pollack notes on the Beatles songs (index)",
+          "url": "https://www.icce.rug.nl/~soundscapes/DATABASES/AWP/awp-alphabet.shtml"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "D",
+        "F",
+        "C",
+        "Dsus4"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "kooks-she-moves-in-her-own-way-youtube-20261028",
+      "title": "She Moves in Her Own Way",
+      "artist": "The Kooks",
+      "genre": "rock",
+      "order": 48,
+      "expected_level": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open G, C, D, Am, Bm and Em shapes.",
+      "skill_focus": "A bouncy acoustic strum through open shapes with a Bm. Short picked licks between sections can be skipped.",
+      "sources": [
+        {
+          "title": "chordu: She Moves in Her Own Way",
+          "url": "https://chordu.com/chords-tabs-the-kooks-she-moves-in-her-own-way-id_rfajVDpGXM8"
+        },
+        {
+          "title": "SongBPM: She Moves in Her Own Way",
+          "url": "https://songbpm.com/@the-kooks/she-moves-in-her-own-way"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "C",
+        "D",
+        "Am",
+        "Bm",
+        "Em"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "smash-mouth-all-star-youtube-20261028",
+      "title": "All Star",
+      "artist": "Smash Mouth",
+      "genre": "pop",
+      "order": 49,
+      "expected_level": 4,
+      "capo": 4,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 4 suggested: play D, A, Bm and G shapes; they sound as F#, C#, D#m and B.",
+      "skill_focus": "A I-V-vi-IV strum with two-beat changes. Quick: keep the Bm grip close and change on beats 1 and 3.",
+      "sources": [
+        {
+          "title": "Hooktheory TheoryTab: All Star",
+          "url": "https://hooktheory.com/theorytab/view/smash-mouth/all-star"
+        },
+        {
+          "title": "SongBPM: All Star",
+          "url": "https://songbpm.com/@smash-mouth/all-star"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "A",
+        "Bm",
+        "G"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "del-amitri-roll-to-me-youtube-20261028",
+      "title": "Roll to Me",
+      "artist": "Del Amitri",
+      "genre": "pop",
+      "order": 50,
+      "expected_level": 4,
+      "capo": 4,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 4 suggested: play D, G, A, Em and Bm7 shapes; they sound as F#, B, C#, G#m and D#m7.",
+      "skill_focus": "A jangly strum on a short, bright song. Bm7 is the only barre-type shape.",
+      "sources": [
+        {
+          "title": "Roll to Me chords (zachmanson mirror)",
+          "url": "https://pg.zachmanson.com/tab/del-amitri/roll-to-me-chords-1878291"
+        },
+        {
+          "title": "SongBPM: Roll to Me",
+          "url": "https://songbpm.com/@del-amitri/roll-to-me"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "G",
+        "A",
+        "Em",
+        "Bm7"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "jam-thats-entertainment-youtube-20261028",
+      "title": "That's Entertainment",
+      "artist": "The Jam",
+      "genre": "rock",
+      "order": 51,
+      "expected_level": 4,
+      "capo": 3,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 3 suggested: play G, Em, Am and F shapes; they sound as Bb, Gm, Cm and Ab.",
+      "skill_focus": "An acoustic strum carries the whole track; F is the barre-type shape.",
+      "sources": [
+        {
+          "title": "That's Entertainment chords (zachmanson mirror)",
+          "url": "https://pg.zachmanson.com/tab/the-jam/thats-entertainment-chords-1907060"
+        },
+        {
+          "title": "Yousician: That's Entertainment chords",
+          "url": "https://yousician.com/chords/thats-entertainment/61c1f0802656a3cdf92d9b70"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "Em",
+        "Am",
+        "F"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "george-michael-faith-youtube-20261028",
+      "title": "Faith",
+      "artist": "George Michael",
+      "genre": "pop",
+      "order": 52,
+      "expected_level": 4,
+      "capo": 2,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 2 suggested: play A, D, G, E, Bm and F#m shapes; they sound as B, E, A, F#, C#m and G#m.",
+      "skill_focus": "A Bo Diddley-style syncopated acoustic strum. Start after the organ intro and lock in with the drums.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar Faith chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/george-michael/faith-chords-745882"
+        },
+        {
+          "title": "SongBPM: Faith",
+          "url": "https://songbpm.com/@george-michael/faith"
+        }
+      ],
+      "expected_shapes": [
+        "A",
+        "D",
+        "G",
+        "E",
+        "Bm",
+        "F#m"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "amy-macdonald-this-is-the-life-youtube-20261028",
+      "title": "This Is the Life",
+      "artist": "Amy Macdonald",
+      "genre": "pop",
+      "order": 53,
+      "expected_level": 4,
+      "capo": 4,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 4 suggested: play Am, F, C and Em shapes; they sound as C#m, A, E and G#m.",
+      "skill_focus": "A four-chord acoustic strum loop with F. Keep the loop going and lock in with the vocal.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar This Is the Life chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/amy-macdonald/this-is-the-life-chords-588538"
+        },
+        {
+          "title": "SongBPM: This Is the Life",
+          "url": "https://songbpm.com/@amy-macdonald/this-is-the-life"
+        }
+      ],
+      "expected_shapes": [
+        "Am",
+        "F",
+        "C",
+        "Em"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "sheryl-crow-soak-up-the-sun-youtube-20261028",
+      "title": "Soak Up the Sun",
+      "artist": "Sheryl Crow",
+      "genre": "pop",
+      "order": 54,
+      "expected_level": 4,
+      "capo": 2,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 2 suggested: play D, A, G, Em and F shapes; they sound as E, B, A, F#m and G.",
+      "skill_focus": "A bright acoustic band strum on capo-2 shapes. Sheets disagree on the bridge; expect a passing F.",
+      "sources": [
+        {
+          "title": "Heartwood Guitar: Soak Up the Sun chords",
+          "url": "https://www.heartwoodguitar.com/chords/soak-up-the-sun-sheryl-crow"
+        },
+        {
+          "title": "Hooktheory TheoryTab: Soak Up the Sun",
+          "url": "https://www.hooktheory.com/theorytab/view/sheryl-crow/soak-up-the-sun"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "A",
+        "G",
+        "Em",
+        "F"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "mamas-and-the-papas-california-dreamin-youtube-20261028",
+      "title": "California Dreamin'",
+      "artist": "The Mamas & the Papas",
+      "genre": "pop",
+      "order": 55,
+      "expected_level": 4,
+      "capo": 4,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 4 suggested: play Am, G, F, E7sus4, E7 and C shapes; they sound as C#m, B, A, G#7sus4, G#7 and E.",
+      "skill_focus": "A 12-string acoustic strum in Am with F. The descending Am-G-F move is the core change.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar California Dreamin' chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/the-mamas-the-papas/california-dreamin-chords-7560"
+        },
+        {
+          "title": "Richter Guitar: California Dreamin'",
+          "url": "https://richterguitar.com/california-dreamin-the-mamas-and-the-papas/"
+        }
+      ],
+      "expected_shapes": [
+        "Am",
+        "G",
+        "F",
+        "E7sus4",
+        "E7",
+        "C"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "cat-stevens-peace-train-youtube-20261028",
+      "title": "Peace Train",
+      "artist": "Cat Stevens",
+      "genre": "pop",
+      "order": 56,
+      "expected_level": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open C, G, F and Am shapes.",
+      "skill_focus": "A driving acoustic strum with fast changes on C, G, F and Am. Practise the C to F to G moves.",
+      "sources": [
+        {
+          "title": "Totally Guitars: Peace Train lesson",
+          "url": "https://totallyguitars.com/lessons/348-peace-train-guitar-lesson"
+        },
+        {
+          "title": "Guitar Tabs Explorer: Peace Train chords",
+          "url": "https://www.guitartabsexplorer.com/stevens-cat/peace-train-(Ver2)-crd"
+        }
+      ],
+      "expected_shapes": [
+        "C",
+        "G",
+        "F",
+        "Am"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "avril-lavigne-complicated-youtube-20261028",
+      "title": "Complicated",
+      "artist": "Avril Lavigne",
+      "genre": "pop",
+      "order": 57,
+      "expected_level": 4,
+      "capo": 5,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 5 suggested: play Am, F, C and G shapes; they sound as Dm, Bb, F and C.",
+      "skill_focus": "A four-chord acoustic strum with F. Slow and steady: a good first F song.",
+      "sources": [
+        {
+          "title": "Hooktheory TheoryTab: Complicated",
+          "url": "https://www.hooktheory.com/theorytab/view/avril-lavigne/complicated"
+        },
+        {
+          "title": "e-chords: Complicated",
+          "url": "https://www.e-chords.com/chords/avril-lavigne/complicated-ver-2"
+        }
+      ],
+      "expected_shapes": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "alanis-morissette-hand-in-my-pocket-youtube-20261028",
+      "title": "Hand in My Pocket",
+      "artist": "Alanis Morissette",
+      "genre": "pop",
+      "order": 58,
+      "expected_level": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open G, Em7, Cadd9, F and C shapes.",
+      "skill_focus": "A jangly strum over a G drone, with a passing F. Keep the open G strings ringing.",
+      "sources": [
+        {
+          "title": "Wikipedia: Hand in My Pocket",
+          "url": "https://en.wikipedia.org/wiki/Hand_in_My_Pocket"
+        },
+        {
+          "title": "Ultimate Guitar Hand in My Pocket chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/alanis-morissette/hand-in-my-pocket-chords-75847"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "Em7",
+        "Cadd9",
+        "F",
+        "C"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "toad-the-wet-sprocket-all-i-want-youtube-20261028",
+      "title": "All I Want",
+      "artist": "Toad the Wet Sprocket",
+      "genre": "pop",
+      "order": 59,
+      "expected_level": 4,
+      "capo": 5,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 5 suggested: play Am, C, G, Em, F and D shapes; they sound as Dm, F, C, Am, Bb and G.",
+      "skill_focus": "A jangly strum on capo-5 shapes with an F. Electric arpeggios sit on top; follow the strum.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar All I Want chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/toad-the-wet-sprocket/all-i-want-chords-447792"
+        },
+        {
+          "title": "Hooktheory TheoryTab: All I Want",
+          "url": "https://hooktheory.com/theorytab/view/toad-the-wet-sprocket/all-i-want"
+        }
+      ],
+      "expected_shapes": [
+        "Am",
+        "C",
+        "G",
+        "Em",
+        "F",
+        "D"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "james-blunt-bonfire-heart-youtube-20261028",
+      "title": "Bonfire Heart",
+      "artist": "James Blunt",
+      "genre": "pop",
+      "order": 60,
+      "expected_level": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open C, Em, Am, G and F shapes.",
+      "skill_focus": "An acoustic strum on a I-iii-vi-V-IV chorus; F is the barre-type shape.",
+      "sources": [
+        {
+          "title": "Hooktheory TheoryTab: Bonfire Heart",
+          "url": "https://www.hooktheory.com/theorytab/view/james-blunt/bonfire-heart"
+        },
+        {
+          "title": "Totally Guitars: Bonfire Heart lesson",
+          "url": "https://totallyguitars.com/lessons/1210-bonfire-heart-james-blunt-guitar-lesson"
+        }
+      ],
+      "expected_shapes": [
+        "C",
+        "Em",
+        "Am",
+        "G",
+        "F"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "kinks-lola-youtube-20261028",
+      "title": "Lola",
+      "artist": "The Kinks",
+      "genre": "rock",
+      "order": 61,
+      "expected_level": 5,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open E, A, D, C, B and C#m shapes.",
+      "skill_focus": "A strummed resonator-acoustic part with a full B and C#m in the bridge. The C-D-E strum figure is the hook.",
+      "sources": [
+        {
+          "title": "Hooktheory TheoryTab: Lola",
+          "url": "https://hooktheory.com/theorytab/view/the-kinks/lola"
+        },
+        {
+          "title": "Lola chords (zachmanson mirror)",
+          "url": "https://pg.zachmanson.com/tab/the-kinks/lola-chords-48159"
+        }
+      ],
+      "expected_shapes": [
+        "E",
+        "A",
+        "D",
+        "C",
+        "B",
+        "C#m"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "oasis-half-the-world-away-youtube-20261028",
+      "title": "Half the World Away",
+      "artist": "Oasis",
+      "genre": "rock",
+      "order": 62,
+      "expected_level": 5,
+      "capo": 2,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 2 suggested: play C, Fmaj7, Am, D, E and Fm shapes; they sound as D, Gmaj7, Bm, E, F# and Gm.",
+      "skill_focus": "An acoustic strum with a Fm in the chorus turnaround: a first minor barre at a gentle pace.",
+      "sources": [
+        {
+          "title": "guitartabs.cc Half the World Away chords",
+          "url": "https://guitartabs.cc/tabs/o/oasis/half_the_world_away_acoustic_crd_ver_4.html"
+        },
+        {
+          "title": "SongBPM: Half the World Away",
+          "url": "https://songbpm.com/@oasis/half-the-world-away"
+        }
+      ],
+      "expected_shapes": [
+        "C",
+        "Fmaj7",
+        "Am",
+        "D",
+        "E",
+        "Fm"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "beatles-she-loves-you-youtube-20261028",
+      "title": "She Loves You",
+      "artist": "The Beatles",
+      "genre": "rock",
+      "order": 63,
+      "expected_level": 5,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open G, Em, Bm, D, C and Cm shapes.",
+      "skill_focus": "A fast electric chord strum with a Cm in the chorus. Fast: learn the changes slowly.",
+      "sources": [
+        {
+          "title": "Alan W. Pollack notes on the Beatles songs (index)",
+          "url": "https://www.icce.rug.nl/~soundscapes/DATABASES/AWP/awp-alphabet.shtml"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "Em",
+        "Bm",
+        "D",
+        "C",
+        "Cm"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "beatles-all-my-loving-youtube-20261028",
+      "title": "All My Loving",
+      "artist": "The Beatles",
+      "genre": "rock",
+      "order": 64,
+      "expected_level": 5,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open Em, A7, D, Bm, G, C#m and F#7 shapes.",
+      "skill_focus": "Lennon's fast triplet chord strum, one chord nearly every bar. Practise the triplet on a single chord first.",
+      "sources": [
+        {
+          "title": "Alan W. Pollack: All My Loving",
+          "url": "https://www.icce.rug.nl/~soundscapes/DATABASES/AWP/aml.shtml"
+        }
+      ],
+      "expected_shapes": [
+        "Em",
+        "A7",
+        "D",
+        "Bm",
+        "G",
+        "C#m",
+        "F#7"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "kt-tunstall-suddenly-i-see-youtube-20261028",
+      "title": "Suddenly I See",
+      "artist": "KT Tunstall",
+      "genre": "pop",
+      "order": 65,
+      "expected_level": 5,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open D, G, A, Bm, F#m and Gm shapes.",
+      "skill_focus": "A driving acoustic strum with a Gm. Keep the eighths pushing through the chorus.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar Suddenly I See chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/kt-tunstall/suddenly-i-see-chords-668418"
+        },
+        {
+          "title": "SongBPM: Suddenly I See",
+          "url": "https://songbpm.com/@kt-tunstall/suddenly-i-see"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "G",
+        "A",
+        "Bm",
+        "F#m",
+        "Gm"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "fratellis-chelsea-dagger-youtube-20261028",
+      "title": "Chelsea Dagger",
+      "artist": "The Fratellis",
+      "genre": "rock",
+      "order": 66,
+      "expected_level": 5,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open G, D, C, B and E shapes.",
+      "skill_focus": "A fast full-band chord strum with a B in the verse. Fast and loud: build up to tempo.",
+      "sources": [
+        {
+          "title": "guitartabs.cc Chelsea Dagger chords",
+          "url": "https://guitartabs.cc/tabs/t/the_fratellis/chelsea_dagger_crd.html"
+        },
+        {
+          "title": "Wikipedia: Chelsea Dagger",
+          "url": "https://en.wikipedia.org/wiki/Chelsea_Dagger"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "D",
+        "C",
+        "B",
+        "E"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    }
+  ]
+}

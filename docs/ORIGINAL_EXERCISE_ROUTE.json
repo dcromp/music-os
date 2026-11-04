@@ -1,0 +1,192 @@
+{
+  "schema_version": "music-os-content-route-design-v1",
+  "checked_date": "2026-10-16",
+  "issue": "https://github.com/dcromp/music-os/issues/9",
+  "source_commit": "389a66364081b0798cb2fb049524a8eadc8eaa29",
+  "route": "project-authored procedural exercises; proposed commercial release remains on hold",
+  "representative_status": "existing diagnostic control, not an approved teaching arrangement or paid catalogue",
+  "recording_id": "l3-pluck-036",
+  "recipe": {
+    "level": 3,
+    "condition": "pluck",
+    "root": 0,
+    "quality": "",
+    "seed": 101,
+    "split": "screen"
+  },
+  "provenance": "Analytic sine harmonics and envelopes in the pinned generator; no imported recording, sample, soundfont, lyrics or melody input.",
+  "commercial_permission_status": "Unknown: operator/contributor authority and release terms have not been recorded. No commercial grant is asserted by this report.",
+  "assets": [
+    {
+      "path": "experiments/generated/synthetic-suite/cases/l3-pluck-036/audio.wav",
+      "bytes": 396944,
+      "sha256": "cecb906c3f8167f79823dcfeffac3b625e786641523261f7b506e2c1239bd6dd"
+    },
+    {
+      "path": "experiments/generated/synthetic-suite/cases/l3-pluck-036/reference.json",
+      "bytes": 1339,
+      "sha256": "2da03a8e433533d546eb8e0b5d7d886c4c3952df82bf1bb3fe45b58da08f218b"
+    },
+    {
+      "path": "experiments/generated/synthetic-suite/cases/l3-pluck-036/btc.json",
+      "bytes": 1992,
+      "sha256": "d66a2706fa518c5023d8f80ea8cf3a8301c0c48b0146c3115d3212690fd5131b"
+    },
+    {
+      "path": "experiments/generated/synthetic-suite/cases/l3-pluck-036/crema.json",
+      "bytes": 1823,
+      "sha256": "088595a009b87980cd9074ff5aee1083ad48c037a5c7c571596601323fe49810"
+    },
+    {
+      "path": "experiments/generated/synthetic-suite/manifest.json",
+      "bytes": 41477,
+      "sha256": "726ba29e3497465b4712815312117eabd6ecec5aa1c91fe4c9da4197ede9fb1a"
+    }
+  ],
+  "sources": [
+    {
+      "path": "experiments/analysis/synthetic_suite.py",
+      "bytes": 22687,
+      "sha256": "9c40d6de328713fb3b932e44e2737e9b964ba303275368fd449fe8643571c012"
+    },
+    {
+      "path": "experiments/analysis/lab.py",
+      "bytes": 21496,
+      "sha256": "4e48a730dae86e99972d28f53714dc6a2d56badb1c38df99f8171ba711c02949"
+    },
+    {
+      "path": "experiments/analysis/requirements.txt",
+      "bytes": 13,
+      "sha256": "a23aaf94250a9f53031a592980142245a848e2372b6c6c3093e8260b129265b8"
+    },
+    {
+      "path": "experiments/analysis/automatic_drafts.py",
+      "bytes": 29137,
+      "sha256": "529e221ab927ad6c684b6154f2d57fac36335a870692b5ae0cff6ddd4ad5e616"
+    }
+  ],
+  "environment": {
+    "python": "3.12.10",
+    "numpy": "2.2.6",
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "audio": {
+    "channels": 1,
+    "sample_width_bytes": 2,
+    "sample_rate_hz": 22050,
+    "frames": 198450,
+    "duration_seconds": 9.0
+  },
+  "authored_score": [
+    {
+      "start_seconds": 0.0,
+      "end_seconds": 0.5,
+      "label": "N"
+    },
+    {
+      "start_seconds": 0.5,
+      "end_seconds": 2.5,
+      "label": "C",
+      "root_pitch_class": 0,
+      "quality": ""
+    },
+    {
+      "start_seconds": 2.5,
+      "end_seconds": 4.5,
+      "label": "Am",
+      "root_pitch_class": 9,
+      "quality": "m"
+    },
+    {
+      "start_seconds": 4.5,
+      "end_seconds": 6.5,
+      "label": "F",
+      "root_pitch_class": 5,
+      "quality": ""
+    },
+    {
+      "start_seconds": 6.5,
+      "end_seconds": 8.5,
+      "label": "G",
+      "root_pitch_class": 7,
+      "quality": ""
+    },
+    {
+      "start_seconds": 8.5,
+      "end_seconds": 9.0,
+      "label": "N"
+    }
+  ],
+  "cached_diagnostics": {
+    "btc_analysis_id": "btc-majmin-71c2c5db17e8",
+    "btc_historical_warm_runtime_seconds": 0.05105458293110132,
+    "crema_analysis_id": "l3-pluck-036-crema",
+    "crema_historical_per_file_runtime_seconds": 0.30889691738411784,
+    "limitations": "Both predictions extend G through final silence; CREMA additionally emits Cmaj7/Fmaj7. These are unaccepted diagnostic predictions, not the authored score."
+  },
+  "checks": {
+    "wav_byte_exact_regeneration": true,
+    "pcm_manifest_hash": true,
+    "score_equals_generator_events": true,
+    "all_three_chart_schemas": true,
+    "paired_prediction_identity": true,
+    "audio_matches_predictions": true,
+    "new_inference_run": false,
+    "learner_pack_changed": false,
+    "new_player_deployed": false
+  },
+  "budget": {
+    "currency": "USD",
+    "status": "illustrative assumptions; not a quote, measured correction cost or profit forecast",
+    "proposed_exercises": 3,
+    "seconds_per_exercise": 120,
+    "sample_rate_hz": 22050,
+    "channels": 1,
+    "sample_width_bytes": 2,
+    "wav_header_bytes": 44,
+    "payers": 100,
+    "subscription_per_month": 4,
+    "full_plays_per_payer_month": 120,
+    "get_requests_per_play": 5,
+    "put_requests_per_month": 100,
+    "authoring_minutes_per_exercise": 45,
+    "review_minutes_per_exercise": 30,
+    "labour_per_hour": 30,
+    "support_minutes_per_payer_month": 1,
+    "payment_fraction": 0.04,
+    "payment_fixed_per_payer_month": 0.3,
+    "other_hosting_allowance_per_month": 20,
+    "excluded_unknowns": [
+      "content/contributor or collecting-society payments",
+      "tax/VAT",
+      "refunds/chargebacks/FX",
+      "legal and production integration cost",
+      "actual supplier/platform terms"
+    ],
+    "r2_standard_public_tariff_checked": "2026-10-16",
+    "r2_source": "https://developers.cloudflare.com/r2/pricing/",
+    "r2_storage_per_gb_month": 0.015,
+    "r2_class_a_per_million": 4.5,
+    "r2_class_b_per_million": 0.36,
+    "r2_included_storage_gb_month": 10,
+    "r2_included_class_a_month": 1000000,
+    "r2_included_class_b_month": 10000000,
+    "r2_direct_egress_per_gb": 0,
+    "r2_allowance_available": "unverified; account-wide use must be checked",
+    "derived": {
+      "bytes_per_exercise": 5292044,
+      "catalogue_audio_bytes": 15876132,
+      "monthly_full_plays": 12000,
+      "monthly_class_b_requests": 60000,
+      "monthly_audio_delivery_bytes": 63504528000,
+      "gross_monthly_receipts": 400,
+      "one_time_authoring_review_labour": 112.5,
+      "monthly_support_labour": 50.0,
+      "monthly_payment_assumption": 46.0,
+      "r2_audio_component_if_free_allowance_available": 0,
+      "monthly_remainder_before_unknowns_and_catalogue_amortisation": 284.0,
+      "support_sensitivity_extra_minutes_before_remainder_zero": 5.68
+    }
+  }
+}

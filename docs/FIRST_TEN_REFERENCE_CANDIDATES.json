@@ -1,0 +1,227 @@
+{
+  "review_date": "2026-10-12",
+  "first_ten_candidates": [
+    {
+      "catalogue_song": "love-me-do",
+      "reference_family": "Isophonics Beatles v1.2",
+      "recording_id": "beatles-love-me-do-youtube-20261011",
+      "corpus_audio_source": "Please Please Me, CDP 7 46435 2",
+      "source_page": "https://isophonics.net/content/reference-annotations.html",
+      "identity_status": "Unverified against 2009 remaster; no canonical CD audio in cache",
+      "prepared_audio_duration_seconds": 141.69832199546485,
+      "prepared_audio_sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea",
+      "timed_gold_ready": false
+    },
+    {
+      "catalogue_song": "twist-and-shout",
+      "reference_family": "Isophonics Beatles v1.2",
+      "recording_id": "beatles-twist-and-shout-youtube-20261011",
+      "corpus_audio_source": "Please Please Me, CDP 7 46435 2",
+      "source_page": "https://isophonics.net/content/reference-annotations.html",
+      "identity_status": "Unverified against 2009 remaster; no canonical CD audio in cache",
+      "prepared_audio_duration_seconds": 155.23555555555555,
+      "prepared_audio_sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c",
+      "timed_gold_ready": false
+    },
+    {
+      "catalogue_song": "brown-eyed-girl",
+      "reference_family": "Rock Corpus RS200",
+      "recording_id": "van-morrison-brown-eyed-girl-youtube-20261011",
+      "corpus_audio_source": "Bang Masters, Epic 1991",
+      "source_page": "https://rockcorpus.midside.com/timing_data/audio_sources.txt",
+      "identity_status": "Unverified against selected Blowin Your Mind! release; same title/artist is insufficient",
+      "prepared_audio_duration_seconds": 186.55927437641722,
+      "prepared_audio_sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf",
+      "timed_gold_ready": false
+    },
+    {
+      "catalogue_song": "come-as-you-are",
+      "reference_family": "Rock Corpus RS200",
+      "recording_id": "nirvana-come-as-you-are-youtube-20261011",
+      "corpus_audio_source": "Nevermind",
+      "source_page": "https://rockcorpus.midside.com/timing_data/audio_sources.txt",
+      "identity_status": "Album title matches; master identity/time origin remain unverified",
+      "prepared_audio_duration_seconds": 218.92789115646258,
+      "prepared_audio_sha256": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7",
+      "timed_gold_ready": false
+    },
+    {
+      "catalogue_song": "the-house-of-the-rising-sun",
+      "reference_family": "Rock Corpus RS200",
+      "recording_id": "animals-house-rising-sun-official-20261011",
+      "corpus_audio_source": "The Best of the Animals, ABKCO 1966 CD",
+      "source_page": "https://rockcorpus.midside.com/timing_data/audio_sources.txt",
+      "identity_status": "New official 269.919-second recording fixes old tribute identity issue but is not yet matched to corpus CD",
+      "prepared_audio_duration_seconds": 269.91891156462583,
+      "prepared_audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708",
+      "timed_gold_ready": false
+    }
+  ],
+  "annotation_file_metadata": [
+    {
+      "song": "08_-_Love_Me_Do",
+      "kind": "chordlab",
+      "url": "https://isophonics.net/files/annotations/chordlab/The%20Beatles/01_-_Please_Please_Me/08_-_Love_Me_Do.lab",
+      "sha256": "d5f21ff2ade5e44203e54ca333894b4c202ffcc2f96af147afb279ca3392cba8",
+      "rows": 73,
+      "first": [
+        "0.000000",
+        "0.465952",
+        "N"
+      ],
+      "last": [
+        "138.659785",
+        "142.759184",
+        "N"
+      ]
+    },
+    {
+      "song": "08_-_Love_Me_Do",
+      "kind": "beat",
+      "url": "https://isophonics.net/files/annotations/beat/The%20Beatles/01_-_Please_Please_Me/08_-_Love_Me_Do.txt",
+      "sha256": "2d63e6db50b99531297ab8f87a4545c2120caa471676c0211f0cc15c11b17348",
+      "rows": 337,
+      "first": [
+        "0.511",
+        "1"
+      ],
+      "last": [
+        "137.125",
+        "1"
+      ]
+    },
+    {
+      "song": "08_-_Love_Me_Do",
+      "kind": "seglab",
+      "url": "https://isophonics.net/files/annotations/seglab/The%20Beatles/01_-_Please_Please_Me/08_-_Love_Me_Do.lab",
+      "sha256": "4be2574c70287b6fbf8739df3a1c21214b4a6559805488bade47c4bcbc15387f",
+      "rows": 9,
+      "first": [
+        "0.000",
+        "0.412",
+        "silence"
+      ],
+      "last": [
+        "137.945",
+        "142.760",
+        "silence"
+      ]
+    },
+    {
+      "song": "14_-_Twist_And_Shout",
+      "kind": "chordlab",
+      "url": "https://isophonics.net/files/annotations/chordlab/The%20Beatles/01_-_Please_Please_Me/14_-_Twist_And_Shout.lab",
+      "sha256": "0a22a67d99ae671f43f905d157cb7f331fb8b0cb294678520e9dd82c2513d04f",
+      "rows": 116,
+      "first": [
+        "0.000000",
+        "0.431661",
+        "N"
+      ],
+      "last": [
+        "152.003406",
+        "153.155918",
+        "N"
+      ]
+    },
+    {
+      "song": "14_-_Twist_And_Shout",
+      "kind": "beat",
+      "url": "https://isophonics.net/files/annotations/beat/The%20Beatles/01_-_Please_Please_Me/14_-_Twist_And_Shout.txt",
+      "sha256": "28823d88053c1e7ea17e9498220d2d2e62281686da0abfb756802a009f6f6f28",
+      "rows": 307,
+      "first": [
+        "1.161",
+        "1"
+      ],
+      "last": [
+        "147.664",
+        "3"
+      ]
+    },
+    {
+      "song": "14_-_Twist_And_Shout",
+      "kind": "seglab",
+      "url": "https://isophonics.net/files/annotations/seglab/The%20Beatles/01_-_Please_Please_Me/14_-_Twist_And_Shout.lab",
+      "sha256": "4760adc8e802cf0e484ceb5ce686bef25bd53b45f778e0c2661ccd543bb6ee9f",
+      "rows": 8,
+      "first": [
+        "0.000",
+        "0.416",
+        "silence"
+      ],
+      "last": [
+        "152.147",
+        "153.267",
+        "silence"
+      ]
+    },
+    {
+      "song": "brown_eyed_girl",
+      "kind": "tim",
+      "url": "https://rockcorpus.midside.com/timing_data/timing_data/brown_eyed_girl.tim",
+      "sha256": "b327e880b4ebbc6e4b9ec60437473ccb08ad85490895213be880296d67511fa4",
+      "rows": 113,
+      "first": [
+        "1.046553287",
+        "0"
+      ],
+      "last": [
+        "178.328775510",
+        "112"
+      ]
+    },
+    {
+      "song": "come_as_you_are",
+      "kind": "tim",
+      "url": "https://rockcorpus.midside.com/timing_data/timing_data/come_as_you_are.tim",
+      "sha256": "0d9fff3f4ed222b231e5d46efdba5ea23a3aa1a09ffcef05d58fba7495355138",
+      "rows": 106,
+      "first": [
+        "1.04639455695",
+        "0"
+      ],
+      "last": [
+        "209.298911564",
+        "105"
+      ]
+    },
+    {
+      "song": "house_of_the_rising_sun",
+      "kind": "tim",
+      "url": "https://rockcorpus.midside.com/timing_data/timing_data/house_of_the_rising_sun.tim",
+      "sha256": "23f4ceef5cacbd708b3d28171f71ec19cb5813b324fcdf331a766f7359bcaba0",
+      "rows": 172,
+      "first": [
+        "0.313265306",
+        "0"
+      ],
+      "last": [
+        "262.942811791",
+        "171"
+      ]
+    }
+  ],
+  "other_first_ten_status": {
+    "wild-thing": "No RS200 title match; no independent timed source located in bounded search",
+    "knockin-on-heaven-s-door": "No RS200 title match; no independent timed source located in bounded search",
+    "seven-nation-army": "No RS200 title match; no independent timed source located in bounded search",
+    "creep": "Prior Rock Corpus/Isophonics/Billboard checks did not identify a timing candidate",
+    "wonderwall": "Prior checked paper figure is structural lead, not downloadable exact chord timing gold"
+  },
+  "annotation_quality_notes": [
+    "Isophonics authors say Beatles chord annotations have been checked several times; Beatles beat labels are only moderate confidence. Keys can omit changes.",
+    "Isophonics beat positions equal to 1 define barlines; distinguish actual beat times from a constant BPM duration estimate.",
+    "Rock Corpus has two independently authored harmony analyses; retain differing labels. Human barlines plus interpolated within-bar chord changes do not make every chord boundary manually marked.",
+    "An annotation endpoint may end before fade/reverb. It is not a source-duration identity test.",
+    "Isophonics annotation licence was not stated on inspected source page; official mirdata Beatles loader also reports unresolved licence. Keep annotations research-only pending clarification."
+  ],
+  "training_overlap_caution": {
+    "source": "https://brianmcfee.net/papers/ismir2017_chord.pdf",
+    "finding": "The 2017 paper uses 1,217 tracks from Isophonics/Billboard/RWC Pop/MARL with five-fold cross-validation. Exact training coverage of the packaged 0.2.0 weights is not established.",
+    "consequence": "Possible Beatles training overlap: future scores are operational/reference agreement diagnostics unless exact deployed weight split establishes held-out membership. Do not call fresh generalisation."
+  },
+  "schema_version": "first-ten-reference-candidates-1.0",
+  "status": "Independent source candidates; recording alignment unverified, no timing accuracy scored",
+  "timed_gold": false
+}

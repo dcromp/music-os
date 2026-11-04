@@ -1,0 +1,66 @@
+{
+  "schema_version": "founder-playalong-feedback-1.0",
+  "reported_date": "2026-10-17",
+  "pack_id": "automatic-first-ten-v1",
+  "candidate_exposure": "model-exposed",
+  "gold": false,
+  "reports": [
+    {
+      "id": "wild-thing-a-near-25s-20261017",
+      "recording": {
+        "id": "troggs-wild-thing-youtube-20261011",
+        "title": "The Troggs - Wild Thing",
+        "duration_seconds": 155.3516553287982,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf"
+      },
+      "quote": "in wild thing, around 25 second mark and A chord is played not E.",
+      "reported_seconds": 25,
+      "time_precision": "Approximate point; no change boundaries supplied.",
+      "status": "user-reported-correction",
+      "expected_native_event": {
+        "start_seconds": 23.777233560090703,
+        "end_seconds": 26.09922902494331,
+        "label": "E"
+      },
+      "replacement_label": "A",
+      "application": "Provisional display overlay for the existing native event only; raw chart and audio unchanged."
+    },
+    {
+      "id": "visible-bar-lengths-20261017",
+      "quote": "It would also be better if the scrolling chords should the bars so you can see if a chord is half or a full bar or more",
+      "status": "usability-request",
+      "application": "Visible estimated duration labels and per-hold bar-length divisions; not numbered song measures."
+    },
+    {
+      "id": "dylan-am7-question-20261017",
+      "recording": {
+        "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+        "title": "Bob Dylan - Knockin' On Heaven's Door",
+        "duration_seconds": 149.89496598639457,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f"
+      },
+      "quote": "im not sure in knocking on heavens doors its Am7 when all the other chrods are Am",
+      "reported_seconds": null,
+      "status": "uncertain-quality-question",
+      "native_candidate_event": {
+        "start_seconds": 45.97551020408163,
+        "end_seconds": 49.13342403628118,
+        "label": "Am7"
+      },
+      "application": "No label correction asserted. Core display maps Am7 to Am while retaining the original full quality."
+    },
+    {
+      "id": "guitar-first-standard-tuning-20261017",
+      "quote": "love me do, might be a bit too much harmonica. easier i guess if we stick with guitar mostly songs in standard tuning",
+      "status": "repertoire-preference",
+      "application": "Remove Love Me Do from recommended steps, retain all ten songs and existing storage. Prefer guitar accompaniment in E-standard teaching arrangements, with capo and retuned riff setups explicit."
+    }
+  ],
+  "limits": [
+    "Listener reactions are not independently timed reference annotations.",
+    "No full recording, arrangement or rhythm is accepted by these reports.",
+    "No synthetic browser feedback was inserted; these are the actual chat reports."
+  ]
+}

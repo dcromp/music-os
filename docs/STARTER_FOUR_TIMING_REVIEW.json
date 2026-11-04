@@ -1,0 +1,608 @@
+{
+  "schema_version": "starter-four-timing-review-summary-1.0",
+  "checked_at_utc": "2026-10-16T09:58:46.254516+00:00",
+  "status": "native timing and contrast review candidates; no accepted arrangements",
+  "gold": false,
+  "timing_report": {
+    "path": "experiments/generated/catalogue-starter-timing-v2-20261016/report.json",
+    "sha256": "9cbf0d2e388b340fee5835c7a0e0084780a9ee01c43d9c4c60ff33cd3c89c6a6"
+  },
+  "controls_report": {
+    "path": "experiments/generated/catalogue-timing-controls-v3-20261016/report.json",
+    "sha256": "26e17d8c4f6af9b225f42b80d9745fff96886fac84163544ec70987ffdbf6d0d"
+  },
+  "timing_spec": {
+    "path": "experiments/fixtures/catalogue-starter-timing-v1.json",
+    "sha256": "1dcc8ed64d940e3f9d4f84b2f7103faebf99cd888a5929ddff37c66fd6617eef"
+  },
+  "timing_method": {
+    "path": "experiments/analysis/catalogue_timing_review.py",
+    "sha256": "efc11e31ec6a1b26b171f41c517a585bc2055179d2b25067653eac531564ba9d"
+  },
+  "controls_method": {
+    "path": "experiments/analysis/catalogue_timing_controls.py",
+    "sha256": "82150f191b6166e77a14b0c30e3e6f254f784e5c7c0d63a780f03cfa2d7a0019"
+  },
+  "method_file_sha256": {
+    "experiments/analysis/catalogue_pitch_check.py": "8873ae929e8b8de360cf5bbb4b38d1c705c6e12fd165d216581a9ea0c5783681",
+    "experiments/analysis/core_chord_screen.py": "b5ffb671c437d28da7bbd4cec305e989d5b323ad5615931d477641ac5b2c2577",
+    "experiments/analysis/rich_quality_suite.py": "09d001c9144304373f898a6df4336bcfcd980b32ecfb192da621c1d3c3ba7c12",
+    "experiments/analysis/candidates/nnls_chroma_adapter.py": "6e0970496adb5d20c42dc3400d9a87db3d7b991463740d39813c5e621cd8a7a5",
+    "experiments/analysis/chart_aligner.py": "e21dc021cc8c508fea583ca4e11d293e6cfaf443535c4c370532cd9ff6a8a3e9",
+    "experiments/analysis/curation.py": "d25c461ccb76a62d245d78e7cfe088801013a8d77c562ebc18c8443a870bfb8b",
+    "experiments/analysis/review_pack.py": "964ba60dd94d876578600dde078d3e3ea6a8089c17efdbae3262063fe77ee2e7",
+    "experiments/analysis/automatic_drafts.py": "529e221ab927ad6c684b6154f2d57fac36335a870692b5ae0cff6ddd4ad5e616",
+    "experiments/analysis/lab.py": "4e48a730dae86e99972d28f53714dc6a2d56badb1c38df99f8171ba711c02949"
+  },
+  "timing_runtime_seconds": 0.278075166977942,
+  "controls_runtime_seconds": 0.10534512437880039,
+  "native_review_policy": {
+    "pair_tolerance_seconds": 0.5,
+    "review_difference_seconds": 0.15,
+    "replay_padding_seconds": 1.5,
+    "max_pair_cells": 1000000,
+    "max_priority_windows": 12,
+    "seam_annotation_radius_seconds": 0.5,
+    "core_merge": "contiguous equivalent core only; no N/X/gap bridging",
+    "matching": "monotone maximum count of compatible directed transitions, then minimum total absolute time difference",
+    "uses_pulses": false,
+    "refines_native_times": false,
+    "accepts_arrangements": false
+  },
+  "synthetic_control_policy": {
+    "reference_tolerance_seconds": 0.15,
+    "residual_association_tolerance_seconds": 0.5,
+    "expected_cases": 64,
+    "review_selection": "unchanged boundary_review all windows and its first 12 priorities",
+    "typed_matching": "directed core transitions; monotone maximum count, then minimum total absolute error",
+    "untyped_matching": "time-only ordered maximum count, then minimum total absolute error",
+    "error_partition": "match at 150ms first; associate remaining compatible directed transitions within 500ms; remaining native points are extras and remaining reference transitions are operational misses",
+    "coverage": "closed replay-window containment of point timestamps; half-open audio intervals for union duration",
+    "false_positive_flags": "directly flagged native points that match a reference directed transition within 150ms; separate from correct points incidentally inside replay windows",
+    "shared_error_shift_seconds": 0.3,
+    "retunes_policy": false,
+    "runs_extraction_or_inference": false,
+    "selected_pipeline_score": false
+  },
+  "synthetic_aggregate": {
+    "case_count": 64,
+    "audio_seconds": 450.0,
+    "reference_metrics": {
+      "primary": {
+        "typed_all": {
+          "reference_transitions": 264,
+          "predicted_transitions": 250,
+          "matched_transitions": 198,
+          "extra_native_points": 52,
+          "missed_reference_transitions": 66,
+          "matched_absolute_error_sum_seconds": 10.769977324263033,
+          "precision": 0.792,
+          "recall": 0.75,
+          "f1": 0.7704280155642024,
+          "matched_mean_absolute_error_seconds": 0.05439382487001532
+        },
+        "untyped_all": {
+          "reference_transitions": 264,
+          "predicted_transitions": 250,
+          "matched_transitions": 211,
+          "extra_native_points": 39,
+          "missed_reference_transitions": 53,
+          "matched_absolute_error_sum_seconds": 11.588798185941037,
+          "precision": 0.844,
+          "recall": 0.7992424242424242,
+          "f1": 0.8210116731517509,
+          "matched_mean_absolute_error_seconds": 0.054923214151379324
+        },
+        "typed_harmonic": {
+          "reference_transitions": 136,
+          "predicted_transitions": 132,
+          "matched_transitions": 119,
+          "extra_native_points": 13,
+          "missed_reference_transitions": 17,
+          "matched_absolute_error_sum_seconds": 6.48603174603175,
+          "precision": 0.9015151515151515,
+          "recall": 0.875,
+          "f1": 0.8880597014925373,
+          "matched_mean_absolute_error_seconds": 0.05450446845404832
+        },
+        "untyped_harmonic": {
+          "reference_transitions": 136,
+          "predicted_transitions": 132,
+          "matched_transitions": 126,
+          "extra_native_points": 6,
+          "missed_reference_transitions": 10,
+          "matched_absolute_error_sum_seconds": 6.797097505668939,
+          "precision": 0.9545454545454546,
+          "recall": 0.9264705882352942,
+          "f1": 0.9402985074626866,
+          "matched_mean_absolute_error_seconds": 0.05394521829895983
+        }
+      },
+      "secondary": {
+        "typed_all": {
+          "reference_transitions": 264,
+          "predicted_transitions": 151,
+          "matched_transitions": 121,
+          "extra_native_points": 30,
+          "missed_reference_transitions": 143,
+          "matched_absolute_error_sum_seconds": 7.733650793650796,
+          "precision": 0.8013245033112583,
+          "recall": 0.4583333333333333,
+          "f1": 0.5831325301204819,
+          "matched_mean_absolute_error_seconds": 0.06391446936901483
+        },
+        "untyped_all": {
+          "reference_transitions": 264,
+          "predicted_transitions": 151,
+          "matched_transitions": 145,
+          "extra_native_points": 6,
+          "missed_reference_transitions": 119,
+          "matched_absolute_error_sum_seconds": 9.683582766439914,
+          "precision": 0.9602649006622517,
+          "recall": 0.5492424242424242,
+          "f1": 0.6987951807228916,
+          "matched_mean_absolute_error_seconds": 0.06678332942372354
+        },
+        "typed_harmonic": {
+          "reference_transitions": 136,
+          "predicted_transitions": 112,
+          "matched_transitions": 85,
+          "extra_native_points": 27,
+          "missed_reference_transitions": 51,
+          "matched_absolute_error_sum_seconds": 5.736825396825401,
+          "precision": 0.7589285714285714,
+          "recall": 0.625,
+          "f1": 0.6854838709677419,
+          "matched_mean_absolute_error_seconds": 0.06749206349206353
+        },
+        "untyped_harmonic": {
+          "reference_transitions": 136,
+          "predicted_transitions": 112,
+          "matched_transitions": 108,
+          "extra_native_points": 4,
+          "missed_reference_transitions": 28,
+          "matched_absolute_error_sum_seconds": 7.595464852607716,
+          "precision": 0.9642857142857143,
+          "recall": 0.7941176470588235,
+          "f1": 0.8709677419354839,
+          "matched_mean_absolute_error_seconds": 0.07032837826488626
+        }
+      }
+    },
+    "window_assessment": {
+      "all": {
+        "window_count": 161,
+        "sum_window_seconds": 406.62843537414966,
+        "union_window_seconds": 238.60430839002268,
+        "audio_seconds": 450.0,
+        "fraction_of_audio": 0.5302317964222726,
+        "primary_errors_or_extras": {
+          "denominator": 52,
+          "covered": 49,
+          "fraction": 0.9423076923076923
+        },
+        "primary_timestamp_errors": {
+          "denominator": 26,
+          "covered": 26,
+          "fraction": 1.0
+        },
+        "primary_extra_native_points": {
+          "denominator": 26,
+          "covered": 23,
+          "fraction": 0.8846153846153846
+        },
+        "primary_operational_missed_reference_transitions": {
+          "denominator": 40,
+          "covered": 16,
+          "fraction": 0.4
+        },
+        "primary_all_strict_missed_reference_transitions": {
+          "denominator": 66,
+          "covered": 41,
+          "fraction": 0.6212121212121212
+        },
+        "direct_flags": {
+          "primary": {
+            "direct_flagged_native_points": 134,
+            "reference_correct_flagged_native_points": 87,
+            "erroneous_or_extra_flagged_native_points": 47,
+            "reference_correct_native_points_inside_windows": 97,
+            "reference_correct_flag_fraction": 0.6492537313432836
+          },
+          "secondary": {
+            "direct_flagged_native_points": 35,
+            "reference_correct_flagged_native_points": 11,
+            "erroneous_or_extra_flagged_native_points": 24,
+            "reference_correct_native_points_inside_windows": 21,
+            "reference_correct_flag_fraction": 0.3142857142857143
+          }
+        }
+      },
+      "selected12": {
+        "window_count": 155,
+        "sum_window_seconds": 391.52022675736964,
+        "union_window_seconds": 237.93405895691612,
+        "audio_seconds": 450.0,
+        "fraction_of_audio": 0.5287423532375913,
+        "primary_errors_or_extras": {
+          "denominator": 52,
+          "covered": 49,
+          "fraction": 0.9423076923076923
+        },
+        "primary_timestamp_errors": {
+          "denominator": 26,
+          "covered": 26,
+          "fraction": 1.0
+        },
+        "primary_extra_native_points": {
+          "denominator": 26,
+          "covered": 23,
+          "fraction": 0.8846153846153846
+        },
+        "primary_operational_missed_reference_transitions": {
+          "denominator": 40,
+          "covered": 16,
+          "fraction": 0.4
+        },
+        "primary_all_strict_missed_reference_transitions": {
+          "denominator": 66,
+          "covered": 41,
+          "fraction": 0.6212121212121212
+        },
+        "direct_flags": {
+          "primary": {
+            "direct_flagged_native_points": 129,
+            "reference_correct_flagged_native_points": 82,
+            "erroneous_or_extra_flagged_native_points": 47,
+            "reference_correct_native_points_inside_windows": 96,
+            "reference_correct_flag_fraction": 0.6356589147286822
+          },
+          "secondary": {
+            "direct_flagged_native_points": 34,
+            "reference_correct_flagged_native_points": 11,
+            "erroneous_or_extra_flagged_native_points": 23,
+            "reference_correct_native_points_inside_windows": 21,
+            "reference_correct_flag_fraction": 0.3235294117647059
+          }
+        }
+      }
+    },
+    "timeline_status_seconds": {
+      "reference": {
+        "chord": 386.0,
+        "no_chord": 64.0,
+        "unknown": 0.0,
+        "unsupported": 0.0,
+        "uncovered": 0.0
+      },
+      "primary": {
+        "chord": 387.18403628117915,
+        "no_chord": 62.81596371882087,
+        "unknown": 0.0,
+        "unsupported": 0.0,
+        "uncovered": 8.881784197001252e-16
+      },
+      "secondary": {
+        "chord": 404.30965986394557,
+        "no_chord": 45.690340136054424,
+        "unknown": 0.0,
+        "unsupported": 0.0,
+        "uncovered": 1.7763568394002505e-15
+      }
+    }
+  },
+  "synthetic_symbolic_controls": {
+    "path": "experiments/generated/catalogue-timing-controls-v3-20261016/symbolic-controls.json",
+    "sha256": "cbe9581ecec969e78f7d4d98f520c461398367dae49fdf375b6216b62c0df2d8",
+    "assertions": {
+      "shared_shift_models_pair_every_transition": true,
+      "shared_shift_has_zero_pair_difference": true,
+      "shared_shift_has_no_priority_windows": true,
+      "shared_shift_fails_all_150ms_reference_matches": true,
+      "wrong_direction_is_not_a_typed_pair": true,
+      "wrong_direction_still_matches_by_time": true,
+      "silence_unknown_and_gap_split_core_runs": true,
+      "silence_unknown_transitions_remain_nonharmonic": true
+    },
+    "all_expected_behaviors_passed": true
+  },
+  "synthetic_provenance": {
+    "classification": "retrospective cached synthetic diagnostics; not a fresh selected-pipeline score",
+    "selected_pipeline_score": false,
+    "groups": {
+      "btc": [
+        {
+          "algorithm": "BTC-ISMIR19",
+          "version": "adapter-0.1.0/upstream-2682317be668",
+          "parameters": {
+            "device": "cpu",
+            "threads": 4,
+            "hop_samples": 2048,
+            "chunk_seconds": 10.0,
+            "smoothing": "none",
+            "timing": "exact CQT hop plus chunk origin; clipped to input duration",
+            "upstream_revision": "2682317be668032e6e4b269ded36adaa2ad57df0",
+            "checkpoint_sha256": "71c2c5db17e8c43b8a9a9da5db36ef2d667158c07a214eba16344c154c00bf54",
+            "torch_version": "2.6.0",
+            "librosa_version": "0.10.2.post1",
+            "numpy_version": "1.26.4"
+          },
+          "selected_declared_execution_settings_match": true,
+          "descriptive_fields": {
+            "timing": {
+              "selected": "Native exact CQT hop plus chunk origin",
+              "cached": "exact CQT hop plus chunk origin; clipped to input duration"
+            },
+            "vocabulary": {
+              "selected": "24 major/minor plus N",
+              "cached": "24 major/minor labels plus N"
+            }
+          },
+          "historical_execution_module_hashes_present": false,
+          "recording_provenance": "User-supplied local audio; permissions recorded separately",
+          "cases": 64
+        }
+      ],
+      "crema": [
+        {
+          "algorithm": "crema-pretrained",
+          "version": "0.2.0/a4c7d57.0/adapter-0.1.0",
+          "parameters": {
+            "model_version": "a4c7d57.0",
+            "device": "cpu",
+            "intraop_threads": "1",
+            "inter_op_threads": "1",
+            "postprocessing": "native CREMA inversion and Viterbi decoding; label normalisation only"
+          },
+          "selected_declared_execution_settings_match": true,
+          "descriptive_fields": {
+            "postprocessing": {
+              "selected": "Native inversion and Viterbi decoding; label normalisation only",
+              "cached": "native CREMA inversion and Viterbi decoding; label normalisation only"
+            }
+          },
+          "historical_execution_module_hashes_present": false,
+          "recording_provenance": null,
+          "cases": 64
+        }
+      ]
+    },
+    "limitations": [
+      "Cached outputs were produced by earlier executions, not rerun through the selected catalogue pipeline.",
+      "Matching declared checkpoint/settings does not establish identical historical module bytes or a fresh validation split.",
+      "Synthetic audio is procedural; inherited native recording provenance strings are not proof of real music or human annotations."
+    ]
+  },
+  "controls_source_snapshot": {
+    "path": "experiments/generated/catalogue-timing-controls-v3-20261016/source-snapshot.json",
+    "sha256": "b0b7efa2d9beb7ab3627e49c9b6624c7fcb199131a1d6dcc8f38571d0bcde570"
+  },
+  "private_drafts": [
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/private-drafts/troggs-wild-thing-youtube-20261011.json",
+      "sha256": "cab2f7f43573bfb7697cdb5880417124646ebe1f38822d2df0328586e8795e9a",
+      "revision": 1,
+      "effort": {
+        "human_seconds": null,
+        "agent_seconds": 0.30719999980926516,
+        "qa_seconds": null
+      }
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/private-drafts/beatles-love-me-do-youtube-20261011.json",
+      "sha256": "483595986c7344b6062fc28104aeff38ee22d99cdddc75ea1d7a41774514744f",
+      "revision": 1,
+      "effort": {
+        "human_seconds": null,
+        "agent_seconds": 0.304,
+        "qa_seconds": null
+      }
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/private-drafts/bob-dylan-knockin-heavens-door-youtube-20261011.json",
+      "sha256": "4c674d44319e1d61f5b016a6d5b4d31895a3fd996213c0f666972813a7f73e35",
+      "revision": 2,
+      "effort": {
+        "human_seconds": null,
+        "agent_seconds": 1.6513999996185302,
+        "qa_seconds": null
+      }
+    },
+    {
+      "path": "experiments/generated/catalogue-curation-20261014/private-drafts/beatles-twist-and-shout-youtube-20261011.json",
+      "sha256": "f5569c5233b1a731c202b672209872021a038a154a91c075cb55687e1138cb8b",
+      "revision": 2,
+      "effort": {
+        "human_seconds": null,
+        "agent_seconds": 10.626699999809265,
+        "qa_seconds": null
+      }
+    }
+  ],
+  "editorial_proposals": {
+    "path": "catalogue/starter-four-curation-proposals-v2.json",
+    "sha256": "b4f1618333abd4c1a7075fd2ec926ecaf8f18811f93129a3f391985a55304867"
+  },
+  "provisional_label_edits": 2,
+  "provisional_common_hold_windows": 2,
+  "accepted_arrangements": 0,
+  "physical_timing_accuracy": null,
+  "human_correction_seconds": null,
+  "verification": {
+    "python_discovered": 406,
+    "python_passed": 386,
+    "python_optional_skipped": 20,
+    "new_timing_tests_passed": 18,
+    "javascript_passed_earlier_same_day": 124,
+    "stage1_frozen_files_verified": 39,
+    "reviewer_public_assets_verified": 45,
+    "learner_public_assets_verified": 48,
+    "private_routes_verified_404": [
+      "/private-drafts/",
+      "/private-drafts/song.json",
+      "/build-spec.json",
+      "/plan.md",
+      "/cases/../manifest.json"
+    ],
+    "learner_manifest": {
+      "path": "experiments/generated/automatic-first-ten-v1/manifest.json",
+      "sha256": "556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671"
+    },
+    "reviewer_manifest": {
+      "path": "experiments/generated/catalogue-curation-20261014/manifest.json",
+      "sha256": "64d67f29f6ff1ce91aeae6309e7102c2c2629e5c0fdcd061035de2a2e22f3fb5"
+    },
+    "raw_charts_modified": false,
+    "source_audio_modified": false,
+    "learner_drafts_modified": false,
+    "fresh_model_inference": false
+  },
+  "proof_images": [
+    {
+      "path": "experiments/generated/curation-proof-20261016/twist-review-windows.jpg",
+      "sha256": "e2ca822f21eec3dc09815fd943c05b4969a27f3ed792ac98f5f123bb4214c2f8"
+    },
+    {
+      "path": "experiments/generated/curation-proof-20261016/twist-review-windows-detail.jpg",
+      "sha256": "67394a90ff6538d01b80ac4f0034d0103ae93b636fa41991b11e052239222d9e"
+    }
+  ],
+  "cases": [
+    {
+      "id": "troggs-wild-thing-youtube-20261011",
+      "name": "The Troggs - Wild Thing",
+      "recording": {
+        "id": "troggs-wild-thing-youtube-20261011",
+        "title": "The Troggs - Wild Thing",
+        "duration_seconds": 155.3516553287982,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "native_artifacts": {
+        "primary_sha256": "aecee2605813eb56acd62971619080f8af1906b6f1319a2c737386d7f449a7c4",
+        "crema_sha256": "13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81"
+      },
+      "boundaries": {
+        "primary_boundaries": 103,
+        "secondary_boundaries": 79,
+        "paired_boundaries": 71,
+        "median_pair_difference_seconds": 0.06167800453514616,
+        "maximum_pair_difference_seconds": 0.27954648526076653
+      },
+      "all_review_windows": 57,
+      "selected_review_windows": 12,
+      "fixed_coverage_samples": 4,
+      "candidate_holds_across_models": 3,
+      "response_runs_by_model": {},
+      "accepted_arrangement": false
+    },
+    {
+      "id": "beatles-love-me-do-youtube-20261011",
+      "name": "The Beatles - Love Me Do",
+      "recording": {
+        "id": "beatles-love-me-do-youtube-20261011",
+        "title": "The Beatles - Love Me Do",
+        "duration_seconds": 141.69832199546485,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "native_artifacts": {
+        "primary_sha256": "833d826283e403fc5edccd5720b6afe784a94bd6f900cc5fac70a3f877405d6b",
+        "crema_sha256": "a12394c6654f761febee240b95d60c45b7c55e33a6fb287225d181976e6531c4"
+      },
+      "boundaries": {
+        "primary_boundaries": 73,
+        "secondary_boundaries": 55,
+        "paired_boundaries": 51,
+        "median_pair_difference_seconds": 0.061315192743762736,
+        "maximum_pair_difference_seconds": 0.4341043083900189
+      },
+      "all_review_windows": 39,
+      "selected_review_windows": 12,
+      "fixed_coverage_samples": 4,
+      "candidate_holds_across_models": 15,
+      "response_runs_by_model": {},
+      "accepted_arrangement": false
+    },
+    {
+      "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+      "name": "Bob Dylan - Knockin' On Heaven's Door",
+      "recording": {
+        "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+        "title": "Bob Dylan - Knockin' On Heaven's Door",
+        "duration_seconds": 149.89496598639457,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "native_artifacts": {
+        "primary_sha256": "018dc316af89e4678d9a9718b26553d3f048e8f80deaedf8e5ea31c14303b78e",
+        "crema_sha256": "022405eadb0d332a34ca66b74989e72cc5e597e57417c1a289178e0a7a084082"
+      },
+      "boundaries": {
+        "primary_boundaries": 73,
+        "secondary_boundaries": 64,
+        "paired_boundaries": 59,
+        "median_pair_difference_seconds": 0.061315192743762736,
+        "maximum_pair_difference_seconds": 0.24798185941043016
+      },
+      "all_review_windows": 21,
+      "selected_review_windows": 12,
+      "fixed_coverage_samples": 4,
+      "candidate_holds_across_models": 42,
+      "response_runs_by_model": {
+        "btc": 23,
+        "crema": 21
+      },
+      "accepted_arrangement": false
+    },
+    {
+      "id": "beatles-twist-and-shout-youtube-20261011",
+      "name": "The Beatles - Twist And Shout",
+      "recording": {
+        "id": "beatles-twist-and-shout-youtube-20261011",
+        "title": "The Beatles - Twist And Shout",
+        "duration_seconds": 155.23555555555555,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c",
+        "provenance": "User-supplied local audio; permissions recorded separately"
+      },
+      "native_artifacts": {
+        "primary_sha256": "e7ce805072c42e3ef39c15eadf8b3522534cc1274c5380b0553e52a1807b935c",
+        "crema_sha256": "09f64db9a6563e2256c528576bd9776b13c84128ce3b982810b8dfbe6145bb59"
+      },
+      "boundaries": {
+        "primary_boundaries": 112,
+        "secondary_boundaries": 101,
+        "paired_boundaries": 93,
+        "median_pair_difference_seconds": 0.03138321995464821,
+        "maximum_pair_difference_seconds": 0.4651247165532908
+      },
+      "all_review_windows": 35,
+      "selected_review_windows": 12,
+      "fixed_coverage_samples": 4,
+      "candidate_holds_across_models": 4,
+      "response_runs_by_model": {},
+      "accepted_arrangement": false
+    }
+  ],
+  "limits": [
+    "Agreement can share systematic timing/label errors; it is not a reference.",
+    "NNLS uses ~743ms windows/~93ms hops, unsuitable for verifying precise physical change times.",
+    "Repeated chord attacks do not make harmonic boundaries; holds do not determine strumming or bar counts.",
+    "Source-guided contrast targets do not identify complete formal sections.",
+    "No pulses, forced chord order, timestamp refinement or automatic lesson promotion.",
+    "Procedural reference events are known synthetic boundaries, not real-guitar or commercial-recording truth.",
+    "Typed scores include direction/core quality; untyped time proximity can credit a wrong label or silence edge.",
+    "Primary operational misses may include mislabelled transitions; no physical cause is inferred.",
+    "Replay windows are generated without references; coverage is measured afterward, with time budgets and direct false-positive flags kept separate.",
+    "The existing selected12 ordering is evaluated unchanged; no reference-derived reranking or retuning.",
+    "Cached earlier outputs and previously exposed procedural splits are retrospective diagnostics, not fresh selected-pipeline validation.",
+    "87/134 directly flagged primary synthetic points were reference-correct within 150ms; this is a flagged-point fraction, not a population false-positive rate.",
+    "64 cached synthetic cases are retrospective, not a fresh selected-workflow or popular-recording accuracy estimate.",
+    "Source-guided profiles were prepared after prior evidence exposure; no threshold fitting, holdout claim or acceptance follows.",
+    "Private draft sessions record UI entry only; no human minutes-per-audio-minute estimate exists."
+  ]
+}

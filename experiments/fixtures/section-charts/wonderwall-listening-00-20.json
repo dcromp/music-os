@@ -1,0 +1,54 @@
+{
+  "schema_version": "untimed-chart-1.1",
+  "recording": {
+    "id": "wonderwall-listening-00-20",
+    "title": "Wonderwall / bounded listening-window hypothesis",
+    "audio_sha256": "2469ecd73dc56013c4d99c5682e7586c29ddf4593c2aea634e770211c11e02d6"
+  },
+  "sections": [
+    {
+      "id": "intro-loop",
+      "name": "Candidate intro loop",
+      "sequence": [
+        "F#m7",
+        "A",
+        "Esus4",
+        "B7sus4"
+      ]
+    }
+  ],
+  "order": [
+    {
+      "section_id": "intro-loop",
+      "repeat": 4
+    }
+  ],
+  "mode": "finite",
+  "start_policy": "first",
+  "end_policy": "any",
+  "metadata": {
+    "key": "F# minor",
+    "capo": 2,
+    "played_shapes": [
+      "Em7",
+      "G",
+      "Dsus4",
+      "A7sus4"
+    ],
+    "label_convention": "sounding pitches; capo already applied",
+    "video_id": "bx1Bh8ZvH84",
+    "scope": "First20seconds listening window, not verified section bounds",
+    "source_references": [
+      {
+        "author": "Carl Brown / GuitarLessons365",
+        "url": "https://guitarlessons365.com/wonderwall-guitar-lesson-oasis/"
+      },
+      {
+        "author": "Greg Shute",
+        "url": "https://www.gregshuteguitar.co.uk/_files/ugd/4079b4_0a1b39a89c1a4776a5c8f553f259cb08.pdf"
+      }
+    ],
+    "review_status": "Unaccepted development candidate; human listening and independent timing marks required",
+    "repeat_count_status": "Declared bounded prefix hypothesis, not reviewed recording structure"
+  }
+}

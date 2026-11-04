@@ -1,0 +1,295 @@
+{
+  "schema": "strumalong-additions-1",
+  "note": "Strummed rock and pop additions towards ~100 songs (28 Oct 2026), from docs/STRUMALONG_SONG_RESEARCH.md (v4 batch). Each entry carries genre (rock or pop). Capo, setup and skill notes are authored suggestions from chord sheets; practice patterns come from the level defaults. Not checked against the recordings beyond the automatic chart sanity check. Fallbacks only: not imported, not read by the exporter.",
+  "songs": [
+    {
+      "recording_id": "gin-blossoms-hey-jealousy-youtube-20261028",
+      "title": "Hey Jealousy",
+      "artist": "Gin Blossoms",
+      "genre": "rock",
+      "order": 67,
+      "expected_level": 2,
+      "capo": 2,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 2 suggested: play C, D, Em and G shapes; they sound as D, E, F#m and A.",
+      "skill_focus": "A jangly electric strum on capo-2 shapes.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar Hey Jealousy chords",
+          "url": "https://tabs.ultimate-guitar.com/g/gin_blossoms/hey_jealousy_crd.htm"
+        }
+      ],
+      "expected_shapes": [
+        "C",
+        "D",
+        "Em",
+        "G"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "one-direction-story-of-my-life-youtube-20261028",
+      "title": "Story of My Life",
+      "artist": "One Direction",
+      "genre": "pop",
+      "order": 68,
+      "expected_level": 4,
+      "capo": 3,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 3 suggested: play Am, F, C and G shapes; they sound as Cm, Ab, Eb and Bb.",
+      "skill_focus": "A four-chord loop with F, picked in the verses and strummed in the choruses.",
+      "sources": [
+        {
+          "title": "guitartabs.cc Story of My Life",
+          "url": "https://www.guitartabs.cc/tabs/o/one_direction/story_of_my_life_tab_ver_3.html"
+        }
+      ],
+      "expected_shapes": [
+        "Am",
+        "F",
+        "C",
+        "G"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "kooks-naive-youtube-20261028",
+      "title": "Naive",
+      "artist": "The Kooks",
+      "genre": "rock",
+      "order": 69,
+      "expected_level": 3,
+      "capo": 4,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 4 suggested: play Em, C, G, D and D/F# shapes; they sound as G#m, E, B, F# and F#/A#.",
+      "skill_focus": "Staccato muted chords in the verse and a strummed chorus.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar Naive chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/the-kooks/naive-chords-376402"
+        },
+        {
+          "title": "SongBPM: Naive",
+          "url": "https://songbpm.com/@the-kooks/naive"
+        }
+      ],
+      "expected_shapes": [
+        "Em",
+        "C",
+        "G",
+        "D",
+        "D/F#"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "catfish-and-the-bottlemen-kathleen-youtube-20261028",
+      "title": "Kathleen",
+      "artist": "Catfish and the Bottlemen",
+      "genre": "rock",
+      "order": 70,
+      "expected_level": 3,
+      "capo": 7,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 7 suggested: play G, Em, Am, D and C shapes; they sound as D, Bm, Em, A and G.",
+      "skill_focus": "A fast electric strum on capo-7 shapes.",
+      "sources": [
+        {
+          "title": "Kathleen chords (zachmanson mirror)",
+          "url": "https://pg.zachmanson.com/tab/catfish-and-the-bottlemen/kathleen-chords-3168098"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "Em",
+        "Am",
+        "D",
+        "C"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "everly-brothers-wake-up-little-susie-youtube-20261028",
+      "title": "Wake Up Little Susie",
+      "artist": "The Everly Brothers",
+      "genre": "rock",
+      "order": 71,
+      "expected_level": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open D, F, G and A shapes.",
+      "skill_focus": "A chordal D-F-G-F strum figure and a steady acoustic strum. Watch the stop bars.",
+      "sources": [
+        {
+          "title": "e-chords: Wake Up Little Susie",
+          "url": "https://m.e-chords.com/chords/the-everly-brothers/wake-up-little-suzie"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "F",
+        "G",
+        "A"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "crowded-house-dont-dream-its-over-youtube-20261028",
+      "title": "Don't Dream It's Over",
+      "artist": "Crowded House",
+      "genre": "rock",
+      "order": 72,
+      "expected_level": 4,
+      "capo": 1,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 1 suggested: play D, Bm, G, A and Em shapes; they sound as Eb, Cm, Ab, Bb and Fm.",
+      "skill_focus": "A strummed acoustic part under organ.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar Don't Dream It's Over chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/crowded-house/dont-dream-its-over-chords-92855"
+        }
+      ],
+      "expected_shapes": [
+        "D",
+        "Bm",
+        "G",
+        "A",
+        "Em"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "jack-johnson-banana-pancakes-youtube-20261028",
+      "title": "Banana Pancakes",
+      "artist": "Jack Johnson",
+      "genre": "pop",
+      "order": 73,
+      "expected_level": 4,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open G, Am, D7, C7, Bm and Em shapes.",
+      "skill_focus": "A syncopated strum with seventh chords.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar Banana Pancakes chords",
+          "url": "https://tabs.ultimate-guitar.com/tab/jack-johnson/banana-pancakes-chords-970463"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "Am",
+        "D7",
+        "C7",
+        "Bm",
+        "Em"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "primal-scream-movin-on-up-youtube-20261028",
+      "title": "Movin' on Up",
+      "artist": "Primal Scream",
+      "genre": "rock",
+      "order": 74,
+      "expected_level": 4,
+      "capo": 5,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). Capo 5 suggested: play G, D, C and Am shapes; they sound as C, G, F and Dm.",
+      "skill_focus": "A Stones-style acoustic strum with gospel piano and choir.",
+      "sources": [
+        {
+          "title": "Ultimate Guitar Movin' on Up chords",
+          "url": "https://pt.ultimate-guitar.com/tab/primal-scream/movin-on-up-chords-80012"
+        },
+        {
+          "title": "SongBPM: Movin' on Up",
+          "url": "https://songbpm.com/@primal-scream/movin-on-up"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "D",
+        "C",
+        "Am"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "ocean-colour-scene-day-we-caught-the-train-youtube-20261028",
+      "title": "The Day We Caught the Train",
+      "artist": "Ocean Colour Scene",
+      "genre": "rock",
+      "order": 75,
+      "expected_level": 5,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Standard tuning (EADGBE). No capo suggested: open Em, D, G, C, A and B shapes.",
+      "skill_focus": "A strummed Britpop part with many chord colours and lead lines.",
+      "sources": [
+        {
+          "title": "e-chords: The Day We Caught the Train",
+          "url": "https://e-chords.com/ukulele/ocean-colour-scene/the-day-we-caught-the-train"
+        },
+        {
+          "title": "SongBPM: The Day We Caught the Train",
+          "url": "https://songbpm.com/@ocean-colour-scene/the-day-we-caught-the-train"
+        }
+      ],
+      "expected_shapes": [
+        "Em",
+        "D",
+        "G",
+        "C",
+        "A",
+        "B"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    },
+    {
+      "recording_id": "green-day-when-i-come-around-youtube-20261028",
+      "title": "When I Come Around",
+      "artist": "Green Day",
+      "genre": "rock",
+      "order": 76,
+      "expected_level": 2,
+      "capo": 0,
+      "capo_source": "suggested",
+      "setup_note": "Tune down a half step (Eb Ab Db Gb Bb Eb) to match the record, no capo: play G, D, Em and C shapes. In standard tuning the record sounds as F#, C#, D#m and B (capo 6 gives C, G, Am, F shapes, L4).",
+      "skill_focus": "Palm-muted chord strumming on G, D, Em and C; the record is tuned down a half step.",
+      "sources": [
+        {
+          "title": "Andy Guitar: When I Come Around",
+          "url": "https://www.andyguitar.co.uk/lessons/green-day-when-i-come-around"
+        }
+      ],
+      "expected_shapes": [
+        "G",
+        "D",
+        "Em",
+        "C"
+      ],
+      "chart_check": {
+        "status": "pending"
+      }
+    }
+  ]
+}

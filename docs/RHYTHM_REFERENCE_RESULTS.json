@@ -1,0 +1,2208 @@
+{
+  "schema_version": "rhythm-reference-results-summary-1.0",
+  "evaluation_date": "2026-10-12",
+  "status": "Retrospective development diagnostic complete; fresh acquisition pending",
+  "scope": "Six saved exact GuitarSet audio/JAMS pairs, 182.362 seconds; nominal metronome/lead-sheet beat grid, not manually marked physical guitar attacks",
+  "scorer_sha256": "eb213daf06d4b18ccc8bbecb0c76628520b4db1aa90fae8ed550b9d2ea65a1bd",
+  "tracker_sha256": "b18efd3d3c6eaeec7bfb847ae30b4cc661850b209ddf4f6919200051d88e60de",
+  "references_sha256": "514c61922367f1e5a9359699a2f4beff18b89b4d72b7fcf60317bedf617d31ff",
+  "selection_sha256": "9bf9832981a66ef375968638c9afaf91a982ab5aa962318bc391e05cc7c2b785",
+  "source_pilot_manifest_sha256": "289e34c4c2f18684827e3c719340e3ad6849a197b2bf44ee335f2c27d5e6759d",
+  "references": [
+    {
+      "recording": {
+        "id": "guitarset-00-ss3-84-bb-comp",
+        "title": "00_SS3-84-Bb_comp / microphone comping",
+        "duration_seconds": 45.70761904761905,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "0d1e9f6f605a49782eeccbb4ad0021a72087d0f9a5f7cb45db867a862c5393cc"
+      },
+      "split": "development",
+      "beat_reference_semantics": "Nominal GuitarSet metronome/lead-sheet grid; retrospective prior six, not physical played attacks or fresh holdout",
+      "source_jams": "experiments/candidate-assets/guitarset/annotations/00_SS3-84-Bb_comp.jams",
+      "source_jams_sha256": "b410e8d7d6ed3040f3674b709c5144267f540a84fab47edc28365891832dcdb5"
+    },
+    {
+      "recording": {
+        "id": "guitarset-01-rock1-90-csharp-comp",
+        "title": "01_Rock1-90-C#_comp / microphone comping",
+        "duration_seconds": 32.0,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "a9449020afa7ce9f45d94acb413c5e857f370c069bc60821d8e8e137c249cb37"
+      },
+      "split": "development",
+      "beat_reference_semantics": "Nominal GuitarSet metronome/lead-sheet grid; retrospective prior six, not physical played attacks or fresh holdout",
+      "source_jams": "experiments/candidate-assets/guitarset/annotations/01_Rock1-90-C#_comp.jams",
+      "source_jams_sha256": "75a1055d5c9b9a1a59af0296660ce23b1556d72114bbb52717a9564a07a23c96"
+    },
+    {
+      "recording": {
+        "id": "guitarset-02-funk1-97-c-comp",
+        "title": "02_Funk1-97-C_comp / microphone comping",
+        "duration_seconds": 29.688390022675737,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "52f2e0b1042bc51e3ca3c28160f2d5f4184f6386521c2a191b16c116fdd9141e"
+      },
+      "split": "development",
+      "beat_reference_semantics": "Nominal GuitarSet metronome/lead-sheet grid; retrospective prior six, not physical played attacks or fresh holdout",
+      "source_jams": "experiments/candidate-assets/guitarset/annotations/02_Funk1-97-C_comp.jams",
+      "source_jams_sha256": "292c8330635f53e35587e796c76ea47358647474471dfaeb8869167ff34a2549"
+    },
+    {
+      "recording": {
+        "id": "guitarset-03-bn1-129-eb-comp",
+        "title": "03_BN1-129-Eb_comp / microphone comping",
+        "duration_seconds": 22.32439909297052,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "51f6bf50ddc33597163de3b4d4e39e9da9b4efb5dc2fce25224765e9a5b021ce"
+      },
+      "split": "development",
+      "beat_reference_semantics": "Nominal GuitarSet metronome/lead-sheet grid; retrospective prior six, not physical played attacks or fresh holdout",
+      "source_jams": "experiments/candidate-assets/guitarset/annotations/03_BN1-129-Eb_comp.jams",
+      "source_jams_sha256": "f41001c65b9b3b62187ed3aace924d01773ec41afe8aceab878af72e0009ece0"
+    },
+    {
+      "recording": {
+        "id": "guitarset-04-rock2-142-d-comp",
+        "title": "04_Rock2-142-D_comp / microphone comping",
+        "duration_seconds": 27.041632653061225,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "c7a08ba03e61f520d77107b66188849306f79f754b991c55ea9452a8f0c0039a"
+      },
+      "split": "development",
+      "beat_reference_semantics": "Nominal GuitarSet metronome/lead-sheet grid; retrospective prior six, not physical played attacks or fresh holdout",
+      "source_jams": "experiments/candidate-assets/guitarset/annotations/04_Rock2-142-D_comp.jams",
+      "source_jams_sha256": "aaab63931089e7910af048ab49e10f99c2302b83cdfc78d077e74d5c228625ce"
+    },
+    {
+      "recording": {
+        "id": "guitarset-05-jazz3-150-c-comp",
+        "title": "05_Jazz3-150-C_comp / microphone comping",
+        "duration_seconds": 25.6,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "dd4c1c04f42d9fdec17ef96c181a0129dd0af6d644397c535294ee1f77fae39b"
+      },
+      "split": "development",
+      "beat_reference_semantics": "Nominal GuitarSet metronome/lead-sheet grid; retrospective prior six, not physical played attacks or fresh holdout",
+      "source_jams": "experiments/candidate-assets/guitarset/annotations/05_Jazz3-150-C_comp.jams",
+      "source_jams_sha256": "8b914d6bd9b6400791307188689fec33c81ab77b628933d118ce7d899975fb08"
+    }
+  ],
+  "conditions": [
+    {
+      "id": "default-120",
+      "report_local_path": "experiments/generated/guitarset-rhythm-cached-v1/default-120-report.json",
+      "report_sha256": "9798832769320d53454481f013f0f22b37f8d248e2142fefa99683fc4e50ef16",
+      "predictions_local_path": "experiments/generated/guitarset-rhythm-cached-v1/default-120-predictions.json",
+      "predictions_sha256": "1a151fa8f263012905b97acc7cb5bbcc4151a614aeb45ad631e145e1efa9909c",
+      "config_sha256": "f715bccc6c77bcff96e9b3de6d3f5c5a7b4cb3e09ed2b8023f6c0ed5e86cf5ed",
+      "total_extraction_runtime_seconds": 3.532702835276723,
+      "method": {
+        "matching": "chronological maximum-cardinality one-to-one; no offset fit",
+        "whole_recording_tolerances_seconds": [
+          0.07,
+          0.15
+        ],
+        "standard_trim_seconds": 5.0,
+        "reference_times_used_to_modify_predictions": false,
+        "parameters_fitted_here": false,
+        "count_windows": "Reference-defined half/one/two-bar intervals; pulse ordinal interpolation without extrapolation",
+        "downbeats_evaluated": false,
+        "bar_starts_evaluated": false
+      },
+      "aggregate": {
+        "recordings": 6,
+        "duration_seconds": 182.36204081632653,
+        "whole_recording": {
+          "f1_70ms": {
+            "matched_pulses": 145,
+            "missed_reference_pulses": 191,
+            "extra_estimated_pulses": 155,
+            "micro_f_measure": 0.4559748427672956,
+            "macro_f_measure": 0.47370077620592377
+          },
+          "f1_150ms": {
+            "matched_pulses": 202,
+            "missed_reference_pulses": 134,
+            "extra_estimated_pulses": 98,
+            "micro_f_measure": 0.6352201257861635,
+            "macro_f_measure": 0.6337492517142483
+          }
+        },
+        "standard_after_5s_macro": {
+          "measured_recordings": 6,
+          "metrics": {
+            "f_measure_70ms": 0.4478116172017863,
+            "cemgil_sigma_40ms": 0.2900461854990592,
+            "cemgil_any_metrical_level": 0.3670511851308924,
+            "cmlc": 0.3982978751554603,
+            "cmlt": 0.4129177581963959,
+            "amlc": 0.5331358381184232,
+            "amlt": 0.5818992396778774
+          }
+        },
+        "count_windows": {
+          "requested_windows": 312,
+          "supported_windows": 290,
+          "unsupported_windows": 22,
+          "absolute_beat_count_error_mean": 0.3085844558940405,
+          "absolute_beat_count_error_p90": 0.8281629494944971,
+          "absolute_equivalent_bar_length_error_mean": 0.07714611397351012
+        }
+      },
+      "by_split": {
+        "development": {
+          "recordings": 6,
+          "duration_seconds": 182.36204081632653,
+          "whole_recording": {
+            "f1_70ms": {
+              "matched_pulses": 145,
+              "missed_reference_pulses": 191,
+              "extra_estimated_pulses": 155,
+              "micro_f_measure": 0.4559748427672956,
+              "macro_f_measure": 0.47370077620592377
+            },
+            "f1_150ms": {
+              "matched_pulses": 202,
+              "missed_reference_pulses": 134,
+              "extra_estimated_pulses": 98,
+              "micro_f_measure": 0.6352201257861635,
+              "macro_f_measure": 0.6337492517142483
+            }
+          },
+          "standard_after_5s_macro": {
+            "measured_recordings": 6,
+            "metrics": {
+              "f_measure_70ms": 0.4478116172017863,
+              "cemgil_sigma_40ms": 0.2900461854990592,
+              "cemgil_any_metrical_level": 0.3670511851308924,
+              "cmlc": 0.3982978751554603,
+              "cmlt": 0.4129177581963959,
+              "amlc": 0.5331358381184232,
+              "amlt": 0.5818992396778774
+            }
+          },
+          "count_windows": {
+            "requested_windows": 312,
+            "supported_windows": 290,
+            "unsupported_windows": 22,
+            "absolute_beat_count_error_mean": 0.3085844558940405,
+            "absolute_beat_count_error_p90": 0.8281629494944971,
+            "absolute_equivalent_bar_length_error_mean": 0.07714611397351012
+          }
+        },
+        "holdout": {
+          "recordings": 0,
+          "duration_seconds": 0,
+          "whole_recording": {
+            "f1_70ms": {
+              "matched_pulses": 0,
+              "missed_reference_pulses": 0,
+              "extra_estimated_pulses": 0,
+              "micro_f_measure": null,
+              "macro_f_measure": null
+            },
+            "f1_150ms": {
+              "matched_pulses": 0,
+              "missed_reference_pulses": 0,
+              "extra_estimated_pulses": 0,
+              "micro_f_measure": null,
+              "macro_f_measure": null
+            }
+          },
+          "standard_after_5s_macro": {
+            "measured_recordings": 0,
+            "metrics": null
+          },
+          "count_windows": {
+            "requested_windows": 0,
+            "supported_windows": 0,
+            "unsupported_windows": 0,
+            "absolute_beat_count_error_mean": null,
+            "absolute_beat_count_error_p90": null,
+            "absolute_equivalent_bar_length_error_mean": null
+          }
+        }
+      },
+      "cases": [
+        {
+          "recording": {
+            "id": "guitarset-00-ss3-84-bb-comp",
+            "title": "00_SS3-84-Bb_comp / microphone comping",
+            "duration_seconds": 45.70761904761905,
+            "sample_rate_hz": 22050,
+            "audio_sha256": "0d1e9f6f605a49782eeccbb4ad0021a72087d0f9a5f7cb45db867a862c5393cc"
+          },
+          "split": "development",
+          "beat_reference_semantics": "Nominal GuitarSet metronome/lead-sheet grid; retrospective prior six, not physical played attacks or fresh holdout",
+          "reference_pulses": 64,
+          "estimated_pulses": 62,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 45.0,
+            "first_estimated_pulse_seconds": 0.7198185941043084,
+            "last_estimated_pulse_seconds": 44.373333333333335,
+            "reference_pulses_inside_estimated_coverage": 61,
+            "reference_pulses_outside_estimated_coverage": 3
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 14,
+              "missed_reference_pulses": 50,
+              "extra_estimated_pulses": 48,
+              "precision": 0.22580645161290322,
+              "recall": 0.21875,
+              "f_measure": 0.2222222222222222,
+              "matched_error_median_seconds": 0.049795918367346204,
+              "matched_error_p90_seconds": 0.06264852607709832,
+              "matched_error_max_seconds": 0.0653061224489786
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 25,
+              "missed_reference_pulses": 39,
+              "extra_estimated_pulses": 37,
+              "precision": 0.4032258064516129,
+              "recall": 0.390625,
+              "f_measure": 0.3968253968253968,
+              "matched_error_median_seconds": 0.06294784580498991,
+              "matched_error_p90_seconds": 0.0915918367346933,
+              "matched_error_max_seconds": 0.14684807256235644
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.196145124716554,
+            "p90": 0.24019047619047598,
+            "max": 0.7198185941043084,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 57,
+            "estimated_pulses": 56,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.19469026548672563,
+              "cemgil_sigma_40ms": 0.10705401049900042,
+              "cemgil_any_metrical_level": 0.10705401049900042,
+              "cmlc": 0.21052631578947367,
+              "cmlt": 0.2982456140350877,
+              "amlc": 0.21052631578947367,
+              "amlt": 0.2982456140350877
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "prediction_analysis": {
+            "id": "librosa-pulse-grid-0.1.0",
+            "library": "librosa",
+            "library_version": "0.9.2",
+            "runtime_seconds": 3.1306325420737267,
+            "parameters": {
+              "sample_rate_hz": 22050,
+              "hop_samples": 512,
+              "start_bpm": 120,
+              "onset_aggregate": "mean",
+              "tightness": 100,
+              "trim": true,
+              "units": "time",
+              "source_separation": "none",
+              "tempo_min_bpm": null,
+              "tempo_max_bpm": null,
+              "tempo_selection": "native default pseudo-log-normal prior centered on start_bpm"
+            },
+            "config_status": "Nominal metronome grid; physical timing not verified",
+            "config": {
+              "start_bpm": 120,
+              "beats_per_bar": 4,
+              "meter_label": "4/4 source hypothesis",
+              "meter_status": "Nominal metronome grid; physical timing not verified",
+              "pulse_prior_status": "No reference tempo/time/positions supplied"
+            },
+            "score_is_calibrated_confidence": false,
+            "downbeats_inferred": false,
+            "chord_boundaries_snapped": false,
+            "limitations": [
+              "Declared priors/ranges select a metrical hypothesis; they do not verify pulse units or force chord timing.",
+              "Half/double tempo, subdivisions and compound-meter ambiguities remain possible.",
+              "Returned pulse phase does not establish a downbeat or absolute bar number.",
+              "Leading/trailing weak pulses are trimmed; unsupported spans should retain a seconds fallback."
+            ]
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 57,
+              "unsupported_windows": 3,
+              "absolute_beat_count_error_mean": 0.07692631158081538,
+              "absolute_beat_count_error_p90": 0.2437932545731697,
+              "absolute_equivalent_bar_length_error_mean": 0.019231577895203845
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 30,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.05624931124395158,
+                "absolute_beat_count_error_p90": 0.11417288306451367,
+                "absolute_equivalent_bar_length_error_mean": 0.014062327810987894
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.08438846206846799,
+                "absolute_beat_count_error_p90": 0.26916293508637634,
+                "absolute_equivalent_bar_length_error_mean": 0.021097115517116998
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.11660630414072135,
+                "absolute_beat_count_error_p90": 0.4146913454185175,
+                "absolute_equivalent_bar_length_error_mean": 0.029151576035180336
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-01-rock1-90-csharp-comp",
+            "title": "01_Rock1-90-C#_comp / microphone comping",
+            "duration_seconds": 32.0,
+            "sample_rate_hz": 22050,
+            "audio_sha256": "a9449020afa7ce9f45d94acb413c5e857f370c069bc60821d8e8e137c249cb37"
+          },
+          "split": "development",
+          "beat_reference_semantics": "Nominal GuitarSet metronome/lead-sheet grid; retrospective prior six, not physical played attacks or fresh holdout",
+          "reference_pulses": 48,
+          "estimated_pulses": 45,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 31.333333333333332,
+            "first_estimated_pulse_seconds": 0.7198185941043084,
+            "last_estimated_pulse_seconds": 30.023401360544216,
+            "reference_pulses_inside_estimated_coverage": 44,
+            "reference_pulses_outside_estimated_coverage": 4
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 44,
+              "missed_reference_pulses": 4,
+              "extra_estimated_pulses": 1,
+              "precision": 0.9777777777777777,
+              "recall": 0.9166666666666666,
+              "f_measure": 0.946236559139785,
+              "matched_error_median_seconds": 0.031292517006802356,
+              "matched_error_p90_seconds": 0.05255328798185944,
+              "matched_error_max_seconds": 0.06657596371882102
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 45,
+              "missed_reference_pulses": 3,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 0.9375,
+              "f_measure": 0.967741935483871,
+              "matched_error_median_seconds": 0.03156462585033992,
+              "matched_error_p90_seconds": 0.055111111111112894,
+              "matched_error_max_seconds": 0.07383219954648546
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.03337868480725614,
+            "p90": 0.06517913832199579,
+            "max": 1.3099319727891157,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 40,
+            "estimated_pulses": 38,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.9487179487179489,
+              "cemgil_sigma_40ms": 0.6666796830538474,
+              "cemgil_any_metrical_level": 0.6666796830538474,
+              "cmlc": 0.95,
+              "cmlt": 0.95,
+              "amlc": 0.95,
+              "amlt": 0.95
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "prediction_analysis": {
+            "id": "librosa-pulse-grid-0.1.0",
+            "library": "librosa",
+            "library_version": "0.9.2",
+            "runtime_seconds": 0.08341420907527208,
+            "parameters": {
+              "sample_rate_hz": 22050,
+              "hop_samples": 512,
+              "start_bpm": 120,
+              "onset_aggregate": "mean",
+              "tightness": 100,
+              "trim": true,
+              "units": "time",
+              "source_separation": "none",
+              "tempo_min_bpm": null,
+              "tempo_max_bpm": null,
+              "tempo_selection": "native default pseudo-log-normal prior centered on start_bpm"
+            },
+            "config_status": "Nominal metronome grid; physical timing not verified",
+            "config": {
+              "start_bpm": 120,
+              "beats_per_bar": 4,
+              "meter_label": "4/4 source hypothesis",
+              "meter_status": "Nominal metronome grid; physical timing not verified",
+              "pulse_prior_status": "No reference tempo/time/positions supplied"
+            },
+            "score_is_calibrated_confidence": false,
+            "downbeats_inferred": false,
+            "chord_boundaries_snapped": false,
+            "limitations": [
+              "Declared priors/ranges select a metrical hypothesis; they do not verify pulse units or force chord timing.",
+              "Half/double tempo, subdivisions and compound-meter ambiguities remain possible.",
+              "Returned pulse phase does not establish a downbeat or absolute bar number.",
+              "Leading/trailing weak pulses are trimmed; unsupported spans should retain a seconds fallback."
+            ]
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 44,
+              "supported_windows": 40,
+              "unsupported_windows": 4,
+              "absolute_beat_count_error_mean": 0.028500956360056895,
+              "absolute_beat_count_error_p90": 0.06283021883515244,
+              "absolute_equivalent_bar_length_error_mean": 0.007125239090014224
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 23,
+                "supported_windows": 21,
+                "unsupported_windows": 2,
+                "absolute_beat_count_error_mean": 0.02550284093934582,
+                "absolute_beat_count_error_p90": 0.051264880952373915,
+                "absolute_equivalent_bar_length_error_mean": 0.006375710234836455
+              },
+              "one_bar": {
+                "requested_windows": 11,
+                "supported_windows": 10,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.03366636154368887,
+                "absolute_beat_count_error_p90": 0.07064562476825971,
+                "absolute_equivalent_bar_length_error_mean": 0.008416590385922218
+              },
+              "two_bars": {
+                "requested_windows": 10,
+                "supported_windows": 9,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.02975721991545832,
+                "absolute_beat_count_error_p90": 0.056945216907672604,
+                "absolute_equivalent_bar_length_error_mean": 0.00743930497886458
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-02-funk1-97-c-comp",
+            "title": "02_Funk1-97-C_comp / microphone comping",
+            "duration_seconds": 29.688390022675737,
+            "sample_rate_hz": 22050,
+            "audio_sha256": "52f2e0b1042bc51e3ca3c28160f2d5f4184f6386521c2a191b16c116fdd9141e"
+          },
+          "split": "development",
+          "beat_reference_semantics": "Nominal GuitarSet metronome/lead-sheet grid; retrospective prior six, not physical played attacks or fresh holdout",
+          "reference_pulses": 48,
+          "estimated_pulses": 46,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 29.072164948453608,
+            "first_estimated_pulse_seconds": 0.6733786848072563,
+            "last_estimated_pulse_seconds": 28.514104308390024,
+            "reference_pulses_inside_estimated_coverage": 45,
+            "reference_pulses_outside_estimated_coverage": 3
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 43,
+              "missed_reference_pulses": 5,
+              "extra_estimated_pulses": 3,
+              "precision": 0.9347826086956522,
+              "recall": 0.8958333333333334,
+              "f_measure": 0.9148936170212766,
+              "matched_error_median_seconds": 0.048261448909460825,
+              "matched_error_p90_seconds": 0.06279785866236481,
+              "matched_error_max_seconds": 0.06637959651214409
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 46,
+              "missed_reference_pulses": 2,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 0.9583333333333334,
+              "f_measure": 0.9787234042553191,
+              "matched_error_median_seconds": 0.048990812819973195,
+              "matched_error_p90_seconds": 0.06479182738387412,
+              "matched_error_max_seconds": 0.08314374547069647
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.04995394721462443,
+            "p90": 0.06811323842251567,
+            "max": 0.6733786848072563,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 39,
+            "estimated_pulses": 38,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.9090909090909091,
+              "cemgil_sigma_40ms": 0.4851407860878626,
+              "cemgil_any_metrical_level": 0.4851407860878626,
+              "cmlc": 0.9743589743589743,
+              "cmlt": 0.9743589743589743,
+              "amlc": 0.9743589743589743,
+              "amlt": 0.9743589743589743
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "prediction_analysis": {
+            "id": "librosa-pulse-grid-0.1.0",
+            "library": "librosa",
+            "library_version": "0.9.2",
+            "runtime_seconds": 0.11579129099845886,
+            "parameters": {
+              "sample_rate_hz": 22050,
+              "hop_samples": 512,
+              "start_bpm": 120,
+              "onset_aggregate": "mean",
+              "tightness": 100,
+              "trim": true,
+              "units": "time",
+              "source_separation": "none",
+              "tempo_min_bpm": null,
+              "tempo_max_bpm": null,
+              "tempo_selection": "native default pseudo-log-normal prior centered on start_bpm"
+            },
+            "config_status": "Nominal metronome grid; physical timing not verified",
+            "config": {
+              "start_bpm": 120,
+              "beats_per_bar": 4,
+              "meter_label": "4/4 source hypothesis",
+              "meter_status": "Nominal metronome grid; physical timing not verified",
+              "pulse_prior_status": "No reference tempo/time/positions supplied"
+            },
+            "score_is_calibrated_confidence": false,
+            "downbeats_inferred": false,
+            "chord_boundaries_snapped": false,
+            "limitations": [
+              "Declared priors/ranges select a metrical hypothesis; they do not verify pulse units or force chord timing.",
+              "Half/double tempo, subdivisions and compound-meter ambiguities remain possible.",
+              "Returned pulse phase does not establish a downbeat or absolute bar number.",
+              "Leading/trailing weak pulses are trimmed; unsupported spans should retain a seconds fallback."
+            ]
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 44,
+              "supported_windows": 41,
+              "unsupported_windows": 3,
+              "absolute_beat_count_error_mean": 0.023269281810581837,
+              "absolute_beat_count_error_p90": 0.044728151525831095,
+              "absolute_equivalent_bar_length_error_mean": 0.005817320452645459
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 23,
+                "supported_windows": 22,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.020371029552730645,
+                "absolute_beat_count_error_p90": 0.040097079037800964,
+                "absolute_equivalent_bar_length_error_mean": 0.005092757388182661
+              },
+              "one_bar": {
+                "requested_windows": 11,
+                "supported_windows": 10,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.030198145211032035,
+                "absolute_beat_count_error_p90": 0.05763172966780807,
+                "absolute_equivalent_bar_length_error_mean": 0.007549536302758009
+              },
+              "two_bars": {
+                "requested_windows": 10,
+                "supported_windows": 9,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.022655161329273414,
+                "absolute_beat_count_error_p90": 0.041757900842954145,
+                "absolute_equivalent_bar_length_error_mean": 0.0056637903323183535
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-03-bn1-129-eb-comp",
+            "title": "03_BN1-129-Eb_comp / microphone comping",
+            "duration_seconds": 22.32439909297052,
+            "sample_rate_hz": 22050,
+            "audio_sha256": "51f6bf50ddc33597163de3b4d4e39e9da9b4efb5dc2fce25224765e9a5b021ce"
+          },
+          "split": "development",
+          "beat_reference_semantics": "Nominal GuitarSet metronome/lead-sheet grid; retrospective prior six, not physical played attacks or fresh holdout",
+          "reference_pulses": 48,
+          "estimated_pulses": 45,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 21.86046511627907,
+            "first_estimated_pulse_seconds": 0.37151927437641724,
+            "last_estimated_pulse_seconds": 20.735419501133787,
+            "reference_pulses_inside_estimated_coverage": 44,
+            "reference_pulses_outside_estimated_coverage": 4
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 0,
+              "missed_reference_pulses": 48,
+              "extra_estimated_pulses": 45,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f_measure": 0.0,
+              "matched_error_median_seconds": null,
+              "matched_error_p90_seconds": null,
+              "matched_error_max_seconds": null
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 3,
+              "missed_reference_pulses": 45,
+              "extra_estimated_pulses": 42,
+              "precision": 0.06666666666666667,
+              "recall": 0.0625,
+              "f_measure": 0.06451612903225806,
+              "matched_error_median_seconds": 0.12228444866318355,
+              "matched_error_p90_seconds": 0.14028666350261076,
+              "matched_error_max_seconds": 0.14478721721246757
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.18011074197120713,
+            "p90": 0.22024869482676826,
+            "max": 1.1250456151452823,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 37,
+            "estimated_pulses": 34,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.0,
+              "cemgil_sigma_40ms": 0.0004259106808857316,
+              "cemgil_any_metrical_level": 0.400763243075214,
+              "cmlc": 0.0,
+              "cmlt": 0.0,
+              "amlc": 0.7777777777777778,
+              "amlt": 0.8888888888888888
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "prediction_analysis": {
+            "id": "librosa-pulse-grid-0.1.0",
+            "library": "librosa",
+            "library_version": "0.9.2",
+            "runtime_seconds": 0.04705325048416853,
+            "parameters": {
+              "sample_rate_hz": 22050,
+              "hop_samples": 512,
+              "start_bpm": 120,
+              "onset_aggregate": "mean",
+              "tightness": 100,
+              "trim": true,
+              "units": "time",
+              "source_separation": "none",
+              "tempo_min_bpm": null,
+              "tempo_max_bpm": null,
+              "tempo_selection": "native default pseudo-log-normal prior centered on start_bpm"
+            },
+            "config_status": "Nominal metronome grid; physical timing not verified",
+            "config": {
+              "start_bpm": 120,
+              "beats_per_bar": 4,
+              "meter_label": "4/4 source hypothesis",
+              "meter_status": "Nominal metronome grid; physical timing not verified",
+              "pulse_prior_status": "No reference tempo/time/positions supplied"
+            },
+            "score_is_calibrated_confidence": false,
+            "downbeats_inferred": false,
+            "chord_boundaries_snapped": false,
+            "limitations": [
+              "Declared priors/ranges select a metrical hypothesis; they do not verify pulse units or force chord timing.",
+              "Half/double tempo, subdivisions and compound-meter ambiguities remain possible.",
+              "Returned pulse phase does not establish a downbeat or absolute bar number.",
+              "Leading/trailing weak pulses are trimmed; unsupported spans should retain a seconds fallback."
+            ]
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 44,
+              "supported_windows": 40,
+              "unsupported_windows": 4,
+              "absolute_beat_count_error_mean": 0.04811375773604187,
+              "absolute_beat_count_error_p90": 0.0894265642303437,
+              "absolute_equivalent_bar_length_error_mean": 0.012028439434010468
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 23,
+                "supported_windows": 21,
+                "unsupported_windows": 2,
+                "absolute_beat_count_error_mean": 0.03890193210550756,
+                "absolute_beat_count_error_p90": 0.07460029069767415,
+                "absolute_equivalent_bar_length_error_mean": 0.00972548302637689
+              },
+              "one_bar": {
+                "requested_windows": 11,
+                "supported_windows": 10,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.061791219923487975,
+                "absolute_beat_count_error_p90": 0.09529346622369902,
+                "absolute_equivalent_bar_length_error_mean": 0.015447804980871994
+              },
+              "two_bars": {
+                "requested_windows": 10,
+                "supported_windows": 9,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.05441083733234849,
+                "absolute_beat_count_error_p90": 0.10779900332226139,
+                "absolute_equivalent_bar_length_error_mean": 0.013602709333087123
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-04-rock2-142-d-comp",
+            "title": "04_Rock2-142-D_comp / microphone comping",
+            "duration_seconds": 27.041632653061225,
+            "sample_rate_hz": 22050,
+            "audio_sha256": "c7a08ba03e61f520d77107b66188849306f79f754b991c55ea9452a8f0c0039a"
+          },
+          "split": "development",
+          "beat_reference_semantics": "Nominal GuitarSet metronome/lead-sheet grid; retrospective prior six, not physical played attacks or fresh holdout",
+          "reference_pulses": 64,
+          "estimated_pulses": 40,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 26.619718309859156,
+            "first_estimated_pulse_seconds": 0.46439909297052157,
+            "last_estimated_pulse_seconds": 25.797369614512473,
+            "reference_pulses_inside_estimated_coverage": 60,
+            "reference_pulses_outside_estimated_coverage": 4
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 18,
+              "missed_reference_pulses": 46,
+              "extra_estimated_pulses": 22,
+              "precision": 0.45,
+              "recall": 0.28125,
+              "f_measure": 0.34615384615384615,
+              "matched_error_median_seconds": 0.03594008495416823,
+              "matched_error_p90_seconds": 0.051339912490819026,
+              "matched_error_max_seconds": 0.06898023058988834
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 23,
+              "missed_reference_pulses": 41,
+              "extra_estimated_pulses": 17,
+              "precision": 0.575,
+              "recall": 0.359375,
+              "f_measure": 0.4423076923076923,
+              "matched_error_median_seconds": 0.04186388170291594,
+              "matched_error_p90_seconds": 0.08179310785347003,
+              "matched_error_max_seconds": 0.1230545175816804
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.1804132732905357,
+            "p90": 0.33803276803679216,
+            "max": 0.8223486953466832,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 52,
+            "estimated_pulses": 32,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.35714285714285715,
+              "cemgil_sigma_40ms": 0.2609739409536825,
+              "cemgil_any_metrical_level": 0.3086661030697546,
+              "cmlc": 0.0,
+              "cmlt": 0.0,
+              "amlc": 0.03125,
+              "amlt": 0.125
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "prediction_analysis": {
+            "id": "librosa-pulse-grid-0.1.0",
+            "library": "librosa",
+            "library_version": "0.9.2",
+            "runtime_seconds": 0.06620441749691963,
+            "parameters": {
+              "sample_rate_hz": 22050,
+              "hop_samples": 512,
+              "start_bpm": 120,
+              "onset_aggregate": "mean",
+              "tightness": 100,
+              "trim": true,
+              "units": "time",
+              "source_separation": "none",
+              "tempo_min_bpm": null,
+              "tempo_max_bpm": null,
+              "tempo_selection": "native default pseudo-log-normal prior centered on start_bpm"
+            },
+            "config_status": "Nominal metronome grid; physical timing not verified",
+            "config": {
+              "start_bpm": 120,
+              "beats_per_bar": 4,
+              "meter_label": "4/4 source hypothesis",
+              "meter_status": "Nominal metronome grid; physical timing not verified",
+              "pulse_prior_status": "No reference tempo/time/positions supplied"
+            },
+            "score_is_calibrated_confidence": false,
+            "downbeats_inferred": false,
+            "chord_boundaries_snapped": false,
+            "limitations": [
+              "Declared priors/ranges select a metrical hypothesis; they do not verify pulse units or force chord timing.",
+              "Half/double tempo, subdivisions and compound-meter ambiguities remain possible.",
+              "Returned pulse phase does not establish a downbeat or absolute bar number.",
+              "Leading/trailing weak pulses are trimmed; unsupported spans should retain a seconds fallback."
+            ]
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 56,
+              "unsupported_windows": 4,
+              "absolute_beat_count_error_mean": 1.3803738926266103,
+              "absolute_beat_count_error_p90": 2.9857801321819792,
+              "absolute_equivalent_bar_length_error_mean": 0.34509347315665256
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 29,
+                "unsupported_windows": 2,
+                "absolute_beat_count_error_mean": 0.7042412748046947,
+                "absolute_beat_count_error_p90": 0.8231869151832327,
+                "absolute_equivalent_bar_length_error_mean": 0.17606031870117367
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 1.4258304456367838,
+                "absolute_beat_count_error_p90": 1.645107508476792,
+                "absolute_equivalent_bar_length_error_mean": 0.35645761140919596
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 2.839716521449159,
+                "absolute_beat_count_error_p90": 3.0155700406140546,
+                "absolute_equivalent_bar_length_error_mean": 0.7099291303622898
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-05-jazz3-150-c-comp",
+            "title": "05_Jazz3-150-C_comp / microphone comping",
+            "duration_seconds": 25.6,
+            "sample_rate_hz": 22050,
+            "audio_sha256": "dd4c1c04f42d9fdec17ef96c181a0129dd0af6d644397c535294ee1f77fae39b"
+          },
+          "split": "development",
+          "beat_reference_semantics": "Nominal GuitarSet metronome/lead-sheet grid; retrospective prior six, not physical played attacks or fresh holdout",
+          "reference_pulses": 64,
+          "estimated_pulses": 62,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 25.200000000000003,
+            "first_estimated_pulse_seconds": 0.44117913832199546,
+            "last_estimated_pulse_seconds": 24.659591836734695,
+            "reference_pulses_inside_estimated_coverage": 60,
+            "reference_pulses_outside_estimated_coverage": 4
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 26,
+              "missed_reference_pulses": 38,
+              "extra_estimated_pulses": 36,
+              "precision": 0.41935483870967744,
+              "recall": 0.40625,
+              "f_measure": 0.4126984126984127,
+              "matched_error_median_seconds": 0.0229478458049881,
+              "matched_error_p90_seconds": 0.041360544217686174,
+              "matched_error_max_seconds": 0.0671201814058957
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 60,
+              "missed_reference_pulses": 4,
+              "extra_estimated_pulses": 2,
+              "precision": 0.967741935483871,
+              "recall": 0.9375,
+              "f_measure": 0.9523809523809523,
+              "matched_error_median_seconds": 0.09696145124716615,
+              "matched_error_p90_seconds": 0.13527437641723417,
+              "matched_error_max_seconds": 0.1491156462585046
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.1020408163265305,
+            "p90": 0.14410884353741693,
+            "max": 0.5404081632653082,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 51,
+            "estimated_pulses": 50,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.27722772277227725,
+              "cemgil_sigma_40ms": 0.22000278171907658,
+              "cemgil_any_metrical_level": 0.23400328499967524,
+              "cmlc": 0.2549019607843137,
+              "cmlt": 0.2549019607843137,
+              "amlc": 0.2549019607843137,
+              "amlt": 0.2549019607843137
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "prediction_analysis": {
+            "id": "librosa-pulse-grid-0.1.0",
+            "library": "librosa",
+            "library_version": "0.9.2",
+            "runtime_seconds": 0.08960712514817715,
+            "parameters": {
+              "sample_rate_hz": 22050,
+              "hop_samples": 512,
+              "start_bpm": 120,
+              "onset_aggregate": "mean",
+              "tightness": 100,
+              "trim": true,
+              "units": "time",
+              "source_separation": "none",
+              "tempo_min_bpm": null,
+              "tempo_max_bpm": null,
+              "tempo_selection": "native default pseudo-log-normal prior centered on start_bpm"
+            },
+            "config_status": "Nominal metronome grid; physical timing not verified",
+            "config": {
+              "start_bpm": 120,
+              "beats_per_bar": 4,
+              "meter_label": "4/4 source hypothesis",
+              "meter_status": "Nominal metronome grid; physical timing not verified",
+              "pulse_prior_status": "No reference tempo/time/positions supplied"
+            },
+            "score_is_calibrated_confidence": false,
+            "downbeats_inferred": false,
+            "chord_boundaries_snapped": false,
+            "limitations": [
+              "Declared priors/ranges select a metrical hypothesis; they do not verify pulse units or force chord timing.",
+              "Half/double tempo, subdivisions and compound-meter ambiguities remain possible.",
+              "Returned pulse phase does not establish a downbeat or absolute bar number.",
+              "Leading/trailing weak pulses are trimmed; unsupported spans should retain a seconds fallback."
+            ]
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 56,
+              "unsupported_windows": 4,
+              "absolute_beat_count_error_mean": 0.06759152399995125,
+              "absolute_beat_count_error_p90": 0.08644812091503695,
+              "absolute_equivalent_bar_length_error_mean": 0.016897880999987812
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 29,
+                "unsupported_windows": 2,
+                "absolute_beat_count_error_mean": 0.05335793951579495,
+                "absolute_beat_count_error_p90": 0.085477941176471,
+                "absolute_equivalent_bar_length_error_mean": 0.013339484878948737
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.06264589169000974,
+                "absolute_beat_count_error_p90": 0.06476715686274641,
+                "absolute_equivalent_bar_length_error_mean": 0.015661472922502435
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.10466943187531384,
+                "absolute_beat_count_error_p90": 0.3380718954248368,
+                "absolute_equivalent_bar_length_error_mean": 0.02616735796882846
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "nominal-tempo-guided",
+      "report_local_path": "experiments/generated/guitarset-rhythm-cached-v1/nominal-tempo-guided-report.json",
+      "report_sha256": "fe0a8cd0a601950840dc3545bf00351d8289d9052dfffcc6ecc02bc469346896",
+      "predictions_local_path": "experiments/generated/guitarset-rhythm-cached-v1/nominal-tempo-guided-predictions.json",
+      "predictions_sha256": "19334fad14e75fbc78b9bf1d065562333340273c138a2495b33edb1e1a99de4a",
+      "config_sha256": "5d69de95effcd33a84f7e94785d3eb51b890385582b3b0f1732dbcdb1224d727",
+      "total_extraction_runtime_seconds": 1.8995104162022471,
+      "method": {
+        "matching": "chronological maximum-cardinality one-to-one; no offset fit",
+        "whole_recording_tolerances_seconds": [
+          0.07,
+          0.15
+        ],
+        "standard_trim_seconds": 5.0,
+        "reference_times_used_to_modify_predictions": false,
+        "parameters_fitted_here": false,
+        "count_windows": "Reference-defined half/one/two-bar intervals; pulse ordinal interpolation without extrapolation",
+        "downbeats_evaluated": false,
+        "bar_starts_evaluated": false
+      },
+      "aggregate": {
+        "recordings": 6,
+        "duration_seconds": 182.36204081632653,
+        "whole_recording": {
+          "f1_70ms": {
+            "matched_pulses": 190,
+            "missed_reference_pulses": 146,
+            "extra_estimated_pulses": 133,
+            "micro_f_measure": 0.5766312594840668,
+            "macro_f_measure": 0.5813627992222775
+          },
+          "f1_150ms": {
+            "matched_pulses": 242,
+            "missed_reference_pulses": 94,
+            "extra_estimated_pulses": 81,
+            "micro_f_measure": 0.7344461305007587,
+            "macro_f_measure": 0.725385633704961
+          }
+        },
+        "standard_after_5s_macro": {
+          "measured_recordings": 6,
+          "metrics": {
+            "f_measure_70ms": 0.5533363513672972,
+            "cemgil_sigma_40ms": 0.3544769196010549,
+            "cemgil_any_metrical_level": 0.42353322554687606,
+            "cmlc": 0.5617594136169988,
+            "cmlt": 0.5763792966579344,
+            "amlc": 0.6913890432466284,
+            "amlt": 0.7245274448060824
+          }
+        },
+        "count_windows": {
+          "requested_windows": 312,
+          "supported_windows": 291,
+          "unsupported_windows": 21,
+          "absolute_beat_count_error_mean": 0.04790913398764584,
+          "absolute_beat_count_error_p90": 0.085477941176471,
+          "absolute_equivalent_bar_length_error_mean": 0.01197728349691146
+        }
+      },
+      "by_split": {
+        "development": {
+          "recordings": 6,
+          "duration_seconds": 182.36204081632653,
+          "whole_recording": {
+            "f1_70ms": {
+              "matched_pulses": 190,
+              "missed_reference_pulses": 146,
+              "extra_estimated_pulses": 133,
+              "micro_f_measure": 0.5766312594840668,
+              "macro_f_measure": 0.5813627992222775
+            },
+            "f1_150ms": {
+              "matched_pulses": 242,
+              "missed_reference_pulses": 94,
+              "extra_estimated_pulses": 81,
+              "micro_f_measure": 0.7344461305007587,
+              "macro_f_measure": 0.725385633704961
+            }
+          },
+          "standard_after_5s_macro": {
+            "measured_recordings": 6,
+            "metrics": {
+              "f_measure_70ms": 0.5533363513672972,
+              "cemgil_sigma_40ms": 0.3544769196010549,
+              "cemgil_any_metrical_level": 0.42353322554687606,
+              "cmlc": 0.5617594136169988,
+              "cmlt": 0.5763792966579344,
+              "amlc": 0.6913890432466284,
+              "amlt": 0.7245274448060824
+            }
+          },
+          "count_windows": {
+            "requested_windows": 312,
+            "supported_windows": 291,
+            "unsupported_windows": 21,
+            "absolute_beat_count_error_mean": 0.04790913398764584,
+            "absolute_beat_count_error_p90": 0.085477941176471,
+            "absolute_equivalent_bar_length_error_mean": 0.01197728349691146
+          }
+        },
+        "holdout": {
+          "recordings": 0,
+          "duration_seconds": 0,
+          "whole_recording": {
+            "f1_70ms": {
+              "matched_pulses": 0,
+              "missed_reference_pulses": 0,
+              "extra_estimated_pulses": 0,
+              "micro_f_measure": null,
+              "macro_f_measure": null
+            },
+            "f1_150ms": {
+              "matched_pulses": 0,
+              "missed_reference_pulses": 0,
+              "extra_estimated_pulses": 0,
+              "micro_f_measure": null,
+              "macro_f_measure": null
+            }
+          },
+          "standard_after_5s_macro": {
+            "measured_recordings": 0,
+            "metrics": null
+          },
+          "count_windows": {
+            "requested_windows": 0,
+            "supported_windows": 0,
+            "unsupported_windows": 0,
+            "absolute_beat_count_error_mean": null,
+            "absolute_beat_count_error_p90": null,
+            "absolute_equivalent_bar_length_error_mean": null
+          }
+        }
+      },
+      "cases": [
+        {
+          "recording": {
+            "id": "guitarset-00-ss3-84-bb-comp",
+            "title": "00_SS3-84-Bb_comp / microphone comping",
+            "duration_seconds": 45.70761904761905,
+            "sample_rate_hz": 22050,
+            "audio_sha256": "0d1e9f6f605a49782eeccbb4ad0021a72087d0f9a5f7cb45db867a862c5393cc"
+          },
+          "split": "development",
+          "beat_reference_semantics": "Nominal GuitarSet metronome/lead-sheet grid; retrospective prior six, not physical played attacks or fresh holdout",
+          "reference_pulses": 64,
+          "estimated_pulses": 62,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 45.0,
+            "first_estimated_pulse_seconds": 0.7198185941043084,
+            "last_estimated_pulse_seconds": 44.373333333333335,
+            "reference_pulses_inside_estimated_coverage": 61,
+            "reference_pulses_outside_estimated_coverage": 3
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 14,
+              "missed_reference_pulses": 50,
+              "extra_estimated_pulses": 48,
+              "precision": 0.22580645161290322,
+              "recall": 0.21875,
+              "f_measure": 0.2222222222222222,
+              "matched_error_median_seconds": 0.049795918367346204,
+              "matched_error_p90_seconds": 0.06264852607709832,
+              "matched_error_max_seconds": 0.0653061224489786
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 25,
+              "missed_reference_pulses": 39,
+              "extra_estimated_pulses": 37,
+              "precision": 0.4032258064516129,
+              "recall": 0.390625,
+              "f_measure": 0.3968253968253968,
+              "matched_error_median_seconds": 0.06294784580498991,
+              "matched_error_p90_seconds": 0.0915918367346933,
+              "matched_error_max_seconds": 0.14684807256235644
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.196145124716554,
+            "p90": 0.24019047619047598,
+            "max": 0.7198185941043084,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 57,
+            "estimated_pulses": 56,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.19469026548672563,
+              "cemgil_sigma_40ms": 0.10705401049900042,
+              "cemgil_any_metrical_level": 0.10705401049900042,
+              "cmlc": 0.21052631578947367,
+              "cmlt": 0.2982456140350877,
+              "amlc": 0.21052631578947367,
+              "amlt": 0.2982456140350877
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "prediction_analysis": {
+            "id": "librosa-pulse-grid-0.1.0",
+            "library": "librosa",
+            "library_version": "0.9.2",
+            "runtime_seconds": 1.5701395003125072,
+            "parameters": {
+              "sample_rate_hz": 22050,
+              "hop_samples": 512,
+              "start_bpm": 84.0,
+              "onset_aggregate": "mean",
+              "tightness": 100,
+              "trim": true,
+              "units": "time",
+              "source_separation": "none",
+              "tempo_min_bpm": 71.39999999999999,
+              "tempo_max_bpm": 96.6,
+              "tempo_selection": "native autocorrelation candidates with declared range prior"
+            },
+            "config_status": "Nominal metronome grid; physical timing not verified",
+            "config": {
+              "start_bpm": 84.0,
+              "beats_per_bar": 4,
+              "meter_label": "4/4 source hypothesis",
+              "meter_status": "Nominal metronome grid; physical timing not verified",
+              "pulse_prior_status": "Filename nominal tempo only",
+              "tempo_min_bpm": 71.39999999999999,
+              "tempo_max_bpm": 96.6
+            },
+            "score_is_calibrated_confidence": false,
+            "downbeats_inferred": false,
+            "chord_boundaries_snapped": false,
+            "limitations": [
+              "Declared priors/ranges select a metrical hypothesis; they do not verify pulse units or force chord timing.",
+              "Half/double tempo, subdivisions and compound-meter ambiguities remain possible.",
+              "Returned pulse phase does not establish a downbeat or absolute bar number.",
+              "Leading/trailing weak pulses are trimmed; unsupported spans should retain a seconds fallback."
+            ]
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 57,
+              "unsupported_windows": 3,
+              "absolute_beat_count_error_mean": 0.07692631158081538,
+              "absolute_beat_count_error_p90": 0.2437932545731697,
+              "absolute_equivalent_bar_length_error_mean": 0.019231577895203845
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 30,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.05624931124395158,
+                "absolute_beat_count_error_p90": 0.11417288306451367,
+                "absolute_equivalent_bar_length_error_mean": 0.014062327810987894
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.08438846206846799,
+                "absolute_beat_count_error_p90": 0.26916293508637634,
+                "absolute_equivalent_bar_length_error_mean": 0.021097115517116998
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.11660630414072135,
+                "absolute_beat_count_error_p90": 0.4146913454185175,
+                "absolute_equivalent_bar_length_error_mean": 0.029151576035180336
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-01-rock1-90-csharp-comp",
+            "title": "01_Rock1-90-C#_comp / microphone comping",
+            "duration_seconds": 32.0,
+            "sample_rate_hz": 22050,
+            "audio_sha256": "a9449020afa7ce9f45d94acb413c5e857f370c069bc60821d8e8e137c249cb37"
+          },
+          "split": "development",
+          "beat_reference_semantics": "Nominal GuitarSet metronome/lead-sheet grid; retrospective prior six, not physical played attacks or fresh holdout",
+          "reference_pulses": 48,
+          "estimated_pulses": 45,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 31.333333333333332,
+            "first_estimated_pulse_seconds": 0.7198185941043084,
+            "last_estimated_pulse_seconds": 30.023401360544216,
+            "reference_pulses_inside_estimated_coverage": 44,
+            "reference_pulses_outside_estimated_coverage": 4
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 44,
+              "missed_reference_pulses": 4,
+              "extra_estimated_pulses": 1,
+              "precision": 0.9777777777777777,
+              "recall": 0.9166666666666666,
+              "f_measure": 0.946236559139785,
+              "matched_error_median_seconds": 0.031292517006802356,
+              "matched_error_p90_seconds": 0.05255328798185944,
+              "matched_error_max_seconds": 0.06657596371882102
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 45,
+              "missed_reference_pulses": 3,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 0.9375,
+              "f_measure": 0.967741935483871,
+              "matched_error_median_seconds": 0.03156462585033992,
+              "matched_error_p90_seconds": 0.055111111111112894,
+              "matched_error_max_seconds": 0.07383219954648546
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.03337868480725614,
+            "p90": 0.06517913832199579,
+            "max": 1.3099319727891157,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 40,
+            "estimated_pulses": 38,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.9487179487179489,
+              "cemgil_sigma_40ms": 0.6666796830538474,
+              "cemgil_any_metrical_level": 0.6666796830538474,
+              "cmlc": 0.95,
+              "cmlt": 0.95,
+              "amlc": 0.95,
+              "amlt": 0.95
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "prediction_analysis": {
+            "id": "librosa-pulse-grid-0.1.0",
+            "library": "librosa",
+            "library_version": "0.9.2",
+            "runtime_seconds": 0.09837595839053392,
+            "parameters": {
+              "sample_rate_hz": 22050,
+              "hop_samples": 512,
+              "start_bpm": 90.0,
+              "onset_aggregate": "mean",
+              "tightness": 100,
+              "trim": true,
+              "units": "time",
+              "source_separation": "none",
+              "tempo_min_bpm": 76.5,
+              "tempo_max_bpm": 103.49999999999999,
+              "tempo_selection": "native autocorrelation candidates with declared range prior"
+            },
+            "config_status": "Nominal metronome grid; physical timing not verified",
+            "config": {
+              "start_bpm": 90.0,
+              "beats_per_bar": 4,
+              "meter_label": "4/4 source hypothesis",
+              "meter_status": "Nominal metronome grid; physical timing not verified",
+              "pulse_prior_status": "Filename nominal tempo only",
+              "tempo_min_bpm": 76.5,
+              "tempo_max_bpm": 103.49999999999999
+            },
+            "score_is_calibrated_confidence": false,
+            "downbeats_inferred": false,
+            "chord_boundaries_snapped": false,
+            "limitations": [
+              "Declared priors/ranges select a metrical hypothesis; they do not verify pulse units or force chord timing.",
+              "Half/double tempo, subdivisions and compound-meter ambiguities remain possible.",
+              "Returned pulse phase does not establish a downbeat or absolute bar number.",
+              "Leading/trailing weak pulses are trimmed; unsupported spans should retain a seconds fallback."
+            ]
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 44,
+              "supported_windows": 40,
+              "unsupported_windows": 4,
+              "absolute_beat_count_error_mean": 0.028500956360056895,
+              "absolute_beat_count_error_p90": 0.06283021883515244,
+              "absolute_equivalent_bar_length_error_mean": 0.007125239090014224
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 23,
+                "supported_windows": 21,
+                "unsupported_windows": 2,
+                "absolute_beat_count_error_mean": 0.02550284093934582,
+                "absolute_beat_count_error_p90": 0.051264880952373915,
+                "absolute_equivalent_bar_length_error_mean": 0.006375710234836455
+              },
+              "one_bar": {
+                "requested_windows": 11,
+                "supported_windows": 10,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.03366636154368887,
+                "absolute_beat_count_error_p90": 0.07064562476825971,
+                "absolute_equivalent_bar_length_error_mean": 0.008416590385922218
+              },
+              "two_bars": {
+                "requested_windows": 10,
+                "supported_windows": 9,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.02975721991545832,
+                "absolute_beat_count_error_p90": 0.056945216907672604,
+                "absolute_equivalent_bar_length_error_mean": 0.00743930497886458
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-02-funk1-97-c-comp",
+            "title": "02_Funk1-97-C_comp / microphone comping",
+            "duration_seconds": 29.688390022675737,
+            "sample_rate_hz": 22050,
+            "audio_sha256": "52f2e0b1042bc51e3ca3c28160f2d5f4184f6386521c2a191b16c116fdd9141e"
+          },
+          "split": "development",
+          "beat_reference_semantics": "Nominal GuitarSet metronome/lead-sheet grid; retrospective prior six, not physical played attacks or fresh holdout",
+          "reference_pulses": 48,
+          "estimated_pulses": 46,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 29.072164948453608,
+            "first_estimated_pulse_seconds": 0.6733786848072563,
+            "last_estimated_pulse_seconds": 28.514104308390024,
+            "reference_pulses_inside_estimated_coverage": 45,
+            "reference_pulses_outside_estimated_coverage": 3
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 43,
+              "missed_reference_pulses": 5,
+              "extra_estimated_pulses": 3,
+              "precision": 0.9347826086956522,
+              "recall": 0.8958333333333334,
+              "f_measure": 0.9148936170212766,
+              "matched_error_median_seconds": 0.048261448909460825,
+              "matched_error_p90_seconds": 0.06279785866236481,
+              "matched_error_max_seconds": 0.06637959651214409
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 46,
+              "missed_reference_pulses": 2,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 0.9583333333333334,
+              "f_measure": 0.9787234042553191,
+              "matched_error_median_seconds": 0.048990812819973195,
+              "matched_error_p90_seconds": 0.06479182738387412,
+              "matched_error_max_seconds": 0.08314374547069647
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.04995394721462443,
+            "p90": 0.06811323842251567,
+            "max": 0.6733786848072563,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 39,
+            "estimated_pulses": 38,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.9090909090909091,
+              "cemgil_sigma_40ms": 0.4851407860878626,
+              "cemgil_any_metrical_level": 0.4851407860878626,
+              "cmlc": 0.9743589743589743,
+              "cmlt": 0.9743589743589743,
+              "amlc": 0.9743589743589743,
+              "amlt": 0.9743589743589743
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "prediction_analysis": {
+            "id": "librosa-pulse-grid-0.1.0",
+            "library": "librosa",
+            "library_version": "0.9.2",
+            "runtime_seconds": 0.05424858257174492,
+            "parameters": {
+              "sample_rate_hz": 22050,
+              "hop_samples": 512,
+              "start_bpm": 97.0,
+              "onset_aggregate": "mean",
+              "tightness": 100,
+              "trim": true,
+              "units": "time",
+              "source_separation": "none",
+              "tempo_min_bpm": 82.45,
+              "tempo_max_bpm": 111.55,
+              "tempo_selection": "native autocorrelation candidates with declared range prior"
+            },
+            "config_status": "Nominal metronome grid; physical timing not verified",
+            "config": {
+              "start_bpm": 97.0,
+              "beats_per_bar": 4,
+              "meter_label": "4/4 source hypothesis",
+              "meter_status": "Nominal metronome grid; physical timing not verified",
+              "pulse_prior_status": "Filename nominal tempo only",
+              "tempo_min_bpm": 82.45,
+              "tempo_max_bpm": 111.55
+            },
+            "score_is_calibrated_confidence": false,
+            "downbeats_inferred": false,
+            "chord_boundaries_snapped": false,
+            "limitations": [
+              "Declared priors/ranges select a metrical hypothesis; they do not verify pulse units or force chord timing.",
+              "Half/double tempo, subdivisions and compound-meter ambiguities remain possible.",
+              "Returned pulse phase does not establish a downbeat or absolute bar number.",
+              "Leading/trailing weak pulses are trimmed; unsupported spans should retain a seconds fallback."
+            ]
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 44,
+              "supported_windows": 41,
+              "unsupported_windows": 3,
+              "absolute_beat_count_error_mean": 0.023269281810581837,
+              "absolute_beat_count_error_p90": 0.044728151525831095,
+              "absolute_equivalent_bar_length_error_mean": 0.005817320452645459
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 23,
+                "supported_windows": 22,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.020371029552730645,
+                "absolute_beat_count_error_p90": 0.040097079037800964,
+                "absolute_equivalent_bar_length_error_mean": 0.005092757388182661
+              },
+              "one_bar": {
+                "requested_windows": 11,
+                "supported_windows": 10,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.030198145211032035,
+                "absolute_beat_count_error_p90": 0.05763172966780807,
+                "absolute_equivalent_bar_length_error_mean": 0.007549536302758009
+              },
+              "two_bars": {
+                "requested_windows": 10,
+                "supported_windows": 9,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.022655161329273414,
+                "absolute_beat_count_error_p90": 0.041757900842954145,
+                "absolute_equivalent_bar_length_error_mean": 0.0056637903323183535
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-03-bn1-129-eb-comp",
+            "title": "03_BN1-129-Eb_comp / microphone comping",
+            "duration_seconds": 22.32439909297052,
+            "sample_rate_hz": 22050,
+            "audio_sha256": "51f6bf50ddc33597163de3b4d4e39e9da9b4efb5dc2fce25224765e9a5b021ce"
+          },
+          "split": "development",
+          "beat_reference_semantics": "Nominal GuitarSet metronome/lead-sheet grid; retrospective prior six, not physical played attacks or fresh holdout",
+          "reference_pulses": 48,
+          "estimated_pulses": 45,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 21.86046511627907,
+            "first_estimated_pulse_seconds": 0.37151927437641724,
+            "last_estimated_pulse_seconds": 20.735419501133787,
+            "reference_pulses_inside_estimated_coverage": 44,
+            "reference_pulses_outside_estimated_coverage": 4
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 0,
+              "missed_reference_pulses": 48,
+              "extra_estimated_pulses": 45,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f_measure": 0.0,
+              "matched_error_median_seconds": null,
+              "matched_error_p90_seconds": null,
+              "matched_error_max_seconds": null
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 3,
+              "missed_reference_pulses": 45,
+              "extra_estimated_pulses": 42,
+              "precision": 0.06666666666666667,
+              "recall": 0.0625,
+              "f_measure": 0.06451612903225806,
+              "matched_error_median_seconds": 0.12228444866318355,
+              "matched_error_p90_seconds": 0.14028666350261076,
+              "matched_error_max_seconds": 0.14478721721246757
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.18011074197120713,
+            "p90": 0.22024869482676826,
+            "max": 1.1250456151452823,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 37,
+            "estimated_pulses": 34,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.0,
+              "cemgil_sigma_40ms": 0.0004259106808857316,
+              "cemgil_any_metrical_level": 0.400763243075214,
+              "cmlc": 0.0,
+              "cmlt": 0.0,
+              "amlc": 0.7777777777777778,
+              "amlt": 0.8888888888888888
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "prediction_analysis": {
+            "id": "librosa-pulse-grid-0.1.0",
+            "library": "librosa",
+            "library_version": "0.9.2",
+            "runtime_seconds": 0.05676779057830572,
+            "parameters": {
+              "sample_rate_hz": 22050,
+              "hop_samples": 512,
+              "start_bpm": 129.0,
+              "onset_aggregate": "mean",
+              "tightness": 100,
+              "trim": true,
+              "units": "time",
+              "source_separation": "none",
+              "tempo_min_bpm": 109.64999999999999,
+              "tempo_max_bpm": 148.35,
+              "tempo_selection": "native autocorrelation candidates with declared range prior"
+            },
+            "config_status": "Nominal metronome grid; physical timing not verified",
+            "config": {
+              "start_bpm": 129.0,
+              "beats_per_bar": 4,
+              "meter_label": "4/4 source hypothesis",
+              "meter_status": "Nominal metronome grid; physical timing not verified",
+              "pulse_prior_status": "Filename nominal tempo only",
+              "tempo_min_bpm": 109.64999999999999,
+              "tempo_max_bpm": 148.35
+            },
+            "score_is_calibrated_confidence": false,
+            "downbeats_inferred": false,
+            "chord_boundaries_snapped": false,
+            "limitations": [
+              "Declared priors/ranges select a metrical hypothesis; they do not verify pulse units or force chord timing.",
+              "Half/double tempo, subdivisions and compound-meter ambiguities remain possible.",
+              "Returned pulse phase does not establish a downbeat or absolute bar number.",
+              "Leading/trailing weak pulses are trimmed; unsupported spans should retain a seconds fallback."
+            ]
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 44,
+              "supported_windows": 40,
+              "unsupported_windows": 4,
+              "absolute_beat_count_error_mean": 0.04811375773604187,
+              "absolute_beat_count_error_p90": 0.0894265642303437,
+              "absolute_equivalent_bar_length_error_mean": 0.012028439434010468
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 23,
+                "supported_windows": 21,
+                "unsupported_windows": 2,
+                "absolute_beat_count_error_mean": 0.03890193210550756,
+                "absolute_beat_count_error_p90": 0.07460029069767415,
+                "absolute_equivalent_bar_length_error_mean": 0.00972548302637689
+              },
+              "one_bar": {
+                "requested_windows": 11,
+                "supported_windows": 10,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.061791219923487975,
+                "absolute_beat_count_error_p90": 0.09529346622369902,
+                "absolute_equivalent_bar_length_error_mean": 0.015447804980871994
+              },
+              "two_bars": {
+                "requested_windows": 10,
+                "supported_windows": 9,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.05441083733234849,
+                "absolute_beat_count_error_p90": 0.10779900332226139,
+                "absolute_equivalent_bar_length_error_mean": 0.013602709333087123
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-04-rock2-142-d-comp",
+            "title": "04_Rock2-142-D_comp / microphone comping",
+            "duration_seconds": 27.041632653061225,
+            "sample_rate_hz": 22050,
+            "audio_sha256": "c7a08ba03e61f520d77107b66188849306f79f754b991c55ea9452a8f0c0039a"
+          },
+          "split": "development",
+          "beat_reference_semantics": "Nominal GuitarSet metronome/lead-sheet grid; retrospective prior six, not physical played attacks or fresh holdout",
+          "reference_pulses": 64,
+          "estimated_pulses": 63,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 26.619718309859156,
+            "first_estimated_pulse_seconds": 0.06965986394557823,
+            "last_estimated_pulse_seconds": 26.23854875283447,
+            "reference_pulses_inside_estimated_coverage": 62,
+            "reference_pulses_outside_estimated_coverage": 2
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 63,
+              "missed_reference_pulses": 1,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 0.984375,
+              "f_measure": 0.9921259842519685,
+              "matched_error_median_seconds": 0.040686020887228835,
+              "matched_error_p90_seconds": 0.05620363450544526,
+              "matched_error_max_seconds": 0.06965986394557823
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 63,
+              "missed_reference_pulses": 1,
+              "extra_estimated_pulses": 0,
+              "precision": 1.0,
+              "recall": 0.984375,
+              "f_measure": 0.9921259842519685,
+              "matched_error_median_seconds": 0.040686020887228835,
+              "matched_error_p90_seconds": 0.05620363450544526,
+              "matched_error_max_seconds": 0.06965986394557823
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.04085592922615078,
+            "p90": 0.056985212864487926,
+            "max": 0.3811695570246876,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 52,
+            "estimated_pulses": 51,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.9902912621359222,
+              "cemgil_sigma_40ms": 0.6475583455656567,
+              "cemgil_any_metrical_level": 0.6475583455656567,
+              "cmlc": 0.9807692307692307,
+              "cmlt": 0.9807692307692307,
+              "amlc": 0.9807692307692307,
+              "amlt": 0.9807692307692307
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "prediction_analysis": {
+            "id": "librosa-pulse-grid-0.1.0",
+            "library": "librosa",
+            "library_version": "0.9.2",
+            "runtime_seconds": 0.05365287512540817,
+            "parameters": {
+              "sample_rate_hz": 22050,
+              "hop_samples": 512,
+              "start_bpm": 142.0,
+              "onset_aggregate": "mean",
+              "tightness": 100,
+              "trim": true,
+              "units": "time",
+              "source_separation": "none",
+              "tempo_min_bpm": 120.7,
+              "tempo_max_bpm": 163.29999999999998,
+              "tempo_selection": "native autocorrelation candidates with declared range prior"
+            },
+            "config_status": "Nominal metronome grid; physical timing not verified",
+            "config": {
+              "start_bpm": 142.0,
+              "beats_per_bar": 4,
+              "meter_label": "4/4 source hypothesis",
+              "meter_status": "Nominal metronome grid; physical timing not verified",
+              "pulse_prior_status": "Filename nominal tempo only",
+              "tempo_min_bpm": 120.7,
+              "tempo_max_bpm": 163.29999999999998
+            },
+            "score_is_calibrated_confidence": false,
+            "downbeats_inferred": false,
+            "chord_boundaries_snapped": false,
+            "limitations": [
+              "Declared priors/ranges select a metrical hypothesis; they do not verify pulse units or force chord timing.",
+              "Half/double tempo, subdivisions and compound-meter ambiguities remain possible.",
+              "Returned pulse phase does not establish a downbeat or absolute bar number.",
+              "Leading/trailing weak pulses are trimmed; unsupported spans should retain a seconds fallback."
+            ]
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 57,
+              "unsupported_windows": 3,
+              "absolute_beat_count_error_mean": 0.030754452074094506,
+              "absolute_beat_count_error_p90": 0.052480731914709866,
+              "absolute_equivalent_bar_length_error_mean": 0.007688613018523627
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 30,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.02720810299245297,
+                "absolute_beat_count_error_p90": 0.03792328164895906,
+                "absolute_equivalent_bar_length_error_mean": 0.006802025748113242
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.03255881284438611,
+                "absolute_beat_count_error_p90": 0.06026017214397464,
+                "absolute_equivalent_bar_length_error_mean": 0.008139703211096527
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.03699517681756863,
+                "absolute_beat_count_error_p90": 0.07049963177759298,
+                "absolute_equivalent_bar_length_error_mean": 0.009248794204392157
+              }
+            }
+          }
+        },
+        {
+          "recording": {
+            "id": "guitarset-05-jazz3-150-c-comp",
+            "title": "05_Jazz3-150-C_comp / microphone comping",
+            "duration_seconds": 25.6,
+            "sample_rate_hz": 22050,
+            "audio_sha256": "dd4c1c04f42d9fdec17ef96c181a0129dd0af6d644397c535294ee1f77fae39b"
+          },
+          "split": "development",
+          "beat_reference_semantics": "Nominal GuitarSet metronome/lead-sheet grid; retrospective prior six, not physical played attacks or fresh holdout",
+          "reference_pulses": 64,
+          "estimated_pulses": 62,
+          "coverage": {
+            "first_reference_pulse_seconds": 0.0,
+            "last_reference_pulse_seconds": 25.200000000000003,
+            "first_estimated_pulse_seconds": 0.44117913832199546,
+            "last_estimated_pulse_seconds": 24.659591836734695,
+            "reference_pulses_inside_estimated_coverage": 60,
+            "reference_pulses_outside_estimated_coverage": 4
+          },
+          "whole_recording": {
+            "f1_70ms": {
+              "tolerance_seconds": 0.07,
+              "matched_pulses": 26,
+              "missed_reference_pulses": 38,
+              "extra_estimated_pulses": 36,
+              "precision": 0.41935483870967744,
+              "recall": 0.40625,
+              "f_measure": 0.4126984126984127,
+              "matched_error_median_seconds": 0.0229478458049881,
+              "matched_error_p90_seconds": 0.041360544217686174,
+              "matched_error_max_seconds": 0.0671201814058957
+            },
+            "f1_150ms": {
+              "tolerance_seconds": 0.15,
+              "matched_pulses": 60,
+              "missed_reference_pulses": 4,
+              "extra_estimated_pulses": 2,
+              "precision": 0.967741935483871,
+              "recall": 0.9375,
+              "f_measure": 0.9523809523809523,
+              "matched_error_median_seconds": 0.09696145124716615,
+              "matched_error_p90_seconds": 0.13527437641723417,
+              "matched_error_max_seconds": 0.1491156462585046
+            }
+          },
+          "nearest_reference_error_seconds": {
+            "median": 0.1020408163265305,
+            "p90": 0.14410884353741693,
+            "max": 0.5404081632653082,
+            "semantics": "All reference pulses, including misses; nearest estimate may be reused for this diagnostic only."
+          },
+          "standard_after_5s": {
+            "minimum_beat_time_seconds": 5.0,
+            "reference_pulses": 51,
+            "estimated_pulses": 50,
+            "library": "mir_eval",
+            "library_version": "0.8.2",
+            "status": "measured",
+            "metrics": {
+              "f_measure_70ms": 0.27722772277227725,
+              "cemgil_sigma_40ms": 0.22000278171907658,
+              "cemgil_any_metrical_level": 0.23400328499967524,
+              "cmlc": 0.2549019607843137,
+              "cmlt": 0.2549019607843137,
+              "amlc": 0.2549019607843137,
+              "amlt": 0.2549019607843137
+            }
+          },
+          "downbeat_accuracy": {
+            "status": "not_measured",
+            "reason": "The tracker produces pulses, not downbeat predictions."
+          },
+          "bar_phase_accuracy": {
+            "status": "not_measured",
+            "reason": "Reference windows measure lengths; no predicted bar starts are supplied."
+          },
+          "prediction_analysis": {
+            "id": "librosa-pulse-grid-0.1.0",
+            "library": "librosa",
+            "library_version": "0.9.2",
+            "runtime_seconds": 0.06632570922374725,
+            "parameters": {
+              "sample_rate_hz": 22050,
+              "hop_samples": 512,
+              "start_bpm": 150.0,
+              "onset_aggregate": "mean",
+              "tightness": 100,
+              "trim": true,
+              "units": "time",
+              "source_separation": "none",
+              "tempo_min_bpm": 127.5,
+              "tempo_max_bpm": 172.5,
+              "tempo_selection": "native autocorrelation candidates with declared range prior"
+            },
+            "config_status": "Nominal metronome grid; physical timing not verified",
+            "config": {
+              "start_bpm": 150.0,
+              "beats_per_bar": 4,
+              "meter_label": "4/4 source hypothesis",
+              "meter_status": "Nominal metronome grid; physical timing not verified",
+              "pulse_prior_status": "Filename nominal tempo only",
+              "tempo_min_bpm": 127.5,
+              "tempo_max_bpm": 172.5
+            },
+            "score_is_calibrated_confidence": false,
+            "downbeats_inferred": false,
+            "chord_boundaries_snapped": false,
+            "limitations": [
+              "Declared priors/ranges select a metrical hypothesis; they do not verify pulse units or force chord timing.",
+              "Half/double tempo, subdivisions and compound-meter ambiguities remain possible.",
+              "Returned pulse phase does not establish a downbeat or absolute bar number.",
+              "Leading/trailing weak pulses are trimmed; unsupported spans should retain a seconds fallback."
+            ]
+          },
+          "count_windows": {
+            "summary": {
+              "requested_windows": 60,
+              "supported_windows": 56,
+              "unsupported_windows": 4,
+              "absolute_beat_count_error_mean": 0.06759152399995125,
+              "absolute_beat_count_error_p90": 0.08644812091503695,
+              "absolute_equivalent_bar_length_error_mean": 0.016897880999987812
+            },
+            "by_type": {
+              "half_bar": {
+                "requested_windows": 31,
+                "supported_windows": 29,
+                "unsupported_windows": 2,
+                "absolute_beat_count_error_mean": 0.05335793951579495,
+                "absolute_beat_count_error_p90": 0.085477941176471,
+                "absolute_equivalent_bar_length_error_mean": 0.013339484878948737
+              },
+              "one_bar": {
+                "requested_windows": 15,
+                "supported_windows": 14,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.06264589169000974,
+                "absolute_beat_count_error_p90": 0.06476715686274641,
+                "absolute_equivalent_bar_length_error_mean": 0.015661472922502435
+              },
+              "two_bars": {
+                "requested_windows": 14,
+                "supported_windows": 13,
+                "unsupported_windows": 1,
+                "absolute_beat_count_error_mean": 0.10466943187531384,
+                "absolute_beat_count_error_p90": 0.3380718954248368,
+                "absolute_equivalent_bar_length_error_mean": 0.02616735796882846
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "fresh_selection": {
+    "path": "experiments/fixtures/rhythm-reference-selection.json",
+    "sha256": "597f4c82625a82cddebd67f9d5523b7afd4c36d5ed7be798347f6ae25b6a7c12",
+    "recordings": 10,
+    "development": 4,
+    "holdout": 6,
+    "status": "Selected before acquisition/inference; no fresh audio or predictions acquired",
+    "acquisition_attempts": [
+      {
+        "url": "https://zenodo.org/api/records/3371780/files/audio_mono-mic.zip/content",
+        "result": "HTTP 504 on initial byte-range request"
+      },
+      {
+        "url": "https://zenodo.org/records/3371780/files/audio_mono-mic.zip?download=1",
+        "result": "Timeout on bounded byte-range availability check"
+      }
+    ],
+    "fresh_holdout_scored": false
+  },
+  "limitations": [
+    "All six cached recordings are previously exposed development material, not fresh holdout; tracker parameters were not retuned here.",
+    "Guided extraction receives filename tempo and a declared +/-15 percent tempo range; beat timestamps and positions are withheld. This is not uninformed beat recognition.",
+    "Window error pools overlapping half-, one- and two-bar intervals inside observed pulse coverage; unsupported windows are reported separately. The 312 windows are not 312 independent recordings.",
+    "Near-correct duration counts do not imply correct pulse phase or bar starts. Downbeats/bar phase, chord boundaries, recorded strumming and whole arrangements are not evaluated.",
+    "Any-metrical-level continuity can reward half/double/offbeat pulses; it must not be read as quarter-note/downbeat accuracy.",
+    "No exact first-ten full-mix reference score is available; the five independent source candidates still need canonical-master/time-origin matching."
+  ]
+}

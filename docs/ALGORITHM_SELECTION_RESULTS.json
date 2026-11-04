@@ -1,0 +1,200 @@
+{
+  "schema_version": "algorithm-selection-results-1.0",
+  "checked_at_utc": "2026-10-13T08:58:36.148858+00:00",
+  "selection_status": "initial offline workflow selected; catalogue acceptance pending",
+  "policy_sha256": "ae1287fde6774f548851286431d50f801b6185806a96cd69e3619eef8ac864c2",
+  "frozen_files_verified": 39,
+  "source_manifest_sha256": "6b8a272451671e0db3a5fa74d6f0991111d778091d2cdd1fa2f378a185e743f1",
+  "selected_manifest_sha256": "312c7527f5ece5681aa494300af20410eae188b4ef162ba54ef4ed81101590b4",
+  "btc_batch_summary_sha256": "117779bab3cd067f0ab82f02906c97f66e3ad9dd9d23de0d01da80bd53d201d2",
+  "retained_player_manifest_sha256": "556e6009e165e3b391e1658fd1d05766201efdbd87bd5e87dea5c971d898d671",
+  "successful_cases": 10,
+  "failed_cases": 0,
+  "audio_seconds": 2024.1182766439908,
+  "btc_batch_runtime_seconds": 36.13812854140997,
+  "public_assets_verified": 48,
+  "cases": [
+    {
+      "id": "troggs-wild-thing-youtube-20261011",
+      "audio_seconds": 155.3516553287982,
+      "hashes": {
+        "audio.wav": "3a58de94b56c5e2c8a2377d0968cc78f53500b327d8002c0c63943ab5088fbdf",
+        "primary.json": "aecee2605813eb56acd62971619080f8af1906b6f1319a2c737386d7f449a7c4",
+        "crema.json": "13cb09d89241f3f358304ee06677cb93bb067402bf2e806cc1e72d67fe135a81"
+      },
+      "btc_runtime_seconds": 6.131591499783099,
+      "btc_intervals": 104,
+      "crema_intervals": 80,
+      "accuracy_score": null,
+      "status": "unreviewed integration check"
+    },
+    {
+      "id": "bob-dylan-knockin-heavens-door-youtube-20261011",
+      "audio_seconds": 149.89496598639457,
+      "hashes": {
+        "audio.wav": "4c21eb55ab2c265730b7842c52863f0989ce72347796c69b934b9e77a15a683f",
+        "primary.json": "018dc316af89e4678d9a9718b26553d3f048e8f80deaedf8e5ea31c14303b78e",
+        "crema.json": "022405eadb0d332a34ca66b74989e72cc5e597e57417c1a289178e0a7a084082"
+      },
+      "btc_runtime_seconds": 2.8115796661004424,
+      "btc_intervals": 74,
+      "crema_intervals": 65,
+      "accuracy_score": null,
+      "status": "unreviewed integration check"
+    },
+    {
+      "id": "van-morrison-brown-eyed-girl-youtube-20261011",
+      "audio_seconds": 186.55927437641722,
+      "hashes": {
+        "audio.wav": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf",
+        "primary.json": "3047f46334a44dfeb0ae5fe0ae235ab33afea06d435db40c221a3e72def6d47b",
+        "crema.json": "1bc1f1c9467a8bea0aab8e8ae9ea4ccbd3f71ce47c52a1376f591528bcb1170d"
+      },
+      "btc_runtime_seconds": 3.513011708855629,
+      "btc_intervals": 125,
+      "crema_intervals": 107,
+      "accuracy_score": null,
+      "status": "unreviewed integration check"
+    },
+    {
+      "id": "beatles-love-me-do-youtube-20261011",
+      "audio_seconds": 141.69832199546485,
+      "hashes": {
+        "audio.wav": "2b3054a6432f76407b45e6446b0cd6e3e080e7d02bee3c5d6f48f5afe8ff01ea",
+        "primary.json": "833d826283e403fc5edccd5720b6afe784a94bd6f900cc5fac70a3f877405d6b",
+        "crema.json": "a12394c6654f761febee240b95d60c45b7c55e33a6fb287225d181976e6531c4"
+      },
+      "btc_runtime_seconds": 5.78644008282572,
+      "btc_intervals": 74,
+      "crema_intervals": 57,
+      "accuracy_score": null,
+      "status": "unreviewed integration check"
+    },
+    {
+      "id": "beatles-twist-and-shout-youtube-20261011",
+      "audio_seconds": 155.23555555555555,
+      "hashes": {
+        "audio.wav": "4e6dcd3505bb69bdd60fb3d6c6e167a09de58ca47bda1d35001d4b65a6518f6c",
+        "primary.json": "e7ce805072c42e3ef39c15eadf8b3522534cc1274c5380b0553e52a1807b935c",
+        "crema.json": "09f64db9a6563e2256c528576bd9776b13c84128ce3b982810b8dfbe6145bb59"
+      },
+      "btc_runtime_seconds": 1.445587333291769,
+      "btc_intervals": 113,
+      "crema_intervals": 102,
+      "accuracy_score": null,
+      "status": "unreviewed integration check"
+    },
+    {
+      "id": "white-stripes-seven-nation-army-youtube-20261011",
+      "audio_seconds": 232.1168253968254,
+      "hashes": {
+        "audio.wav": "394c791d799d7ff7ece36c1b93a434c1f600afe0265f5dfe1d6ad328626a6854",
+        "primary.json": "0f69d5fb878bb87fa90d223a85cc16f49c01448da81f4e2c088d2fddf141e9e7",
+        "crema.json": "b7deadf0f4f816c2da6c91e1f8c807ceebc543c6b106e728d1e54bbedf2f0f9b"
+      },
+      "btc_runtime_seconds": 2.0635205833241343,
+      "btc_intervals": 198,
+      "crema_intervals": 128,
+      "accuracy_score": null,
+      "status": "unreviewed integration check"
+    },
+    {
+      "id": "nirvana-come-as-you-are-youtube-20261011",
+      "audio_seconds": 218.92789115646258,
+      "hashes": {
+        "audio.wav": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7",
+        "primary.json": "b19ab0e6f3b711f8e5d7a5894ce87b34c108a95b974ec1d408417ad510ec3ef6",
+        "crema.json": "86371063c859a1b412d39a8ef4a87436863690d181838600946ce207f960bee1"
+      },
+      "btc_runtime_seconds": 3.4675683742389083,
+      "btc_intervals": 123,
+      "crema_intervals": 107,
+      "accuracy_score": null,
+      "status": "unreviewed integration check"
+    },
+    {
+      "id": "radiohead-creep-youtube-20261010",
+      "audio_seconds": 236.63455782312926,
+      "hashes": {
+        "audio.wav": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10",
+        "primary.json": "31ab2f236db594ee83f3223ac168601435ba0ce83e7aea3f1a54d207ca9f2ec2",
+        "crema.json": "9ab5ce1f02b7ba127554937009f1747112e7fc3df583ddcd3b8abcfa9cdc191c"
+      },
+      "btc_runtime_seconds": 2.1710195830091834,
+      "btc_intervals": 90,
+      "crema_intervals": 52,
+      "accuracy_score": null,
+      "status": "unreviewed integration check"
+    },
+    {
+      "id": "animals-house-rising-sun-official-20261011",
+      "audio_seconds": 269.91891156462583,
+      "hashes": {
+        "audio.wav": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708",
+        "primary.json": "7ee27e5ecc662a1bd838663fdb89cc1e18736d8cf60b4f7cf059d6a6208edd31",
+        "crema.json": "71eb918cc9ef3662d5c6d75b49814f700b89a2fc15b73c1ce92d9bdb18dd6037"
+      },
+      "btc_runtime_seconds": 5.61871474981308,
+      "btc_intervals": 177,
+      "crema_intervals": 162,
+      "accuracy_score": null,
+      "status": "unreviewed integration check"
+    },
+    {
+      "id": "oasis-wonderwall-youtube-20261010",
+      "audio_seconds": 277.78031746031746,
+      "hashes": {
+        "audio.wav": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462",
+        "primary.json": "7ee7705e93646d4e4d2db07f1991cdee36ee7b1d45c1cfc37ec91f4efb8b7c17",
+        "crema.json": "1d696977fe56f91126f3e838903939a6670a335d7079fc297b45e6573a3c3e83"
+      },
+      "btc_runtime_seconds": 3.0959834177047014,
+      "btc_intervals": 178,
+      "crema_intervals": 144,
+      "accuracy_score": null,
+      "status": "unreviewed integration check"
+    }
+  ],
+  "limitations": [
+    "No verified reference pairs for this popular-song batch; no accuracy score",
+    "Existing local caches warmed; runtime is BTC batch only, not acquisition, review or hosting cost",
+    "CREMA charts are exact cached native results, not fresh inference",
+    "Correction effort and ordinary guitar followability remain unmeasured acceptance gates",
+    "Legacy player bytes and identity retained; selected pack is a separate local research artifact"
+  ],
+  "verification": {
+    "checked_at_utc": "2026-10-13T08:59:42.020782+00:00",
+    "python_suite": {
+      "command": ".venv-analysis/bin/python -B -m unittest discover -s experiments/analysis/tests -q",
+      "total": 339,
+      "passed": 319,
+      "skipped": 20,
+      "skip_reason": "Optional mir_eval and Torch/Julius dependencies absent from the analysis environment; no changed inference/scoring adapter"
+    },
+    "javascript": {
+      "review_checks_passed": 62,
+      "bench_checks_passed": 48
+    },
+    "http": {
+      "selected_pack_test_port": 8072,
+      "served_assets_byte_identical": 48,
+      "private_routes_404": 4,
+      "existing_ports_http200": [
+        8067,
+        8068,
+        8070
+      ]
+    },
+    "browser": {
+      "origin": "http://127.0.0.1:8072/",
+      "btc_primary_loaded": true,
+      "crema_alternative_loaded": true,
+      "seek_to_seconds": 30,
+      "playback_advanced_and_paused_at_seconds": 103,
+      "issues_created": 0,
+      "practice_progress_created": 0,
+      "temporary_tab_closed": true
+    },
+    "deployment": "Selected pack remains a local research artifact; temporary QA server is stopped after verification. Existing player deployment is retained."
+  }
+}

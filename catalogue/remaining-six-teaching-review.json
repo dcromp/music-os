@@ -1,0 +1,392 @@
+{
+  "schema_version": "remaining-six-teaching-review-1.0",
+  "checked_date": "2026-10-16",
+  "status": "Primary-source prose rechecked; teaching proposals only",
+  "scope": "Remaining six exact cached recording identities; qualitative setup and rhythm tasks, without copying charts, tabs, lyrics, pattern arrows or repeat counts",
+  "gold": false,
+  "accepted": false,
+  "recording_pitch_verified": false,
+  "timing_transcription": false,
+  "strum_transcription": false,
+  "full_recordings_listened_through": false,
+  "source_policy": "One or two primary teacher sources per song. Claims describe the teacher lesson or adaptation; no assertion that its every detail matches the selected upload.",
+  "inputs": [
+    {
+      "path": "catalogue/first-ten-review.json",
+      "sha256": "d1bbcd7618e0aeaf4af954c6b2bc7307d1ea4b3378af55ed172e53c0b18d7bda"
+    },
+    {
+      "path": "docs/FIRST_TEN_ARRANGEMENT_CHECK.json",
+      "sha256": "5a7855d9c837e6086a511a896872476fed8dea76da6d6e289438729380d211ae"
+    },
+    {
+      "path": "catalogue/starter-four-teaching-review.json",
+      "sha256": "564b33066eec4f9e1258a6d0168671fb9f27f470c3cd2e396b6124876f6f25ce"
+    },
+    {
+      "path": "docs/STARTER_FOUR_TIMING_REVIEW.json",
+      "sha256": "76e29a16ae6673405227ba92f34ce54e84b7b51f4d2d2c2f7d420735080c558c"
+    }
+  ],
+  "sources": [
+    {
+      "id": "brown-andy",
+      "title": "Andy Guitar: Brown Eyed Girl",
+      "url": "https://www.andyguitar.co.uk/videos/brown-eyed-girl-by-van-morrison",
+      "inspected_date": "2026-10-16",
+      "evidence_scope": "Public primary teacher prose; four main chords, linked strumming lesson, separate intro/lead task"
+    },
+    {
+      "id": "brown-tie-andy",
+      "title": "Andy Guitar: down/up strumming with a tie",
+      "url": "https://www.andyguitar.co.uk/videos/lesson-2-down-and-up-strumming-with-a-tie",
+      "inspected_date": "2026-10-16",
+      "evidence_scope": "Linked primary lesson prose; omitted attack at count 3 and continuous eighth-note hand movement; images not transcribed"
+    },
+    {
+      "id": "seven-andy",
+      "title": "Andy Guitar: Seven Nation Army",
+      "url": "https://www.andyguitar.co.uk/videos/electric-guitar-song-1-seven-nation-army-by-the-white-stripes",
+      "inspected_date": "2026-10-16",
+      "evidence_scope": "Public primary teacher prose; standard-tuning adaptation versus original Open A, main riff, power-chord variation, no-slide solo adaptation"
+    },
+    {
+      "id": "come-carl",
+      "title": "Carl Brown: Come As You Are",
+      "url": "https://guitarlessons365.com/come-as-you-are-guitar-lesson-nirvana/",
+      "inspected_date": "2026-10-16",
+      "evidence_scope": "Public primary teacher prose; D-standard studio setup versus live E-flat, riff versus chord sections, sus4 barre"
+    },
+    {
+      "id": "creep-andy",
+      "title": "Andy Guitar: Creep",
+      "url": "https://www.andyguitar.co.uk/videos/radiohead-creep",
+      "inspected_date": "2026-10-16",
+      "evidence_scope": "Public primary teacher prose; G/B/C/Cm root-six barres; sus4 options explicitly tied to an acoustic version"
+    },
+    {
+      "id": "creep-carl",
+      "title": "Carl Brown: Creep",
+      "url": "https://guitarlessons365.com/creep-guitar-lesson-radiohead/",
+      "inspected_date": "2026-10-16",
+      "evidence_scope": "Public primary teacher prose; variable verse arpeggios, distorted chorus layers and extended ending chorus"
+    },
+    {
+      "id": "house-jon",
+      "title": "Jon MacLennan: House Of The Rising Sun",
+      "url": "https://www.jonmaclennan.com/blog/house-of-the-rising-sun-guitar-lesson",
+      "inspected_date": "2026-10-16",
+      "evidence_scope": "Public primary teacher prose; 6/8, small F, flat-pick/rake versus optional fingerstyle and Am/Dm outro contrast"
+    },
+    {
+      "id": "house-richter",
+      "title": "Jonathan Richter: House Of The Rising Sun",
+      "url": "https://richterguitar.com/house-of-the-rising-sun-the-animals/",
+      "inspected_date": "2026-10-16",
+      "evidence_scope": "Primary teacher prose; explicit no capo, six-chord palette and optional E7/fingerstyle choices; chart and tab not reproduced"
+    },
+    {
+      "id": "wonder-carl",
+      "title": "Carl Brown: Wonderwall",
+      "url": "https://guitarlessons365.com/wonderwall-guitar-lesson-oasis/",
+      "inspected_date": "2026-10-16",
+      "evidence_scope": "Public primary teacher prose; standard tuning/capo 2, verse variation, pre-chorus adaptation and continuous right-hand motion"
+    },
+    {
+      "id": "wonder-shute",
+      "title": "Greg Shute Guitar: Wonderwall",
+      "url": "https://www.gregshuteguitar.co.uk/_files/ugd/4079b4_0a1b39a89c1a4776a5c8f553f259cb08.pdf",
+      "inspected_date": "2026-10-16",
+      "evidence_scope": "Teacher-hosted PDF text; capo 2 and richer shape vocabulary. No lyrics, complete progression, pattern arrows or bar counts reproduced"
+    }
+  ],
+  "cases": [
+    {
+      "song_id": "brown-eyed-girl",
+      "title": "Brown Eyed Girl",
+      "source_ids": [
+        "brown-andy",
+        "brown-tie-andy"
+      ],
+      "teaching_shape_palette": [
+        "G",
+        "C",
+        "D",
+        "Em"
+      ],
+      "setup": {
+        "tuning": "EADGBE",
+        "tuning_status": "Project open-chord practice proposal; explicit support exists in the older separate Stanley arrangement, which was not reopened in this pass",
+        "source_capo": null,
+        "proposed_capo": 0,
+        "selected_recording_verified": false
+      },
+      "source_observations": [
+        "Four-chord accompaniment and optional intro/lead work are separate learning tasks.",
+        "The linked rhythm lesson omits an attack on count 3 while the hand continues its eighth-note motion."
+      ],
+      "proposed_rhythm_note": "Begin with steady strokes, then practise a ringing tie across an omitted attack. Keep the hand moving. This is a teacher-supported accompaniment exercise; its contacts are not an exact-upload strum transcription.",
+      "proposed_review_note": "Keep G/C/D/Em as source-supported practice shapes, inspect Em contrast and original-recording tempo independently, and leave lead/intro work optional. A skipped attack lets the prior sound ring; it is not a deliberate mute.",
+      "next_checks": [
+        "Compare detected pulse periods to individual attacks without treating every transient as a beat.",
+        "Check Em versus major alternatives and selected-upload pitch before attaching playable setup.",
+        "Do not replace the existing pulse estimate using another arrangement's tempo."
+      ],
+      "accepted": false,
+      "recording": {
+        "id": "van-morrison-brown-eyed-girl-youtube-20261011",
+        "title": "Van Morrison - Brown Eyed Girl",
+        "duration_seconds": 186.55927437641722,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "cbbf5531475987eacf65fc9d39dd6acb4567b8adf2977295882964f6119ceaaf"
+      },
+      "selected_source_url": "https://www.youtube.com/watch?v=nEQmbFWnQeE"
+    },
+    {
+      "song_id": "seven-nation-army",
+      "title": "Seven Nation Army",
+      "source_ids": [
+        "seven-andy"
+      ],
+      "teaching_shape_palette": null,
+      "teaching_track": "riff-first; optional power-chord accompaniment",
+      "setup": {
+        "tuning": "EADGBE adaptation",
+        "tuning_status": "Teacher explicitly distinguishes the standard adaptation from original Open A",
+        "source_capo": null,
+        "proposed_capo": 0,
+        "selected_recording_verified": false
+      },
+      "source_observations": [
+        "The main riff is foundational; the chorus adds a power-chord variation.",
+        "The lesson uses standard tuning and a no-slide solo adaptation; the teacher identifies original Open A/slide playing separately."
+      ],
+      "proposed_rhythm_note": "Practise the single-note groove and clean muting first. Introduce the power-chord variation as a separate task. A continuous chord strumming drill is accompaniment practice, not the main riff.",
+      "proposed_review_note": "Keep standard-tuning adaptation separate from original Open A. Major/minor labels over a monophonic riff do not establish played chord grips, and the Open A setup requires string-specific mapping.",
+      "next_checks": [
+        "Inspect note/attack repetition separately from harmonic transitions.",
+        "Check riff versus fuller accompaniment contrasts without interpreting detector label changes as riff-note truth.",
+        "Do not promote this recording into the open-chord strumming path using its label count."
+      ],
+      "accepted": false,
+      "recording": {
+        "id": "white-stripes-seven-nation-army-youtube-20261011",
+        "title": "The White Stripes - Seven Nation Army",
+        "duration_seconds": 232.1168253968254,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "394c791d799d7ff7ece36c1b93a434c1f600afe0265f5dfe1d6ad328626a6854"
+      },
+      "selected_source_url": "https://www.youtube.com/watch?v=D_QLxj8jCF0"
+    },
+    {
+      "song_id": "come-as-you-are",
+      "title": "Come As You Are",
+      "source_ids": [
+        "come-carl"
+      ],
+      "teaching_shape_palette": null,
+      "teaching_track": "riff-first; later chord/sus4 sections",
+      "setup": {
+        "tuning": "DGCFAD",
+        "tuning_status": "Explicit teacher studio lesson setup; live E-flat standard is a separate variant",
+        "source_capo": null,
+        "proposed_capo": 0,
+        "selected_recording_verified": false
+      },
+      "source_observations": [
+        "Intro and verse are a single-note riff; later rhythm sections use chords including a suspended-fourth barre.",
+        "The teacher uses D standard for the studio arrangement and describes E-flat standard in live versions."
+      ],
+      "theory_mapping": {
+        "classification": "Uniform-retuning theory, not measured recording-pitch evidence",
+        "assumptions": "D-standard tuning with no capo",
+        "shape_root_from_sounding_root_semitones": 2,
+        "example": "A conventional E-minor fingering sounds D minor; do not display a detected D-minor label as that fingering without setup context"
+      },
+      "proposed_rhythm_note": "Learn riff articulation and muting before the later chord rhythm. Keep the suspended-fourth option explicit; the major/minor detector cannot describe its full grip.",
+      "proposed_review_note": "D-standard is the teacher-supported studio setup, pending selected-upload pitch verification. Shape names are two semitones above sounding roots for this no-capo uniform retuning; this is a different mapping direction from capo 2.",
+      "next_checks": [
+        "Check whole-recording pitch offset without constraining model outputs to the teacher vocabulary.",
+        "Keep riff and chord-region evidence separate.",
+        "Add uniform-retuning-aware shape handling before showing sounding labels as instructed grips."
+      ],
+      "accepted": false,
+      "recording": {
+        "id": "nirvana-come-as-you-are-youtube-20261011",
+        "title": "Nirvana - Come As You Are",
+        "duration_seconds": 218.92789115646258,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "4235f205a801f547790afc774454325c4adad16c5ca495aa108a108b7bb2d3a7"
+      },
+      "selected_source_url": "https://www.youtube.com/watch?v=f1IdyrhOrGs"
+    },
+    {
+      "song_id": "creep",
+      "title": "Creep",
+      "source_ids": [
+        "creep-andy",
+        "creep-carl"
+      ],
+      "teaching_shape_palette": [
+        "G",
+        "B",
+        "C",
+        "Cm"
+      ],
+      "setup": {
+        "tuning": "EADGBE",
+        "tuning_status": "Consistent with teacher fret/root-six descriptions; not an explicit newly checked tuning sentence",
+        "source_capo": null,
+        "proposed_capo": 0,
+        "selected_recording_verified": false
+      },
+      "source_observations": [
+        "The four main barre grips include B major and C minor.",
+        "Verse picking varies; chorus parts become fuller and the ending chorus extends. Acoustic sus4 embellishments belong to a separate variant."
+      ],
+      "proposed_rhythm_note": "Begin with controlled chord changes, then a flexible verse arpeggio and fuller chorus attack. Do not impose one fixed picking pattern across the recording.",
+      "proposed_review_note": "Preserve B major and C minor in main-chord mode; key-only substitution would erase the defining quality contrast. Treat acoustic sus4 additions and the optional chorus octave melody as separate choices.",
+      "next_checks": [
+        "Compare B/Bm and C/Cm acoustic support without forcing either result from key.",
+        "Inspect repeated chord-duration differences and section dynamics independently.",
+        "Keep physical barre difficulty separate from the four-label vocabulary count."
+      ],
+      "accepted": false,
+      "recording": {
+        "id": "radiohead-creep-youtube-20261010",
+        "title": "Radiohead - Creep",
+        "duration_seconds": 236.63455782312926,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "312c3f9e0638a2a6173f3b8398466751564b4beb97c9e79c5779d76a50117b10"
+      },
+      "selected_source_url": "https://www.youtube.com/watch?v=XFkzRNyygfk"
+    },
+    {
+      "song_id": "the-house-of-the-rising-sun",
+      "title": "The House Of The Rising Sun",
+      "source_ids": [
+        "house-jon",
+        "house-richter"
+      ],
+      "teaching_shape_palette": [
+        "Am",
+        "C",
+        "D",
+        "F",
+        "E",
+        "Dm"
+      ],
+      "setup": {
+        "tuning": "EADGBE",
+        "tuning_status": "Project standard open-grip proposal; not an explicit newly checked tuning sentence",
+        "source_capo": 0,
+        "capo_status": "Explicit Richter lesson setup",
+        "selected_recording_verified": false
+      },
+      "source_observations": [
+        "The teacher describes 6/8, a small-F option, picked/raked arpeggios and a distinct Am/Dm outro.",
+        "Richter explicitly specifies no capo and offers optional E7 and fingerstyle choices."
+      ],
+      "proposed_rhythm_note": "Start with six evenly spaced eighth-note counts grouped 3+3, then a root-led picked/raked arpeggio. Fingerstyle is an optional adaptation. Counts are a practice convention until the selected recording's pulse phase is checked.",
+      "proposed_review_note": "Retain D major and E major in the A-minor teaching palette, add the distinct Dm outro and a small-F choice. Inspect shorter changes within outro phrases. Do not infer numbered bars from a global pulse estimate.",
+      "next_checks": [
+        "Test three-subdivision/two-pulse grouping as a hypothesis, including half/double-tempo alternatives.",
+        "Inspect Am/Dm outro contrast and independently determine within-bar change placement.",
+        "Keep recorded flat-pick technique separate from a fingerstyle learning adaptation."
+      ],
+      "accepted": false,
+      "recording": {
+        "id": "animals-house-rising-sun-official-20261011",
+        "title": "The Animals - The House Of The Rising Sun",
+        "duration_seconds": 269.91891156462583,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "9aab8f12ac095d18af4630bd152b38ed432ad4b322d28c915cb4c8c642ba3708"
+      },
+      "selected_source_url": "https://www.youtube.com/watch?v=VixdIglCZXk"
+    },
+    {
+      "song_id": "wonderwall",
+      "title": "Wonderwall",
+      "source_ids": [
+        "wonder-carl",
+        "wonder-shute"
+      ],
+      "teaching_shape_palette": [
+        "Em7",
+        "G",
+        "Dsus4",
+        "A7sus4",
+        "Cadd9"
+      ],
+      "optional_teaching_tasks": [
+        "Passing-bass movement",
+        "Separate pre-chorus melodic embellishment"
+      ],
+      "setup": {
+        "tuning": "EADGBE",
+        "tuning_status": "Explicit Carl Brown lesson setup",
+        "source_capo": 2,
+        "capo_status": "Explicit Carl Brown and Greg Shute lesson setup",
+        "selected_recording_verified": false
+      },
+      "source_observations": [
+        "The teacher separates verse variations, a harder adapted pre-chorus and a simpler chorus, and keeps the right hand moving through missed contacts.",
+        "Shute's PDF supports capo 2 and the richer Em7/G/Dsus4/A7sus4/Cadd9 shape vocabulary."
+      ],
+      "theory_mapping": {
+        "classification": "Capo theory, not measured recording-pitch evidence",
+        "assumptions": "Standard tuning and capo 2",
+        "shape_root_from_sounding_root_semitones": -2,
+        "example": "An Em7 shape sounds F#m7"
+      },
+      "proposed_rhythm_note": "Keep a continuous subdivision motion while deciding which passes contact the strings. Practise verse, pre-chorus and chorus separately. The current generic syncopated drill is a preparatory exercise, not a complete recorded strum pattern.",
+      "proposed_review_note": "Preserve capo-2 played shapes separately from sounding labels. Offer shared-finger richer grips as a project practice option; simplifying to main chords loses the suspended/add-note colour. Section extents and local meter remain unverified.",
+      "next_checks": [
+        "Compare native sounding labels with richer anchored-grip alternatives without overwriting the raw charts.",
+        "Inspect verse variations and shorter passing changes separately from long harmonic holds.",
+        "Do not carry prior 4/4-to-2/4 wording as newly confirmed evidence: neither page rechecked here explicitly establishes those meter changes."
+      ],
+      "accepted": false,
+      "recording": {
+        "id": "oasis-wonderwall-youtube-20261010",
+        "title": "Oasis - Wonderwall",
+        "duration_seconds": 277.78031746031746,
+        "sample_rate_hz": 22050,
+        "audio_sha256": "88e1649a3efa33647b8a07a7fc5feab2540c588ce35e2f27a3a682f2c4553462"
+      },
+      "selected_source_url": "https://www.youtube.com/watch?v=bx1Bh8ZvH84"
+    }
+  ],
+  "first_four_rhythm_follow_up": [
+    {
+      "song_id": "wild-thing",
+      "source_review": "catalogue/starter-four-teaching-review.json (14 October; not reopened in this pass)",
+      "supported_practice_task": "Paired attacks followed by separate contrasting G/A figure",
+      "still_unverified": "Attack timing, figure extent, full ending and physical stroke choices; harmonic long-A windows do not resolve them"
+    },
+    {
+      "song_id": "love-me-do",
+      "source_review": "catalogue/starter-four-teaching-review.json (14 October; not reopened in this pass)",
+      "supported_practice_task": "On-beat entry, later swing, deliberate mute distinct from a missed attack",
+      "still_unverified": "Exact swing ratio, muted-stop placement, D-contrast section boundaries and chord-change times"
+    },
+    {
+      "song_id": "knockin-on-heaven-s-door",
+      "source_review": "catalogue/starter-four-teaching-review.json (14 October; not reopened in this pass)",
+      "supported_practice_task": "Steady pulse then progressively added subdivisions; optional separate fingerstyle adaptation",
+      "still_unverified": "Recorded attack pattern, phrase boundaries and Am/C response rhythm; two proposed G corrections do not verify physical timing"
+    },
+    {
+      "song_id": "twist-and-shout",
+      "source_review": "catalogue/starter-four-teaching-review.json (14 October; not reopened in this pass)",
+      "supported_practice_task": "Response rhythm and repeated downstroke eighths for the A build-up",
+      "still_unverified": "Exact attack grids, response placement and build-up extents; the two saved common A-hold windows are provisional search windows"
+    }
+  ],
+  "acceptance_limits": [
+    "No new musical listening or physical play-along has occurred in this source pass.",
+    "Teacher setup and chord vocabulary do not independently verify selected-recording pitch, physical voicing, downbeat or exact strum contacts.",
+    "Agent source research and draft entry do not measure human arrangement-production cost.",
+    "No source proposal changes the existing learner pack or raw model labels/times."
+  ]
+}
