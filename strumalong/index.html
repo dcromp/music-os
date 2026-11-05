@@ -1,1 +1,53 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#f4f1e8"><meta name="apple-mobile-web-app-capable" content="yes"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><link rel="icon" href="icons/icon.svg"><link rel="stylesheet" href="bandmaker.css?v=20261104a"><title>Music OS</title><script defer src="home.js?v=20261104a"></script></head><body><main><header><span class="eyebrow">Music OS</span><h1>What do you want to play?</h1><p class="muted">Play along with a favourite, or start something of your own.</p></header><div class="home-grid"><section class="mode"><span class="eyebrow">Jukebox mode</span><h2>Play a favourite.</h2><p>Explore 100 rock and pop songs, with chord cues and strumming guidance.</p><a href="jukebox.html">Open Jukebox →</a></section><section class="mode band"><span class="eyebrow" style="color:#bbd2c2">Bandmaker</span><h2>Start your own song.</h2><p>Explore keys and their feelings, hear the chords, and try suggested sequences.</p><a href="bandmaker.html">Open Bandmaker →</a><small>Chord recommender pilot · no recording yet</small></section></div></main><footer class="footer">Personal practice pilot · 1 Nov build</footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#14110e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Music OS">
+<title>Music OS</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="theme.css?v=20261105a">
+<link rel="stylesheet" href="home.css?v=20261105a">
+<script defer src="lib/session.js?v=20261105a"></script>
+<script defer src="home.js?v=20261105a"></script>
+</head>
+<body>
+<main class="home">
+  <div class="wordmark">Music OS</div>
+  <h1>What do you want to play tonight?</h1>
+  <div class="mode-grid">
+    <section class="mode-card jukebox">
+      <svg class="mode-art" width="210" height="210" viewBox="0 0 210 210" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="105" cy="105" r="100"></circle><circle cx="105" cy="105" r="80"></circle><circle cx="105" cy="105" r="60"></circle><circle cx="105" cy="105" r="40"></circle><circle cx="105" cy="105" r="12" fill="currentColor"></circle></svg>
+      <div class="mode-text">
+        <span class="eyebrow">Jukebox</span>
+        <h2><a href="jukebox.html">Play along<br>with a favourite</a></h2>
+        <p>100 rock and pop songs with live chords and a strum to follow.</p>
+      </div>
+      <a id="resume" class="card-action" href="jukebox.html">
+        <span class="play-tile"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"></path></svg></span>
+        <span class="card-action-text"><small id="resume-label">Find a song</small><b id="resume-song">Browse the Jukebox</b></span>
+      </a>
+    </section>
+    <section class="mode-card bandmaker">
+      <svg class="mode-art" width="220" height="140" viewBox="0 0 220 140" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" aria-hidden="true"><path d="M20 20h120"></path><path d="M60 50h140"></path><path d="M20 80h70M110 80h60"></path><path d="M40 110h150"></path></svg>
+      <div class="mode-text">
+        <span class="eyebrow">Bandmaker</span>
+        <h2>Start a song<br>of your own</h2>
+        <p>Explore keys and their feelings, hear the chords and try suggested sequences.</p>
+      </div>
+      <a class="card-button" href="bandmaker.html">Open Bandmaker</a>
+    </section>
+  </div>
+  <p class="build-note">Personal practice pilot · 5 Nov build</p>
+</main>
+</body>
+</html>

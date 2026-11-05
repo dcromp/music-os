@@ -1,0 +1,36 @@
+/* Music OS theme: the shared colours, type and page basics from the 4 November design canvas
+ * (docs/design/2026-11-04-music-os-canvas/). Dark stage ground; each mode keeps one colour. */
+:root {
+  color-scheme: dark;
+  --bg: #14110e;
+  --panel: #1f1a15;
+  --soft: #2a231c;
+  --border: #3a3028;
+  --text: #f5eee4;
+  --muted: #b5a796;
+  --jukebox: #f2a93b;
+  --on-jukebox: #1a1208;
+  --bandmaker: #5cc8b5;
+  --on-bandmaker: #0b1a17;
+  --warn-bg: #3a2a12;
+  --warn-text: #ffd596;
+  --err-bg: #3e1e1a;
+  --err-text: #ffb4a8;
+  --font-display: "Bricolage Grotesque", -apple-system, system-ui, sans-serif;
+  --font-body: Inter, -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --gl: max(20px, env(safe-area-inset-left));
+  --gr: max(20px, env(safe-area-inset-right));
+}
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; background: var(--bg); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.4 var(--font-body);
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+.eyebrow { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }

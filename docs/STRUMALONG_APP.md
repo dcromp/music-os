@@ -435,35 +435,33 @@ Pure planning, tested in `test/count-in.test.js`. Times are chart (cue) seconds.
 
 The end-user journey is **Jukebox** (founder's choice from the journey prototype, 27 October 2026, #53; prototype on branch `prototype/strumalong-journey`). Find a song fast, open it on a page that shows what you need and plays the song, play, then get offered "another like this". Strum Along supports lessons taken elsewhere; it does not teach.
 
+- **Design.** Home and the Jukebox follow the 4 November design canvas (`docs/design/2026-11-04-music-os-canvas/`, #84). Colours and type are shared in `theme.css`.
+- **Home (`index.html`).** A Jukebox card and a Bandmaker card. The Jukebox card offers "Pick up where you left off" from the saved last song (`#/resume/<id>`, which resolves the saved position and replaces itself with `#/song/<id>`), or a plain link to the library when nothing has been played.
 - **Library (`#/`).**
-  - The header reads "Strum Along", with a **🎲 Surprise me** button (see `surprise`, which opens that song's page), the line "Provisional automatic chord charts. For personal practice." and a **search** box (title or artist). While the box has text, matching cards replace the shelves. The query is kept while moving between pages.
+  - The header has a back button to Home, "Jukebox", a **Surprise me** button (see `surprise`, which opens that song's page), a **search** box (title or artist) and the All / Rock / Pop filter. While the box has text, matching songs replace the shelves.
   - A last-played song gets a resume chip ("Resume … at m:ss", or "Play again: …"). It opens the player directly.
-  - **Shelves** scroll horizontally, as in prototype A: "★ Your favourites" when there are any, "Easy to jump into", "Three-chord classics", "Campfire open chords" and "Barre-chord songs" (see `shelves`). Difficulty still rises shelf by shelf, but the library shows no level numbers. The level stays on the song page badge and in Details. Each card shows the title, artist and main shapes as chips, plus a capo badge and the "timing unchecked" / "alternate video" badge where they apply. Cards open the song page.
+  - **Shelves** scroll horizontally, as in prototype A: "Your favourites" when there are any, "Easy to jump into", "Three-chord classics", "Campfire open chords" and "Barre-chord songs" (see `shelves`). Difficulty still rises shelf by shelf, but the library shows no level numbers. The level stays on the song page badge and in Details. Each card shows the title, artist and main shapes as chips, plus a capo badge and the "timing unchecked" / "alternate video" badge where they apply. Cards open the song page.
 - **No separate get-ready page.** The founder chose to merge it into the song page (variant C of the 28 October prototype, branch `prototype/strumalong-merged-song`, #53). The old `#/ready/<id>` address opens `#/song/<id>`, so saved links still work.
-- **After the song.** When the video ends, a panel opens at the top of the cue column. It shows "Nice one", the play count on this phone, **↻ Again** (restart and play), Favourite, Surprise me, and up to five "Another like this" cards (`similar`). Playing again hides it. Nothing is placed over the player.
-- **Song (`#/song/<id>`), portrait, top to bottom:**
-  1. A top bar with a back link, the title, and the capo, level ("Level 2", titled with its label) and provisional badges.
+- **After the song.** When the video ends, a panel opens at the top of the cue column. It shows "Nice one", the play count on this phone, **Again** (restart and play), Favourite, Surprise me, and up to five "Another like this" cards (`similar`). Playing again hides it. Nothing is placed over the player.
+- **Song (`#/song/<id>`), portrait, top to bottom.** Tapping a song goes straight here: setup is merged into playing.
+  1. A top bar with a back button, the title, "artist · Level N · ~BPM", and a favourite button.
   2. The YouTube player at full width, 16:9, with nothing on top. It loads as soon as the page opens.
-  3. The **chord strip** under the player, which replaces the get-ready sheet:
-     - "Chords" (or "Capo N") and the song's main shapes as chips. Tapping a chip opens its diagram under the strip; tapping it again closes it. While the song plays, the NOW chord's chip is filled and the NEXT chord's chip is outlined, matched by capo-shape grip at Core quality.
-     - A ☆/★ favourite toggle, and the setup note.
-     - "Strum": the current practice pattern as one line of ↓/↑/· with the live step highlighted, and ~BPM.
-  4. The **cue panel**, layout A as approved in #23.
-     - The NOW chord is large, with the NEXT chord immediately to its right.
-     - Beat dots sit under both chords: ● marks the active beat, ◉ past beats in the current hold, ○ future beats.
-     - Vertical bar lines separate bars.
-     - A line below reads "3 beats to change", or "4.2 s to change" outside the grid. Seconds are wall-clock: they are divided by the playback rate. Before the first play it reads "Loading video…", then "Tap ▶ to start" (or "Capo N on, then tap ▶").
-     - A compact Play/Pause button sits at the right of that line, so playback can start with the player and cues on screen. It stays visible and usable above the Hide-cues and ad covers.
+  3. **One line under the player** (`shapeLine`), with a Capo badge when the song needs one: "Three shapes you know · steady downstrokes", "One new shape here: D", or, with no finished songs to compare, "Three shapes: A, D, E". Known shapes come from songs played to the end (`knownShapes`). Tapping it opens the breakdown; it never opens by itself.
+  4. The **cue panel**.
+     - NOW is a large amber card with the chord's length ("2 bars", "6 beats", or seconds outside the grid). NEXT sits to its right with how soon it comes ("in 3 beats", or "in 4.2 s" outside the grid). Seconds are wall-clock: they are divided by the playback rate.
+     - A strip of the next six chords, each as wide as it lasts.
+     - The current practice pattern as one line of ↓/↑/· with its counts, the live step highlighted.
+     - Before the first play a line reads "Loading video…", then "Tap ▶ to start" (or "Capo N on, then tap ▶"). "provisional chart" and any approx-bars or timing note stay visible.
      - Quick changes get a "quick" marker.
-  5. **Controls**: big Play/Pause, "−10 s" and restart.
+  5. **Controls**: progress and time; 0.75× / 1× when YouTube offers both; restart, "back 5 seconds" and a big Play/Pause.
   6. **Options** (collapsed):
-     - The pattern selector (Start or Next) with the pattern's name and description, labelled a practice suggestion, not the recorded part.
-     - Speed (`getAvailablePlaybackRates`), "Hide cues" for interruptions, and **Count-in on/off** (off by default, saved in `settings.countIn`).
+     - Every available speed (`getAvailablePlaybackRates`), "Hide cues" for interruptions, and **Count-in on/off** (off by default, saved in `settings.countIn`).
      - A **sync nudge** (−/+ 50 ms, showing the current offset), saved per video in localStorage.
-     - A **View** group: Simple (Core) or Full chords, and Capo shapes or Sounding when the capo is above 0. (The NOW/NEXT diagram panel and its Diagrams toggle were removed with the merge; `settings.diagrams` is still stored but unused.)
+     - A **View** group: Simple (Core) or Full chords, and Capo shapes or Sounding when the capo is above 0. (`settings.diagrams` is still stored but unused.)
   7. **Details** (collapsed): setup note, level with its reason (or the override reason), skill focus, sources (links), chart status, beats and bars (how much of the song shows approx bars), corrections (label corrections, and the timing fix's line with each moved change), the strumming note, the video's uploader, and "Open on YouTube".
-- **Song (`#/song/<id>`), landscape at 700 px wide or more:** a two-column grid, with the player, chord strip, controls and options on the left and the cues on the right.
-- **Theme.** Use the palette of layout A and the Mac player: background `#f4f1e8`, text `#222b27`, accent `#22543e`, panels white with `#d4d8cc` borders. Add a dark mode via `prefers-color-scheme`.
+- **Song breakdown.** Opens in place of the cue panel, so the player is never rebuilt. It pauses the song, and closing it carries on if it was playing. It shows the capo, tuning, meter and "Provisional chart"; the setup note; shape diagrams, with new shapes marked; "How it goes", the most repeated chord loop (`commonLoop`); and the strum patterns, with the pattern's description labelled a practice suggestion, not the recorded part.
+- **Song (`#/song/<id>`), landscape at 700 px wide or more:** a two-column grid, with the player, line, controls and options on the left and the cues or breakdown on the right.
+- **Theme.** Dark only, from `theme.css`: stage ground `#14110e`, amber `#f2a93b` for the Jukebox, teal `#5cc8b5` for Bandmaker. Bricolage Grotesque (display), Inter (body) and JetBrains Mono (chords, counts), from Google Fonts with system fallbacks.
 - **Sizing.** Large tap targets of at least 44 px. Respect safe areas with `viewport-fit=cover` and `env(safe-area-inset-*)`.
 - **iOS Home Screen.** Set the `apple-mobile-web-app-capable` meta and add a manifest and `apple-touch-icon`.
 
@@ -489,7 +487,7 @@ The end-user journey is **Jukebox** (founder's choice from the journey prototype
   - **Pre-roll.** Otherwise (most songs, played from the start), the count runs on its own clock. It calls `playVideo()` a learned start-up delay early (default 0.08 s, updated after each pre-roll), then follows the video's clock once it plays.
   - **Warm-up.** A video that hasn't played yet on the page is warmed up first, inside the tap: it plays muted until YouTube reports playing, then pauses back at 0, its mute state is restored and the count starts. The NOW tag reads "Getting the video ready…" meanwhile. This keeps YouTube's loading delay out of the count (founder feedback, 27 October). If the video doesn't start within 8 s, the count is dropped and the "Tap ▶ in the video" hint stays.
   - **Restart** while playing or counting counts in again from the top. Paused, it only seeks to 0, and the next Play counts in.
-  - While counting, the Play buttons read Pause and the NOW tag reads "Count-in". Pause, −10 s, a YouTube pause, the song ending or a hidden page cancel the count.
+  - While counting, the Play button reads Pause and the NOW tag reads "Count-in". Pause, back 5 seconds, a YouTube pause, the song ending or a hidden page cancel the count.
   - On iPhone the clicks may be silent with the ring switch on silent; the numbers still show.
 - **Visibility.** Pause the video when the page becomes hidden.
 - **Gestures.** Both Play buttons call `player.playVideo()` from the click handler. If the player frame is not fully in the viewport, it is first scrolled into view. If `onAutoplayBlocked` fires, show "Tap ▶ in the video to start".
