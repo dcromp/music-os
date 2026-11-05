@@ -974,7 +974,7 @@
   function renderProgress() {
     const total = Core.expectedDuration(S.song, S.video);
     const row = $("progress-row");
-    if (!row || !total) return;
+    if (!row || !total || S.ad) return;
     const shown = Math.max(0, Math.min(total, Math.floor(S.pt)));
     if (S.memo.progress === shown) return;
     S.memo.progress = shown;
