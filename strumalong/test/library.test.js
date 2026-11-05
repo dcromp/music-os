@@ -2,7 +2,7 @@
 // Tests for strumalong/lib/library.js: search, shelves, similar songs and Surprise me.
 // Run: node strumalong/test/run.js (or this file directly).
 const assert = require("node:assert/strict");
-const { search, shelves, similar, surprise, byGenre } = require("../lib/library.js");
+const { search, shelves, similar, surprise, byGenre, knownShapes, shapeLine, commonLoop } = require("../lib/library.js");
 
 const results = { passed: 0, failed: [] };
 function test(name, fn) {
@@ -88,6 +88,52 @@ test("byGenre keeps one genre's songs; all, unknown or missing genres keep every
   assert.deepEqual(ids(byGenre(tagged, "all")), ["a", "b", "c"]);
   assert.deepEqual(ids(byGenre(tagged, "jazz")), ["a", "b", "c"]);
   assert.deepEqual(ids(byGenre(tagged, undefined)), ["a", "b", "c"]);
+});
+
+test("knownShapes collects the core shapes of finished songs only", () => {
+  const list = [S("a", 1, ["A", "D"]), S("b", 2, ["G", "C"]), S("c", 2, ["Em"])];
+  assert.deepEqual([...knownShapes(list, { a: 2, c: 1 })].sort(), ["A", "D", "Em"]);
+  assert.equal(knownShapes(list, {}).size, 0);
+  assert.equal(knownShapes(list, undefined).size, 0);
+  assert.equal(knownShapes(list, { gone: 3 }).size, 0);
+});
+
+test("shapeLine says what is relevant: known, new, or nothing to compare yet", () => {
+  assert.deepEqual(shapeLine(["A", "D", "E"], new Set(["A", "D", "E", "G"])), { text: "Three shapes you know", fresh: [] });
+  assert.deepEqual(shapeLine(["A", "D", "E"], new Set(["A", "E"])), { text: "One new shape here: D", fresh: ["D"] });
+  assert.deepEqual(shapeLine(["A", "D", "E"], new Set(["A"])), { text: "Two new shapes here: D, E", fresh: ["D", "E"] });
+  assert.deepEqual(shapeLine(["A"], new Set(["A"])), { text: "One shape you know", fresh: [] });
+  // No finished songs yet: every shape would read as new, so just name them.
+  assert.deepEqual(shapeLine(["A", "D", "E"], new Set()), { text: "Three shapes: A, D, E", fresh: [] });
+  assert.deepEqual(shapeLine([], new Set(["A"])), { text: "Song breakdown", fresh: [] });
+  assert.equal(shapeLine(["A", "B", "C", "D", "E", "F", "G"], new Set()).text, "7 shapes: A, B, C, D, E, F, G");
+});
+
+const events = labels => labels.map((label, i) => ({ label, s: i * 2, e: i * 2 + 2 }));
+const loopLabels = loop => loop.chords.map(c => c.label);
+
+test("commonLoop finds the shortest sequence that covers the most of the song", () => {
+  const loop = commonLoop(events(["G", "D", "Em", "C", "G", "D", "Em", "C", "G", "D", "Em", "C"]));
+  assert.deepEqual(loopLabels(loop), ["G", "D", "Em", "C"]);
+  assert.equal(loop.repeats, 3);
+  assert.equal(loop.coverage, 1);
+  assert.deepEqual(loopLabels(commonLoop(events(["A", "D", "A", "D", "A", "D"]))), ["A", "D"], "not A D A D");
+});
+
+test("commonLoop reports partial coverage, and the length of each chord in the loop", () => {
+  const verse = [{ label: "A", s: 0, e: 8 }, { label: "D", s: 8, e: 10 }, { label: "A", s: 10, e: 14 }, { label: "D", s: 14, e: 20 }];
+  const loop = commonLoop(verse.concat(events(["E", "F#", "B", "C#"]).map(e => ({ ...e, s: e.s + 20, e: e.e + 20 }))));
+  assert.deepEqual(loop.chords, [{ label: "A", seconds: 6 }, { label: "D", seconds: 4 }]);
+  assert.equal(loop.repeats, 2);
+  assert.equal(loop.coverage, 0.5);
+});
+
+test("commonLoop skips no-chord events, merges what they split, and gives up when nothing repeats", () => {
+  const gaps = events(["G", "N", "G", "C", "X", "G", "C", "N"]);
+  assert.deepEqual(loopLabels(commonLoop(gaps)), ["G", "C"]);
+  assert.equal(commonLoop(events(["A", "B", "C", "D", "E"])), null);
+  assert.equal(commonLoop([]), null);
+  assert.equal(commonLoop(undefined), null);
 });
 
 console.log(`library.test.js: ${results.passed} passed, ${results.failed.length} failed`);

@@ -1,0 +1,73 @@
+/* Music OS Home: a card per mode, filling the screen on a phone. */
+.home {
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: max(24px, env(safe-area-inset-top)) var(--gr) max(14px, env(safe-area-inset-bottom)) var(--gl);
+}
+.wordmark { font-family: var(--font-display); font-weight: 800; font-size: 20px; letter-spacing: -0.02em; }
+.home h1 { margin: 4px 0 0; font-family: var(--font-display); font-weight: 700; font-size: 34px; line-height: 1.05; letter-spacing: -0.03em; }
+.mode-card {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px;
+  border-radius: 28px;
+  overflow: hidden;
+  isolation: isolate;
+}
+.mode-card.jukebox { background: var(--jukebox); color: var(--on-jukebox); --ink: var(--on-jukebox); --tint: rgba(26, 18, 8, 0.12); }
+.mode-card.bandmaker { background: var(--bandmaker); color: var(--on-bandmaker); --ink: var(--on-bandmaker); --tint: rgba(11, 26, 23, 0.12); }
+.mode-art { position: absolute; z-index: -1; right: -40px; top: -30px; color: var(--ink); opacity: 0.18; pointer-events: none; }
+.mode-text { display: flex; flex-direction: column; gap: 6px; }
+.mode-card h2 { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: 30px; line-height: 1; letter-spacing: -0.02em; }
+.mode-card h2 a { color: inherit; text-decoration: none; }
+.mode-card h2 a::after { content: ""; position: absolute; inset: 0; } /* the whole card opens the mode */
+.mode-card p { margin: 0; font-size: 15px; max-width: 250px; }
+.card-action {
+  position: relative;
+  z-index: 1;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 18px;
+  background: var(--tint);
+  color: inherit;
+  text-decoration: none;
+}
+.card-action .play-tile { flex: 0 0 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: var(--ink); color: var(--jukebox); }
+.card-action-text { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.card-action small { font-size: 12px; font-weight: 600; }
+.card-action b { font-size: 15px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-button {
+  position: relative;
+  z-index: 1;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: var(--ink);
+  color: var(--bandmaker);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+}
+:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
+.mode-card :focus-visible { outline-color: var(--ink); }
+.build-note { margin: 0; text-align: center; font-size: 12px; color: var(--muted); }
+.mode-grid { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+@media (min-width: 760px) {
+  .home { max-width: 960px; }
+  .mode-grid { display: grid; grid-template-columns: 1fr 1fr; }
+}

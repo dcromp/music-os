@@ -1,4 +1,4 @@
-/* Strum Along: app shell, hash router, YouTube controller and render loop.
+/* Jukebox (Strum Along): app shell, hash router, YouTube controller and render loop.
  * Spec: docs/STRUMALONG_APP.md ("UI" and "Playback and sync"). Plain ES2020, no build step.
  * Charts are provisional automatic drafts; strum patterns are practice suggestions; beats are
  * estimated and bars approximate. The official YouTube player stays visible with nothing on it. */
@@ -44,6 +44,17 @@
     const abs = Math.abs(ms);
     return abs >= 1000 ? `${sign}${(abs / 1000).toFixed(2)} s` : `${sign}${abs} ms`;
   }
+
+  const svgIcon = (body, size, solid) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" ${solid ? 'fill="currentColor"' : 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"'} aria-hidden="true">${body}</svg>`;
+  const ICON = {
+    back: svgIcon('<path d="M15 5l-7 7 7 7"></path>', 18),
+    shuffle: svgIcon('<path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path>', 16),
+    star: svgIcon('<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"></path>', 18),
+    rewind: svgIcon('<path d="M4 12a8 8 0 1 0 3-6.2M4 4v5h5"></path>', 20),
+    restart: svgIcon('<path d="M6 5v14M19 5L9 12l10 7z"></path>', 20),
+    play: svgIcon('<path d="M7 4l13 8-13 8z"></path>', 22, true),
+    pause: svgIcon('<rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect>', 22, true),
+  };
 
   // ---------------------------------------------------------------- data
   let cataloguePromise = null;
@@ -107,12 +118,13 @@
   function route() {
     const gen = ++routeGen;
     leaveSong();
-    const match = /^#\/(song|ready)\/([^/?#]+)\/?$/.exec(location.hash || "");
+    const match = /^#\/(song|ready|resume)\/([^/?#]+)\/?$/.exec(location.hash || "");
     if (match) {
       let id = "";
       try { id = decodeURIComponent(match[2]); } catch (_) { id = ""; }
       // #/ready/<id> is the old get-ready sheet's address; it now opens the song page, which carries the sheet's contents.
-      showSong(id, gen);
+      // #/resume/<id> is Home's "Pick up where you left off".
+      showSong(id, gen, match[1] === "resume");
     } else showLibrary(gen);
     try { window.scrollTo(0, 0); } catch (_) { /* ignore */ }
   }
@@ -124,17 +136,18 @@
 
   const listedSongs = catalogue => Array.isArray(catalogue && catalogue.songs) ? catalogue.songs.filter(s => s && validSongId(s.id)) : [];
   const genreButtons = () => [["all", "All"], ["rock", "Rock"], ["pop", "Pop"]].map(([g, label]) =>
-    `<button type="button" class="btn small" data-act="genre" data-genre="${g}" aria-pressed="${libGenre === g}">${label}</button>`).join("");
+    `<button type="button" class="pill" data-act="genre" data-genre="${g}" aria-pressed="${libGenre === g}">${label}</button>`).join("");
   const songHref = id => `#/song/${encodeURIComponent(id)}`;
 
   async function showLibrary(gen) {
-    document.title = "Strum Along";
+    document.title = "Jukebox · Music OS";
     app.className = "app view-library";
-    app.innerHTML = `<header class="lib-head"><div class="lib-title"><h1>Strum Along</h1>
-        <button type="button" class="btn" data-act="surprise">🎲 Surprise me</button></div>
-      <p class="tagline">Provisional automatic chord charts. For personal practice.</p>
+    app.innerHTML = `<header class="lib-head"><div class="lib-title">
+        <a class="icon-btn" href="./" aria-label="Back to home">${ICON.back}</a>
+        <h1 class="eyebrow">Jukebox</h1>
+        <button type="button" class="btn-surprise" data-act="surprise">${ICON.shuffle} Surprise me</button></div>
       <input id="lib-search" class="lib-search" type="search" placeholder="Search songs or artists" aria-label="Search songs or artists" autocomplete="off" autocorrect="off" spellcheck="false" value="${esc(libQuery)}">
-      <span class="seg genre-seg" role="group" aria-label="Genre">${genreButtons()}</span></header>
+      <span class="genre-seg" role="group" aria-label="Genre">${genreButtons()}</span></header>
       <div id="lib-body"><p class="muted">Loading songs…</p></div>`;
     let catalogue;
     try { catalogue = await getCatalogue(); }
@@ -165,7 +178,7 @@
           <span class="resume-icon" aria-hidden="true">${t ? "▶" : "↻"}</span><span>${t ? "Resume" : "Play again:"} <b>${esc(lastSong.title)}</b>${t ? ` at ${Core.formatTime(t)}` : ""}</span></a>`;
       }
       for (const shelf of Library.shelves({ groups: catalogue && catalogue.groups, songs }, store.favourites())) {
-        html += `<section class="group shelf-group"><h2>${esc(shelf.title)}</h2>${shelf.note ? `<p class="group-note">${esc(shelf.note)}</p>` : ""}
+        html += `<section class="group shelf-group"><div class="shelf-head"><h2>${esc(shelf.title)}</h2>${shelf.note ? `<p class="group-note">${esc(shelf.note)}</p>` : ""}</div>
           <ul class="cards shelf">${shelf.songs.map(songCard).join("")}</ul></section>`;
       }
       if (!songs.length) html += `<p class="msg">${libGenre === "all" ? "No songs are listed yet." : `No ${esc(libGenre)} songs are listed yet.`}</p>`;
@@ -174,12 +187,13 @@
     body.innerHTML = html;
   }
 
-  function songCard(s) {
+  function songCard(s, i) {
     const chips = (Array.isArray(s.core_shapes) ? s.core_shapes : []).map(c => `<span class="chip">${esc(c)}</span>`).join("");
     const badges = [];
     if (num(s.capo) && s.capo > 0) badges.push(`<span class="badge capo">Capo ${esc(s.capo)}</span>`);
     if (s.playable_embed === false) badges.push(`<span class="badge warn">${/unchecked/i.test(s.embed_note) ? "timing unchecked" : "alternate video"}</span>`);
     return `<li><a class="card" href="${songHref(s.id)}">
+      <span class="card-art tint-${i % 4}" aria-hidden="true">${esc(String(s.title || "").charAt(0))}</span>
       <span class="card-main"><span class="card-title">${esc(s.title)}</span><span class="card-artist">${esc(s.artist)}</span></span>
       ${chips ? `<span class="chips" aria-label="Core shapes">${chips}</span>` : ""}
       ${badges.length ? `<span class="card-meta">${badges.join(" ")}</span>` : ""}
@@ -197,9 +211,9 @@
   const favouriteLabel = id => store.favourites().includes(id) ? "★ Favourite" : "☆ Favourite";
 
   // ---------------------------------------------------------------- song page
-  async function showSong(id, gen) {
+  async function showSong(id, gen, resuming) {
     app.className = "app view-song";
-    app.innerHTML = `<header class="topbar"><a class="back" href="#/">‹ Songs</a><div class="top-title"><h1>Loading…</h1></div></header>
+    app.innerHTML = `<header class="topbar"><a class="icon-btn" href="#/" aria-label="Back to songs">${ICON.back}</a><div class="top-title"><h1>Loading…</h1></div></header>
       <p class="muted pad">Loading song…</p>`;
     if (!validSongId(id)) { songError("Song not found.", false); return; }
     let song;
@@ -212,11 +226,16 @@
     }
     if (gen !== routeGen) return;
     if (!song || !Array.isArray(song.chords)) { songError("This song's chart is missing or damaged.", false); return; }
+    if (resuming) {
+      const point = store.resumePoint([{ id: song.id, duration_seconds: song.recording && song.recording.duration_seconds }]);
+      if (point) resumeRequest = { id: song.id, t: point.t };
+      history.replaceState(null, "", songHref(song.id));
+    }
     startSong(song, gen);
   }
 
   function songError(message, retry) {
-    app.innerHTML = `<header class="topbar"><a class="back" href="#/">‹ Songs</a><div class="top-title"><h1>Strum Along</h1></div></header>
+    app.innerHTML = `<header class="topbar"><a class="icon-btn" href="#/" aria-label="Back to songs">${ICON.back}</a><div class="top-title"><h1>Jukebox</h1></div></header>
       <p class="msg error">${esc(message)}</p>${retry ? `<p><button type="button" class="btn" data-act="reload">Try again</button></p>` : ""}`;
   }
 
@@ -224,7 +243,7 @@
   // every change goes through S.session.
   const SESSION_FIELDS = ["song", "videos", "patterns", "video", "state", "played", "ready", "failed", "ad", "rate", "pt", "timeline", "patternId", "nudgeMs"];
   function pageState(session, gen) {
-    const page = { gen, session, cuesHidden: false, raf: 0, poll: 0, loadTimer: 0, playTimer: 0, msgs: {}, memo: {}, epoch: session.epoch, strumCells: [] };
+    const page = { gen, session, cuesHidden: false, breakdownOpen: false, resumeAfterBreakdown: false, known: null, raf: 0, poll: 0, loadTimer: 0, playTimer: 0, msgs: {}, memo: {}, epoch: session.epoch, strumCells: [] };
     for (const key of SESSION_FIELDS) Object.defineProperty(page, key, { get: () => session[key], enumerable: true });
     return page;
   }
@@ -233,9 +252,11 @@
     const resume = resumeRequest && resumeRequest.id === song.id && num(resumeRequest.t) ? resumeRequest.t : 0;
     resumeRequest = null;
     S = pageState(Session.createSession({ song, store, resume }), gen);
-    document.title = `${song.title || "Song"} · Strum Along`;
+    document.title = `${song.title || "Song"} · Jukebox`;
     app.innerHTML = songSkeleton(song);
     renderStrumPanel();
+    renderBarLine();
+    loadKnownShapes();
     renderViewControls();
     renderSync();
     renderDetails();
@@ -259,43 +280,55 @@
 
   function songSkeleton(song) {
     const capo = num(song.capo) && song.capo > 0 ? song.capo : 0;
+    const level = levelOf(song);
+    const bpm = song.rhythm && num(song.rhythm.bpm) ? Math.round(song.rhythm.bpm) : null;
+    const sub = [song.artist, level ? `Level ${level.level}` : "", bpm ? `~${bpm} BPM` : ""].filter(Boolean).join(" · ");
+    const fav = store.favourites().includes(song.id);
     return `<header class="topbar">
-      <a class="back" href="#/" aria-label="Back to songs">‹ Songs</a>
-      <div class="top-title"><h1>${esc(song.title)}</h1><p>${esc(song.artist)}</p></div>
-      <span class="top-badges">${capo ? `<span class="badge capo" id="capo-badge">Capo ${capo}</span>` : ""}${levelBadge(song)}<span class="badge prov" title="Automatic chord chart; not reviewed">Provisional</span></span>
+      <a class="icon-btn" href="#/" aria-label="Back to songs">${ICON.back}</a>
+      <div class="top-title"><h1>${esc(song.title)}</h1><p>${esc(sub)}</p></div>
+      <button type="button" class="icon-btn fav" data-act="fav" data-id="${esc(song.id)}" aria-pressed="${fav}" aria-label="Favourite">${ICON.star}</button>
     </header>
     <div class="song-grid">
       <div class="col-video">
         <div class="player-frame"><div id="yt-player"></div></div>
         <div id="player-status" class="player-status" role="status" aria-live="polite"></div>
-        ${songStrip(song)}
+        <button type="button" id="bar-line" class="bar-line" data-act="breakdown" aria-expanded="false" aria-controls="breakdown">
+          ${capo ? `<span class="badge capo" id="capo-badge">Capo ${capo}</span>` : `<span id="bar-dot" class="bar-dot"></span>`}
+          <span id="bar-text" class="bar-text"></span><span id="bar-action" class="bar-action">Breakdown ›</span>
+        </button>
       </div>
       <div class="col-cues">
         <section id="after-panel" class="panel after-panel" aria-label="Song finished" hidden></section>
-        <section id="cue-panel" class="panel cue-panel" aria-label="Chord cues">
+        <section id="breakdown" class="breakdown" aria-label="Song breakdown" hidden></section>
+        <section id="cue-panel" class="cue-panel" aria-label="Chord cues">
           <div id="cue-live" class="cue-live">
             <div class="cue-row">
               <div class="cue cue-now"><div class="cue-cap">NOW <span id="now-quick" class="tag quick" hidden>quick</span><span id="cue-note" class="tag note" hidden></span></div>
-                <div id="now-chord" class="cue-chord len-s">—</div><div id="now-dots" class="dots" role="img" aria-label=""></div></div>
+                <div id="now-chord" class="cue-chord len-s">—</div><div id="now-sub" class="cue-sub"></div></div>
               <div id="next-col" class="cue cue-next"><div class="cue-cap">NEXT <span id="next-quick" class="tag quick" hidden>quick</span></div>
-                <div id="next-chord" class="cue-chord len-s">—</div><div id="next-dots" class="dots" role="img" aria-label=""></div></div>
+                <div id="next-chord" class="cue-chord len-s">—</div><div id="next-sub" class="cue-sub"></div></div>
             </div>
-            <div class="cue-foot"><span id="cue-count" class="cue-count"></span><span id="cue-hint" class="cue-hint"></span><button type="button" id="btn-play-cue" class="btn btn-play cue-play" data-act="play" disabled aria-label="Play">▶ Play</button></div>
+            <div id="chord-strip" class="chord-strip" aria-hidden="true"></div>
+            <div id="strip-strum" class="strip-strum" hidden></div>
+            <div class="cue-foot"><span id="cue-count" class="cue-count"></span><span id="cue-hint" class="cue-hint"></span></div>
           </div>
           <div id="cue-cover" class="cue-cover" hidden></div>
           <div id="count-big" class="count-big" role="status" aria-live="assertive" hidden></div>
         </section>
       </div>
       <div class="col-controls">
-        <section class="panel controls" aria-label="Playback controls">
+        <section class="controls" aria-label="Playback controls">
+          <div id="progress-row" class="progress-row" hidden><span id="time-now">0:00</span><span class="progress"><span id="progress-fill" class="progress-fill"></span></span><span id="time-end"></span></div>
           <div class="transport">
-            <button type="button" id="btn-play" class="btn btn-play" data-act="play" disabled>▶ Play</button>
-            <button type="button" id="btn-back" class="btn" data-act="back10" disabled aria-label="Back 10 seconds">−10 s</button>
-            <button type="button" id="btn-restart" class="btn" data-act="restart" disabled aria-label="Restart from the beginning">Restart</button>
+            <span id="speed-seg" class="speed-seg" role="group" aria-label="Playback speed" hidden></span>
+            <span class="transport-gap"></span>
+            <button type="button" id="btn-restart" class="round" data-act="restart" disabled aria-label="Restart from the beginning">${ICON.restart}</button>
+            <button type="button" id="btn-back" class="round" data-act="back5" disabled aria-label="Back 5 seconds">${ICON.rewind}</button>
+            <button type="button" id="btn-play" class="round play" data-act="play" disabled aria-label="Play">${ICON.play}</button>
           </div>
         </section>
-        <details class="panel options" id="options"><summary>Options: pattern, sync, speed, view, count-in</summary>
-          <div id="pattern-opts"></div>
+        <details class="panel options" id="options"><summary>Options: sync, view, count-in, all speeds</summary>
           <div class="row">
             <label id="speed-wrap" class="speed" hidden>Speed <select id="sel-speed" aria-label="Playback speed"></select></label>
             <button type="button" id="btn-hide" class="btn" data-act="hide" aria-pressed="false">Hide cues</button>
@@ -329,32 +362,84 @@
     </div>`;
   }
 
-  // Everything the old get-ready sheet showed, kept under the video (#53, founder's pick C on 28 October):
-  // the core shapes as chips that open a diagram and light up with the chord being played, and the strum.
-  function songStrip(song) {
-    const capo = num(song.capo) && song.capo > 0 ? song.capo : 0;
-    const d = song.difficulty || {};
-    const shapes = Array.isArray(d.main_shapes) ? d.main_shapes.filter(x => typeof x === "string" && x) : [];
-    const bpm = song.rhythm && num(song.rhythm.bpm) ? Math.round(song.rhythm.bpm) : null;
-    const fav = store.favourites().includes(song.id);
-    return `<section class="song-strip" aria-label="Chords and strum">
-      <div class="strip-row"><span class="strip-label">${capo ? `Capo ${esc(capo)}` : "Chords"}</span>
-        <span class="strip-chips">${shapes.map(l => `<button type="button" class="chord-chip" data-act="chip" data-chord="${esc(l)}" aria-expanded="false">${esc(l)}</button>`).join("")}</span>
-        <button type="button" class="btn small fav-star" data-act="fav" data-id="${esc(song.id)}" aria-pressed="${fav}" aria-label="Favourite">${fav ? "★" : "☆"}</button></div>
-      <div id="chip-diagram" class="chip-diagram" hidden></div>
-      ${song.setup_note ? `<p class="hint strip-note">${esc(song.setup_note)}</p>` : ""}
-      <div id="strip-strum" class="strip-row" hidden><span class="strip-label">Strum</span><span id="strip-strokes" class="strip-strokes"></span>${bpm ? `<span class="strip-bpm">~${bpm} BPM</span>` : ""}</div>
-    </section>`;
+  const mainShapes = song => {
+    const shapes = song.difficulty && song.difficulty.main_shapes;
+    return Array.isArray(shapes) ? shapes.filter(x => typeof x === "string" && x) : [];
+  };
+
+  // ---------------------------------------------------------------- the line under the video and the breakdown
+  // One relevant line, setup merged into playing: tapping it opens the breakdown, which never opens by itself.
+  function loadKnownShapes() {
+    const page = S;
+    getCatalogue().then(catalogue => {
+      if (S !== page) return;
+      page.known = Library.knownShapes(listedSongs(catalogue), store.plays());
+      renderBarLine();
+      if (page.breakdownOpen) renderBreakdown();
+    }).catch(() => {});
+  }
+  function shapeInfo() { return Library.shapeLine(mainShapes(S.song), S.known); }
+  const patternName = pattern => String(pattern.name || "").split(":").slice(1).join(":").trim();
+
+  function renderBarLine() {
+    const text = $("bar-text");
+    if (!text) return;
+    const info = shapeInfo();
+    const pattern = S.patterns.find(p => p.id === S.patternId);
+    const style = !info.fresh.length && pattern ? patternName(pattern) : "";
+    text.textContent = style ? `${info.text} · ${style}` : info.text;
+    const dot = $("bar-dot");
+    if (dot) dot.classList.toggle("fresh", info.fresh.length > 0);
+    $("bar-action").textContent = S.breakdownOpen ? "Hide" : "Breakdown ›";
+    $("bar-line").setAttribute("aria-expanded", String(S.breakdownOpen));
+  }
+
+  // Looking at the breakdown pauses the song; closing it carries on if it was playing.
+  function setBreakdown(open) {
+    if (!S || S.breakdownOpen === open) return;
+    S.breakdownOpen = open;
+    if (open) {
+      S.resumeAfterBreakdown = S.session.playing || Boolean(S.count);
+      cancelCountIn();
+      if (S.session.playing) S.session.pause();
+      renderBreakdown();
+    }
+    setHidden($("breakdown"), !open);
+    setHidden($("cue-panel"), open);
+    renderBarLine();
+    if (!open && S.resumeAfterBreakdown) { S.resumeAfterBreakdown = false; S.session.play(); }
+  }
+
+  function renderBreakdown() {
+    const box = $("breakdown");
+    if (!box) return;
+    const song = S.song, capo = num(song.capo) && song.capo > 0 ? song.capo : 0;
+    const note = String(song.setup_note || "");
+    const tuning = /^[^.(]*tuning/i.exec(note);
+    const rest = note.includes(".") ? note.slice(note.indexOf(".") + 1).trim() : "";
+    const meter = song.rhythm && song.rhythm.meter_label;
+    const facts = [capo ? `Capo ${capo}` : "No capo", tuning && tuning[0].trim(), meter, "Provisional chart"].filter(Boolean);
+    const info = shapeInfo();
+    const shapes = mainShapes(song);
+    const loop = Library.commonLoop(S.timeline);
+    const loopNote = !loop ? "" : loop.coverage >= 0.5 ? "This loop repeats through most of the song."
+      : `The most repeated run of chords: it comes round ${loop.repeats} times.`;
+    const pattern = S.patterns.find(p => p.id === S.patternId);
+    box.innerHTML = `<div class="facts">${facts.map(f => `<span class="fact">${esc(f)}</span>`).join("")}</div>
+      ${rest ? `<p class="hint">${esc(rest)}</p>` : ""}
+      ${shapes.length ? `<section><h2 class="bd-title">Shapes</h2><div class="shape-grid">${shapes.map(l => shapeCard(l, info.fresh.includes(l))).join("")}</div></section>` : ""}
+      ${loop ? `<section><h2 class="bd-title">How it goes</h2><div class="chord-strip">${loop.chords.map((c, i) =>
+        `<span class="strip-cell${i ? "" : " now"}" style="flex-grow:${Math.max(1, Math.round(c.seconds))}">${esc(Core.displayLabel(c.label))}</span>`).join("")}</div><p class="hint">${esc(loopNote)}</p></section>` : ""}
+      ${S.patterns.length ? `<section><h2 class="bd-title">Strum pattern</h2><div class="pattern-list">${S.patterns.map(p =>
+        `<button type="button" class="pattern" data-act="pattern" data-p="${esc(p.id)}" aria-pressed="${p.id === S.patternId}"><span>${esc(p.name || "")}</span><span class="pattern-strokes">${esc(p.strokes.join(" "))}</span></button>`).join("")}</div>
+        <p class="hint">${esc((pattern && pattern.description) || "")} A practice suggestion, not the recorded part.</p></section>` : ""}
+      <button type="button" class="btn-primary" data-act="breakdown">Back to playing</button>`;
   }
 
   function levelOf(song) {
     const d = song && song.difficulty;
     const level = d && Number.isInteger(d.level) ? d.level : Number.isInteger(song && song.level) ? song.level : null;
     return level >= 1 && level <= 5 ? { level, label: d && typeof d.label === "string" ? d.label : "" } : null;
-  }
-  function levelBadge(song) {
-    const l = levelOf(song);
-    return l ? `<span class="badge level" title="${esc(l.label)}">Level ${l.level}</span>` : "";
   }
 
   // ---------------------------------------------------------------- player
@@ -394,6 +479,7 @@
           onPlaybackRateChange: live(event => {
             const sel = $("sel-speed"); if (sel) sel.value = String(event.data);
             S.session.rateChange(event.data);
+            renderSpeedSeg();
             frame();
           }),
         },
@@ -417,10 +503,24 @@
     S.session.refreshRate();
     if (!wrap || !sel) return;
     const rates = S.session.availableRates();
+    renderSpeedSeg(rates);
     if (rates.length <= 1) { wrap.hidden = true; return; }
     sel.innerHTML = rates.map(r => `<option value="${r}">${r === 1 ? "1× (normal)" : `${r}×`}</option>`).join("");
     sel.value = String(S.rate);
     wrap.hidden = false;
+  }
+
+  // The two speeds worth a tap while playing; Options keeps every speed YouTube offers.
+  const QUICK_RATES = [0.75, 1];
+  function renderSpeedSeg(rates) {
+    const seg = $("speed-seg");
+    if (!seg) return;
+    if (rates) {
+      const usable = QUICK_RATES.every(r => rates.includes(r));
+      seg.innerHTML = usable ? QUICK_RATES.map(r => `<button type="button" data-act="speed" data-r="${r}" aria-label="Playback speed ${r}×">${r}×</button>`).join("") : "";
+      seg.hidden = !usable;
+    }
+    for (const b of seg.querySelectorAll("button")) b.setAttribute("aria-pressed", String(Number(b.dataset.r) === S.rate));
   }
 
   function onState(code) {
@@ -505,6 +605,7 @@
   function togglePlay() {
     if (!S || !S.session.controllable) return;
     if (S.session.playing || S.count) { cancelCountIn(); if (S.session.playing) S.session.pause(); return; }
+    if (S.breakdownOpen) { S.resumeAfterBreakdown = false; setBreakdown(false); }
     // Never start audio with the official player off screen (the lower Play button can be reached
     // after scrolling): bring the player, and the "Tap ▶ in the video" hint under it, into view first.
     const f = document.querySelector(".player-frame");
@@ -718,8 +819,9 @@
     // A new timeline, rate, video or failure makes every cached render key stale.
     if (S.epoch !== S.session.epoch) { S.epoch = S.session.epoch; S.memo = {}; }
     renderCue(cue);
+    renderChordStrip(cue);
     renderStrumStep(t);
-    renderChips(cue);
+    renderProgress();
   }
 
   function cueMode() {
@@ -735,7 +837,7 @@
     if (S.state === 3) return "Buffering…";
     if (S.state === 2) return "Paused";
     if (S.state === 0) return "Ended";
-    if (S.state === -1 || S.state === 5) return S.ready ? "Tap ▶ to start" : "Waiting · loading";
+    if (S.state === -1 || S.state === 5) return !S.ready ? "Waiting · loading" : S.played ? "Tap ▶ to start" : ""; // before the first play, the line under the cues says it
     return "";
   }
   const partKey = p => p ? `${p.idx}:${p.kind}:${p.display}:${p.dotOffset}:${p.active}:${p.dots.length}:${p.more}:${p.quick}:${p.barStart}` : "-";
@@ -776,7 +878,7 @@
       S.memo.now = nowKey;
       setChord($("now-chord"), now ? now.display : "—", Boolean(now && now.kind === "chord"));
       setHidden($("now-quick"), !(now && now.quick));
-      setDots($("now-dots"), now, true);
+      $("now-sub").textContent = holdText(now, cue.beatsPerBar);
     }
     const nextText = next ? next.display : now && now.kind === "end" ? "" : "End";
     const nextKey = `${partKey(next)}:${nextText}`;
@@ -784,12 +886,12 @@
       S.memo.next = nextKey;
       setChord($("next-chord"), nextText, Boolean(next && next.kind === "chord"));
       setHidden($("next-quick"), !(next && next.quick));
-      setDots($("next-dots"), next, false);
-      $("next-col").classList.toggle("bar-start", Boolean(next && next.barStart === true));
     }
+    const nextSub = changeText(cue);
+    if (S.memo.nextSub !== nextSub) { S.memo.nextSub = nextSub; $("next-sub").textContent = nextSub; }
     const count = countText(cue);
     if (S.memo.count !== count) { S.memo.count = count; $("cue-count").textContent = count; }
-    const hints = [];
+    const hints = ["provisional chart"];
     if (cue.inBeatGrid && cue.approxBars) hints.push("approx bars");
     if (S.song.rhythm && S.song.rhythm.beats_per_bar_assumed) hints.push(`${cue.beatsPerBar} beats/bar assumed`);
     if (S.video && S.video.timing_checked === false) hints.push("timing unchecked");
@@ -813,11 +915,11 @@
     try { const songs = listedSongs(await getCatalogue()); others = Library.similar(songs, songs.find(x => x.id === page.song.id), 5); } catch (_) { others = []; }
     const box = $("after-panel");
     if (S !== page || !box || S.state !== 0) return;
-    box.innerHTML = `<h2 class="after-title">Nice one 🎸</h2>
+    box.innerHTML = `<h2 class="after-title">Nice one</h2>
       <p class="hint">${esc(page.song.title)} · played ${count === 1 ? "once" : `${count} times`} on this phone</p>
-      <div class="row"><button type="button" class="btn btn-play" data-act="again">↻ Again</button>
+      <div class="row"><button type="button" class="btn btn-play" data-act="again">Again</button>
         <button type="button" class="btn" data-act="fav" data-id="${esc(page.song.id)}" aria-pressed="${store.favourites().includes(page.song.id)}">${favouriteLabel(page.song.id)}</button>
-        <button type="button" class="btn" data-act="surprise">🎲 Surprise me</button></div>
+        <button type="button" class="btn" data-act="surprise">Surprise me</button></div>
       ${others.length ? `<h3 class="after-sub">Another like this</h3><ul class="cards after-list">${others.map(songCard).join("")}</ul>` : ""}`;
     setHidden(box, false);
     box.scrollIntoView({ block: "nearest", behavior: "smooth" });
@@ -833,10 +935,20 @@
     }
     if (now.kind === "end") return "End of chart";
     if (now.kind === "empty") return "No chord chart";
-    const target = now.idx < 0 ? "first chord" : cue.toEnd ? "end" : "change";
-    if (cue.beatsUntilChange !== null) return `${plural(cue.beatsUntilChange, "beat")} to ${target}`;
+    return "";
+  }
+
+  // Under NOW: how long this chord lasts, in whole bars when it fills them.
+  function holdText(part, beatsPerBar) {
+    if (!part || part.idx < 0) return "";
+    if (num(part.beats) && part.beats > 0) return part.beats % beatsPerBar === 0 ? plural(part.beats / beatsPerBar, "bar") : plural(part.beats, "beat");
+    return num(part.seconds) ? `${(part.seconds / S.rate).toFixed(1)} s` : "";
+  }
+  // Under NEXT: how soon it comes.
+  function changeText(cue) {
+    if (cue.beatsUntilChange !== null) return `in ${plural(cue.beatsUntilChange, "beat")}`;
     // Media seconds / playback rate = wall-clock seconds the player will take.
-    if (cue.secondsUntilChange !== null) return `${(cue.secondsUntilChange / S.rate).toFixed(1)} s to ${target}`;
+    if (cue.secondsUntilChange !== null) return `in ${(cue.secondsUntilChange / S.rate).toFixed(1)} s`;
     return "";
   }
 
@@ -845,32 +957,31 @@
     el.className = `cue-chord ${isChord ? sizeClass(text) : "word"}`;
   }
 
-  const GLYPH = { past: "◉", active: "●", future: "○" };
-  function setDots(el, part, isNow) {
-    if (!part || !part.dots.length) {
-      // Outside the beat grid: show the hold length in seconds (the count line counts down).
-      const seconds = part && part.idx >= 0 && num(part.seconds);
-      el.className = seconds ? "dots seconds" : "dots";
-      el.textContent = seconds ? `${(part.seconds / S.rate).toFixed(1)} s` : "";
-      el.style.removeProperty("--units");
-      el.setAttribute("aria-label", seconds ? `${(part.seconds / S.rate).toFixed(1)} seconds` : "");
-      return;
-    }
-    el.className = "dots";
-    const bars = new Set(part.barBefore);
-    let units = 0.4;
-    let html = "";
-    if (part.dotOffset > 0) { html += `<span class="dot-more" aria-hidden="true">…</span>`; units += 1.1; }
-    part.dots.forEach((dot, j) => {
-      if (bars.has(j)) { html += `<span class="bar" aria-hidden="true"></span>`; units += 0.55; }
-      html += `<span class="dot ${dot.state}" aria-hidden="true">${GLYPH[dot.state]}</span>`;
-      units += 1.1;
-    });
-    if (part.more > 0) { html += `<span class="dot-more" aria-hidden="true">+${part.more}</span>`; units += 0.45 * (String(part.more).length + 1) + 0.4; }
-    el.innerHTML = html;
-    // Dots grow to fill the column (capped in CSS) so short holds read from a music stand.
-    el.style.setProperty("--units", units.toFixed(2));
-    el.setAttribute("aria-label", isNow && part.active >= 0 ? `Beat ${part.active + 1} of ${part.beats}` : plural(part.beats, "beat"));
+  // The chords coming up, each as wide as it lasts. Redrawn only when the chord changes.
+  const STRIP_CHORDS = 6;
+  function renderChordStrip(cue) {
+    const box = $("chord-strip");
+    if (!box) return;
+    const from = cue.now && cue.now.idx >= 0 ? cue.now.idx : cue.next ? cue.next.idx : -1;
+    const started = Boolean(cue.now && cue.now.idx >= 0);
+    const key = `${from}:${started}`;
+    if (S.memo.strip === key) return;
+    S.memo.strip = key;
+    box.innerHTML = from < 0 ? "" : S.timeline.slice(from, from + STRIP_CHORDS).map((e, i) =>
+      `<span class="strip-cell${i === 0 && started ? " now" : ""}" style="flex-grow:${Math.max(1, Math.round(e.e - e.s))}">${e.label === "N" ? "–" : esc(Core.displayLabel(e.label))}</span>`).join("");
+  }
+
+  function renderProgress() {
+    const total = Core.expectedDuration(S.song, S.video);
+    const row = $("progress-row");
+    if (!row || !total) return;
+    const shown = Math.max(0, Math.min(total, Math.floor(S.pt)));
+    if (S.memo.progress === shown) return;
+    S.memo.progress = shown;
+    row.hidden = false;
+    $("time-now").textContent = Core.formatTime(shown);
+    $("time-end").textContent = Core.formatTime(total);
+    $("progress-fill").style.width = `${(shown / total * 100).toFixed(1)}%`;
   }
 
   function chordListHTML() {
@@ -883,28 +994,21 @@
   }
 
   // ---------------------------------------------------------------- strum
-  // One line of strokes in the strip (the live step lights up); the pattern choice and its notes live in Options.
+  // One line of strokes under the cues (the live step lights up); the pattern choice lives in the breakdown.
   function renderStrumPanel() {
-    const row = $("strip-strum"), line = $("strip-strokes"), opts = $("pattern-opts");
-    if (!row || !line) return;
+    const row = $("strip-strum");
+    if (!row) return;
     const pattern = S.patterns.find(p => p.id === S.patternId);
-    if (!pattern) { row.hidden = true; line.innerHTML = ""; if (opts) opts.innerHTML = ""; S.strumCells = []; return; }
+    if (!pattern) { row.hidden = true; row.innerHTML = ""; S.strumCells = []; return; }
     row.hidden = false;
     const counts = Array.isArray(pattern.counts) ? pattern.counts : [];
-    const label = pattern.strokes.map((s, i) => `${counts[i] !== undefined ? counts[i] : i + 1} ${s === "D" ? "down" : s === "U" ? "up" : "skip"}`).join(", ");
-    line.setAttribute("role", "img");
-    line.setAttribute("aria-label", `Suggested practice pattern, not the recorded part: ${label}`);
-    line.innerHTML = pattern.strokes.map((stroke, i) => `<span class="stroke${stroke === "D" || stroke === "U" ? "" : " rest"}" data-i="${i}" aria-hidden="true">${stroke === "D" || stroke === "U" ? Core.strokeGlyph(stroke) : "·"}</span>`).join("");
-    S.strumCells = Array.from(line.querySelectorAll(".stroke"));
+    const count = i => counts[i] !== undefined ? counts[i] : i + 1;
+    const label = pattern.strokes.map((s, i) => `${count(i)} ${s === "D" ? "down" : s === "U" ? "up" : "skip"}`).join(", ");
+    row.setAttribute("role", "img");
+    row.setAttribute("aria-label", `Suggested practice pattern, not the recorded part: ${label}`);
+    row.innerHTML = pattern.strokes.map((stroke, i) => `<span class="stroke${stroke === "D" || stroke === "U" ? "" : " rest"}" data-i="${i}" aria-hidden="true"><small>${esc(count(i))}</small>${stroke === "D" || stroke === "U" ? Core.strokeGlyph(stroke) : "·"}</span>`).join("");
+    S.strumCells = Array.from(row.querySelectorAll(".stroke"));
     S.memo.strum = null;
-    if (!opts) return;
-    const selector = S.patterns.length > 1 ? `<span class="seg" role="group" aria-label="Practice pattern">${S.patterns.map((p, i) => {
-      const short = String(p.name || "").split(":")[0].trim() || (i ? "Next" : "Start");
-      return `<button type="button" class="btn small" data-act="pattern" data-p="${esc(p.id)}" aria-pressed="${p.id === pattern.id}">${esc(short)}</button>`;
-    }).join("")}</span>` : "";
-    const name = String(pattern.name || "").includes(":") ? String(pattern.name).split(":").slice(1).join(":").trim() : String(pattern.name || "");
-    opts.innerHTML = `<div class="row"><span class="row-label">Pattern</span>${selector}</div>
-      <p class="hint">${name ? `<b>${esc(name)}.</b> ` : ""}${esc(pattern.description || "")} A practice suggestion, not the recorded part.</p>`;
   }
 
   function renderStrumStep(t) {
@@ -918,64 +1022,28 @@
     S.strumCells.forEach((cell, i) => cell.classList.toggle("on", i === step));
   }
 
-  // ---------------------------------------------------------------- chord chips
-  // Light the chips that match the NOW and NEXT grips (the capo-shape fingering, as the chips are named).
-  function renderChips(cue) {
-    const chips = app.querySelectorAll(".chord-chip");
-    if (!chips.length) return;
-    const live = cueMode() === "live" && S.played;
-    const capo = num(S.song.capo) && S.song.capo > 0 ? S.song.capo : 0;
-    const grip = p => p && p.idx >= 0 && p.kind === "chord" ? Core.shapeLabel(p.sounding, { capo, view: "shapes", quality: "core" }) : null;
-    const nowGrip = live ? grip(cue.now) : null, nextGrip = live ? grip(cue.next) : null;
-    const key = `${nowGrip}|${nextGrip}`;
-    if (S.memo.chips === key) return;
-    S.memo.chips = key;
-    for (const chip of chips) {
-      chip.classList.toggle("now", chip.dataset.chord === nowGrip);
-      chip.classList.toggle("next", chip.dataset.chord === nextGrip && nextGrip !== nowGrip);
-    }
-  }
-
-  // A tapped chip opens its diagram under the strip; tapping it again closes it.
-  function toggleChipDiagram(chip) {
-    const box = $("chip-diagram");
-    if (!box) return;
-    const label = chip.dataset.chord;
-    const open = box.hidden || box.dataset.chord !== label;
-    for (const c of app.querySelectorAll(".chord-chip")) c.setAttribute("aria-expanded", String(open && c === chip));
-    box.dataset.chord = open ? label : "";
-    box.innerHTML = open ? diagramHTML(label, "", 120, label) : "";
-    box.hidden = !open;
-  }
-
-  function diagramHTML(label, role, size, gripLabel) {
-    if (!label || label === "N" || label === "X") {
-      return `<figure class="diagram empty"><figcaption><span class="d-role">${role}</span> <span class="d-name">${label ? esc(Core.displayLabel(label)) : "—"}</span></figcaption></figure>`;
-    }
+  // ---------------------------------------------------------------- shape diagrams
+  function shapeCard(label, isNew) {
     const lib = window.StrumShapes;
     let shape = null, svg = "";
-    try { shape = lib && typeof lib.getShape === "function" ? lib.getShape(gripLabel || label) : null; } catch (_) { shape = null; }
+    try { shape = lib && typeof lib.getShape === "function" ? lib.getShape(label) : null; } catch (_) { shape = null; }
     if (shape && typeof lib.renderShapeSVG === "function") {
-      try { svg = String(lib.renderShapeSVG(shape, { size }) || ""); } catch (_) { svg = ""; }
+      try { svg = String(lib.renderShapeSVG(shape, { size: 96 }) || ""); } catch (_) { svg = ""; }
     }
-    const capo = num(S.song.capo) && S.song.capo > 0 ? S.song.capo : 0;
-    const capoNote = gripLabel && gripLabel !== label ? `<p class="d-note">${esc(gripLabel)} shape, capo ${esc(capo)}</p>`
-      : capo > 0 ? `<p class="d-note">Shape with capo ${esc(capo)}</p>` : "";
-    return `<figure class="diagram${role === "Now" ? " now" : ""}"><figcaption><span class="d-role">${role}</span> <span class="d-name">${esc(label)}</span></figcaption>
+    return `<figure class="diagram${isNew ? " fresh" : ""}"><figcaption class="d-name">${esc(label)}${isNew ? " · new" : ""}</figcaption>
       ${svg ? `<div class="d-svg">${svg}</div>` : `<p class="muted d-missing">No diagram</p>`}
-      ${shape && shape.note ? `<p class="d-note">${esc(shape.note)}</p>` : ""}${svg ? capoNote : ""}</figure>`;
+      ${shape && shape.note ? `<p class="d-note">${esc(shape.note)}</p>` : ""}</figure>`;
   }
 
   // ---------------------------------------------------------------- controls and details
   function updateTransport() {
     if (!S) return;
     const enabled = S.session.controllable;
-    for (const id of ["btn-play", "btn-play-cue", "btn-back", "btn-restart"]) { const b = $(id); if (b) b.disabled = !enabled; }
+    for (const id of ["btn-play", "btn-back", "btn-restart"]) { const b = $(id); if (b) b.disabled = !enabled; }
     const playing = S.state === 1 || S.state === 3 || Boolean(S.count);
-    for (const id of ["btn-play", "btn-play-cue"]) {
-      const play = $(id);
-      if (!play) continue;
-      play.textContent = playing ? "❚❚ Pause" : "▶ Play";
+    const play = $("btn-play");
+    if (play && play.getAttribute("aria-label") !== (playing ? "Pause" : "Play")) {
+      play.innerHTML = playing ? ICON.pause : ICON.play;
       play.setAttribute("aria-label", playing ? "Pause" : "Play");
     }
     const hide = $("btn-hide");
@@ -1083,8 +1151,10 @@
     }
     if (act === "fav") {
       const on = store.toggleFavourite(target.dataset.id);
-      target.setAttribute("aria-pressed", String(on));
-      target.textContent = target.classList.contains("fav-star") ? (on ? "★" : "☆") : on ? "★ Favourite" : "☆ Favourite";
+      for (const b of app.querySelectorAll("[data-act=fav]")) {
+        b.setAttribute("aria-pressed", String(on));
+        if (!b.classList.contains("icon-btn")) b.textContent = favouriteLabel(target.dataset.id);
+      }
       return;
     }
     if (act === "resume") {
@@ -1095,7 +1165,9 @@
     if (!S) return;
     switch (act) {
       case "play": togglePlay(); break;
-      case "back10": seekTo(S.pt - 10); break;
+      case "back5": seekTo(S.pt - 5); break;
+      case "speed": S.session.setRate(Number(target.dataset.r)); break;
+      case "breakdown": setBreakdown(!S.breakdownOpen); break;
       case "restart": restart(); break;
       case "again": setHidden($("after-panel"), true); seekTo(0); if (!S.session.playing) togglePlay(); break;
       case "hide": S.cuesHidden = !S.cuesHidden; updateTransport(); frame(); break;
@@ -1110,14 +1182,13 @@
         store.setLatency(store.latency() + Number(target.dataset.ms));
         renderLatency(); frame(); break;
       case "quality":
-        S.session.setQuality(target.dataset.v); renderViewControls(); frame(); break;
+        S.session.setQuality(target.dataset.v); renderViewControls(); if (S.breakdownOpen) renderBreakdown(); frame(); break;
       case "view":
-        S.session.setView(target.dataset.v); renderViewControls(); frame(); break;
+        S.session.setView(target.dataset.v); renderViewControls(); if (S.breakdownOpen) renderBreakdown(); frame(); break;
       case "countin":
         store.setCountIn(!settings().countIn); renderViewControls(); break;
-      case "chip": toggleChipDiagram(target); break;
       case "pattern":
-        if (S.session.setPattern(target.dataset.p)) { renderStrumPanel(); frame(); }
+        if (S.session.setPattern(target.dataset.p)) { renderStrumPanel(); renderBarLine(); renderBreakdown(); frame(); }
         break;
       case "retry":
         setMsg("error", null);
@@ -1148,7 +1219,7 @@
     const tag = event.target && event.target.tagName ? event.target.tagName : "";
     if (/^(INPUT|TEXTAREA|SELECT|BUTTON|SUMMARY|A|OUTPUT)$/.test(tag) || (event.target && event.target.isContentEditable)) return;
     if (event.key === " " || event.key === "k") { event.preventDefault(); togglePlay(); }
-    else if (event.key === "ArrowLeft" || event.key === "j") { event.preventDefault(); seekTo(S.pt - 10); }
+    else if (event.key === "ArrowLeft" || event.key === "j") { event.preventDefault(); seekTo(S.pt - 5); }
     else if (event.key === "h") { S.cuesHidden = !S.cuesHidden; updateTransport(); frame(); }
   });
 
