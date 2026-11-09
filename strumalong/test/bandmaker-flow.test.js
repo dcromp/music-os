@@ -64,7 +64,7 @@ assert.deepEqual(run("padChords({key:'E',mode:'power'})"),['E5','G5','A5','D5'])
 act('feel-go','key');assert.equal(run("feelUI.screen"),'key');assert.match(html(),/Find where your song lives/);
 assert.equal((html().match(/data-action="key-pick:/g)||[]).length,12,'twelve keys on the wheel');
 assert.match(html(),/What's a key\?/);assert.match(html(),/The 7 notes/,'the key lesson is kept');
-act('key-pick','D');assert.equal(run("currentSection().key"),'D');assert.match(html(),/D feels like home/);
+vm.runInContext("var keyStarts=0;const rp=previewPlayback.play;previewPlayback.play=o=>{keyStarts++;return rp(o)}",ctx);act('key-pick','D');assert.equal(run('keyStarts'),0,'tapping a key does not play');assert.equal(run("currentSection().key"),'D');assert.match(html(),/D feels like home/);
 vm.runInContext("Math.random=()=>0.99",ctx);act('key-dice');
 assert.ok(run("rankedKeys('major').slice(0,5)").includes(run("currentSection().key")),'dice picks a friendly key');assert.notEqual(run("currentSection().key"),'D');
 
@@ -80,11 +80,13 @@ assert.equal((html().match(/data-action="loop-seq:/g)||[]).length,4);
 assert.deepEqual(run("sequencesFor(currentSection()).slice(0,4).map(r=>r.chords.join(' '))"),['Am Dm G C','Am F Dm Am','Am Dm E7 Am','Am F C G']);
 act('loop-more');assert.equal((html().match(/data-action="loop-seq:/g)||[]).length,run("visibleRecipes('minor').length"));
 assert.doesNotMatch(html(),/Spice|Learn more|substitution/);
+// Nothing starts playing on its own.
+vm.runInContext("var started=0;const realPlay=previewPlayback.play;previewPlayback.play=o=>{started++;return realPlay(o)}",ctx);
 act('loop-seq','nope');assert.equal(run("feelUI.screen"),'chords','an unknown sequence is ignored');
 act('loop-seq','S2');
 assert.equal(run("feelUI.screen"),'build');assert.equal(run("bandReady()"),true);assert.equal(run("currentSection().recipe"),'S2');
 assert.deepEqual(run("currentSection().chords"),['Am','Dm','E7','Am'],'sequences are transposed');
-assert.match(html(),/Make it yours/);
+assert.match(html(),/Make it yours/);assert.equal(run('started'),0,'picking a sequence does not play');
 
 // Song: tapping a bar offers the swaps the chord table recommends for that chord.
 const swaps=()=>run("barSwaps(currentSection(),guide.selectedBar).map(o=>palette(currentSection())[o.to]+': '+o.label)");
@@ -95,7 +97,7 @@ assert.equal((html().match(/swap-dot/g)||[]).length,2,'bars with a swap are mark
 assert.doesNotMatch(html(),/Hear original/);
 act('feel-swap','3');assert.deepEqual(run("currentSection().chords"),['Am','Dm','Em','Am']);
 assert.match(html(),/Back to original/);assert.match(html(),/Hear original/);assert.deepEqual(swaps(),['E7: Stronger pull home']);
-act('feel-swap','99');assert.deepEqual(run("currentSection().chords"),['Am','Dm','Em','Am'],'an unknown chord is ignored');
+assert.equal(run('started'),0,'a swap does not play');act('feel-swap','99');assert.deepEqual(run("currentSection().chords"),['Am','Dm','Em','Am'],'an unknown chord is ignored');
 act('feel-undo');assert.deepEqual(run("currentSection().chords"),['Am','Dm','E7','Am']);
 // Going back and tapping the same sequence keeps your changes; another one replaces them.
 act('feel-bar','1');act('feel-swap','7');act('feel-go','chords');assert.match(html(),/class="seq on"/);
