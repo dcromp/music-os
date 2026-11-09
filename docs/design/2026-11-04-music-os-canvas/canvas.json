@@ -1,0 +1,31 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Bandmaker-Songs.dc.html": {"h": 844, "is_interactive": true, "title": "Bandmaker · My songs (from Home)", "w": 390, "x": 0, "y": 1300},
+    "Bandmaker-Feel.dc.html": {"h": 844, "is_interactive": true, "title": "Bandmaker · New song, step 1: feel", "w": 390, "x": 470, "y": 1300},
+    "Bandmaker-Key.dc.html": {"h": 844, "is_interactive": true, "title": "Bandmaker · Step 2: key", "w": 390, "x": 940, "y": 1300},
+    "Bandmaker-Foundation.dc.html": {"h": 844, "is_interactive": true, "title": "Bandmaker · Rhythm, step 3: chords", "w": 390, "x": 1410, "y": 1300},
+    "Bandmaker-Bass.dc.html": {"h": 844, "is_interactive": true, "title": "Bandmaker · Bass", "w": 390, "x": 1880, "y": 1300},
+    "Jukebox-Library.dc.html": {"h": 844, "is_interactive": true, "title": "Jukebox · Library", "w": 390, "x": 470, "y": 0},
+    "Jukebox-Play.dc.html": {"h": 844, "is_interactive": true, "title": "Jukebox · Play along (setup built in)", "w": 390, "x": 940, "y": 0},
+    "Jukebox-Breakdown.dc.html": {"h": 844, "is_interactive": true, "title": "Jukebox · Song breakdown (opened from the bar)", "w": 390, "x": 1410, "y": 0},
+    "Main.dc.html": {"h": 844, "is_interactive": true, "title": "Home", "w": 390, "x": 0, "y": 0}
+  },
+  "createdOnFiles": {"at": "2026-11-04T19:55:00Z", "v": 1},
+  "designSystems": [],
+  "launch": {"view": "canvas"},
+  "noteOrder": ["t1", "t2", "s4", "s1", "s2", "s3", "s5"],
+  "notes": {
+    "s1": {"fill": "orange", "text": "Jukebox is close to its worked-out feature set: shelves by level, Rock/Pop filter, search, favourites, Surprise me, capo and core shapes, practice pattern, speed, sync nudge.\n\nOpen: should a song end with a nudge to try its chords in Bandmaker?", "w": 300, "x": 1880, "y": 420},
+    "s2": {"fill": "gray", "text": "Look: dark stage, amber for Jukebox, teal for Bandmaker. Each mode keeps one colour so you always know where you are.", "w": 300, "x": 2260, "y": 0},
+    "s3": {"fill": "teal", "text": "No separate start screen: Home's New song goes straight to step 1, My songs opens the list.\n\nThe band selector sits on top of every Bandmaker screen. A new song starts on Rhythm with the guided foundation (feel, key, chords, song). Other members are dimmed until there are chords, then each one follows them, like Bass.\n\nDrums: mostly AI, GarageBand-style. Auto fills, or you choose where fills go. Not designed yet.", "w": 300, "x": 2350, "y": 1300},
+    "s5": {"fill": "teal", "text": "Key step teaches and sets the foundation at once:\n\n- what a key is (a home note plus the 7 notes and chords that belong with it)\n- major vs minor, linked to the feel you picked\n- guitar-friendly keys, ranked by how many easy open shapes they give you\n- hear the key before choosing\n- a nudge to move it if it's too high or low to sing", "w": 300, "x": 2350, "y": 1760},
+    "s4": {"fill": "orange", "text": "Setup is merged into Play along. Tapping a song goes straight to playing.\n\nUnder the video, one line says something relevant: \"One new shape here: D\" or \"Three shapes you know\". Tapping it opens the song breakdown (diagrams, strum patterns). It never opens by itself.\n\nTry the firstVisit tweak to see the new-shape message.", "w": 300, "x": 1880, "y": 0},
+    "t1": {"kind": "title1", "maxW": 1800, "text": "Home + Jukebox: play along with a favourite", "w": 240, "x": 0, "y": -300},
+    "t2": {"kind": "title1", "maxW": 2270, "text": "Bandmaker: band selector + guided foundation", "w": 240, "x": 0, "y": 1000}
+  },
+  "order": ["Main.dc.html", "Jukebox-Library.dc.html", "Jukebox-Play.dc.html", "Jukebox-Breakdown.dc.html", "Bandmaker-Songs.dc.html", "Bandmaker-Feel.dc.html", "Bandmaker-Key.dc.html", "Bandmaker-Foundation.dc.html", "Bandmaker-Bass.dc.html"],
+  "pages": [],
+  "title": "Music OS"
+}

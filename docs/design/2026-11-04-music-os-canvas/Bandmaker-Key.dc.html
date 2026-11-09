@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bandmaker choose a key</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#14110E}
+a{color:#5CC8B5}a:hover{color:#8EE0D1}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #14110E; color: #F5EEE4; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+  <div style="padding: 52px 20px 6px; display: flex; align-items: center; gap: 12px">
+    <a href="Bandmaker-Feel.dc.html" aria-label="Back to feel" style="width: 44px; height: 44px; flex: 0 0 44px; border-radius: 22px; background: #1F1A15; border: 1px solid #3A3028; color: #F5EEE4; display: flex; align-items: center; justify-content: center">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>
+    </a>
+    <div style="flex: 1">
+      <div style="font-size: 16px; font-weight: 600">New song</div>
+      <div style="font-size: 13px; color: #B5A796">Happy and bright</div>
+    </div>
+  </div>
+
+  <div style="padding: 8px 0 2px; display: flex; gap: 10px; justify-content: center; align-items: flex-end">
+    <sc-for list="{{members}}" as="m" hint-placeholder-count="5">
+      <div style="{{m.wrap}}">
+        <div style="{{m.disc}}"><span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800">{{m.short}}</span></div>
+        <span style="{{m.labelStyle}}">{{m.name}}</span>
+      </div>
+    </sc-for>
+  </div>
+  <div style="height: 14px"></div>
+
+  <div style="flex: 1; padding: 0 20px 22px; display: flex; flex-direction: column; gap: 12px">
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+      <sc-for list="{{steps}}" as="s" hint-placeholder-count="4">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="{{s.bar}}"></span>
+          <span style="{{s.label}}">{{s.name}}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 26px; line-height: 1.05; letter-spacing: -0.02em">Pick a home for your song</h1>
+      <p style="margin: 0; font-size: 14px; line-height: 1.4; color: #B5A796">A key is the note your song feels settled on. It decides which notes and chords fit together.</p>
+    </div>
+
+    <div style="display: flex; gap: 4px; background: #1F1A15; border: 1px solid #3A3028; border-radius: 14px; padding: 4px">
+      <sc-for list="{{modes}}" as="md" hint-placeholder-count="2">
+        <button onClick="{{md.pick}}" style="{{md.style}}">
+          <span style="font-size: 14px; font-weight: 600">{{md.name}}</span>
+          <span style="font-size: 11px; opacity: 0.85">{{md.note}}</span>
+        </button>
+      </sc-for>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px">
+      <sc-for list="{{keys}}" as="k" hint-placeholder-count="5">
+        <button onClick="{{k.pick}}" aria-label="{{k.label}}" style="{{k.style}}">
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 20px">{{k.name}}</span>
+          <span style="display: flex; gap: 3px">
+            <sc-for list="{{k.ease}}" as="e" hint-placeholder-count="3"><span style="{{e}}"></span></sc-for>
+          </span>
+        </button>
+      </sc-for>
+    </div>
+
+    <div style="background: #1F1A15; border: 1px solid #3A3028; border-radius: 18px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 18px">{{cur.title}}</span>
+          <span style="font-size: 12px; color: #B5A796">{{cur.why}}</span>
+        </div>
+        <button aria-label="Hear {{cur.title}}" style="height: 44px; padding: 0 14px; border-radius: 22px; border: 0; background: #5CC8B5; color: #0B1A17; display: flex; align-items: center; gap: 6px; font-family: Inter, sans-serif; font-size: 13px; font-weight: 700">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"></path></svg>
+          Hear it
+        </button>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 11px; color: #B5A796; text-transform: uppercase; letter-spacing: 0.06em">The 7 notes · home note first</span>
+        <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px">
+          <sc-for list="{{cur.notes}}" as="n" hint-placeholder-count="7"><span style="{{n.style}}">{{n.name}}</span></sc-for>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 11px; color: #B5A796; text-transform: uppercase; letter-spacing: 0.06em">Chords you get · easy open shapes in teal</span>
+        <div style="display: flex; gap: 4px; flex-wrap: wrap">
+          <sc-for list="{{cur.chords}}" as="c" hint-placeholder-count="7"><span style="{{c.style}}">{{c.name}}</span></sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #B5A796; line-height: 1.35">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 18px"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg>
+      Too high or low to sing? You can move the key later. Your chord shapes stay with a capo.
+    </div>
+
+    <div style="flex: 1"></div>
+    <a href="Bandmaker-Foundation.dc.html" style="height: 56px; border-radius: 18px; background: #5CC8B5; color: #0B1A17; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700">{{cta}}</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { mode: 'major', key: 'G' }; }
+  renderVals() {
+    const EASY = ['G', 'C', 'D', 'A', 'E', 'Em', 'Am', 'Dm'];
+    const DATA = {
+      major: [
+        { name: 'G', notes: 'G A B C D E F♯', chords: ['G', 'Am', 'Bm', 'C', 'D', 'Em', 'F♯°'] },
+        { name: 'C', notes: 'C D E F G A B', chords: ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'B°'] },
+        { name: 'D', notes: 'D E F♯ G A B C♯', chords: ['D', 'Em', 'F♯m', 'G', 'A', 'Bm', 'C♯°'] },
+        { name: 'A', notes: 'A B C♯ D E F♯ G♯', chords: ['A', 'Bm', 'C♯m', 'D', 'E', 'F♯m', 'G♯°'] },
+        { name: 'E', notes: 'E F♯ G♯ A B C♯ D♯', chords: ['E', 'F♯m', 'G♯m', 'A', 'B', 'C♯m', 'D♯°'] }
+      ],
+      minor: [
+        { name: 'Em', notes: 'E F♯ G A B C D', chords: ['Em', 'F♯°', 'G', 'Am', 'Bm', 'C', 'D'] },
+        { name: 'Am', notes: 'A B C D E F G', chords: ['Am', 'B°', 'C', 'Dm', 'Em', 'F', 'G'] },
+        { name: 'Dm', notes: 'D E F G A B♭ C', chords: ['Dm', 'E°', 'F', 'Gm', 'Am', 'B♭', 'C'] },
+        { name: 'Bm', notes: 'B C♯ D E F♯ G A', chords: ['Bm', 'C♯°', 'D', 'Em', 'F♯m', 'G', 'A'] },
+        { name: 'F♯m', notes: 'F♯ G♯ A B C♯ D E', chords: ['F♯m', 'G♯°', 'A', 'Bm', 'C♯m', 'D', 'E'] }
+      ]
+    };
+    const mode = this.state.mode;
+    const list = DATA[mode];
+    const keyName = list.some(k => k.name === this.state.key) ? this.state.key : list[0].name;
+    const easyCount = k => k.chords.filter(c => EASY.includes(c)).length;
+    const level = n => n >= 5 ? 3 : (n >= 4 ? 2 : 1);
+
+    const sel = ['Singer', 'Drums', 'Rhythm', 'Bass', 'Lead'];
+    const shorts = ['Vo', 'Dr', 'Rh', 'Ba', 'Ld'];
+    const members = sel.map((name, i) => {
+      const act = i === 2; const size = act ? 64 : 44;
+      return { name, short: shorts[i],
+        wrap: 'display: flex; flex-direction: column; align-items: center; gap: 6px; opacity: ' + (act ? 1 : 0.55),
+        disc: 'width: ' + size + 'px; height: ' + size + 'px; border-radius: ' + size / 2 + 'px; display: flex; align-items: center; justify-content: center; font-size: ' + (act ? 22 : 15) + 'px; ' +
+          (act ? 'background: #5CC8B5; color: #0B1A17' : 'background: #1F1A15; color: #B5A796; border: 1px dashed #5E5246'),
+        labelStyle: 'font-size: ' + (act ? 14 : 12) + 'px; font-weight: ' + (act ? 600 : 500) + '; color: ' + (act ? '#F5EEE4' : '#B5A796') };
+    });
+    const steps = ['Feel', 'Key', 'Chords', 'Song'].map((n, i) => ({ name: n,
+      bar: 'height: 4px; border-radius: 2px; background: ' + (i <= 1 ? '#5CC8B5' : '#3A3028'),
+      label: 'font-size: 12px; font-weight: ' + (i === 1 ? 700 : 500) + '; color: ' + (i === 1 ? '#F5EEE4' : '#B5A796') }));
+
+    const mBase = 'flex: 1; min-height: 48px; border-radius: 10px; border: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; font-family: Inter, sans-serif; ';
+    const modes = [
+      { id: 'major', name: 'Major', note: 'bright · fits your feel' },
+      { id: 'minor', name: 'Minor', note: 'moodier, darker' }
+    ].map(m => ({ ...m,
+      style: mBase + (mode === m.id ? 'background: #5CC8B5; color: #0B1A17' : 'background: transparent; color: #F5EEE4'),
+      pick: () => this.setState({ mode: m.id, key: DATA[m.id][0].name }) }));
+
+    const kBase = 'height: 62px; border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-family: Inter, sans-serif; color: #F5EEE4; ';
+    const keys = list.map(k => {
+      const on = k.name === keyName; const lv = level(easyCount(k));
+      return { name: k.name, label: k.name + (mode === 'major' ? ' major' : ' minor') + ', ease ' + lv + ' of 3',
+        style: kBase + (on ? 'background: #173A34; border: 2px solid #5CC8B5' : 'background: #1F1A15; border: 1px solid #3A3028'),
+        ease: [0, 1, 2].map(i => 'width: 6px; height: 6px; border-radius: 3px; background: ' + (i < lv ? '#5CC8B5' : '#3A3028')),
+        pick: () => this.setState({ key: k.name }) };
+    });
+
+    const k = list.find(x => x.name === keyName);
+    const n = easyCount(k);
+    const home = mode === 'major' ? k.name : k.name.replace('m', '');
+    const title = home + (mode === 'major' ? ' major' : ' minor');
+    const why = n >= 5 ? n + ' of 7 chords are easy open shapes' : (n >= 4 ? n + ' easy shapes, the rest need barres' : 'Fewer easy shapes: try a capo');
+    const noteBase = 'height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: JetBrains Mono, monospace; font-size: 13px; font-weight: 700; ';
+    const notes = k.notes.split(' ').map((nm, i) => ({ name: nm,
+      style: noteBase + (i === 0 ? 'background: #5CC8B5; color: #0B1A17' : 'background: #2A231C; color: #F5EEE4') }));
+    const cBase = 'padding: 4px 8px; border-radius: 8px; font-family: JetBrains Mono, monospace; font-size: 13px; font-weight: 700; ';
+    const chords = k.chords.map(c => ({ name: c,
+      style: cBase + (EASY.includes(c) ? 'background: #173A34; color: #5CC8B5' : 'background: #2A231C; color: #B5A796') }));
+
+    return { members, steps, modes, keys,
+      cur: { title, why, notes, chords },
+      cta: 'Use ' + title + ' · choose chords' };
+  }
+}
+</script>
+</body>
+</html>
