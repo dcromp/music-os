@@ -104,26 +104,25 @@ button.member:not(.active) .disc { background: var(--accent-soft); color: var(--
 .sing-note { font-size: 13px; color: var(--muted); line-height: 1.35; }
 
 /* Chords */
-.chord-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
-.chord-card { min-height: 66px; padding: 4px 2px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; border-radius: 14px; background: var(--panel); color: var(--muted); border: 1px dashed var(--dash); }
-.chord-card b { font-family: var(--font-display); font-weight: 800; font-size: 20px; }
-.chord-card small { font-size: 11px; color: inherit; }
-.chord-card .mono { color: inherit; opacity: 0.85; }
-.chord-card.starter { background: var(--accent); color: var(--on-accent); border: 0; }
 .seq { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 16px; background: var(--panel); border: 1px solid var(--border); }
 .seq.on { background: var(--accent-soft); border: 2px solid var(--accent); padding: 9px 11px; }
 .seq-pick { flex: 1; min-width: 0; min-height: 44px; display: flex; flex-direction: column; gap: 2px; padding: 0; border: 0; background: none; text-align: left; }
-.seq-pick b { font-family: var(--font-display); font-weight: 700; font-size: 18px; letter-spacing: 0.02em; white-space: pre-wrap; }
+.seq-pick b { font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: 0.02em; white-space: pre-wrap; }
 
 /* Song */
 .bar-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
 .bar-cell { min-height: 76px; padding: 6px 2px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; border-radius: 14px; background: var(--panel); border: 1px solid var(--border); }
 .bar-cell small { font-size: 11px; }
 .bar-cell b { font-family: var(--font-display); font-weight: 800; font-size: 20px; }
-.chord-degree { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--muted); }
 .bar-cell.selected { border: 2px solid var(--accent); background: var(--accent-soft); }
 .bar-cell.sounding { background: var(--accent); color: var(--on-accent); }
-.bar-cell.sounding small, .bar-cell.sounding .chord-degree { color: inherit; }
+.bar-cell.sounding small { color: inherit; }
+.bar-cell { position: relative; }
+.swap-dot { position: absolute; top: 7px; right: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--jukebox); }
+.swap-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.swap { min-height: 60px; padding: 6px 12px; display: flex; flex-direction: column; justify-content: center; gap: 2px; border-radius: 14px; border: 1px solid var(--accent); background: var(--accent-soft); text-align: left; }
+.swap b { font-family: var(--font-display); font-weight: 800; font-size: 20px; }
+.swap small { font-size: 12px; color: var(--muted); }
 .more { border-radius: 14px; }
 .more summary { min-height: 44px; display: flex; align-items: center; font-size: 15px; font-weight: 600; cursor: pointer; }
 .more > p, .more .chips, .more .fields, .more > .stack { margin-bottom: 10px; }
@@ -188,36 +187,16 @@ select, input[type="number"] { width: 100%; min-height: 44px; padding: 0 8px; bo
 /* Chord pads */
 .pad-grid { display: grid; gap: 8px; }
 .pad-grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.pad-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .pad { min-height: 92px; padding: 6px 2px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border-radius: 18px; border: 1px solid var(--border); background: var(--panel); color: var(--text); }
 .pad b { font-family: var(--font-display); font-weight: 800; font-size: 24px; }
 .pad small { font-size: 10px; color: inherit; opacity: 0.75; }
 .pad .mono { color: inherit; }
 .pad.home { background: var(--accent); color: var(--on-accent); border: 0; }
 .pad.lit { background: var(--jukebox); color: var(--on-jukebox); border: 0; }
-.pad-grid.two .pad { min-height: 80px; flex-direction: row; justify-content: space-between; padding: 0 18px; border: 0; color: var(--bg); }
-.pad-grid.two .pad b { font-size: 28px; }
-.tint-0 { background: #e8d9c0; }
-.tint-1 { background: #f2a93b; }
-.tint-2 { background: #e9875b; }
-.tint-3 { background: #b9aef0; }
 
-/* Loop maker */
-.loop-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
-.slot { min-height: 140px; padding: 12px 0; display: flex; flex-direction: column; align-items: center; justify-content: space-between; border-radius: 20px; border: 3px solid transparent; background: var(--accent); color: var(--on-accent); }
-.slot b { font-family: var(--font-display); font-weight: 800; font-size: 30px; line-height: 1; }
-.slot .mono { color: inherit; opacity: 0.75; font-size: 11px; }
-.slot.empty { background: transparent; color: var(--dash); border: 2px dashed var(--dash); }
-.slot.selected { border: 3px solid var(--jukebox); }
-.slot.sounding { box-shadow: 0 0 0 3px var(--text); }
-.loop-controls { display: flex; justify-content: center; }
+/* Shared round play button */
 .big-play { flex: 0 0 64px; width: 64px; height: 64px; padding: 0; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 32px; background: var(--accent); color: var(--on-accent); box-shadow: 0 0 30px rgba(92, 200, 181, 0.35); }
 .big-play svg { width: 22px; height: 22px; }
-.spice { display: flex; align-items: center; gap: 8px; }
-.spice span { flex: 0 0 40px; font-size: 12px; color: var(--muted); }
-.spice button { flex: 1; min-height: 48px; border-radius: 14px; border: 1px dashed var(--accent); background: transparent; font-family: var(--font-display); font-weight: 800; font-size: 18px; }
-.use { flex: 0 0 auto; min-height: 44px; padding: 0 12px; border-radius: 14px; border: 1px solid var(--accent); background: transparent; color: var(--accent); font-size: 14px; font-weight: 600; }
-.seq-pick { cursor: default; }
 
 /* Members / Tracks toggle and Tracks lanes */
 .view-seg { display: flex; gap: 2px; width: max-content; margin: 0 auto 12px; padding: 3px; border-radius: 12px; background: var(--panel); border: 1px solid var(--border); }
