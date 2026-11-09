@@ -54,16 +54,42 @@ assert.deepEqual(run("[currentSection().mode,currentSection().key,rhythm.bpm,fee
 act('feel-pick','heavy');assert.deepEqual(run("[currentSection().mode,currentSection().key]"),['power','E']);
 act('feel-pick','happy');assert.deepEqual(run("[currentSection().mode,currentSection().key,rhythm.bpm]"),['major','G',108]);
 act('feel-go','build');assert.equal(run("feelUI.screen"),'feel','no sequence chosen yet');
-act('feel-go','key');assert.equal(run("feelUI.screen"),'key');assert.match(html(),/Pick a home for your song/);assert.match(html(),/G major/);
 
-// Changing mode or key follows through to the chords and sequences.
-act('feel-group','minor');assert.equal(run("feelUI.screen"),'key','stays on the key step');assert.equal(run("feelUI.seq"),'S1');
-act('key-pick','A');assert.deepEqual(run("[currentSection().mode,currentSection().key]"),['minor','A']);
-act('feel-go','chords');assert.match(html(),/Seven chords live in A minor/);
-assert.equal(run("visibleRecipes('minor').length"),4);assert.equal(run("visibleRecipes('major').length"),8);assert.equal(run("visibleRecipes('power').length"),4);
-act('seq-pick','S2');assert.equal(run("feelUI.seq"),'S2');assert.match(html(),/E7/,'the sequence is transposed to A minor');
-act('feel-use','S2');
-assert.equal(run("feelUI.screen"),'build');assert.equal(run("bandReady()"),true);assert.deepEqual(run("currentSection().chords"),['Am','Dm','E7','Am']);
+// Key wheel: all twelve keys round the circle of fifths, each minor beside its relative major.
+assert.deepEqual(run("wheelKeys('major')"),['C','G','D','A','E','B','F♯','D♭','A♭','E♭','B♭','F']);
+assert.deepEqual(run("wheelKeys('minor')"),['A','E','B','F♯','C♯','G♯','E♭','B♭','F','C','G','D']);
+for(const mode of ['major','minor','power'])assert.deepEqual(run(`wheelKeys('${mode}').slice().sort()`),run(`keyGroups.${mode}.keys.slice().sort()`),`${mode} wheel holds every key`);
+assert.deepEqual(run("padChords({key:'G',mode:'major'})"),['G','D','Em','C']);
+assert.deepEqual(run("padChords({key:'E',mode:'minor'})"),['Em','C','G','D']);
+assert.deepEqual(run("padChords({key:'E',mode:'power'})"),['E5','G5','A5','D5']);
+act('feel-go','key');assert.equal(run("feelUI.screen"),'key');assert.match(html(),/Find where your song lives/);
+assert.equal((html().match(/data-action="key-pick:/g)||[]).length,12,'twelve keys on the wheel');
+assert.match(html(),/What's a key\?/);assert.match(html(),/The 7 notes/,'the key lesson is kept');
+act('key-pick','D');assert.equal(run("currentSection().key"),'D');assert.match(html(),/D feels like home/);
+vm.runInContext("Math.random=()=>0.99",ctx);act('key-dice');
+assert.ok(run("rankedKeys('major').slice(0,5)").includes(run("currentSection().key")),'dice picks a friendly key');assert.notEqual(run("currentSection().key"),'D');
+
+// Brighter / Moodier moves to the relative key.
+act('key-pick','G');act('feel-group','minor');assert.deepEqual(run("[currentSection().mode,currentSection().key,feelUI.seq]"),['minor','E','S1']);
+assert.equal(run("feelUI.screen"),'key','stays on the key step');
+act('feel-group','major');assert.equal(run("currentSection().key"),'G');
+act('feel-group','minor');act('key-pick','A');assert.deepEqual(run("[currentSection().mode,currentSection().key]"),['minor','A']);
+
+// Loop maker: drop chords into four bars, then keep the loop.
+act('feel-go','chords');assert.match(html(),/Make a loop/);assert.match(html(),/3 bars to go/);
+assert.deepEqual(run("feelUI.loop"),[0,null,null,null]);
+assert.deepEqual(run("padIndices(currentSection()).map(i=>palette(currentSection())[i])"),['Am','C','Dm','F']);
+assert.deepEqual(run("spiceIndices(currentSection()).map(i=>palette(currentSection())[i])"),['B°'.replace('°','dim'),'Em','G']);
+act('loop-keep');assert.equal(run("feelUI.screen"),'chords','an unfinished loop is not kept');
+act('loop-drop','5');act('loop-drop','1');act('loop-drop','4');
+assert.deepEqual(run("loopChords()"),['Am','F','C','G']);assert.match(html(),/Keep this loop/);
+act('loop-slot','1');act('loop-drop','2');assert.deepEqual(run("loopChords()"),['Am','Dm','C','G'],'tapping a bar lets you swap it');
+assert.match(html(),/Proven sequences/);assert.match(html(),/What do the numbers mean\?/);
+act('loop-seq','S2');assert.deepEqual(run("loopChords()"),['Am','Dm','E7','Am'],'proven sequences are transposed');
+assert.match(html(),/Try a chord substitution/,'substitutions show for a proven sequence');
+act('loop-keep');
+assert.equal(run("feelUI.screen"),'build');assert.equal(run("bandReady()"),true);assert.equal(run("currentSection().recipe"),'S2');
+assert.deepEqual(run("currentSection().chords"),['Am','Dm','E7','Am']);
 assert.match(html(),/Make it yours/);
 
 // The editor still works; undo steps back through it.
@@ -72,6 +98,17 @@ assert.deepEqual(run("currentSection().chords"),['Am','Am','E7','Am']);
 act('feel-reset');assert.deepEqual(run("currentSection().chords"),['Am','Dm','E7','Am']);
 act('feel-undo');assert.deepEqual(run("currentSection().chords"),['Am','Am','E7','Am']);
 
+// Tracks: Rhythm and Bass lanes play together, with mute and solo.
+vm.runInContext("bassAction('member','tracks')",ctx);assert.equal(run("bassState.tab"),'tracks');
+assert.match(html(),/class="lane/);assert.equal((html().match(/Coming later/g)||[]).length,3,'Singer, Drums and Lead');
+const instruments=()=>[...new Set(run("bandNotes().map(n=>n.instrument)"))].sort();
+assert.deepEqual(instruments(),['bass','guitar']);
+vm.runInContext("bassAction('tracks-mute','rhythm')",ctx);assert.deepEqual(instruments(),['bass']);
+vm.runInContext("bassAction('tracks-mute','rhythm')",ctx);vm.runInContext("bassAction('tracks-solo','rhythm')",ctx);assert.deepEqual(instruments(),['guitar']);
+vm.runInContext("bassAction('tracks-solo','rhythm')",ctx);assert.deepEqual(instruments(),['bass','guitar']);
+vm.runInContext("bassAction('tracks-select','bass')",ctx);assert.match(html(),/Open Bass/);
+vm.runInContext("bassAction('member','rhythm')",ctx);
+
 // Bass follows the song; choosing a new feel starts over and locks it again.
 vm.runInContext("bassAction('member','bass')",ctx);assert.match(html(),/Pick a bass line/);assert.match(html(),/Bass follows your chords: Am Am E7 Am/);
 for(const p of run("bassPatterns.map(p=>p.name)"))assert.ok(html().includes(p),p);
@@ -79,5 +116,6 @@ vm.runInContext("bassAction('bass-select','fifths')",ctx);assert.match(html(),/t
 vm.runInContext("bassAction('member','rhythm')",ctx);
 act('feel-go','feel');act('feel-pick','heavy');assert.equal(run("bandReady()"),false);
 vm.runInContext("bassAction('member','bass')",ctx);assert.equal(run("bassState.tab"),'rhythm','Bass stays locked without chords');
+vm.runInContext("bassAction('member','tracks')",ctx);assert.equal(run("bassState.tab"),'rhythm','Tracks stays locked without chords');
 act('feel-undo');assert.equal(run("bandReady()"),true,'undo brings the song back');
-console.log('Bandmaker flow: key ranking, scale notes, chords in every key, guided steps and band unlock pass');
+console.log('Bandmaker flow: key ranking, scale notes, key wheel, loop maker, Tracks lanes, guided steps and band unlock pass');
