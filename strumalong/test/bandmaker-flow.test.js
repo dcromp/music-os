@@ -77,7 +77,7 @@ act('feel-group','minor');act('key-pick','A');assert.deepEqual(run("[currentSect
 // Chords: pick a sequence. The first four use the easiest shapes; the rest wait behind one button.
 act('feel-go','chords');assert.match(html(),/Pick a sequence/);
 assert.equal((html().match(/data-action="loop-seq:/g)||[]).length,4);
-assert.deepEqual(run("sequencesFor(currentSection()).slice(0,4).map(r=>r.chords.join(' '))"),['Am Dm G C','Am F Dm Am','Am Dm E7 Am','Am F C G']);
+assert.deepEqual(run("sequencesFor(currentSection()).slice(0,4).map(r=>r.chords.join(' '))"),['Am Dm E7 Am','Am F C G','Am Dm G C','Am F Dm Am'],'popular first, then easiest shapes');
 act('loop-more');assert.equal((html().match(/data-action="loop-seq:/g)||[]).length,run("visibleRecipes('minor').length"));
 assert.doesNotMatch(html(),/Spice|Learn more|substitution/);
 // Nothing starts playing on its own.
@@ -88,27 +88,42 @@ assert.equal(run("feelUI.screen"),'build');assert.equal(run("bandReady()"),true)
 assert.deepEqual(run("currentSection().chords"),['Am','Dm','E7','Am'],'sequences are transposed');
 assert.match(html(),/Make it yours/);assert.equal(run('started'),0,'picking a sequence does not play');
 
-// Song: tapping a bar offers the swaps the chord table recommends for that chord.
-const swaps=()=>run("barSwaps(currentSection(),guide.selectedBar).map(o=>palette(currentSection())[o.to]+': '+o.label)");
-act('feel-bar','0');assert.deepEqual(swaps(),[],'home has no suggested swap');
-act('feel-bar','1');assert.deepEqual(swaps(),['D: Brighter']);
-act('feel-bar','2');assert.deepEqual(swaps(),['Em: Softer']);assert.match(html(),/Softer/);
-assert.equal((html().match(/swap-dot/g)||[]).length,2,'bars with a swap are marked');
+// Song: the book's suggestions for the whole sequence, Roman numerals on every chord, and the full table grouped below.
+const sugs=()=>run("bookSuggestions(currentSection()).map(o=>`${o.bar+1}:${labelsFor(currentSection())[o.from]}>${labelsFor(currentSection())[o.to]}`)");
+assert.deepEqual(sugs(),['2:iv>IV','3:V7>v']);
+assert.match(html(),/Suggestions from the book/);assert.match(html(),/Brighter \(Dorian\)/);
+assert.match(html(),/Dm<\/b><small class="mono">iv</,'bars show numerals');
+assert.match(html(),/Natural minor/);assert.match(html(),/Colour/);
 assert.doesNotMatch(html(),/Hear original/);
-act('feel-swap','3');assert.deepEqual(run("currentSection().chords"),['Am','Dm','Em','Am']);
-assert.match(html(),/Back to original/);assert.match(html(),/Hear original/);assert.deepEqual(swaps(),['E7: Stronger pull home']);
-assert.equal(run('started'),0,'a swap does not play');act('feel-swap','99');assert.deepEqual(run("currentSection().chords"),['Am','Dm','Em','Am'],'an unknown chord is ignored');
+act('feel-sughear','2,3');act('feel-sughear','9,9');
+act('feel-sug','2,3');assert.deepEqual(run("currentSection().chords"),['Am','Dm','Em','Am']);
+assert.match(html(),/aria-pressed="true">Undo/);assert.match(html(),/Hear original/);
+assert.deepEqual(sugs(),['2:iv>IV','3:V7>v'],'suggestions stay put after one is used');
+act('feel-sug','2,3');assert.deepEqual(run("currentSection().chords"),['Am','Dm','E7','Am'],'tapping again puts it back');
+act('feel-sug','0,5');assert.deepEqual(run("currentSection().chords"),['Am','Dm','E7','Am'],'an unknown suggestion is ignored');
+act('feel-bar','2');act('feel-swap','3');assert.deepEqual(run("currentSection().chords"),['Am','Dm','Em','Am']);
+assert.equal(run('started'),1,'only the hear button played; using a suggestion or swap does not');
+act('feel-swap','99');assert.deepEqual(run("currentSection().chords"),['Am','Dm','Em','Am'],'an unknown chord is ignored');
 act('feel-undo');assert.deepEqual(run("currentSection().chords"),['Am','Dm','E7','Am']);
 // Going back and tapping the same sequence keeps your changes; another one replaces them.
-act('feel-bar','1');act('feel-swap','7');act('feel-go','chords');assert.match(html(),/class="seq on"/);
+act('feel-sug','1,7');act('feel-go','chords');assert.match(html(),/class="seq on/);
 act('loop-seq','S2');assert.deepEqual(run("currentSection().chords"),['Am','D','E7','Am']);
 vm.runInContext("Math.random=()=>0",ctx);act('feel-go','chords');act('loop-dice');assert.notEqual(run("currentSection().recipe"),'S2','dice picks a different sequence');
-act('feel-go','chords');act('loop-seq','S2');act('feel-bar','1');vm.runInContext("currentSection().barDegrees[1]=0;syncGuide(currentSection())",ctx);
-// Some swaps only suit a bar that leads to a particular chord.
-assert.deepEqual(run("(()=>{const s={mode:'major',key:'G',bars:4,barDegrees:[0,1,4,0]};return [barSwaps(s,1).map(o=>o.to),barSwaps({...s,barDegrees:[0,1,3,0]},1).map(o=>o.to)]})()"),[[9],[]]);
-assert.equal(run("barSwaps({mode:'power',key:'E',bars:4,barDegrees:[0,1,2,0]},1).length"),0,'power chords have no suggested swaps');
-// One menu on each step, and no leftover lessons.
-assert.equal((html().match(/<details/g)||[]).length,2,'Song keeps More chords and Tempo and sound');
+act('feel-go','chords');act('loop-seq','S2');vm.runInContext("currentSection().barDegrees[1]=0;syncGuide(currentSection())",ctx);
+// Book rules in major and power, including the ones tied to a place.
+const book=(mode,key,degrees)=>run(`bookSuggestions({mode:'${mode}',key:'${key}',bars:4,barDegrees:${JSON.stringify(degrees)},recipe:null}).map(o=>palette({mode:'${mode}',key:'${key}'})[o.to]+'@'+(o.bar+1)+' '+o.label)`);
+assert.deepEqual(book('major','G',[0,3,4,0]),['Cm@2 Tender, romantic','F@3 Bluesier way home']);
+assert.ok(book('major','G',[0,3,4,0]).includes('F@3 Bluesier way home'));
+assert.ok(book('major','G',[0,1,4,0]).includes('A@2 Brief lift before IV or V'));
+assert.ok(!book('major','G',[0,1,5,0]).some(x=>x.startsWith('A@2')),'major II only before IV or V');
+assert.ok(book('major','G',[0,2,3,0]).includes('B♭@2 Bluesy hard-rock step'),'♭III between I and IV');
+assert.ok(book('power','E',[0,2,5,0]).includes('D5@3 Rock way home'),'power chords get suggestions');
+assert.ok(book('major','G',[0,5,3,4]).every(x=>!x.endsWith('@1')),'home on bar 1 is never replaced');
+// Sequence cards show numerals; popular ones are marked and listed first.
+act('feel-go','chords');assert.match(html(),/<i class="badge">Popular<\/i>/);assert.match(html(),/<small class="mono">iv<\/small>/);
+assert.deepEqual(run("sequencesFor(currentSection()).slice(0,2).map(r=>r.id)"),['S2','S3']);
+act('loop-seq','S2');
+assert.equal((html().match(/<details/g)||[]).length,1,'Song keeps one menu: Tempo and sound');
 
 // Tracks: Rhythm and Bass lanes play together, with mute and solo.
 vm.runInContext("bassAction('member','tracks')",ctx);assert.equal(run("bassState.tab"),'tracks');
@@ -122,7 +137,7 @@ vm.runInContext("bassAction('tracks-select','bass')",ctx);assert.match(html(),/O
 vm.runInContext("bassAction('member','rhythm')",ctx);
 
 // Bass follows the song; choosing a new feel starts over and locks it again.
-vm.runInContext("bassAction('member','bass')",ctx);assert.match(html(),/Pick a bass line/);assert.match(html(),/Bass follows your chords: Am Am E7 Am/);
+vm.runInContext("bassAction('member','bass')",ctx);assert.match(html(),/Pick a bass line/);assert.match(html(),/Bass follows your chords: Am i · Am i · E7 V7 · Am i/);
 for(const p of run("bassPatterns.map(p=>p.name)"))assert.ok(html().includes(p),p);
 vm.runInContext("bassAction('bass-select','fifths')",ctx);assert.match(html(),/tab-staff/);
 vm.runInContext("bassAction('member','rhythm')",ctx);
