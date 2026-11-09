@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Jukebox play along</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#14110E}
+a{color:#F2A93B}a:hover{color:#FFC56B}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #14110E; color: #F5EEE4; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+  <div style="padding: 48px 20px 10px; display: flex; align-items: center; gap: 12px">
+    <a href="Jukebox-Library.dc.html" aria-label="Back to songs" style="width: 44px; height: 44px; flex: 0 0 44px; border-radius: 22px; background: #1F1A15; border: 1px solid #3A3028; color: #F5EEE4; display: flex; align-items: center; justify-content: center">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>
+    </a>
+    <div style="flex: 1; min-width: 0">
+      <div style="font-size: 16px; font-weight: 600">Wild Thing</div>
+      <div style="font-size: 13px; color: #B5A796">The Troggs · Level 1 · 103 BPM</div>
+    </div>
+    <button aria-label="Favourite" style="width: 44px; height: 44px; border-radius: 22px; border: 1px solid #3A3028; background: #1F1A15; color: #F2A93B; display: flex; align-items: center; justify-content: center">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"></path></svg>
+    </button>
+  </div>
+
+  <div style="margin: 0 20px; height: 190px; flex: 0 0 190px; border-radius: 16px; background: #0A0806; border: 1px solid #3A3028; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #B5A796">
+    <svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true"><rect width="40" height="28" rx="8" fill="#3A3028"></rect><path d="M16 8l10 6-10 6z" fill="#B5A796"></path></svg>
+    <span style="font-size: 13px">Official YouTube player (nothing drawn over it)</span>
+  </div>
+
+  <button onClick="{{toggleSetup}}" aria-expanded="{{setupOpenText}}" style="margin: 12px 20px 0; min-height: 48px; padding: 6px 8px 6px 12px; border-radius: 16px; border: 1px solid #3A3028; background: #1F1A15; color: #F5EEE4; display: flex; align-items: center; gap: 8px; font-family: Inter, sans-serif">
+    <span style="{{barDot}}"></span>
+    <span style="flex: 1; font-size: 14px; font-weight: 500; text-align: left; line-height: 1.3">{{barLine}}</span>
+    <span style="font-size: 13px; font-weight: 600; color: #F2A93B; white-space: nowrap">{{setupAction}}</span>
+  </button>
+
+  <sc-if value="{{setupOpen}}" hint-placeholder-val="{{ false }}">
+    <div style="margin: 8px 20px 0; flex: 1; background: #1F1A15; border: 1px solid #3A3028; border-radius: 20px; padding: 14px; display: flex; flex-direction: column; gap: 12px; overflow: hidden">
+      <sc-if value="{{hasNew}}" hint-placeholder-val="{{ true }}">
+        <div style="background: #3A2A12; color: #FFD596; border-radius: 12px; padding: 8px 10px; font-size: 13px; line-height: 1.4">New for you: <b>D</b>. Try the shape before the first change.</div>
+      </sc-if>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+        <button style="background: #14110E; border: 1px solid #3A3028; border-radius: 14px; padding: 8px 4px; display: flex; flex-direction: column; align-items: center; gap: 4px; color: #F5EEE4; font-family: Inter, sans-serif">
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 18px; color: #F2A93B">A</span>
+          <svg width="54" height="68" viewBox="0 0 60 76" fill="none" stroke="#B5A796" stroke-width="1.2" role="img" aria-label="A chord shape"><path d="M6 14H54" stroke-width="3" stroke="#F5EEE4"></path><path d="M6 28H54M6 42H54M6 56H54M6 70H54M6 14V70M15.6 14V70M25.2 14V70M34.8 14V70M44.4 14V70M54 14V70"></path><path d="M3 3l6 6M9 3l-6 6" stroke="#F5EEE4"></path><circle cx="15.6" cy="6" r="3" stroke="#F5EEE4"></circle><circle cx="54" cy="6" r="3" stroke="#F5EEE4"></circle><circle cx="25.2" cy="35" r="4" fill="#F2A93B" stroke="none"></circle><circle cx="34.8" cy="35" r="4" fill="#F2A93B" stroke="none"></circle><circle cx="44.4" cy="35" r="4" fill="#F2A93B" stroke="none"></circle></svg>
+        </button>
+        <button style="background: #14110E; border: 2px solid #F2A93B; border-radius: 14px; padding: 8px 4px; display: flex; flex-direction: column; align-items: center; gap: 4px; color: #F5EEE4; font-family: Inter, sans-serif">
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 18px; color: #F2A93B">D</span>
+          <svg width="54" height="68" viewBox="0 0 60 76" fill="none" stroke="#B5A796" stroke-width="1.2" role="img" aria-label="D chord shape"><path d="M6 14H54" stroke-width="3" stroke="#F5EEE4"></path><path d="M6 28H54M6 42H54M6 56H54M6 70H54M6 14V70M15.6 14V70M25.2 14V70M34.8 14V70M44.4 14V70M54 14V70"></path><path d="M3 3l6 6M9 3l-6 6M12.6 3l6 6M18.6 3l-6 6" stroke="#F5EEE4"></path><circle cx="25.2" cy="6" r="3" stroke="#F5EEE4"></circle><circle cx="34.8" cy="35" r="4" fill="#F2A93B" stroke="none"></circle><circle cx="44.4" cy="49" r="4" fill="#F2A93B" stroke="none"></circle><circle cx="54" cy="35" r="4" fill="#F2A93B" stroke="none"></circle></svg>
+        </button>
+        <button style="background: #14110E; border: 1px solid #3A3028; border-radius: 14px; padding: 8px 4px; display: flex; flex-direction: column; align-items: center; gap: 4px; color: #F5EEE4; font-family: Inter, sans-serif">
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 18px; color: #F2A93B">E</span>
+          <svg width="54" height="68" viewBox="0 0 60 76" fill="none" stroke="#B5A796" stroke-width="1.2" role="img" aria-label="E chord shape"><path d="M6 14H54" stroke-width="3" stroke="#F5EEE4"></path><path d="M6 28H54M6 42H54M6 56H54M6 70H54M6 14V70M15.6 14V70M25.2 14V70M34.8 14V70M44.4 14V70M54 14V70"></path><circle cx="6" cy="6" r="3" stroke="#F5EEE4"></circle><circle cx="44.4" cy="6" r="3" stroke="#F5EEE4"></circle><circle cx="54" cy="6" r="3" stroke="#F5EEE4"></circle><circle cx="15.6" cy="35" r="4" fill="#F2A93B" stroke="none"></circle><circle cx="25.2" cy="35" r="4" fill="#F2A93B" stroke="none"></circle><circle cx="34.8" cy="21" r="4" fill="#F2A93B" stroke="none"></circle></svg>
+        </button>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <sc-for list="{{patterns}}" as="p" hint-placeholder-count="2">
+          <button onClick="{{p.pick}}" style="{{p.style}}">
+            <span style="font-size: 14px; font-weight: 600; text-align: left">{{p.name}}</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; letter-spacing: 0.12em; color: #F2A93B">{{p.strokes}}</span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="flex: 1"></div>
+      <button onClick="{{toggleSetup}}" style="height: 48px; border-radius: 14px; border: 0; background: #F2A93B; color: #1A1208; font-family: Inter, sans-serif; font-size: 15px; font-weight: 700">Got it, show the cues</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{setupClosed}}" hint-placeholder-val="{{ true }}">
+    <div style="flex: 1; display: flex; flex-direction: column; min-height: 0">
+      <div style="padding: 12px 20px 0; display: flex; gap: 10px">
+        <div style="flex: 1.4; background: #F2A93B; color: #1A1208; border-radius: 22px; padding: 12px 16px; display: flex; flex-direction: column; gap: 2px">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.08em">NOW</span>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 64px; line-height: 0.9; letter-spacing: -0.04em">A</span>
+          <span style="font-size: 13px; font-weight: 600">2 bars</span>
+        </div>
+        <div style="flex: 1; background: #1F1A15; border: 1px solid #3A3028; border-radius: 22px; padding: 12px 16px; display: flex; flex-direction: column; gap: 2px">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #B5A796">NEXT</span>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 50px; line-height: 0.9; color: #F5EEE4">D</span>
+          <span style="font-size: 13px; color: #F2A93B; font-weight: 600">in 3 beats</span>
+        </div>
+      </div>
+      <div style="padding: 12px 20px 0; display: flex; gap: 4px; height: 32px">
+        <sc-for list="{{strip}}" as="c" hint-placeholder-count="8">
+          <div style="{{c.style}}">{{c.label}}</div>
+        </sc-for>
+      </div>
+      <div style="margin: 12px 20px 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+        <sc-for list="{{beats}}" as="b" hint-placeholder-count="4">
+          <div style="{{b.style}}">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700">{{b.count}}</span>
+            <svg width="14" height="16" viewBox="0 0 16 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v13M3 10l5 5 5-5"></path></svg>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <div style="padding: 12px 20px 22px; display: flex; flex-direction: column; gap: 10px">
+    <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #B5A796">
+      <span>{{timeNow}}</span>
+      <div style="flex: 1; height: 4px; border-radius: 2px; background: #3A3028"><div style="{{progress}}"></div></div>
+      <span>2:35</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px">
+      <div style="display: flex; gap: 4px; background: #1F1A15; border: 1px solid #3A3028; border-radius: 16px; padding: 4px">
+        <sc-for list="{{speeds}}" as="s" hint-placeholder-count="2">
+          <button onClick="{{s.pick}}" aria-label="Playback speed {{s.label}}" style="{{s.style}}">{{s.label}}</button>
+        </sc-for>
+      </div>
+      <div style="flex: 1"></div>
+      <button aria-label="Back 5 seconds" style="width: 48px; height: 48px; border-radius: 24px; border: 1px solid #3A3028; background: #1F1A15; color: #F5EEE4; display: flex; align-items: center; justify-content: center">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v5h5"></path></svg>
+      </button>
+      <button onClick="{{togglePlay}}" aria-label="{{playLabel}}" style="width: 64px; height: 64px; border-radius: 32px; border: 0; background: #F2A93B; color: #1A1208; display: flex; align-items: center; justify-content: center">
+        <sc-if value="{{playing}}" hint-placeholder-val="{{ true }}">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>
+        </sc-if>
+        <sc-if value="{{paused}}" hint-placeholder-val="{{ false }}">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"></path></svg>
+        </sc-if>
+      </button>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"firstVisit":{"editor":"boolean","default":false},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const first = props.firstVisit ?? false;
+    this.state = { open: false, playing: !first, speed: '1x', picked: 'steady' };
+  }
+  componentDidUpdate(prev) {
+    if (prev.firstVisit !== this.props.firstVisit) {
+      this.setState({ open: false, playing: !(this.props.firstVisit ?? false) });
+    }
+  }
+  renderVals() {
+    const first = this.props.firstVisit ?? false;
+    const open = this.state.open;
+    const chipBase = 'font-family: JetBrains Mono, monospace; font-size: 12px; font-weight: 700; padding: 3px 7px; border-radius: 6px; ';
+    const shapes = ['A', 'D', 'E'].map(n => ({ name: n,
+      chip: chipBase + (first && n === 'D' ? 'background: #F2A93B; color: #1A1208' : 'background: #2A231C; color: #F2A93B') }));
+    const pList = [
+      { id: 'steady', name: 'Start: steady downstrokes', strokes: 'D D D D' },
+      { id: 'groove', name: 'Next: add the off-beat', strokes: 'D DU DU' }
+    ];
+    const pBase = 'width: 100%; min-height: 48px; padding: 8px 12px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #F5EEE4; font-family: Inter, sans-serif; ';
+    const patterns = pList.map(p => ({ ...p,
+      style: pBase + (this.state.picked === p.id ? 'background: #2A231C; border: 2px solid #F2A93B' : 'background: #14110E; border: 1px solid #3A3028'),
+      pick: () => this.setState({ picked: p.id }) }));
+    const current = pList.find(p => p.id === this.state.picked);
+    const cell = 'flex: 1; border-radius: 8px; display: flex; align-items: center; padding-left: 8px; font-family: JetBrains Mono, monospace; font-size: 13px; font-weight: 700; ';
+    const bars = ['A', 'A', 'D', 'E', 'A', 'A', 'D', 'E'];
+    const strip = bars.map((l, i) => ({ label: (i === 0 || bars[i - 1] !== l) ? l : '',
+      style: cell + (i < 2 ? 'background: #F2A93B; color: #1A1208' : 'background: #2A231C; color: #F5EEE4') }));
+    const beatBase = 'height: 52px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; ';
+    const beats = ['1', '2', '3', '4'].map((c, i) => ({ count: c,
+      style: beatBase + (i === 1 ? 'background: #F2A93B; color: #1A1208' : 'background: #2A231C; color: #B5A796') }));
+    const sBase = 'height: 40px; min-width: 48px; padding: 0 8px; border-radius: 12px; border: 0; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; ';
+    const speeds = ['0.75x', '1x'].map(s => ({ label: s,
+      style: sBase + (this.state.speed === s ? 'background: #F5EEE4; color: #14110E' : 'background: transparent; color: #F5EEE4'),
+      pick: () => this.setState({ speed: s }) }));
+    return {
+      shapes, patterns, strip, beats, speeds,
+      patternStrokes: current.strokes,
+      setupOpen: open, setupClosed: !open, setupOpenText: open ? 'true' : 'false',
+      setupAction: open ? 'Hide' : 'Breakdown ›',
+      barLine: first ? 'One new shape here: D' : 'Three shapes you know · ' + current.name.replace(/^\w+: /, ''),
+      barDot: 'width: 8px; height: 8px; flex: 0 0 8px; border-radius: 4px; background: ' + (first ? '#F2A93B' : '#5E5246'),
+      hasNew: first,
+      toggleSetup: () => this.setState({ open: !open }),
+      timeNow: first ? '0:00' : '1:12',
+      progress: 'height: 4px; border-radius: 2px; background: #F2A93B; width: ' + (first ? 0 : 46) + '%',
+      playing: this.state.playing, paused: !this.state.playing,
+      playLabel: this.state.playing ? 'Pause' : 'Play',
+      togglePlay: () => this.setState({ playing: !this.state.playing })
+    };
+  }
+}
+</script>
+</body>
+</html>
