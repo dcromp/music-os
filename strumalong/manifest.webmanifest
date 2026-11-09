@@ -1,7 +1,7 @@
 {
   "name": "Music OS",
   "short_name": "Music OS",
-  "description": "Jukebox practice and Bandmaker chord ideas.",
+  "description": "Jukebox practice and Bandmaker song ideas.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
