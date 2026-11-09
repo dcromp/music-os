@@ -34,15 +34,14 @@ assert.deepEqual(run("keyEase('G','major')"),{easy:5,level:3,home:true});
 assert.deepEqual(run("keyEase('D','major')"),{easy:4,level:2,home:true});
 assert.deepEqual(run("keyEase('B♭','major')"),{easy:1,level:1,home:false});
 
-// Every key offers its chords step, with a role or a reason for every chord.
+// Every key offers sequences, transposed, with the easiest shapes first.
 for(const mode of ['major','minor','power'])for(const key of run(`keyGroups.${mode}.keys`)){
- const cards=run(`chordCards({key:${JSON.stringify(key)},mode:'${mode}'})`);
- assert.equal(cards.length,mode==='power'?6:7,`${key} ${mode}`);
- assert.equal(cards[0].tag,'home');assert.ok(cards[0].starter);
- assert.equal(cards.filter(c=>c.starter).length,mode==='power'?3:4);
- for(const c of cards)assert.ok(c.tag&&c.name&&c.degree,`${key} ${mode} ${c.name}`);
+ const list=run(`(()=>{const s=currentSection(),k=s.key,m=s.mode;s.key=${JSON.stringify(key)};s.mode='${mode}';const out=sequencesFor(s).map(r=>r.chords);s.key=k;s.mode=m;return out})()`);
+ assert.ok(list.length>=7,`${key} ${mode} has ${list.length} sequences`);
+ for(const chords of list){assert.equal(chords.length,4);for(const c of chords)assert.ok(c&&typeof c==='string',`${key} ${mode}: every chord is named`)}
 }
-assert.deepEqual(run("chordCards({key:'G',mode:'major'}).map(c=>[c.degree,c.name,c.tag])"),[['I','G','home'],['IV','C','lift'],['V','D','pull home'],['vi','Em','softer'],['ii','Am','later'],['iii','Bm','barre'],['vii°','F♯dim','tension']]);
+assert.equal(new Set(run("feelRecipes.map(r=>r.id)")).size,run("feelRecipes.length"),'sequence ids are unique');
+assert.equal(new Set(run("feelRecipes.map(r=>r.mode+r.chords.join())")).size,run("feelRecipes.length"),'no sequence is repeated');
 
 // Flow: nothing moves on until there is a feel, and Bass waits for chords.
 assert.equal(run("feelUI.screen"),'feel');
@@ -75,28 +74,39 @@ assert.equal(run("feelUI.screen"),'key','stays on the key step');
 act('feel-group','major');assert.equal(run("currentSection().key"),'G');
 act('feel-group','minor');act('key-pick','A');assert.deepEqual(run("[currentSection().mode,currentSection().key]"),['minor','A']);
 
-// Loop maker: drop chords into four bars, then keep the loop.
-act('feel-go','chords');assert.match(html(),/Make a loop/);assert.match(html(),/3 bars to go/);
-assert.deepEqual(run("feelUI.loop"),[0,null,null,null]);
-assert.deepEqual(run("padIndices(currentSection()).map(i=>palette(currentSection())[i])"),['Am','C','Dm','F']);
-assert.deepEqual(run("spiceIndices(currentSection()).map(i=>palette(currentSection())[i])"),['B°'.replace('°','dim'),'Em','G']);
-act('loop-keep');assert.equal(run("feelUI.screen"),'chords','an unfinished loop is not kept');
-act('loop-drop','5');act('loop-drop','1');act('loop-drop','4');
-assert.deepEqual(run("loopChords()"),['Am','F','C','G']);assert.match(html(),/Keep this loop/);
-act('loop-slot','1');act('loop-drop','2');assert.deepEqual(run("loopChords()"),['Am','Dm','C','G'],'tapping a bar lets you swap it');
-assert.match(html(),/Proven sequences/);assert.match(html(),/What do the numbers mean\?/);
-act('loop-seq','S2');assert.deepEqual(run("loopChords()"),['Am','Dm','E7','Am'],'proven sequences are transposed');
-assert.match(html(),/Try a chord substitution/,'substitutions show for a proven sequence');
-act('loop-keep');
+// Chords: pick a sequence. The first four use the easiest shapes; the rest wait behind one button.
+act('feel-go','chords');assert.match(html(),/Pick a sequence/);
+assert.equal((html().match(/data-action="loop-seq:/g)||[]).length,4);
+assert.deepEqual(run("sequencesFor(currentSection()).slice(0,4).map(r=>r.chords.join(' '))"),['Am Dm G C','Am F Dm Am','Am Dm E7 Am','Am F C G']);
+act('loop-more');assert.equal((html().match(/data-action="loop-seq:/g)||[]).length,run("visibleRecipes('minor').length"));
+assert.doesNotMatch(html(),/Spice|Learn more|substitution/);
+act('loop-seq','nope');assert.equal(run("feelUI.screen"),'chords','an unknown sequence is ignored');
+act('loop-seq','S2');
 assert.equal(run("feelUI.screen"),'build');assert.equal(run("bandReady()"),true);assert.equal(run("currentSection().recipe"),'S2');
-assert.deepEqual(run("currentSection().chords"),['Am','Dm','E7','Am']);
+assert.deepEqual(run("currentSection().chords"),['Am','Dm','E7','Am'],'sequences are transposed');
 assert.match(html(),/Make it yours/);
 
-// The editor still works; undo steps back through it.
-vm.runInContext("guide.selectedBar=1;currentSection().barDegrees[1]=0;syncGuide(currentSection())",ctx);
-assert.deepEqual(run("currentSection().chords"),['Am','Am','E7','Am']);
-act('feel-reset');assert.deepEqual(run("currentSection().chords"),['Am','Dm','E7','Am']);
-act('feel-undo');assert.deepEqual(run("currentSection().chords"),['Am','Am','E7','Am']);
+// Song: tapping a bar offers the swaps the chord table recommends for that chord.
+const swaps=()=>run("barSwaps(currentSection(),guide.selectedBar).map(o=>palette(currentSection())[o.to]+': '+o.label)");
+act('feel-bar','0');assert.deepEqual(swaps(),[],'home has no suggested swap');
+act('feel-bar','1');assert.deepEqual(swaps(),['D: Brighter']);
+act('feel-bar','2');assert.deepEqual(swaps(),['Em: Softer']);assert.match(html(),/Softer/);
+assert.equal((html().match(/swap-dot/g)||[]).length,2,'bars with a swap are marked');
+assert.doesNotMatch(html(),/Hear original/);
+act('feel-swap','3');assert.deepEqual(run("currentSection().chords"),['Am','Dm','Em','Am']);
+assert.match(html(),/Back to original/);assert.match(html(),/Hear original/);assert.deepEqual(swaps(),['E7: Stronger pull home']);
+act('feel-swap','99');assert.deepEqual(run("currentSection().chords"),['Am','Dm','Em','Am'],'an unknown chord is ignored');
+act('feel-undo');assert.deepEqual(run("currentSection().chords"),['Am','Dm','E7','Am']);
+// Going back and tapping the same sequence keeps your changes; another one replaces them.
+act('feel-bar','1');act('feel-swap','7');act('feel-go','chords');assert.match(html(),/class="seq on"/);
+act('loop-seq','S2');assert.deepEqual(run("currentSection().chords"),['Am','D','E7','Am']);
+vm.runInContext("Math.random=()=>0",ctx);act('feel-go','chords');act('loop-dice');assert.notEqual(run("currentSection().recipe"),'S2','dice picks a different sequence');
+act('feel-go','chords');act('loop-seq','S2');act('feel-bar','1');vm.runInContext("currentSection().barDegrees[1]=0;syncGuide(currentSection())",ctx);
+// Some swaps only suit a bar that leads to a particular chord.
+assert.deepEqual(run("(()=>{const s={mode:'major',key:'G',bars:4,barDegrees:[0,1,4,0]};return [barSwaps(s,1).map(o=>o.to),barSwaps({...s,barDegrees:[0,1,3,0]},1).map(o=>o.to)]})()"),[[9],[]]);
+assert.equal(run("barSwaps({mode:'power',key:'E',bars:4,barDegrees:[0,1,2,0]},1).length"),0,'power chords have no suggested swaps');
+// One menu on each step, and no leftover lessons.
+assert.equal((html().match(/<details/g)||[]).length,2,'Song keeps More chords and Tempo and sound');
 
 // Tracks: Rhythm and Bass lanes play together, with mute and solo.
 vm.runInContext("bassAction('member','tracks')",ctx);assert.equal(run("bassState.tab"),'tracks');
@@ -118,4 +128,4 @@ act('feel-go','feel');act('feel-pick','heavy');assert.equal(run("bandReady()"),f
 vm.runInContext("bassAction('member','bass')",ctx);assert.equal(run("bassState.tab"),'rhythm','Bass stays locked without chords');
 vm.runInContext("bassAction('member','tracks')",ctx);assert.equal(run("bassState.tab"),'rhythm','Tracks stays locked without chords');
 act('feel-undo');assert.equal(run("bandReady()"),true,'undo brings the song back');
-console.log('Bandmaker flow: key ranking, scale notes, key wheel, loop maker, Tracks lanes, guided steps and band unlock pass');
+console.log('Bandmaker flow: key ranking, scale notes, key wheel, sequence picker, bar swaps, Tracks lanes, guided steps and band unlock pass');
