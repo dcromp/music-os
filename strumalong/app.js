@@ -448,6 +448,13 @@
     return {
       currentTime: () => yt.getCurrentTime(),
       duration: () => yt.getDuration(),
+      // The video the player is showing: an ad or a different video names another id (#84).
+      videoId: () => {
+        const data = typeof yt.getVideoData === "function" ? yt.getVideoData() : null;
+        if (data && data.video_id) return data.video_id;
+        const match = /[?&]v=([A-Za-z0-9_-]{11})/.exec(typeof yt.getVideoUrl === "function" ? yt.getVideoUrl() || "" : "");
+        return match ? match[1] : null;
+      },
       playbackRate: () => yt.getPlaybackRate(),
       availableRates: () => yt.getAvailablePlaybackRates(),
       seekTo: seconds => yt.seekTo(seconds, true),

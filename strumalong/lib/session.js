@@ -5,8 +5,9 @@
  * Two adapters keep it testable:
  * - storage: {getItem(key), setItem(key, value)}; localStorage in the app, a Map in tests.
  *   Every access is guarded, so a throwing or missing store just means nothing is remembered.
- * - player: {currentTime(), duration(), playbackRate(), availableRates(), seekTo(s), cue(videoId, s),
+ * - player: {currentTime(), duration(), videoId(), playbackRate(), availableRates(), seekTo(s), cue(videoId, s),
  *   play(), pause(), setRate(r), isMuted(), mute(), unMute(), destroy()}; the YouTube IFrame player in the app, a fake in tests.
+ *   videoId() is the video the player says it is showing; a player without it just skips that ad check.
  *   Every call is guarded too: a throwing player keeps the last known value.
  * Message wording, the render loop, timers and wake lock stay in app.js. */
 (function (root, factory) {
@@ -263,11 +264,17 @@
       setMuted(on) { if (controllable()) attempt(() => on ? player.mute() : player.unMute()); },
 
       // ---- clock: call every frame. Returns the player position, the cue time and the cue model.
+      // While an ad (or a different video) shows, the player's clock is the ad's: the position holds where the
+      // song was, so cues, the strum step, the timing bar and the saved resume point don't move (#84).
       tick() {
-        pt = readPlayerTime();
         if (state === PLAYING && player && ready) {
-          const duration = attempt(() => player.duration(), 0);
-          ad = Core.durationMismatch(duration, Core.expectedDuration(song, video));
+          ad = Core.adShowing({
+            videoId: attempt(() => player.videoId(), null), expectedId: video && video.video_id,
+            duration: attempt(() => player.duration(), 0), expectedDuration: Core.expectedDuration(song, video),
+          });
+        }
+        if (!ad) pt = readPlayerTime();
+        if (state === PLAYING && player && ready && !ad) {
           const now = clock();
           if (now - lastSave > SAVE_EVERY_MS) { lastSave = now; saveLast(); }
         }
