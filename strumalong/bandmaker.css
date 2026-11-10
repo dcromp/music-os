@@ -147,6 +147,15 @@ select, input[type="number"] { width: 100%; min-height: 44px; padding: 0 8px; bo
 .tab-knock.on { fill: var(--accent-soft); }
 .tab-note { fill: var(--panel); stroke: var(--text); }
 .tab-note.filled { fill: var(--text); }
+/* Drums */
+.drum-grid { display: grid; grid-template-columns: 52px repeat(var(--steps), minmax(0, 1fr)); gap: 4px; align-items: center; margin-top: 10px; }
+.drum-name { font-size: 12px; color: var(--muted); }
+.drum-count { text-align: center; font: 12px var(--font-mono); color: var(--muted); }
+.drum-count.on { color: var(--accent); }
+.drum-cell { height: 26px; border-radius: 6px; background: var(--panel); border: 1px solid var(--border); }
+.drum-cell.hit { background: var(--text); border-color: var(--text); }
+.drum-cell.on { border-color: var(--accent); }
+.drum-cell.hit.on { background: var(--accent); border-color: var(--accent); }
 .tip { padding: 12px 14px; border-radius: 16px; background: var(--accent-soft); font-size: 13px; line-height: 1.45; }
 .bass-actions { display: flex; gap: 10px; }
 .wide { flex: 1 1 0; min-height: 56px; padding: 6px; border-radius: 18px; border: 1px solid var(--border); background: var(--panel); font-size: 15px; font-weight: 600; }

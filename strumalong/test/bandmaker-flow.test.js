@@ -4,10 +4,11 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
 const root={dataset:{},querySelectorAll:()=>[],innerHTML:''};
 const ctx={setTimeout,clearTimeout,console,root,document:{querySelector:()=>root,querySelectorAll:()=>[],addEventListener(){}},window:{addEventListener(){}}};
 vm.createContext(ctx);
-for(const file of ['lib/preview-playback.js','bandmaker-samples.js','bandmaker-bass.js','bandmaker.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',file),'utf8'),ctx);
+for(const file of ['lib/preview-playback.js','bandmaker-samples.js','bandmaker-bass.js','bandmaker-drums.js','bandmaker.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',file),'utf8'),ctx);
 const run=code=>JSON.parse(vm.runInContext(`JSON.stringify(${code})`,ctx));
 const act=(action,value='')=>vm.runInContext(`feelAction(${JSON.stringify(action)},${JSON.stringify(value)})`,ctx);
 const html=()=>root.innerHTML;
+const dact=(action,value='')=>vm.runInContext(`bassAction(${JSON.stringify(action)},${JSON.stringify(value)})`,ctx);
 
 // Scale notes are spelled with one letter each, home note first.
 assert.deepEqual(run("scaleNotes({key:'G',mode:'major'})"),['G','A','B','C','D','E','F♯']);
@@ -46,9 +47,9 @@ assert.equal(new Set(run("feelRecipes.map(r=>r.mode+r.chords.join())")).size,run
 // Song path: Bandmaker opens on the trail. Feel is the only open step; unbuilt steps say they are coming later.
 assert.equal(run("feelUI.screen"),'path');assert.match(html(),/Let&#39;s make a song!/);assert.match(html(),/0 \/ 8/);
 assert.equal((html().match(/data-action="path-pick:/g)||[]).length,8);
-assert.deepEqual(run("pathSteps.map((_,i)=>pathStatus(i))"),['open','locked','locked','later','locked','later','later','later']);
+assert.deepEqual(run("pathSteps.map((_,i)=>pathStatus(i))"),['open','locked','locked','locked','locked','later','later','later']);
 act('path-pick','1');assert.match(html(),/Unlocks after Feel/);act('path-start','key');assert.equal(run("feelUI.screen"),'path','a locked step does not open');
-act('path-pick','3');assert.match(html(),/Coming later/);act('path-start','drums');assert.equal(run("feelUI.screen"),'path');
+act('path-pick','3');assert.match(html(),/Unlocks after Chords/);act('path-start','drums');assert.equal(run("feelUI.screen"),'path');
 act('path-pick','0');act('path-start','feel');
 // Flow: nothing moves on until there is a feel, and Bass waits for chords.
 assert.equal(run("feelUI.screen"),'feel');
@@ -95,10 +96,28 @@ act('loop-seq','S2');
 assert.equal(run("feelUI.screen"),'build');assert.equal(run("bandReady()"),true);assert.equal(run("currentSection().recipe"),'S2');
 assert.deepEqual(run("currentSection().chords"),['Am','Dm','E7','Am'],'sequences are transposed');
 assert.match(html(),/Make it yours/);assert.equal(run('started'),0,'picking a sequence does not play');
-assert.deepEqual(run("pathSteps.slice(0,5).map((_,i)=>pathStatus(i))"),['done','done','done','later','open'],'Feel, Key and Chords are done; Bass opens');
-vm.runInContext("feelUI.screen='path'",ctx);vm.runInContext("render()",ctx);assert.match(html(),/3 \/ 8/);assert.match(html(),/Next up: Bass/);
+assert.deepEqual(run("pathSteps.slice(0,5).map((_,i)=>pathStatus(i))"),['done','done','done','open','locked'],'Feel, Key and Chords are done; Drums opens, Bass waits for it');
+assert.match(html(),/Bring in the drums/);assert.match(html(),/data-action="member:drums"/,'the Dr disc opens once there are chords');
+vm.runInContext("feelUI.screen='path'",ctx);vm.runInContext("render()",ctx);assert.match(html(),/3 \/ 8/);assert.match(html(),/Next up: Drums/);
 act('path-start','loop');assert.equal(run("feelUI.screen"),'build','Chords reopens your song once it exists');
-act('feel-go','path');act('path-start','bass');assert.equal(run("bassState.tab"),'bass');vm.runInContext("bassAction('bass-select','roots')",ctx);
+// Drums: five beats, a one-bar grid and no auto-play. Picking a beat ticks the step and opens Bass.
+act('feel-go','path');act('path-start','drums');assert.equal(run("bassState.tab"),'drums');assert.match(html(),/Pick a beat/);
+for(const p of run("drumPatterns.map(p=>p.name)"))assert.ok(html().includes(p),p);
+assert.equal(run("drumPatterns.length"),5);assert.equal((html().match(/class="drum-cell/g)||[]).length,24,'straight rock: 3 rows of 8');
+assert.equal((html().match(/<details/g)||[]).length,0,'Drums adds no menus');
+assert.equal(run('started'),0,'opening Drums does not play');
+const hits=(id,drum)=>run(`drumHits('${id}').filter(h=>h.drum==='${drum}').map(h=>+h.beat.toFixed(3))`);
+assert.deepEqual(hits('rock','snare'),[1,3]);assert.deepEqual(hits('rock','kick'),[0,2]);assert.equal(hits('rock','hat').length,8);
+assert.deepEqual(hits('half','snare'),[2]);assert.deepEqual(hits('four','kick'),[0,1,2,3]);assert.deepEqual(hits('four','hat'),[0.5,1.5,2.5,3.5]);
+assert.deepEqual(hits('shuffle','hat').slice(0,2),[0,0.667],'shuffle swings the off-beat');assert.deepEqual(hits('ride','ride'),[0,1,2,3]);assert.deepEqual(hits('ride','hat'),[]);
+for(const p of run("drumPatterns.map(p=>p.id)"))assert.ok(run(`drumNotes('${p}',4,.5).every(n=>n.instrument==='drums'&&n.time>=0&&n.time<8&&n.level>0&&n.level<1)`),p);
+assert.equal(run("drumNotes('rock',4,.5).length"),4*run("drumHits('rock').length"),'the beat repeats every bar');
+assert.ok(run("(()=>{const ctx={sampleRate:8000,createBuffer:(c,n)=>{const d=new Float32Array(n);return {getChannelData:()=>d,d}}};return [36,38,42,51].every(m=>{const b=drumBuffer(ctx,m,.3);return b.d.length===2400&&b.d.every(Number.isFinite)&&b.d.some(v=>Math.abs(v)>.05)})})()"),'synth kit renders every drum');
+vm.runInContext("var banks=0;const realBank=sampleBank;sampleBank=i=>{banks++;return realBank(i)};prepareSamples({},[{instrument:'drums',notes:[36,38]}])",ctx);assert.equal(run('banks'),0,'drums never fetch samples');
+assert.equal(run("pathStatus(3)"),'open');dact('drum-select','nope');assert.equal(run("pathStatus(3)"),'open','an unknown beat is ignored');
+dact('drum-select','half');assert.equal(run("drumState.selected"),'half');assert.match(html(),/Snare only on 3/);
+assert.equal(run('started'),0,'picking a beat does not play');assert.deepEqual(run("[pathStatus(3),pathStatus(4)]"),['done','open']);
+vm.runInContext("bassAction('member','rhythm')",ctx);act('feel-go','path');act('path-start','bass');assert.equal(run("bassState.tab"),'bass');vm.runInContext("bassAction('bass-select','roots')",ctx);
 assert.equal(run("pathStatus(4)"),'done');vm.runInContext("bassAction('member','rhythm')",ctx);assert.equal(run("feelUI.screen"),'build');
 
 // Song: the book's suggestions for the whole sequence, Roman numerals on every chord, and the full table grouped below.
@@ -140,12 +159,17 @@ assert.equal((html().match(/<details/g)||[]).length,1,'Song keeps one menu: Temp
 
 // Tracks: Rhythm and Bass lanes play together, with mute and solo.
 vm.runInContext("bassAction('member','tracks')",ctx);assert.equal(run("bassState.tab"),'tracks');
-assert.match(html(),/class="lane/);assert.equal((html().match(/Coming later/g)||[]).length,3,'Singer, Drums and Lead');
+assert.match(html(),/class="lane/);assert.equal((html().match(/Coming later/g)||[]).length,2,'Singer and Lead');assert.match(html(),/class="clip drums">Half-time/);
 const instruments=()=>[...new Set(run("bandNotes().map(n=>n.instrument)"))].sort();
-assert.deepEqual(instruments(),['bass','guitar']);
-vm.runInContext("bassAction('tracks-mute','rhythm')",ctx);assert.deepEqual(instruments(),['bass']);
+assert.deepEqual(instruments(),['bass','drums','guitar']);
+vm.runInContext("bassAction('tracks-mute','rhythm')",ctx);assert.deepEqual(instruments(),['bass','drums']);
 vm.runInContext("bassAction('tracks-mute','rhythm')",ctx);vm.runInContext("bassAction('tracks-solo','rhythm')",ctx);assert.deepEqual(instruments(),['guitar']);
-vm.runInContext("bassAction('tracks-solo','rhythm')",ctx);assert.deepEqual(instruments(),['bass','guitar']);
+vm.runInContext("bassAction('tracks-solo','rhythm')",ctx);assert.deepEqual(instruments(),['bass','drums','guitar']);
+vm.runInContext("bassAction('tracks-mute','drums')",ctx);assert.deepEqual(instruments(),['bass','guitar'],'mute Drums');assert.match(html(),/aria-label="Mute Drums"/);
+vm.runInContext("bassAction('tracks-mute','drums')",ctx);vm.runInContext("bassAction('tracks-solo','drums')",ctx);assert.deepEqual(instruments(),['drums'],'solo Drums');
+assert.equal(run("bandNotes().length"),run("drumNotes('half',currentSection().bars,1).length"));
+vm.runInContext("bassAction('tracks-solo','drums')",ctx);assert.deepEqual(instruments(),['bass','drums','guitar']);
+vm.runInContext("bassAction('tracks-select','drums')",ctx);assert.match(html(),/Open Drums/);assert.match(html(),/Half-time · keeps time at/);
 vm.runInContext("bassAction('tracks-select','bass')",ctx);assert.match(html(),/Open Bass/);
 vm.runInContext("bassAction('member','rhythm')",ctx);
 
@@ -153,9 +177,12 @@ vm.runInContext("bassAction('member','rhythm')",ctx);
 vm.runInContext("bassAction('member','bass')",ctx);assert.match(html(),/Pick a bass line/);assert.match(html(),/Bass follows your chords: Am i · Am i · E7 V7 · Am i/);
 for(const p of run("bassPatterns.map(p=>p.name)"))assert.ok(html().includes(p),p);
 vm.runInContext("bassAction('bass-select','fifths')",ctx);assert.match(html(),/tab-staff/);
+vm.runInContext("bassAction('member','drums')",ctx);const before=run('started');dact('drum-play','four,mix');assert.equal(run('started'),before+1,'Hear plays the beat');assert.equal(run("drumState.selected"),'four');
+dact('drum-play','nope,solo');assert.equal(run('started'),before+1,'an unknown beat does not play');
 vm.runInContext("bassAction('member','rhythm')",ctx);
 act('feel-go','feel');act('feel-pick','heavy');assert.equal(run("bandReady()"),false);
 vm.runInContext("bassAction('member','bass')",ctx);assert.equal(run("bassState.tab"),'rhythm','Bass stays locked without chords');
 vm.runInContext("bassAction('member','tracks')",ctx);assert.equal(run("bassState.tab"),'rhythm','Tracks stays locked without chords');
+vm.runInContext("bassAction('member','drums')",ctx);assert.equal(run("bassState.tab"),'rhythm','Drums stays locked without chords');assert.doesNotMatch(html(),/data-action="member:drums"/);
 act('feel-undo');assert.equal(run("bandReady()"),true,'undo brings the song back');
-console.log('Bandmaker flow: key ranking, scale notes, key wheel, sequence picker, bar swaps, Tracks lanes, guided steps and band unlock pass');
+console.log('Bandmaker flow: key ranking, scale notes, key wheel, sequence picker, bar swaps, Drums beats, Tracks lanes, guided steps and band unlock pass');
