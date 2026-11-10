@@ -6,7 +6,7 @@ module.exports=(async()=>{
  const names=['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];
  const bank=Array.from({length:88},(_,i)=>{const n=i+21;return '"'+names[n%12]+(Math.floor(n/12)-1)+'": "data:audio/mp3;base64,AQID",'}).join('\n');
  const ctx={handlers,setTimeout,clearTimeout,AbortController,atob,console,document:{querySelector:s=>s==='#sound-status'?status:root,querySelectorAll:()=>[],addEventListener(type,fn){(handlers[type]??=[]).push(fn)}},window:{addEventListener(type,fn){(handlers[type]??=[]).push(fn)}},fetch:async()=>{fetches++;if(release)await new Promise(r=>release=r);if(fail)throw Error('offline');return {ok:true,text:async()=>bank+'\nthrow new Error("must never execute");'}}};
- vm.createContext(ctx);for(const file of ['lib/preview-playback.js','bandmaker-samples.js','bandmaker-bass.js','bandmaker.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',file),'utf8'),ctx);
+ vm.createContext(ctx);for(const file of ['lib/preview-playback.js','bandmaker-samples.js','bandmaker-bass.js','bandmaker-drums.js','bandmaker.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',file),'utf8'),ctx);
  ctx.fakeAudio={decodeAudioData:async()=>{decodes++;return {sample:true}},resume:async()=>{},currentTime:0,createGain:()=>({gain:{value:1,setValueAtTime(){},linearRampToValueAtTime(){}},connect(){},disconnect(){}}),createBufferSource:()=>({connect(){},start(){started.push(true)},stop(){}})};
  await vm.runInContext("prepareSamples(fakeAudio,[{instrument:'guitar',notes:[60,60,64]}])",ctx);
  assert.equal(fetches,1);assert.equal(decodes,2);assert.match(status.textContent,/FluidR3/);
