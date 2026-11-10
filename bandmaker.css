@@ -118,11 +118,6 @@ button.member:not(.active) .disc { background: var(--accent-soft); color: var(--
 .bar-cell.sounding { background: var(--accent); color: var(--on-accent); }
 .bar-cell.sounding small { color: inherit; }
 .bar-cell { position: relative; }
-.swap-dot { position: absolute; top: 7px; right: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--jukebox); }
-.swap-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-.swap { min-height: 60px; padding: 6px 12px; display: flex; flex-direction: column; justify-content: center; gap: 2px; border-radius: 14px; border: 1px solid var(--accent); background: var(--accent-soft); text-align: left; }
-.swap b { font-family: var(--font-display); font-weight: 800; font-size: 20px; }
-.swap small { font-size: 12px; color: var(--muted); }
 .more { border-radius: 14px; }
 .more summary { min-height: 44px; display: flex; align-items: center; font-size: 15px; font-weight: 600; cursor: pointer; }
 .more > p, .more .chips, .more .fields, .more > .stack { margin-bottom: 10px; }
@@ -230,3 +225,30 @@ select, input[type="number"] { width: 100%; min-height: 44px; padding: 0 8px; bo
 .lane-lead { --lane: #8cb8ee; }
 .playhead { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--text); pointer-events: none; left: calc(var(--head) + 6px + (100% - var(--head) - 12px) * var(--at)); }
 .card .disc { flex: 0 0 44px; width: 44px; height: 44px; border: 0; background: var(--lane); color: var(--on-accent); }
+
+/* Roman numerals under chords, popular sequences, book suggestions and the grouped chord table (#93). */
+.chord-stack { display: flex; gap: 14px; }
+.chord-stack span { display: flex; flex-direction: column; align-items: center; min-width: 30px; }
+.chord-stack b { font-family: var(--font-display); font-weight: 800; font-size: 21px; line-height: 1.1; }
+.chord-stack small { font-size: 11px; color: var(--muted); }
+.seq.popular { border-color: var(--jukebox); }
+.badge { font-style: normal; display: inline-block; padding: 1px 7px; margin-right: 4px; border-radius: 8px; background: var(--jukebox); color: var(--on-jukebox); font-size: 11px; font-weight: 700; }
+.bar-cell .mono { font-size: 11px; color: var(--muted); }
+.sug-list { display: flex; flex-direction: column; gap: 8px; }
+.sug { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 16px; background: var(--panel); border: 1px solid var(--border); }
+.sug.on { background: var(--accent-soft); border: 2px solid var(--accent); padding: 9px 11px; }
+.sug-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.sug-text b { font-family: var(--font-display); font-weight: 800; font-size: 18px; }
+.sug-text small { font-size: 13px; color: var(--muted); }
+.sug-text .mono { color: var(--accent); font-weight: 700; }
+.use { flex: 0 0 auto; min-width: 60px; min-height: 44px; padding: 0 12px; border-radius: 14px; border: 1px solid var(--accent); background: transparent; color: var(--accent); font-size: 14px; font-weight: 600; }
+.sug.on .use { background: var(--accent); color: var(--on-accent); }
+.swap-group { display: flex; flex-direction: column; gap: 6px; }
+.swap-group > small { font-size: 12px; color: var(--muted); }
+.swap-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+.swap-chord { min-height: 58px; padding: 4px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; border-radius: 12px; border: 1px solid var(--border); background: var(--panel); }
+.swap-chord b { font-family: var(--font-display); font-weight: 800; font-size: 17px; }
+.swap-chord small { font-size: 10px; color: var(--muted); }
+.swap-chord.on { background: var(--accent); color: var(--on-accent); border: 0; }
+.swap-chord.on small { color: inherit; }
+.clip small { font-weight: 500; opacity: 0.8; }
