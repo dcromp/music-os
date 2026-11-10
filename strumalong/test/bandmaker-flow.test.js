@@ -43,9 +43,17 @@ for(const mode of ['major','minor','power'])for(const key of run(`keyGroups.${mo
 assert.equal(new Set(run("feelRecipes.map(r=>r.id)")).size,run("feelRecipes.length"),'sequence ids are unique');
 assert.equal(new Set(run("feelRecipes.map(r=>r.mode+r.chords.join())")).size,run("feelRecipes.length"),'no sequence is repeated');
 
+// Song path: Bandmaker opens on the trail. Feel is the only open step; unbuilt steps say they are coming later.
+assert.equal(run("feelUI.screen"),'path');assert.match(html(),/Let&#39;s make a song!/);assert.match(html(),/0 \/ 8/);
+assert.equal((html().match(/data-action="path-pick:/g)||[]).length,8);
+assert.deepEqual(run("pathSteps.map((_,i)=>pathStatus(i))"),['open','locked','locked','later','locked','later','later','later']);
+act('path-pick','1');assert.match(html(),/Unlocks after Feel/);act('path-start','key');assert.equal(run("feelUI.screen"),'path','a locked step does not open');
+act('path-pick','3');assert.match(html(),/Coming later/);act('path-start','drums');assert.equal(run("feelUI.screen"),'path');
+act('path-pick','0');act('path-start','feel');
 // Flow: nothing moves on until there is a feel, and Bass waits for chords.
 assert.equal(run("feelUI.screen"),'feel');
 assert.match(html(),/How should it feel\?/);
+act('feel-go','path');assert.equal(run("feelUI.screen"),'path','back from Feel returns to the path');act('path-start','feel');
 act('feel-go','key');assert.equal(run("feelUI.screen"),'feel','no feel chosen yet');
 assert.equal(run("bandReady()"),false);
 act('feel-pick','sad');
@@ -87,6 +95,11 @@ act('loop-seq','S2');
 assert.equal(run("feelUI.screen"),'build');assert.equal(run("bandReady()"),true);assert.equal(run("currentSection().recipe"),'S2');
 assert.deepEqual(run("currentSection().chords"),['Am','Dm','E7','Am'],'sequences are transposed');
 assert.match(html(),/Make it yours/);assert.equal(run('started'),0,'picking a sequence does not play');
+assert.deepEqual(run("pathSteps.slice(0,5).map((_,i)=>pathStatus(i))"),['done','done','done','later','open'],'Feel, Key and Chords are done; Bass opens');
+vm.runInContext("feelUI.screen='path'",ctx);vm.runInContext("render()",ctx);assert.match(html(),/3 \/ 8/);assert.match(html(),/Next up: Bass/);
+act('path-start','loop');assert.equal(run("feelUI.screen"),'build','Chords reopens your song once it exists');
+act('feel-go','path');act('path-start','bass');assert.equal(run("bassState.tab"),'bass');vm.runInContext("bassAction('bass-select','roots')",ctx);
+assert.equal(run("pathStatus(4)"),'done');vm.runInContext("bassAction('member','rhythm')",ctx);assert.equal(run("feelUI.screen"),'build');
 
 // Song: the book's suggestions for the whole sequence, Roman numerals on every chord, and the full table grouped below.
 const sugs=()=>run("bookSuggestions(currentSection()).map(o=>`${o.bar+1}:${labelsFor(currentSection())[o.from]}>${labelsFor(currentSection())[o.to]}`)");
