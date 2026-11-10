@@ -56,7 +56,7 @@ button.member:not(.active) .disc { background: var(--accent-soft); color: var(--
 .member.unavailable { opacity: 0.55; }
 .member.unavailable .disc { border-style: dashed; border-color: var(--dash); }
 .band-note { text-align: center; font-size: 12px; color: var(--muted); padding: 6px 0 12px; }
-.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
 .step {
   min-height: 44px; padding: 4px 0 0; border: 0; border-top: 4px solid var(--border); border-radius: 2px 2px 0 0;
   background: none; color: var(--muted); font-size: 12px; font-weight: 500; text-align: left;
@@ -252,3 +252,34 @@ select, input[type="number"] { width: 100%; min-height: 44px; padding: 0 8px; bo
 .swap-chord.on { background: var(--accent); color: var(--on-accent); border: 0; }
 .swap-chord.on small { color: inherit; }
 .clip small { font-weight: 500; opacity: 0.8; }
+
+/* Song path (9 November design, step 1 alternative). */
+.path-screen { display: flex; flex-direction: column; min-height: calc(100vh - 140px); }
+.path-head { display: flex; align-items: center; gap: 12px; padding: 4px 0 10px; }
+.path-progress { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.path-progress span { font-size: 16px; font-weight: 600; }
+.path-bar { height: 8px; border-radius: 4px; background: var(--soft); overflow: hidden; }
+.path-bar i { display: block; height: 8px; border-radius: 4px; background: var(--accent); transition: width .3s; }
+.path-count { font-size: 13px; font-weight: 700; color: var(--muted); }
+.path { position: relative; display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 8px 0 120px; }
+.path-unit { align-self: stretch; height: 48px; display: flex; align-items: center; padding: 0 16px; border-radius: 16px; background: var(--panel); color: #8a7d6e; border: 1px solid var(--border); font-family: var(--font-display); font-weight: 800; font-size: 18px; }
+.path-unit.on { background: var(--accent); color: var(--on-accent); border: 0; box-shadow: 0 4px 0 #2e8c7c; }
+.path-node { position: relative; width: 76px; height: 76px; transform: translateX(var(--zig)); }
+.path-node button { position: relative; width: 76px; height: 76px; padding: 0; border: 0; border-radius: 38px; display: flex; align-items: center; justify-content: center; background: var(--soft); color: #5e5246; box-shadow: 0 6px 0 #1a1612; }
+.path-node.open button { background: var(--accent); color: var(--on-accent); box-shadow: 0 6px 0 #2e8c7c; }
+.path-node.open::before { content: ""; position: absolute; inset: 0; border-radius: 38px; border: 3px solid var(--accent); animation: path-pulse 1.4s ease-out infinite; pointer-events: none; }
+.path-node.done button { background: var(--accent-soft); color: var(--accent); box-shadow: 0 6px 0 #0f2924; border: 2px solid var(--accent); }
+.path-node.later button { opacity: 0.6; }
+.path-node.selected button { outline: 3px solid var(--text); outline-offset: 4px; }
+.path-tick { position: absolute; right: -2px; bottom: -2px; width: 24px; height: 24px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: var(--accent); color: var(--on-accent); }
+.path-buddy { position: absolute; right: 0; top: 70px; display: flex; flex-direction: column; align-items: center; gap: 6px; animation: path-bob 2.4s ease-in-out infinite; pointer-events: none; }
+.path-buddy .bubble { max-width: 120px; padding: 8px 12px; border-radius: 14px; background: var(--text); color: var(--bg); font-size: 14px; font-weight: 700; text-align: center; }
+.path-sheet { position: sticky; bottom: max(16px, env(safe-area-inset-bottom)); display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 22px; background: var(--panel); border: 1px solid var(--border); box-shadow: 0 -10px 30px rgba(20, 17, 14, 0.9); }
+.path-sheet > div { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.path-sheet b { font-family: var(--font-display); font-weight: 800; font-size: 20px; }
+.path-sheet span { font-size: 13px; color: var(--muted); }
+.path-start { min-height: 52px; padding: 0 24px; border: 0; border-radius: 16px; background: var(--accent); color: var(--on-accent); font-size: 16px; font-weight: 800; box-shadow: 0 4px 0 #2e8c7c; }
+.path-locked { min-height: 52px; padding: 0 16px; display: flex; align-items: center; gap: 6px; border-radius: 16px; background: var(--soft); color: #8a7d6e !important; font-size: 14px !important; font-weight: 700; }
+@keyframes path-pulse { 0% { transform: scale(1); opacity: .6 } 100% { transform: scale(1.45); opacity: 0 } }
+@keyframes path-bob { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
+@media (prefers-reduced-motion: reduce) { .path-node.open::before, .path-buddy { animation: none; } }
