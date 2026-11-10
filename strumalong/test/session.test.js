@@ -22,7 +22,7 @@ function fakePlayer(init = {}) {
     return typeof value === "function" ? value(...args) : value;
   };
   Object.assign(p, {
-    currentTime: call("currentTime", () => p.time), duration: call("duration", () => p.length),
+    currentTime: call("currentTime", () => p.time), duration: call("duration", () => p.length), videoId: call("videoId", () => p.showing),
     playbackRate: call("playbackRate", () => p.rate), availableRates: call("availableRates", () => p.rates),
     seekTo: call("seekTo", s => { p.time = s; }), cue: call("cue"), play: call("play"), pause: call("pause"),
     setRate: call("setRate", r => { p.rate = r; }), destroy: call("destroy"),
@@ -232,6 +232,68 @@ test("ad / wrong-video guard follows the player's duration while playing", () =>
   player.length = 0; // unknown never trips it
   session.tick();
   assert.equal(session.ad, false);
+});
+
+test("ad guard: a player naming another video counts as an ad, and only valid ids count (#84)", () => {
+  const { session, player } = setup({ player: { length: 120, showing: vid("a") } });
+  session.stateChange(1);
+  session.tick();
+  assert.equal(session.ad, false); // the cued video
+  player.showing = "AdVideo1234";
+  session.tick();
+  assert.equal(session.ad, true);
+  for (const quiet of [undefined, null, "", "short", 42]) {
+    player.showing = quiet; // a reading the player doesn't give never trips it
+    session.tick();
+    assert.equal(session.ad, false, String(quiet));
+  }
+  player.showing = "AdVideo1234";
+  player.throws.add("videoId"); // a throwing player skips the check
+  session.tick();
+  assert.equal(session.ad, false);
+});
+
+test("ad guard: nothing advances while an ad plays, then the song picks up (#84)", () => {
+  const map = new Map();
+  const { session, player, clock } = setup({ map, player: { length: 120, showing: vid("a"), time: 40 } });
+  session.stateChange(1);
+  clock.now = 10000;
+  let before = session.tick();
+  assert.equal(before.pt, 40);
+  assert.equal(stored(map, "last").t, 40);
+  // A pre-roll on the song's own id but with its own length, then one naming its own id: both hold the clock.
+  for (const ad of [{ length: 15, showing: vid("a") }, { length: 120, showing: "AdVideo1234" }]) {
+    Object.assign(player, ad);
+    for (const [time, now] of [[0, 20000], [7, 30000], [14, 40000]]) {
+      player.time = time; clock.now = now;
+      const during = session.tick();
+      assert.equal(session.ad, true);
+      assert.equal(during.pt, before.pt, "player position holds");
+      assert.equal(during.t, before.t, "cue time holds");
+      assert.deepEqual(during.cue, before.cue, "cue model holds");
+    }
+    assert.equal(stored(map, "last").t, Math.floor(before.pt), "the ad's clock is never saved as the resume point");
+    session.stateChange(2); // pausing during the ad saves the song position, not the ad's
+    assert.equal(stored(map, "last").t, Math.floor(before.pt));
+    session.stateChange(1);
+    Object.assign(player, { length: 120, showing: vid("a"), time: before.pt + 1 });
+    const after = session.tick();
+    assert.equal(session.ad, false);
+    assert.equal(after.pt, before.pt + 1);
+    before = after;
+  }
+});
+
+test("adShowing combines the id and duration readings conservatively (#84)", () => {
+  const base = { videoId: vid("a"), expectedId: vid("a"), duration: 120, expectedDuration: 120 };
+  assert.equal(core.adShowing(base), false);
+  assert.equal(core.adShowing({ ...base, videoId: vid("c") }), true);
+  assert.equal(core.adShowing({ ...base, duration: 30 }), true);
+  assert.equal(core.adShowing({ ...base, duration: 122 }), false); // within 3 s
+  assert.equal(core.adShowing({ ...base, duration: 0, videoId: "" }), false);
+  assert.equal(core.adShowing({ ...base, expectedId: null, videoId: vid("c") }), false); // nothing to compare against
+  assert.equal(core.adShowing({}), false);
+  assert.equal(core.adShowing(undefined), false);
 });
 
 // --- Session: errors and fallback ----------------------------------------------------------------
