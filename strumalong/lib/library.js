@@ -36,6 +36,50 @@
     { id: "campfire", title: "Campfire open chords", note: "G, C and friends, with more changes.", levels: [2, 3] },
     { id: "barre", title: "Barre-chord songs", note: "F, Bm and full barre shapes.", levels: [4, 5] },
   ];
+  // Hand-picked collections (#103), by catalogue id. A song can sit in more than one. Order inside a
+  // collection is easiest first. A collection with no songs left after the genre filter is dropped.
+  const COLLECTIONS = [
+    { id: "sixties-rock", title: "Rock 'n' roll and the 60s", note: "Where guitar rock started.", ids: [
+      "elvis-presley-thats-all-right-youtube-20261026", "buddy-holly-peggy-sue-youtube-20261026", "ritchie-valens-la-bamba-youtube-20261026",
+      "troggs-wild-thing-youtube-20261011", "everly-brothers-bye-bye-love-youtube-20261026", "beatles-eight-days-a-week-youtube-20261028",
+      "beatles-twist-and-shout-youtube-20261011", "beatles-she-loves-you-youtube-20261028", "beatles-i-want-to-hold-your-hand-youtube-20261025",
+      "beatles-help-youtube-20261025", "ccr-bad-moon-rising-youtube-20261024", "van-morrison-brown-eyed-girl-youtube-20261011",
+      "mamas-and-the-papas-california-dreamin-youtube-20261028"] },
+    { id: "classic-rock", title: "70s and 80s rock", note: "Classic rock radio.", ids: [
+      "eric-clapton-lay-down-sally-youtube-20261026", "stealers-wheel-stuck-in-the-middle-with-you-youtube-20261025",
+      "status-quo-rockin-all-over-the-world-youtube-20261028", "rolling-stones-dead-flowers-youtube-20261028", "rod-stewart-maggie-may-youtube-20261028",
+      "ccr-wholl-stop-the-rain-youtube-20261028", "ccr-have-you-ever-seen-the-rain-youtube-20261024", "bob-dylan-knockin-heavens-door-youtube-20261011",
+      "neil-young-heart-of-gold-youtube-20261025", "eagles-take-it-easy-youtube-20261025", "eagles-peaceful-easy-feeling-youtube-20261028",
+      "fleetwood-mac-go-your-own-way-youtube-20261028", "kinks-lola-youtube-20261028", "queen-crazy-little-thing-called-love-youtube-20261025",
+      "jam-thats-entertainment-youtube-20261028", "john-mellencamp-small-town-youtube-20261028", "traveling-wilburys-end-of-the-line-youtube-20261028",
+      "traveling-wilburys-handle-with-care-youtube-20261028", "tom-petty-free-fallin-youtube-20261024", "tom-petty-learning-to-fly-youtube-20261025",
+      "neil-young-rockin-in-the-free-world-youtube-20261028"] },
+    { id: "harder-rock", title: "Harder rock", note: "Driving guitars. Dig in.", ids: [
+      "troggs-wild-thing-youtube-20261011", "status-quo-rockin-all-over-the-world-youtube-20261028", "cranberries-zombie-youtube-20261024",
+      "neil-young-rockin-in-the-free-world-youtube-20261028", "4-non-blondes-whats-up-youtube-20261025", "lifehouse-hanging-by-a-moment-youtube-20261028",
+      "jake-bugg-lightning-bolt-youtube-20261028", "fratellis-chelsea-dagger-youtube-20261028", "spin-doctors-two-princes-youtube-20261028",
+      "green-day-boulevard-of-broken-dreams-youtube-20261025"] },
+    { id: "britpop-indie", title: "Britpop and indie", note: "Oasis, The Verve and friends.", ids: [
+      "oasis-songbird-youtube-20261028", "oasis-wonderwall-youtube-20261010", "oasis-stand-by-me-youtube-20261028",
+      "oasis-dont-look-back-in-anger-youtube-20261024", "verve-lucky-man-youtube-20261025", "verve-drugs-dont-work-youtube-20261028",
+      "coldplay-yellow-youtube-20261025", "stereophonics-have-a-nice-day-youtube-20261028", "james-laid-youtube-20261028",
+      "travis-why-does-it-always-rain-on-me-youtube-20261028", "jake-bugg-lightning-bolt-youtube-20261028", "fratellis-chelsea-dagger-youtube-20261028",
+      "kooks-she-moves-in-her-own-way-youtube-20261028", "beautiful-south-rotterdam-or-anywhere-youtube-20261028", "amy-macdonald-this-is-the-life-youtube-20261028"] },
+    { id: "pop-singalongs", title: "Pop singalongs", note: "Everyone knows the words.", ids: [
+      "neil-diamond-sweet-caroline-youtube-20261025", "george-michael-faith-youtube-20261028", "bob-marley-three-little-birds-youtube-20261025",
+      "hootie-and-the-blowfish-hold-my-hand-youtube-20261028", "smash-mouth-all-star-youtube-20261028", "taylor-swift-you-belong-with-me-youtube-20261028",
+      "taylor-swift-we-are-never-getting-back-youtube-20261028", "taylor-swift-mine-youtube-20261028", "sugar-ray-every-morning-youtube-20261028",
+      "uncle-kracker-follow-me-youtube-20261028", "barenaked-ladies-if-i-had-1000000-youtube-20261028", "magic-rude-youtube-20261028",
+      "george-ezra-budapest-youtube-20261025", "jason-mraz-im-yours-youtube-20261025", "counting-crows-accidentally-in-love-youtube-20261028",
+      "avril-lavigne-complicated-youtube-20261028", "eagle-eye-cherry-save-tonight-youtube-20261025", "natalie-imbruglia-torn-youtube-20261025",
+      "lisa-loeb-stay-i-missed-you-youtube-20261028", "proclaimers-im-gonna-be-500-miles-youtube-20261025"] },
+    { id: "country-folk", title: "Country and folk", note: "Storytelling songs with open chords.", ids: [
+      "johnny-cash-jackson-youtube-20261026", "billy-ray-cyrus-achy-breaky-heart-youtube-20261026", "john-denver-country-roads-youtube-20261024",
+      "old-crow-medicine-show-wagon-wheel-youtube-20261025", "jimmy-buffett-margaritaville-youtube-20261028", "shania-twain-youre-still-the-one-youtube-20261028",
+      "harry-chapin-cats-in-the-cradle-youtube-20261028", "noah-kahan-stick-season-youtube-20261028", "lumineers-stubborn-love-youtube-20261028",
+      "lumineers-ho-hey-youtube-20261025", "phillip-phillips-home-youtube-20261028", "paul-simon-me-and-julio-down-by-the-schoolyard-youtube-20261028",
+      "cat-stevens-wild-world-youtube-20261025", "cat-stevens-peace-train-youtube-20261028", "james-blunt-bonfire-heart-youtube-20261028"] },
+  ];
   const changesOf = s => typeof (s && s.changes_per_min) === "number" ? s.changes_per_min : Infinity;
   const byLevelThenOrder = (a, b) => levelOf(a) - levelOf(b) || byOrder(a, b);
 
@@ -51,6 +95,10 @@
     const easy = songs.filter(s => levelOf(s) <= EASY_MAX_LEVEL && changesOf(s) !== Infinity)
       .sort((a, b) => changesOf(a) - changesOf(b) || byLevelThenOrder(a, b)).slice(0, EASY_LIMIT);
     out.push({ id: "easy", title: "Easy to jump into", note: "Few chord changes: just strum.", songs: easy });
+    for (const c of COLLECTIONS) {
+      const members = c.ids.map(id => byId.get(id)).filter(Boolean).sort(byLevelThenOrder);
+      out.push({ id: c.id, title: c.title, note: c.note, songs: members });
+    }
     const themed = new Set();
     for (const t of THEMES) {
       const members = songs.filter(s => t.levels.includes(levelOf(s))).sort(byLevelThenOrder);
@@ -59,6 +107,28 @@
     }
     out.push({ id: "other", title: "Other songs", note: "", songs: songs.filter(s => !themed.has(s.id)).sort(byOrder) });
     return out.filter(shelf => shelf.songs.length);
+  }
+
+  // One shelf by id with every song, for "See all" (null if it is empty or unknown).
+  function shelf(catalogue, favouriteIds, id) {
+    return shelves(catalogue, favouriteIds).find(x => x.id === id) || null;
+  }
+
+  // A–Z (#103): songs sorted by title or artist, ignoring a leading "The" or "A", grouped under their first letter
+  // ("#" for digits). by: "title" | "artist". Returns [{letter, songs}].
+  const sortKey = text => fold(text).replace(/^(the|a) /, "");
+  function alphabetical(songs, by) {
+    const field = by === "artist" ? "artist" : "title";
+    const other = field === "title" ? "artist" : "title";
+    const sorted = (songs || []).slice().sort((a, b) => sortKey(a[field]).localeCompare(sortKey(b[field])) || sortKey(a[other]).localeCompare(sortKey(b[other])));
+    const groups = [];
+    for (const s of sorted) {
+      const first = sortKey(s[field]).charAt(0).toUpperCase();
+      const letter = /[A-Z]/.test(first) ? first : "#";
+      if (!groups.length || groups[groups.length - 1].letter !== letter) groups.push({ letter, songs: [] });
+      groups[groups.length - 1].songs.push(s);
+    }
+    return groups;
   }
 
   // Up to `limit` songs sharing at least one core shape with `song` and at most one level harder:
@@ -145,5 +215,5 @@
     return { chords, repeats: starts.length, coverage: starts.length * n / seq.length };
   }
 
-  return { search, shelves, similar, surprise, fold, byGenre, GENRES, knownShapes, shapeLine, commonLoop };
+  return { search, shelves, shelf, alphabetical, COLLECTIONS, similar, surprise, fold, byGenre, GENRES, knownShapes, shapeLine, commonLoop };
 });
