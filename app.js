@@ -125,7 +125,10 @@
       // #/ready/<id> is the old get-ready sheet's address; it now opens the song page, which carries the sheet's contents.
       // #/resume/<id> is Home's "Pick up where you left off".
       showSong(id, gen, match[1] === "resume");
-    } else showLibrary(gen);
+    } else {
+      const list = /^#\/list\/([a-z0-9-]+)\/?$/.exec(location.hash || "");
+      if (list) showList(list[1], gen); else showLibrary(gen);
+    }
     try { window.scrollTo(0, 0); } catch (_) { /* ignore */ }
   }
 
@@ -147,7 +150,7 @@
         <h1 class="eyebrow">Jukebox</h1>
         <button type="button" class="btn-surprise" data-act="surprise">${ICON.shuffle} Surprise me</button></div>
       <input id="lib-search" class="lib-search" type="search" placeholder="Search songs or artists" aria-label="Search songs or artists" autocomplete="off" autocorrect="off" spellcheck="false" value="${esc(libQuery)}">
-      <span class="genre-seg" role="group" aria-label="Genre">${genreButtons()}</span></header>
+      <div class="lib-filters"><span class="genre-seg" role="group" aria-label="Genre">${genreButtons()}</span><a class="pill az" href="#/list/all">A–Z list</a></div></header>
       <div id="lib-body"><p class="muted">Loading songs…</p></div>`;
     let catalogue;
     try { catalogue = await getCatalogue(); }
@@ -178,13 +181,62 @@
           <span class="resume-icon" aria-hidden="true">${t ? "▶" : "↻"}</span><span>${t ? "Resume" : "Play again:"} <b>${esc(lastSong.title)}</b>${t ? ` at ${Core.formatTime(t)}` : ""}</span></a>`;
       }
       for (const shelf of Library.shelves({ groups: catalogue && catalogue.groups, songs }, store.favourites())) {
-        html += `<section class="group shelf-group"><div class="shelf-head"><h2>${esc(shelf.title)}</h2>${shelf.note ? `<p class="group-note">${esc(shelf.note)}</p>` : ""}</div>
-          <ul class="cards shelf">${shelf.songs.map(songCard).join("")}</ul></section>`;
+        // Long shelves show their first few songs and end on a "See all" card (#103).
+        const more = shelf.songs.length > SHELF_LIMIT;
+        html += `<section class="group shelf-group"><div class="shelf-head"><h2>${esc(shelf.title)}</h2>${more ? `<a class="see-all" href="#/list/${shelf.id}">See all ${shelf.songs.length}</a>` : shelf.note ? `<p class="group-note">${esc(shelf.note)}</p>` : ""}</div>
+          <ul class="cards shelf">${shelf.songs.slice(0, SHELF_LIMIT).map(songCard).join("")}${more ? `<li><a class="card more-card" href="#/list/${shelf.id}"><b>See all</b><span>${shelf.songs.length} songs</span></a></li>` : ""}</ul></section>`;
       }
       if (!songs.length) html += `<p class="msg">${libGenre === "all" ? "No songs are listed yet." : `No ${esc(libGenre)} songs are listed yet.`}</p>`;
     }
     html += `<footer class="lib-foot"><p>Chords are automatic drafts and may be wrong. Strum patterns are practice suggestions, not the recorded parts. Beats are estimated; bars are approximate.</p></footer>`;
     body.innerHTML = html;
+  }
+
+  // ---------------------------------------------------------------- full lists (#103): one shelf, or every song A–Z
+  const SHELF_LIMIT = 8;
+  let listSort = "title"; // A–Z list: "title" | "artist"
+
+  async function showList(id, gen) {
+    app.className = "app view-library view-list";
+    app.innerHTML = `<header class="lib-head"><div class="lib-title">
+        <a class="icon-btn" href="#/" aria-label="Back to the Jukebox">${ICON.back}</a>
+        <h1 class="eyebrow">Jukebox</h1></div>
+      <div class="lib-filters"><span class="genre-seg" role="group" aria-label="Genre">${genreButtons()}</span></div></header>
+      <div id="list-body" data-list="${esc(id)}"><p class="muted">Loading songs…</p></div>`;
+    let catalogue;
+    try { catalogue = await getCatalogue(); }
+    catch (_) {
+      if (gen !== routeGen) return;
+      $("list-body").innerHTML = `<p class="msg error">Couldn't load the song list. Check your connection.</p>
+        <p><button type="button" class="btn" data-act="reload">Try again</button></p>`;
+      return;
+    }
+    if (gen !== routeGen) return;
+    renderList(catalogue);
+  }
+
+  function renderList(catalogue) {
+    const body = $("list-body");
+    if (!body) return;
+    const id = body.dataset.list;
+    const songs = Library.byGenre(listedSongs(catalogue), libGenre);
+    if (id === "all") {
+      document.title = "A–Z · Jukebox · Music OS";
+      const groups = Library.alphabetical(songs, listSort);
+      body.innerHTML = `<div class="list-head"><h2>All songs A–Z</h2><p class="group-note">${songs.length} songs</p></div>
+        <div class="sort-seg" role="group" aria-label="Sort by">${[["title", "Title"], ["artist", "Artist"]].map(([v, label]) =>
+          `<button type="button" class="pill" data-act="az-sort" data-sort="${v}" aria-pressed="${listSort === v}">${label}</button>`).join("")}</div>
+        <nav class="az-jump" aria-label="Jump to letter">${groups.map(g => `<button type="button" data-act="az-jump" data-letter="${g.letter}">${g.letter}</button>`).join("")}</nav>
+        ${groups.map(g => `<section class="az-group" id="az-${g.letter === "#" ? "num" : g.letter}"><h3>${g.letter}</h3><ul class="cards results">${g.songs.map(songCard).join("")}</ul></section>`).join("")}
+        ${songs.length ? "" : `<p class="msg">No ${esc(libGenre)} songs are listed yet.</p>`}`;
+      return;
+    }
+    const shelf = Library.shelf({ groups: catalogue && catalogue.groups, songs }, store.favourites(), id);
+    document.title = `${shelf ? shelf.title : "Songs"} · Jukebox · Music OS`;
+    body.innerHTML = shelf
+      ? `<div class="list-head"><h2>${esc(shelf.title)}</h2><p class="group-note">${shelf.note ? esc(shelf.note) + " · " : ""}${shelf.songs.length} song${shelf.songs.length === 1 ? "" : "s"}</p></div>
+        <ul class="cards results">${shelf.songs.map(songCard).join("")}</ul>`
+      : `<p class="msg">${libGenre === "all" ? "This list is empty." : `No ${esc(libGenre)} songs in this list.`}</p><p><a class="btn" href="#/">Back to the Jukebox</a></p>`;
   }
 
   function songCard(s, i) {
@@ -1153,7 +1205,18 @@
     if (act === "genre") {
       libGenre = target.dataset.genre;
       target.parentNode.querySelectorAll("[data-act=genre]").forEach(b => b.setAttribute("aria-pressed", String(b === target)));
-      getCatalogue().then(catalogue => { if (!S && $("lib-search")) renderLibrary(catalogue); }).catch(() => {});
+      getCatalogue().then(catalogue => { if (S) return; if ($("lib-search")) renderLibrary(catalogue); else if ($("list-body")) renderList(catalogue); }).catch(() => {});
+      return;
+    }
+    if (act === "az-sort") {
+      listSort = target.dataset.sort === "artist" ? "artist" : "title";
+      getCatalogue().then(catalogue => { if (!S && $("list-body")) renderList(catalogue); }).catch(() => {});
+      return;
+    }
+    if (act === "az-jump") {
+      const letter = target.dataset.letter === "#" ? "num" : target.dataset.letter;
+      const el = document.getElementById("az-" + letter);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
       return;
     }
     if (act === "fav") {

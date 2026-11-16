@@ -2,7 +2,7 @@
 // Tests for strumalong/lib/library.js: search, shelves, similar songs and Surprise me.
 // Run: node strumalong/test/run.js (or this file directly).
 const assert = require("node:assert/strict");
-const { search, shelves, similar, surprise, byGenre, knownShapes, shapeLine, commonLoop } = require("../lib/library.js");
+const { search, shelves, shelf, alphabetical, COLLECTIONS, similar, surprise, byGenre, knownShapes, shapeLine, commonLoop } = require("../lib/library.js");
 
 const results = { passed: 0, failed: [] };
 function test(name, fn) {
@@ -134,6 +134,45 @@ test("commonLoop skips no-chord events, merges what they split, and gives up whe
   assert.equal(commonLoop(events(["A", "B", "C", "D", "E"])), null);
   assert.equal(commonLoop([]), null);
   assert.equal(commonLoop(undefined), null);
+});
+
+test("collections only name real catalogue songs, with no repeats inside a collection", () => {
+  const catalogue = require("../songs/index.json");
+  const real = new Set(catalogue.songs.map(s => s.id));
+  assert.ok(COLLECTIONS.length >= 6);
+  for (const c of COLLECTIONS) {
+    assert.ok(c.title && c.note, c.id);
+    assert.deepEqual(c.ids.filter(id => !real.has(id)), [], `${c.id} names unknown songs`);
+    assert.equal(new Set(c.ids).size, c.ids.length, `${c.id} repeats a song`);
+  }
+  const ids = COLLECTIONS.map(c => c.id);
+  assert.ok(ids.includes("harder-rock") && ids.includes("classic-rock") && ids.includes("sixties-rock"));
+});
+
+test("shelves put the collections after Easy, easiest first, and the genre filter can empty one out", () => {
+  const catalogue = require("../songs/index.json");
+  const out = shelves(catalogue, []);
+  assert.deepEqual(out.map(s => s.id).slice(0, 7), ["easy", "sixties-rock", "classic-rock", "harder-rock", "britpop-indie", "pop-singalongs", "country-folk"]);
+  const hard = out.find(s => s.id === "harder-rock").songs;
+  assert.ok(hard.every((s, i) => i === 0 || (hard[i - 1].level || 99) <= (s.level || 99)), "easiest first");
+  const pop = { songs: byGenre(catalogue.songs, "pop") };
+  assert.equal(shelf(pop, [], "harder-rock"), null, "no pop songs in Harder rock");
+  assert.ok(shelf(pop, [], "pop-singalongs").songs.length > 10);
+  assert.equal(shelf(catalogue, [], "nope"), null);
+});
+
+test("A–Z groups by first letter, ignoring a leading The or A, by title or by artist", () => {
+  const list = [
+    { title: "The Drugs Don't Work", artist: "The Verve" }, { title: "Yellow", artist: "Coldplay" },
+    { title: "A Hard Day", artist: "Beatles" }, { title: "500 Miles", artist: "The Proclaimers" }, { title: "Daydream", artist: "Lovin' Spoonful" },
+  ];
+  const byTitle = alphabetical(list, "title");
+  assert.deepEqual(byTitle.map(g => g.letter), ["#", "D", "H", "Y"]);
+  assert.deepEqual(byTitle.find(g => g.letter === "D").songs.map(s => s.title), ["Daydream", "The Drugs Don't Work"]);
+  assert.deepEqual(alphabetical(list, "artist").map(g => g.letter + g.songs.length), ["B1", "C1", "L1", "P1", "V1"]);
+  assert.deepEqual(alphabetical([], "title"), []);
+  const all = require("../songs/index.json").songs;
+  assert.equal(alphabetical(all, "title").reduce((n, g) => n + g.songs.length, 0), all.length, "every song is listed once");
 });
 
 console.log(`library.test.js: ${results.passed} passed, ${results.failed.length} failed`);
